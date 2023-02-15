@@ -1,4 +1,4 @@
-import App from "./components/App";
+import App from "./taskpane/components/App";
 import { AppContainer } from "react-hot-loader";
 import { initializeIcons } from "@fluentui/font-icons-mdl2";
 import { ThemeProvider } from "@fluentui/react";
@@ -31,8 +31,8 @@ Office.onReady(() => {
 });
 
 if ((module as any).hot) {
-  (module as any).hot.accept("./components/App", () => {
-    const NextApp = require("./components/App").default;
+  (module as any).hot.accept("./taskpane/components/App.tsx", () => {
+    const NextApp = require("./taskpane/components/App.tsx").default;
     render(NextApp);
   });
 }
