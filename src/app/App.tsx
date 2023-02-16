@@ -8,13 +8,16 @@ export default function App() {
         await Excel.run(async (context) => {
             const sheet = context.workbook.worksheets.getItem('Sheet1');
             const table = sheet.tables.getItem('Коносаменты');
+
             const range = table.getRange();
+            const column = range.getColumn(3);
+            column.load('values');
             range.load('values');
             await context.sync();
 
             const { values } = range;
             const transformed = transformObject(values);
-            console.log(transformed);
+            console.log(column.values);
         });
     };
 

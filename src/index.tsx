@@ -1,13 +1,12 @@
+/* global Office */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require */
 import { AppContainer } from 'react-hot-loader';
 import { initializeIcons } from '@fluentui/font-icons-mdl2';
 import { ThemeProvider } from '@fluentui/react';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import App from './taskpane/components/App';
-
-/* global Office */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app/App';
 
 initializeIcons();
 
@@ -33,8 +32,8 @@ Office.onReady(() => {
 });
 
 if ((module as any).hot) {
-    (module as any).hot.accept('./taskpane/components/App.tsx', () => {
-        const NextApp = require('./taskpane/components/App.tsx').default;
+    (module as any).hot.accept('./app/App.tsx', () => {
+        const NextApp = require('./app/App.tsx').default;
         render(NextApp);
     });
 }
