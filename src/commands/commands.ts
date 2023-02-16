@@ -1,4 +1,6 @@
-/* global global, Office, self, window */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-nested-ternary */
+/* global Office */
 
 Office.onReady(() => {
     // If needed, Office.js is ready to be called

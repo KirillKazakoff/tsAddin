@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import * as React from 'react';
 import { Spinner, SpinnerSize } from '@fluentui/react';
 
@@ -18,7 +19,9 @@ export default class Progress extends React.Component<ProgressProps> {
                     src={logo} alt={title}
                     title={title}
                 />
-                <h1 className='ms-fontSize-su ms-fontWeight-light ms-fontColor-neutralPrimary'>{title}</h1>
+                <h1 className='ms-fontSize-su ms-fontWeight-light ms-fontColor-neutralPrimary'>
+                    {title}
+                </h1>
                 <Spinner size={SpinnerSize.large} label={message} />
             </section>
         );
