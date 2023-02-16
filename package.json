@@ -15,9 +15,8 @@
         "build": "webpack --mode production",
         "build:dev": "webpack --mode development",
         "dev-server": "webpack serve --mode development",
-        "lint": "office-addin-lint check",
-        "lint:fix": "office-addin-lint fix",
-        "prettier": "office-addin-lint prettier",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "start": "office-addin-debugging start manifest.xml",
         "start:desktop": "office-addin-debugging start manifest.xml desktop",
         "start:web": "office-addin-debugging start manifest.xml web",
@@ -26,11 +25,13 @@
         "watch": "webpack --mode development --watch"
     },
     "dependencies": {
+        "@fluentui/font-icons-mdl2": "^8.5.8",
         "@fluentui/react": "^8.52.3",
         "core-js": "^3.9.1",
         "es6-promise": "^4.2.8",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
+        "react-hot-loader": "^4.13.1",
         "regenerator-runtime": "^0.13.7"
     },
     "devDependencies": {
@@ -43,11 +44,20 @@
         "@types/react-hot-loader": "^4.1.1",
         "@types/webpack": "^4.4.34",
         "@types/webpack-dev-server": "^4.1.0",
+        "@typescript-eslint/eslint-plugin": "^5.4.0",
+        "@typescript-eslint/parser": "^5.4.0",
         "acorn": "^8.5.0",
         "babel-loader": "^8.2.2",
         "copy-webpack-plugin": "^9.0.1",
+        "eslint": "^8.3.0",
+        "eslint-config-airbnb": "^19.0.1",
+        "eslint-config-airbnb-typescript": "^16.0.0",
+        "eslint-import-resolver-typescript": "^2.5.0",
+        "eslint-plugin-import": "^2.25.3",
+        "eslint-plugin-jsx-a11y": "^6.5.1",
         "eslint-plugin-office-addins": "^2.1.4",
         "eslint-plugin-react": "^7.28.0",
+        "eslint-plugin-react-hooks": "^4.3.0",
         "file-loader": "^6.2.0",
         "html-loader": "^4.1.0",
         "html-webpack-plugin": "^5.5.0",
@@ -61,15 +71,14 @@
         "office-addin-prettier-config": "^1.2.0",
         "os-browserify": "^0.3.0",
         "process": "^0.11.10",
+        "push-dir": "^0.4.1",
         "source-map-loader": "^3.0.0",
         "ts-loader": "^9.4.1",
         "typescript": "^4.3.5",
         "webpack": "^5.73.0",
         "webpack-cli": "^4.8.0",
-        "webpack-dev-server": "4.7.4",
-        "push-dir": "^0.4.1"
+        "webpack-dev-server": "4.7.4"
     },
-    "prettier": "office-addin-prettier-config",
     "browserslist": [
         "ie 11"
     ]
