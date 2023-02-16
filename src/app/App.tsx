@@ -17,7 +17,7 @@ export default function App() {
 
             const { values } = range;
             const transformed = transformObject(values);
-            console.log(column.values);
+            console.log('hell');
         });
     };
 

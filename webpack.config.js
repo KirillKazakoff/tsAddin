@@ -21,7 +21,7 @@ module.exports = async (env, options) => {
             polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
             vendor: ["react", "react-dom", "core-js", "@fluentui/react"],
             index: ["react-hot-loader/patch", "./src/index.tsx", "./src/index.html"],
-            commands: "./src/commands/commands.ts",
+            commands: "./src/app/commands/commands.ts",
         },
         output: {
             clean: true,
@@ -87,7 +87,7 @@ module.exports = async (env, options) => {
             }),
             new HtmlWebpackPlugin({
                 filename: "commands.html",
-                template: "./src/commands/commands.html",
+                template: "./src/app/commands/commands.html",
                 chunks: ["commands"],
             }),
             new webpack.ProvidePlugin({
