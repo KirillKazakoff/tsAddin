@@ -13,6 +13,7 @@ export const transformObject = (table: any[][]) => {
             pack,
             amount,
             total,
+            operation,
         ] = row;
         const rowObj = {
             reice,
@@ -27,6 +28,8 @@ export const transformObject = (table: any[][]) => {
             amount,
             total,
         };
+
+        if (operation !== 'Внутренний рынок') return totalObj;
         totalObj.push(rowObj);
         return totalObj;
     }, []);
