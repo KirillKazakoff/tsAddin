@@ -1,8 +1,12 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable global-require */
 /* eslint-disable class-methods-use-this */
 import React, { useEffect } from 'react';
 import { getUniqueVessels } from './getUniqueVessels';
-import { transformObject } from './transformObject';
+import { getHeaderLetter } from './letter/getHeaderLetter';
+import { transformByProduct } from './letter/transformByProduct';
+import { transformTable } from './transformTable';
+import { TableRowT } from './types/types';
 
 export default function App() {
     const onClick = async () => {
@@ -14,16 +18,36 @@ export default function App() {
             table.load(['values', 'items', 'columns']);
             range.load('values');
 
-            await context.sync();
-
-            const transformedTable = transformObject(range.values);
             const vessels = table.columns.getItem('Судно');
             vessels.load('values');
 
             await context.sync();
+
+            const transformedTable = transformTable(range.values);
             const uniqueVessels = getUniqueVessels(vessels);
-            console.log(uniqueVessels);
-            console.log(transformedTable);
+            const letter = getHeaderLetter(uniqueVessels);
+
+            const groupedByVessel = uniqueVessels.reduce<TableRowT[][]>(
+                (rowsByVessel, vessel) => {
+                    const group = transformedTable.reduce<TableRowT[]>(
+                        (total, row) => {
+                            if (vessel === row.vessel) total.push(row);
+                            return total;
+                        },
+                        [],
+                    );
+
+                    rowsByVessel.push(group);
+                    return rowsByVessel;
+                },
+                [],
+            );
+
+            console.log(groupedByVessel);
+            groupedByVessel.forEach((group) => {
+                const productGrouped = transformByProduct(group);
+                console.log(productGrouped);
+            });
         });
     };
 

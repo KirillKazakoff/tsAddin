@@ -1,4 +1,6 @@
-export const transformObject = (table: any[][]) => {
+import { TableRowT } from './types/types';
+
+export const transformTable = (table: any[][]): TableRowT[] => {
     return table.reduce((totalObj, row, index) => {
         if (index === 0) return totalObj;
         const [
@@ -15,14 +17,10 @@ export const transformObject = (table: any[][]) => {
             total,
             operation,
         ] = row;
-        const rowObj = {
-            reice,
-            konosament,
-            date,
+
+        const rowObj: TableRowT = {
             vessel,
-            transport,
-            company,
-            product,
+            product: product.toLowerCase(),
             sort,
             pack,
             amount,
