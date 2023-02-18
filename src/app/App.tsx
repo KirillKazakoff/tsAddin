@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { getBody } from './letter/getBody';
+import { getHeaderLetter } from './letter/getHeader';
 
 export default function App() {
     const onClick = async () => {
@@ -12,12 +13,14 @@ export default function App() {
             range.load('values');
 
             const vessels = table.columns.getItem('Судно');
+            const transport = table.columns.getItem('Транспорт');
             vessels.load('values');
+            transport.load('values');
 
             await context.sync();
-
-            const bodyLetter = getBody(range.values, vessels);
-            console.log(bodyLetter);
+            const headerLetter = getHeaderLetter(vessels.values, transport.values);
+            console.log(headerLetter);
+            const bodyLetter = getBody(range.values, vessels.values);
         });
     };
 

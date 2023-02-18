@@ -1,5 +1,9 @@
+import { getTransport } from '../getTransport';
+import { getUniqueVessels } from '../getUniqueVessels';
+
 /* eslint-disable no-param-reassign */
-export const getHeaderLetter = (vessels: string[]) => {
+export const getHeaderLetter = (vesselsSrc: any[][], transportSrc: any[][]) => {
+    const vessels = getUniqueVessels(vesselsSrc);
     const greeting = 'Добрый день!';
     const info = 'Направляем информацию по новой партии продукции';
 
@@ -13,5 +17,7 @@ export const getHeaderLetter = (vessels: string[]) => {
         return total;
     }, '');
 
-    return `${greeting}\n${info} ${vesselsStr}`;
+    const transport = getTransport(transportSrc);
+
+    return `${greeting}\n${info} ${vesselsStr}\n${transport}`;
 };

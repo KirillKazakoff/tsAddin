@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TableRowT } from './types/types';
 
 export const transformTable = (table: any[][]): TableRowT[] => {

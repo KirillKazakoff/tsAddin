@@ -15,7 +15,7 @@ const getBodyRow = (group: TableRowT[]) => {
     return bodyRow;
 };
 
-export const getBody = (srcTable: any[][], vessels: Excel.TableColumn) => {
+export const getBody = (srcTable: any[][], vessels: any[][]) => {
     const transformedTable = transformTable(srcTable);
     const uniqueVessels = getUniqueVessels(vessels);
     const groupsVessel = groupByVessel(uniqueVessels, transformedTable);

@@ -1,6 +1,6 @@
-export const getUniqueVessels = (vessels: Excel.TableColumn) => {
-    vessels.values.shift();
-    const res = vessels.values.reduce((total, valArr) => {
+export const getUniqueVessels = (vessels: any[][]) => {
+    vessels.shift();
+    const res = vessels.reduce((total, valArr) => {
         total.push(valArr[0]);
         return total;
     }, []);
