@@ -2,15 +2,31 @@ export type TableRowT = {
     vessel: string;
     product: string;
     sort: string;
-    pack: number;
     amount: number;
-    total: number;
+    periodCreation: string;
+};
+
+export type ProductDescriptionT = {
+    standart: string;
+    expirationDate: string;
+    title: string;
+    pack: string;
+};
+
+export type ProductInfoT = {
+    desc: ProductDescriptionT;
+    producer: string;
+    periodCreation: string;
+};
+
+export type DetailsT = {
+    amount: number;
+    sort: string;
 };
 
 export type ProductT = {
-    sorts: string[];
-    title: string;
-    dateCreation: string;
+    details: DetailsT[];
+    info: ProductInfoT;
 };
 
 export type ProductionT = {

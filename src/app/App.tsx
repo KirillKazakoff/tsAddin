@@ -1,12 +1,5 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable global-require */
-/* eslint-disable class-methods-use-this */
 import React, { useEffect } from 'react';
-import { getUniqueVessels } from './getUniqueVessels';
-import { getHeaderLetter } from './letter/getHeaderLetter';
-import { transformByProduct } from './letter/transformByProduct';
-import { transformTable } from './transformTable';
-import { TableRowT } from './types/types';
+import { getBody } from './letter/getBody';
 
 export default function App() {
     const onClick = async () => {
@@ -23,31 +16,8 @@ export default function App() {
 
             await context.sync();
 
-            const transformedTable = transformTable(range.values);
-            const uniqueVessels = getUniqueVessels(vessels);
-            const letter = getHeaderLetter(uniqueVessels);
-
-            const groupedByVessel = uniqueVessels.reduce<TableRowT[][]>(
-                (rowsByVessel, vessel) => {
-                    const group = transformedTable.reduce<TableRowT[]>(
-                        (total, row) => {
-                            if (vessel === row.vessel) total.push(row);
-                            return total;
-                        },
-                        [],
-                    );
-
-                    rowsByVessel.push(group);
-                    return rowsByVessel;
-                },
-                [],
-            );
-
-            console.log(groupedByVessel);
-            groupedByVessel.forEach((group) => {
-                const productGrouped = transformByProduct(group);
-                console.log(productGrouped);
-            });
+            const bodyLetter = getBody(range.values, vessels);
+            console.log(bodyLetter);
         });
     };
 

@@ -13,18 +13,18 @@ export const transformTable = (table: any[][]): TableRowT[] => {
             product,
             sort,
             pack,
-            amount,
-            total,
+            amountPlaces,
+            amountTotal,
             operation,
+            periodCreation,
         ] = row;
 
         const rowObj: TableRowT = {
             vessel,
             product: product.toLowerCase(),
             sort,
-            pack,
-            amount,
-            total,
+            amount: amountTotal,
+            periodCreation,
         };
 
         if (operation !== 'Внутренний рынок') return totalObj;
