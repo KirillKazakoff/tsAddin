@@ -33,3 +33,25 @@ export const groupByProduct = (groupVessel: TableRowT[]): ProductionT => {
         return productionTypes;
     }, {});
 };
+
+export const productToString = (product: ProductT) => {
+    const { details, info } = product;
+    const { desc, producer, periodCreation } = info;
+    const {
+        standart, expirationDate, pack, title,
+    } = desc;
+
+    const detailsStr = details.reduce((total, detailsObj) => {
+        const { amount, sort } = detailsObj;
+        const detailsRow = `- ${title} ${sort} - ${amount} кг`;
+        total = `${total}${detailsRow}\n`;
+        return total;
+    }, '');
+
+    const producerStr = `Изготовитель:${producer}`;
+    const periodStr = `Период изготовления: ${periodCreation}`;
+    const descStr = `${pack}\n${producerStr}\n${expirationDate}\n${standart}\n${periodStr}\n`;
+    const productStr = `${detailsStr}\n${descStr}\n`;
+
+    return productStr;
+};
