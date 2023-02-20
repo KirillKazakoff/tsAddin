@@ -27,20 +27,19 @@ export const getBody = (srcTable: any[][], vessels: any[][]) => {
         return total;
     }, []);
 
-    // console.log(bodyObj);
-    console.log('hey');
     const body = bodyObj.reduce((bodyStr, bodyRow) => {
         const { vesselName, production } = bodyRow;
-        bodyStr = `\n${bodyStr} ${vesselName}\n`;
 
         const productionValues = Object.values(production);
         const productionStr = productionValues.reduce((total, prodVal) => {
             total = `${total}${productToString(prodVal)}`;
             return total;
         }, '');
-        console.log(productionStr.trimStart());
+
+        bodyStr = `\n${bodyStr}${vesselName}\n${productionStr}`;
 
         return bodyStr;
     }, '');
-    // console.log(bodyObj);
+
+    return body;
 };

@@ -38,3 +38,7 @@ export type BodyRowT = {
     vesselName: string;
     production: ProductionT;
 };
+
+export type SubjectT = {
+    [key: string]: string[];
+};

@@ -1,9 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Input from './components/Input';
 import { getBody } from './letter/getBody';
+import { getFooter } from './letter/getFooter';
 import { getHeaderLetter } from './letter/getHeader';
+import { getHref } from './letter/getHref';
+import { getSubject } from './letter/getSubject';
 
 export default function App() {
-    const onClick = async () => {
+    const [href, setHref] = useState('');
+    const [dateArrival, setDateArrival] = useState('');
+    const [port, setPort] = useState('');
+    const [datePayment, setDatePayment] = useState('');
+
+    const getLetter = async () => {
         await Excel.run(async (context) => {
             const sheet = context.workbook.worksheets.getItem('Sheet1');
             const table = sheet.tables.getItem('Коносаменты');
@@ -18,23 +27,41 @@ export default function App() {
             transport.load('values');
 
             await context.sync();
+            const subjectLetter = getSubject(range.values, transport.values);
             const headerLetter = getHeaderLetter(vessels.values, transport.values);
-            console.log(headerLetter);
             const bodyLetter = getBody(range.values, vessels.values);
+            const footerLetter = getFooter(dateArrival, datePayment, port);
+
+            setHref(getHref(subjectLetter, headerLetter, bodyLetter, footerLetter));
         });
     };
 
     useEffect(() => {
-        onClick();
+        getLetter();
     });
 
     return (
         <div>
-            <button type='button' onClick={onClick}>
-                <a href='mailto:test@example.com?subject=Testing out mailto!&body=This is only a test!'>
-                    Second Example
-                </a>
-            </button>
+            <form className='form form-letter'>
+                <Input
+                    placeholder='Дата прибытия'
+                    setter={setDateArrival}
+                    value={dateArrival}
+                />
+                <Input
+                    placeholder='Порт' setter={setPort}
+                    value={port}
+                />
+                <Input
+                    placeholder='Дата оплаты'
+                    setter={setDatePayment}
+                    value={datePayment}
+                />
+
+                <button type='submit' className='btn'>
+                    <a href={href}>Создать письмо</a>
+                </button>
+            </form>
         </div>
     );
 }
