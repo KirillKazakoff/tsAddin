@@ -11,5 +11,6 @@ export const getHref: GetHrefT = (subject, header, body, footer) => {
     const href = `mailto:${mailTo}?subject=${subject}&body=${header}${body}${footer}`;
     const hrefReplaced = href.replace(/\n/g, '%0A');
 
+    console.log('hello');
     return hrefReplaced;
 };

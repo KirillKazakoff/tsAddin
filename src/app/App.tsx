@@ -14,7 +14,7 @@ export default function App() {
 
     const getLetter = async () => {
         await Excel.run(async (context) => {
-            const sheet = context.workbook.worksheets.getItem('Sheet1');
+            const sheet = context.workbook.worksheets.getItem('Коносаменты');
             const table = sheet.tables.getItem('Коносаменты');
             const range = table.getRange();
 
