@@ -1,9 +1,6 @@
-export const getUniqueVessels = (vessels: any[][]) => {
-    vessels.shift();
-    const res = vessels.reduce((total, valArr) => {
-        total.push(valArr[0]);
-        return total;
-    }, []);
+import { TableRowT } from './types/types';
 
-    return Array.from(new Set(res));
+export const getUniqueVessels = (table: TableRowT[]) => {
+    const vessels = table.map((row) => row.vessel);
+    return Array.from(new Set(vessels));
 };

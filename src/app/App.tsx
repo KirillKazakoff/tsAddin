@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Input from './components/Input';
+import { getTransport } from './getTransport';
+import { getUniqueVessels } from './getUniqueVessels';
 import { getBody } from './letter/getBody';
 import { getFooter } from './letter/getFooter';
 import { getHeaderLetter } from './letter/getHeader';
 import { getHref } from './letter/getHref';
 import { getSubject } from './letter/getSubject';
+import { transformTable } from './transformTable';
 
 export default function App() {
     const [href, setHref] = useState('');
@@ -15,21 +18,26 @@ export default function App() {
     const getLetter = async () => {
         await Excel.run(async (context) => {
             const sheet = context.workbook.worksheets.getItem('Коносаменты');
-            const table = sheet.tables.getItem('Коносаменты');
-            const range = table.getRange();
+            const tableSrc = sheet.tables.getItem('Коносаменты');
+            const range = tableSrc.getRange();
 
-            table.load(['values', 'items', 'columns']);
+            tableSrc.load(['values', 'items', 'columns']);
             range.load('values');
 
-            const vessels = table.columns.getItem('Судно');
-            const transport = table.columns.getItem('Транспорт');
-            vessels.load('values');
-            transport.load('values');
+            // const vessels = tableSrc.columns.getItem('Судно');
+            const transportSrc = tableSrc.columns.getItem('Транспорт');
+            // vessels.load('values');
+            transportSrc.load('values');
 
             await context.sync();
-            const subjectLetter = getSubject(range.values, transport.values);
-            const headerLetter = getHeaderLetter(vessels.values, transport.values);
-            const bodyLetter = getBody(range.values, vessels.values);
+
+            const table = transformTable(range.values);
+            const vessels = getUniqueVessels(table);
+            const transport = getTransport(transportSrc.values);
+
+            const subjectLetter = getSubject(table, transport);
+            const headerLetter = getHeaderLetter(vessels, transport);
+            const bodyLetter = getBody(table, vessels);
             const footerLetter = getFooter(dateArrival, datePayment, port);
 
             setHref(getHref(subjectLetter, headerLetter, bodyLetter, footerLetter));

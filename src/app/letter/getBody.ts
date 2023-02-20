@@ -1,8 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { TableRowT, BodyRowT } from '../types/types';
 import { groupByProduct, productToString } from '../groupByProduct';
-import { transformTable } from '../transformTable';
-import { getUniqueVessels } from '../getUniqueVessels';
 import { groupByVessel } from '../groupByVessel';
 
 const getBodyRow = (group: TableRowT[]) => {
@@ -16,10 +14,8 @@ const getBodyRow = (group: TableRowT[]) => {
     return bodyRow;
 };
 
-export const getBody = (srcTable: any[][], vessels: any[][]) => {
-    const transformedTable = transformTable(srcTable);
-    const uniqueVessels = getUniqueVessels(vessels);
-    const groupsVessel = groupByVessel(uniqueVessels, transformedTable);
+export const getBody = (table: TableRowT[], vessels: string[]) => {
+    const groupsVessel = groupByVessel(vessels, table);
 
     const bodyObj = groupsVessel.reduce<BodyRowT[]>((total, group) => {
         const bodyRow = getBodyRow(group);

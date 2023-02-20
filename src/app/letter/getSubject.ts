@@ -1,12 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { getTransport } from '../getTransport';
-import { transformTable } from '../transformTable';
-import { SubjectT } from '../types/types';
+import { SubjectT, TableRowT } from '../types/types';
 
-export const getSubject = (srcTable: any[][], transportSrc: any[][]) => {
-    const transport = getTransport(transportSrc);
-    const table = transformTable(srcTable);
-
+export const getSubject = (table: TableRowT[], transport: string) => {
     const subjectObj = table.reduce<SubjectT>((total, row) => {
         const { product, sort } = row;
         if (!total[product]) {
