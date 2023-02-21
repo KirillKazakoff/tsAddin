@@ -24,9 +24,7 @@ export default function App() {
             tableSrc.load(['values', 'items', 'columns']);
             range.load('values');
 
-            // const vessels = tableSrc.columns.getItem('Судно');
             const transportSrc = tableSrc.columns.getItem('Транспорт');
-            // vessels.load('values');
             transportSrc.load('values');
 
             await context.sync();

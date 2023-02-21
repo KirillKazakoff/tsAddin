@@ -7,8 +7,8 @@ export type TableRowT = {
 };
 
 export type ProductDescriptionT = {
-    standart: string;
-    expirationDate: string;
+    standart?: string;
+    expirationDate?: string;
     title: string;
     pack: string;
 };

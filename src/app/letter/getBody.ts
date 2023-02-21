@@ -24,7 +24,7 @@ export const getBody = (table: TableRowT[], vessels: string[]) => {
     }, []);
 
     const body = bodyObj.reduce((bodyStr, bodyRow) => {
-        const { vesselName, production } = bodyRow;
+        const { production, vesselName } = bodyRow;
 
         const productionValues = Object.values(production);
         const productionStr = productionValues.reduce((total, prodVal) => {
