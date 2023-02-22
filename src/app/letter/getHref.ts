@@ -1,16 +1,30 @@
-type GetHrefT = (
-    subject: string,
-    header: string,
-    body: string,
-    footer: string
-) => string;
+import letterStore from '../stores/letterStore';
+import { getBody } from './getBody';
+import { getFooter } from './getFooter';
+import { getHeaderLetter } from './getHeader';
+import { getSubject } from './getSubject';
 
-export const getHref: GetHrefT = (subject, header, body, footer) => {
-    const mailTo = 'oved@sea-wolf.ru';
+type GetHrefT = (dateArrival: string, datePayment: string, port: string) => string;
 
-    const href = `mailto:${mailTo}?subject=${subject}&body=${header}${body}${footer}`;
-    const hrefReplaced = href.replace(/\n/g, '%0A');
+export const useGetHref = () => {
+    const getHref: GetHrefT = (dateArrival, datePayment, port) => {
+        const {
+            operation, table, transport, vessels,
+        } = letterStore.letter;
 
-    console.log('hello');
-    return hrefReplaced;
+        const subject = getSubject(table, transport);
+        const header = getHeaderLetter(vessels, transport);
+        const body = getBody(table, vessels);
+        const footer = getFooter(dateArrival, datePayment, port);
+
+        const mailTo = 'oved@sea-wolf.ru';
+
+        const href = `mailto:${mailTo}?subject=${subject}&body=${header}${body}${footer}`;
+        const hrefReplaced = href.replace(/\n/g, '%0A');
+
+        console.log('hello');
+        return hrefReplaced;
+    };
+
+    return getHref;
 };

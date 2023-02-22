@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -20,7 +18,7 @@ module.exports = async (env, options) => {
         entry: {
             polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
             vendor: ["react", "react-dom", "core-js", "@fluentui/react"],
-            index: ["react-hot-loader/patch", "./src/index.tsx", "./src/index.html"],
+            index: ["./src/index.tsx", "./src/index.html"],
             commands: "./src/app/commands/commands.ts",
         },
         output: {
@@ -44,7 +42,7 @@ module.exports = async (env, options) => {
                 {
                     test: /\.tsx?$/,
                     exclude: /node_modules/,
-                    use: ["react-hot-loader/webpack", "ts-loader"],
+                    use: ["ts-loader"],
                 },
                 {
                     test: /\.html$/,
@@ -95,6 +93,9 @@ module.exports = async (env, options) => {
             }),
         ],
         devServer: {
+            historyApiFallback: true,
+            https: false,
+            compress: true,
             hot: true,
             headers: {
                 "Access-Control-Allow-Origin": "*",
