@@ -4,7 +4,7 @@ import { LetterRoute } from './routes/LetterRoute/LetterRoute';
 import MainRoute from './routes/MainRoute';
 
 export default function RouteApp() {
-    console.log('hel');
+    console.log('he');
     return (
         <Router>
             <Routes>

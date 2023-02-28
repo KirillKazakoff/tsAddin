@@ -14,8 +14,11 @@ export const LetterRoute = observer(() => {
     const [datePayment, setDatePayment] = useState('');
 
     useEffect(() => {
-        initLetter();
-    }, []);
+        const func = async () => {
+            await initLetter();
+        };
+        func();
+    });
 
     const onClick = async () => {
         await initLetter();

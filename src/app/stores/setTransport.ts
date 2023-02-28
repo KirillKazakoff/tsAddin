@@ -1,4 +1,4 @@
-import letterStore from '../../stores/letterStore';
+import letterStore from './letterStore';
 
 export const setTransport = (transportCol: any[][], dictionaryRange: any[][]) => {
     const transportMate = transportCol[1][0];

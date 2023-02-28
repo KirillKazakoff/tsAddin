@@ -1,12 +1,13 @@
 import { makeAutoObservable } from 'mobx';
 import { TableRowT } from '../types/types';
-import type { TransportT, VesselT } from '../types/typesDictionary';
+import type { ProductionNewT, TransportT, VesselT } from '../types/typesSP';
 
 type LetterT = {
     operation: string;
     table: TableRowT[];
     transport: TransportT;
     vessels: VesselT[];
+    production: ProductionNewT;
 };
 
 class LetterStore {
@@ -19,14 +20,11 @@ class LetterStore {
             id: '',
         },
         vessels: [],
+        production: {},
     };
 
     constructor() {
         makeAutoObservable(this);
-    }
-
-    setOperation(operation: string) {
-        this.letter.operation = operation;
     }
 
     setTable(table: TableRowT[]) {
@@ -39,6 +37,14 @@ class LetterStore {
 
     setTransport(transport: TransportT) {
         this.letter.transport = transport;
+    }
+
+    setOperation(operation: string) {
+        this.letter.operation = operation;
+    }
+
+    setProduction(production: ProductionNewT) {
+        this.letter.production = production;
     }
 }
 

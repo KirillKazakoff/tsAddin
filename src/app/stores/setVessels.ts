@@ -1,5 +1,5 @@
-import letterStore from '../../stores/letterStore';
-import { VesselT } from '../../types/typesDictionary';
+import type { VesselT } from '../types/typesSP';
+import letterStore from './letterStore';
 
 export const setVessels = (spRange: any[][]) => {
     const { table } = letterStore.letter;

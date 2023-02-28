@@ -6,6 +6,17 @@ export type TableRowT = {
     periodCreation: string;
 };
 
+// DictionaryTypes
+export type DictionaryT = {
+    getSubject: (info: string) => string;
+    getHeader: (
+        product: string,
+        vessels: string,
+        transport: string,
+        port?: string
+    ) => string;
+};
+
 export type ProductDescriptionT = {
     standart?: string;
     expirationDate?: string;
