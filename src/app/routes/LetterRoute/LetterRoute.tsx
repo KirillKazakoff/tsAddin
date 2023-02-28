@@ -1,8 +1,9 @@
 import { observer } from 'mobx-react-lite';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../../components/Input';
 import { useGetHref } from '../../letter/getHref';
-import { useInitLetter } from '../../letter/useInitLetter';
+import { useInitLetter } from '../../letter/init/useInitLetter';
+import letterStore from '../../stores/letterStore';
 
 export const LetterRoute = observer(() => {
     const initLetter = useInitLetter();
@@ -16,9 +17,14 @@ export const LetterRoute = observer(() => {
         initLetter();
     }, []);
 
-    const onClick = () => {
+    const onClick = async () => {
+        await initLetter();
         const href = getHref(dateArrival, datePayment, port);
         document.location.href = href;
+    };
+
+    const setOperation = (value: string) => {
+        letterStore.setOperation(value);
     };
 
     return (
@@ -37,6 +43,11 @@ export const LetterRoute = observer(() => {
                     placeholder='Дата оплаты'
                     setter={setDatePayment}
                     value={datePayment}
+                />
+                <Input
+                    placeholder='Операция'
+                    setter={setOperation}
+                    value={letterStore.letter.operation}
                 />
 
                 <button

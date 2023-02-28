@@ -1,18 +1,23 @@
 import { makeAutoObservable } from 'mobx';
 import { TableRowT } from '../types/types';
+import type { TransportT, VesselT } from '../types/typesDictionary';
 
 type LetterT = {
     operation: string;
     table: TableRowT[];
-    transport: string;
-    vessels: string[];
+    transport: TransportT;
+    vessels: VesselT[];
 };
 
 class LetterStore {
     letter: LetterT = {
         operation: '',
         table: [],
-        transport: '',
+        transport: {
+            name: '',
+            translation: '',
+            id: '',
+        },
         vessels: [],
     };
 
@@ -26,12 +31,13 @@ class LetterStore {
 
     setTable(table: TableRowT[]) {
         this.letter.table = table;
-
-        const vessels = table.map((row) => row.vessel);
-        this.letter.vessels = Array.from(new Set(vessels));
     }
 
-    setTransport(transport: string) {
+    setVessels(vessels: VesselT[]) {
+        this.letter.vessels = vessels;
+    }
+
+    setTransport(transport: TransportT) {
         this.letter.transport = transport;
     }
 }

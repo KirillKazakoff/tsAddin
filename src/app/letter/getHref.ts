@@ -11,10 +11,11 @@ export const useGetHref = () => {
         const {
             operation, table, transport, vessels,
         } = letterStore.letter;
+        const mocha = vessels.map((vessel) => vessel.name);
 
-        const subject = getSubject(table, transport);
-        const header = getHeaderLetter(vessels, transport);
-        const body = getBody(table, vessels);
+        const subject = getSubject(table, transport.name);
+        const header = getHeaderLetter(mocha, transport.name);
+        const body = getBody(table, mocha);
         const footer = getFooter(dateArrival, datePayment, port);
 
         const mailTo = 'oved@sea-wolf.ru';

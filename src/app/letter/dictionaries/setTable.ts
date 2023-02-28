@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { TableRowT } from './types/types';
+import letterStore from '../../stores/letterStore';
+import { TableRowT } from '../../types/types';
 
-export const transformTable = (table: any[][]): TableRowT[] => {
-    return table.reduce((totalObj, row, index) => {
+export const setTable = (table: any[][]) => {
+    const transformedTable = table.reduce((totalObj, row, index) => {
         if (index === 0) return totalObj;
         const [
             reice,
@@ -32,4 +33,6 @@ export const transformTable = (table: any[][]): TableRowT[] => {
         totalObj.push(rowObj);
         return totalObj;
     }, []);
+
+    letterStore.setTable(transformedTable);
 };
