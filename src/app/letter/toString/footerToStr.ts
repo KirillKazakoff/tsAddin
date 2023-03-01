@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
 
 export const footerToStrRu = () => {
@@ -17,9 +18,10 @@ export const footerToStrEng = () => {
 
     const weightInformStr = 'Send for you weight reports in attached files.';
     const arrivalStr = `ETA ${port} - ${dateArrival}`;
-    const termsStr = `Terms of sale:\n\n-${terms} ${port}`;
+    const termsStr = `Terms of sale\n${terms} ${port}`;
+
     const paymentStr = '- payment 100% during 10 banking days after sign a contract';
     const conclusionStr = `If you get interested, please advise us your price offer, we are going to sell this lot at ${datePayment}`;
 
-    return `\n${weightInformStr}\n${arrivalStr}\n${termsStr}\n${paymentStr}\n\n${conclusionStr}`;
+    return `\n${weightInformStr}\n${arrivalStr}\n${termsStr}\n${paymentStr}\n${conclusionStr}`;
 };

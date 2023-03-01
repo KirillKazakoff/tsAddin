@@ -10,7 +10,14 @@ export const getHref = () => {
 
     const mailTo = 'oved@sea-wolf.ru';
 
-    const href = `mailto:${mailTo}?subject=${getSubject()}&body=${getHeader()}${getBody()}${getFooter()}`;
+    const subject = getSubject();
+    const body = getBody();
+    const header = getHeader();
+    const footer = getFooter();
+
+    const bodyHref = encodeURIComponent(`${header}${body}${footer}`);
+
+    const href = `mailto:${mailTo}?subject=${subject}&body=${bodyHref}`;
     const hrefReplaced = href.replace(/\n/g, '%0A');
 
     return hrefReplaced;

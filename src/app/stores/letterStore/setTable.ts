@@ -31,7 +31,7 @@ export const setTable = (table: any[][]) => {
 
         if (
             operation !== 'Внутренний рынок'
-            || operation !== 'Хранение на экспорт'
+            && operation !== 'Хранение на экспорт'
         ) {
             return totalObj;
         }

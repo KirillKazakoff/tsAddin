@@ -9,7 +9,7 @@ export const setProduction = (spRange: any[][]) => {
         const [fullName, nameEng, name, expirationDate, packEng, pack, standart] = row;
 
         const rowObj: ProductDescriptionT = {
-            name,
+            name: name.toLowerCase(),
             fullName,
             nameEng,
             expirationDate,

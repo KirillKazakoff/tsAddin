@@ -25,7 +25,9 @@ export const productToStringRu = (product: ProductT) => {
     const packStr = `Упаковка - ${pack}`;
     const producerStr = `Изготовитель:${producer.name}`;
     const periodStr = `Период изготовления: ${periodCreation}`;
-    const descStr = `${packStr}\n${producerStr}\n${expirationDate}\n${standart}\n${periodStr}\n`;
+    const expirationStr = `Cрок годности - ${expirationDate} месяцев`;
+
+    const descStr = `${packStr}\n${producerStr}\n${expirationStr}\n${standart}\n${periodStr}\n`;
     const productStr = `${detailsStr}\n${descStr}\n`;
 
     return productStr;
@@ -41,7 +43,7 @@ export const productToStringEng = (product: ProductT) => {
 
     const groundStr = `Fishing ground: ${ground}`;
     const periodStr = `Producing period: ${periodCreation}`;
-    const portStr = 'Port of discharging: ??????';
+    const portStr = 'Port of discharging:';
     const descStr = `${packEng}\n${groundStr}\n${periodStr}\n${portStr}`;
 
     const productStr = `${detailsStr}\n${descStr}\n`;

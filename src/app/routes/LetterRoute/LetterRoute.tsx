@@ -12,6 +12,8 @@ export const LetterRoute = observer(() => {
     useEffect(() => {
         const func = async () => {
             await initLetter();
+            const href = getHref();
+            console.log(href);
         };
         func();
     });
@@ -19,6 +21,7 @@ export const LetterRoute = observer(() => {
     const onClick = async () => {
         await initLetter();
         const href = getHref();
+        console.log(href);
         document.location.href = href;
     };
 
@@ -67,6 +70,7 @@ export const LetterRoute = observer(() => {
                 >
                     Создать письмо
                 </button>
+                {/* <a href={testHref}>TEST</a> */}
             </form>
         </div>
     );

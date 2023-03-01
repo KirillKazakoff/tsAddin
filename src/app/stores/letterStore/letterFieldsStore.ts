@@ -5,7 +5,7 @@ class LetterFieldsStore {
     fields: LetterFieldsT = {
         dateArrival: '',
         datePayment: '',
-        operation: '',
+        operation: 'eng',
         terms: '',
         ground: '',
         port: '',

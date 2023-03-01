@@ -24,8 +24,6 @@ export const useInitLetter = () => {
             setTransport(transportCol.values, spTransportRange.values);
             setVessels(spVesselsRange.values);
             setProduction(spProductionRange.values);
-
-            console.log({ ...letterStore.letter.production });
         });
     };
     return initLetter;
