@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { TableRowT, BodyRowT } from '../types/types';
-import { groupByProduct, productToString } from '../groupByProduct';
-import { groupByVessel } from '../groupByVessel';
+import { groupByProduct, productToString } from './groupBy/groupByProduct';
+import { groupByVessel } from './groupBy/groupByVessel';
 
 const getBodyRow = (group: TableRowT[]) => {
     const production = groupByProduct(group);

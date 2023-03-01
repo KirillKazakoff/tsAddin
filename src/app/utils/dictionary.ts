@@ -1,9 +1,10 @@
-import type { DictionaryT, ProductDescriptionT } from '../types/types';
+import type { DictionaryT } from '../types/types';
 
 type ProductsDictionaryT = {
-    [key: string]: ProductDescriptionT;
+    [key: string]: any;
 };
 
+// need to be replaced
 export const productDictionary: ProductsDictionaryT = {
     'сельдь н/р': {
         title: 'Сельдь Т/О жирн.морож. н/р',

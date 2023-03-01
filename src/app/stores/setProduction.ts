@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { ProductDescriptionNewT, ProductionNewT } from '../types/typesSP';
+import { ProductDescriptionT, ProductionNewT } from '../types/typesSP';
 import letterStore from './letterStore';
 
 export const setProduction = (spRange: any[][]) => {
@@ -8,7 +8,8 @@ export const setProduction = (spRange: any[][]) => {
     const production = spRange.reduce<ProductionNewT>((totalObj, row) => {
         const [fullName, nameEng, name, expirationDate, packEng, pack, standart] = row;
 
-        const rowObj: ProductDescriptionNewT = {
+        const rowObj: ProductDescriptionT = {
+            name,
             fullName,
             nameEng,
             expirationDate,

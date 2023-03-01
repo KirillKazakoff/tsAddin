@@ -1,28 +1,27 @@
 /* eslint-disable no-param-reassign */
-import { ProductionT, ProductT, TableRowT } from './types/types';
-import { productDictionary } from './utils/dictionary';
+import {
+    selectProductSp,
+    selectVesselSp,
+} from '../../stores/select/selectProductSp';
+import { ProductionInfoT, ProductT, TableRowT } from '../../types/types';
 
 const initProduct = (tableRow: TableRowT): ProductT => {
     const { product, vessel, periodCreation } = tableRow;
-    const dictionary = productDictionary[product];
+    const productSp = selectProductSp(product);
+    const vesselSp = selectVesselSp(vessel);
 
     return {
         details: [],
         info: {
-            desc: {
-                standart: dictionary.standart,
-                expirationDate: dictionary.expirationDate,
-                pack: dictionary.pack,
-                title: dictionary.title,
-            },
-            producer: vessel,
+            desc: { ...productSp },
+            producer: vesselSp,
             periodCreation,
         },
     };
 };
 
-export const groupByProduct = (groupVessel: TableRowT[]): ProductionT => {
-    return groupVessel.reduce<ProductionT>((productionTypes, tableRow) => {
+export const groupByProduct = (groupVessel: TableRowT[]): ProductionInfoT => {
+    return groupVessel.reduce<ProductionInfoT>((productionTypes, tableRow) => {
         const { product, sort, amount } = tableRow;
         if (!productionTypes[product]) {
             productionTypes[product] = initProduct(tableRow);
@@ -38,12 +37,12 @@ export const productToString = (product: ProductT) => {
     const { details, info } = product;
     const { desc, producer, periodCreation } = info;
     const {
-        standart, expirationDate, pack, title,
+        standart, expirationDate, pack, name,
     } = desc;
 
     const detailsStr = details.reduce((total, detailsObj) => {
         const { amount, sort } = detailsObj;
-        const detailsRow = `- ${title} ${sort} - ${amount} кг`;
+        const detailsRow = `- ${name} ${sort} - ${amount} кг`;
         total = `${total}${detailsRow}\n`;
         return total;
     }, '');

@@ -1,16 +1,17 @@
 export type TransportT = {
     name: string;
-    translation: string;
+    nameEng: string;
     id: string;
 };
 
 export type VesselT = {
     name: string;
-    translation: string;
+    nameEng: string;
     id: string;
 };
 
-export type ProductDescriptionNewT = {
+export type ProductDescriptionT = {
+    name: string;
     fullName: string;
     nameEng: string;
     standart: string;
@@ -20,5 +21,5 @@ export type ProductDescriptionNewT = {
 };
 
 export type ProductionNewT = {
-    [key: string]: ProductDescriptionNewT;
+    [key: string]: ProductDescriptionT;
 };

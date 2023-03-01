@@ -11,8 +11,8 @@ export const setVessels = (spRange: any[][]) => {
     });
 
     const transformed: VesselT[] = vessels.map((vessel) => {
-        const [name, translation, id] = vessel;
-        return { name, translation, id };
+        const [name, nameEng, id] = vessel;
+        return { name, nameEng, id };
     });
 
     letterStore.setVessels(transformed);

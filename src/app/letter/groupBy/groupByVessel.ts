@@ -1,4 +1,4 @@
-import { TableRowT } from './types/types';
+import { TableRowT } from '../../types/types';
 
 export const groupByVessel = (vessels: string[], table: TableRowT[]) => {
     return vessels.reduce<TableRowT[][]>((groupVessel, vessel) => {

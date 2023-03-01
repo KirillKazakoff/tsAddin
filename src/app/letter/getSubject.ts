@@ -1,7 +1,9 @@
 /* eslint-disable no-param-reassign */
-import { SubjectT, TableRowT } from '../types/types';
+import letterStore from '../stores/letterStore';
+import { SubjectT } from '../types/types';
 
-export const getSubject = (table: TableRowT[], transport: string) => {
+export const getSubject = () => {
+    const { table } = letterStore.letter;
     const subjectObj = table.reduce<SubjectT>((total, row) => {
         const { product, sort } = row;
         if (!total[product]) {
@@ -13,16 +15,5 @@ export const getSubject = (table: TableRowT[], transport: string) => {
         return total;
     }, {});
 
-    const subjectProductionStr = Object.entries(subjectObj).reduce(
-        (total, [product, sorts]) => {
-            const sortsStr = sorts.join(', ');
-            total = `${total}${product} ${sortsStr}; `;
-
-            return total;
-        },
-        '',
-    );
-
-    const subject = `Предложение ${subjectProductionStr}${transport}`;
-    return subject;
+    return subjectObj;
 };

@@ -1,3 +1,5 @@
+import { ProductDescriptionT, VesselT } from './typesSP';
+
 export type TableRowT = {
     vessel: string;
     product: string;
@@ -17,16 +19,10 @@ export type DictionaryT = {
     ) => string;
 };
 
-export type ProductDescriptionT = {
-    standart?: string;
-    expirationDate?: string;
-    title: string;
-    pack: string;
-};
-
+// ProductionInfoTypes
 export type ProductInfoT = {
     desc: ProductDescriptionT;
-    producer: string;
+    producer: VesselT;
     periodCreation: string;
 };
 
@@ -40,14 +36,14 @@ export type ProductT = {
     info: ProductInfoT;
 };
 
-export type ProductionT = {
+export type ProductionInfoT = {
     [key: string]: ProductT;
 };
 
 // LetterTypes
 export type BodyRowT = {
     vesselName: string;
-    production: ProductionT;
+    production: ProductionInfoT;
 };
 
 export type SubjectT = {

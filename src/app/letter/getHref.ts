@@ -13,7 +13,7 @@ export const useGetHref = () => {
         } = letterStore.letter;
         const mocha = vessels.map((vessel) => vessel.name);
 
-        const subject = getSubject(table, transport.name);
+        const subject = getSubject();
         const header = getHeaderLetter(mocha, transport.name);
         const body = getBody(table, mocha);
         const footer = getFooter(dateArrival, datePayment, port);

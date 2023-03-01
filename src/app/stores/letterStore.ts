@@ -16,7 +16,7 @@ class LetterStore {
         table: [],
         transport: {
             name: '',
-            translation: '',
+            nameEng: '',
             id: '',
         },
         vessels: [],
