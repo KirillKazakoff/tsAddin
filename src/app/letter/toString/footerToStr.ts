@@ -8,7 +8,7 @@ export const footerToStrRu = () => {
     const paymentStr = `Оплата до ${datePayment}`;
     const conclusionStr = 'В случае Вашей заинтересованности, просим Вас направить предложение';
 
-    return `\n${arrivalStr}\n${paymentStr}\n${conclusionStr}`;
+    return `\n${arrivalStr}\n\n${paymentStr}\n\n${conclusionStr}`;
 };
 
 export const footerToStrEng = () => {
@@ -18,10 +18,10 @@ export const footerToStrEng = () => {
 
     const weightInformStr = 'Send for you weight reports in attached files.';
     const arrivalStr = `ETA ${port} - ${dateArrival}`;
-    const termsStr = `Terms of sale\n${terms} ${port}`;
+    const termsStr = `Terms of sale: \n\n- ${terms} ${port}`;
 
     const paymentStr = '- payment 100% during 10 banking days after sign a contract';
     const conclusionStr = `If you get interested, please advise us your price offer, we are going to sell this lot at ${datePayment}`;
 
-    return `\n${weightInformStr}\n${arrivalStr}\n${termsStr}\n${paymentStr}\n${conclusionStr}`;
+    return `\n${weightInformStr}\n\n${arrivalStr}\n\n${termsStr}\n${paymentStr}\n\n${conclusionStr}`;
 };

@@ -17,3 +17,7 @@ export const selectVesselSp = (key: string) => {
 export const selectVesselsStr = () => {
     return letterStore.letter.vessels.map((vessel) => vessel.name);
 };
+
+export const selectVesselsStrEng = () => {
+    return letterStore.letter.vessels.map((vessel) => vessel.nameEng);
+};

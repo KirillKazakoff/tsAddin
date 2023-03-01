@@ -17,13 +17,13 @@ export const productToStringRu = (product: ProductT) => {
     const { details, info } = product;
     const { desc, producer, periodCreation } = info;
     const {
-        standart, expirationDate, pack, name,
+        standart, expirationDate, pack, fullName,
     } = desc;
 
-    const detailsStr = getDetailsStr(details, name, 'кг');
+    const detailsStr = getDetailsStr(details, fullName, 'кг');
 
     const packStr = `Упаковка - ${pack}`;
-    const producerStr = `Изготовитель:${producer.name}`;
+    const producerStr = `Изготовитель: ${producer.name}`;
     const periodStr = `Период изготовления: ${periodCreation}`;
     const expirationStr = `Cрок годности - ${expirationDate} месяцев`;
 
@@ -39,14 +39,15 @@ export const productToStringEng = (product: ProductT) => {
     const { desc, periodCreation } = info;
     const { packEng, nameEng } = desc;
 
-    const detailsStr = getDetailsStr(details, nameEng, 'кг');
+    const detailsStr = getDetailsStr(details, nameEng, 'kg');
 
+    const packStr = `Packing - ${packEng}`;
     const groundStr = `Fishing ground: ${ground}`;
     const periodStr = `Producing period: ${periodCreation}`;
-    const portStr = 'Port of discharging:';
-    const descStr = `${packEng}\n${groundStr}\n${periodStr}\n${portStr}`;
+    const portStr = 'Port of discharging: UNKNOWN';
+    const descStr = `${packStr}\n${groundStr}\n${periodStr}\n${portStr}`;
 
-    const productStr = `${detailsStr}\n${descStr}\n`;
+    const productStr = `${detailsStr}\n${descStr}\n\n`;
 
     return productStr;
 };

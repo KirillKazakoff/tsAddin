@@ -3,12 +3,12 @@ import { LetterFieldsT } from '../../types/typesStore';
 
 class LetterFieldsStore {
     fields: LetterFieldsT = {
-        dateArrival: '',
-        datePayment: '',
+        dateArrival: '18.02.23',
+        datePayment: '10.02.23',
         operation: 'eng',
-        terms: '',
-        ground: '',
-        port: '',
+        terms: 'CFR',
+        ground: 'Okhotsk Sea',
+        port: 'Busan',
     };
 
     constructor() {
