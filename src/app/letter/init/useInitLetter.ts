@@ -1,8 +1,8 @@
-import letterStore from '../../stores/letterStore';
-import { setProduction } from '../../stores/setProduction';
-import { setTable } from '../../stores/setTable';
-import { setTransport } from '../../stores/setTransport';
-import { setVessels } from '../../stores/setVessels';
+import letterStore from '../../stores/letterStore/letterStore';
+import { setProduction } from '../../stores/letterStore/setProduction';
+import { setTable } from '../../stores/letterStore/setTable';
+import { setTransport } from '../../stores/letterStore/setTransport';
+import { setVessels } from '../../stores/letterStore/setVessels';
 
 import { initMate } from './initMate';
 import { initProduction } from './initProducts';

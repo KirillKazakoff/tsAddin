@@ -1,4 +1,4 @@
-import letterStore from '../letterStore';
+import letterStore from './letterStore';
 
 export const selectProductSp = (key: string) => {
     const { production } = letterStore.letter;
@@ -14,7 +14,6 @@ export const selectVesselSp = (key: string) => {
     return vesselsArr.find((vesselSp) => vesselSp.name === key);
 };
 
-// export const selectProductName = (key: string) => {
-//     const product = selectProductSp(key);
-
-// }
+export const selectVesselsStr = () => {
+    return letterStore.letter.vessels.map((vessel) => vessel.name);
+};

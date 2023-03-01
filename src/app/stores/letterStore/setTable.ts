@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { TableRowT } from '../../types/types';
 import letterStore from './letterStore';
-import { TableRowT } from '../types/types';
 
 export const setTable = (table: any[][]) => {
     const transformedTable = table.reduce((totalObj, row, index) => {
@@ -29,7 +29,13 @@ export const setTable = (table: any[][]) => {
             periodCreation,
         };
 
-        if (operation !== 'Внутренний рынок') return totalObj;
+        if (
+            operation !== 'Внутренний рынок'
+            || operation !== 'Хранение на экспорт'
+        ) {
+            return totalObj;
+        }
+
         totalObj.push(rowObj);
         return totalObj;
     }, []);

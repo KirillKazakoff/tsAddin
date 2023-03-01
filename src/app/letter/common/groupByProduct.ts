@@ -2,7 +2,7 @@
 import {
     selectProductSp,
     selectVesselSp,
-} from '../../stores/select/selectProductSp';
+} from '../../stores/letterStore/selectProductSp';
 import { ProductionInfoT, ProductT, TableRowT } from '../../types/types';
 
 const initProduct = (tableRow: TableRowT): ProductT => {
@@ -31,26 +31,4 @@ export const groupByProduct = (groupVessel: TableRowT[]): ProductionInfoT => {
         productionTypes[product].details.push(details);
         return productionTypes;
     }, {});
-};
-
-export const productToString = (product: ProductT) => {
-    const { details, info } = product;
-    const { desc, producer, periodCreation } = info;
-    const {
-        standart, expirationDate, pack, name,
-    } = desc;
-
-    const detailsStr = details.reduce((total, detailsObj) => {
-        const { amount, sort } = detailsObj;
-        const detailsRow = `- ${name} ${sort} - ${amount} кг`;
-        total = `${total}${detailsRow}\n`;
-        return total;
-    }, '');
-
-    const producerStr = `Изготовитель:${producer}`;
-    const periodStr = `Период изготовления: ${periodCreation}`;
-    const descStr = `${pack}\n${producerStr}\n${expirationDate}\n${standart}\n${periodStr}\n`;
-    const productStr = `${detailsStr}\n${descStr}\n`;
-
-    return productStr;
 };

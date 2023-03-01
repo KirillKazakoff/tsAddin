@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { ProductDescriptionT, ProductionNewT } from '../types/typesSP';
+import { ProductDescriptionT, ProductionNewT } from '../../types/typesSP';
 import letterStore from './letterStore';
 
 export const setProduction = (spRange: any[][]) => {

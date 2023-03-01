@@ -1,4 +1,4 @@
-import type { VesselT } from '../types/typesSP';
+import { VesselT } from '../../types/typesSP';
 import letterStore from './letterStore';
 
 export const setVessels = (spRange: any[][]) => {

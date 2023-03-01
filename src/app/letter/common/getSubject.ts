@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import letterStore from '../stores/letterStore';
-import { SubjectT } from '../types/types';
+import letterStore from '../../stores/letterStore/letterStore';
+import { SubjectT } from '../../types/types';
 
 export const getSubject = () => {
     const { table } = letterStore.letter;

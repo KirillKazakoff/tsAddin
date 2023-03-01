@@ -42,10 +42,16 @@ export type ProductionInfoT = {
 
 // LetterTypes
 export type BodyRowT = {
-    vesselName: string;
+    vessel: VesselT;
     production: ProductionInfoT;
 };
 
 export type SubjectT = {
     [key: string]: string[];
 };
+
+// toStr
+export type ProductionToStr = (
+    bodyRow: BodyRowT,
+    callback: (product: ProductT) => string
+) => string;

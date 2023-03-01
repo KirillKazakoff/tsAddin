@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
-import letterStore from '../../stores/letterStore';
-import { selectProductSp } from '../../stores/select/selectProductSp';
-import { getSubject } from '../getSubject';
+import letterStore from '../../stores/letterStore/letterStore';
+import { selectProductSp } from '../../stores/letterStore/selectProductSp';
+import { getSubject } from '../common/getSubject';
 
-export const getSubjectStrRu = () => {
+export const subjectToStrRu = () => {
     const { transport } = letterStore.letter;
     const subjectObj = getSubject();
 
@@ -22,7 +22,7 @@ export const getSubjectStrRu = () => {
     return `Предложение ${subjectStr}, ${transport.name}`;
 };
 
-export const getSubjectStrEng = () => {
+export const subjectToStrEng = () => {
     const { transport } = letterStore.letter;
     const subjectObj = getSubject();
 
