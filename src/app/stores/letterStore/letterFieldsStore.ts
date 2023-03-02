@@ -3,8 +3,9 @@ import { LetterFieldsT } from '../../types/typesStore';
 
 class LetterFieldsStore {
     fields: LetterFieldsT = {
-        dateArrival: '18.02.23',
-        datePayment: '10.02.23',
+        arrivalVld: '18.02.23',
+        arrivalForeign: '21.02.23',
+        payment: '10.02.23',
         operation: 'eng',
         terms: 'CFR',
         ground: 'Okhotsk Sea',
@@ -15,12 +16,16 @@ class LetterFieldsStore {
         makeAutoObservable(this);
     }
 
-    setDatePayment(date: string) {
-        this.fields.datePayment = date;
+    setPayment(date: string) {
+        this.fields.payment = date;
     }
 
-    setDateArrival(date: string) {
-        this.fields.dateArrival = date;
+    setArrivalVld(date: string) {
+        this.fields.arrivalVld = date;
+    }
+
+    setArrivalForeign(date: string) {
+        this.fields.arrivalForeign = date;
     }
 
     setOperation(operation: string) {

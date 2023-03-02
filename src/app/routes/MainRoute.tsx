@@ -10,7 +10,7 @@ export default function MainRoute() {
 
     return (
         <div>
-            <div>MainRoute</div>
+            <div className='main-route'>MainRoute</div>
         </div>
     );
 }

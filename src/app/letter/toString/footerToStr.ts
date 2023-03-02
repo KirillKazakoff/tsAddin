@@ -1,11 +1,12 @@
 /* eslint-disable no-useless-escape */
 import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
+import letterStore from '../../stores/letterStore/letterStore';
 
 export const footerToStrRu = () => {
-    const { dateArrival, datePayment, port } = letterFieldsStore.fields;
+    const { arrivalVld, payment, port } = letterFieldsStore.fields;
 
-    const arrivalStr = `Прибытие в п. ${port} ${dateArrival}`;
-    const paymentStr = `Оплата до ${datePayment}`;
+    const arrivalStr = `Прибытие в п. ${port} ${arrivalVld}`;
+    const paymentStr = `Оплата до ${payment}`;
     const conclusionStr = 'В случае Вашей заинтересованности, просим Вас направить предложение';
 
     return `\n${arrivalStr}\n\n${paymentStr}\n\n${conclusionStr}`;
@@ -13,15 +14,20 @@ export const footerToStrRu = () => {
 
 export const footerToStrEng = () => {
     const {
-        port, terms, dateArrival, datePayment,
+        port, terms, arrivalForeign, payment, arrivalVld,
     } = letterFieldsStore.fields;
+    const transport = letterStore.letter.transport.nameEng;
 
     const weightInformStr = 'Send for you weight reports in attached files.';
-    const arrivalStr = `ETA ${port} - ${dateArrival}`;
     const termsStr = `Terms of sale: \n\n- ${terms} ${port}`;
 
-    const paymentStr = '- payment 100% during 10 banking days after sign a contract';
-    const conclusionStr = `If you get interested, please advise us your price offer, we are going to sell this lot at ${datePayment}`;
+    const arrivalVldStr = `ETA Vladivostok - ${arrivalVld}`;
+    const arrivalForeignStr = `ETA ${port} - ${arrivalForeign}`;
+    const scheduleStr = `Schedule ${transport}:\n${arrivalVldStr}\n${arrivalForeignStr}\n\n`;
+    const arrivalStr = terms === 'CFR' ? scheduleStr : '';
 
-    return `\n${weightInformStr}\n\n${arrivalStr}\n\n${termsStr}\n${paymentStr}\n\n${conclusionStr}`;
+    const paymentInfoStr = '- payment 100% during 10 banking days after sign a contract';
+    const paymentStr = `If you get interested, please advise us your price offer, we are going to sell this lot at ${payment}`;
+
+    return `\n${weightInformStr}\n\n${arrivalStr}${termsStr}\n${paymentInfoStr}\n\n${paymentStr}`;
 };

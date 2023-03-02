@@ -9,8 +9,9 @@ export type LetterT = {
 };
 
 export type LetterFieldsT = {
-    dateArrival: string;
-    datePayment: string;
+    arrivalVld: string;
+    arrivalForeign: string;
+    payment: string;
     terms: string;
     ground: string;
     operation: string;
