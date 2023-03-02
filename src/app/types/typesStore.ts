@@ -14,6 +14,6 @@ export type LetterFieldsT = {
     payment: string;
     terms: string;
     ground: string;
-    operation: string;
+    isExport: boolean;
     port: string;
 };

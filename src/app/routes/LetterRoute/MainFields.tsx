@@ -1,13 +1,14 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import CheckBox from '../../components/CheckBox';
 import Input from '../../components/Input';
 import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
 
 export const MainFields = observer(() => {
     const { fields } = letterFieldsStore;
 
-    const setOperation = (operation: string) => {
-        letterFieldsStore.setOperation(operation);
+    const toggleIsExport = () => {
+        letterFieldsStore.toggleIsExport();
     };
 
     const setDateArrival = (date: string) => {
@@ -42,11 +43,12 @@ export const MainFields = observer(() => {
                 setter={setDatePayment}
                 value={fields.payment}
             />
-            <Input
-                title='Операция'
-                placeholder='Операция'
-                setter={setOperation}
-                value={fields.operation}
+            <CheckBox
+                type='checkbox'
+                title='Предложение на экспорт'
+                placeholder='Предложение на экспорт'
+                setter={toggleIsExport}
+                checked={fields.isExport}
             />
         </div>
     );

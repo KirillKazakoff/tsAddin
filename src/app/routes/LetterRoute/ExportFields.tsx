@@ -16,7 +16,7 @@ export const ExportFields = observer(() => {
         letterFieldsStore.setArrivalForeign(date);
     };
 
-    if (fields.operation !== 'eng') return null;
+    if (!fields.isExport) return null;
 
     return (
         <div className='letter__fields letter__fields--export'>

@@ -9,10 +9,10 @@ export const LetterRoute = observer(() => {
     const initLetter = useInitLetter();
 
     useEffect(() => {
+        const str = '2134532';
+        console.log(str.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 '));
         const func = async () => {
             await initLetter();
-            const href = getHref();
-            console.log(href);
         };
         func();
     });
@@ -20,7 +20,6 @@ export const LetterRoute = observer(() => {
     const onClick = async () => {
         await initLetter();
         const href = getHref();
-        console.log(href);
         document.location.href = href;
     };
 
@@ -38,7 +37,6 @@ export const LetterRoute = observer(() => {
                 >
                     Создать письмо
                 </button>
-                {/* <a href={testHref}>TEST</a> */}
             </form>
         </div>
     );

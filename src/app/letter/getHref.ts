@@ -2,11 +2,12 @@ import letterFieldsStore from '../stores/letterStore/letterFieldsStore';
 import { letter } from './letter';
 
 export const getHref = () => {
-    const { operation } = letterFieldsStore.fields;
+    const { isExport } = letterFieldsStore.fields;
 
+    const key = isExport ? 'eng' : 'ru';
     const {
         getSubject, getHeader, getBody, getFooter,
-    } = letter[operation];
+    } = letter[key];
 
     const mailTo = 'oved@sea-wolf.ru';
 

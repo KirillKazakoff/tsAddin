@@ -21,12 +21,23 @@ b {
     justify-content: space-between;
 }
 
+.input-checkbox {
+    width: 15px;
+    height: 15px;
+}
+
 /* letter */
 .letter {
     padding: 10px;
 }
 
 /* .letter__fields */
+.letter__fields {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
 .letter__fields--export {
     margin-top: 30px;
 }

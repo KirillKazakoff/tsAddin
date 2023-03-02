@@ -6,7 +6,7 @@ class LetterFieldsStore {
         arrivalVld: '18.02.23',
         arrivalForeign: '21.02.23',
         payment: '10.02.23',
-        operation: 'eng',
+        isExport: true,
         terms: 'CFR',
         ground: 'Okhotsk Sea',
         port: 'Busan',
@@ -28,8 +28,8 @@ class LetterFieldsStore {
         this.fields.arrivalForeign = date;
     }
 
-    setOperation(operation: string) {
-        this.fields.operation = operation;
+    toggleIsExport() {
+        this.fields.isExport = !this.fields.isExport;
     }
 
     setTerms(terms: string) {
