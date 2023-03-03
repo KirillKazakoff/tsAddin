@@ -6,6 +6,7 @@ export type TableRowT = {
     sort: string;
     amount: number;
     periodCreation: string;
+    operation: string;
 };
 
 // DictionaryTypes

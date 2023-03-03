@@ -22,6 +22,7 @@ export const setTable = (table: any[][]) => {
         ] = row;
 
         const rowObj: TableRowT = {
+            operation,
             vessel,
             product: product.toLowerCase(),
             sort,

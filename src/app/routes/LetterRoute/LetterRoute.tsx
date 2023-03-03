@@ -13,6 +13,7 @@ export const LetterRoute = observer(() => {
         console.log(str.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 '));
         const func = async () => {
             await initLetter();
+            getHref();
         };
         func();
     });
