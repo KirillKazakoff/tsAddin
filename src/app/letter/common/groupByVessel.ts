@@ -5,7 +5,7 @@ export const groupByVessel = (vessels: string[], table: TableRowT[]) => {
     const checkOperation = ({ operation, product }: TableRowT) => {
         const { terms, isExport } = letterFieldsStore.fields;
 
-        console.log(operation, terms, isExport, product);
+        // console.log(operation, terms, isExport, product);
         if (operation === 'Внутренний рынок' && !isExport) {
             return true;
         }
@@ -23,13 +23,18 @@ export const groupByVessel = (vessels: string[], table: TableRowT[]) => {
 
     return vessels.reduce<TableRowT[][]>((groupVessel, vessel) => {
         const group = table.reduce<TableRowT[]>((total, row) => {
-            checkOperation(row);
+            const check = checkOperation(row);
+            // console.log(check);
+            if (!check) return total;
 
             if (vessel === row.vessel) total.push(row);
             return total;
         }, []);
 
-        groupVessel.push(group);
+        if (group.length > 0) {
+            groupVessel.push(group);
+        }
+
         return groupVessel;
     }, []);
 };

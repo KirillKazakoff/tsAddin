@@ -3,7 +3,7 @@ import { LetterFieldsT } from '../../types/typesStore';
 
 class LetterFieldsStore {
     fields: LetterFieldsT = {
-        arrivalVld: '18.02.23',
+        arrivalVld: '18.03.23',
         arrivalForeign: '21.02.23',
         payment: '10.02.23',
         isExport: true,

@@ -19,6 +19,7 @@ export const getHref = () => {
     const bodyHref = encodeURIComponent(`${header}${body}${footer}`);
 
     const href = `mailto:${mailTo}?subject=${subject}&body=${bodyHref}`;
+    console.log(href);
     const hrefReplaced = href.replace(/\n/g, '%0A');
 
     return hrefReplaced;

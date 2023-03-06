@@ -30,12 +30,7 @@ export const setTable = (table: any[][]) => {
             periodCreation,
         };
 
-        if (
-            operation !== 'Внутренний рынок'
-            && operation !== 'Хранение на экспорт'
-        ) {
-            return totalObj;
-        }
+        if (operation === 'Образец') return totalObj;
 
         totalObj.push(rowObj);
         return totalObj;

@@ -9,8 +9,6 @@ export const LetterRoute = observer(() => {
     const initLetter = useInitLetter();
 
     useEffect(() => {
-        const str = '2134532';
-        console.log(str.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 '));
         const func = async () => {
             await initLetter();
             getHref();

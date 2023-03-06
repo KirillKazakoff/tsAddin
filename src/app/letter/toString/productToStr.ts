@@ -3,6 +3,8 @@ import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
 import { DetailsT, ProductT } from '../../types/types';
 import { formatCount } from '../../utils/formatCount';
 
+const TAB = '   ';
+
 function getDetailsStr(details: DetailsT[], name: string, measure: string) {
     const detailsStr = details.reduce((total, detailsObj) => {
         const { amount, sort } = detailsObj;
@@ -25,10 +27,10 @@ export const productToStringRu = (product: ProductT) => {
 
     const detailsStr = getDetailsStr(details, fullName, 'кг');
 
-    const packStr = `Упаковка - ${pack}`;
-    const producerStr = `Изготовитель: ${producer.name}`;
-    const periodStr = `Период изготовления: ${periodCreation}`;
-    const expirationStr = `Cрок годности - ${expirationDate} месяцев`;
+    const packStr = `${TAB}Упаковка - ${pack}`;
+    const producerStr = `${TAB}Изготовитель: ${producer.name}`;
+    const periodStr = `${TAB}Период изготовления: ${periodCreation}`;
+    const expirationStr = `${TAB}Cрок годности - ${expirationDate} месяцев`;
 
     const descStr = `${packStr}\n${producerStr}\n${expirationStr}\n${standart}\n${periodStr}\n`;
     const productStr = `${detailsStr}\n${descStr}\n`;
@@ -44,10 +46,10 @@ export const productToStringEng = (product: ProductT) => {
 
     const detailsStr = getDetailsStr(details, nameEng, 'kg');
 
-    const packStr = `Packing - ${packEng}`;
-    const groundStr = `Fishing ground: ${ground}`;
-    const periodStr = `Producing period: ${periodCreation}`;
-    const portStr = 'Port of discharging: UNKNOWN';
+    const packStr = `${TAB}Packing - ${packEng}`;
+    const groundStr = `${TAB}Fishing ground: ${ground}`;
+    const periodStr = `${TAB}Producing period: ${periodCreation}`;
+    const portStr = `${TAB}Port of discharging: UNKNOWN`;
     const descStr = `${packStr}\n${groundStr}\n${periodStr}\n${portStr}`;
 
     const productStr = `${detailsStr}\n${descStr}\n\n`;
