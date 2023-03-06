@@ -12,7 +12,7 @@ export const subjectToStrRu = () => {
             const productSp = selectProductSp(productKey);
 
             const sortsStr = sorts.join(', ');
-            total = `${total}${productSp.name} ${sortsStr} ; `;
+            total = `${total}${productSp.name} ${sortsStr}; `;
 
             return total;
         },
@@ -31,7 +31,7 @@ export const subjectToStrEng = () => {
             const productSp = selectProductSp(productKey);
 
             const sortsStr = sorts.join(', ');
-            total = `${total}${productSp.nameEng} ${sortsStr} ; `;
+            total = `${total}${productSp.nameEng} ${sortsStr}; `;
 
             return total;
         },

@@ -19,10 +19,10 @@ export const footerToStrEng = () => {
     const transport = letterStore.letter.transport.nameEng;
 
     const weightInformStr = 'Send for you weight reports in attached files.';
-    const termsStr = `Terms of sale: \n\n- ${terms} ${port}`;
+    const termsStr = `Terms of sale: \n- ${terms} ${port}`;
 
-    const arrivalVldStr = `ETA Vladivostok - ${arrivalVld}`;
-    const arrivalForeignStr = `ETA ${port} - ${arrivalForeign}`;
+    const arrivalVldStr = `- ETA Vladivostok - ${arrivalVld}`;
+    const arrivalForeignStr = `- ETA ${port} - ${arrivalForeign}`;
     const scheduleStr = `Schedule ${transport}:\n${arrivalVldStr}\n${arrivalForeignStr}\n\n`;
     const arrivalStr = terms === 'CFR' ? scheduleStr : '';
 

@@ -17,10 +17,10 @@ export const headerToStrRu = () => {
 export const headerToStrEng = () => {
     const { transport } = letterStore.letter;
     const { port } = letterFieldsStore.fields;
-    const vesselsStr = selectVesselsStrEng().join('; ');
+    const vesselsStr = selectVesselsStrEng().join(';  ');
 
     const greeting = 'Dear Sir! Good day!';
-    const info = 'Send you information for new production from ';
+    const info = 'Send you information for new production, discharging from';
 
-    return `${greeting}\n\n${info} ${vesselsStr} to ${port} via ${transport.nameEng}`;
+    return `${greeting}\n\n${info} ${vesselsStr} to ${port} via ${transport.nameEng}\n`;
 };

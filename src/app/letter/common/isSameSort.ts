@@ -10,7 +10,7 @@ export const isSameSort = (product: ProductT, details: DetailsT) => {
     return true;
 };
 
-export const isStOff = ({ sort }: DetailsT) => {
+export const isStOff = (sort: string) => {
     if (sort === 'ST' || sort === 'OFF') return true;
     return false;
 };

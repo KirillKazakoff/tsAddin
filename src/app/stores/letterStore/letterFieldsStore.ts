@@ -1,16 +1,8 @@
 import { makeAutoObservable } from 'mobx';
-import { LetterFieldsT } from '../../types/typesStore';
+import { initLetterFields } from './initLetterFields';
 
 class LetterFieldsStore {
-    fields: LetterFieldsT = {
-        arrivalVld: '18.03.23',
-        arrivalForeign: '21.02.23',
-        payment: '10.02.23',
-        isExport: true,
-        terms: 'CFR',
-        ground: 'Okhotsk Sea',
-        port: 'Busan',
-    };
+    fields = initLetterFields('build');
 
     constructor() {
         makeAutoObservable(this);

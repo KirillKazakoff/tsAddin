@@ -4,6 +4,7 @@ import { headerToStrEng, headerToStrRu } from './toString/headerToStr';
 import { subjectToStrEng, subjectToStrRu } from './toString/subjectToStr';
 
 const ru = {
+    mailTo: 'oved@sea-wolf.ru',
     getSubject: () => subjectToStrRu(),
     getHeader: () => headerToStrRu(),
     getBody: () => bodyToStrRu(),
@@ -11,6 +12,7 @@ const ru = {
 };
 
 const eng = {
+    mailTo: 'mt.econom@gmail.com',
     getSubject: () => subjectToStrEng(),
     getHeader: () => headerToStrEng(),
     getBody: () => bodyToStrEng(),

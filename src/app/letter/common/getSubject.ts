@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import letterStore from '../../stores/letterStore/letterStore';
 import { SubjectT } from '../../types/types';
+import { isStOff } from './isSameSort';
 
 export const getSubject = () => {
     const { table } = letterStore.letter;
@@ -9,7 +10,9 @@ export const getSubject = () => {
         if (!total[product]) {
             total[product] = [];
         }
+
         if (total[product].includes(sort)) return total;
+        if (isStOff(sort)) return total;
 
         total[product].push(sort);
         return total;

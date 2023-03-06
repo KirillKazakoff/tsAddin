@@ -1,14 +1,13 @@
 /* eslint-disable no-param-reassign */
 import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
 import { DetailsT, ProductT } from '../../types/types';
+import { TAB } from '../../utils/constants';
 import { formatCount } from '../../utils/formatCount';
 import { isStOff } from '../common/isSameSort';
 
-const TAB = '   ';
-
 function getDetailsStr(details: DetailsT[], name: string, measure: string) {
     const detailsStr = details.reduce((total, detailsObj) => {
-        const sort = isStOff(detailsObj) ? '' : detailsObj.sort;
+        const sort = isStOff(detailsObj.sort) ? '' : detailsObj.sort;
         const amount = formatCount(detailsObj.amount);
 
         const detailsRow = `- ${name} ${sort} - ${amount} ${measure}`;
