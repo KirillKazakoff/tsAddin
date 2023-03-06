@@ -1,10 +1,17 @@
+import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import pageStatusStore from '../stores/pageStatusStore';
 
-export default function MainRoute() {
+export const MainRoute = observer(() => {
     const navigate = useNavigate();
+    const { isLetterError } = pageStatusStore;
 
     useEffect(() => {
+        if (isLetterError) {
+            navigate('/errorLetter');
+            return;
+        }
         navigate('/letter');
     });
 
@@ -13,4 +20,4 @@ export default function MainRoute() {
             <div className='main-route'>MainRoute</div>
         </div>
     );
-}
+});

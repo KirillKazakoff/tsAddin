@@ -10,7 +10,6 @@ const getBodyRow = (group: TableRowT[]) => {
         production: groupByProduct(group),
     };
 
-    console.log(group[0].vessel);
     return bodyRow;
 };
 

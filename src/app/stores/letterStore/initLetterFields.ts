@@ -10,7 +10,7 @@ export const initLetterFields = (debugStr: DebugStr) => {
         isExport: false,
         terms: '',
         ground: '',
-        port: 'Busan',
+        port: '',
     };
     const debugFields = {
         arrivalVld: '18.03.23',

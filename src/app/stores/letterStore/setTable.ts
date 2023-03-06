@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { TableRowT } from '../../types/types';
+import pageStatusStore from '../pageStatusStore';
 import letterStore from './letterStore';
 
 export const setTable = (table: any[][]) => {
@@ -30,6 +31,9 @@ export const setTable = (table: any[][]) => {
             periodCreation,
         };
 
+        if (!operation || !vessel || !product) {
+            pageStatusStore.setLetterStatus(true);
+        }
         if (operation === 'Образец') return totalObj;
 
         totalObj.push(rowObj);

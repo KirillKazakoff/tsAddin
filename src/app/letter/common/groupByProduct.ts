@@ -24,6 +24,7 @@ const initProduct = (tableRow: TableRowT): ProductT => {
 export const groupByProduct = (groupVessel: TableRowT[]): ProductionInfoT => {
     return groupVessel.reduce<ProductionInfoT>((productionTypes, tableRow) => {
         const { product, sort, amount } = tableRow;
+
         if (!productionTypes[product]) {
             productionTypes[product] = initProduct(tableRow);
         }
