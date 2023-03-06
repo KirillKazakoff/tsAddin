@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { ProductDescriptionT, ProductionNewT } from '../../types/typesSP';
-import { TAB } from '../../utils/constants';
 import letterStore from './letterStore';
 
 export const setProduction = (spRange: any[][]) => {
@@ -16,7 +15,7 @@ export const setProduction = (spRange: any[][]) => {
             expirationDate: expirationDate || 'ХХХ',
             pack: pack || 'Нет упаковки',
             packEng: packEng || 'No package',
-            standart: standart || `${TAB}Нет стандарта`,
+            standart: standart || 'Нет стандарта',
         };
 
         const isInTable = table.some(({ product }) => {

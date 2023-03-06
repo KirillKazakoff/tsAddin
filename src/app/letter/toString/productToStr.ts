@@ -31,8 +31,9 @@ export const productToStringRu = (product: ProductT) => {
     const producerStr = `${TAB}Изготовитель: ${producer.name}`;
     const periodStr = `${TAB}Период изготовления: ${periodCreation}`;
     const expirationStr = `${TAB}Cрок годности - ${expirationDate} месяцев`;
+    const standartStr = `${TAB}${standart}`;
 
-    const descStr = `${packStr}\n${producerStr}\n${expirationStr}\n${standart}\n${periodStr}\n`;
+    const descStr = `${packStr}\n${producerStr}\n${expirationStr}\n${standartStr}\n${periodStr}\n`;
     const productStr = `${detailsStr}\n${descStr}\n`;
 
     return productStr;
