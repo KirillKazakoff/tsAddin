@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { initLetterFields } from './initLetterFields';
 
 class LetterFieldsStore {
-    fields = initLetterFields('dev');
+    fields = initLetterFields('build');
 
     constructor() {
         makeAutoObservable(this);

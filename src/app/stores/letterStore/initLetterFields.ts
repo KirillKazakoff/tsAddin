@@ -3,6 +3,8 @@ import { LetterFieldsT } from '../../types/typesStore';
 type DebugStr = 'dev' | 'build';
 
 export const initLetterFields = (debugStr: DebugStr) => {
+    console.log(process.env.NODE_ENV);
+
     const clearFields: LetterFieldsT = {
         arrivalVld: '',
         arrivalForeign: '',
