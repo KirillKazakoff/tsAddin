@@ -6,7 +6,7 @@ export const setProduction = (spRange: any[][]) => {
     const { table } = letterStore.letter;
 
     const production = spRange.reduce<ProductionNewT>((totalObj, row) => {
-        const [fullName, nameEng, name, expirationDate, packEng, pack, standart] = row;
+        const [fullName, nameEng, name, expirationDate, pack, packEng, standart] = row;
 
         const rowObj: ProductDescriptionT = {
             name: name.toLowerCase(),

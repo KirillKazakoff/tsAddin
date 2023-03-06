@@ -2,15 +2,16 @@
 import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
 import { DetailsT, ProductT } from '../../types/types';
 import { formatCount } from '../../utils/formatCount';
+import { isStOff } from '../common/isSameSort';
 
 const TAB = '   ';
 
 function getDetailsStr(details: DetailsT[], name: string, measure: string) {
     const detailsStr = details.reduce((total, detailsObj) => {
-        const { amount, sort } = detailsObj;
-        const formated = formatCount(amount);
+        const sort = isStOff(detailsObj) ? '' : detailsObj.sort;
+        const amount = formatCount(detailsObj.amount);
 
-        const detailsRow = `- ${name} ${sort} - ${formated} ${measure}`;
+        const detailsRow = `- ${name} ${sort} - ${amount} ${measure}`;
         total = `${total}${detailsRow}\n`;
         return total;
     }, '');
@@ -39,7 +40,7 @@ export const productToStringRu = (product: ProductT) => {
 };
 
 export const productToStringEng = (product: ProductT) => {
-    const { ground } = letterFieldsStore.fields;
+    const { ground, port } = letterFieldsStore.fields;
     const { details, info } = product;
     const { desc, periodCreation } = info;
     const { packEng, nameEng } = desc;
@@ -49,7 +50,7 @@ export const productToStringEng = (product: ProductT) => {
     const packStr = `${TAB}Packing - ${packEng}`;
     const groundStr = `${TAB}Fishing ground: ${ground}`;
     const periodStr = `${TAB}Producing period: ${periodCreation}`;
-    const portStr = `${TAB}Port of discharging: UNKNOWN`;
+    const portStr = `${TAB}Port of discharging: ${port}`;
     const descStr = `${packStr}\n${groundStr}\n${periodStr}\n${portStr}`;
 
     const productStr = `${detailsStr}\n${descStr}\n\n`;
