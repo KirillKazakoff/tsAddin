@@ -45,3 +45,10 @@ b {
 .letter__fields-wrapper {
     min-height: 250px;
 }
+
+/* .nav */
+.nav {
+    display: flex;
+    column-gap: 20px;
+    margin-bottom: 30px;
+}

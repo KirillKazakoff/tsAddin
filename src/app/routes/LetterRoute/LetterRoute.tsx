@@ -1,22 +1,14 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ExportFields } from './ExportFields';
 import { getHref } from '../../letter/getHref';
 import { useInitLetter } from '../../letter/init/useInitLetter';
 import { MainFields } from './MainFields';
-import pageStatusStore from '../../stores/pageStatusStore';
 
 export const LetterRoute = observer(() => {
     const initLetter = useInitLetter();
-    const { isLetterError } = pageStatusStore;
-    const navigate = useNavigate();
 
     useEffect(() => {
-        if (isLetterError) {
-            navigate('/errorLetter');
-            return;
-        }
         const func = async () => {
             await initLetter();
             getHref();
