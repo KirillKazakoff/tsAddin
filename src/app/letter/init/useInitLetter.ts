@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { setProduction } from '../../stores/letterStore/setProduction';
 import { setTable } from '../../stores/letterStore/setTable';
 import { setTransport } from '../../stores/letterStore/setTransport';
 import { setVessels } from '../../stores/letterStore/setVessels';
+import { getHref } from '../getHref';
 
 import { initMate } from './initMate';
 import { initProduction } from './initProducts';
@@ -25,5 +27,18 @@ export const useInitLetter = () => {
             setProduction(spProductionRange.values);
         });
     };
+
+    // debuging mode not to click every time
+    const mode = process.env.NODE_ENV;
+
+    useEffect(() => {
+        if (mode === 'production') return;
+        const func = async () => {
+            await initLetter();
+            getHref();
+        };
+        func();
+    });
+
     return initLetter;
 };

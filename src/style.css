@@ -15,6 +15,10 @@ b {
     font-weight: bold;
 }
 
+.main-route {
+    padding: 10px;
+}
+
 /* .input-wrapper */
 .input-wrapper {
     display: flex;
@@ -24,11 +28,6 @@ b {
 .input-checkbox {
     width: 20px;
     height: 20px;
-}
-
-/* letter */
-.letter {
-    padding: 10px;
 }
 
 /* .letter__fields */

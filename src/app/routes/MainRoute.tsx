@@ -14,18 +14,16 @@ export const MainRoute = observer(() => {
     }, [isLetterError, navigate]);
 
     return (
-        <div>
-            <div className='main-route'>
-                <nav className='nav'>
-                    <NavLink to={'/letter'} className='nav-link'>
-                        Offer
-                    </NavLink>
-                    <NavLink to={'/docs'} className='nav-link'>
-                        Docs
-                    </NavLink>
-                </nav>
-                <Outlet />
-            </div>
+        <div className='main-route'>
+            <nav className='nav'>
+                <NavLink to={'/letter'} className='nav-link'>
+                    Offer
+                </NavLink>
+                <NavLink to={'/docs'} className='nav-link'>
+                    Docs
+                </NavLink>
+            </nav>
+            <Outlet />
         </div>
     );
 });
