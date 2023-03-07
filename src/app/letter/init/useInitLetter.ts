@@ -4,11 +4,12 @@ import { setTable } from '../../stores/letterStore/setTable';
 import { setTransport } from '../../stores/letterStore/setTransport';
 import { setVessels } from '../../stores/letterStore/setVessels';
 import { getHref } from '../getHref';
-
-import { initMate } from './initMate';
-import { initProduction } from './initProducts';
-import { initTransport } from './initTransport';
-import { initVessels } from './initVessels';
+import {
+    initMate,
+    initProduction,
+    initTransport,
+    initVessels,
+} from './initExcelLetter';
 
 export const useInitLetter = () => {
     const initLetter = async () => {
