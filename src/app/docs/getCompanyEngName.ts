@@ -20,7 +20,7 @@ export const getCompanyEngName = (dictionaryBook: any, companyName: any) => {
 
     const companyNameEng = prodavecWs.getCell(
         foundCompanyNameCell.row,
-        companyNameEngHeaderCell.col
+        companyNameEngHeaderCell.col,
     );
 
     return companyNameEng.value;

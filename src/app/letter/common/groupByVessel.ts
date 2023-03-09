@@ -1,8 +1,8 @@
-import { TableRowT } from '../../types/types';
+import type { MateRowT } from '../../types/typesTables';
 import letterStore from '../../stores/letterStore/letterStore';
 
-export const groupByVessel = (vessels: string[], table: TableRowT[]) => {
-    const checkOperation = ({ operation }: TableRowT) => {
+export const groupByVessel = (vessels: string[], table: MateRowT[]) => {
+    const checkOperation = ({ operation }: MateRowT) => {
         const { terms, isExport } = letterStore.fields;
 
         if (operation === 'Внутренний рынок' && !isExport) {
@@ -20,8 +20,8 @@ export const groupByVessel = (vessels: string[], table: TableRowT[]) => {
         return false;
     };
 
-    return vessels.reduce<TableRowT[][]>((groupVessel, vessel) => {
-        const group = table.reduce<TableRowT[]>((total, row) => {
+    return vessels.reduce<MateRowT[][]>((groupVessel, vessel) => {
+        const group = table.reduce<MateRowT[]>((total, row) => {
             if (!checkOperation(row)) return total;
 
             if (vessel === row.vessel) total.push(row);

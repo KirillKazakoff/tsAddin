@@ -1,9 +1,11 @@
 /* eslint-disable no-param-reassign */
+import type { ProductionInfoT, ProductT } from '../../types/types';
+import type { MateRowT } from '../../types/typesTables';
+
 import { selectProductSp, selectVesselSp } from '../../stores/spsStore/select';
-import { ProductionInfoT, ProductT, TableRowT } from '../../types/types';
 import { isSameSort } from './isSameSort';
 
-const initProduct = (tableRow: TableRowT): ProductT => {
+const initProduct = (tableRow: MateRowT): ProductT => {
     const { product, vessel, periodCreation } = tableRow;
     const productSp = selectProductSp(product);
     const vesselSp = selectVesselSp(vessel);
@@ -18,7 +20,7 @@ const initProduct = (tableRow: TableRowT): ProductT => {
     };
 };
 
-export const groupByProduct = (groupVessel: TableRowT[]): ProductionInfoT => {
+export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
     return groupVessel.reduce<ProductionInfoT>((productionTypes, tableRow) => {
         const { product, sort, amount } = tableRow;
 

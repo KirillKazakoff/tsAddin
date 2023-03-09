@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { TableRowT } from '../../types/types';
+
+import { MateRowT } from '../../types/typesTables';
 import pageStatusStore from '../pageStatusStore';
 import tablesStore from './tablesStore';
 
@@ -22,7 +23,7 @@ export const setMate = (table: any[][]) => {
             periodCreation,
         ] = row;
 
-        const rowObj: TableRowT = {
+        const rowObj: MateRowT = {
             operation,
             vessel,
             product: product.toLowerCase(),

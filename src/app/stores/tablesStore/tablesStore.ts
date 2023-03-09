@@ -1,10 +1,15 @@
-import { TableRowT } from '../../types/types';
+import { MateRowT, ExportRowT } from '../../types/typesTables';
 
 class TablesStore {
     mates = [];
+    export = [];
 
-    setMates(table: TableRowT[]) {
+    setMates(table: MateRowT[]) {
         this.mates = table;
+    }
+
+    setExport(table: ExportRowT[]) {
+        this.export = table;
     }
 }
 

@@ -1,5 +1,5 @@
-import { TableRowT } from './types';
 import { TransportT, VesselT, ProductionNewT } from './typesSP';
+import { MateRowT } from './typesTables';
 
 export type SpsT = {
     transport: TransportT;
@@ -8,11 +8,11 @@ export type SpsT = {
 };
 
 export type TablesT = {
-    mates: TableRowT[];
+    mates: MateRowT[];
 };
 
 export type LetterT = {
-    table: TableRowT[];
+    table: MateRowT[];
     transport: TransportT;
     vessels: VesselT[];
     production: ProductionNewT;

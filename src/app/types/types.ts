@@ -1,14 +1,5 @@
 import { ProductDescriptionT, VesselT } from './typesSP';
 
-export type TableRowT = {
-    vessel: string;
-    product: string;
-    sort: string;
-    amount: number;
-    periodCreation: string;
-    operation: string;
-};
-
 // DictionaryTypes
 export type DictionaryT = {
     getSubject: (info: string) => string;

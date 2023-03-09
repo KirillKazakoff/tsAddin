@@ -1,10 +1,12 @@
 /* eslint-disable no-param-reassign */
+import type { BodyRowT } from '../../types/types';
+import type { MateRowT } from '../../types/typesTables';
+
 import { selectVesselSp } from '../../stores/spsStore/select';
-import { TableRowT, BodyRowT } from '../../types/types';
 import { groupByProduct } from './groupByProduct';
 import { groupByVessel } from './groupByVessel';
 
-const getBodyRow = (group: TableRowT[]) => {
+const getBodyRow = (group: MateRowT[]) => {
     const bodyRow: BodyRowT = {
         vessel: selectVesselSp(group[0].vessel),
         production: groupByProduct(group),
@@ -13,7 +15,7 @@ const getBodyRow = (group: TableRowT[]) => {
     return bodyRow;
 };
 
-export const getBody = (table: TableRowT[], vessels: string[]) => {
+export const getBody = (table: MateRowT[], vessels: string[]) => {
     const groupsVessel = groupByVessel(vessels, table);
 
     const bodyObj = groupsVessel.reduce<BodyRowT[]>((total, group) => {
