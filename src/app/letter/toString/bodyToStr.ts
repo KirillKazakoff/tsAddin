@@ -1,5 +1,5 @@
-import letterStore from '../../stores/letterStore/letterStore';
-import { selectVesselsStr } from '../../stores/letterStore/selectProductSp';
+import { selectVesselsStr } from '../../stores/spsStore/select';
+import tablesStore from '../../stores/tablesStore/tablesStore';
 import { ProductionToStr } from '../../types/types';
 import { getBody } from '../common/getBody';
 import { productToStringEng, productToStringRu } from './productToStr';
@@ -18,9 +18,9 @@ const productionToStr: ProductionToStr = (bodyRow, callback) => {
 };
 
 export const bodyToStrRu = () => {
-    const { table } = letterStore.letter;
+    const { mates } = tablesStore;
     const vessels = selectVesselsStr();
-    const bodyObj = getBody(table, vessels);
+    const bodyObj = getBody(mates, vessels);
 
     const body = bodyObj.reduce((bodyStr, bodyRow) => {
         const { vessel } = bodyRow;
@@ -35,9 +35,9 @@ export const bodyToStrRu = () => {
 };
 
 export const bodyToStrEng = () => {
-    const { table } = letterStore.letter;
+    const { mates } = tablesStore;
     const vessels = selectVesselsStr();
-    const bodyObj = getBody(table, vessels);
+    const bodyObj = getBody(mates, vessels);
 
     const body = bodyObj.reduce((bodyStr, bodyRow) => {
         const { vessel } = bodyRow;

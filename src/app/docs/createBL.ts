@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { getCompanyEngName } from './getCompanyEngName';
 import { getCompanyName } from './getCompanyName';
-import { initCopy } from './initCopy';
+import { initCopy } from './init/initCopy';
 import { read } from './read';
 
 export const createBL = async () => {

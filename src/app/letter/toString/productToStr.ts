@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
+import letterStore from '../../stores/letterStore/letterStore';
 import { DetailsT, ProductT } from '../../types/types';
 import { TAB } from '../../utils/constants';
 import { formatCount } from '../../utils/formatCount';
@@ -40,7 +40,7 @@ export const productToStringRu = (product: ProductT) => {
 };
 
 export const productToStringEng = (product: ProductT) => {
-    const { ground, port } = letterFieldsStore.fields;
+    const { ground, port } = letterStore.fields;
     const { details, info } = product;
     const { desc, periodCreation } = info;
     const { packEng, nameEng } = desc;

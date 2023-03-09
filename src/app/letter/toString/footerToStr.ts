@@ -1,9 +1,9 @@
 /* eslint-disable no-useless-escape */
-import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
 import letterStore from '../../stores/letterStore/letterStore';
+import spsStore from '../../stores/spsStore/spsStore';
 
 export const footerToStrRu = () => {
-    const { arrivalVld, payment, port } = letterFieldsStore.fields;
+    const { arrivalVld, payment, port } = letterStore.fields;
 
     const arrivalStr = `Прибытие в п. ${port} ${arrivalVld}`;
     const paymentStr = `Оплата до ${payment}`;
@@ -15,8 +15,8 @@ export const footerToStrRu = () => {
 export const footerToStrEng = () => {
     const {
         port, terms, arrivalForeign, payment, arrivalVld,
-    } = letterFieldsStore.fields;
-    const transport = letterStore.letter.transport.nameEng;
+    } = letterStore.fields;
+    const transport = spsStore.transport.nameEng;
 
     const weightInformStr = 'Send for you weight reports in attached files.';
     const termsStr = `Terms of sale: \n- ${terms} ${port}`;

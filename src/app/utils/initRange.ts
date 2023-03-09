@@ -8,5 +8,5 @@ export const initRange = (
     const range = tableSrc.getRange();
 
     range.load('values');
-    return { range, tableSrc };
+    return range;
 };

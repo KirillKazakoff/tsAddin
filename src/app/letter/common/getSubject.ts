@@ -1,11 +1,12 @@
 /* eslint-disable no-param-reassign */
-import letterStore from '../../stores/letterStore/letterStore';
+import tablesStore from '../../stores/tablesStore/tablesStore';
 import { SubjectT } from '../../types/types';
 import { isStOff } from './isSameSort';
 
 export const getSubject = () => {
-    const { table } = letterStore.letter;
-    const subjectObj = table.reduce<SubjectT>((total, row) => {
+    const { mates } = tablesStore;
+
+    const subjectObj = mates.reduce<SubjectT>((total, row) => {
         const { product, sort } = row;
         if (!total[product]) {
             total[product] = [];

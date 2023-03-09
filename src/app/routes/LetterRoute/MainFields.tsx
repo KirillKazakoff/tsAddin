@@ -2,25 +2,25 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import CheckBox from '../../components/CheckBox';
 import Input from '../../components/Input';
-import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
+import letterStore from '../../stores/letterStore/letterStore';
 
 export const MainFields = observer(() => {
-    const { fields } = letterFieldsStore;
+    const { fields } = letterStore;
 
     const toggleIsExport = () => {
-        letterFieldsStore.toggleIsExport();
+        letterStore.toggleIsExport();
     };
 
     const setDateArrival = (date: string) => {
-        letterFieldsStore.setArrivalVld(date);
+        letterStore.setArrivalVld(date);
     };
 
     const setDatePayment = (date: string) => {
-        letterFieldsStore.setPayment(date);
+        letterStore.setPayment(date);
     };
 
     const setPort = (port: string) => {
-        letterFieldsStore.setPort(port);
+        letterStore.setPort(port);
     };
 
     return (

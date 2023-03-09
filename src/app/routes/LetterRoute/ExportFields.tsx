@@ -1,19 +1,19 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
+import letterStore from '../../stores/letterStore/letterStore';
 import Input from '../../components/Input';
 
 export const ExportFields = observer(() => {
-    const { fields } = letterFieldsStore;
+    const { fields } = letterStore;
 
     const setTerms = (terms: string) => {
-        letterFieldsStore.setTerms(terms);
+        letterStore.setTerms(terms);
     };
     const setGround = (ground: string) => {
-        letterFieldsStore.setGround(ground);
+        letterStore.setGround(ground);
     };
     const setDateForeignArrival = (date: string) => {
-        letterFieldsStore.setArrivalForeign(date);
+        letterStore.setArrivalForeign(date);
     };
 
     if (!fields.isExport) return null;

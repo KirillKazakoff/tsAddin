@@ -1,9 +1,9 @@
 import { TableRowT } from '../../types/types';
-import letterFieldsStore from '../../stores/letterStore/letterFieldsStore';
+import letterStore from '../../stores/letterStore/letterStore';
 
 export const groupByVessel = (vessels: string[], table: TableRowT[]) => {
-    const checkOperation = ({ operation, product }: TableRowT) => {
-        const { terms, isExport } = letterFieldsStore.fields;
+    const checkOperation = ({ operation }: TableRowT) => {
+        const { terms, isExport } = letterStore.fields;
 
         if (operation === 'Внутренний рынок' && !isExport) {
             return true;

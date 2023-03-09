@@ -51,6 +51,8 @@
             "error",
             4
         ],
+        "@typescript-eslint/lines-between-class-members": "off",
+        "lines-between-class-members": "off",
         "react/function-component-definition": [
             0
         ],

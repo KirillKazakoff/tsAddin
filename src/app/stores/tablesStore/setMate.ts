@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { TableRowT } from '../../types/types';
 import pageStatusStore from '../pageStatusStore';
-import letterStore from './letterStore';
+import tablesStore from './tablesStore';
 
-export const setTable = (table: any[][]) => {
+export const setMate = (table: any[][]) => {
+    table.shift();
     const transformedTable = table.reduce((totalObj, row, index) => {
-        if (index === 0) return totalObj;
         const [
             reice,
             konosament,
@@ -40,5 +40,6 @@ export const setTable = (table: any[][]) => {
         return totalObj;
     }, []);
 
-    letterStore.setTable(transformedTable);
+    console.log(transformedTable);
+    tablesStore.setMates(transformedTable);
 };

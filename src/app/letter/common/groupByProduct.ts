@@ -1,8 +1,5 @@
 /* eslint-disable no-param-reassign */
-import {
-    selectProductSp,
-    selectVesselSp,
-} from '../../stores/letterStore/selectProductSp';
+import { selectProductSp, selectVesselSp } from '../../stores/spsStore/select';
 import { ProductionInfoT, ProductT, TableRowT } from '../../types/types';
 import { isSameSort } from './isSameSort';
 

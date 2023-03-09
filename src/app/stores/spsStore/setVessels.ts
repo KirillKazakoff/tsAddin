@@ -1,9 +1,10 @@
 import { VesselT } from '../../types/typesSP';
-import letterStore from './letterStore';
+import tablesStore from '../tablesStore/tablesStore';
+import spsStore from './spsStore';
 
 export const setVessels = (spRange: any[][]) => {
-    const { table } = letterStore.letter;
-    const vesselsArr = table.map((row) => row.vessel);
+    const { mates } = tablesStore;
+    const vesselsArr = mates.map((row) => row.vessel);
     const vesselsMate = Array.from(new Set(vesselsArr));
 
     const vessels = spRange.filter((row) => {
@@ -15,6 +16,6 @@ export const setVessels = (spRange: any[][]) => {
         return { name, nameEng, id };
     });
 
-    letterStore.setVessels(transformed);
+    spsStore.setVessels(transformed);
     return transformed;
 };

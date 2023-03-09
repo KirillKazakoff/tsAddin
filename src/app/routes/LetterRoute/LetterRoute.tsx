@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { ExportFields } from './ExportFields';
 import { getHref } from '../../letter/getHref';
-import { useInitLetter } from '../../letter/init/useInitLetter';
+import { useInitLetter } from '../../letter/useInitLetter';
 import { MainFields } from './MainFields';
 
 export const LetterRoute = observer(() => {

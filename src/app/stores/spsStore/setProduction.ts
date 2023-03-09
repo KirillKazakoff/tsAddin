@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { ProductDescriptionT, ProductionNewT } from '../../types/typesSP';
-import letterStore from './letterStore';
+import spsStore from './spsStore';
+import tablesStore from '../tablesStore/tablesStore';
 
 export const setProduction = (spRange: any[][]) => {
-    const { table } = letterStore.letter;
+    const { mates } = tablesStore;
 
     const production = spRange.reduce<ProductionNewT>((totalObj, row) => {
         const [fullName, nameEng, name, expirationDate, pack, packEng, standart] = row;
@@ -18,7 +19,7 @@ export const setProduction = (spRange: any[][]) => {
             standart: standart || 'Нет стандарта',
         };
 
-        const isInTable = table.some(({ product }) => {
+        const isInTable = mates.some(({ product }) => {
             return product.toLowerCase() === name.toLowerCase();
         });
 
@@ -27,5 +28,5 @@ export const setProduction = (spRange: any[][]) => {
         return totalObj;
     }, {});
 
-    letterStore.setProduction(production);
+    spsStore.setProduction(production);
 };

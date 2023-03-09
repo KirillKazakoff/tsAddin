@@ -1,38 +1,39 @@
 import { makeAutoObservable } from 'mobx';
-import { TableRowT } from '../../types/types';
-import type { ProductionNewT, TransportT, VesselT } from '../../types/typesSP';
-import { LetterT } from '../../types/typesStore';
+import { initLetterFields } from './initLetterFields';
 
 class LetterStore {
-    letter: LetterT = {
-        table: [],
-        transport: {
-            name: '',
-            nameEng: '',
-            id: '',
-        },
-        vessels: [],
-        production: {},
-    };
+    fields = initLetterFields();
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setTable(table: TableRowT[]) {
-        this.letter.table = table;
+    setPayment(date: string) {
+        this.fields.payment = date;
     }
 
-    setVessels(vessels: VesselT[]) {
-        this.letter.vessels = vessels;
+    setArrivalVld(date: string) {
+        this.fields.arrivalVld = date;
     }
 
-    setTransport(transport: TransportT) {
-        this.letter.transport = transport;
+    setArrivalForeign(date: string) {
+        this.fields.arrivalForeign = date;
     }
 
-    setProduction(production: ProductionNewT) {
-        this.letter.production = production;
+    toggleIsExport() {
+        this.fields.isExport = !this.fields.isExport;
+    }
+
+    setTerms(terms: string) {
+        this.fields.terms = terms;
+    }
+
+    setGround(ground: string) {
+        this.fields.ground = ground;
+    }
+
+    setPort(port: string) {
+        this.fields.port = port;
     }
 }
 

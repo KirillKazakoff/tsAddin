@@ -1,8 +1,8 @@
-import letterFieldsStore from '../stores/letterStore/letterFieldsStore';
+import letterStore from '../stores/letterStore/letterStore';
 import { letter } from './letter';
 
 export const getHref = () => {
-    const { isExport } = letterFieldsStore.fields;
+    const { isExport } = letterStore.fields;
 
     const key = isExport ? 'eng' : 'ru';
     const {

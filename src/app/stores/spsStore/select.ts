@@ -1,23 +1,23 @@
-import letterStore from './letterStore';
+import spsStore from './spsStore';
 
 export const selectProductSp = (key: string) => {
-    const { production } = letterStore.letter;
+    const { production } = spsStore;
     const productionArr = Object.values(production);
 
     return productionArr.find((productSp) => productSp.name === key);
 };
 
 export const selectVesselSp = (key: string) => {
-    const { vessels } = letterStore.letter;
+    const { vessels } = spsStore;
     const vesselsArr = Object.values(vessels);
 
     return vesselsArr.find((vesselSp) => vesselSp.name === key);
 };
 
 export const selectVesselsStr = () => {
-    return letterStore.letter.vessels.map((vessel) => vessel.name);
+    return spsStore.vessels.map((vessel) => vessel.name);
 };
 
 export const selectVesselsStrEng = () => {
-    return letterStore.letter.vessels.map((vessel) => vessel.nameEng);
+    return spsStore.vessels.map((vessel) => vessel.nameEng);
 };
