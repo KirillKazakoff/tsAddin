@@ -1,10 +1,11 @@
-const devCerts = require("office-addin-dev-certs");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
+const devCerts = require('office-addin-dev-certs');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
-const urlDev = "https://localhost:3000/";
-const urlProd = "https://kirillkazakoff.github.io/tsAddin/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
+const urlDev = 'https://localhost:3000/';
+const urlProd = 'https://kirillkazakoff.github.io/tsAddin/'; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
+const webpackXlsxLoader = require('webpack-xlsx-loader');
 
 async function getHttpsOptions() {
     const httpsOptions = await devCerts.getHttpsServerOptions();
@@ -12,48 +13,49 @@ async function getHttpsOptions() {
 }
 
 module.exports = async (env, options) => {
-    const dev = options.mode === "development";
+    const dev = options.mode === 'development';
     const config = {
-        devtool: "source-map",
+        devtool: 'source-map',
         entry: {
-            polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-            vendor: ["react", "react-dom", "core-js", "@fluentui/react"],
-            index: ["./src/index.tsx", "./src/index.html"],
-            commands: "./src/app/commands/commands.ts",
+            polyfill: ['core-js/stable', 'regenerator-runtime/runtime'],
+            vendor: ['react', 'react-dom', 'core-js', '@fluentui/react'],
+            index: ['./src/index.tsx', './src/index.html'],
+            commands: './src/app/commands/commands.ts',
         },
         output: {
             clean: true,
         },
         resolve: {
-            extensions: [".ts", ".tsx", ".html", ".js"],
+            extensions: ['.ts', '.tsx', '.html', '.js'],
         },
         module: {
             rules: [
+                { test: /\.xlsx$/, loader: 'webpack-xlsx-loader' },
                 {
                     test: /\.ts$/,
                     exclude: /node_modules/,
                     use: {
-                        loader: "babel-loader",
+                        loader: 'babel-loader',
                         options: {
-                            presets: ["@babel/preset-typescript"],
+                            presets: ['@babel/preset-typescript'],
                         },
                     },
                 },
                 {
                     test: /\.tsx?$/,
                     exclude: /node_modules/,
-                    use: ["ts-loader"],
+                    use: ['ts-loader'],
                 },
                 {
                     test: /\.html$/,
                     exclude: /node_modules/,
-                    use: "html-loader",
+                    use: 'html-loader',
                 },
                 {
                     test: /\.(png|jpg|jpeg|gif|ico)$/,
-                    type: "asset/resource",
+                    type: 'asset/resource',
                     generator: {
-                        filename: "assets/[name][ext][query]",
+                        filename: 'assets/[name][ext][query]',
                     },
                 },
             ],
@@ -62,45 +64,51 @@ module.exports = async (env, options) => {
             new CopyWebpackPlugin({
                 patterns: [
                     {
-                        from: "assets/*",
-                        to: "assets/[name][ext][query]",
+                        from: 'assets',
+                        to: 'assets',
                     },
+                    { from: 'templates', to: 'templates' },
                     {
-                        from: "manifest*.xml",
-                        to: "[name]" + "[ext]",
+                        from: 'manifest*.xml',
+                        to: '[name]' + '[ext]',
                         transform(content) {
                             if (dev) {
                                 return content;
                             } else {
-                                return content.toString().replace(new RegExp(urlDev, "g"), urlProd);
+                                return content
+                                    .toString()
+                                    .replace(new RegExp(urlDev, 'g'), urlProd);
                             }
                         },
                     },
                 ],
             }),
             new HtmlWebpackPlugin({
-                filename: "index.html",
-                template: "./src/index.html",
-                chunks: ["index", "vendor", "polyfills"],
+                filename: 'index.html',
+                template: './src/index.html',
+                chunks: ['index', 'vendor', 'polyfills'],
             }),
             new HtmlWebpackPlugin({
-                filename: "commands.html",
-                template: "./src/app/commands/commands.html",
-                chunks: ["commands"],
+                filename: 'commands.html',
+                template: './src/app/commands/commands.html',
+                chunks: ['commands'],
             }),
             new webpack.ProvidePlugin({
-                Promise: ["es6-promise", "Promise"],
+                Promise: ['es6-promise', 'Promise'],
             }),
         ],
-        devtool: 'source-map',
+        devtool: 'inline-source-map',
         devServer: {
             historyApiFallback: true,
             headers: {
-                "Access-Control-Allow-Origin": "*",
+                'Access-Control-Allow-Origin': '*',
             },
             server: {
-                type: "https",
-                options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
+                type: 'https',
+                options:
+                    env.WEBPACK_BUILD || options.https !== undefined
+                        ? options.https
+                        : await getHttpsOptions(),
             },
             compress: true,
             port: 3000,

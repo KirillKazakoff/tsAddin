@@ -1,5 +1,26 @@
-export const createBL = () => {
-    console.log('create');
+/* eslint-disable import/no-extraneous-dependencies */
+import ExcelJS from 'exceljs';
+import _ from 'lodash';
+import { getCellByName } from '../utils/getCellByName';
+import tablesStore from '../stores/tablesStore/tablesStore';
+import { selectSellerSp } from '../stores/spsStore/select';
+import { saveFile } from '../utils/create';
+
+export const createBL = async (book: ExcelJS.Workbook) => {
+    try {
+        tablesStore.export.forEach((row) => {
+            const newBook = _.cloneDeep(book);
+            const blWs = newBook.getWorksheet('BL');
+            const sellerCell = getCellByName(blWs, 'Продавец');
+
+            console.log(row.seller);
+            const sellerSp = selectSellerSp(row.seller);
+            sellerCell.value = sellerSp.nameEng;
+            saveFile(newBook, row.seller);
+        });
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 // /* eslint-disable no-param-reassign */

@@ -21,3 +21,7 @@ export const selectVesselsStr = () => {
 export const selectVesselsStrEng = () => {
     return spsStore.vessels.map((vessel) => vessel.nameEng);
 };
+
+export const selectSellerSp = (name: string) => {
+    return spsStore.sellers[name];
+};

@@ -5,14 +5,16 @@ import { useInitDocs } from '../../docs/init/useInitDocs';
 
 export const DocsRoute = observer(() => {
     const initDocs = useInitDocs();
+    console.log('he');
 
     const onBlClick = async () => {
-        await initDocs();
+        // await initDocs();
         // await createBL();
     };
 
     return (
         <ul className='doc-links'>
+            <img src='./assets/icon-64.png' alt='huh' />
             <li onClick={onBlClick} className='doc-link'>
                 BL
             </li>

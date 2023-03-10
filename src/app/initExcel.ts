@@ -29,3 +29,7 @@ export const initVessels = (worksheets: Excel.WorksheetCollection) => {
 export const initProduction = (worksheets: Excel.WorksheetCollection) => {
     return initRange(worksheets, 'Продукция', 'SPProductMSC');
 };
+
+export const initSeller = (worksheets: Excel.WorksheetCollection) => {
+    return initRange(worksheets, 'Продавец', 'SPProdavec');
+};

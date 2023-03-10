@@ -23,3 +23,16 @@ export type ProductDescriptionT = {
 export type ProductionNewT = {
     [key: string]: ProductDescriptionT;
 };
+
+export type SellerT = {
+    name: string;
+    fullName: string;
+    addres: string;
+    nameEng: string;
+    addresEng: string;
+    inn: string;
+};
+
+export type SellersT = {
+    [key: string]: SellerT;
+};

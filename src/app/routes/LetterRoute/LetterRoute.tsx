@@ -9,6 +9,7 @@ export const LetterRoute = observer(() => {
     const initLetter = useInitLetter();
 
     const onClick = async () => {
+        console.log('hey');
         await initLetter();
         const href = getHref();
         document.location.href = href;

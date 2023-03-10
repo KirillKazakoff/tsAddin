@@ -1,6 +1,14 @@
 import { useEffect } from 'react';
-import { initExport, initExportStorage, initInner } from '../../initExcel';
+import {
+    initExport,
+    initExportStorage,
+    initInner,
+    initSeller,
+} from '../../initExcel';
 import { setExport } from '../../stores/tablesStore/setExport';
+import { createBL } from '../createBL';
+import { read } from '../readBL';
+import { setSellers } from '../../stores/spsStore/setSeller';
 
 export const useInitDocs = () => {
     const initDocs = async () => {
@@ -11,10 +19,12 @@ export const useInitDocs = () => {
                 const exportRange = initExport(worksheets);
                 const exportStorageRange = initExportStorage(worksheets);
                 const innerRange = initInner(worksheets);
+                const spSellerRange = initSeller(worksheets);
 
                 await context.sync();
 
                 setExport(exportRange.values);
+                setSellers(spSellerRange.values);
             });
         } catch (e) {
             console.log(e);
@@ -27,6 +37,8 @@ export const useInitDocs = () => {
         if (mode === 'production') return;
         const func = async () => {
             await initDocs();
+            const book = await read();
+            createBL(book);
             // nextStuff()
         };
         func();

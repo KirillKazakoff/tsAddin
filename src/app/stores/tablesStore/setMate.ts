@@ -41,6 +41,5 @@ export const setMate = (table: any[][]) => {
         return totalObj;
     }, []);
 
-    console.log(transformedTable);
     tablesStore.setMates(transformedTable);
 };
