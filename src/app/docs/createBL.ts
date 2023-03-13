@@ -1,67 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import ExcelJS from 'exceljs';
 import _ from 'lodash';
-import { initBlTemplate } from './init/initBl';
+import { initBlTemplate } from './init/initBlTemplate';
 import tablesStore from '../stores/tablesStore/tablesStore';
 import { saveFile } from '../utils/create';
 
 export const createBL = async (book: ExcelJS.Workbook) => {
     try {
-        tablesStore.export.forEach((row) => {
+        tablesStore.export.forEach(async (row) => {
             const newBook = _.cloneDeep(book);
             initBlTemplate(newBook, row);
 
-            saveFile(newBook, row.blNo);
+            await saveFile(newBook, row.blNo);
+            console.log('hello');
         });
     } catch (e) {
         console.log(e);
     }
 };
-
-// /* eslint-disable no-param-reassign */
-// import { getCompanyEngName } from './getCompanyEngName';
-// import { getCompanyName } from './getCompanyName';
-// import { read } from './readBL';
-
-// export const createBL = async () => {
-//     console.log('start');
-
-//     const blBook = await read();
-//     const blWs = blBook.getWorksheet('BL');
-//     const exportStorageWs = movementBook.getWorksheet('Экспорт');
-
-//     const blIdCell = blWs.getCell('A14');
-//     const blCompanyNameCell = blWs.getCell('A2');
-
-//     const blCol = blWs.getColumn('Z');
-//     const blArray: string[] = [];
-//     blCol.eachCell((cell: any) => {
-//         const { value } = cell;
-
-//         if (!value) return;
-//         if (typeof value === 'object') {
-//             blArray.push(value.result);
-//             return;
-//         }
-//         blArray.push(cell.value);
-//     });
-
-//     blWs.eachRow((row: any) => row.eachCell((cell: any) => {
-//         if (!cell?.value?.result) return;
-//         const { result, model } = cell.value;
-
-//         cell.value = result;
-
-//         if (model) {
-//             cell.value.model = undefined;
-//         }
-//     }));
-
-//     blArray.forEach((blId) => {
-//         blIdCell.value = blId;
-//         const companyName = getCompanyName(exportStorageWs, blIdCell);
-//         blCompanyNameCell.value = getCompanyEngName(dictionaryBook, companyName);
-//         console.log(blCompanyNameCell);
-//         copy.xlsx.writeFile(`${blId}.xlsx`);
-//     });
-// };

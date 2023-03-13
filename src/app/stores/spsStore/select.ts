@@ -1,7 +1,7 @@
 import spsStore from './spsStore';
 
 export const selectProductSp = (name: string) => {
-    return spsStore.production[name];
+    return spsStore.production[name.toLowerCase()];
 };
 
 export const selectVesselSp = (key: string) => {

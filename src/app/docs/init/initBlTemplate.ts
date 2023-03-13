@@ -48,8 +48,6 @@ export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
 
     blNoCl.value = row.blNo;
     const productSp = selectProductSp(row.product);
-    console.log(row.product);
-    console.log(productSp);
 
     productCl.value = productSp.nameEng;
     sortCl.value = row.sort;
