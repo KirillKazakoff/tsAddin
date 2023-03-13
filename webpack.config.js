@@ -1,29 +1,16 @@
-const devCerts = require('office-addin-dev-certs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 
 const urlDev = 'https://localhost:3000/';
 const urlProd = 'https://kirillkazakoff.github.io/tsAddin/'; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
-const webpackXlsxLoader = require('webpack-xlsx-loader');
-
-async function getHttpsOptions() {
-    const httpsOptions = await devCerts.getHttpsServerOptions();
-    return { ca: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
-}
 
 module.exports = async (env, options) => {
     const dev = options.mode === 'development';
     const config = {
         devtool: 'source-map',
         entry: {
-            polyfill: ['core-js/stable', 'regenerator-runtime/runtime'],
-            vendor: ['react', 'react-dom', 'core-js', '@fluentui/react'],
             index: ['./src/index.tsx', './src/index.html'],
             commands: './src/app/commands/commands.ts',
-        },
-        output: {
-            clean: true,
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.html', '.js'],
@@ -86,7 +73,7 @@ module.exports = async (env, options) => {
             new HtmlWebpackPlugin({
                 filename: 'index.html',
                 template: './src/index.html',
-                chunks: ['index', 'vendor', 'polyfills'],
+                chunks: ['index'],
             }),
             new HtmlWebpackPlugin({
                 filename: 'commands.html',
@@ -94,7 +81,6 @@ module.exports = async (env, options) => {
                 chunks: ['commands'],
             }),
         ],
-        devtool: 'inline-source-map',
         devServer: {
             historyApiFallback: true,
             headers: {
@@ -102,10 +88,6 @@ module.exports = async (env, options) => {
             },
             server: {
                 type: 'https',
-                options:
-                    env.WEBPACK_BUILD || options.https !== undefined
-                        ? options.https
-                        : await getHttpsOptions(),
             },
             compress: true,
             port: 3000,

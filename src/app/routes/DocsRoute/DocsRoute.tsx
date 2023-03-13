@@ -1,15 +1,20 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-// import { createBL } from '../../docs/createBL';
+import { createBL } from '../../docs/createBL';
 import { useInitDocs } from '../../docs/init/useInitDocs';
+import { read } from '../../docs/readBL';
 
 export const DocsRoute = observer(() => {
     const initDocs = useInitDocs();
-    console.log('he');
 
     const onBlClick = async () => {
-        // await initDocs();
-        // await createBL();
+        try {
+            await initDocs();
+            const book = await read();
+            await createBL(book);
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     return (

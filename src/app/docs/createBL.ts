@@ -12,7 +12,6 @@ export const createBL = async (book: ExcelJS.Workbook) => {
             initBlTemplate(newBook, row);
 
             await saveFile(newBook, row.blNo);
-            console.log('hello');
         });
     } catch (e) {
         console.log(e);

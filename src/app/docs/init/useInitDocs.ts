@@ -36,6 +36,7 @@ export const useInitDocs = () => {
                 setProduction(spProductionRange.values);
             });
         } catch (e) {
+            console.log('hell');
             console.log(e);
         }
     };
@@ -43,13 +44,13 @@ export const useInitDocs = () => {
     const mode = process.env.NODE_ENV;
 
     useEffect(() => {
-        if (mode === 'production') return;
-        const func = async () => {
-            await initDocs();
-            const book = await read();
-            createBL(book);
-        };
-        func();
+        // if (mode === 'production') return;
+        // const func = async () => {
+        //     await initDocs();
+        //     const book = await read();
+        //     createBL(book);
+        // };
+        // func();
     });
 
     return initDocs;
