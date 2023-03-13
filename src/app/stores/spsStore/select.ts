@@ -1,13 +1,7 @@
 import spsStore from './spsStore';
 
 export const selectProductSp = (name: string) => {
-    const { production } = spsStore;
-    // const productionArr = Object.values(production);
-
-    const a = production[name];
-    console.log(a);
     return spsStore.production[name];
-    // return productionArr.find((productSp) => productSp.name === name);
 };
 
 export const selectVesselSp = (key: string) => {

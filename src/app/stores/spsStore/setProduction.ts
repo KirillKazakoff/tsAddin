@@ -5,9 +5,10 @@ import spsStore from './spsStore';
 export const setProduction = (spRange: any[][]) => {
     const production = spRange.reduce<ProductionNewT>((totalObj, row) => {
         const [fullName, nameEng, name, expirationDate, pack, packEng, standart] = row;
+        const shortName = name.toLowerCase();
 
         const rowObj: ProductDescriptionT = {
-            name: name.toLowerCase(),
+            name: shortName,
             fullName,
             nameEng,
             expirationDate: expirationDate || 'ХХХ',
@@ -16,7 +17,7 @@ export const setProduction = (spRange: any[][]) => {
             standart: standart || 'Нет стандарта',
         };
 
-        totalObj[name] = rowObj;
+        totalObj[shortName] = rowObj;
         return totalObj;
     }, {});
 
