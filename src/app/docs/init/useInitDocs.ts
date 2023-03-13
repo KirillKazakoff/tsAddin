@@ -5,12 +5,14 @@ import {
     initInner,
     initSeller,
     initConsignee,
+    initProduction,
 } from '../../initExcel';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { createBL } from '../createBL';
 import { read } from '../readBL';
 import { setSellers } from '../../stores/spsStore/setSeller';
 import { setConsignees } from '../../stores/spsStore/setConsignees';
+import { setProduction } from '../../stores/spsStore/setProduction';
 
 export const useInitDocs = () => {
     const initDocs = async () => {
@@ -24,12 +26,14 @@ export const useInitDocs = () => {
 
                 const spSellerRange = initSeller(worksheets);
                 const spConsigneeRange = initConsignee(worksheets);
+                const spProductionRange = initProduction(worksheets);
 
                 await context.sync();
 
                 setExport(exportRange.values);
                 setSellers(spSellerRange.values);
                 setConsignees(spConsigneeRange.values);
+                setProduction(spProductionRange.values);
             });
         } catch (e) {
             console.log(e);

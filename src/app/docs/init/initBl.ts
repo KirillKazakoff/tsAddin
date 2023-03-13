@@ -4,7 +4,11 @@ import ExcelJS from 'exceljs';
 import _ from 'lodash';
 import { getCellByName } from '../../utils/getCellByName';
 import { ExportRowT } from '../../types/typesTables';
-import { selectSellerSp, selectConsigneeSp } from '../../stores/spsStore/select';
+import {
+    selectSellerSp,
+    selectConsigneeSp,
+    selectProductSp,
+} from '../../stores/spsStore/select';
 
 export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     const blWs = book.getWorksheet('BL');
@@ -31,7 +35,7 @@ export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     sellerCl.value = sellerSp.nameEng;
     sellerAdressCl.value = sellerSp.addresEng;
 
-    const consigneeSp = selectConsigneeSp(row.consignee);
+    const consigneeSp = selectConsigneeSp(row.consignee || row.buyer);
     consigneeCl.value = consigneeSp.fullName;
     consigneeAdressCl.value = consigneeSp.adress;
 
@@ -43,7 +47,11 @@ export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     fromCl.value = row.portFrom;
 
     blNoCl.value = row.blNo;
-    productCl.value = row.product;
+    const productSp = selectProductSp(row.product);
+    console.log(row.product);
+    console.log(productSp);
+
+    productCl.value = productSp.nameEng;
     sortCl.value = row.sort;
     packCl.value = row.pack;
     amountPlacesCl.value = row.amountPlaces;

@@ -28,7 +28,6 @@
         "@fluentui/font-icons-mdl2": "^8.5.8",
         "@fluentui/react": "^8.52.3",
         "core-js": "^3.9.1",
-        "es6-promise": "^4.2.8",
         "exceljs": "^4.3.0",
         "file-saver": "^2.0.5",
         "loadash": "^1.0.0",

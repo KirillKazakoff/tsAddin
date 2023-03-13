@@ -93,9 +93,6 @@ module.exports = async (env, options) => {
                 template: './src/app/commands/commands.html',
                 chunks: ['commands'],
             }),
-            new webpack.ProvidePlugin({
-                Promise: ['es6-promise', 'Promise'],
-            }),
         ],
         devtool: 'inline-source-map',
         devServer: {
