@@ -4,11 +4,13 @@ import {
     initExportStorage,
     initInner,
     initSeller,
+    initConsignee,
 } from '../../initExcel';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { createBL } from '../createBL';
 import { read } from '../readBL';
 import { setSellers } from '../../stores/spsStore/setSeller';
+import { setConsignees } from '../../stores/spsStore/setConsignees';
 
 export const useInitDocs = () => {
     const initDocs = async () => {
@@ -19,12 +21,15 @@ export const useInitDocs = () => {
                 const exportRange = initExport(worksheets);
                 const exportStorageRange = initExportStorage(worksheets);
                 const innerRange = initInner(worksheets);
+
                 const spSellerRange = initSeller(worksheets);
+                const spConsigneeRange = initConsignee(worksheets);
 
                 await context.sync();
 
                 setExport(exportRange.values);
                 setSellers(spSellerRange.values);
+                setConsignees(spConsigneeRange.values);
             });
         } catch (e) {
             console.log(e);
@@ -39,7 +44,6 @@ export const useInitDocs = () => {
             await initDocs();
             const book = await read();
             createBL(book);
-            // nextStuff()
         };
         func();
     });

@@ -25,3 +25,7 @@ export const selectVesselsStrEng = () => {
 export const selectSellerSp = (name: string) => {
     return spsStore.sellers[name];
 };
+
+export const selectConsigneeSp = (name: string) => {
+    return spsStore.consignees[name];
+};

@@ -33,3 +33,7 @@ export const initProduction = (worksheets: Excel.WorksheetCollection) => {
 export const initSeller = (worksheets: Excel.WorksheetCollection) => {
     return initRange(worksheets, 'Продавец', 'SPProdavec');
 };
+
+export const initConsignee = (worksheets: Excel.WorksheetCollection) => {
+    return initRange(worksheets, 'SP_Consignee', 'SP_Consignee');
+};

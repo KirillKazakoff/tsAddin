@@ -1,22 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import ExcelJS from 'exceljs';
 import _ from 'lodash';
-import { getCellByName } from '../utils/getCellByName';
+import { initBlTemplate } from './init/initBl';
 import tablesStore from '../stores/tablesStore/tablesStore';
-import { selectSellerSp } from '../stores/spsStore/select';
 import { saveFile } from '../utils/create';
 
 export const createBL = async (book: ExcelJS.Workbook) => {
     try {
         tablesStore.export.forEach((row) => {
             const newBook = _.cloneDeep(book);
-            const blWs = newBook.getWorksheet('BL');
-            const sellerCell = getCellByName(blWs, 'Продавец');
+            initBlTemplate(newBook, row);
 
-            console.log(row.seller);
-            const sellerSp = selectSellerSp(row.seller);
-            sellerCell.value = sellerSp.nameEng;
-            saveFile(newBook, row.seller);
+            saveFile(newBook, row.blNo);
         });
     } catch (e) {
         console.log(e);

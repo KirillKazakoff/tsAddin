@@ -4,7 +4,7 @@
 import _ from 'lodash';
 import ExcelJS from 'exceljs';
 
-const pathBl = './templates/BL_template.xlsx';
+const pathBl = './templates/BL.xlsx';
 
 export const read = async () => {
     const file = await (await fetch(pathBl)).arrayBuffer();

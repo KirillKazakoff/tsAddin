@@ -1,7 +1,11 @@
 // sp - dictionary (spravochnik)
 // data already selected on init
 import {
-    ProductionNewT, SellersT, TransportT, VesselT,
+    ProductionNewT,
+    SellersT,
+    TransportT,
+    VesselT,
+    ConsigneesT,
 } from '../../types/typesSP';
 
 class SpsStore {
@@ -13,6 +17,7 @@ class SpsStore {
     vessels: VesselT[] = [];
     production: ProductionNewT = {};
     sellers: SellersT = {};
+    consignees: ConsigneesT = {};
 
     setVessels(vessels: VesselT[]) {
         this.vessels = vessels;
@@ -28,6 +33,10 @@ class SpsStore {
 
     setSellers(sellers: SellersT) {
         this.sellers = sellers;
+    }
+
+    setConsignees(consignees: ConsigneesT) {
+        this.consignees = consignees;
     }
 }
 

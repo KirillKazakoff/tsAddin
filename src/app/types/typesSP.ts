@@ -24,6 +24,7 @@ export type ProductionNewT = {
     [key: string]: ProductDescriptionT;
 };
 
+// Sellers
 export type SellerT = {
     name: string;
     fullName: string;
@@ -35,4 +36,15 @@ export type SellerT = {
 
 export type SellersT = {
     [key: string]: SellerT;
+};
+
+// Consignee
+export type ConsigneeT = {
+    fullName: string;
+    name: string;
+    adress: string;
+};
+
+export type ConsigneesT = {
+    [key: string]: ConsigneeT;
 };

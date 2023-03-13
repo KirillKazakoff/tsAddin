@@ -12,12 +12,14 @@ export type ExportRowT = {
     seller: string;
     buyer: string;
     vessel: string;
+    transport: string;
     aggrementNo: number;
     invoice: number;
     date: string;
     blNo: string;
     terms: string;
-    port: string;
+    portTo: string;
+    portFrom: string;
     consignee: string;
     msc: string;
     product: string;
