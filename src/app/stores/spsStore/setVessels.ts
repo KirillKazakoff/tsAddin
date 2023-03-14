@@ -1,4 +1,5 @@
-import { VesselT } from '../../types/typesSP';
+/* eslint-disable no-param-reassign */
+import { VesselsT } from '../../types/typesSP';
 import tablesStore from '../tablesStore/tablesStore';
 import spsStore from './spsStore';
 
@@ -11,11 +12,11 @@ export const setVessels = (spRange: any[][]) => {
         return vesselsMate.some((vessel) => vessel === row[0]);
     });
 
-    const transformed: VesselT[] = vessels.map((vessel) => {
+    const transformed = vessels.reduce<VesselsT>((total, vessel) => {
         const [name, nameEng, id] = vessel;
-        return { name, nameEng, id };
-    });
+        total[name] = { name, nameEng, id };
+        return total;
+    }, {});
 
     spsStore.setVessels(transformed);
-    return transformed;
 };

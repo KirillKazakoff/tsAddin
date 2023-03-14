@@ -24,9 +24,9 @@ import { saveAs } from 'file-saver';
 export async function saveFile(workbook: ExcelJS.Workbook, id) {
     try {
         const xls64 = await workbook.xlsx.writeBuffer();
-        const blob = new Blob([xls64], { type: 'application/xlsx' });
+        const blob = new Blob([xls64]);
         saveAs(blob, `${id}.xlsx`);
-        console.log('ehy');
+        console.log(blob);
     } catch (e) {
         console.log(e);
     }

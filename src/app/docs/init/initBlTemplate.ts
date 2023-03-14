@@ -5,6 +5,8 @@ import _ from 'lodash';
 import { getCellByName } from '../../utils/getCellByName';
 import { ExportRowT } from '../../types/typesTables';
 import {
+    selectTransportSp,
+    selectVesselSp,
     selectSellerSp,
     selectConsigneeSp,
     selectProductSp,
@@ -40,8 +42,12 @@ export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     consigneeAdressCl.value = consigneeSp.adress;
 
     dateCl.value = row.date;
-    vesselCl.value = row.vessel;
-    transportCl.value = row.transport;
+
+    const vesselSp = selectVesselSp(row.vessel);
+    vesselCl.value = vesselSp.nameEng;
+
+    const transportSp = selectTransportSp();
+    transportCl.value = transportSp.nameEng;
 
     toCl.value = row.portTo;
     fromCl.value = row.portFrom;

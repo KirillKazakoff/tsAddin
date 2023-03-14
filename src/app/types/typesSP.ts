@@ -4,10 +4,15 @@ export type TransportT = {
     id: string;
 };
 
+// Vessels
 export type VesselT = {
     name: string;
     nameEng: string;
     id: string;
+};
+
+export type VesselsT = {
+    [key: string]: VesselT;
 };
 
 export type ProductDescriptionT = {

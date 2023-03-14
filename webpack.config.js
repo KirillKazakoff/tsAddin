@@ -2,7 +2,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const urlDev = 'https://localhost:3000/';
-const urlProd = 'https://kirillkazakoff.github.io/tsAddin/'; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
+const urlProd = 'https://kirillkazakoff.github.io/tsAddin/';
 
 module.exports = async (env, options) => {
     const dev = options.mode === 'development';

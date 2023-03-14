@@ -4,8 +4,8 @@ import {
     ProductionNewT,
     SellersT,
     TransportT,
-    VesselT,
     ConsigneesT,
+    VesselsT,
 } from '../../types/typesSP';
 
 class SpsStore {
@@ -14,12 +14,12 @@ class SpsStore {
         nameEng: '',
         id: '',
     };
-    vessels: VesselT[] = [];
+    vessels: VesselsT = {};
     production: ProductionNewT = {};
     sellers: SellersT = {};
     consignees: ConsigneesT = {};
 
-    setVessels(vessels: VesselT[]) {
+    setVessels(vessels: VesselsT) {
         this.vessels = vessels;
     }
 

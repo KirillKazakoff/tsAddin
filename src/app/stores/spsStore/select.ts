@@ -4,19 +4,16 @@ export const selectProductSp = (name: string) => {
     return spsStore.production[name.toLowerCase()];
 };
 
-export const selectVesselSp = (key: string) => {
-    const { vessels } = spsStore;
-    const vesselsArr = Object.values(vessels);
-
-    return vesselsArr.find((vesselSp) => vesselSp.name === key);
+export const selectVesselSp = (name: string) => {
+    return spsStore.vessels[name];
 };
 
 export const selectVesselsStr = () => {
-    return spsStore.vessels.map((vessel) => vessel.name);
+    return Object.values(spsStore.vessels).map((vessel) => vessel.name);
 };
 
 export const selectVesselsStrEng = () => {
-    return spsStore.vessels.map((vessel) => vessel.nameEng);
+    return Object.values(spsStore.vessels).map((vessel) => vessel.nameEng);
 };
 
 export const selectSellerSp = (name: string) => {
@@ -25,4 +22,8 @@ export const selectSellerSp = (name: string) => {
 
 export const selectConsigneeSp = (name: string) => {
     return spsStore.consignees[name];
+};
+
+export const selectTransportSp = () => {
+    return spsStore.transport;
 };
