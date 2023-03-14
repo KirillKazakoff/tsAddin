@@ -60,6 +60,6 @@ export const setExport = (table: any[][]) => {
         return totalObj;
     }, []);
 
-    throw new Error('err');
+    console.log(transformedTable);
     tablesStore.setExport(transformedTable);
 };
