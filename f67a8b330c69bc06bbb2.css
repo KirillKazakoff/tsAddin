@@ -1,0 +1,53 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+b {
+    font-weight: bold;
+}
+
+.main-route {
+    padding: 10px;
+}
+
+/* .input-wrapper */
+.input-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+/* .letter__fields */
+.letter__fields {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.letter__fields--export {
+    margin-top: 30px;
+}
+
+.letter__fields-wrapper {
+    min-height: 250px;
+}
+
+/* .nav */
+.nav {
+    display: flex;
+    column-gap: 20px;
+    margin-bottom: 30px;
+}
