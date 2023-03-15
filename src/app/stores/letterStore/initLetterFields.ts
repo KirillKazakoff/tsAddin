@@ -23,4 +23,5 @@ export const initLetterFields = () => {
     };
 
     return mode === 'production' ? clearFields : debugFields;
+    return clearFields;
 };

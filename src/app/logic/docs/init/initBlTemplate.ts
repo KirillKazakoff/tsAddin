@@ -1,16 +1,17 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable import/no-extraneous-dependencies */
 import ExcelJS from 'exceljs';
-import _ from 'lodash';
-import { getCellByName } from '../../utils/getCellByName';
-import { ExportRowT } from '../../types/typesTables';
 import {
-    selectTransportSp,
-    selectVesselSp,
     selectSellerSp,
     selectConsigneeSp,
+    selectVesselSp,
+    selectTransportSp,
+    selectPortZarubezhSp,
+    selectPortTamozhnyaSp,
     selectProductSp,
-} from '../../stores/spsStore/select';
+} from '../../../stores/spsStore/select';
+import { ExportRowT } from '../../../types/typesTables';
+import { formatCount } from '../../utils/formatCount';
+import { getCellByName } from '../../excel/getCellByName';
+import { getExcelDate } from '../../excel/getExcelDate';
 
 export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     const blWs = book.getWorksheet('BL');
@@ -20,7 +21,6 @@ export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     const sellerAdressCl = getCellBl('Продавец_адрес');
     const consigneeCl = getCellBl('Получатель');
     const consigneeAdressCl = getCellBl('Получатель_адрес');
-
     const dateCl = getCellBl('Дата');
     const vesselCl = getCellBl('Судно');
     const transportCl = getCellBl('Транспорт');
@@ -41,7 +41,11 @@ export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     consigneeCl.value = consigneeSp.fullName;
     consigneeAdressCl.value = consigneeSp.adress;
 
-    dateCl.value = row.date;
+    dateCl.value = getExcelDate(row.date).toLocaleString('eng', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    });
 
     const vesselSp = selectVesselSp(row.vessel);
     vesselCl.value = vesselSp.nameEng;
@@ -49,15 +53,20 @@ export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     const transportSp = selectTransportSp();
     transportCl.value = transportSp.nameEng;
 
-    toCl.value = row.portTo;
-    fromCl.value = row.portFrom;
+    const portZarubezhSp = selectPortZarubezhSp(row.portTo);
+    toCl.value = portZarubezhSp.nameEng;
+
+    const portTamozhnyaSp = selectPortTamozhnyaSp(row.portFrom);
+    fromCl.value = portTamozhnyaSp.nameEng;
 
     blNoCl.value = row.blNo;
-    const productSp = selectProductSp(row.product);
 
+    const productSp = selectProductSp(row.product);
     productCl.value = productSp.nameEng;
+
     sortCl.value = row.sort;
-    packCl.value = row.pack;
-    amountPlacesCl.value = row.amountPlaces;
-    amountTotalCl.value = row.amountTotal;
+    packCl.value = `${row.pack} KG`;
+    amountPlacesCl.value = `${formatCount(row.amountPlaces)} PCS`;
+
+    amountTotalCl.value = `${formatCount(row.amountTotal.toFixed(3))} tn`;
 };

@@ -1,5 +1,9 @@
 import spsStore from './spsStore';
 
+export const selectTransportSp = () => {
+    return spsStore.transport;
+};
+
 export const selectProductSp = (name: string) => {
     return spsStore.production[name.toLowerCase()];
 };
@@ -24,6 +28,10 @@ export const selectConsigneeSp = (name: string) => {
     return spsStore.consignees[name];
 };
 
-export const selectTransportSp = () => {
-    return spsStore.transport;
+export const selectPortZarubezhSp = (name: string) => {
+    return spsStore.portsZarubezh[name];
+};
+
+export const selectPortTamozhnyaSp = (name: string) => {
+    return spsStore.portsTamozhnya[name];
 };

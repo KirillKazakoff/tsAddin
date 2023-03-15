@@ -1,4 +1,4 @@
-import letterStore from '../stores/letterStore/letterStore';
+import letterStore from '../../stores/letterStore/letterStore';
 import { letter } from './letter';
 
 export const getHref = () => {

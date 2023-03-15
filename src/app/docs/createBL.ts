@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import ExcelJS from 'exceljs';
 import _ from 'lodash';
-import { initBlTemplate } from './init/initBlTemplate';
+import { initBlTemplate } from '../logic/docs/init/initBlTemplate';
+
 import tablesStore from '../stores/tablesStore/tablesStore';
 import { saveFile } from '../utils/create';
 

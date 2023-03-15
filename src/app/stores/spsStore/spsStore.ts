@@ -6,6 +6,8 @@ import {
     TransportT,
     ConsigneesT,
     VesselsT,
+    PortsTamozhnyaT,
+    PortsZarubezhT,
 } from '../../types/typesSP';
 
 class SpsStore {
@@ -18,6 +20,8 @@ class SpsStore {
     production: ProductionNewT = {};
     sellers: SellersT = {};
     consignees: ConsigneesT = {};
+    portsTamozhnya: PortsTamozhnyaT = {};
+    portsZarubezh: PortsZarubezhT = {};
 
     setVessels(vessels: VesselsT) {
         this.vessels = vessels;
@@ -37,6 +41,14 @@ class SpsStore {
 
     setConsignees(consignees: ConsigneesT) {
         this.consignees = consignees;
+    }
+
+    setPortsTamozhnya(ports: PortsTamozhnyaT) {
+        this.portsTamozhnya = ports;
+    }
+
+    setPortsZarubezh(ports: PortsZarubezhT) {
+        this.portsZarubezh = ports;
     }
 }
 

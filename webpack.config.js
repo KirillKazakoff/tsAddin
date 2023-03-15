@@ -10,6 +10,11 @@ async function getHttpsOptions() {
     return { ca: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
 }
 
+async function getHttpsOptions() {
+    const httpsOptions = await devCerts.getHttpsServerOptions();
+    return { ca: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
+}
+
 module.exports = async (env, options) => {
     const dev = options.mode === 'development';
     const config = {
@@ -95,13 +100,12 @@ module.exports = async (env, options) => {
             headers: {
                 'Access-Control-Allow-Origin': '*',
             },
+            hot: true,
             server: {
-                type: 'https',
-                options:
-                    env.WEBPACK_BUILD || options.https !== undefined
-                        ? options.https
-                        : await getHttpsOptions(),
+                type: "https",
+                options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
             },
+            // port: process.env.npm_package_config_dev_server_port || 3000,
             compress: true,
             port: 3000,
         },

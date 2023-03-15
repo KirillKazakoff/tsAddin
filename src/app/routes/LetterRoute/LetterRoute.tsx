@@ -1,19 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import { useInitLetter } from '../../logic/letter/useInitLetter';
 import { ExportFields } from './ExportFields';
-import { getHref } from '../../letter/getHref';
-import { useInitLetter } from '../../letter/useInitLetter';
+
 import { MainFields } from './MainFields';
 
 export const LetterRoute = observer(() => {
-    const initLetter = useInitLetter();
-
-    const onClick = async () => {
-        console.log('hey');
-        await initLetter();
-        const href = getHref();
-        document.location.href = href;
-    };
+    const onLetterSubmit = useInitLetter();
 
     return (
         <div className='letter'>
@@ -24,7 +17,8 @@ export const LetterRoute = observer(() => {
                 </div>
 
                 <button
-                    type='button' onClick={onClick}
+                    type='button'
+                    onClick={onLetterSubmit}
                     className='btn letter__btn'
                 >
                     Создать письмо

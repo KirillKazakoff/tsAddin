@@ -1,3 +1,5 @@
+import { blNotFulfilled } from '../pageStatusStore.ts/pageMessages';
+import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
 import tablesStore from './tablesStore';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -54,12 +56,14 @@ export const setExport = (table: any[][]) => {
             priceTotal,
         };
 
-        if (!product || !vessel || !blNo) throw new Error('empty row');
+        if (!product || !vessel || !blNo || !transport || !price || !date) {
+            pageStatusStore.setPageStatus(blNotFulfilled);
+            throw new Error('error');
+        }
 
         totalObj.push(rowObj);
         return totalObj;
     }, []);
 
-    console.log(transformedTable);
     tablesStore.setExport(transformedTable);
 };

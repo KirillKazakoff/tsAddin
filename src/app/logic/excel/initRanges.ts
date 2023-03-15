@@ -1,4 +1,4 @@
-import { initRange } from './utils/initRange';
+import { initRange } from './initRange';
 
 // tablesInit
 export const initExport = (worksheets: Excel.WorksheetCollection) => {
@@ -36,4 +36,12 @@ export const initSeller = (worksheets: Excel.WorksheetCollection) => {
 
 export const initConsignee = (worksheets: Excel.WorksheetCollection) => {
     return initRange(worksheets, 'SP_Consignee', 'SP_Consignee');
+};
+
+export const initPortZarubezh = (worksheets: Excel.WorksheetCollection) => {
+    return initRange(worksheets, 'SPPortZarubezh', 'SPPortZarubezh');
+};
+
+export const initPortTamozhnya = (worksheets: Excel.WorksheetCollection) => {
+    return initRange(worksheets, 'SPTamozhnya', 'SPTamozhnya');
 };

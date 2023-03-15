@@ -27,3 +27,9 @@ export type LetterFieldsT = {
     isExport: boolean;
     port: string;
 };
+
+export type PageStatusT = {
+    isError: boolean;
+    title: string;
+    desc: string;
+};

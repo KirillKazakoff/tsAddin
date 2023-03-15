@@ -1,7 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable import/no-extraneous-dependencies */
-
-import _ from 'lodash';
 import ExcelJS from 'exceljs';
 
 const pathBl = './templates/BL.xlsx';
