@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import {
     initMate, initProduction, initTransport, initVessels,
-} from '../initExcel';
+} from '../excel/initRanges';
 import { setProduction } from '../stores/spsStore/setProduction';
 import { setTransport } from '../stores/spsStore/setTransport';
 import { setVessels } from '../stores/spsStore/setVessels';

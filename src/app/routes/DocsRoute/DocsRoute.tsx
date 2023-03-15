@@ -1,26 +1,15 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { createBL } from '../../docs/createBL';
-import { useInitDocs } from '../../docs/init/useInitDocs';
-import { read } from '../../docs/readBL';
+
+import { useInitDocs } from '../../logic/docs/init/useInitDocs';
 
 export const DocsRoute = observer(() => {
-    const initDocs = useInitDocs();
-
-    const onBlClick = async () => {
-        try {
-            await initDocs();
-            const book = await read();
-            await createBL(book);
-        } catch (e) {
-            console.log(e);
-        }
-    };
+    const onClickBl = useInitDocs();
 
     return (
         <ul className='doc-links'>
             <img src='./assets/icon-64.png' alt='huh' />
-            <li onClick={onBlClick} className='doc-link'>
+            <li onClick={onClickBl} className='doc-link'>
                 BL
             </li>
         </ul>

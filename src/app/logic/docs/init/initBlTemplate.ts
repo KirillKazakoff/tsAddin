@@ -1,20 +1,17 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable import/no-extraneous-dependencies */
 import ExcelJS from 'exceljs';
-import _ from 'lodash';
-import { getCellByName } from '../../utils/getCellByName';
-import { ExportRowT } from '../../types/typesTables';
 import {
-    selectTransportSp,
-    selectVesselSp,
     selectSellerSp,
     selectConsigneeSp,
-    selectProductSp,
+    selectVesselSp,
+    selectTransportSp,
     selectPortZarubezhSp,
     selectPortTamozhnyaSp,
-} from '../../stores/spsStore/select';
-import { getExcelDate } from '../../utils/getExcelDate';
+    selectProductSp,
+} from '../../../stores/spsStore/select';
+import { ExportRowT } from '../../../types/typesTables';
 import { formatCount } from '../../utils/formatCount';
+import { getCellByName } from '../../excel/getCellByName';
+import { getExcelDate } from '../../excel/getExcelDate';
 
 export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     const blWs = book.getWorksheet('BL');
