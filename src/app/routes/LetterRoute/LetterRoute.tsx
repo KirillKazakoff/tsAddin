@@ -17,7 +17,7 @@ export const LetterRoute = observer(() => {
                 </div>
 
                 <button
-                    type='submit'
+                    type='button'
                     onClick={onLetterSubmit}
                     className='btn letter__btn'
                 >

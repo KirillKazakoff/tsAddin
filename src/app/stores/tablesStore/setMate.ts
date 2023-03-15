@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { MateRowT } from '../../types/typesTables';
-import pageStatusStore from '../pageStatusStore';
+import { letterNotFulfilled } from '../pageStatusStore.ts/pageMessages';
+import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
 import tablesStore from './tablesStore';
 
 export const setMate = (table: any[][]) => {
@@ -32,8 +32,8 @@ export const setMate = (table: any[][]) => {
             periodCreation,
         };
 
-        if (!operation || !vessel || !product) {
-            pageStatusStore.setLetterStatus(true);
+        if (!operation || !vessel || !product || !transport) {
+            pageStatusStore.setPageStatus(letterNotFulfilled);
         }
         if (operation === 'Образец') return totalObj;
 

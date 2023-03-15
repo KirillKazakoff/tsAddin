@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { LetterRoute } from './app/routes/LetterRoute/LetterRoute';
 import { MainRoute } from './app/routes/MainRoute';
-import ErrorLetter from './app/routes/ErrorRoute/ErrorLetter';
 import NavigatorRoute from './app/routes/NavigatorRoute';
 import { DocsRoute } from './app/routes/DocsRoute/DocsRoute';
+import PageStatusRoute from './app/routes/ErrorRoute/PageStatusRoute';
 
 export default function App() {
     return (
@@ -16,7 +16,7 @@ export default function App() {
                     <Route path='/letter' element={<LetterRoute />} />
                     <Route path='/docs' element={<DocsRoute />} />
                 </Route>
-                <Route path='/errorLetter' element={<ErrorLetter />} />
+                <Route path='/pageStatus' element={<PageStatusRoute />} />
             </Routes>
         </Router>
     );

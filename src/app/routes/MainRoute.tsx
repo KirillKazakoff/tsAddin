@@ -1,17 +1,17 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import pageStatusStore from '../stores/pageStatusStore';
+import pageStatusStore from '../stores/pageStatusStore.ts/pageStatusStore';
 
 export const MainRoute = observer(() => {
-    const { isLetterError } = pageStatusStore;
-    const navigate = useNavigate();
+    // const { isError } = pageStatusStore.status;
+    // const navigate = useNavigate();
 
-    useEffect(() => {
-        if (isLetterError) {
-            navigate('/errorLetter');
-        }
-    }, [isLetterError, navigate]);
+    // useEffect(() => {
+    //     if (isError) {
+    //         navigate('/pageStatus');
+    //     }
+    // }, [isError, navigate]);
 
     return (
         <div className='main-route'>

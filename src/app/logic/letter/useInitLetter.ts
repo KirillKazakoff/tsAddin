@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { initExcel } from '../excel/initExcel';
+import { useInitExcel } from '../excel/initExcel';
 import { getHref } from './getHref';
 
 export const useInitLetter = () => {
+    const initExcel = useInitExcel();
     const mode = process.env.NODE_ENV;
 
     const onLetterSubmit = async () => {

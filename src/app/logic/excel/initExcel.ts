@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { setConsignees } from '../../stores/spsStore/setConsignees';
 import { setPortsTamozhnya } from '../../stores/spsStore/setPortsTamozhnya';
 import { setPortsZarubezh } from '../../stores/spsStore/setPortsZarubezh';
@@ -21,38 +22,80 @@ import {
     initPortTamozhnya,
 } from './initRanges';
 
-export const initExcel = async () => {
-    try {
-        await Excel.run(async (context) => {
-            const { worksheets } = context.workbook;
+// export const initExcel = async () => {
+//     try {
+//         await Excel.run(async (context) => {
+//             const { worksheets } = context.workbook;
 
-            const mateRange = initMate(worksheets);
-            const exportRange = initExport(worksheets);
-            const exportStorageRange = initExportStorage(worksheets);
-            const innerRange = initInner(worksheets);
+//             const mateRange = initMate(worksheets);
+//             const exportRange = initExport(worksheets);
+//             const exportStorageRange = initExportStorage(worksheets);
+//             const innerRange = initInner(worksheets);
 
-            const spTransportRange = initTransport(worksheets);
-            const spVesselsRange = initVessels(worksheets);
-            const spSellerRange = initSeller(worksheets);
-            const spConsigneeRange = initConsignee(worksheets);
-            const spProductionRange = initProduction(worksheets);
-            const SPPortZarubezhRange = initPortZarubezh(worksheets);
-            const SPPortTamozhnyaRange = initPortTamozhnya(worksheets);
+//             const spTransportRange = initTransport(worksheets);
+//             const spVesselsRange = initVessels(worksheets);
+//             const spSellerRange = initSeller(worksheets);
+//             const spConsigneeRange = initConsignee(worksheets);
+//             const spProductionRange = initProduction(worksheets);
+//             const SPPortZarubezhRange = initPortZarubezh(worksheets);
+//             const SPPortTamozhnyaRange = initPortTamozhnya(worksheets);
 
-            await context.sync();
+//             await context.sync();
 
-            setMate(mateRange.values);
-            setExport(exportRange.values);
+//             setMate(mateRange.values);
+//             setExport(exportRange.values);
 
-            setSellers(spSellerRange.values);
-            setTransport(mateRange.values, spTransportRange.values);
-            setVessels(spVesselsRange.values);
-            setConsignees(spConsigneeRange.values);
-            setProduction(spProductionRange.values);
-            setPortsZarubezh(SPPortZarubezhRange.values);
-            setPortsTamozhnya(SPPortTamozhnyaRange.values);
-        });
-    } catch (e) {
-        console.log(e);
-    }
+//             setSellers(spSellerRange.values);
+//             setTransport(mateRange.values, spTransportRange.values);
+//             setVessels(spVesselsRange.values);
+//             setConsignees(spConsigneeRange.values);
+//             setProduction(spProductionRange.values);
+//             setPortsZarubezh(SPPortZarubezhRange.values);
+//             setPortsTamozhnya(SPPortTamozhnyaRange.values);
+//         });
+//     } catch (e) {
+//         console.log(e);
+//     }
+// };
+
+export const useInitExcel = () => {
+    const navigate = useNavigate();
+    const initExcel = async () => {
+        try {
+            await Excel.run(async (context) => {
+                const { worksheets } = context.workbook;
+
+                const mateRange = initMate(worksheets);
+                const exportRange = initExport(worksheets);
+                const exportStorageRange = initExportStorage(worksheets);
+                const innerRange = initInner(worksheets);
+
+                const spTransportRange = initTransport(worksheets);
+                const spVesselsRange = initVessels(worksheets);
+                const spSellerRange = initSeller(worksheets);
+                const spConsigneeRange = initConsignee(worksheets);
+                const spProductionRange = initProduction(worksheets);
+                const SPPortZarubezhRange = initPortZarubezh(worksheets);
+                const SPPortTamozhnyaRange = initPortTamozhnya(worksheets);
+
+                await context.sync();
+
+                setMate(mateRange.values);
+                setExport(exportRange.values);
+
+                setSellers(spSellerRange.values);
+                setTransport(mateRange.values, spTransportRange.values);
+                setVessels(spVesselsRange.values);
+                setConsignees(spConsigneeRange.values);
+                setProduction(spProductionRange.values);
+                setPortsZarubezh(SPPortZarubezhRange.values);
+                setPortsTamozhnya(SPPortTamozhnyaRange.values);
+            });
+        } catch (e) {
+            navigate('/pageStatus');
+            console.log(e);
+        }
+    };
+
+    return initExcel;
 };
