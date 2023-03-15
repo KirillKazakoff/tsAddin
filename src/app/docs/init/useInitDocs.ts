@@ -9,6 +9,8 @@ import {
     initMate,
     initTransport,
     initVessels,
+    initPortZarubezh,
+    initPortTamozhnya,
 } from '../../initExcel';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { createBL } from '../createBL';
@@ -19,6 +21,8 @@ import { setProduction } from '../../stores/spsStore/setProduction';
 import { setVessels } from '../../stores/spsStore/setVessels';
 import { setTransport } from '../../stores/spsStore/setTransport';
 import { setMate } from '../../stores/tablesStore/setMate';
+import { setPortsZarubezh } from '../../stores/spsStore/setPortsZarubezh';
+import { setPortsTamozhnya } from '../../stores/spsStore/setPortsTamozhnya';
 
 export const useInitDocs = () => {
     const initDocs = async () => {
@@ -36,6 +40,8 @@ export const useInitDocs = () => {
                 const spSellerRange = initSeller(worksheets);
                 const spConsigneeRange = initConsignee(worksheets);
                 const spProductionRange = initProduction(worksheets);
+                const SPPortZarubezhRange = initPortZarubezh(worksheets);
+                const SPPortTamozhnyaRange = initPortTamozhnya(worksheets);
 
                 await context.sync();
 
@@ -43,13 +49,14 @@ export const useInitDocs = () => {
                 setExport(exportRange.values);
 
                 setSellers(spSellerRange.values);
-                setTransport(mateRange.valueTypes, spTransportRange.values);
+                setTransport(mateRange.values, spTransportRange.values);
                 setVessels(spVesselsRange.values);
                 setConsignees(spConsigneeRange.values);
                 setProduction(spProductionRange.values);
+                setPortsZarubezh(SPPortZarubezhRange.values);
+                setPortsTamozhnya(SPPortTamozhnyaRange.values);
             });
         } catch (e) {
-            console.log('hell');
             console.log(e);
         }
     };
@@ -57,13 +64,13 @@ export const useInitDocs = () => {
     const mode = process.env.NODE_ENV;
 
     useEffect(() => {
-        // if (mode === 'production') return;
-        // const func = async () => {
-        //     await initDocs();
-        //     const book = await read();
-        //     createBL(book);
-        // };
-        // func();
+        if (mode === 'production') return;
+        const func = async () => {
+            await initDocs();
+            // const book = await read();
+            // createBL(book);
+        };
+        func();
     });
 
     return initDocs;

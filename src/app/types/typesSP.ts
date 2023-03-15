@@ -15,6 +15,7 @@ export type VesselsT = {
     [key: string]: VesselT;
 };
 
+// Production
 export type ProductDescriptionT = {
     name: string;
     fullName: string;
@@ -52,4 +53,27 @@ export type ConsigneeT = {
 
 export type ConsigneesT = {
     [key: string]: ConsigneeT;
+};
+
+// PortZarubezh
+export type PortZarubezhT = {
+    name: string;
+    nameEng: string;
+    country: string;
+    countryEng: string;
+};
+
+export type PortsZarubezhT = {
+    [key: string]: PortZarubezhT;
+};
+
+// PortTamozhnyaT
+export type PortTamozhnyaT = {
+    name: string;
+    nameEng: string;
+    fullName: string;
+};
+
+export type PortsTamozhnyaT = {
+    [key: string]: PortTamozhnyaT;
 };
