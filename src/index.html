@@ -1,9 +1,6 @@
 <!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license. -->
 <!-- See LICENSE in the project root for license information -->
 
-<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license. -->
-<!-- See LICENSE in the project root for license information -->
-
 <!DOCTYPE html>
 <html lang="en" data-framework="typescript">
     <head>
@@ -13,10 +10,28 @@
         <title>Contoso Task Pane Add-in</title>
 
         <!-- Office JavaScript API -->
+        <script type="text/javascript">
+            // Office js deletes window.history.pushState and window.history.replaceState. Cache them and restore them
+            window._historyCache = {
+                replaceState: window.history.replaceState,
+                pushState: window.history.pushState,
+            };
+        </script>
+
         <script
             type="text/javascript"
-            src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"
+            src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"
         ></script>
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/exceljs@1.12.1/dist/exceljs.min.js"
+        ></script>
+
+        <script type="text/javascript">
+            // Office js deletes window.history.pushState and window.history.replaceState. Restore them
+            window.history.replaceState = window._historyCache.replaceState;
+            window.history.pushState = window._historyCache.pushState;
+        </script>
 
         <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
         <link

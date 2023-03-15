@@ -54,6 +54,7 @@ export const useInitDocs = () => {
     const mode = process.env.NODE_ENV;
 
     useEffect(() => {
+        console.log('heee');
         if (mode === 'production') return;
         const func = async () => {
             await initDocs();
