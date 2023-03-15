@@ -1,5 +1,5 @@
-import type { MateRowT } from '../../types/typesTables';
-import letterStore from '../../stores/letterStore/letterStore';
+import letterStore from '../../../stores/letterStore/letterStore';
+import { MateRowT } from '../../../types/typesTables';
 
 export const groupByVessel = (vessels: string[], table: MateRowT[]) => {
     const checkOperation = ({ operation }: MateRowT) => {

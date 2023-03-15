@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import tablesStore from '../../stores/tablesStore/tablesStore';
-import { SubjectT } from '../../types/types';
+import tablesStore from '../../../stores/tablesStore/tablesStore';
+import { SubjectT } from '../../../types/types';
 import { isStOff } from './isSameSort';
 
 export const getSubject = () => {

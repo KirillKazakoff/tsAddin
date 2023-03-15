@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
-import letterStore from '../../stores/letterStore/letterStore';
-import spsStore from '../../stores/spsStore/spsStore';
+import letterStore from '../../../stores/letterStore/letterStore';
+import spsStore from '../../../stores/spsStore/spsStore';
 
 export const footerToStrRu = () => {
     const { arrivalVld, payment, port } = letterStore.fields;

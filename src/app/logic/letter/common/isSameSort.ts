@@ -1,4 +1,4 @@
-import type { DetailsT, ProductT } from '../../types/types';
+import { ProductT, DetailsT } from '../../../types/types';
 
 export const isSameSort = (product: ProductT, details: DetailsT) => {
     const firstDetails = product.details[0];

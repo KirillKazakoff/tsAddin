@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { selectProductSp } from '../../stores/spsStore/select';
-import spsStore from '../../stores/spsStore/spsStore';
+import { selectProductSp } from '../../../stores/spsStore/select';
+import spsStore from '../../../stores/spsStore/spsStore';
 import { getSubject } from '../common/getSubject';
 
 export const subjectToStrRu = () => {

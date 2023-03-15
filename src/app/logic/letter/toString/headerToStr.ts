@@ -1,7 +1,9 @@
-import letterStore from '../../stores/letterStore/letterStore';
-
-import { selectVesselsStr, selectVesselsStrEng } from '../../stores/spsStore/select';
-import spsStore from '../../stores/spsStore/spsStore';
+import letterStore from '../../../stores/letterStore/letterStore';
+import {
+    selectVesselsStr,
+    selectVesselsStrEng,
+} from '../../../stores/spsStore/select';
+import spsStore from '../../../stores/spsStore/spsStore';
 
 export const headerToStrRu = () => {
     const { transport } = spsStore;

@@ -1,8 +1,7 @@
 /* eslint-disable no-param-reassign */
-import type { ProductionInfoT, ProductT } from '../../types/types';
-import type { MateRowT } from '../../types/typesTables';
-
-import { selectProductSp, selectVesselSp } from '../../stores/spsStore/select';
+import { selectProductSp, selectVesselSp } from '../../../stores/spsStore/select';
+import { ProductT, ProductionInfoT } from '../../../types/types';
+import { MateRowT } from '../../../types/typesTables';
 import { isSameSort } from './isSameSort';
 
 const initProduct = (tableRow: MateRowT): ProductT => {
