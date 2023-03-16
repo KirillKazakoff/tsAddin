@@ -18,7 +18,6 @@ async function getHttpsOptions() {
 module.exports = async (env, options) => {
     const dev = options.mode === 'development';
     const config = {
-
         devtool: 'source-map',
         entry: {
             polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
@@ -100,7 +99,6 @@ module.exports = async (env, options) => {
             headers: {
                 'Access-Control-Allow-Origin': '*',
             },
-            hot: true,
             server: {
                 type: "https",
                 options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),

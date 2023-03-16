@@ -1,5 +1,6 @@
 // sp - dictionary (spravochnik)
 // data already selected on init
+import { makeAutoObservable } from 'mobx';
 import {
     ProductionNewT,
     SellersT,
@@ -22,6 +23,10 @@ class SpsStore {
     consignees: ConsigneesT = {};
     portsTamozhnya: PortsTamozhnyaT = {};
     portsZarubezh: PortsZarubezhT = {};
+
+    constructor() {
+        makeAutoObservable(this);
+    }
 
     setVessels(vessels: VesselsT) {
         this.vessels = vessels;

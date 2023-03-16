@@ -1,8 +1,13 @@
+import { makeAutoObservable } from 'mobx';
 import { MateRowT, ExportRowT } from '../../types/typesTables';
 
 class TablesStore {
     mates: MateRowT[] = [];
     export: ExportRowT[] = [];
+
+    constructor() {
+        makeAutoObservable(this);
+    }
 
     setMates(table: MateRowT[]) {
         this.mates = table;

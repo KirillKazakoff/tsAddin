@@ -9,6 +9,7 @@ body {
 ul {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 b {
@@ -50,4 +51,17 @@ b {
     display: flex;
     column-gap: 20px;
     margin-bottom: 30px;
+}
+
+/* blList */
+.blList {
+    display: flex;
+    column-gap: 10px;
+    margin-bottom: 10px;
+}
+
+.bl {
+    cursor: pointer;
+    padding: 2px;
+    border: 1px solid royalblue;
 }

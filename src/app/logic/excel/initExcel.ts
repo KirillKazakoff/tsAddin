@@ -8,6 +8,7 @@ import { setTransport } from '../../stores/spsStore/set/setTransport';
 import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { setMate } from '../../stores/tablesStore/setMate';
+import tablesStore from '../../stores/tablesStore/tablesStore';
 
 import {
     initMate,
