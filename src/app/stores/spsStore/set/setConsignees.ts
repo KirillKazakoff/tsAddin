@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import type { ConsigneesT } from '../../types/typesSP';
-import spsStore from './spsStore';
+import type { ConsigneesT } from '../../../types/typesSP';
+import spsStore from '../spsStore';
 
 export const setConsignees = (spRange: any[][]) => {
     const transformed = spRange.reduce<ConsigneesT>((total, row) => {

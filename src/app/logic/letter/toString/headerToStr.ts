@@ -2,7 +2,8 @@ import letterStore from '../../../stores/letterStore/letterStore';
 import {
     selectVesselsStr,
     selectVesselsStrEng,
-} from '../../../stores/spsStore/select';
+} from '../../../stores/spsStore/selectUtils';
+
 import spsStore from '../../../stores/spsStore/spsStore';
 
 export const headerToStrRu = () => {

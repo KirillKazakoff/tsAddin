@@ -1,5 +1,6 @@
-import { SellersT } from '../../types/typesSP';
-import spsStore from './spsStore';
+import { SellersT } from '../../../types/typesSP';
+import spsStore from '../spsStore';
+
 /* eslint-disable no-param-reassign */
 export const setSellers = (spRange: any[][]) => {
     const transformed = spRange.reduce<SellersT>((total, row) => {

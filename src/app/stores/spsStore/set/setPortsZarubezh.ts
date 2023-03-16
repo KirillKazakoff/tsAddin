@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { PortsZarubezhT } from '../../types/typesSP';
-import spsStore from './spsStore';
+import { PortsZarubezhT } from '../../../types/typesSP';
+import spsStore from '../spsStore';
 
 export const setPortsZarubezh = (spRange: any[][]) => {
     const transformed = spRange.reduce<PortsZarubezhT>((total, row) => {

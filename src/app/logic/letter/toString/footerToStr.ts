@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-useless-escape */
 import letterStore from '../../../stores/letterStore/letterStore';
 import spsStore from '../../../stores/spsStore/spsStore';
@@ -14,7 +15,7 @@ export const footerToStrRu = () => {
 
 export const footerToStrEng = () => {
     const {
-        port, terms, arrivalForeign, payment, arrivalVld,
+        port, terms, arrivalForeign, arrivalVld,
     } = letterStore.fields;
     const transport = spsStore.transport.nameEng;
 
@@ -27,7 +28,7 @@ export const footerToStrEng = () => {
     const arrivalStr = terms === 'CFR' ? scheduleStr : '';
 
     const paymentInfoStr = '- payment 100% during 10 banking days after sign a contract';
-    const paymentStr = `If you get interested, please advise us your price offer, we are going to sell this lot at ${payment}`;
+    // const paymentStr = `If you get interested, please advise us your price offer, we are going to sell this lot at ${payment}`;
 
-    return `\n${weightInformStr}\n\n${arrivalStr}${termsStr}\n${paymentInfoStr}\n\n${paymentStr}`;
+    return `\n${weightInformStr}\n\n${arrivalStr}${termsStr}\n${paymentInfoStr}\n`;
 };

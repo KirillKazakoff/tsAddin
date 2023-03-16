@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import { setConsignees } from '../../stores/spsStore/setConsignees';
-import { setPortsTamozhnya } from '../../stores/spsStore/setPortsTamozhnya';
-import { setPortsZarubezh } from '../../stores/spsStore/setPortsZarubezh';
-import { setProduction } from '../../stores/spsStore/setProduction';
-import { setSellers } from '../../stores/spsStore/setSeller';
-import { setTransport } from '../../stores/spsStore/setTransport';
-import { setVessels } from '../../stores/spsStore/setVessels';
+import { setConsignees } from '../../stores/spsStore/set/setConsignees';
+import { setPortsTamozhnya } from '../../stores/spsStore/set/setPortsTamozhnya';
+import { setPortsZarubezh } from '../../stores/spsStore/set/setPortsZarubezh';
+import { setProduction } from '../../stores/spsStore/set/setProduction';
+import { setSellers } from '../../stores/spsStore/set/setSeller';
+import { setTransport } from '../../stores/spsStore/set/setTransport';
+import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { setMate } from '../../stores/tablesStore/setMate';
+
 import {
     initMate,
     initExport,

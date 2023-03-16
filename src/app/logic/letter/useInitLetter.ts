@@ -13,12 +13,13 @@ export const useInitLetter = () => {
     };
 
     useEffect(() => {
+        console.log('he');
         if (mode === 'production') return;
         const func = async () => {
             // await onLetterSubmit();
             await initExcel();
             const href = getHref();
-            console.log(href);
+            // console.log(href);
         };
         func();
     });

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { VesselsT } from '../../types/typesSP';
-import tablesStore from '../tablesStore/tablesStore';
-import spsStore from './spsStore';
+import { VesselsT } from '../../../types/typesSP';
+import tablesStore from '../../tablesStore/tablesStore';
+import spsStore from '../spsStore';
 
 export const setVessels = (spRange: any[][]) => {
     const { mates } = tablesStore;

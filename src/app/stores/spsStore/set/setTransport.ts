@@ -1,4 +1,4 @@
-import spsStore from './spsStore';
+import spsStore from '../spsStore';
 
 export const setTransport = (mateValues: any[][], dictionaryRange: any[][]) => {
     // get transport cell from first table row

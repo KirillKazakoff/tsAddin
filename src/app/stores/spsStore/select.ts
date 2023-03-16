@@ -12,14 +12,6 @@ export const selectVesselSp = (name: string) => {
     return spsStore.vessels[name];
 };
 
-export const selectVesselsStr = () => {
-    return Object.values(spsStore.vessels).map((vessel) => vessel.name);
-};
-
-export const selectVesselsStrEng = () => {
-    return Object.values(spsStore.vessels).map((vessel) => vessel.nameEng);
-};
-
 export const selectSellerSp = (name: string) => {
     return spsStore.sellers[name];
 };

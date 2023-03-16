@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { ProductDescriptionT, ProductionNewT } from '../../types/typesSP';
-import spsStore from './spsStore';
+import { ProductionNewT, ProductDescriptionT } from '../../../types/typesSP';
+import spsStore from '../spsStore';
 
 export const setProduction = (spRange: any[][]) => {
     const production = spRange.reduce<ProductionNewT>((totalObj, row) => {
