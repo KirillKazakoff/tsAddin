@@ -7,11 +7,12 @@ import spsStore from '../../../stores/spsStore/spsStore';
 
 export const headerToStrRu = () => {
     const { transport } = spsStore;
+    const transportStr = `Продукция отгружена с ${transport.name}`;
     const vesselsStr = selectVesselsStr().join('; ');
     const greeting = 'Добрый день!';
     const info = 'Направляем информацию по новой партии продукции';
 
-    return `${greeting}\n\n${info} ${vesselsStr}\n${transport.name}\n`;
+    return `${greeting}\n\n${info} ${vesselsStr}\n${transportStr}\n`;
 };
 
 export const headerToStrEng = () => {

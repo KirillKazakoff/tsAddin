@@ -22,42 +22,6 @@ import {
     initPortTamozhnya,
 } from './initRanges';
 
-// export const initExcel = async () => {
-//     try {
-//         await Excel.run(async (context) => {
-//             const { worksheets } = context.workbook;
-
-//             const mateRange = initMate(worksheets);
-//             const exportRange = initExport(worksheets);
-//             const exportStorageRange = initExportStorage(worksheets);
-//             const innerRange = initInner(worksheets);
-
-//             const spTransportRange = initTransport(worksheets);
-//             const spVesselsRange = initVessels(worksheets);
-//             const spSellerRange = initSeller(worksheets);
-//             const spConsigneeRange = initConsignee(worksheets);
-//             const spProductionRange = initProduction(worksheets);
-//             const SPPortZarubezhRange = initPortZarubezh(worksheets);
-//             const SPPortTamozhnyaRange = initPortTamozhnya(worksheets);
-
-//             await context.sync();
-
-//             setMate(mateRange.values);
-//             setExport(exportRange.values);
-
-//             setSellers(spSellerRange.values);
-//             setTransport(mateRange.values, spTransportRange.values);
-//             setVessels(spVesselsRange.values);
-//             setConsignees(spConsigneeRange.values);
-//             setProduction(spProductionRange.values);
-//             setPortsZarubezh(SPPortZarubezhRange.values);
-//             setPortsTamozhnya(SPPortTamozhnyaRange.values);
-//         });
-//     } catch (e) {
-//         console.log(e);
-//     }
-// };
-
 export const useInitExcel = () => {
     const navigate = useNavigate();
     const initExcel = async () => {
@@ -92,7 +56,7 @@ export const useInitExcel = () => {
                 setPortsTamozhnya(SPPortTamozhnyaRange.values);
             });
         } catch (e) {
-            navigate('/pageStatus');
+            // navigate('/pageStatus');
             console.log(e);
         }
     };

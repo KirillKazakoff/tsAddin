@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-
 import { useInitDocs } from '../../logic/docs/init/useInitDocs';
 
 export const DocsRoute = observer(() => {

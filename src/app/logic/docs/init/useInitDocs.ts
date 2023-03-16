@@ -19,6 +19,8 @@ export const useInitDocs = () => {
 
     useEffect(() => {
         if (mode === 'production') return;
+        console.log('he');
+
         const func = async () => {
             await initExcel();
             const book = await read();
