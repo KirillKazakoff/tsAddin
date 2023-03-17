@@ -3,7 +3,6 @@ import { PageStatusT } from '../../types/typesStore';
 import { initPageStatus } from './initPageStatus';
 
 class PageStatusStore {
-    isLetterError = false;
     status = initPageStatus();
 
     constructor() {

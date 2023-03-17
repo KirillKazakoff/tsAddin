@@ -28,8 +28,11 @@ export type LetterFieldsT = {
     port: string;
 };
 
+// PageStatus
+export type PageStatusTypeT = 'notFilledTable' | 'ok';
+
 export type PageStatusT = {
-    isError: boolean;
+    statusType: PageStatusTypeT;
     title: string;
     desc: string;
 };

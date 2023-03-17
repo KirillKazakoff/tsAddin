@@ -5,7 +5,7 @@ import Error from './Error';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 
 export default function PageStatusRoute() {
-    const { desc, isError, title } = pageStatusStore.status;
+    const { desc, title } = pageStatusStore.status;
     const navigate = useNavigate();
     const onClick = () => {
         pageStatusStore.resetPageStatus();

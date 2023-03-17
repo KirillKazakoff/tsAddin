@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useInitExcel } from '../excel/initExcel';
+import { useInitExcel } from '../excel/useInitExcel';
 import { getHref } from './getHref';
 
 export const useInitLetter = () => {
@@ -13,10 +13,8 @@ export const useInitLetter = () => {
     };
 
     useEffect(() => {
-        console.log('he');
         if (mode === 'production') return;
         const func = async () => {
-            // await onLetterSubmit();
             await initExcel();
             const href = getHref();
             // console.log(href);

@@ -4,14 +4,14 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import pageStatusStore from '../stores/pageStatusStore.ts/pageStatusStore';
 
 export const MainRoute = observer(() => {
-    const { isError } = pageStatusStore.status;
+    const { statusType } = pageStatusStore.status;
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isError) {
+        if (statusType !== 'ok') {
             navigate('/pageStatus');
         }
-    }, [isError, navigate]);
+    }, [statusType, navigate]);
 
     return (
         <div className='main-route'>

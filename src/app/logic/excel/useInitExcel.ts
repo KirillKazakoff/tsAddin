@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import excelChangesStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import { setConsignees } from '../../stores/spsStore/set/setConsignees';
 import { setPortsTamozhnya } from '../../stores/spsStore/set/setPortsTamozhnya';
 import { setPortsZarubezh } from '../../stores/spsStore/set/setPortsZarubezh';
@@ -25,7 +26,6 @@ import {
 } from './initRanges';
 
 export const useInitExcel = () => {
-    const navigate = useNavigate();
     const initExcel = async () => {
         try {
             await Excel.run(async (context) => {
@@ -56,9 +56,10 @@ export const useInitExcel = () => {
                 setProduction(spProductionRange.values);
                 setPortsZarubezh(SPPortZarubezhRange.values);
                 setPortsTamozhnya(SPPortTamozhnyaRange.values);
+
+                excelChangesStore.setSync(true);
             });
         } catch (e) {
-            // navigate('/pageStatus');
             console.log(e);
         }
     };
