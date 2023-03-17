@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MateRowT } from '../../types/typesTables';
-import { letterNotFulfilled } from '../pageStatusStore.ts/pageMessages';
+import { tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
 import tablesStore from './tablesStore';
 
@@ -33,7 +33,8 @@ export const setMate = (table: any[][]) => {
         };
 
         if (!operation || !vessel || !product || !transport) {
-            pageStatusStore.setPageStatus(letterNotFulfilled);
+            pageStatusStore.setPageStatus(tableNotFulfilled('Коносаменты'));
+            throw new Error('tableNotFulfilled');
         }
         if (operation === 'Образец') return totalObj;
 

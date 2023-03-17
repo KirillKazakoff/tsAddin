@@ -1,15 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import ExcelJS from 'exceljs';
 import _ from 'lodash';
-import tablesStore from '../../stores/tablesStore/tablesStore';
-import { saveFile } from '../excel/create';
+import { ExportRowT } from '../../types/typesTables';
+import { saveFile } from '../excel/saveFile';
+import { pathObj } from '../utils/constants';
 import { initBlTemplate } from './init/initBlTemplate';
+import { readTmpBl } from './readTmpBl';
 
-export const createBL = async (book: ExcelJS.Workbook) => {
-    tablesStore.export.forEach(async (row) => {
-        const newBook = _.cloneDeep(book);
-        initBlTemplate(newBook, row);
+export const createBL = async (row: ExportRowT) => {
+    const book = await readTmpBl(pathObj.bl);
+    const newBook = _.cloneDeep(book);
+    initBlTemplate(newBook, row);
 
-        await saveFile(newBook, row.blNo);
-    });
+    await saveFile(newBook, row.blNo);
 };

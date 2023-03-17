@@ -29,7 +29,7 @@ export type LetterFieldsT = {
 };
 
 // PageStatus
-export type PageStatusTypeT = 'notFilledTable' | 'ok';
+export type PageStatusTypeT = 'notFilledTable' | 'sameBl' | 'ok';
 
 export type PageStatusT = {
     statusType: PageStatusTypeT;

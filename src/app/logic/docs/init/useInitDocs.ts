@@ -5,10 +5,8 @@ import excelChangesStore from '../../../stores/excelSyncStore.ts/excelSyncStore'
 import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import { ExportRowT } from '../../../types/typesTables';
-import { saveFile } from '../../excel/create';
 import { useInitExcel } from '../../excel/useInitExcel';
-import { read } from '../readBL';
-import { initBlTemplate } from './initBlTemplate';
+import { createBL } from '../createBL';
 
 export const useInitDocs = () => {
     const initExcel = useInitExcel();
@@ -25,11 +23,7 @@ export const useInitDocs = () => {
         await initExcel();
 
         if (statusType !== 'ok') return;
-        const book = await read();
-        const newBook = _.cloneDeep(book);
-        initBlTemplate(newBook, row);
-
-        await saveFile(newBook, row.blNo);
+        await createBL(row);
     };
 
     const getAllBl = async () => {
