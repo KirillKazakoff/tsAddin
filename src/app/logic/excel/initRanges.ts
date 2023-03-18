@@ -1,4 +1,4 @@
-import { initRange } from './initRange';
+import initRange from './initRange';
 
 // tablesInit
 export const initExport = (worksheets: Excel.WorksheetCollection) => {

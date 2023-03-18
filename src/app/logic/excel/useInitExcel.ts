@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import excelChangesStore from '../../stores/excelSyncStore.ts/excelSyncStore';
+import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import { setConsignees } from '../../stores/spsStore/set/setConsignees';
 import { setPortsTamozhnya } from '../../stores/spsStore/set/setPortsTamozhnya';
 import { setPortsZarubezh } from '../../stores/spsStore/set/setPortsZarubezh';
@@ -10,6 +12,7 @@ import { setExport } from '../../stores/tablesStore/setExport';
 import { setExportStorage } from '../../stores/tablesStore/setExportStorage';
 import { setMate } from '../../stores/tablesStore/setMate';
 import tablesStore from '../../stores/tablesStore/tablesStore';
+import { addChangeHandler } from './addChangeHandler';
 
 import {
     initMate,
@@ -26,11 +29,15 @@ import {
 } from './initRanges';
 
 export const useInitExcel = () => {
+    const { statusType } = pageStatusStore.status;
+    const { isSync } = excelChangesStore;
+
     const initExcel = async () => {
         try {
             await Excel.run(async (context) => {
                 const { worksheets } = context.workbook;
 
+                addChangeHandler(context);
                 const mateRange = initMate(worksheets);
                 const exportRange = initExport(worksheets);
                 const exportStorageRange = initExportStorage(worksheets);
@@ -64,6 +71,12 @@ export const useInitExcel = () => {
             console.log(e);
         }
     };
+
+    useEffect(() => {
+        if (statusType === 'ok' || !isSync) {
+            initExcel();
+        }
+    }, [statusType, isSync]);
 
     return initExcel;
 };
