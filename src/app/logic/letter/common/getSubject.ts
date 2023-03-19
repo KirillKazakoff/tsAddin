@@ -5,7 +5,7 @@ import { checkOperation } from './checkOperation';
 import { isStOff } from './isSameSort';
 
 export const getSubject = () => {
-    const { mates } = tablesStore;
+    const { matesT: mates } = tablesStore;
 
     const subjectObj = mates.reduce<SubjectT>((total, row) => {
         const { product, sort } = row;

@@ -2,24 +2,24 @@ import { makeAutoObservable } from 'mobx';
 import { MateRowT, ExportRowT, ExportStorageRowT } from '../../types/typesTables';
 
 class TablesStore {
-    mates: MateRowT[] = [];
-    export: ExportRowT[] = [];
-    exportStorage: ExportStorageRowT[] = [];
+    matesT: MateRowT[] = [];
+    exportT: ExportRowT[] = [];
+    exportStorageT: ExportStorageRowT[] = [];
 
     constructor() {
         makeAutoObservable(this);
     }
 
     setMates(table: MateRowT[]) {
-        this.mates = table;
+        this.matesT = table;
     }
 
     setExport(table: ExportRowT[]) {
-        this.export = table;
+        this.exportT = table;
     }
 
     setExportStorage(table: ExportStorageRowT[]) {
-        this.exportStorage = table;
+        this.exportStorageT = table;
     }
 }
 

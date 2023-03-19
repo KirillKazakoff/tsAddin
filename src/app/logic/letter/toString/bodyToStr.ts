@@ -18,7 +18,7 @@ const productionToStr: ProductionToStr = (bodyRow, callback) => {
 };
 
 export const bodyToStrRu = () => {
-    const { mates } = tablesStore;
+    const { matesT: mates } = tablesStore;
     const vessels = selectVesselsStr();
     const bodyObj = getBody(mates, vessels);
 
@@ -35,7 +35,7 @@ export const bodyToStrRu = () => {
 };
 
 export const bodyToStrEng = () => {
-    const { mates } = tablesStore;
+    const { matesT: mates } = tablesStore;
     const vessels = selectVesselsStr();
     const bodyObj = getBody(mates, vessels);
 

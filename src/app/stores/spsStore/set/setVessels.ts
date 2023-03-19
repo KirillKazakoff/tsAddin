@@ -4,7 +4,7 @@ import tablesStore from '../../tablesStore/tablesStore';
 import spsStore from '../spsStore';
 
 export const setVessels = (spRange: any[][]) => {
-    const { mates } = tablesStore;
+    const { matesT: mates } = tablesStore;
     const vesselsArr = mates.map((row) => row.vessel);
     const vesselsMate = Array.from(new Set(vesselsArr));
 

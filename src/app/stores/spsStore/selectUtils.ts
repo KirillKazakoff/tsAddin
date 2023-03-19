@@ -5,7 +5,7 @@ import { selectVesselSp } from './select';
 
 // LetterSelects
 export const selectFilteredMates = () => {
-    return tablesStore.mates.filter((row) => checkOperation(row));
+    return tablesStore.matesT.filter((row) => checkOperation(row));
 };
 
 export const selectFilteredVessels = () => {

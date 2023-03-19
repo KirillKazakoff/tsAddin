@@ -13,6 +13,7 @@ export const setExportStorage = (table: any[][]) => {
             aggrementNo,
             invoice,
             date,
+            blMode,
             blNo,
             msc,
             product,

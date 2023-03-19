@@ -11,7 +11,6 @@ import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { setExportStorage } from '../../stores/tablesStore/setExportStorage';
 import { setMate } from '../../stores/tablesStore/setMate';
-import tablesStore from '../../stores/tablesStore/tablesStore';
 import { addChangeHandler } from './addChangeHandler';
 
 import {
