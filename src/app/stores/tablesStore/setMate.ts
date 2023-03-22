@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { checkEmptyTable } from '../../logic/excel/checkEmptyTable';
 import { MateRowT } from '../../types/typesTables';
 import { tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
@@ -6,6 +7,8 @@ import tablesStore from './tablesStore';
 
 export const setMate = (table: any[][]) => {
     table.shift();
+    if (checkEmptyTable(table)) return;
+
     const transformedTable = table.reduce((totalObj, row, index) => {
         const [
             reice,
@@ -34,7 +37,6 @@ export const setMate = (table: any[][]) => {
 
         if (!operation || !vessel || !product || !transport) {
             pageStatusStore.setPageStatus(tableNotFulfilled('Коносаменты'));
-            throw new Error('tableNotFulfilled');
         }
         if (operation === 'Образец') return totalObj;
 

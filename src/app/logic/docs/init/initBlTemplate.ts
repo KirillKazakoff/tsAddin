@@ -33,6 +33,8 @@ export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     const amountPlacesCl = getCellBl('Места');
     const amountTotalCl = getCellBl('Всего');
 
+    blWs.getCell(sellerCl.row, sellerCl.col);
+
     const sellerSp = selectSellerSp(row.seller);
     sellerCl.value = sellerSp.nameEng;
     sellerAdressCl.value = sellerSp.addresEng;

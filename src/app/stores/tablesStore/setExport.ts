@@ -1,3 +1,4 @@
+import { checkEmptyTable } from '../../logic/excel/checkEmptyTable';
 import { ExportRowT } from '../../types/typesTables';
 import { blSame, tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
@@ -6,6 +7,8 @@ import tablesStore from './tablesStore';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const setExport = (table: any[][]) => {
     table.shift();
+    if (checkEmptyTable(table)) return;
+
     const transformedTable = table.reduce<ExportRowT[]>((totalObj, row, index) => {
         const [
             contract,
@@ -59,12 +62,10 @@ export const setExport = (table: any[][]) => {
 
         if (!product || !vessel || !blNo || !transport || !price || !date) {
             pageStatusStore.setPageStatus(tableNotFulfilled('Экспорт'));
-            throw new Error('tableNotFulfilled');
         }
 
         if (totalObj.some((rowIn) => rowIn.blNo === blNo)) {
             pageStatusStore.setPageStatus(blSame('Экспорт'));
-            throw new Error('blSame');
         }
 
         totalObj.push(rowObj);

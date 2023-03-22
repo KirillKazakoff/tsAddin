@@ -12,3 +12,9 @@ export const blSame = (table: string): PageStatusT => ({
     title: `В таблице ${table} одинаковые Bl!`,
     desc: 'Исправьте одинаковые Bl',
 });
+
+export const transportNotFound = (): PageStatusT => ({
+    statusType: 'transportNotFound',
+    title: 'Не найден транспорт',
+    desc: 'Не могу найти указанный транспорт в первой строке таблицы "Коносаменты" в БД, проверьте правильность заполнения либо обновите связи в Excel',
+});

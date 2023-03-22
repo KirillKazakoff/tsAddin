@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx';
 export type OperationT = 'export' | 'export_storage';
 
 class BlStore {
-    operation: OperationT = 'export';
+    operation: OperationT = 'export_storage';
 
     constructor() {
         makeAutoObservable(this);

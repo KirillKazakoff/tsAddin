@@ -5,7 +5,7 @@ import { LetterRoute } from './app/routes/LetterRoute/LetterRoute';
 import { MainRoute } from './app/routes/MainRoute';
 import NavigatorRoute from './app/routes/NavigatorRoute';
 import { DocsRoute } from './app/routes/DocsRoute/DocsRoute';
-import PageStatusRoute from './app/routes/ErrorRoute/PageStatusRoute';
+import { PageStatusRoute } from './app/routes/ErrorRoute/PageStatusRoute';
 
 export default function App() {
     return (

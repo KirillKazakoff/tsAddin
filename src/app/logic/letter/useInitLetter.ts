@@ -3,11 +3,10 @@ import { useInitExcel } from '../excel/useInitExcel';
 import { getHref } from './getHref';
 
 export const useInitLetter = () => {
-    const initExcel = useInitExcel();
+    useInitExcel();
     const mode = process.env.NODE_ENV;
 
     const onLetterSubmit = async () => {
-        await initExcel();
         const href = getHref();
         document.location.href = href;
     };
@@ -15,7 +14,6 @@ export const useInitLetter = () => {
     useEffect(() => {
         if (mode === 'production') return;
         const func = async () => {
-            await initExcel();
             const href = getHref();
             // console.log(href);
         };
