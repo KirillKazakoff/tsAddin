@@ -2,14 +2,10 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { initBlSection } from '../../logic/docs/init/initBlSection';
 import blStore, { OperationT } from '../../stores/docsStores/blStore';
-import tablesStore from '../../stores/tablesStore/tablesStore';
 import { InputEventT } from '../../types/typesUtils';
 
 const BlSection = observer(() => {
-    const { getBl, getAllBl } = initBlSection();
-    const { exportT, exportStorageT } = tablesStore;
-
-    const table = blStore.operation === 'export' ? exportT : exportStorageT;
+    const { getBl, getAllBl, table } = initBlSection();
 
     const blList = table.map((row) => {
         const onClick = () => getBl(row);

@@ -13,7 +13,7 @@ import { formatCount } from '../../utils/formatCount';
 import { getCellByName } from '../../excel/getCellByName';
 import { getExcelDate } from '../../excel/getExcelDate';
 
-export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
+export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
     const blWs = book.getWorksheet('BL');
     const getCellBl: (name: string) => ExcelJS.Cell = getCellByName.bind(this, blWs);
 
@@ -70,5 +70,5 @@ export const initBlTemplate = (book: ExcelJS.Workbook, row: ExportRowT) => {
     packCl.value = `${row.pack} KG`;
     amountPlacesCl.value = `${formatCount(row.amountPlaces)} PCS`;
 
-    amountTotalCl.value = `${formatCount(row.amountTotal.toFixed(3))} tn`;
+    amountTotalCl.value = `${formatCount(row.amountTotal.toFixed(4))} tn`;
 };
