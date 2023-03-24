@@ -1,8 +1,6 @@
-import ExcelJS from 'exceljs';
+import ExcelJS, { Cell } from 'exceljs';
 
-type CellT = ExcelJS.Cell;
-
-export const getCellByName = (worksheet: ExcelJS.Worksheet, name: string): CellT => {
+export const getCellByName = (worksheet: ExcelJS.Worksheet, name: string): Cell => {
     let match;
 
     worksheet.eachRow((row) => row.eachCell((cell) => {
@@ -11,4 +9,13 @@ export const getCellByName = (worksheet: ExcelJS.Worksheet, name: string): CellT
         }
     }));
     return match;
+};
+
+export const getCellsObj = (ws: ExcelJS.Worksheet, cellName: string) => {
+    const cellEng = getCellByName(ws, cellName);
+    const cellRus = ws.getCell(cellEng.row, +cellEng.col + 1);
+    return {
+        cellEng,
+        cellRus,
+    };
 };

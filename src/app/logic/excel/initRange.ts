@@ -4,7 +4,9 @@ type InitRangeT = (
     tableName: string
 ) => Excel.Range;
 
-const initRange: InitRangeT = (worksheets, wsName, tableName) => {
+export type InitRangeBoundT = (wsName: string, tableName: string) => Excel.Range;
+
+export const initRange: InitRangeT = (worksheets, wsName, tableName) => {
     const ws = worksheets.getItem(wsName);
     const tableSrc = ws.tables.getItem(tableName);
 
@@ -13,5 +15,3 @@ const initRange: InitRangeT = (worksheets, wsName, tableName) => {
 
     return range;
 };
-
-export default initRange;

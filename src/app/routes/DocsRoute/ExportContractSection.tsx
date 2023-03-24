@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { createExportContract } from '../../logic/docs/createDoc';
 import tablesStore from '../../stores/tablesStore/tablesStore';
+import { createExportContract } from '../../logic/docs/exportContract/createExportContract';
+import { groupByAggrementNo } from '../../logic/docs/exportContract/groupByAggrementNo';
 
 export const ExportContractSection = observer(() => {
-    const { exportT } = tablesStore;
-    const getContract = () => createExportContract(exportT[0]);
+    const agreementObj = groupByAggrementNo();
+    const agreementFirst = Object.values(agreementObj)[0];
 
-    useEffect(() => {
-        if (exportT.length === 0) return;
-        getContract();
-    });
+    const getContract = () => createExportContract(agreementFirst);
+
+    // useEffect(() => {
+    //     if (exportT.length === 0) return;
+    //     getContract();
+    // });
 
     return (
         <section className='export-contract'>
@@ -19,7 +22,7 @@ export const ExportContractSection = observer(() => {
                 onClick={getContract} className='doc-link'
                 type='button'
             >
-                get all bl
+                get all export contracts
             </button>
         </section>
     );

@@ -9,6 +9,7 @@ import {
     VesselsT,
     PortsTamozhnyaT,
     PortsZarubezhT,
+    ContractsT,
 } from '../../types/typesSP';
 
 class SpsStore {
@@ -23,6 +24,7 @@ class SpsStore {
     consignees: ConsigneesT = {};
     portsTamozhnya: PortsTamozhnyaT = {};
     portsZarubezh: PortsZarubezhT = {};
+    contracts: ContractsT = {};
 
     constructor() {
         makeAutoObservable(this);
@@ -54,6 +56,10 @@ class SpsStore {
 
     setPortsZarubezh(ports: PortsZarubezhT) {
         this.portsZarubezh = ports;
+    }
+
+    setContracts(contracts: ContractsT) {
+        this.contracts = contracts;
     }
 }
 

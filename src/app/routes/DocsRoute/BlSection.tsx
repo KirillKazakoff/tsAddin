@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { initBlSection } from '../../logic/docs/init/initBlSection';
+import { initBlSection } from '../../logic/docs/bl/initBlSection';
 import blStore, { OperationT } from '../../stores/docsStores/blStore';
 import { InputEventT } from '../../types/typesUtils';
 

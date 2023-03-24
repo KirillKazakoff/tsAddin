@@ -77,3 +77,20 @@ export type PortTamozhnyaT = {
 export type PortsTamozhnyaT = {
     [key: string]: PortTamozhnyaT;
 };
+
+// ContractsT
+export type ContractT = {
+    contractNo: string;
+    date: string;
+    code: string;
+    seller: string;
+    buyerFull: string;
+    buyer: string;
+    bankSeller: string;
+    timeEnd: string;
+    status: string;
+};
+
+export type ContractsT = {
+    [key: string]: ContractT;
+};
