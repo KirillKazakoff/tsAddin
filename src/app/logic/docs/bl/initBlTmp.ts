@@ -11,7 +11,7 @@ import {
 import { ExportRowT } from '../../../types/typesTables';
 import { formatCount } from '../../utils/formatCount';
 import { getCellByName } from '../../excel/getCellByName';
-import { getExcelDate } from '../../excel/getExcelDate';
+import { getExcelDateStr } from '../../excel/getExcelDate';
 
 export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
     const blWs = book.getWorksheet('BL');
@@ -43,11 +43,7 @@ export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
     consigneeCl.value = consigneeSp.fullName;
     consigneeAdressCl.value = consigneeSp.adress;
 
-    dateCl.value = getExcelDate(row.date).toLocaleString('eng', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-    });
+    dateCl.value = getExcelDateStr(row.date, 'eng');
 
     const vesselSp = selectVesselSp(row.vessel);
     vesselCl.value = vesselSp.nameEng;

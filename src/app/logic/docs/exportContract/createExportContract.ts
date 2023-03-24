@@ -3,7 +3,7 @@ import { saveFile } from '../../excel/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
 import { AgreementT } from './groupByAggrementNo';
-import { initExportContractTmp } from './initExportContractTmp';
+import { initExportContractTmp } from './initExportContractTmp/initExportContractTmp';
 
 export const createExportContract = async (agreement: AgreementT) => {
     const { agreementNo } = agreement;

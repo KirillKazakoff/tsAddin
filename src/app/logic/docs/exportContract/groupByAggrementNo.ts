@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import {
+    selectAgentSp,
     selectConsigneeSp,
+    selectContractSp,
     selectProductSp,
     selectSellerSp,
     selectVesselSp,
@@ -10,10 +12,13 @@ import { ExportRowT } from '../../../types/typesTables';
 
 const initAgreement = (row: ExportRowT) => ({
     agreementNo: row.aggrementNo,
+    agreementDate: row.date,
+    contract: selectContractSp(row.contract),
     portTo: row.portTo,
     portFrom: row.portFrom,
     terms: row.terms,
     buyerInfo: selectConsigneeSp(row.buyer),
+    agentInfo: selectAgentSp(row.buyer),
     sellerInfo: selectSellerSp(row.seller),
     vesselInfo: selectVesselSp(row.vessel),
     products: [],

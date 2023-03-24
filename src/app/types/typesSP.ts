@@ -94,3 +94,34 @@ export type ContractT = {
 export type ContractsT = {
     [key: string]: ContractT;
 };
+
+// PodpisantsT
+export type PodpisantT = {
+    name: string;
+    nameEng: string;
+    declination: string;
+    comment: string;
+    commentEng: string;
+};
+
+export type PodpisantsT = {
+    [key: string]: PodpisantT;
+};
+
+// AgentsT
+export type AgentT = {
+    name: string;
+    signatoryEng: string;
+    signatory: string;
+    beneficiaryBank: string;
+    branch: string;
+    bankAdress: string;
+    acNo: string;
+    swift: string;
+    adress: string;
+    code: string;
+};
+
+export type AgentsT = {
+    [key: string]: AgentT;
+};

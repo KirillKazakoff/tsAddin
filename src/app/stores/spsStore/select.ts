@@ -27,3 +27,15 @@ export const selectPortZarubezhSp = (name: string) => {
 export const selectPortTamozhnyaSp = (name: string) => {
     return spsStore.portsTamozhnya[name];
 };
+
+export const selectContractSp = (code: number) => {
+    return spsStore.contracts[code];
+};
+
+export const selectPodpisantSp = (name: string) => {
+    return spsStore.podpisants[name];
+};
+
+export const selectAgentSp = (name: string) => {
+    return spsStore.agents[name];
+};

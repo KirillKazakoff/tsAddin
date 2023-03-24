@@ -1,19 +1,23 @@
 import { useEffect } from 'react';
-import excelChangesStore from '../../stores/excelSyncStore.ts/excelSyncStore';
+import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import { addChangeHandler } from './addChangeHandler';
 import { initStores } from './initStores';
 
 export const useInitExcel = () => {
     const { statusType } = pageStatusStore.status;
-    const { isSync } = excelChangesStore;
+    const { isSync } = excelSyncStore;
 
     const initExcel = async () => {
         try {
             await Excel.run(async (context) => {
+                excelSyncStore.setLoading(true);
+
                 addChangeHandler(context);
                 await initStores(context);
-                excelChangesStore.setSync(true);
+
+                excelSyncStore.setSync(true);
+                excelSyncStore.setLoading(false);
             });
         } catch (e) {
             console.log(e);

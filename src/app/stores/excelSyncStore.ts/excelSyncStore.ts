@@ -3,6 +3,7 @@ import { makeAutoObservable } from 'mobx';
 class ExcelSyncStore {
     isSync = true;
     changedTable = '';
+    isLoading = true;
 
     constructor() {
         makeAutoObservable(this);
@@ -15,7 +16,11 @@ class ExcelSyncStore {
     setExcelChanged(table: string) {
         this.changedTable = table;
     }
+
+    setLoading(isLoading: boolean) {
+        this.isLoading = isLoading;
+    }
 }
 
-const excelChangesStore = new ExcelSyncStore();
-export default excelChangesStore;
+const excelSyncStore = new ExcelSyncStore();
+export default excelSyncStore;

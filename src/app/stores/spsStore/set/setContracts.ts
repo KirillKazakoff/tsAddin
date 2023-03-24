@@ -17,7 +17,7 @@ export const setContracts = (spRange: any[][]) => {
             status,
         ] = row;
 
-        total[contractNo] = {
+        total[code] = {
             contractNo,
             date,
             code,
@@ -31,6 +31,5 @@ export const setContracts = (spRange: any[][]) => {
         return total;
     }, {});
 
-    console.log(transformed);
     spsStore.setContracts(transformed);
 };
