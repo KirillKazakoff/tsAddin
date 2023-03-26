@@ -2,7 +2,9 @@ import ExcelJS from 'exceljs';
 import { GetCellBoundT } from '../../../../types/typesUtils';
 import { getCellsObj } from '../../../excel/getCellByName';
 import { AgreementT } from '../groupByAggrementNo';
+import { initExportContractCost } from './initExportContractCost';
 import { initExportContractHeader } from './initExportContractHeader';
+import { initExportContractSubject } from './initExportContractSubject';
 
 export const initExportContractTmp = (
     book: ExcelJS.Workbook,
@@ -14,14 +16,10 @@ export const initExportContractTmp = (
     const getCell: GetCellBoundT = getCellsObj.bind(this, ws);
 
     initExportContractHeader(getCell, agreement);
+    initExportContractSubject(getCell, agreement);
+    initExportContractCost(getCell, agreement);
 
-    // const subjectCell = getCellExp('Предмет_массив');
-    // const subjectCellEng = ws.getCell(subjectCell.row, +subjectCell.col + 1);
-
-    // subjectCell.value = 'Жоа';
-    // const rowValues = [4, 'value1', 'value2'];
-    // ws.insertRow(+subjectCell.row, rowValues).commit();
-
-    // console.log(subjectCellEng.value);
-    // console.log(subjectCell.value);
+    ws.pageSetup.fitToPage = true;
+    ws.pageSetup.fitToWidth = 1;
+    ws.pageSetup.fitToHeight = 1;
 };

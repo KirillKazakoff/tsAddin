@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { createExportContract } from '../../logic/docs/exportContract/createExportContract';
-import { groupByAggrementNo } from '../../logic/docs/exportContract/groupByAggrementNo';
 import { SelectPodpisant } from '../../components/SelectPodpisant';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
+import { groupByAgreementNo } from '../../logic/docs/exportContract/groupByAggrementNo';
 
 export const ExportContractSection = observer(() => {
-    const agreementObj = groupByAggrementNo();
+    const agreementObj = groupByAgreementNo();
     const agreementFirst = Object.values(agreementObj)[0];
 
     const getContract = () => createExportContract(agreementFirst);
@@ -14,6 +14,7 @@ export const ExportContractSection = observer(() => {
 
     useEffect(() => {
         setPodpisant('Котов Н.М.');
+        getContract();
     }, []);
 
     return (

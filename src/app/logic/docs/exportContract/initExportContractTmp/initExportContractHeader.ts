@@ -1,12 +1,8 @@
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import { GetCellBoundT } from '../../../../types/typesUtils';
-import { getExcelDate, getExcelDateStr } from '../../../excel/getExcelDate';
-import { AgreementT } from '../groupByAggrementNo';
+import { InitExportPart } from '../../../../types/typesUtils';
+import { getExcelDateStr } from '../../../excel/getExcelDate';
 
-export const initExportContractHeader = (
-    getCell: GetCellBoundT,
-    agreement: AgreementT,
-) => {
+export const initExportContractHeader: InitExportPart = (getCell, agreement) => {
     const {
         agreementDate,
         agreementNo,
@@ -16,8 +12,6 @@ export const initExportContractHeader = (
         agentInfo,
     } = agreement;
     const { podpisant } = exportContractStore;
-
-    console.log(agreement);
 
     const agreementDateStrRu = getExcelDateStr(agreementDate, 'ru');
     const agreementDateStrEng = getExcelDateStr(agreementDate, 'eng');

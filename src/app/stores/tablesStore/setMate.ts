@@ -32,7 +32,7 @@ export const setMate = (table: any[][]) => {
             product: product.toLowerCase(),
             sort,
             amount: amountTotal,
-            periodCreation,
+            periodCreation: periodCreation || '! NOT STATED !',
         };
 
         if (!operation || !vessel || !product || !transport) {

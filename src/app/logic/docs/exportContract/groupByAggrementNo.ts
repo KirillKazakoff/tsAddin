@@ -8,7 +8,15 @@ import {
     selectVesselSp,
 } from '../../../stores/spsStore/select';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
+import { ProductDescriptionT, ConsigneeT } from '../../../types/typesSP';
 import { ExportRowT } from '../../../types/typesTables';
+
+type ProductInfoT = {
+    product: ProductDescriptionT;
+    price: number;
+    consignee: ConsigneeT;
+    amount: number;
+};
 
 const initAgreement = (row: ExportRowT) => ({
     agreementNo: row.aggrementNo,
@@ -22,13 +30,16 @@ const initAgreement = (row: ExportRowT) => ({
     sellerInfo: selectSellerSp(row.seller),
     vesselInfo: selectVesselSp(row.vessel),
     products: [],
+    totalPrice: 0,
 });
 
-export type AgreementT = ReturnType<typeof initAgreement>;
+export type AgreementT = Omit<ReturnType<typeof initAgreement>, 'products'> & {
+    products: ProductInfoT[];
+};
 type AgreementObjT = { [key: string]: AgreementT };
 
-export const groupByAggrementNo = () => {
-    const res = tablesStore.exportT.reduce<AgreementObjT>((total, row) => {
+export const groupByAgreementNo = () => {
+    const agreements = tablesStore.exportT.reduce<AgreementObjT>((total, row) => {
         const { aggrementNo } = row;
         if (!total[aggrementNo]) {
             total[aggrementNo] = initAgreement(row);
@@ -42,8 +53,9 @@ export const groupByAggrementNo = () => {
         };
 
         total[aggrementNo].products.push(productInfo);
+        total[aggrementNo].totalPrice += row.price;
         return total;
     }, {});
 
-    return res;
+    return agreements;
 };

@@ -8,6 +8,7 @@ import { ExportContractSection } from './ExportContractSection';
 export const DocsRoute = observer(() => {
     useInitExcel();
 
+    console.log(excelSyncStore.isLoading);
     if (excelSyncStore.isLoading) return null;
 
     return (

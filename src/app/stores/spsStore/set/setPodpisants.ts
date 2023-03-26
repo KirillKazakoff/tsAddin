@@ -17,6 +17,5 @@ export const setPodpisants = (spRange: any[][]) => {
         return total;
     }, {});
 
-    console.log(transformed);
     spsStore.setPodpisants(transformed);
 };
