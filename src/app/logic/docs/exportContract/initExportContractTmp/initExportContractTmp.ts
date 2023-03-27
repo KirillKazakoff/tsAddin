@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs';
 import { GetCellBoundT } from '../../../../types/typesUtils';
-import { getCellsObj } from '../../../excel/getCellByName';
+import { getCellsObj } from '../../../excel/utils/getCellByName';
 import { AgreementT } from '../groupByAggrementNo';
 import { initExportContractCost } from './initExportContractCost';
 import { initExportContractHeader } from './initExportContractHeader';
@@ -8,7 +8,7 @@ import { initExportContractSubject } from './initExportContractSubject';
 
 export const initExportContractTmp = (
     book: ExcelJS.Workbook,
-    agreement: AgreementT,
+    agreement: AgreementT
 ) => {
     console.log(agreement);
 

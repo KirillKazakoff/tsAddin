@@ -11,7 +11,7 @@ import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { setExportStorage } from '../../stores/tablesStore/setExportStorage';
 import { setMate } from '../../stores/tablesStore/setMate';
-import { initRange as initRangeUnbound, InitRangeBoundT } from './initRange';
+import { InitRangeBoundT, initRange as initRangeUnbound } from './utils/initRange';
 
 export const initStores = async (context: Excel.RequestContext) => {
     const { worksheets } = context.workbook;
@@ -20,7 +20,7 @@ export const initStores = async (context: Excel.RequestContext) => {
     const mateRange = initRange('Коносаменты', 'Коносаменты');
     const exportRange = initRange('Экспорт', 'Экспорт');
     const exportStorageRange = initRange('Экспорт Хранение', 'Экспорт_хранение');
-    const innerRange = initRange('Внутренний рынок', 'Продажи_ВР');
+    // const innerRange = initRange('Внутренний рынок', 'Продажи_ВР');
 
     const spTransportRange = initRange('Транспорта', 'SPTransport');
     const spVesselsRange = initRange('Суда', 'SPSudno');

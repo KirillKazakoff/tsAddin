@@ -1,6 +1,6 @@
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { InitExportPart } from '../../../../types/typesUtils';
-import { getExcelDateStr } from '../../../excel/getExcelDate';
+import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 
 export const initExportContractHeader: InitExportPart = (getCell, agreement) => {
     const {

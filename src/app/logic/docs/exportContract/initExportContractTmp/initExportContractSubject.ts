@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { InitExportPart } from '../../../../types/typesUtils';
+import { deleteRow } from '../../../excel/utils/deleteRow';
+import { formatCount } from '../../../utils/formatCount';
 
 export const initExportContractSubject: InitExportPart = (getCell, agreement) => {
     const { vesselInfo, products } = agreement;
@@ -17,7 +19,7 @@ export const initExportContractSubject: InitExportPart = (getCell, agreement) =>
 
     const productRows = products.reduce<string[][]>((total, product) => {
         const { fullName, nameEng } = product.product;
-        const { amount } = product;
+        const amount = formatCount(product.amount, 3);
 
         const colEng = `* ${nameEng} - ${amount} tn (net weight)`;
         const colRu = `* ${fullName} - ${amount} тн (нетто)`;
@@ -29,4 +31,6 @@ export const initExportContractSubject: InitExportPart = (getCell, agreement) =>
 
     subjectDescRow.height = 40;
     subjectDescRow.commit();
+
+    deleteRow(ws, 'Предмет_массив');
 };

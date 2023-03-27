@@ -1,17 +1,9 @@
-// export function formatCount(count: number | string) {
-//     const str = count.toString();
-//     return str.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
-// }
 import numberToString from 'number-to-cyrillic';
 
-export function formatCount(
-    count: number,
-    maxFraction: number,
-    minFraction: number,
-) {
+export function formatCount(count: number, fractionNumber: number) {
     const formatter = new Intl.NumberFormat('ru', {
-        maximumFractionDigits: maxFraction,
-        minimumFractionDigits: minFraction,
+        maximumFractionDigits: fractionNumber,
+        minimumFractionDigits: fractionNumber,
         useGrouping: true,
     });
 
@@ -22,10 +14,9 @@ export function formatCount(
 export function formatCurrency(
     count: number,
     language: 'eng' | 'ru',
-    maxFraction: number,
-    minFraction: number,
+    fractionNumber: number,
 ) {
-    const formattedCount = formatCount(count, maxFraction, minFraction);
+    const formattedCount = formatCount(count, fractionNumber);
     if (language === 'eng') {
         return `USD ${formattedCount}`;
     }

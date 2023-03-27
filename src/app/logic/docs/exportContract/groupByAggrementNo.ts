@@ -14,6 +14,7 @@ import { ExportRowT } from '../../../types/typesTables';
 type ProductInfoT = {
     product: ProductDescriptionT;
     price: number;
+    isPriceUnique: boolean;
     consignee: ConsigneeT;
     amount: number;
 };
@@ -30,7 +31,7 @@ const initAgreement = (row: ExportRowT) => ({
     sellerInfo: selectSellerSp(row.seller),
     vesselInfo: selectVesselSp(row.vessel),
     products: [],
-    totalPrice: 0,
+    priceTotal: 0,
 });
 
 export type AgreementT = Omit<ReturnType<typeof initAgreement>, 'products'> & {
@@ -45,15 +46,20 @@ export const groupByAgreementNo = () => {
             total[aggrementNo] = initAgreement(row);
         }
 
+        const isPriceUnique = total[aggrementNo].products.every(
+            (product) => product.price !== row.price,
+        );
+
         const productInfo = {
             product: selectProductSp(row.product),
             price: row.price,
             consignee: selectConsigneeSp(row.consignee),
             amount: row.amountTotal,
+            isPriceUnique,
         };
 
         total[aggrementNo].products.push(productInfo);
-        total[aggrementNo].totalPrice += row.price;
+        total[aggrementNo].priceTotal += row.priceTotal;
         return total;
     }, {});
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { checkEmptyTable } from '../../logic/excel/checkEmptyTable';
+import { checkEmptyTable } from '../../logic/excel/utils/checkEmptyTable';
 import { MateRowT } from '../../types/typesTables';
 import { tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
