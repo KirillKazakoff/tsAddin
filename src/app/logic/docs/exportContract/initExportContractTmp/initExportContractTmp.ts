@@ -8,7 +8,7 @@ import { initExportContractSubject } from './initExportContractSubject';
 
 export const initExportContractTmp = (
     book: ExcelJS.Workbook,
-    agreement: AgreementT
+    agreement: AgreementT,
 ) => {
     console.log(agreement);
 

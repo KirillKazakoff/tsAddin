@@ -3,7 +3,7 @@ import letterStore from '../../../stores/letterStore/letterStore';
 import { DetailsT, ProductT } from '../../../types/types';
 import { TAB } from '../../utils/constants';
 import { formatCount } from '../../utils/formatCount';
-import { isStOff } from '../common/isSameSort';
+import { isStOff } from '../common/isStOff';
 
 function getDetailsStr(details: DetailsT[], name: string, measure: string) {
     const detailsStr = details.reduce((total, detailsObj) => {

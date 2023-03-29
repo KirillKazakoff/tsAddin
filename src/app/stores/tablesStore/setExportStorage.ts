@@ -61,9 +61,9 @@ export const setExportStorage = (table: any[][]) => {
         // const isEmptyRow = row.every((value) => !value);
         // if (isEmptyRow) return totalObj;
 
-        if (!product || !vessel || !blNo || !transport || !price || !date) {
-            pageStatusStore.setPageStatus(tableNotFulfilled('ЭкспортХранение'));
-        }
+        // if (!product || !vessel || !blNo || !transport || !price || !date) {
+        //     pageStatusStore.setPageStatus(tableNotFulfilled('ЭкспортХранение'));
+        // }
 
         if (totalObj.some((rowIn) => rowIn.blNo === blNo)) {
             pageStatusStore.setPageStatus(blSame('Экспорт'));

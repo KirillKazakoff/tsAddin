@@ -47,3 +47,9 @@ export type ProductionToStr = (
     bodyRow: BodyRowT,
     callback: (product: ProductT) => string
 ) => string;
+
+// RequestType
+export type RequestObjT = {
+    url?: string;
+    settings?: RequestInit;
+};

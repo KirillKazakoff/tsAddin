@@ -2,7 +2,7 @@
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import { SubjectT } from '../../../types/types';
 import { checkOperation } from './checkOperation';
-import { isStOff } from './isSameSort';
+import { isStOff } from './isStOff';
 
 export const getSubject = () => {
     const { matesT: mates } = tablesStore;

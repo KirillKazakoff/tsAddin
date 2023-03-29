@@ -4,12 +4,12 @@
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "jsx": "react",
-        "module": "CommonJS",
+        "module": "esnext",
         "moduleResolution": "node",
         "outDir": "dist",
         "removeComments": false,
         "sourceMap": true,
-        "target": "es5",
+        "target": "es2017",
         "lib": [
             "es7",
             "dom"

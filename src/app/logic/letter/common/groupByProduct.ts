@@ -2,7 +2,7 @@
 import { selectProductSp, selectVesselSp } from '../../../stores/spsStore/select';
 import { ProductT, ProductionInfoT } from '../../../types/types';
 import { MateRowT } from '../../../types/typesTables';
-import { isSameSort } from './isSameSort';
+import { isStOff } from './isStOff';
 
 const initProduct = (tableRow: MateRowT): ProductT => {
     const { product, vessel, periodCreation } = tableRow;
@@ -30,8 +30,14 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
         const details = { sort, amount };
         const productObj = productionTypes[product];
 
-        if (isSameSort(productObj, details)) {
+        const matchedDetails = productObj.details.find((d) => d.sort === sort);
+        if (isStOff(sort)) {
             productObj.details[0].amount += details.amount;
+            return productionTypes;
+        }
+
+        if (matchedDetails) {
+            matchedDetails.amount += details.amount;
             return productionTypes;
         }
 

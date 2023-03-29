@@ -15,7 +15,7 @@ export const ExportContractSection = observer(() => {
     useEffect(() => {
         setPodpisant('Котов Н.М.');
         getContract();
-    }, []);
+    }, [getContract]);
 
     return (
         <section className='export-contract'>
