@@ -5,9 +5,7 @@ export const initExportContractAddreses: NewInitExportPart = (
     setCell,
     agreement,
 ) => {
-    const {
-        sellerInfo, buyerInfo, bankProdavecInfo, agentInfo,
-    } = agreement;
+    const { sellerInfo, bankProdavecInfo, agentInfo } = agreement;
     const { podpisant } = exportContractStore;
 
     setCell({

@@ -1,9 +1,16 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-unresolved */
+import _ from 'lodash';
 import numberToString from 'number-to-cyrillic';
 
-export function formatCount(count: number, fractionNumber: number) {
+export function formatCount(
+    count: number,
+    fractionMin: number,
+    fractionMax: number,
+) {
     const formatter = new Intl.NumberFormat('ru', {
-        maximumFractionDigits: fractionNumber,
-        minimumFractionDigits: fractionNumber,
+        maximumFractionDigits: fractionMax,
+        minimumFractionDigits: fractionMin,
         useGrouping: true,
     });
 
@@ -14,9 +21,10 @@ export function formatCount(count: number, fractionNumber: number) {
 export function formatCurrency(
     count: number,
     language: 'eng' | 'ru',
-    fractionNumber: number,
+    fractionMin: number,
+    fractionMax: number,
 ) {
-    const formattedCount = formatCount(count, fractionNumber);
+    const formattedCount = formatCount(count, fractionMin, fractionMax);
     if (language === 'eng') {
         return `USD ${formattedCount}`;
     }

@@ -8,7 +8,7 @@ import { isStOff } from '../common/isStOff';
 function getDetailsStr(details: DetailsT[], name: string, measure: string) {
     const detailsStr = details.reduce((total, detailsObj) => {
         const sort = isStOff(detailsObj.sort) ? '' : detailsObj.sort;
-        const amount = formatCount(detailsObj.amount, 0);
+        const amount = formatCount(detailsObj.amount, 0, 2);
 
         const detailsRow = `- ${name} ${sort} - ${amount} ${measure}`;
         total = `${total}${detailsRow}\n`;

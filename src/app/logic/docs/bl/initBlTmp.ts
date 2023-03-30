@@ -64,7 +64,7 @@ export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
 
     sortCl.value = row.sort;
     packCl.value = `${row.pack} KG`;
-    amountPlacesCl.value = `${formatCount(row.amountPlaces, 0)} PCS`;
+    amountPlacesCl.value = `${formatCount(row.amountPlaces, 0, 0)} PCS`;
 
-    amountTotalCl.value = `${formatCount(row.amountTotal, 3)} tn`;
+    amountTotalCl.value = `${formatCount(row.amountTotal, 3, 3)} tn`;
 };

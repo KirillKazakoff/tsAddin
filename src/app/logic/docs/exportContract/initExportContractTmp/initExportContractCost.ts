@@ -11,7 +11,7 @@ export const initExportContractCost: InitExportPart = (getCell, agreement) => {
 
     const costRows = products.reduce<string[][]>((total, product) => {
         const { fullName, nameEng } = product.product;
-        const price = formatCount(product.price, 2);
+        const price = formatCount(product.price, 2, 2);
 
         const colEng = `* ${nameEng} - USD ${price} for one kg net weight`;
         const colRu = `* ${fullName} - ${price} долл. за одну тонну (нетто)`;
@@ -26,9 +26,9 @@ export const initExportContractCost: InitExportPart = (getCell, agreement) => {
 
     const totalCostCl = getCell('Цена_всего');
 
-    const shortCurrencyEngStr = `USD ${formatCount(priceTotal, 2)}`;
+    const shortCurrencyEngStr = `USD ${formatCount(priceTotal, 2, 2)}`;
     const fullCurrencyEngStr = formatCurrencyLong(priceTotal, 'en');
-    const shortCurrencyRuStr = `$${formatCount(priceTotal, 2)}`;
+    const shortCurrencyRuStr = `$${formatCount(priceTotal, 2, 2)}`;
     const fullCurrencyRuStr = formatCurrencyLong(priceTotal, 'ru');
 
     totalCostCl.cellEng.value = `2.2 Total amount of this Agreement is \n${shortCurrencyEngStr} (${fullCurrencyEngStr})`;

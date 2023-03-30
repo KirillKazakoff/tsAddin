@@ -4,12 +4,7 @@ import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 
 export const initExportContractHeader: InitExportPart = (getCell, agreement) => {
     const {
-        agreementDate,
-        agreementNo,
-        contract,
-        sellerInfo,
-        buyerInfo,
-        agentInfo,
+        agreementDate, agreementNo, contract, sellerInfo, agentInfo,
     } = agreement;
     const { podpisant } = exportContractStore;
 
@@ -32,6 +27,7 @@ export const initExportContractHeader: InitExportPart = (getCell, agreement) => 
     contractDateCl.cellRus.value = `Магадан от ${contractDateStrRu}`;
 
     // body
+    // seller
     const sellerCl = getCell('Продавец');
     sellerCl.cellEng.value = sellerInfo.nameEng;
     sellerCl.cellRus.value = sellerInfo.fullName;
@@ -44,6 +40,11 @@ export const initExportContractHeader: InitExportPart = (getCell, agreement) => 
     sellerPodpisantCl.cellEng.value = `${podpisant.nameEng} and`;
     sellerPodpisantCl.cellRus.value = `${podpisant.declination} и`;
 
+    const sellerRepresentativeCl = getCell('Продавец_представитель');
+    sellerRepresentativeCl.cellEng.value = `${podpisant.commentEng}`;
+    sellerRepresentativeCl.cellRus.value = `${podpisant.comment}`;
+
+    // buyer
     const buyerCl = getCell('Покупатель');
     buyerCl.cellEng.value = `${agentInfo.name}`;
     buyerCl.cellRus.value = `${agentInfo.name}`;

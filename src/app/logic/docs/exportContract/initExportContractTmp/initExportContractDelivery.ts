@@ -42,7 +42,7 @@ export const initExportContractDelivery: InitExportPart = (getCell, agreement) =
 
         productsConsignee.forEach((p) => {
             const { amount, product } = p;
-            const amountFormated = formatCount(amount, 3);
+            const amountFormated = formatCount(amount, 3, 4);
 
             colEng += `- ${product.nameEng} - ${amountFormated} tn (net weight)\n`;
             colRu += `- ${product.fullName} - ${amountFormated} тн (нетто)\n`;

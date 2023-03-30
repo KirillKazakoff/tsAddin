@@ -16,6 +16,7 @@ export const initExportContractTmp = (
     console.log(agreement);
 
     const ws = book.getWorksheet('Export_Contract');
+
     const getCell: GetCellBoundT = getCellsObj.bind(this, ws);
     const setCell: SetCellBoundT = setCellDouble.bind(this, ws);
 
