@@ -45,12 +45,12 @@ export const initExportContractHeader: InitExportPart = (getCell, agreement) => 
     sellerPodpisantCl.cellRus.value = `${podpisant.declination} и`;
 
     const buyerCl = getCell('Покупатель');
-    buyerCl.cellEng.value = `${buyerInfo.fullName}`;
-    buyerCl.cellRus.value = `${buyerInfo.fullName}`;
+    buyerCl.cellEng.value = `${agentInfo.name}`;
+    buyerCl.cellRus.value = `${agentInfo.name}`;
 
     const buyerAddressCl = getCell('Покупатель_адрес');
-    buyerAddressCl.cellEng.value = `${buyerInfo.adress}`;
-    buyerAddressCl.cellRus.value = `${buyerInfo.adress}`;
+    buyerAddressCl.cellEng.value = `${agentInfo.adress}`;
+    buyerAddressCl.cellRus.value = `${agentInfo.adress}`;
 
     const buyerPodpisantCl = getCell('Покупатель_представитель');
     buyerPodpisantCl.cellEng.value = `Represented by president ${agentInfo.signatoryEng}`;

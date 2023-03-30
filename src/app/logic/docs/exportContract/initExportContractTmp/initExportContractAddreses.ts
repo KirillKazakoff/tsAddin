@@ -1,3 +1,4 @@
+import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { NewInitExportPart } from '../../../../types/typesUtils';
 
 export const initExportContractAddreses: NewInitExportPart = (
@@ -7,6 +8,7 @@ export const initExportContractAddreses: NewInitExportPart = (
     const {
         sellerInfo, buyerInfo, bankProdavecInfo, agentInfo,
     } = agreement;
+    const { podpisant } = exportContractStore;
 
     setCell({
         cell: 'Адреса_продавец',
@@ -52,8 +54,8 @@ export const initExportContractAddreses: NewInitExportPart = (
 
     setCell({
         cell: 'Адреса_покупатель',
-        eng: buyerInfo.fullName,
-        ru: buyerInfo.fullName,
+        eng: agentInfo.name,
+        ru: agentInfo.name,
     });
 
     setCell({
@@ -81,20 +83,26 @@ export const initExportContractAddreses: NewInitExportPart = (
     });
 
     setCell({
-        cell: 'Адрес_покупатель_банк_свифт',
+        cell: 'Адреса_покупатель_банк_свифт',
         eng: `SWIFT: ${agentInfo.swift}`,
         ru: `SWIFT: ${agentInfo.swift}`,
     });
 
     setCell({
         cell: 'Адреса_покупатель_бенефициар',
-        eng: `Beneficiary: ${buyerInfo.fullName}`,
-        ru: `Beneficiary: ${buyerInfo.fullName}`,
+        eng: `Beneficiary: ${agentInfo.name}`,
+        ru: `Beneficiary: ${agentInfo.name}`,
     });
 
     setCell({
         cell: 'Адреса_покупатель_счет',
         eng: `A/C: ${agentInfo.acNo}`,
         ru: `A/C: ${agentInfo.acNo}`,
+    });
+
+    setCell({
+        cell: 'Адреса_подпись',
+        eng: `Продавец/Seller  _______________________${podpisant.nameEng}`,
+        ru: `Покупатель/Buyer ________________________${agentInfo.signatoryEng}`,
     });
 };

@@ -11,7 +11,7 @@ const BlSection = observer(() => {
         const onClick = () => getBl(row);
         return (
             <li
-                className='bl' onClick={onClick}
+                className='doc-link bl' onClick={onClick}
                 key={row.blNo}
             >
                 {row.blNo}
@@ -25,7 +25,7 @@ const BlSection = observer(() => {
     };
 
     return (
-        <section className='bl-section'>
+        <form className='docs__form bl-form'>
             <ul className='radio-list'>
                 <div>
                     <input
@@ -51,14 +51,14 @@ const BlSection = observer(() => {
                 </div>
             </ul>
             <h2 className='title bl-title'>BL section</h2>
-            <ul className='blList'>{blList}</ul>
+            <ul className='docs'>{blList}</ul>
             <button
-                onClick={getAllBl} className='doc-link'
+                onClick={getAllBl} className='btn docs-all__btn'
                 type='button'
             >
                 get all bl
             </button>
-        </section>
+        </form>
     );
 });
 

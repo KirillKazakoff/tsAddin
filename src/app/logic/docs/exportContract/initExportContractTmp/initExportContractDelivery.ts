@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { InitExportPart } from '../../../../types/typesUtils';
 import { deleteRow } from '../../../excel/utils/deleteRow';
+import { formatCount } from '../../../utils/formatCount';
 import { groupByConsignee } from '../groupByConsignee';
 
 export const initExportContractDelivery: InitExportPart = (getCell, agreement) => {
@@ -41,9 +42,10 @@ export const initExportContractDelivery: InitExportPart = (getCell, agreement) =
 
         productsConsignee.forEach((p) => {
             const { amount, product } = p;
+            const amountFormated = formatCount(amount, 3);
 
-            colEng += `- ${product.nameEng} - ${amount} tn (net weight)\n`;
-            colRu += `- ${product.fullName} - ${amount} тн (нетто)\n`;
+            colEng += `- ${product.nameEng} - ${amountFormated} tn (net weight)\n`;
+            colRu += `- ${product.fullName} - ${amountFormated} тн (нетто)\n`;
         }, []);
 
         ws.insertRow(+sertificateArrayCl.row + i, [colEng, colRu], 'i').commit();

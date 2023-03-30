@@ -1,40 +1,37 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { createExportContract } from '../../logic/docs/exportContract/createExportContract';
 import { SelectPodpisant } from '../../components/SelectPodpisant';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
-import { groupByAgreementNo } from '../../logic/docs/exportContract/groupByAggrementNo';
+import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
 
 export const ExportContractSection = observer(() => {
-    const agreementObj = groupByAgreementNo();
-    const agreementFirst = Object.values(agreementObj)[0];
+    const { getContract, setPodpisant, agreements } = useInitContractSection();
 
-    const getContract = () => createExportContract(agreementFirst);
-    const setPodpisant = (value: string) => exportContractStore.setPodpisant(value);
+    const agreementsHtml = agreements.map((agreement) => {
+        const onClick = () => getContract(agreement);
 
-    useEffect(() => {
-        setPodpisant('Котов Н.М.');
-        getContract();
-    }, [getContract]);
+        return (
+            <li
+                key={agreement.agreementNo}
+                onClick={onClick}
+                className='doc-link export-contract'
+            >
+                {`№ ${agreement.agreementNo}`}
+            </li>
+        );
+    });
 
     return (
-        <section className='export-contract'>
+        <form className='docs__form export-contract-form'>
             <h2>Export Contract Section</h2>
 
-            <form className='export-contract-section'>
-                <SelectPodpisant
-                    current={exportContractStore.podpisant.name}
-                    setter={setPodpisant}
-                />
-            </form>
+            <SelectPodpisant
+                current={exportContractStore.podpisant.name}
+                setter={setPodpisant}
+            />
 
-            <button
-                onClick={getContract} className='doc-link'
-                type='button'
-            >
-                get all export contracts
-            </button>
-        </section>
+            <ul className='docs'>{agreementsHtml}</ul>
+        </form>
     );
 });
