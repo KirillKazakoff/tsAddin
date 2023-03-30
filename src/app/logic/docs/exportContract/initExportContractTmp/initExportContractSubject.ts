@@ -11,9 +11,9 @@ export const initExportContractSubject: InitExportPart = (getCell, agreement) =>
     subjectDescCl.cellRus.value = `1.1. Продавец обязуется поставить Покупателю, а Покупатель обязуется принять и оплатить партию продукции, изготовленную на ${vesselInfo.name}`;
 
     const ws = subjectDescCl.cellEng.worksheet;
-    const subjectDescRow = ws.getRow(+subjectDescCl.cellEng.row);
-    subjectDescRow.height = 25;
-    subjectDescRow.commit();
+    const inheritRow = ws.getRow(+subjectDescCl.cellEng.row);
+    inheritRow.height = 25;
+    inheritRow.commit();
 
     const subjectArrayCl = getCell('Предмет_массив');
 
@@ -29,8 +29,8 @@ export const initExportContractSubject: InitExportPart = (getCell, agreement) =>
     }, []);
     ws.insertRows(+subjectArrayCl.cellEng.row, productRows, 'i');
 
-    subjectDescRow.height = 40;
-    subjectDescRow.commit();
+    inheritRow.height = 40;
+    inheritRow.commit();
 
     deleteRow(ws, 'Предмет_массив');
 };

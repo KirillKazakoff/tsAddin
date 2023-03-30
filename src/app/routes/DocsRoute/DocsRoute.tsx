@@ -8,15 +8,15 @@ import { ExportContractSection } from './ExportContractSection';
 export const DocsRoute = observer(() => {
     useInitExcel();
 
-    useEffect(() => {
-        const test = async () => {
-            const baseUrl = 'http://localhost:9092/pdf';
-            const res = await (await fetch(baseUrl)).json();
-            console.log(res);
-        };
+    // useEffect(() => {
+    //     const test = async () => {
+    //         const baseUrl = 'http://localhost:9092/pdf';
+    //         const res = await (await fetch(baseUrl)).json();
+    //         console.log(res);
+    //     };
 
-        test();
-    }, []);
+    //     test();
+    // }, []);
 
     if (excelSyncStore.isLoading) return null;
 

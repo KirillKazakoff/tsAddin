@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { createExportContract } from '../../logic/docs/exportContract/createExportContract';
@@ -20,6 +21,7 @@ export const ExportContractSection = observer(() => {
     return (
         <section className='export-contract'>
             <h2>Export Contract Section</h2>
+
             <form className='export-contract-section'>
                 <SelectPodpisant
                     current={exportContractStore.podpisant.name}

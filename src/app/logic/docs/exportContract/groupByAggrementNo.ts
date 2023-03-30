@@ -1,33 +1,33 @@
 /* eslint-disable no-param-reassign */
 import {
     selectAgentSp,
+    selectBankProdavecSp,
     selectConsigneeSp,
     selectContractSp,
+    selectPortZarubezhSp,
     selectProductSp,
     selectSellerSp,
     selectVesselSp,
 } from '../../../stores/spsStore/select';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { ProductDescriptionT, ConsigneeT } from '../../../types/typesSP';
+import { ProductInfoExportT } from '../../../types/typesExportContract';
 import { ExportRowT } from '../../../types/typesTables';
 
-type ProductInfoT = {
-    product: ProductDescriptionT;
-    price: number;
-    isPriceUnique: boolean;
-    consignee: ConsigneeT;
-    amount: number;
+const initBankProdavecInfo = (contract: number) => {
+    const contractSp = selectContractSp(contract);
+    return selectBankProdavecSp(contractSp.bankSeller);
 };
 
 const initAgreement = (row: ExportRowT) => ({
     agreementNo: row.aggrementNo,
     agreementDate: row.date,
     contract: selectContractSp(row.contract),
-    portTo: row.portTo,
+    portTo: selectPortZarubezhSp(row.portTo),
     portFrom: row.portFrom,
     terms: row.terms,
     buyerInfo: selectConsigneeSp(row.buyer),
     agentInfo: selectAgentSp(row.buyer),
+    bankProdavecInfo: initBankProdavecInfo(row.contract),
     sellerInfo: selectSellerSp(row.seller),
     vesselInfo: selectVesselSp(row.vessel),
     products: [],
@@ -35,7 +35,7 @@ const initAgreement = (row: ExportRowT) => ({
 });
 
 export type AgreementT = Omit<ReturnType<typeof initAgreement>, 'products'> & {
-    products: ProductInfoT[];
+    products: ProductInfoExportT[];
 };
 type AgreementObjT = { [key: string]: AgreementT };
 

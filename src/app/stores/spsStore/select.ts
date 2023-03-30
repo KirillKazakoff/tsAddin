@@ -39,3 +39,7 @@ export const selectPodpisantSp = (name: string) => {
 export const selectAgentSp = (name: string) => {
     return spsStore.agents[name];
 };
+
+export const selectBankProdavecSp = (name: string) => {
+    return spsStore.banksProdavec[name];
+};

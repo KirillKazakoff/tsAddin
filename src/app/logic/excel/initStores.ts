@@ -1,4 +1,5 @@
 import { setAgents } from '../../stores/spsStore/set/setAgents';
+import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
 import { setConsignees } from '../../stores/spsStore/set/setConsignees';
 import { setContracts } from '../../stores/spsStore/set/setContracts';
 import { setPodpisants } from '../../stores/spsStore/set/setPodpisants';
@@ -32,6 +33,10 @@ export const initStores = async (context: Excel.RequestContext) => {
     const spContractsRange = initRange('SPContract', 'SPContract');
     const spPodpisantsRange = initRange('SPPodpisant', 'SPPodpisant');
     const spAgentsRange = initRange('SPAgent', 'SPAgent');
+    const spBankProdavec = initRange(
+        'SPRekvizitBankProdavec',
+        'SPRekvizitBankProdavec',
+    );
 
     await context.sync();
 
@@ -49,4 +54,5 @@ export const initStores = async (context: Excel.RequestContext) => {
     setContracts(spContractsRange.values);
     setPodpisants(spPodpisantsRange.values);
     setAgents(spAgentsRange.values);
+    setBanksProdavec(spBankProdavec.values);
 };

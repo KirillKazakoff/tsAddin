@@ -125,3 +125,21 @@ export type AgentT = {
 export type AgentsT = {
     [key: string]: AgentT;
 };
+
+// BanksProdavec
+export type BankProdavecT = {
+    name: string;
+    nameEng: string;
+    adress: string;
+    swift: string;
+    intermediary: string;
+    intermediaryAddres: string;
+    intermediarySwift: string;
+    inForward: string;
+    inForwardEng: string;
+    accountNo: string;
+};
+
+export type BanksProdavecT = {
+    [key: string]: BankProdavecT;
+};

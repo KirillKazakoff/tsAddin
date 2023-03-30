@@ -10,4 +10,16 @@ export type CellDouble = {
 
 export type GetCellBoundT = (name: string) => CellDouble;
 
+export type SetObjT = {
+    cell: string;
+    eng: string;
+    ru: string;
+};
+
+export type SetCellBoundT = (setObj: SetObjT) => void;
+
 export type InitExportPart = (getCell: GetCellBoundT, agreement: AgreementT) => void;
+export type NewInitExportPart = (
+    setCell: SetCellBoundT,
+    agreement: AgreementT
+) => void;
