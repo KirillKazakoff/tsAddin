@@ -1,16 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import _ from 'lodash';
 import blStore from '../../../stores/docsStores/blStore';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { ExportRowT } from '../../../types/typesTables';
+import { ExportCommonRow } from '../../../types/typesTables';
 import { createBL } from './createBl';
 
 export const initBlSection = () => {
     const { exportT, exportStorageT } = tablesStore;
 
-    const table = blStore.operation === 'export' ? exportT : exportStorageT;
+    const table: ExportCommonRow[] = blStore.operation === 'export' ? exportT : exportStorageT;
 
-    const getBl = async (row: ExportRowT) => {
+    const getBl = async (row: ExportCommonRow) => {
         await createBL(row);
     };
 

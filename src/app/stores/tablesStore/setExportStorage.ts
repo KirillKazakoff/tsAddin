@@ -29,6 +29,7 @@ export const setExportStorage = (table: any[][]) => {
             price,
             priceTotal,
             portTo,
+            operationUseless,
             id,
             consignee,
             portFrom,
@@ -58,6 +59,7 @@ export const setExportStorage = (table: any[][]) => {
             id,
         };
 
+        console.log(rowObj);
         // const isEmptyRow = row.every((value) => !value);
         // if (isEmptyRow) return totalObj;
 

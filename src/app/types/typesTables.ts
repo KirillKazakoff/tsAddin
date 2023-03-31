@@ -54,3 +54,5 @@ export type ExportStorageRowT = {
     consignee: string;
     id: string;
 };
+
+export type ExportCommonRow = ExportStorageRowT | ExportRowT;

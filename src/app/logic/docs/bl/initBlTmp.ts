@@ -8,12 +8,12 @@ import {
     selectPortTamozhnyaSp,
     selectProductSp,
 } from '../../../stores/spsStore/select';
-import { ExportRowT } from '../../../types/typesTables';
+import { ExportCommonRow } from '../../../types/typesTables';
 import { getCellByName } from '../../excel/utils/getCellByName';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { formatCount } from '../../utils/formatCount';
 
-export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
+export const initBlTmp = (book: ExcelJS.Workbook, row: ExportCommonRow) => {
     const blWs = book.getWorksheet('BL');
     const getCellBl: (name: string) => ExcelJS.Cell = getCellByName.bind(this, blWs);
 
@@ -52,7 +52,7 @@ export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
     transportCl.value = transportSp.nameEng;
 
     const portZarubezhSp = selectPortZarubezhSp(row.portTo);
-    toCl.value = portZarubezhSp.nameEng;
+    toCl.value = `${portZarubezhSp.nameEng}, ${portZarubezhSp.countryEng}`;
 
     const portTamozhnyaSp = selectPortTamozhnyaSp(row.portFrom);
     fromCl.value = portTamozhnyaSp.nameEng;
@@ -63,8 +63,8 @@ export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
     productCl.value = productSp.nameEng;
 
     sortCl.value = row.sort;
-    packCl.value = `${row.pack} KG`;
-    amountPlacesCl.value = `${formatCount(row.amountPlaces, 0, 0)} PCS`;
+    packCl.value = `1/${row.pack} KG`;
+    amountPlacesCl.value = `${formatCount(row.amountPlaces, 0, 0)} PCS /`;
 
-    amountTotalCl.value = `${formatCount(row.amountTotal, 3, 3)} tn`;
+    amountTotalCl.value = `${formatCount(row.amountTotal, 3, 4)} tn`;
 };

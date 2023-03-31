@@ -18,8 +18,19 @@ export type SetObjT = {
 
 export type SetCellBoundT = (setObj: SetObjT) => void;
 
-export type InitExportPart = (getCell: GetCellBoundT, agreement: AgreementT) => void;
-export type NewInitExportPart = (
-    setCell: SetCellBoundT,
+export type InitExportPartT = (
+    getCell: GetCellBoundT,
     agreement: AgreementT
 ) => void;
+
+type InitPartObjT = {
+    setCell: SetCellBoundT;
+    getCell: GetCellBoundT;
+};
+
+export type InitExportContractPartT = (
+    utils: InitPartObjT,
+    agreement: AgreementT
+) => void;
+
+export type InitExportComInvoicePartT = (utils: InitPartObjT) => void;

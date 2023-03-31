@@ -9,9 +9,9 @@ import { initExportContractTmp } from './initExportContractTmp/initExportContrac
 export const createExportContract = async (agreement: AgreementT) => {
     const { agreementNo } = agreement;
 
-    const bookContract = await readTmp(pathObj.exportContract);
+    const book = await readTmp(pathObj.exportContract);
 
-    initExportContractTmp(bookContract, agreement);
+    initExportContractTmp(book, agreement);
 
-    await saveFile(bookContract, agreementNo);
+    await saveFile(book, agreementNo);
 };

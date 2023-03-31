@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
+import _ from 'lodash';
 import {
     selectAgentSp,
     selectBankProdavecSp,
@@ -7,9 +9,11 @@ import {
     selectPortZarubezhSp,
     selectProductSp,
     selectSellerSp,
+    selectTransportSp,
     selectVesselSp,
 } from '../../../stores/spsStore/select';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
+import { setMSC } from '../../../stores/tablesStore/utils/setMSC';
 import { ProductInfoExportT } from '../../../types/typesExportContract';
 import { ExportRowT } from '../../../types/typesTables';
 
@@ -31,6 +35,7 @@ const initAgreement = (row: ExportRowT) => ({
     sellerInfo: selectSellerSp(row.seller),
     vesselInfo: selectVesselSp(row.vessel),
     products: [],
+    transport: selectTransportSp(),
     priceTotal: 0,
 });
 
@@ -50,8 +55,11 @@ export const groupByAgreementNo = () => {
             (product) => product.price !== row.price,
         );
 
+        const product = _.cloneDeep(selectProductSp(row.product));
+        if (row.msc) setMSC(product);
+
         const productInfo = {
-            product: selectProductSp(row.product),
+            product,
             price: row.price,
             consignee: selectConsigneeSp(row.consignee),
             amount: row.amountTotal,

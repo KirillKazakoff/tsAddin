@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
-import { InitExportPart } from '../../../../types/typesUtils';
+import { InitExportPartT } from '../../../../types/typesUtils';
 import { deleteRow } from '../../../excel/utils/deleteRow';
 import { formatCount } from '../../../utils/formatCount';
 import { groupByConsignee } from '../groupByConsignee';
 
-export const initExportContractDelivery: InitExportPart = (getCell, agreement) => {
+export const initExportContractDelivery: InitExportPartT = (getCell, agreement) => {
     const getRow = (cellName: string, i: number) => {
         const cell = getCell(cellName);
         const ws = cell.cellEng.worksheet;
