@@ -10,7 +10,18 @@ export const createExportContract = async (agreement: AgreementT) => {
     const { agreementNo } = agreement;
 
     const book = await readTmp(pathObj.exportContract);
+    const wsOriginal = book.getWorksheet('Com_Invoice');
+    const wsCopyTo = book.addWorksheet('New_Invoice');
 
+    wsCopyTo.model = wsOriginal.model;
+    wsCopyTo.name = 'hello';
+
+    wsCopyTo.mergeCells(7, 1, 7, 3);
+    wsCopyTo.mergeCells(7, 4, 7, 7);
+    wsCopyTo.mergeCells(50, 1, 50, 3);
+    wsCopyTo.mergeCells(50, 4, 50, 7);
+
+    // wsCopyTo.pageSetup.
     initExportContractTmp(book, agreement);
 
     await saveFile(book, agreementNo);

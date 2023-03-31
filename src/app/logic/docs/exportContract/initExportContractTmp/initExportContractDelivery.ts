@@ -26,10 +26,6 @@ export const initExportContractDelivery: InitExportPartT = (getCell, agreement) 
     const sertificateDescCl = getCell('Сертификаты_описание').cellEng;
     const ws = sertificateDescCl.worksheet;
 
-    const inheritRow = getRow('Сертификаты_описание', 0);
-    inheritRow.font = { size: 9 };
-    inheritRow.commit();
-
     const consignees = Object.keys(grouped);
 
     consignees.forEach((key, i) => {
@@ -55,9 +51,10 @@ export const initExportContractDelivery: InitExportPartT = (getCell, agreement) 
         const { products: productsConsignee } = grouped[key];
 
         const row = getRow('Сертификаты_описание', i + 1);
-        row.height = 40 + productsConsignee.length * 15;
+        row.height = 35 + productsConsignee.length * 15;
     });
 
-    inheritRow.font.size = 10;
+    const inheritRow = getRow('Сертификаты_описание', 0);
+    inheritRow.font = { size: 10 };
     deleteRow(ws, 'Сертификаты_массив');
 };

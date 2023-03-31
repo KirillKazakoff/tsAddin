@@ -25,8 +25,4 @@ export const initExportContractTmp = (
     initExportContractCost(getCell, agreement);
     initExportContractDelivery(getCell, agreement);
     initExportContractAddreses({ getCell, setCell }, agreement);
-
-    ws.pageSetup.fitToPage = true;
-    ws.pageSetup.fitToWidth = 1;
-    ws.pageSetup.fitToHeight = 1;
 };
