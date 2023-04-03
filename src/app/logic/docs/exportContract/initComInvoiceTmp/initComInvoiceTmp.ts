@@ -1,11 +1,11 @@
-import ExcelJS from 'exceljs';
-import { GetCellBoundT, SetCellBoundT } from '../../../../types/typesUtils';
-import { getCellsObj } from '../../../excel/utils/getCellByName';
-import { setCellDouble } from '../../../excel/utils/setCell';
+import { Workbook } from 'exceljs';
+import { InvoiceT } from '../../../../types/typesContract';
+import { initCellUtils } from '../../../excel/utils/cellUtils/initCellUtils';
+import { initComInvoiceHeader } from './initComInvoiceHeader';
 
-export const initComInvoiceTmp = (book: ExcelJS.Workbook) => {
+export const initComInvoiceTmp = (book: Workbook, invoice: InvoiceT) => {
     const ws = book.getWorksheet('Com_Invoice');
+    const utils = initCellUtils(ws);
 
-    const getCell: GetCellBoundT = getCellsObj.bind(this, ws);
-    const setCell: SetCellBoundT = setCellDouble.bind(this, ws);
+    initComInvoiceHeader(utils, invoice);
 };

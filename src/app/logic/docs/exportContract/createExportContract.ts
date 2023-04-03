@@ -3,7 +3,7 @@
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
-import { AgreementT } from './groupByAggrementNo';
+import { AgreementT } from './groupBy/initAgreement';
 import { initExportContractTmp } from './initExportContractTmp/initExportContractTmp';
 
 export const createExportContract = async (agreement: AgreementT) => {
@@ -21,8 +21,8 @@ export const createExportContract = async (agreement: AgreementT) => {
     wsCopyTo.mergeCells(50, 1, 50, 3);
     wsCopyTo.mergeCells(50, 4, 50, 7);
 
-    // wsCopyTo.pageSetup.
+    console.log(agreement.invoices);
     initExportContractTmp(book, agreement);
 
-    await saveFile(book, agreementNo);
+    // await saveFile(book, agreementNo);
 };

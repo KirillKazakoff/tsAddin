@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { ProductInfoExportT } from '../../../types/typesExportContract';
-import { ConsigneeT } from '../../../types/typesSP';
+import { ProductInfoExportT } from '../../../../types/typesContract';
+import { ConsigneeT } from '../../../../types/typesSP';
 
 type GroupedProductsT = {
     [key: string]: {
@@ -12,17 +12,17 @@ type GroupedProductsT = {
 export const groupByConsignee = (products: ProductInfoExportT[]) => {
     return products.reduce<GroupedProductsT>((total, product) => {
         const { name } = product.consignee;
+        let group = total[name];
 
-        if (!total[name]) {
-            total[name] = {
+        if (!group) {
+            group = {
                 products: [],
                 consignee: product.consignee,
             };
+            total[name] = group;
         }
 
-        const grouped = total[name].products;
-        grouped.push(product);
-
+        group.products.push(product);
         return total;
     }, {});
 };

@@ -14,7 +14,7 @@ export type ExportRowT = {
     vessel: string;
     transport: string;
     aggrementNo: number;
-    invoice: number;
+    invoice: string;
     date: string;
     blNo: string;
     terms: string;
@@ -38,7 +38,7 @@ export type ExportStorageRowT = {
     vessel: string;
     transport: string;
     aggrementNo: number;
-    invoice: number;
+    invoice: string;
     date: string;
     blNo: string;
     msc: string;
@@ -55,4 +55,4 @@ export type ExportStorageRowT = {
     id: string;
 };
 
-export type ExportCommonRow = ExportStorageRowT | ExportRowT;
+export type ExportCommonRow = (ExportStorageRowT | ExportRowT) & { terms?: string };

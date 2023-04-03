@@ -1,10 +1,7 @@
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import { InitExportContractPartT } from '../../../../types/typesUtils';
+import { InitContractPartT } from '../../../../types/typesUtils';
 
-export const initExportContractAddreses: InitExportContractPartT = (
-    utils,
-    agreement,
-) => {
+export const initExportContractAddreses: InitContractPartT = (utils, agreement) => {
     const { sellerInfo, bankProdavecInfo, agentInfo } = agreement;
     const { podpisant } = exportContractStore;
     const { setCell } = utils;

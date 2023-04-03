@@ -1,8 +1,11 @@
 import ExcelJS from 'exceljs';
-import { GetCellBoundT, SetCellBoundT } from '../../../../types/typesUtils';
-import { getCellsObj } from '../../../excel/utils/getCellByName';
-import { setCellDouble } from '../../../excel/utils/setCell';
-import { AgreementT } from '../groupByAggrementNo';
+import {
+    GetCellDoubleBoundT,
+    SetCellDoubleBoundT,
+} from '../../../../types/typesUtils';
+import { getCellsObj } from '../../../excel/utils/cellUtils/getCellByName';
+import { setCellDouble } from '../../../excel/utils/cellUtils/setCell';
+import { AgreementT } from '../groupBy/initAgreement';
 import { initExportContractAddreses } from './initExportContractAddreses';
 import { initExportContractCost } from './initExportContractCost';
 import { initExportContractDelivery } from './initExportContractDelivery';
@@ -17,12 +20,12 @@ export const initExportContractTmp = (
 
     const ws = book.getWorksheet('Export_Contract');
 
-    const getCell: GetCellBoundT = getCellsObj.bind(this, ws);
-    const setCell: SetCellBoundT = setCellDouble.bind(this, ws);
+    const getCell: GetCellDoubleBoundT = getCellsObj.bind(this, ws);
+    const setCell: SetCellDoubleBoundT = setCellDouble.bind(this, ws);
 
     initExportContractHeader(getCell, agreement);
     initExportContractSubject(getCell, agreement);
     initExportContractCost(getCell, agreement);
     initExportContractDelivery(getCell, agreement);
-    initExportContractAddreses({ getCell, setCell }, agreement);
+    initExportContractAddreses({ getCell, setCell, ws }, agreement);
 };

@@ -2,7 +2,7 @@
 import { InitExportPartT } from '../../../../types/typesUtils';
 import { deleteRow } from '../../../excel/utils/deleteRow';
 import { formatCount } from '../../../utils/formatCount';
-import { groupByConsignee } from '../groupByConsignee';
+import { groupByConsignee } from '../groupBy/groupByConsignee';
 
 export const initExportContractDelivery: InitExportPartT = (getCell, agreement) => {
     const getRow = (cellName: string, i: number) => {
@@ -37,8 +37,8 @@ export const initExportContractDelivery: InitExportPartT = (getCell, agreement) 
         let colRu = consigneeStr;
 
         productsConsignee.forEach((p) => {
-            const { amount, product } = p;
-            const amountFormated = formatCount(amount, 3, 4);
+            const { product } = p;
+            const amountFormated = formatCount(p.record.amountTotal, 3, 4);
 
             colEng += `- ${product.nameEng} - ${amountFormated} tn (net weight)\n`;
             colRu += `- ${product.fullName} - ${amountFormated} тн (нетто)\n`;

@@ -64,10 +64,6 @@ export const setExport = (table: any[][]) => {
             pageStatusStore.setPageStatus(tableNotFulfilled('Экспорт'));
         }
 
-        if (totalObj.some((rowIn) => rowIn.blNo === blNo)) {
-            pageStatusStore.setPageStatus(blSame('Экспорт'));
-        }
-
         totalObj.push(rowObj);
         return totalObj;
     }, []);

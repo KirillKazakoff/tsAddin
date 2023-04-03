@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import { createExportContract } from './createExportContract';
-import { groupByAgreementNo, AgreementT } from './groupByAggrementNo';
+import { groupByAgreementNo } from './groupBy/groupByAggrementNo';
+import { AgreementT } from './groupBy/initAgreement';
 
 export const useInitContractSection = () => {
     const agreementObj = groupByAgreementNo();
@@ -12,7 +13,7 @@ export const useInitContractSection = () => {
 
     useEffect(() => {
         setPodpisant('Котов Н.М.');
-        getContract(agreements[0]);
+        // getContract(agreements[0]);
     }, []);
 
     return { getContract, setPodpisant, agreements };
