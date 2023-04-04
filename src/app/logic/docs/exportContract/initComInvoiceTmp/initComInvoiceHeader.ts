@@ -1,7 +1,7 @@
-import { InitInvoiceT } from '../../../../types/typesUtils';
+import { InitInvoicePartT } from '../../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 
-export const initComInvoiceHeader: InitInvoiceT = (utils, invoice) => {
+export const initComInvoiceHeader: InitInvoicePartT = (utils, invoice) => {
     const { setCell } = utils;
     const { sellerInfo } = invoice.agreement;
     const { invoiceDate, invoiceNo, msc } = invoice;
@@ -26,6 +26,6 @@ export const initComInvoiceHeader: InitInvoiceT = (utils, invoice) => {
     });
     setCell({
         cell: 'МСЦ_сертификат',
-        value: 'MSC-C-52870',
+        value: msc ? 'MSC-C-52870' : '',
     });
 };

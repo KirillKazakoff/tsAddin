@@ -18,8 +18,6 @@ export const groupByInvoice = (agreement: AgreementT) => {
             agreement.invoices[invoiceNo] = invoice;
         }
 
-        if (invoice.invoiceNo !== product.record.invoice) return;
-
         invoice.products.push(product);
     });
 

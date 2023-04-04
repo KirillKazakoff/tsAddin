@@ -9,7 +9,7 @@ import {
     selectProductSp,
 } from '../../../stores/spsStore/select';
 import { ExportCommonRow } from '../../../types/typesTables';
-import { getCellByName } from '../../excel/utils/cellUtils/getCellByName';
+import { getCellByName } from '../../excel/utils/excelUtilsObj/getCellByName';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { formatCount } from '../../utils/formatCount';
 

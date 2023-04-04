@@ -1,16 +1,10 @@
 /* eslint-disable no-param-reassign */
-import { InitExportPartT } from '../../../../types/typesUtils';
-import { deleteRow } from '../../../excel/utils/deleteRow';
+import { InitContractPartT } from '../../../../types/typesExcelUtils';
 import { formatCount } from '../../../utils/formatCount';
 import { groupByConsignee } from '../groupBy/groupByConsignee';
 
-export const initExportContractDelivery: InitExportPartT = (getCell, agreement) => {
-    const getRow = (cellName: string, i: number) => {
-        const cell = getCell(cellName);
-        const ws = cell.cellEng.worksheet;
-        return ws.getRow(+cell.cellEng.row + i);
-    };
-
+export const initExportContractDelivery: InitContractPartT = (utils, agreement) => {
+    const { getCell, getRow, deleteRow } = utils;
     const { terms, portTo, products } = agreement;
     const grouped = groupByConsignee(products);
 
@@ -54,7 +48,7 @@ export const initExportContractDelivery: InitExportPartT = (getCell, agreement) 
         row.height = 35 + productsConsignee.length * 15;
     });
 
-    const inheritRow = getRow('Сертификаты_описание', 0);
+    const inheritRow = getRow(ws, 'Сертификаты_описание', 0);
     inheritRow.font = { size: 10 };
-    deleteRow(ws, 'Сертификаты_массив');
+    deleteRow('Сертификаты_массив');
 };

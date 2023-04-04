@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { InitExportPartT } from '../../../../types/typesUtils';
-import { deleteRow } from '../../../excel/utils/deleteRow';
+import { InitExportPartT } from '../../../../types/typesExcelUtils';
+import { deleteRow } from '../../../excel/utils/excelUtilsObj/deleteRow';
 import { formatCount } from '../../../utils/formatCount';
 
 export const initExportContractSubject: InitExportPartT = (getCell, agreement) => {

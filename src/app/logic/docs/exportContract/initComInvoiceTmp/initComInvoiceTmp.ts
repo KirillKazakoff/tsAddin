@@ -1,11 +1,14 @@
-import { Workbook } from 'exceljs';
+import { Worksheet } from 'exceljs';
 import { InvoiceT } from '../../../../types/typesContract';
-import { initCellUtils } from '../../../excel/utils/cellUtils/initCellUtils';
+import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { initComInvoiceBl } from './initComInvoiceBl';
+import { initComInvoiceBody } from './initComInvoiceBody';
 import { initComInvoiceHeader } from './initComInvoiceHeader';
 
-export const initComInvoiceTmp = (book: Workbook, invoice: InvoiceT) => {
-    const ws = book.getWorksheet('Com_Invoice');
-    const utils = initCellUtils(ws);
+export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
+    const utils = initExcelUtils(ws);
 
     initComInvoiceHeader(utils, invoice);
+    initComInvoiceBody(utils, invoice);
+    initComInvoiceBl(utils, invoice);
 };

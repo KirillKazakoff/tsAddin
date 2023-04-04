@@ -1,5 +1,5 @@
 import { Worksheet } from 'exceljs';
-import { CellObjDoubleT, CellObjT } from '../../../../types/typesUtils';
+import { CellObjDoubleT, CellObjT } from '../../../../types/typesExcelUtils';
 import { getCellByName, getCellsObj } from './getCellByName';
 
 export const setCellDouble = (ws: Worksheet, setObj: CellObjDoubleT) => {
@@ -8,6 +8,7 @@ export const setCellDouble = (ws: Worksheet, setObj: CellObjDoubleT) => {
 
     cellObj.cellEng.value = eng;
     cellObj.cellRus.value = ru;
+    return cellObj;
 };
 
 export const setCell = (ws: Worksheet, setObj: CellObjT) => {
@@ -15,4 +16,5 @@ export const setCell = (ws: Worksheet, setObj: CellObjT) => {
 
     const cellObj = getCellByName(ws, cell);
     cellObj.value = value;
+    return cellObj;
 };

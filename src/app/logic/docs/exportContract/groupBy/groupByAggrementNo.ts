@@ -27,18 +27,20 @@ export const groupByAgreementNo = () => {
         const product = _.cloneDeep(selectProductSp(row.product));
         if (row.msc) setMSC(product);
 
-        const productInfo = {
+        const productInfo = _.cloneDeep({
             record: row,
             product,
             consignee: selectConsigneeSp(row.consignee),
             isPriceUnique,
-        };
+        });
 
         agreement.products.push(productInfo);
         agreement.priceTotal += row.priceTotal;
-        agreement = groupByInvoice(agreement);
         return total;
     }, {});
 
+    Object.keys(agreements).forEach((key) => {
+        agreements[key] = groupByInvoice(agreements[key]);
+    });
     return agreements;
 };

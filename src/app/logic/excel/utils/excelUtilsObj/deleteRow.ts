@@ -1,5 +1,5 @@
 import { Worksheet } from 'exceljs';
-import { getCellByName } from './cellUtils/getCellByName';
+import { getCellByName } from './getCellByName';
 
 export const deleteRow = (ws: Worksheet, cellName: string) => {
     const cellRow = getCellByName(ws, cellName).row;

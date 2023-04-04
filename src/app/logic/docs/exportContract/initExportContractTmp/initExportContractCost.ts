@@ -1,5 +1,5 @@
-import { InitExportPartT } from '../../../../types/typesUtils';
-import { deleteRow } from '../../../excel/utils/deleteRow';
+import { InitExportPartT } from '../../../../types/typesExcelUtils';
+import { deleteRow } from '../../../excel/utils/excelUtilsObj/deleteRow';
 import { formatCurrencyLong, formatCount } from '../../../utils/formatCount';
 
 export const initExportContractCost: InitExportPartT = (getCell, agreement) => {
