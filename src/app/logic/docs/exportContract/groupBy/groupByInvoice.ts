@@ -8,6 +8,8 @@ export const groupByInvoice = (agreement: AgreementT) => {
 
         if (!invoice) {
             invoice = {
+                amountPlaces: 0,
+                amountTotal: 0,
                 products: [],
                 invoiceDate,
                 invoiceNo,
@@ -17,6 +19,9 @@ export const groupByInvoice = (agreement: AgreementT) => {
             };
             agreement.invoices[invoiceNo] = invoice;
         }
+
+        invoice.amountPlaces += product.record.amountPlaces;
+        invoice.amountTotal += product.record.amountTotal;
 
         invoice.products.push(product);
     });

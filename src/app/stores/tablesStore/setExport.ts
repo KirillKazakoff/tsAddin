@@ -1,6 +1,7 @@
 import { checkEmptyTable } from '../../logic/excel/utils/checkEmptyTable';
+import { formatCount } from '../../logic/utils/formatCount';
 import { ExportRowT } from '../../types/typesTables';
-import { blSame, tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
+import { tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
 import tablesStore from './tablesStore';
 
@@ -55,8 +56,8 @@ export const setExport = (table: any[][]) => {
             sort,
             pack,
             amountPlaces,
-            amountTotal,
-            price,
+            amountTotal: formatCount(amountTotal, 3, 4),
+            price: formatCount(price, 2, 2),
             priceTotal,
         };
 

@@ -2,17 +2,16 @@ import { Worksheet } from 'exceljs';
 import { InvoiceT } from '../../../../types/typesContract';
 import { getCellByName as getCell } from '../../../excel/utils/excelUtilsObj/getCellByName';
 
-export const clearInvoices = (
+export const clearInvoicesTmp = (
     wsOriginal: Worksheet,
     wsCopy: Worksheet,
     invoice: InvoiceT,
 ) => {
     const { products } = invoice;
-    const blArrayCl = getCell(wsOriginal, 'Инвойс_Bl_массив');
+    const blRow = +getCell(wsOriginal, 'Инвойс_Bl_массив').row;
 
-    const startDelete = +blArrayCl.row - products.length;
-    console.log(startDelete);
+    const startDeleteArray = blRow - products.length;
 
-    wsOriginal.spliceRows(startDelete, products.length);
-    wsCopy.spliceRows(+blArrayCl.row, 1);
+    wsOriginal.spliceRows(startDeleteArray, products.length);
+    wsCopy.spliceRows(blRow, 1);
 };

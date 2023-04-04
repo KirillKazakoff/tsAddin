@@ -8,11 +8,11 @@ export const initComInvoiceHeader: InitInvoicePartT = (utils, invoice) => {
 
     setCell({
         cell: 'Инвойс_продавец',
-        value: sellerInfo.fullName,
+        value: sellerInfo.nameEng,
     });
     setCell({
         cell: 'Инвойс_продавец_адрес',
-        value: sellerInfo.addres,
+        value: sellerInfo.addresEng,
     });
 
     setCell({

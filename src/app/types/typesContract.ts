@@ -16,6 +16,8 @@ export type InvoiceT = {
     invoiceNo: string;
     msc: string;
     consignee: ConsigneeT;
+    amountTotal: number;
+    amountPlaces: number;
 };
 
 export type InvoicesT = {

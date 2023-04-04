@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { InitContractPartT } from '../../../../types/typesExcelUtils';
 import { deleteRow } from '../../../excel/utils/excelUtilsObj/deleteRow';
-import { formatCount } from '../../../utils/formatCount';
 
 export const initExportContractSubject: InitContractPartT = (utils, agreement) => {
     const { getCell } = utils;
@@ -20,7 +19,7 @@ export const initExportContractSubject: InitContractPartT = (utils, agreement) =
 
     const productRows = products.reduce<string[][]>((total, product) => {
         const { fullName, nameEng } = product.product;
-        const amountTotal = formatCount(product.record.amountTotal, 3, 4);
+        const { amountTotal } = product.record;
 
         const colEng = `* ${nameEng} - ${amountTotal} tn (net weight)`;
         const colRu = `* ${fullName} - ${amountTotal} тн (нетто)`;

@@ -26,8 +26,8 @@ export type ExportRowT = {
     sort: string;
     pack: number;
     amountPlaces: number;
-    amountTotal: number;
-    price: number;
+    amountTotal: string;
+    price: string;
     priceTotal: number;
 };
 
