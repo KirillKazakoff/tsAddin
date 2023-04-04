@@ -1,8 +1,9 @@
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import { InitExportPartT } from '../../../../types/typesExcelUtils';
+import { InitContractPartT } from '../../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 
-export const initExportContractHeader: InitExportPartT = (getCell, agreement) => {
+export const initExportContractHeader: InitContractPartT = (utils, agreement) => {
+    const { getCell } = utils;
     const {
         agreementDate, agreementNo, contract, sellerInfo, agentInfo,
     } = agreement;
@@ -15,8 +16,6 @@ export const initExportContractHeader: InitExportPartT = (getCell, agreement) =>
 
     // header
     const agreementCl = getCell('Соглашение');
-    console.log(agreementCl);
-
     agreementCl.cellEng.value = `AGREEMENT No. ${agreementNo} dated ${agreementDateStrEng}`;
     agreementCl.cellRus.value = `Дополнение № ${agreementNo} от ${agreementDateStrRu}`;
 

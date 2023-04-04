@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
-import { InitExportPartT } from '../../../../types/typesExcelUtils';
+import { InitContractPartT } from '../../../../types/typesExcelUtils';
 import { deleteRow } from '../../../excel/utils/excelUtilsObj/deleteRow';
 import { formatCount } from '../../../utils/formatCount';
 
-export const initExportContractSubject: InitExportPartT = (getCell, agreement) => {
+export const initExportContractSubject: InitContractPartT = (utils, agreement) => {
+    const { getCell } = utils;
     const { vesselInfo, products } = agreement;
 
     const subjectDescCl = getCell('Предмет_описание');

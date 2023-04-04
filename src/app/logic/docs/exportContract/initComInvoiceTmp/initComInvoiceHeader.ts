@@ -22,7 +22,7 @@ export const initComInvoiceHeader: InitInvoicePartT = (utils, invoice) => {
 
     setCell({
         cell: 'МСЦ',
-        value: msc ? 'MSC certified' : '',
+        value: msc ? 'MSC certified' : 'Non-MSC product',
     });
     setCell({
         cell: 'МСЦ_сертификат',

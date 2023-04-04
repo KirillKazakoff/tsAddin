@@ -48,7 +48,7 @@ export const initExportContractDelivery: InitContractPartT = (utils, agreement) 
         row.height = 35 + productsConsignee.length * 15;
     });
 
-    const inheritRow = getRow(ws, 'Сертификаты_описание', 0);
+    const inheritRow = getRow('Сертификаты_описание', 0);
     inheritRow.font = { size: 10 };
     deleteRow('Сертификаты_массив');
 };

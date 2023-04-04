@@ -14,22 +14,11 @@ export const initExportContractTmp = (
     // console.log(agreement);
 
     const ws = book.getWorksheet('Export_Contract');
-    const {
-        getCell, setCell, deleteRow, getRow,
-    } = initExcelUtilsDouble(ws);
+    const utils = initExcelUtilsDouble(ws);
 
-    initExportContractHeader(getCell, agreement);
-    initExportContractSubject(getCell, agreement);
-    initExportContractCost(getCell, agreement);
-    initExportContractDelivery(getCell, agreement);
-    initExportContractAddreses(
-        {
-            getCell,
-            setCell,
-            ws,
-            deleteRow,
-            getRow,
-        },
-        agreement,
-    );
+    initExportContractHeader(utils, agreement);
+    initExportContractSubject(utils, agreement);
+    initExportContractCost(utils, agreement);
+    initExportContractDelivery(utils, agreement);
+    initExportContractAddreses(utils, agreement);
 };

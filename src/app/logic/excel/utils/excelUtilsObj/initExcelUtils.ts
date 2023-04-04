@@ -7,6 +7,7 @@ import { deleteRow } from './deleteRow';
 
 export const initExcelUtilsDouble = (ws: Worksheet) => {
     return {
+        ws,
         getRow: getRow.bind(this, ws),
         deleteRow: deleteRow.bind(this, ws),
         getCell: getCellsObj.bind(this, ws),
@@ -16,6 +17,7 @@ export const initExcelUtilsDouble = (ws: Worksheet) => {
 
 export const initExcelUtils = (ws: Worksheet) => {
     return {
+        ws,
         getRow: getRow.bind(this, ws),
         deleteRow: deleteRow.bind(this, ws),
         getCell: getCellByName.bind(this, ws),

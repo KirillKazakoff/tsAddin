@@ -1,8 +1,9 @@
-import { InitExportPartT } from '../../../../types/typesExcelUtils';
+import { InitContractPartT } from '../../../../types/typesExcelUtils';
 import { deleteRow } from '../../../excel/utils/excelUtilsObj/deleteRow';
 import { formatCurrencyLong, formatCount } from '../../../utils/formatCount';
 
-export const initExportContractCost: InitExportPartT = (getCell, agreement) => {
+export const initExportContractCost: InitContractPartT = (utils, agreement) => {
+    const { getCell } = utils;
     const { products, priceTotal } = agreement;
 
     const costDescCl = getCell('Цена_описание').cellEng;
