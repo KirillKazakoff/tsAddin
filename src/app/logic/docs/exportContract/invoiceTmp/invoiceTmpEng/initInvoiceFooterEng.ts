@@ -1,7 +1,7 @@
-import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import { InitInvoicePartT } from '../../../../types/typesExcelUtils';
+import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
+import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 
-export const initComInvoiceFooter: InitInvoicePartT = ({ setCell }, invoice) => {
+export const initInvoiceFooterEng: InitInvoicePartT = ({ setCell }, invoice) => {
     const { vesselInfo, bankProdavecInfo, sellerInfo } = invoice.agreement;
     const { places, priceTotal, placesTotal } = invoice.amount;
 

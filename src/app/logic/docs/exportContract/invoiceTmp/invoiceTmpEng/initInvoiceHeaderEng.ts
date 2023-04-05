@@ -1,7 +1,7 @@
-import { InitInvoicePartT } from '../../../../types/typesExcelUtils';
-import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
+import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
+import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 
-export const initComInvoiceHeader: InitInvoicePartT = (utils, invoice) => {
+export const initInvoiceHeaderEng: InitInvoicePartT = (utils, invoice) => {
     const { setCell } = utils;
     const { sellerInfo } = invoice.agreement;
     const { invoiceDate, invoiceNo, msc } = invoice;

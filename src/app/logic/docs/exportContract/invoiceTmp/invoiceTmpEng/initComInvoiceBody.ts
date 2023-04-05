@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { InitInvoicePartT } from '../../../../types/typesExcelUtils';
-import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
+import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
+import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 
-export const initComInvoiceBody: InitInvoicePartT = (utils, invoice) => {
+export const initInvoiceBodyEng: InitInvoicePartT = (utils, invoice) => {
     const { setCell, ws } = utils;
     const {
         agentInfo,

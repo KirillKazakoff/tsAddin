@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { Cell, Workbook } from 'exceljs';
 import _ from 'lodash';
-import { InvoicesT } from '../../../types/typesContract';
-import { clearInvoicesTmp } from './initComInvoiceTmp/clearInvoices';
-import { initComInvoiceTmp } from './initComInvoiceTmp/initComInvoiceTmp';
+import { InvoicesT } from '../../../../types/typesContract';
+import { clearInvoicesTmp } from './clearInvoices';
+import { initComInvoiceTmp } from './initComInvoiceTmp';
 
 export const createInvoices = async (book: Workbook, invoices: InvoicesT) => {
     const wsOriginal = book.getWorksheet('Com_Invoice');
@@ -12,7 +12,7 @@ export const createInvoices = async (book: Workbook, invoices: InvoicesT) => {
         const invoice = invoices[key];
         initComInvoiceTmp(wsOriginal, invoice);
 
-        const wsCopyTo = book.addWorksheet('New_Invoice');
+        const wsCopyTo = book.addWorksheet();
         wsCopyTo.model = _.cloneDeep(wsOriginal.model);
         wsCopyTo.name = `invoice ${key}`;
 
