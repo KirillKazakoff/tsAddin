@@ -2,7 +2,7 @@
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 
-export const initInvoiceBodyEng: InitInvoicePartT = (utils, invoice) => {
+export const initInvoiceBodyRu: InitInvoicePartT = (utils, invoice) => {
     const { setCell, ws } = utils;
     const {
         agentInfo,
@@ -17,43 +17,43 @@ export const initInvoiceBodyEng: InitInvoicePartT = (utils, invoice) => {
     const { consignee } = invoice;
 
     setCell({
-        cell: 'Инвойс_получатель',
+        cell: 'Инвойс_получатель_п',
         value: consignee.fullName,
     });
     setCell({
-        cell: 'Инвойс_получатель_адрес',
+        cell: 'Инвойс_получатель_адрес_п',
         value: consignee.adress,
     });
 
     setCell({
-        cell: 'Инвойс_покупатель',
+        cell: 'Инвойс_покупатель_п',
         value: agentInfo.name,
     });
     setCell({
-        cell: 'Инвойс_покупатель_адрес',
+        cell: 'Инвойс_покупатель_адрес_п',
         value: agentInfo.adress,
     });
     setCell({
-        cell: 'Инвойс_декларация',
+        cell: 'Инвойс_декларация_п',
         value: '',
     });
 
     const departureInfo = [
         setCell({
-            cell: 'Инвойс_дата',
+            cell: 'Инвойс_дата_п',
             value: getExcelDateStr(invoice.invoiceDate, 'en'),
         }),
         setCell({
-            cell: 'Инвойс_транспорт',
+            cell: 'Инвойс_транспорт_п',
             value: transport.name,
         }),
         setCell({
-            cell: 'Инвойс_куда',
-            value: `${portTo.nameEng}, ${portTo.countryEng}`,
+            cell: 'Инвойс_куда_п',
+            value: `${portTo.name}, ${portTo.country}`,
         }),
         setCell({
-            cell: 'Инвойс_откуда',
-            value: portFrom.nameEng,
+            cell: 'Инвойс_откуда_п',
+            value: portFrom.fullName,
         }),
     ];
 
@@ -64,28 +64,28 @@ export const initInvoiceBodyEng: InitInvoicePartT = (utils, invoice) => {
             titleCl.value = '';
         });
         setCell({
-            cell: 'Инвойс_декларация',
-            value: 'Temporary Customs Declaration',
+            cell: 'Инвойс_декларация_п',
+            value: '№ временной декларации на товары',
         });
     }
 
     setCell({
-        cell: 'Инвойс_соглашение',
+        cell: 'Инвойс_соглашение_п',
         value: `AGREEMENT No.${agreementNo} from ${getExcelDateStr(
             agreementDate,
             'en',
         )}`,
     });
     setCell({
-        cell: 'Инвойс_контракт',
+        cell: 'Инвойс_контракт_п',
         value: `to a contract of sale No. ${contract.contractNo}`,
     });
     setCell({
-        cell: 'Инвойс_контракт_дата',
-        value: `Magadan, dated from ${getExcelDateStr(contract.date, 'en')}`,
+        cell: 'Инвойс_контракт_дата_п',
+        value: `Magadan, dated from ${getExcelDateStr(contract.date, 'ru')}`,
     });
     setCell({
-        cell: 'Инвойс_условия',
-        value: `${terms}, ${portTo.countryEng}`,
+        cell: 'Инвойс_условия_п',
+        value: `${terms}, ${portTo.country}`,
     });
 };

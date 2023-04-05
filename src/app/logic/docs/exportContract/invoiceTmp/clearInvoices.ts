@@ -16,6 +16,6 @@ export const clearInvoicesTmp = (
         wsCopy.spliceRows(blRow, 1);
     };
 
-    clearInvoicesTmpPart('Инвойс_Bl_массив');
     clearInvoicesTmpPart('Инвойс_Bl_массив_п');
+    clearInvoicesTmpPart('Инвойс_Bl_массив');
 };

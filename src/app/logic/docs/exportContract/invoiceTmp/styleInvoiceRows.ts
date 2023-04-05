@@ -5,9 +5,10 @@ import { GetRowBoundT } from '../../../../types/typesExcelUtils';
 export const styleBlRows = (
     products: ProductInfoExportT[],
     getRow: GetRowBoundT,
+    arrayClName: string,
 ) => {
     products.forEach((product, i) => {
-        const row = getRow('Инвойс_Bl_массив', -i - 1);
+        const row = getRow(arrayClName, -i - 1);
         row.eachCell((cell) => {
             cell.font = {
                 size: 10,
@@ -18,6 +19,7 @@ export const styleBlRows = (
 
         const amountPlacesCl = row.getCell(4);
         amountPlacesCl.alignment = { horizontal: 'right' };
+        console.log(row.number);
         row.height = 25;
         row.commit();
     });

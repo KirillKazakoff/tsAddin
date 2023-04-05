@@ -17,6 +17,7 @@ export const createInvoices = async (book: Workbook, invoices: InvoicesT) => {
         wsCopyTo.name = `invoice ${key}`;
 
         clearInvoicesTmp(wsOriginal, wsCopyTo, invoice);
+        book.removeWorksheet('Com_Invoice');
     });
 
     const xls64 = await book.xlsx.writeBuffer();
