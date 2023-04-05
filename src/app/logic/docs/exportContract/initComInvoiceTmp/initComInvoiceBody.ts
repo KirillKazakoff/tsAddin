@@ -3,7 +3,7 @@ import { InitInvoicePartT } from '../../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 
 export const initComInvoiceBody: InitInvoicePartT = (utils, invoice) => {
-    const { setCell } = utils;
+    const { setCell, ws } = utils;
     const {
         agentInfo,
         transport,
@@ -33,6 +33,10 @@ export const initComInvoiceBody: InitInvoicePartT = (utils, invoice) => {
         cell: 'Инвойс_покупатель_адрес',
         value: agentInfo.adress,
     });
+    setCell({
+        cell: 'Инвойс_декларация',
+        value: '',
+    });
 
     const departureInfo = [
         setCell({
@@ -56,6 +60,12 @@ export const initComInvoiceBody: InitInvoicePartT = (utils, invoice) => {
     if (terms === 'EXW') {
         departureInfo.forEach((cell) => {
             cell.value = '';
+            const titleCl = ws.getCell(+cell.row - 1, cell.col);
+            titleCl.value = '';
+        });
+        setCell({
+            cell: 'Инвойс_декларация',
+            value: 'Temporary Customs Declaration',
         });
     }
 

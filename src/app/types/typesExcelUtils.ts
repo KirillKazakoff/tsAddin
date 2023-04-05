@@ -36,7 +36,7 @@ export type CellObjT = {
     cell: string;
     value: string;
 };
-export type SetCellBoundT = (setObj: CellObjT) => CellObjT;
+export type SetCellBoundT = (setObj: CellObjT) => Cell;
 export type CellUtilsT = {
     ws: Worksheet;
     getRow: GetRowBoundT;

@@ -1,4 +1,5 @@
 import { checkEmptyTable } from '../../logic/excel/utils/checkEmptyTable';
+import { formatCount } from '../../logic/utils/formatCount';
 import { ExportStorageRowT } from '../../types/typesTables';
 import { blSame, tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
@@ -24,8 +25,8 @@ export const setExportStorage = (table: any[][]) => {
             product,
             sort,
             pack,
-            amountPlaces,
-            amountTotal,
+            places,
+            placesTotal,
             price,
             priceTotal,
             portTo,
@@ -52,10 +53,25 @@ export const setExportStorage = (table: any[][]) => {
             product,
             sort,
             pack,
-            amountPlaces,
-            amountTotal,
-            price,
-            priceTotal,
+            places,
+            amount: {
+                places: {
+                    str: formatCount(places, 0, 0),
+                    count: places,
+                },
+                placesTotal: {
+                    str: formatCount(placesTotal, 3, 4),
+                    count: placesTotal,
+                },
+                price: {
+                    str: formatCount(price, 2, 2),
+                    count: price,
+                },
+                priceTotal: {
+                    str: formatCount(priceTotal, 3, 4),
+                    count: priceTotal,
+                },
+            },
             id,
         };
 

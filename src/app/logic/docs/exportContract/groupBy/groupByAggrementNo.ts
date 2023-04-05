@@ -21,7 +21,7 @@ export const groupByAgreementNo = () => {
         }
 
         const isPriceUnique = agreement.products.every(
-            (product) => product.record.price !== row.price,
+            (product) => product.record.amount.price.count !== row.amount.price.count,
         );
 
         const product = _.cloneDeep(selectProductSp(row.product));
@@ -35,7 +35,7 @@ export const groupByAgreementNo = () => {
         });
 
         agreement.products.push(productInfo);
-        agreement.priceTotal += row.priceTotal;
+        agreement.priceTotal += row.amount.priceTotal.count;
         return total;
     }, {});
 

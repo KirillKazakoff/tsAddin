@@ -30,8 +30,8 @@ export const setExport = (table: any[][]) => {
             product,
             sort,
             pack,
-            amountPlaces,
-            amountTotal,
+            places,
+            placesTotal,
             price,
             priceTotal,
             id,
@@ -55,10 +55,24 @@ export const setExport = (table: any[][]) => {
             product,
             sort,
             pack,
-            amountPlaces,
-            amountTotal: formatCount(amountTotal, 3, 4),
-            price: formatCount(price, 2, 2),
-            priceTotal,
+            amount: {
+                places: {
+                    str: formatCount(places, 0, 0),
+                    count: places,
+                },
+                placesTotal: {
+                    str: formatCount(placesTotal, 3, 4),
+                    count: placesTotal,
+                },
+                price: {
+                    str: formatCount(price, 2, 2),
+                    count: price,
+                },
+                priceTotal: {
+                    str: formatCount(priceTotal, 3, 4),
+                    count: priceTotal,
+                },
+            },
         };
 
         if (!product || !vessel || !blNo || !transport || !price || !date) {

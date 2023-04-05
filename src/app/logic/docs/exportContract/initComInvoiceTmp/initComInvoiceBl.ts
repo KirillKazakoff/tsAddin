@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { InitInvoicePartT } from '../../../../types/typesExcelUtils';
-import { formatCount } from '../../../utils/formatCount';
 
 export const initComInvoiceBl: InitInvoicePartT = (utils, invoice) => {
     const { getCell, ws, getRow } = utils;
@@ -10,23 +9,26 @@ export const initComInvoiceBl: InitInvoicePartT = (utils, invoice) => {
 
     products.forEach((p, index) => {
         const { record, product } = p;
+        const {
+            places, placesTotal, price, priceTotal,
+        } = record.amount;
 
-        const bl = record.blNo;
-        const desc = product.nameEng;
-        const pack = `1/${record.pack} KG`;
-        const amountPlaces = `${record.amountPlaces} PCS/`;
-        const amountTotal = `${formatCount(record.amountTotal, 3, 4)}`;
-        const priceUnit = `${formatCount(record.price, 2, 2)} USD`;
-        const priceTotal = `${formatCount(record.priceTotal, 2, 2)} USD`;
+        const colBl = record.blNo;
+        const colDesc = product.nameEng;
+        const colPack = `1/${record.pack} KG`;
+        const colPlaces = `${places.str} PCS/`;
+        const colPlacesTotal = `${placesTotal.str} tn`;
+        const colPriceUnit = `${price.str} USD`;
+        const colPriceTotal = `${priceTotal.str} USD`;
 
         const rowArr = [
-            bl,
-            desc,
-            pack,
-            amountPlaces,
-            amountTotal,
-            priceUnit,
-            priceTotal,
+            colBl,
+            colDesc,
+            colPack,
+            colPlaces,
+            colPlacesTotal,
+            colPriceUnit,
+            colPriceTotal,
         ];
 
         ws.insertRow(+blArrayCl.row + index, rowArr).commit();
@@ -46,5 +48,6 @@ export const initComInvoiceBl: InitInvoicePartT = (utils, invoice) => {
         const amountPlacesCl = row.getCell(4);
         amountPlacesCl.alignment = { horizontal: 'right' };
         row.height = 25;
+        row.commit();
     });
 };

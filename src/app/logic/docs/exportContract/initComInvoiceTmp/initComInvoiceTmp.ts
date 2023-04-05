@@ -3,6 +3,7 @@ import { InvoiceT } from '../../../../types/typesContract';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initComInvoiceBl } from './initComInvoiceBl';
 import { initComInvoiceBody } from './initComInvoiceBody';
+import { initComInvoiceFooter } from './initComInvoiceFooter';
 import { initComInvoiceHeader } from './initComInvoiceHeader';
 
 export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
@@ -11,4 +12,5 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     initComInvoiceHeader(utils, invoice);
     initComInvoiceBody(utils, invoice);
     initComInvoiceBl(utils, invoice);
+    initComInvoiceFooter(utils, invoice);
 };

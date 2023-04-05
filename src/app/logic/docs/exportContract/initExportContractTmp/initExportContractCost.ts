@@ -12,10 +12,10 @@ export const initExportContractCost: InitContractPartT = (utils, agreement) => {
 
     const costRows = products.reduce<string[][]>((total, product) => {
         const { fullName, nameEng } = product.product;
-        const price = formatCount(product.record.price, 2, 2);
+        const { price } = product.record.amount;
 
-        const colEng = `* ${nameEng} - USD ${price} for one kg net weight`;
-        const colRu = `* ${fullName} - ${price} долл. за одну тонну (нетто)`;
+        const colEng = `* ${nameEng} - USD ${price.str} for one kg net weight`;
+        const colRu = `* ${fullName} - ${price.str} долл. за одну тонну (нетто)`;
 
         if (product.isPriceUnique) {
             total.push([colEng, colRu]);

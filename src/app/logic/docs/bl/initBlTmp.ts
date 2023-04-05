@@ -11,7 +11,6 @@ import {
 import { ExportCommonRow } from '../../../types/typesTables';
 import { getCellByName } from '../../excel/utils/excelUtilsObj/getCellByName';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
-import { formatCount } from '../../utils/formatCount';
 
 export const initBlTmp = (book: ExcelJS.Workbook, row: ExportCommonRow) => {
     const blWs = book.getWorksheet('BL');
@@ -64,7 +63,7 @@ export const initBlTmp = (book: ExcelJS.Workbook, row: ExportCommonRow) => {
 
     sortCl.value = row.sort;
     packCl.value = `1/${row.pack} KG`;
-    amountPlacesCl.value = `${formatCount(row.amountPlaces, 0, 0)} PCS /`;
+    amountPlacesCl.value = `${row.amount.places.str} PCS /`;
 
-    amountTotalCl.value = `${formatCount(row.amountTotal, 3, 4)} tn`;
+    amountTotalCl.value = `${row.amount.placesTotal.str} tn`;
 };

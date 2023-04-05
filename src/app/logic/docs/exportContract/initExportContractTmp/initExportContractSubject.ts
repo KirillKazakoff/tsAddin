@@ -19,10 +19,10 @@ export const initExportContractSubject: InitContractPartT = (utils, agreement) =
 
     const productRows = products.reduce<string[][]>((total, product) => {
         const { fullName, nameEng } = product.product;
-        const { amountTotal } = product.record;
+        const { placesTotal } = product.record.amount;
 
-        const colEng = `* ${nameEng} - ${amountTotal} tn (net weight)`;
-        const colRu = `* ${fullName} - ${amountTotal} тн (нетто)`;
+        const colEng = `* ${nameEng} - ${placesTotal.str} tn (net weight)`;
+        const colRu = `* ${fullName} - ${placesTotal.str} тн (нетто)`;
         total.push([colEng, colRu]);
 
         return total;

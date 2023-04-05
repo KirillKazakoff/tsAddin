@@ -7,6 +7,17 @@ export type MateRowT = {
     operation: string;
 };
 
+export type AmountT = {
+    str: string;
+    count: number;
+};
+type AmountObjT = {
+    places: AmountT;
+    placesTotal: AmountT;
+    price: AmountT;
+    priceTotal: AmountT;
+};
+
 export type ExportRowT = {
     contract: number;
     seller: string;
@@ -25,10 +36,7 @@ export type ExportRowT = {
     product: string;
     sort: string;
     pack: number;
-    amountPlaces: number;
-    amountTotal: string;
-    price: string;
-    priceTotal: number;
+    amount: AmountObjT;
 };
 
 export type ExportStorageRowT = {
@@ -45,10 +53,7 @@ export type ExportStorageRowT = {
     product: string;
     sort: string;
     pack: string;
-    amountPlaces: number;
-    amountTotal: number;
-    price: number;
-    priceTotal: number;
+    amount: AmountObjT;
     portTo: string;
     portFrom: string;
     consignee: string;

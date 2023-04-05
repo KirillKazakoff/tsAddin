@@ -9,7 +9,7 @@ export const createExportContract = async (agreement: AgreementT) => {
     const { agreementNo, invoices } = agreement;
     const book = await readTmp(pathObj.exportContract);
 
-    createInvoices(book, invoices);
+    await createInvoices(book, invoices);
     initExportContractTmp(book, agreement);
     await saveFile(book, agreementNo);
 };
