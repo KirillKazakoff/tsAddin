@@ -7,11 +7,11 @@ export const tableNotFulfilled = (table: string): PageStatusT => ({
     desc: `Проверьте таблицу ${table} заполните пустые ячейки либо удалите пустые строки`,
 });
 
-export const blSame = (table: string): PageStatusT => ({
-    statusType: 'sameBl',
-    title: `В таблице ${table} одинаковые Bl!`,
-    desc: 'Исправьте одинаковые Bl',
-});
+// export const blSame = (table: string): PageStatusT => ({
+//     statusType: 'sameBl',
+//     title: `В таблице ${table} одинаковые Bl!`,
+//     desc: 'Исправьте одинаковые Bl',
+// });
 
 export const transportNotFound = (): PageStatusT => ({
     statusType: 'transportNotFound',

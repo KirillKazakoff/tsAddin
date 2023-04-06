@@ -5,15 +5,15 @@ import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 export const initInvoiceBodyRu: InitInvoicePartT = (utils, invoice) => {
     const { setCell, ws } = utils;
     const {
-        agentInfo,
+        agent,
         transport,
         portFrom,
         portTo,
         terms,
         agreementNo,
         contract,
-        agreementDate,
-    } = invoice.agreement;
+        date,
+    } = invoice.agreement.record;
     const { consignee } = invoice;
 
     setCell({
@@ -27,11 +27,11 @@ export const initInvoiceBodyRu: InitInvoicePartT = (utils, invoice) => {
 
     setCell({
         cell: 'Инвойс_покупатель_п',
-        value: agentInfo.name,
+        value: agent.name,
     });
     setCell({
         cell: 'Инвойс_покупатель_адрес_п',
-        value: agentInfo.adress,
+        value: agent.adress,
     });
     setCell({
         cell: 'Инвойс_декларация_п',
@@ -71,10 +71,7 @@ export const initInvoiceBodyRu: InitInvoicePartT = (utils, invoice) => {
 
     setCell({
         cell: 'Инвойс_соглашение_п',
-        value: `AGREEMENT No.${agreementNo} from ${getExcelDateStr(
-            agreementDate,
-            'en',
-        )}`,
+        value: `AGREEMENT No.${agreementNo} from ${getExcelDateStr(date, 'en')}`,
     });
     setCell({
         cell: 'Инвойс_контракт_п',

@@ -1,18 +1,9 @@
 import ExcelJS from 'exceljs';
-import {
-    selectSellerSp,
-    selectConsigneeSp,
-    selectVesselSp,
-    selectTransportSp,
-    selectPortZarubezhSp,
-    selectPortTamozhnyaSp,
-    selectProductSp,
-} from '../../../stores/spsStore/select';
-import { ExportCommonRow } from '../../../types/typesTables';
+import { ExportRowT } from '../../../types/typesTables';
 import { getCellByName } from '../../excel/utils/excelUtilsObj/getCellByName';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 
-export const initBlTmp = (book: ExcelJS.Workbook, row: ExportCommonRow) => {
+export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
     const blWs = book.getWorksheet('BL');
     const getCellBl: (name: string) => ExcelJS.Cell = getCellByName.bind(this, blWs);
 
@@ -34,32 +25,25 @@ export const initBlTmp = (book: ExcelJS.Workbook, row: ExportCommonRow) => {
 
     blWs.getCell(sellerCl.row, sellerCl.col);
 
-    const sellerSp = selectSellerSp(row.seller);
-    sellerCl.value = sellerSp.nameEng;
-    sellerAdressCl.value = sellerSp.addresEng;
+    sellerCl.value = row.seller.nameEng;
+    sellerAdressCl.value = row.seller.addresEng;
 
-    const consigneeSp = selectConsigneeSp(row.consignee || row.buyer);
-    consigneeCl.value = consigneeSp.fullName;
-    consigneeAdressCl.value = consigneeSp.adress;
+    consigneeCl.value = row.consignee.fullName;
+    consigneeAdressCl.value = row.consignee.adress;
 
     dateCl.value = getExcelDateStr(row.date, 'eng');
 
-    const vesselSp = selectVesselSp(row.vessel);
-    vesselCl.value = vesselSp.nameEng;
+    vesselCl.value = row.vessel.nameEng;
 
-    const transportSp = selectTransportSp();
-    transportCl.value = transportSp.nameEng;
+    transportCl.value = row.transport.nameEng;
 
-    const portZarubezhSp = selectPortZarubezhSp(row.portTo);
-    toCl.value = `${portZarubezhSp.nameEng}, ${portZarubezhSp.countryEng}`;
+    toCl.value = `${row.portTo.nameEng}, ${row.portTo.countryEng}`;
 
-    const portTamozhnyaSp = selectPortTamozhnyaSp(row.portFrom);
-    fromCl.value = portTamozhnyaSp.nameEng;
+    fromCl.value = row.portFrom.nameEng;
 
     blNoCl.value = row.blNo;
 
-    const productSp = selectProductSp(row.product);
-    productCl.value = productSp.nameEng;
+    productCl.value = row.product.nameEng;
 
     sortCl.value = row.sort;
     packCl.value = `1/${row.pack} KG`;

@@ -2,7 +2,7 @@
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 
-export const initInvoiceBodyEng: InitInvoicePartT = (utils, invoice) => {
+export const initInvoiceBody: InitInvoicePartT = (utils, invoice) => {
     const { setCell, ws } = utils;
     const {
         agent,

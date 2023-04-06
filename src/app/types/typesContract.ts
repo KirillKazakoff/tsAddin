@@ -1,9 +1,9 @@
 import type { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
 import { ProductDescriptionT, ConsigneeT } from './typesSP';
-import { AmountT, ExportCommonRow } from './typesTables';
+import { AmountT, ExportRowT } from './typesTables';
 
 export type ProductInfoExportT = {
-    record: ExportCommonRow;
+    record: ExportRowT;
     product: ProductDescriptionT;
     consignee: ConsigneeT;
     isPriceUnique: boolean;

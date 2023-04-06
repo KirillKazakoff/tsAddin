@@ -2,12 +2,12 @@ import exportContractStore from '../../../../../stores/docsStores/exportContract
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 
 export const initInvoiceFooterEng: InitInvoicePartT = ({ setCell }, invoice) => {
-    const { vesselInfo, bankProdavecInfo, sellerInfo } = invoice.agreement;
+    const { vessel, seller, bankSeller } = invoice.agreement.record;
     const { places, priceTotal, placesTotal } = invoice.amount;
 
     setCell({
         cell: 'Инвойс_судно',
-        value: vesselInfo.nameEng,
+        value: vessel.nameEng,
     });
     setCell({
         cell: 'Инвойс_подвал_места',
@@ -23,23 +23,23 @@ export const initInvoiceFooterEng: InitInvoicePartT = ({ setCell }, invoice) => 
     });
     setCell({
         cell: 'Инвойс_банк_получателя',
-        value: `Beneficiary Bank: ${bankProdavecInfo.nameEng}`,
+        value: `Beneficiary Bank: ${bankSeller.nameEng}`,
     });
     setCell({
         cell: 'Инвойс_банк_получателя_адрес',
-        value: bankProdavecInfo.adress,
+        value: bankSeller.adress,
     });
     setCell({
         cell: 'Инвойс_банк_получателя_свифт',
-        value: `SWIFT: ${bankProdavecInfo.swift}`,
+        value: `SWIFT: ${bankSeller.swift}`,
     });
     setCell({
         cell: 'Инвойс_получатель_в_пользу',
-        value: `in forward to ${sellerInfo.nameEng}`,
+        value: `in forward to ${seller.nameEng}`,
     });
     setCell({
         cell: 'Инвойс_получатель_счет',
-        value: `A/C: ${bankProdavecInfo.accountNo}`,
+        value: `A/C: ${bankSeller.accountNo}`,
     });
     setCell({
         cell: 'Инвойс_подписант',

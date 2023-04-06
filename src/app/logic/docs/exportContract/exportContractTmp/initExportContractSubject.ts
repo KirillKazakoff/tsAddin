@@ -4,11 +4,12 @@ import { deleteRow } from '../../../excel/utils/excelUtilsObj/deleteRow';
 
 export const initExportContractSubject: InitContractPartT = (utils, agreement) => {
     const { getCell } = utils;
-    const { vesselInfo, products } = agreement;
+    const { products } = agreement;
+    const { vessel } = agreement.record;
 
     const subjectDescCl = getCell('Предмет_описание');
-    subjectDescCl.cellEng.value = `1.1. Seller is obliged to deliver the commodity, and   Buyer  is obligated to receive and pay lot of the cargo,  produced by ${vesselInfo.nameEng}`;
-    subjectDescCl.cellRus.value = `1.1. Продавец обязуется поставить Покупателю, а Покупатель обязуется принять и оплатить партию продукции, изготовленную на ${vesselInfo.name}`;
+    subjectDescCl.cellEng.value = `1.1. Seller is obliged to deliver the commodity, and   Buyer  is obligated to receive and pay lot of the cargo,  produced by ${vessel.nameEng}`;
+    subjectDescCl.cellRus.value = `1.1. Продавец обязуется поставить Покупателю, а Покупатель обязуется принять и оплатить партию продукции, изготовленную на ${vessel.name}`;
 
     const ws = subjectDescCl.cellEng.worksheet;
     const inheritRow = ws.getRow(+subjectDescCl.cellEng.row);

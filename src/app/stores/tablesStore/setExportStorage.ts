@@ -1,22 +1,34 @@
 import { checkEmptyTable } from '../../logic/excel/utils/checkEmptyTable';
-import { formatCount } from '../../logic/utils/formatCount';
-import { ExportStorageRowT } from '../../types/typesTables';
-import { blSame, tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
+import { ExportRowT } from '../../types/typesTables';
+import { tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
+import {
+    selectContractSp,
+    selectSellerSp,
+    selectAgentSp,
+    selectVesselSp,
+    selectTransportSp,
+    selectPortTamozhnyaSp,
+    selectPortZarubezhSp,
+    selectConsigneeSp,
+    selectProductSp,
+} from '../spsStore/select';
 import tablesStore from './tablesStore';
+import { initAmount } from './utils/initAmount';
+import { initRowToStr } from './utils/initRowToStr';
 
 export const setExportStorage = (table: any[][]) => {
     table.shift();
     if (checkEmptyTable(table)) return;
 
-    const transformedTable = table.reduce<ExportStorageRowT[]>((totalObj, row) => {
+    const transformedTable = table.reduce<ExportRowT[]>((totalObj, row) => {
         const [
             contract,
             seller,
             buyer,
             vessel,
             transport,
-            aggrementNo,
+            agreementNo,
             invoice,
             date,
             blMode,
@@ -36,47 +48,34 @@ export const setExportStorage = (table: any[][]) => {
             portFrom,
         ] = row;
 
-        const rowObj = {
-            contract,
-            seller,
-            buyer,
-            vessel,
-            transport,
-            aggrementNo,
+        const contractSp = selectContractSp(contract);
+
+        const rowObj: ExportRowT = {
+            contract: selectContractSp(contract),
+            seller: selectSellerSp(seller),
+            agent: selectAgentSp(buyer),
+            vessel: selectVesselSp(vessel),
+            transport: selectTransportSp(),
+            portFrom: selectPortTamozhnyaSp(portFrom),
+            portTo: selectPortZarubezhSp(portTo),
+            consignee: selectConsigneeSp(consignee),
+            product: selectProductSp(product),
+            amount: {
+                places: initAmount(places, 0, 0),
+                placesTotal: initAmount(placesTotal, 3, 4),
+                price: initAmount(price, 2, 2),
+                priceTotal: initAmount(priceTotal, 3, 4),
+            },
+            toStr: initRowToStr(contractSp, agreementNo, date, invoice),
+            agreementNo,
             invoice,
             date,
             blNo,
-            portFrom,
-            portTo,
-            consignee,
-            msc,
-            product,
+
             sort,
             pack,
-            places,
-            amount: {
-                places: {
-                    str: formatCount(places, 0, 0),
-                    count: places,
-                },
-                placesTotal: {
-                    str: formatCount(placesTotal, 3, 4),
-                    count: placesTotal,
-                },
-                price: {
-                    str: formatCount(price, 2, 2),
-                    count: price,
-                },
-                priceTotal: {
-                    str: formatCount(priceTotal, 3, 4),
-                    count: priceTotal,
-                },
-            },
-            id,
+            msc,
         };
-
-        // const isEmptyRow = row.every((value) => !value);
-        // if (isEmptyRow) return totalObj;
 
         // if (!product || !vessel || !blNo || !transport || !price || !date) {
         //     pageStatusStore.setPageStatus(tableNotFulfilled('ЭкспортХранение'));

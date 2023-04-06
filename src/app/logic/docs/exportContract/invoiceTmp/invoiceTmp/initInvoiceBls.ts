@@ -2,11 +2,11 @@
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { styleBlRows } from '../styleInvoiceRows';
 
-export const initInvoiceBlsRu: InitInvoicePartT = (utils, invoice) => {
+export const initInvoiceBls: InitInvoicePartT = (utils, invoice) => {
     const { getCell, ws, getRow } = utils;
     const { products } = invoice;
 
-    const blArrayCl = getCell('Инвойс_Bl_массив_п');
+    const blArrayCl = getCell('Инвойс_Bl_массив');
 
     products.forEach((p, index) => {
         const { record, product } = p;
@@ -15,12 +15,12 @@ export const initInvoiceBlsRu: InitInvoicePartT = (utils, invoice) => {
         } = record.amount;
 
         const colBl = record.blNo;
-        const colDesc = product.fullName;
-        const colPack = `1/${record.pack} КГ`;
-        const colPlaces = `${places.str} шт/`;
-        const colPlacesTotal = `${placesTotal.str} тн`;
-        const colPriceUnit = `${price.str} $`;
-        const colPriceTotal = `${priceTotal.str} $`;
+        const colDesc = product.nameEng;
+        const colPack = `1/${record.pack} KG`;
+        const colPlaces = `${places.str} PCS/`;
+        const colPlacesTotal = `${placesTotal.str} tn`;
+        const colPriceUnit = `${price.str} USD`;
+        const colPriceTotal = `${priceTotal.str} USD`;
 
         const rowArr = [
             colBl,
@@ -35,5 +35,5 @@ export const initInvoiceBlsRu: InitInvoicePartT = (utils, invoice) => {
         ws.insertRow(+blArrayCl.row + index, rowArr).commit();
     });
 
-    styleBlRows(products, getRow, 'Инвойс_Bl_массив_п');
+    styleBlRows(products, getRow, 'Инвойс_Bl_массив');
 };

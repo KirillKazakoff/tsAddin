@@ -1,15 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import blStore from '../../../stores/docsStores/blStore';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { ExportCommonRow } from '../../../types/typesTables';
+import { ExportRowT } from '../../../types/typesTables';
 import { createBL } from './createBl';
 
 export const initBlSection = () => {
     const { exportT, exportStorageT } = tablesStore;
 
-    const table: ExportCommonRow[] = blStore.operation === 'export' ? exportT : exportStorageT;
+    const table: ExportRowT[] = blStore.operation === 'export' ? exportT : exportStorageT;
 
-    const getBl = async (row: ExportCommonRow) => {
+    const getBl = async (row: ExportRowT) => {
         await createBL(row);
     };
 

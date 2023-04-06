@@ -5,8 +5,9 @@ import { createInvoices } from './invoiceTmp/createInvoices';
 import { AgreementT } from './groupBy/initAgreement';
 import { initExportContractTmp } from './exportContractTmp/initExportContractTmp';
 
-export const createExportContract = async (agreement: AgreementT) => {
-    const { agreementNo, invoices } = agreement;
+export const createExportContractDoc = async (agreement: AgreementT) => {
+    const { invoices } = agreement;
+    const { agreementNo } = agreement.record;
     const book = await readTmp(pathObj.exportContract);
 
     await createInvoices(book, invoices);

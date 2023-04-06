@@ -19,7 +19,6 @@ export const styleBlRows = (
 
         const amountPlacesCl = row.getCell(4);
         amountPlacesCl.alignment = { horizontal: 'right' };
-        console.log(row.number);
         row.height = 25;
         row.commit();
     });

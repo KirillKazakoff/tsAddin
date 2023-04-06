@@ -1,3 +1,16 @@
+import {
+    AgentT,
+    BankProdavecT,
+    ConsigneeT,
+    ContractT,
+    PortTamozhnyaT,
+    PortZarubezhT,
+    ProductDescriptionT,
+    SellerT,
+    TransportT,
+    VesselT,
+} from './typesSP';
+
 export type MateRowT = {
     vessel: string;
     product: string;
@@ -17,47 +30,46 @@ type AmountObjT = {
     price: AmountT;
     priceTotal: AmountT;
 };
+export type RowToStrT = {
+    invoice: {
+        eng: string;
+        ru: string;
+    };
+    contract: {
+        title: {
+            eng: string;
+            ru: string;
+        };
+        date: {
+            eng: string;
+            ru: string;
+        };
+    };
+    agreement: {
+        eng: string;
+        ru: string;
+    };
+};
 
 export type ExportRowT = {
-    contract: number;
-    seller: string;
-    buyer: string;
-    vessel: string;
-    transport: string;
-    aggrementNo: number;
-    invoice: string;
-    date: string;
-    blNo: string;
-    terms: string;
-    portTo: string;
-    portFrom: string;
-    consignee: string;
-    msc: string;
-    product: string;
-    sort: string;
-    pack: number;
+    contract: ContractT;
+    seller: SellerT;
+    bankSeller?: BankProdavecT;
+    agent: AgentT;
+    vessel: VesselT;
+    transport: TransportT;
+    portFrom: PortTamozhnyaT;
+    portTo: PortZarubezhT;
+    consignee: ConsigneeT;
+    product: ProductDescriptionT;
     amount: AmountObjT;
-};
-
-export type ExportStorageRowT = {
-    contract: number;
-    seller: string;
-    buyer: string;
-    vessel: string;
-    transport: string;
-    aggrementNo: number;
+    toStr: RowToStrT;
+    agreementNo: number;
     invoice: string;
     date: string;
     blNo: string;
-    msc: string;
-    product: string;
+    terms?: string;
     sort: string;
     pack: string;
-    amount: AmountObjT;
-    portTo: string;
-    portFrom: string;
-    consignee: string;
-    id: string;
+    msc: string;
 };
-
-export type ExportCommonRow = (ExportStorageRowT | ExportRowT) & { terms?: string };

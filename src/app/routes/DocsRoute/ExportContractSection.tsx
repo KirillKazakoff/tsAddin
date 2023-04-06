@@ -9,15 +9,16 @@ export const ExportContractSection = observer(() => {
     const { getContract, setPodpisant, agreements } = useInitContractSection();
 
     const agreementsHtml = agreements.map((agreement) => {
+        const { agreementNo } = agreement.record;
         const onClick = () => getContract(agreement);
 
         return (
             <li
-                key={agreement.agreementNo}
+                key={agreementNo}
                 onClick={onClick}
                 className='doc-link export-contract'
             >
-                {`№ ${agreement.agreementNo}`}
+                {`№ ${agreementNo}`}
             </li>
         );
     });

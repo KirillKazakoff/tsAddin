@@ -4,7 +4,8 @@ import { groupByConsignee } from '../groupBy/groupByConsignee';
 
 export const initExportContractDelivery: InitContractPartT = (utils, agreement) => {
     const { getCell, getRow, deleteRow } = utils;
-    const { terms, portTo, products } = agreement;
+    const { products } = agreement;
+    const { terms, portTo } = agreement.record;
     const grouped = groupByConsignee(products);
 
     const termsCl = getCell('Доставка_условия');

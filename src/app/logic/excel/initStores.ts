@@ -41,8 +41,6 @@ export const initStores = async (context: Excel.RequestContext) => {
     await context.sync();
 
     setMate(mateRange.values);
-    setExport(exportRange.values);
-    setExportStorage(exportStorageRange.values);
 
     setSellers(spSellersRange.values);
     setTransport(mateRange.values, spTransportRange.values);
@@ -55,4 +53,7 @@ export const initStores = async (context: Excel.RequestContext) => {
     setPodpisants(spPodpisantsRange.values);
     setAgents(spAgentsRange.values);
     setBanksProdavec(spBankProdavec.values);
+
+    setExport(exportRange.values);
+    setExportStorage(exportStorageRange.values);
 };

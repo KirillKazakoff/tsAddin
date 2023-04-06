@@ -1,31 +1,31 @@
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 
-export const initInvoiceHeaderRu: InitInvoicePartT = (utils, invoice) => {
+export const initInvoiceHeader: InitInvoicePartT = (utils, invoice) => {
     const { setCell } = utils;
     const { seller } = invoice.agreement.record;
     const { invoiceDate, invoiceNo, msc } = invoice;
 
     setCell({
-        cell: 'Инвойс_продавец_п',
-        value: seller.fullName,
+        cell: 'Инвойс_продавец',
+        value: seller.nameEng,
     });
     setCell({
-        cell: 'Инвойс_продавец_адрес_п',
-        value: seller.addres,
-    });
-
-    setCell({
-        cell: 'Инвойс_п',
-        value: `${invoiceNo} от ${getExcelDateStr(invoiceDate, 'ru')}`,
+        cell: 'Инвойс_продавец_адрес',
+        value: seller.addresEng,
     });
 
     setCell({
-        cell: 'МСЦ_п',
+        cell: 'Инвойс',
+        value: `${invoiceNo} from ${getExcelDateStr(invoiceDate, 'en')}`,
+    });
+
+    setCell({
+        cell: 'МСЦ',
         value: msc ? 'MSC certified' : 'Non-MSC product',
     });
     setCell({
-        cell: 'МСЦ_сертификат_п',
+        cell: 'МСЦ_сертификат',
         value: msc ? 'MSC-C-52870' : '',
     });
 };
