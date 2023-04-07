@@ -1,26 +1,47 @@
 /* eslint-disable no-param-reassign */
-import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
+import { InitInvoicePartLanguageT } from '../../../../../types/typesExcelUtils';
 import { styleBlRows } from '../styleInvoiceRows';
 
-export const initInvoiceBls: InitInvoicePartT = (utils, invoice) => {
+export const initInvoiceBls: InitInvoicePartLanguageT = (
+    utils,
+    invoice,
+    language
+) => {
     const { getCell, ws, getRow } = utils;
     const { products } = invoice;
 
-    const blArrayCl = getCell('Инвойс_Bl_массив');
+    const cellName = language === 'eng' ? 'Инвойс_Bl_массив' : 'Инвойс_Bl_массив_п';
+    const blArrayCl = getCell(cellName);
 
     products.forEach((p, index) => {
         const { record, product } = p;
-        const {
-            places, placesTotal, price, priceTotal,
-        } = record.amount;
+        const { places, placesTotal, price, priceTotal } = record.amount;
 
-        const colBl = record.blNo;
-        const colDesc = product.nameEng;
-        const colPack = `1/${record.pack} KG`;
-        const colPlaces = `${places.str} PCS/`;
-        const colPlacesTotal = `${placesTotal.str} tn`;
-        const colPriceUnit = `${price.str} USD`;
-        const colPriceTotal = `${priceTotal.str} USD`;
+        let colBl = '',
+            colDesc = '',
+            colPack = '',
+            colPlaces = '',
+            colPlacesTotal = '',
+            colPriceUnit = '',
+            colPriceTotal = '';
+
+        if (language === 'eng') {
+            colBl = record.blNo;
+            colDesc = product.nameEng;
+            colPack = `1/${record.pack} KG`;
+            colPlaces = `${places.str} PCS/`;
+            colPlacesTotal = `${placesTotal.str} tn`;
+            colPriceUnit = `${price.str} USD`;
+            colPriceTotal = `${priceTotal.str} USD`;
+        } else {
+            colBl = record.blNo;
+            colDesc = product.fullName;
+            colPack = `1/${record.pack} КГ`;
+            colPlaces = `${places.str} шт/`;
+            colPlacesTotal = `${placesTotal.str} тн`;
+            colPriceUnit = `${price.str} $`;
+            colPriceTotal = `${priceTotal.str} $`;
+        }
 
         const rowArr = [
             colBl,
@@ -35,5 +56,5 @@ export const initInvoiceBls: InitInvoicePartT = (utils, invoice) => {
         ws.insertRow(+blArrayCl.row + index, rowArr).commit();
     });
 
-    styleBlRows(products, getRow, 'Инвойс_Bl_массив');
+    styleBlRows(products, getRow, cellName);
 };

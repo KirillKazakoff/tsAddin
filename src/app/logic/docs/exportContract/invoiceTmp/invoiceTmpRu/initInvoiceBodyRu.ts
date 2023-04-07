@@ -41,7 +41,7 @@ export const initInvoiceBodyRu: InitInvoicePartT = (utils, invoice) => {
     const departureInfo = [
         setCell({
             cell: 'Инвойс_дата_п',
-            value: getExcelDateStr(invoice.invoiceDate, 'en'),
+            value: getExcelDateStr(invoice.invoiceDate, 'ru'),
         }),
         setCell({
             cell: 'Инвойс_транспорт_п',
@@ -71,15 +71,15 @@ export const initInvoiceBodyRu: InitInvoicePartT = (utils, invoice) => {
 
     setCell({
         cell: 'Инвойс_соглашение_п',
-        value: `AGREEMENT No.${agreementNo} from ${getExcelDateStr(date, 'en')}`,
+        value: `Дополнение No.${agreementNo} от ${getExcelDateStr(date, 'ru')}`,
     });
     setCell({
         cell: 'Инвойс_контракт_п',
-        value: `to a contract of sale No. ${contract.contractNo}`,
+        value: `к контракту купли-продажи №. ${contract.contractNo}`,
     });
     setCell({
         cell: 'Инвойс_контракт_дата_п',
-        value: `Magadan, dated from ${getExcelDateStr(contract.date, 'ru')}`,
+        value: `Магадан, от ${getExcelDateStr(contract.date, 'ru')}`,
     });
     setCell({
         cell: 'Инвойс_условия_п',

@@ -35,7 +35,7 @@ export const initInvoiceFooterRu: InitInvoicePartT = ({ setCell }, invoice) => {
     });
     setCell({
         cell: 'Инвойс_получатель_в_пользу_п',
-        value: `in forward to ${seller.nameEng}`,
+        value: `в пользу ${seller.name}`,
     });
     setCell({
         cell: 'Инвойс_получатель_счет_п',
@@ -43,6 +43,6 @@ export const initInvoiceFooterRu: InitInvoicePartT = ({ setCell }, invoice) => {
     });
     setCell({
         cell: 'Инвойс_подписант_п',
-        value: `Signed by ${exportContractStore.podpisant.nameEng}`,
+        value: `Подписано ${exportContractStore.podpisant.name}`,
     });
 };

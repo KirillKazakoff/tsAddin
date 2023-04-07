@@ -4,7 +4,7 @@ import { AmountT } from '../../../types/typesTables';
 export const initAmount = (
     count?: number,
     fractionMin?: number,
-    fractionMax?: number,
+    fractionMax?: number
 ): AmountT => {
     if (!count) {
         return {
@@ -12,6 +12,9 @@ export const initAmount = (
             count: 0,
         };
     }
-    const amount = { str: formatCount(count, fractionMin, fractionMax), count };
+    const amount = {
+        str: formatCount(count, fractionMin, fractionMax),
+        count,
+    };
     return amount;
 };

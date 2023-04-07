@@ -53,3 +53,5 @@ export type RequestObjT = {
     url?: string;
     settings?: RequestInit;
 };
+
+export type LanguageT = 'eng' | 'ru';

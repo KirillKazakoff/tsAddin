@@ -16,7 +16,6 @@ import {
 } from '../spsStore/select';
 import tablesStore from './tablesStore';
 import { initAmount } from './utils/initAmount';
-import { initRowToStr } from './utils/initRowToStr';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const setExport = (table: any[][]) => {
@@ -69,7 +68,6 @@ export const setExport = (table: any[][]) => {
                 price: initAmount(price, 2, 2),
                 priceTotal: initAmount(priceTotal, 3, 4),
             },
-            toStr: initRowToStr(contractSp, agreementNo, date, invoice),
             agreementNo,
             invoice,
             date,

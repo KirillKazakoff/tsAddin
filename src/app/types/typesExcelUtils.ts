@@ -1,5 +1,6 @@
 import { Cell, Row, Worksheet } from 'exceljs';
 import { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
+import { LanguageT } from './types';
 import { InvoiceT } from './typesContract';
 
 export type GetRowBoundT = (cellName: string, offset: number) => Row;
@@ -57,3 +58,8 @@ export type InitContractPartT = (
 ) => void;
 
 export type InitInvoicePartT = (utils: CellUtilsT, invoice: InvoiceT) => void;
+export type InitInvoicePartLanguageT = (
+    utils: CellUtilsT,
+    invoice: InvoiceT,
+    language: LanguageT
+) => void;

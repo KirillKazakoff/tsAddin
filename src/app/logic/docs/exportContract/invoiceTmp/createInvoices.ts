@@ -4,13 +4,14 @@ import _ from 'lodash';
 import { InvoicesT } from '../../../../types/typesContract';
 import { clearInvoicesTmp } from './clearInvoices';
 import { initComInvoiceTmp } from './initComInvoiceTmp';
+import { setComInvoice } from './invoiceTmp/setComInvoice';
 
 export const createInvoices = async (book: Workbook, invoices: InvoicesT) => {
     const wsOriginal = book.getWorksheet('Com_Invoice');
 
     Object.keys(invoices).forEach((key) => {
         const invoice = invoices[key];
-        initComInvoiceTmp(wsOriginal, invoice);
+        setComInvoice(wsOriginal, invoice);
 
         const wsCopyTo = book.addWorksheet();
         wsCopyTo.model = _.cloneDeep(wsOriginal.model);
