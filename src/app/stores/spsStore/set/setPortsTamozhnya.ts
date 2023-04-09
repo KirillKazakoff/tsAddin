@@ -4,12 +4,16 @@ import spsStore from '../spsStore';
 
 export const setPortsTamozhnya = (spRange: any[][]) => {
     const transformed = spRange.reduce<PortsTamozhnyaT>((total, row) => {
-        const [name, nameEng, fullName] = row;
+        const [codeName, nameEng, fullName] = row;
 
-        total[name] = {
-            name,
-            nameEng,
-            fullName,
+        total[codeName] = {
+            codeName,
+            eng: {
+                name: nameEng,
+            },
+            ru: {
+                name: codeName,
+            },
         };
         return total;
     }, {});

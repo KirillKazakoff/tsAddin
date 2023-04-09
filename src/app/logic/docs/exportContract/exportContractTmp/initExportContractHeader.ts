@@ -4,9 +4,7 @@ import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 
 export const initExportContractHeader: InitContractPartT = (utils, agreement) => {
     const { getCell } = utils;
-    const {
-        date, agreementNo, contract, seller, agent,
-    } = agreement.record;
+    const { date, agreementNo, contract, seller, agent } = agreement.record;
     const { podpisant } = exportContractStore;
 
     const agreementDateStrRu = getExcelDateStr(date, 'ru');
@@ -30,20 +28,20 @@ export const initExportContractHeader: InitContractPartT = (utils, agreement) =>
     // body
     // seller
     const sellerCl = getCell('Продавец');
-    sellerCl.cellEng.value = seller.nameEng;
-    sellerCl.cellRus.value = seller.fullName;
+    sellerCl.cellEng.value = seller.eng.name;
+    sellerCl.cellRus.value = seller.ru.name;
 
     const sellerAddresCl = getCell('Продавец_адрес');
-    sellerAddresCl.cellEng.value = seller.addresEng;
-    sellerAddresCl.cellRus.value = seller.addres;
+    sellerAddresCl.cellEng.value = seller.eng.addres;
+    sellerAddresCl.cellRus.value = seller.ru.addres;
 
     const sellerPodpisantCl = getCell('Продавец_подписант');
-    sellerPodpisantCl.cellEng.value = `${podpisant.nameEng} and`;
+    sellerPodpisantCl.cellEng.value = `${podpisant.eng.name} and`;
     sellerPodpisantCl.cellRus.value = `${podpisant.declination} и`;
 
     const sellerRepresentativeCl = getCell('Продавец_представитель');
-    sellerRepresentativeCl.cellEng.value = `${podpisant.commentEng}`;
-    sellerRepresentativeCl.cellRus.value = `${podpisant.comment}`;
+    sellerRepresentativeCl.cellEng.value = `${podpisant.eng.comment}`;
+    sellerRepresentativeCl.cellRus.value = `${podpisant.ru.comment}`;
 
     // buyer
     const buyerCl = getCell('Покупатель');
@@ -55,6 +53,6 @@ export const initExportContractHeader: InitContractPartT = (utils, agreement) =>
     buyerAddressCl.cellRus.value = `${agent.adress}`;
 
     const buyerPodpisantCl = getCell('Покупатель_представитель');
-    buyerPodpisantCl.cellEng.value = `Represented by president ${agent.signatoryEng}`;
-    buyerPodpisantCl.cellRus.value = `В лице президента ${agent.signatoryEng}`;
+    buyerPodpisantCl.cellEng.value = `Represented by president ${agent.eng.signatory}`;
+    buyerPodpisantCl.cellRus.value = `В лице президента ${agent.eng.signatory}`;
 };

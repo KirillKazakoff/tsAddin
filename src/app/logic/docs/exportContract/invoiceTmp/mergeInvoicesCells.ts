@@ -1,26 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { Cell, Workbook } from 'exceljs';
-import _ from 'lodash';
-import { InvoicesT } from '../../../../types/typesContract';
-import { clearInvoicesTmp } from './clearInvoices';
-import { initComInvoiceTmp } from './initComInvoiceTmp';
-import { setComInvoice } from './invoiceTmp/setComInvoice';
+import { Workbook, Cell } from 'exceljs';
 
-export const createInvoices = async (book: Workbook, invoices: InvoicesT) => {
-    const wsOriginal = book.getWorksheet('Com_Invoice');
-
-    Object.keys(invoices).forEach((key) => {
-        const invoice = invoices[key];
-        setComInvoice(wsOriginal, invoice);
-
-        const wsCopyTo = book.addWorksheet();
-        wsCopyTo.model = _.cloneDeep(wsOriginal.model);
-        wsCopyTo.name = `invoice ${key}`;
-
-        clearInvoicesTmp(wsOriginal, wsCopyTo, invoice);
-        book.removeWorksheet('Com_Invoice');
-    });
-
+export const mergeInvoicesCells = async (book: Workbook) => {
     const xls64 = await book.xlsx.writeBuffer();
     await book.xlsx.load(xls64);
     book.worksheets.forEach((ws) => {

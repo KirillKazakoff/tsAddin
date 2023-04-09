@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
-import { ProductInfoExportT } from '../../../../types/typesContract';
-import { GetRowBoundT } from '../../../../types/typesExcelUtils';
+import { ProductInfoExportT } from '../../../../../types/typesContract';
+import { GetRowBoundT } from '../../../../../types/typesExcelUtils';
 
-export const styleBlRows = (
+export const styleInvoiceBlRows = (
     products: ProductInfoExportT[],
     getRow: GetRowBoundT,
-    arrayClName: string,
+    arrayClName: string
 ) => {
     products.forEach((product, i) => {
         const row = getRow(arrayClName, -i - 1);

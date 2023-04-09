@@ -21,14 +21,12 @@ function getDetailsStr(details: DetailsT[], name: string, measure: string) {
 export const productToStringRu = (product: ProductT) => {
     const { details, info } = product;
     const { desc, producer, periodCreation } = info;
-    const {
-        standart, expirationDate, pack, fullName,
-    } = desc;
+    const { standart, expirationDate } = desc;
 
-    const detailsStr = getDetailsStr(details, fullName, 'кг');
+    const detailsStr = getDetailsStr(details, desc.ru.name, 'кг');
 
-    const packStr = `${TAB}Упаковка - ${pack}`;
-    const producerStr = `${TAB}Изготовитель: ${producer.name}`;
+    const packStr = `${TAB}Упаковка - ${desc.ru.pack}`;
+    const producerStr = `${TAB}Изготовитель: ${producer.ru.name}`;
     const periodStr = `${TAB}Период изготовления: ${periodCreation}`;
     const expirationStr = `${TAB}Cрок годности - ${expirationDate} месяцев`;
     const standartStr = `${TAB}${standart}`;
@@ -43,11 +41,10 @@ export const productToStringEng = (product: ProductT) => {
     const { ground, port } = letterStore.fields;
     const { details, info } = product;
     const { desc, periodCreation } = info;
-    const { packEng, nameEng } = desc;
 
-    const detailsStr = getDetailsStr(details, nameEng, 'kg');
+    const detailsStr = getDetailsStr(details, desc.eng.name, 'kg');
 
-    const packStr = `${TAB}Packing - ${packEng}`;
+    const packStr = `${TAB}Packing - ${desc.eng.pack}`;
     const groundStr = `${TAB}Fishing ground: ${ground}`;
     const periodStr = `${TAB}Producing period: ${periodCreation}`;
     const portStr = `${TAB}Port of discharging: ${port}`;

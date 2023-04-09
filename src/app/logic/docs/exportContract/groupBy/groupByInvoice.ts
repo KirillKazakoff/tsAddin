@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { initAmount } from '../../../../stores/tablesStore/utils/initAmount';
 import { formatCount } from '../../../utils/formatCount';
 import { AgreementT } from './initAgreement';
 
@@ -17,18 +18,9 @@ export const groupByInvoice = (agreement: AgreementT) => {
                 agreement,
                 consignee: product.consignee,
                 amount: {
-                    places: {
-                        str: '',
-                        count: 0,
-                    },
-                    priceTotal: {
-                        str: '',
-                        count: 0,
-                    },
-                    placesTotal: {
-                        str: '',
-                        count: 0,
-                    },
+                    places: initAmount(),
+                    priceTotal: initAmount(),
+                    placesTotal: initAmount(),
                 },
             };
             agreement.invoices[invoiceNo] = invoice;

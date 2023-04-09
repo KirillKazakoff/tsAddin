@@ -1,6 +1,6 @@
 import { CellObjT, CellUtilsT } from '../../../../../types/typesExcelUtils';
 
-export const initDepartureInfoCells = (
+export const initComInvoiceEXW = (
     cells: CellObjT[],
     utils: CellUtilsT,
     terms: string

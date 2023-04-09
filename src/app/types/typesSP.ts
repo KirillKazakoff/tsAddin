@@ -1,13 +1,22 @@
 export type TransportT = {
-    name: string;
-    nameEng: string;
+    eng: {
+        name: string;
+    };
+    ru: {
+        name: string;
+    };
     id: string;
 };
 
 // Vessels
 export type VesselT = {
-    name: string;
-    nameEng: string;
+    codeName: string;
+    eng: {
+        name: string;
+    };
+    ru: {
+        name: string;
+    };
     id: string;
 };
 
@@ -17,13 +26,18 @@ export type VesselsT = {
 
 // Production
 export type ProductDescriptionT = {
-    name: string;
-    fullName: string;
-    nameEng: string;
+    codeName: string;
+    eng: {
+        name: string;
+        pack: string;
+    };
+    ru: {
+        name: string;
+        pack: string;
+    };
+
     standart: string;
     expirationDate: string;
-    pack: string;
-    packEng: string;
 };
 
 export type ProductionNewT = {
@@ -32,11 +46,15 @@ export type ProductionNewT = {
 
 // Sellers
 export type SellerT = {
-    name: string;
-    fullName: string;
-    addres: string;
-    nameEng: string;
-    addresEng: string;
+    codeName: string;
+    eng: {
+        name: string;
+        addres: string;
+    };
+    ru: {
+        name: string;
+        addres: string;
+    };
     inn: string;
 };
 
@@ -46,8 +64,8 @@ export type SellersT = {
 
 // Consignee
 export type ConsigneeT = {
+    codeName: string;
     fullName: string;
-    name: string;
     adress: string;
 };
 
@@ -57,10 +75,15 @@ export type ConsigneesT = {
 
 // PortZarubezh
 export type PortZarubezhT = {
-    name: string;
-    nameEng: string;
-    country: string;
-    countryEng: string;
+    codeName: string;
+    eng: {
+        name: string;
+        country: string;
+    };
+    ru: {
+        name: string;
+        country: string;
+    };
 };
 
 export type PortsZarubezhT = {
@@ -69,9 +92,13 @@ export type PortsZarubezhT = {
 
 // PortTamozhnyaT
 export type PortTamozhnyaT = {
-    name: string;
-    nameEng: string;
-    fullName: string;
+    codeName: string;
+    eng: {
+        name: string;
+    };
+    ru: {
+        name: string;
+    };
 };
 
 export type PortsTamozhnyaT = {
@@ -80,9 +107,9 @@ export type PortsTamozhnyaT = {
 
 // ContractsT
 export type ContractT = {
+    code: string;
     contractNo: string;
     date: string;
-    code: string;
     seller: string;
     buyerFull: string;
     buyer: string;
@@ -97,11 +124,16 @@ export type ContractsT = {
 
 // PodpisantsT
 export type PodpisantT = {
-    name: string;
-    nameEng: string;
+    codeName: string;
+    eng: {
+        name: string;
+        comment: string;
+    };
+    ru: {
+        name: string;
+        comment: string;
+    };
     declination: string;
-    comment: string;
-    commentEng: string;
 };
 
 export type PodpisantsT = {
@@ -110,16 +142,20 @@ export type PodpisantsT = {
 
 // AgentsT
 export type AgentT = {
+    code: string;
+    eng: {
+        signatory: string;
+    };
+    ru: {
+        signatory: string;
+    };
     name: string;
-    signatoryEng: string;
-    signatory: string;
     beneficiaryBank: string;
     branch: string;
     bankAdress: string;
     acNo: string;
     swift: string;
     adress: string;
-    code: string;
 };
 
 export type AgentsT = {
@@ -128,15 +164,20 @@ export type AgentsT = {
 
 // BanksProdavec
 export type BankProdavecT = {
-    name: string;
-    nameEng: string;
+    codeName: string;
+    eng: {
+        name: string;
+        inForward: string;
+    };
+    ru: {
+        name: string;
+        inForward: string;
+    };
     adress: string;
     swift: string;
     intermediary: string;
     intermediaryAddres: string;
     intermediarySwift: string;
-    inForward: string;
-    inForwardEng: string;
     accountNo: string;
 };
 

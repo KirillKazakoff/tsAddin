@@ -9,12 +9,12 @@ export const initExportContractDelivery: InitContractPartT = (utils, agreement) 
     const grouped = groupByConsignee(products);
 
     const termsCl = getCell('Доставка_условия');
-    termsCl.cellEng.value = `3.1 The commodity should be delivered under terms of ${terms} ${portTo.nameEng}`;
-    termsCl.cellRus.value = `3.1 Поставка осуществляется на условиях ${terms} ${portTo.name}`;
+    termsCl.cellEng.value = `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`;
+    termsCl.cellRus.value = `3.1 Поставка осуществляется на условиях ${terms} ${portTo.ru.name}`;
 
     const deliveryPortCl = getCell('Доставка_порт');
-    deliveryPortCl.cellEng.value = `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.nameEng}, ${portTo.countryEng}`;
-    deliveryPortCl.cellRus.value = `Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.name}, ${portTo.country}`;
+    deliveryPortCl.cellEng.value = `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country}`;
+    deliveryPortCl.cellRus.value = `Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country}`;
 
     const sertificateArrayCl = getCell('Сертификаты_массив').cellEng;
     const sertificateDescCl = getCell('Сертификаты_описание').cellEng;
@@ -34,8 +34,8 @@ export const initExportContractDelivery: InitContractPartT = (utils, agreement) 
             const { product } = p;
             const { placesTotal } = p.record.amount;
 
-            colEng += `- ${product.nameEng} - ${placesTotal.str} tn (net weight)\n`;
-            colRu += `- ${product.fullName} - ${placesTotal.str} тн (нетто)\n`;
+            colEng += `- ${product.eng.name} - ${placesTotal.str} tn (net weight)\n`;
+            colRu += `- ${product.ru.name} - ${placesTotal.str} тн (нетто)\n`;
         }, []);
 
         ws.insertRow(+sertificateArrayCl.row + i, [colEng, colRu], 'i').commit();

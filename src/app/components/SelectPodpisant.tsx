@@ -11,8 +11,8 @@ export const SelectPodpisant = observer(({ current, setter }: SelectPodpisantT) 
     const { podpisants } = spsStore;
 
     const options = Object.values(podpisants).map((podpisant) => (
-        <option key={podpisant.name} value={podpisant.name}>
-            {podpisant.name}
+        <option key={podpisant.ru.name} value={podpisant.ru.name}>
+            {podpisant.ru.name}
         </option>
     ));
 

@@ -6,28 +6,33 @@ export const setBanksProdavec = (spRange: any[][]) => {
     spRange.shift();
     const transformed = spRange.reduce<BanksProdavecT>((total, row) => {
         const [
-            name,
+            codeName,
             nameEng,
             adress,
             swift,
             intermediary,
             intermediaryAddres,
             intermediarySwift,
-            inForward,
+            inForwardRu,
             inForwardEng,
             accountNo,
         ] = row;
 
-        total[name] = {
-            name,
-            nameEng,
+        total[codeName] = {
+            codeName,
+            eng: {
+                name: nameEng,
+                inForward: inForwardEng,
+            },
+            ru: {
+                name: codeName,
+                inForward: inForwardRu,
+            },
             adress,
             swift,
             intermediary,
             intermediaryAddres,
             intermediarySwift,
-            inForward,
-            inForwardEng,
             accountNo,
         };
 

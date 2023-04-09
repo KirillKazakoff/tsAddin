@@ -8,7 +8,7 @@ export const setAgents = (spRange: any[][]) => {
         const [
             name,
             signatoryEng,
-            signatory,
+            signatoryRu,
             beneficiaryBank,
             branch,
             bankAdress,
@@ -19,16 +19,20 @@ export const setAgents = (spRange: any[][]) => {
         ] = row;
 
         total[code] = {
+            code,
+            eng: {
+                signatory: signatoryEng,
+            },
+            ru: {
+                signatory: signatoryRu,
+            },
             name,
-            signatoryEng,
-            signatory,
             beneficiaryBank,
             branch,
             bankAdress,
             acNo,
             swift,
             adress,
-            code,
         };
         return total;
     }, {});

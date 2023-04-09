@@ -1,6 +1,6 @@
 import { Worksheet } from 'exceljs';
 import { CellObjDoubleT, CellObjT } from '../../../../types/typesExcelUtils';
-import { getCellByName, getCellsObj } from './getCellByName';
+import { getCellByName, getCellsObj } from './getCell';
 
 export const setCellDouble = (ws: Worksheet, setObj: CellObjDoubleT) => {
     const { cell, eng, ru } = setObj;

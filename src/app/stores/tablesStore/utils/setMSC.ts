@@ -2,8 +2,8 @@
 import { ProductDescriptionT } from '../../../types/typesSP';
 
 export const setMSC = (product: ProductDescriptionT) => {
-    const { fullName, nameEng } = product;
+    const { eng, ru } = product;
 
-    product.fullName = `MSC ${fullName}`;
-    product.nameEng = `MSC ${nameEng}`;
+    ru.name = `MSC ${ru.name}`;
+    eng.name = `MSC ${eng.name}`;
 };

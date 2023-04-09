@@ -3,11 +3,13 @@ import ExcelJS, { Cell } from 'exceljs';
 export const getCellByName = (worksheet: ExcelJS.Worksheet, name: string): Cell => {
     let match;
 
-    worksheet.eachRow((row) => row.eachCell((cell) => {
-        if (cell.name === name) {
-            match = cell;
-        }
-    }));
+    worksheet.eachRow((row) =>
+        row.eachCell((cell) => {
+            if (cell.name === name) {
+                match = cell;
+            }
+        })
+    );
     return match;
 };
 

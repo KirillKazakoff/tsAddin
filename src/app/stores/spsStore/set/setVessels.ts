@@ -13,8 +13,13 @@ export const setVessels = (spRange: any[][]) => {
     });
 
     const transformed = vessels.reduce<VesselsT>((total, vessel) => {
-        const [name, nameEng, id] = vessel;
-        total[name] = { name, nameEng, id };
+        const [codeName, nameEng, id] = vessel;
+        total[codeName] = {
+            codeName,
+            eng: { name: nameEng },
+            ru: { name: codeName },
+            id,
+        };
         return total;
     }, {});
 

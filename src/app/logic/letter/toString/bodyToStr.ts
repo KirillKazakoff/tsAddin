@@ -26,7 +26,7 @@ export const bodyToStrRu = () => {
         const { vessel } = bodyRow;
         const productionStr = productionToStr(bodyRow, productToStringRu);
 
-        bodyStr = `\n${bodyStr}${vessel.name}\n${productionStr}`;
+        bodyStr = `\n${bodyStr}${vessel.eng.name}\n${productionStr}`;
 
         return bodyStr;
     }, '');
@@ -43,7 +43,7 @@ export const bodyToStrEng = () => {
         const { vessel } = bodyRow;
         const productionStr = productionToStr(bodyRow, productToStringEng);
 
-        bodyStr = `\n${bodyStr}${vessel.nameEng}\n${productionStr}`;
+        bodyStr = `\n${bodyStr}${vessel.eng.name}\n${productionStr}`;
 
         return bodyStr;
     }, '');

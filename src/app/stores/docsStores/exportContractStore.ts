@@ -4,11 +4,16 @@ import { selectPodpisantSp } from '../spsStore/select';
 
 class ExportContractStore {
     podpisant: PodpisantT = {
-        name: '',
-        comment: '',
-        commentEng: '',
+        codeName: '',
+        ru: {
+            name: '',
+            comment: '',
+        },
+        eng: {
+            name: '',
+            comment: '',
+        },
         declination: '',
-        nameEng: '',
     };
 
     constructor() {

@@ -14,6 +14,6 @@ export const setTransport = (mateValues: any[][], dictionaryRange: any[][]) => {
         pageStatusStore.setPageStatus(transportNotFound());
     }
 
-    const [name, nameEng, id] = transport;
-    spsStore.setTransport({ name, nameEng, id });
+    const [nameRu, nameEng, id] = transport;
+    spsStore.setTransport({ eng: { name: nameEng }, ru: { name: nameRu }, id });
 };

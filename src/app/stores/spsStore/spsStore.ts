@@ -17,8 +17,8 @@ import {
 
 class SpsStore {
     transport = {
-        name: '',
-        nameEng: '',
+        eng: { name: '' },
+        ru: { name: '' },
         id: '',
     };
     vessels: VesselsT = {};

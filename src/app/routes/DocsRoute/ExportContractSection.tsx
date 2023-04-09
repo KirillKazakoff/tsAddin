@@ -16,23 +16,22 @@ export const ExportContractSection = observer(() => {
             <li
                 key={agreementNo}
                 onClick={onClick}
-                className='doc-link export-contract'
-            >
+                className="doc-link export-contract">
                 {`№ ${agreementNo}`}
             </li>
         );
     });
 
     return (
-        <form className='docs__form export-contract-form'>
+        <form className="docs__form export-contract-form">
             <h2>Export Contract Section</h2>
 
             <SelectPodpisant
-                current={exportContractStore.podpisant.name}
+                current={exportContractStore.podpisant.codeName}
                 setter={setPodpisant}
             />
 
-            <ul className='docs'>{agreementsHtml}</ul>
+            <ul className="docs">{agreementsHtml}</ul>
         </form>
     );
 });

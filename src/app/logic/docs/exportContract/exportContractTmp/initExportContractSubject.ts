@@ -8,8 +8,8 @@ export const initExportContractSubject: InitContractPartT = (utils, agreement) =
     const { vessel } = agreement.record;
 
     const subjectDescCl = getCell('Предмет_описание');
-    subjectDescCl.cellEng.value = `1.1. Seller is obliged to deliver the commodity, and   Buyer  is obligated to receive and pay lot of the cargo,  produced by ${vessel.nameEng}`;
-    subjectDescCl.cellRus.value = `1.1. Продавец обязуется поставить Покупателю, а Покупатель обязуется принять и оплатить партию продукции, изготовленную на ${vessel.name}`;
+    subjectDescCl.cellEng.value = `1.1. Seller is obliged to deliver the commodity, and   Buyer  is obligated to receive and pay lot of the cargo,  produced by ${vessel.eng.name}`;
+    subjectDescCl.cellRus.value = `1.1. Продавец обязуется поставить Покупателю, а Покупатель обязуется принять и оплатить партию продукции, изготовленную на ${vessel.ru.name}`;
 
     const ws = subjectDescCl.cellEng.worksheet;
     const inheritRow = ws.getRow(+subjectDescCl.cellEng.row);
@@ -18,12 +18,12 @@ export const initExportContractSubject: InitContractPartT = (utils, agreement) =
 
     const subjectArrayCl = getCell('Предмет_массив');
 
-    const productRows = products.reduce<string[][]>((total, product) => {
-        const { fullName, nameEng } = product.product;
-        const { placesTotal } = product.record.amount;
+    const productRows = products.reduce<string[][]>((total, productInfo) => {
+        const { product: desc } = productInfo;
+        const { placesTotal } = productInfo.record.amount;
 
-        const colEng = `* ${nameEng} - ${placesTotal.str} tn (net weight)`;
-        const colRu = `* ${fullName} - ${placesTotal.str} тн (нетто)`;
+        const colEng = `* ${desc.eng.name} - ${placesTotal.str} tn (net weight)`;
+        const colRu = `* ${desc.ru.name} - ${placesTotal.str} тн (нетто)`;
         total.push([colEng, colRu]);
 
         return total;

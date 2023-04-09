@@ -8,20 +8,20 @@ export const initExportContractAddreses: InitContractPartT = (utils, agreement) 
 
     setCell({
         cell: 'Адреса_продавец',
-        eng: seller.nameEng,
-        ru: seller.fullName,
+        eng: seller.eng.name,
+        ru: seller.ru.name,
     });
 
     setCell({
         cell: 'Адреса_продавец_адрес',
-        eng: seller.addresEng,
-        ru: seller.addres,
+        eng: seller.eng.addres,
+        ru: seller.ru.addres,
     });
 
     setCell({
         cell: 'Адреса_банк_получателя',
-        eng: bankSeller.adress,
-        ru: `Банк-получателя: ${bankSeller.nameEng}`,
+        eng: bankSeller.eng.name,
+        ru: `Банк-получателя: ${bankSeller.eng.name}`,
     });
 
     setCell({
@@ -38,8 +38,8 @@ export const initExportContractAddreses: InitContractPartT = (utils, agreement) 
 
     setCell({
         cell: 'Адреса_получатель_в_пользу',
-        eng: `in forward to ${seller.nameEng}`,
-        ru: `в пользу ${seller.fullName}`,
+        eng: `in forward to ${bankSeller.eng.name}`,
+        ru: `в пользу ${bankSeller.ru.name}`,
     });
 
     setCell({
@@ -98,7 +98,7 @@ export const initExportContractAddreses: InitContractPartT = (utils, agreement) 
 
     setCell({
         cell: 'Адреса_подпись',
-        eng: `Продавец/Seller  _______________________${podpisant.nameEng}`,
-        ru: `Покупатель/Buyer ________________________${agent.signatoryEng}`,
+        eng: `Продавец/Seller  _______________________${podpisant.eng.name}`,
+        ru: `Покупатель/Buyer ________________________${agent.eng.signatory}`,
     });
 };

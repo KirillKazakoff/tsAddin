@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs';
 import { ExportRowT } from '../../../types/typesTables';
-import { getCellByName } from '../../excel/utils/excelUtilsObj/getCellByName';
+import { getCellByName } from '../../excel/utils/excelUtilsObj/getCell';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 
 export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
@@ -25,25 +25,25 @@ export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
 
     blWs.getCell(sellerCl.row, sellerCl.col);
 
-    sellerCl.value = row.seller.nameEng;
-    sellerAdressCl.value = row.seller.addresEng;
+    sellerCl.value = row.seller.eng.name;
+    sellerAdressCl.value = row.seller.eng.addres;
 
     consigneeCl.value = row.consignee.fullName;
     consigneeAdressCl.value = row.consignee.adress;
 
     dateCl.value = getExcelDateStr(row.date, 'eng');
 
-    vesselCl.value = row.vessel.nameEng;
+    vesselCl.value = row.vessel.eng.name;
 
-    transportCl.value = row.transport.nameEng;
+    transportCl.value = row.transport.eng.name;
 
-    toCl.value = `${row.portTo.nameEng}, ${row.portTo.countryEng}`;
+    toCl.value = `${row.portTo.eng.name}, ${row.portTo.eng.country}`;
 
-    fromCl.value = row.portFrom.nameEng;
+    fromCl.value = row.portFrom.eng.name;
 
     blNoCl.value = row.blNo;
 
-    productCl.value = row.product.nameEng;
+    productCl.value = row.product.eng.name;
 
     sortCl.value = row.sort;
     packCl.value = `1/${row.pack} KG`;

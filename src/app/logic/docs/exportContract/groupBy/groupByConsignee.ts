@@ -11,15 +11,15 @@ type GroupedProductsT = {
 
 export const groupByConsignee = (products: ProductInfoExportT[]) => {
     return products.reduce<GroupedProductsT>((total, product) => {
-        const { name } = product.consignee;
-        let group = total[name];
+        const { codeName } = product.consignee;
+        let group = total[codeName];
 
         if (!group) {
             group = {
                 products: [],
                 consignee: product.consignee,
             };
-            total[name] = group;
+            total[codeName] = group;
         }
 
         group.products.push(product);

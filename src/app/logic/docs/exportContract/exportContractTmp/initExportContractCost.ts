@@ -10,14 +10,14 @@ export const initExportContractCost: InitContractPartT = (utils, agreement) => {
     const costArrayCl = getCell('Цена_массив').cellEng;
     const ws = costDescCl.worksheet;
 
-    const costRows = products.reduce<string[][]>((total, product) => {
-        const { fullName, nameEng } = product.product;
-        const { price } = product.record.amount;
+    const costRows = products.reduce<string[][]>((total, productInfo) => {
+        const { product: desc } = productInfo;
+        const { price } = productInfo.record.amount;
 
-        const colEng = `* ${nameEng} - USD ${price.str} for one kg net weight`;
-        const colRu = `* ${fullName} - ${price.str} долл. за одну тонну (нетто)`;
+        const colEng = `* ${desc.eng.name} - USD ${price.str} for one kg net weight`;
+        const colRu = `* ${desc.ru.name} - ${price.str} долл. за одну тонну (нетто)`;
 
-        if (product.isPriceUnique) {
+        if (productInfo.isPriceUnique) {
             total.push([colEng, colRu]);
         }
 

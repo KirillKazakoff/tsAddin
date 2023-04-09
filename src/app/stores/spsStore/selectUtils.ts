@@ -12,7 +12,7 @@ export const selectFilteredVessels = () => {
     const mates = selectFilteredMates();
     const vessels = mates.reduce<VesselT[]>((total, row) => {
         const vessel = selectVesselSp(row.vessel);
-        if (total.some((vesselInArr) => vesselInArr.name === vessel.name)) {
+        if (total.some((vesselInArr) => vesselInArr.codeName === vessel.codeName)) {
             return total;
         }
 
@@ -24,9 +24,9 @@ export const selectFilteredVessels = () => {
 };
 
 export const selectVesselsStr = () => {
-    return selectFilteredVessels().map((vessel) => vessel.name);
+    return selectFilteredVessels().map((vessel) => vessel.ru.name);
 };
 
 export const selectVesselsStrEng = () => {
-    return selectFilteredVessels().map((vessel) => vessel.nameEng);
+    return selectFilteredVessels().map((vessel) => vessel.eng.name);
 };

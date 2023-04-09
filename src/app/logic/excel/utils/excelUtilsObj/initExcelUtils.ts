@@ -1,7 +1,7 @@
 import { Worksheet } from 'exceljs';
 import { CellUtilsT, CellUtilsDoubleT } from '../../../../types/typesExcelUtils';
 import { getRow } from './getRow';
-import { getCellByName, getCellsObj } from './getCellByName';
+import { getCellByName, getCellsObj } from './getCell';
 import { setCell, setCellDouble } from './setCell';
 import { deleteRow } from './deleteRow';
 
