@@ -32,7 +32,7 @@ export const setAgents = (spRange: any[][]) => {
             bankAdress,
             acNo,
             swift,
-            adress,
+            addres: adress,
         };
         return total;
     }, {});

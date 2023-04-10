@@ -4,7 +4,7 @@ import { AmountT } from '../../../types/typesTables';
 export const initAmount = (
     count?: number,
     fractionMin?: number,
-    fractionMax?: number
+    fractionMax?: number,
 ): AmountT => {
     if (!count) {
         return {

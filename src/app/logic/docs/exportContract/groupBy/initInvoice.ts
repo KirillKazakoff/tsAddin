@@ -1,11 +1,12 @@
 import { initAmount } from '../../../../stores/tablesStore/utils/initAmount';
 import { ProductInfoExportT } from '../../../../types/typesContract';
-import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 import { AgreementT } from './initAgreement';
 
 export const initInvoice = (product: ProductInfoExportT, agreement: AgreementT) => {
     const { record } = product;
-    const { invoice: invoiceNo, date: invoiceDate, msc, consignee } = record;
+    const {
+        invoice: invoiceNo, date: invoiceDate, msc, consignee,
+    } = record;
 
     const invoice = {
         products: [],

@@ -20,7 +20,7 @@ export type CellObjDoubleT = {
     ru: string;
 };
 
-export type SetCellDoubleBoundT = (setObj: CellObjDoubleT) => CellObjDoubleT;
+export type SetCellDoubleBoundT = (setObj: CellObjDoubleT) => CellDouble;
 
 // Utils Double
 export type CellUtilsDoubleT = {

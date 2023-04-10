@@ -155,7 +155,7 @@ export type AgentT = {
     bankAdress: string;
     acNo: string;
     swift: string;
-    adress: string;
+    addres: string;
 };
 
 export type AgentsT = {

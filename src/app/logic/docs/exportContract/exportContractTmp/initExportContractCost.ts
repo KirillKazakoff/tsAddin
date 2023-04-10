@@ -3,7 +3,7 @@ import { deleteRow } from '../../../excel/utils/excelUtilsObj/deleteRow';
 import { formatCurrencyLong, formatCount } from '../../../utils/formatCount';
 
 export const initExportContractCost: InitContractPartT = (utils, agreement) => {
-    const { getCell } = utils;
+    const { getCell, setCell } = utils;
     const { products, priceTotal } = agreement;
 
     const costDescCl = getCell('Цена_описание').cellEng;
@@ -25,15 +25,16 @@ export const initExportContractCost: InitContractPartT = (utils, agreement) => {
     }, []);
     ws.insertRows(+costArrayCl.row, costRows, 'i');
 
-    const totalCostCl = getCell('Цена_всего');
-
     const shortCurrencyEngStr = `USD ${formatCount(priceTotal, 2, 2)}`;
     const fullCurrencyEngStr = formatCurrencyLong(priceTotal, 'en');
     const shortCurrencyRuStr = `$${formatCount(priceTotal, 2, 2)}`;
     const fullCurrencyRuStr = formatCurrencyLong(priceTotal, 'ru');
 
-    totalCostCl.cellEng.value = `2.2 Total amount of this Agreement is \n${shortCurrencyEngStr} (${fullCurrencyEngStr})`;
-    totalCostCl.cellRus.value = `2.2 Общая сумма настоящего Дополнения составляет \n${shortCurrencyRuStr} (${fullCurrencyRuStr})`;
+    setCell({
+        cell: 'Цена_всего',
+        eng: `2.2 Total amount of this Agreement is \n${shortCurrencyEngStr} (${fullCurrencyEngStr})`,
+        ru: `2.2 Общая сумма настоящего Дополнения составляет \n${shortCurrencyRuStr} (${fullCurrencyRuStr})`,
+    });
 
     deleteRow(ws, 'Цена_массив');
 };
