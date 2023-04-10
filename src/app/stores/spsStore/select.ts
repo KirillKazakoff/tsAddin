@@ -43,3 +43,7 @@ export const selectAgentSp = (name: string) => {
 export const selectBankProdavecSp = (name: string) => {
     return spsStore.banksProdavec[name];
 };
+
+export const selectClientRuSp = (name: string) => {
+    return spsStore.clientsRu[name];
+};

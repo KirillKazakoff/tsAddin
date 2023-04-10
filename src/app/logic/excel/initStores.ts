@@ -1,5 +1,6 @@
 import { setAgents } from '../../stores/spsStore/set/setAgents';
 import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
+import { setClientsRu } from '../../stores/spsStore/set/setClientsRu';
 import { setConsignees } from '../../stores/spsStore/set/setConsignees';
 import { setContracts } from '../../stores/spsStore/set/setContracts';
 import { setPodpisants } from '../../stores/spsStore/set/setPodpisants';
@@ -21,7 +22,7 @@ export const initStores = async (context: Excel.RequestContext) => {
     const mateRange = initRange('Коносаменты', 'Коносаменты');
     const exportRange = initRange('Экспорт', 'Экспорт');
     const exportStorageRange = initRange('Экспорт Хранение', 'Экспорт_хранение');
-    // const innerRange = initRange('Внутренний рынок', 'Продажи_ВР');
+    const innerRange = initRange('Внутренний рынок', 'Продажи_ВР');
 
     const spTransportRange = initRange('Транспорта', 'SPTransport');
     const spVesselsRange = initRange('Суда', 'SPSudno');
@@ -37,6 +38,7 @@ export const initStores = async (context: Excel.RequestContext) => {
         'SPRekvizitBankProdavec',
         'SPRekvizitBankProdavec',
     );
+    const spClientsRange = initRange('SPClientsSell', 'SPClientsSell');
 
     await context.sync();
 
@@ -53,6 +55,7 @@ export const initStores = async (context: Excel.RequestContext) => {
     setPodpisants(spPodpisantsRange.values);
     setAgents(spAgentsRange.values);
     setBanksProdavec(spBankProdavec.values);
+    setClientsRu(spClientsRange.values);
 
     setExport(exportRange.values);
     setExportStorage(exportStorageRange.values);

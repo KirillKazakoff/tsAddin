@@ -19,8 +19,11 @@ export const MainRoute = observer(() => {
                 <NavLink to={'/letter'} className='nav-link'>
                     Offer
                 </NavLink>
-                <NavLink to={'/docs'} className='nav-link'>
-                    Docs
+                <NavLink to={'/export'} className='nav-link'>
+                    Export
+                </NavLink>
+                <NavLink to={'/inner'} className='nav-link'>
+                    Inner
                 </NavLink>
             </nav>
             <Outlet />

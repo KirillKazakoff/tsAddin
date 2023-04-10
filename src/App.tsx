@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LetterRoute } from './app/routes/LetterRoute/LetterRoute';
 import { MainRoute } from './app/routes/MainRoute';
 import NavigatorRoute from './app/routes/NavigatorRoute';
-import { DocsRoute } from './app/routes/DocsRoute/DocsRoute';
 import { PageStatusRoute } from './app/routes/ErrorRoute/PageStatusRoute';
+import { ExportRoute } from './app/routes/ExportRoute/ExportRoute';
+import { InnerRoute } from './app/routes/InnerRoute/InnerRoute';
 
 export default function App() {
     return (
@@ -14,7 +15,8 @@ export default function App() {
                 <Route path='*' element={<NavigatorRoute />} />
                 <Route path='/' element={<MainRoute />}>
                     <Route path='/letter' element={<LetterRoute />} />
-                    <Route path='/docs' element={<DocsRoute />} />
+                    <Route path='/export' element={<ExportRoute />} />
+                    <Route path='/inner' element={<InnerRoute />} />
                 </Route>
                 <Route path='/pageStatus' element={<PageStatusRoute />} />
             </Routes>

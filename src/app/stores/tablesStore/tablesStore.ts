@@ -1,10 +1,11 @@
 import { makeAutoObservable } from 'mobx';
-import { MateRowT, ExportRowT } from '../../types/typesTables';
+import { MateRowT, ExportRowT, InnerRowT } from '../../types/typesTables';
 
 class TablesStore {
     matesT: MateRowT[] = [];
     exportT: ExportRowT[] = [];
     exportStorageT: ExportRowT[] = [];
+    innerT: InnerRowT[] = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -20,6 +21,10 @@ class TablesStore {
 
     setExportStorage(table: ExportRowT[]) {
         this.exportStorageT = table;
+    }
+
+    setInner(table: InnerRowT[]) {
+        this.innerT = table;
     }
 }
 

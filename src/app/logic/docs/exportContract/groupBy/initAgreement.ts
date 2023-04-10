@@ -11,9 +11,10 @@ export const initAgreement = (row: ExportRowT) => {
     return agreement;
 };
 
-// types dynamic
-export type AgreementT = Omit<ReturnType<typeof initAgreement>, 'products'> & {
+export type AgreementT = {
     products: ProductInfoExportT[];
     invoices: InvoicesT;
+    record: ExportRowT;
+    priceTotal: number;
 };
 export type AgreementObjT = { [key: string]: AgreementT };

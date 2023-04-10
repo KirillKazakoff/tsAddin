@@ -184,3 +184,16 @@ export type BankProdavecT = {
 export type BanksProdavecT = {
     [key: string]: BankProdavecT;
 };
+
+// ClientsSellRu
+export type ClientRuT = {
+    codeName: string;
+    name: string;
+    inn: string;
+    phone: string;
+    mail: string;
+};
+
+export type ClientsRuT = {
+    [key: string]: ClientRuT;
+};

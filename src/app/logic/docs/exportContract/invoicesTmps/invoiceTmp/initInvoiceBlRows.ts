@@ -1,8 +1,5 @@
 /* eslint-disable no-param-reassign */
-import {
-    InitInvoicePartLanguageT,
-    InitInvoicePartT,
-} from '../../../../../types/typesExcelUtils';
+import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { styleInvoiceBlRows } from './styleInvoiceBlRows';
 
 export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
@@ -16,15 +13,17 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
 
         products.forEach((p, index) => {
             const { record, product } = p;
-            const { places, placesTotal, price, priceTotal } = record.amount;
+            const {
+                places, placesTotal, price, priceTotal,
+            } = record.amount;
 
-            let colBl = '',
-                colDesc = '',
-                colPack = '',
-                colPlaces = '',
-                colPlacesTotal = '',
-                colPriceUnit = '',
-                colPriceTotal = '';
+            let colBl = '';
+            let colDesc = '';
+            let colPack = '';
+            let colPlaces = '';
+            let colPlacesTotal = '';
+            let colPriceUnit = '';
+            let colPriceTotal = '';
 
             if (language === 'eng') {
                 colBl = record.blNo;

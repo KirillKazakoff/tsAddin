@@ -22,7 +22,7 @@ export const setExport = (table: any[][]) => {
     table.shift();
     if (checkEmptyTable(table)) return;
 
-    const transformedTable = table.reduce<ExportRowT[]>((totalObj, row, index) => {
+    const transformedTable = table.reduce<ExportRowT[]>((totalObj, row) => {
         const [
             contract,
             seller,

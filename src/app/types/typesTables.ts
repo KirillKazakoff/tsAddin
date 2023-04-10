@@ -1,6 +1,7 @@
 import {
     AgentT,
     BankProdavecT,
+    ClientRuT,
     ConsigneeT,
     ContractT,
     PortTamozhnyaT,
@@ -51,4 +52,20 @@ export type ExportRowT = {
     sort: string;
     pack: string;
     msc: string;
+};
+
+export type InnerRowT = {
+    buyer: ClientRuT;
+    seller: SellerT;
+    contractNo: number;
+    contractDate: string;
+    vessel: VesselT;
+    product: ProductDescriptionT;
+    sort: string;
+    pack: string;
+    konosament: string;
+    amount: AmountObjT;
+    bankSeller: BankProdavecT;
+    deliveryDate: string;
+    paymentDate: string;
 };
