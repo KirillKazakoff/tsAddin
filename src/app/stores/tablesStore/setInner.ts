@@ -47,9 +47,9 @@ export const setInner = (table: any[][]) => {
             konosament,
             amount: {
                 places: initAmount(placesTotal / pack, 0, 0),
-                placesTotal: initAmount(placesTotal, 0, 3),
-                price: initAmount(price, 0, 2),
-                priceTotal: initAmount(priceTotal, 3, 4),
+                placesTotal: initAmount(placesTotal, 1, 3),
+                price: initAmount(price, 2, 2),
+                priceTotal: initAmount(priceTotal, 2, 2),
             },
             bankSeller: selectBankProdavecSp(bank),
             deliveryDate,
@@ -59,6 +59,8 @@ export const setInner = (table: any[][]) => {
         totalObj.push(rowObj);
         return totalObj;
     }, []);
+
+    transformedTable.pop();
 
     tablesStore.setInner(transformedTable);
 };

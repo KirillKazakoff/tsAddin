@@ -3,7 +3,7 @@ import { CellObjT, CellUtilsT } from '../../../../../types/typesExcelUtils';
 export const initComInvoiceEXW = (
     cells: CellObjT[],
     utils: CellUtilsT,
-    terms: string
+    terms: string,
 ) => {
     if (terms === 'EXW') {
         cells.forEach((cellInfo) => {

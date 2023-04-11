@@ -12,6 +12,7 @@ import { setTransport } from '../../stores/spsStore/set/setTransport';
 import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { setExportStorage } from '../../stores/tablesStore/setExportStorage';
+import { setInner } from '../../stores/tablesStore/setInner';
 import { setMate } from '../../stores/tablesStore/setMate';
 import { InitRangeBoundT, initRange as initRangeUnbound } from './utils/initRange';
 
@@ -59,4 +60,5 @@ export const initStores = async (context: Excel.RequestContext) => {
 
     setExport(exportRange.values);
     setExportStorage(exportStorageRange.values);
+    setInner(innerRange.values);
 };

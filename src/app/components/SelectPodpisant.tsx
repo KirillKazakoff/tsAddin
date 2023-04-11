@@ -1,24 +1,19 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import spsStore from '../stores/spsStore/spsStore';
+import { Select } from './Select';
+import { SelectSpecificT } from '../types/typesComponents';
 
-type SelectPodpisantT = {
-    current: string;
-    setter: (newCurrent: string) => void;
-};
-
-export const SelectPodpisant = observer(({ current, setter }: SelectPodpisantT) => {
+export const SelectPodpisant = observer(({ current, setter }: SelectSpecificT) => {
     const { podpisants } = spsStore;
-
-    const options = Object.values(podpisants).map((podpisant) => (
-        <option key={podpisant.ru.name} value={podpisant.ru.name}>
-            {podpisant.ru.name}
-        </option>
-    ));
+    const options = Object.values(podpisants).map((podpisant) => podpisant.codeName);
 
     return (
-        <select onChange={(e) => setter(e.currentTarget.value)} value={current}>
-            {options}
-        </select>
+        <Select
+            current={current}
+            setter={setter}
+            options={options}
+            title={'Выберите подписанта:'}
+        />
     );
 });

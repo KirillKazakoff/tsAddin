@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
-import { styleInvoiceBlRows } from './styleInvoiceBlRows';
 
 export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
     const { getCell, ws, getRow } = utils;
@@ -11,51 +10,67 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
         const cellName = language === 'eng' ? 'Инвойс_Bl_массив' : 'Инвойс_Bl_массив_п';
         const blArrayCl = getCell(cellName);
 
+        // insert rows
         products.forEach((p, index) => {
             const { record, product } = p;
             const {
                 places, placesTotal, price, priceTotal,
             } = record.amount;
 
-            let colBl = '';
-            let colDesc = '';
-            let colPack = '';
-            let colPlaces = '';
-            let colPlacesTotal = '';
-            let colPriceUnit = '';
-            let colPriceTotal = '';
+            let blCol = '';
+            let descCol = '';
+            let packCol = '';
+            let placesCol = '';
+            let placesTotalCol = '';
+            let priceUnitCol = '';
+            let priceTotalCol = '';
 
             if (language === 'eng') {
-                colBl = record.blNo;
-                colDesc = product.eng.name;
-                colPack = `1/${record.pack} KG`;
-                colPlaces = `${places.str} PCS/`;
-                colPlacesTotal = `${placesTotal.str} tn`;
-                colPriceUnit = `${price.str} USD`;
-                colPriceTotal = `${priceTotal.str} USD`;
+                blCol = record.blNo;
+                descCol = product.eng.name;
+                packCol = `1/${record.pack} KG`;
+                placesCol = `${places.str} PCS/`;
+                placesTotalCol = `${placesTotal.str} tn`;
+                priceUnitCol = `${price.str} USD`;
+                priceTotalCol = `${priceTotal.str} USD`;
             } else {
-                colBl = record.blNo;
-                colDesc = product.ru.name;
-                colPack = `1/${record.pack} КГ`;
-                colPlaces = `${places.str} шт/`;
-                colPlacesTotal = `${placesTotal.str} тн`;
-                colPriceUnit = `${price.str} $`;
-                colPriceTotal = `${priceTotal.str} $`;
+                blCol = record.blNo;
+                descCol = product.ru.name;
+                packCol = `1/${record.pack} КГ`;
+                placesCol = `${places.str} шт/`;
+                placesTotalCol = `${placesTotal.str} тн`;
+                priceUnitCol = `${price.str} $`;
+                priceTotalCol = `${priceTotal.str} $`;
             }
 
             const rowArr = [
-                colBl,
-                colDesc,
-                colPack,
-                colPlaces,
-                colPlacesTotal,
-                colPriceUnit,
-                colPriceTotal,
+                blCol,
+                descCol,
+                packCol,
+                placesCol,
+                placesTotalCol,
+                priceUnitCol,
+                priceTotalCol,
             ];
 
             ws.insertRow(+blArrayCl.row + index, rowArr).commit();
         });
 
-        styleInvoiceBlRows(products, getRow, cellName);
+        // style inserted rows
+        products.forEach((product, i) => {
+            const row = getRow(cellName, -i - 1);
+            row.eachCell((cell) => {
+                cell.font = {
+                    size: 10,
+                    bold: false,
+                };
+                cell.alignment = { horizontal: 'center' };
+            });
+
+            const amountPlacesCl = row.getCell(4);
+            amountPlacesCl.alignment = { horizontal: 'right' };
+            row.height = 25;
+            row.commit();
+        });
     });
 };

@@ -11,8 +11,6 @@ export const initExportContractTmp = (
     book: ExcelJS.Workbook,
     agreement: AgreementT,
 ) => {
-    // console.log(agreement);
-
     const ws = book.getWorksheet('Export_Contract');
     const utils = initExcelUtilsDouble(ws);
 

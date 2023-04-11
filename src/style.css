@@ -53,7 +53,7 @@ b {
     margin-bottom: 30px;
 }
 
-/* blList */
+/* docs */
 .docs {
     display: flex;
     flex-wrap: wrap;
@@ -71,4 +71,23 @@ b {
 
 .doc-link:hover {
     border-color: black;
+}
+
+/* request */
+.request-docs-title {
+    margin-top: 20px;
+}
+
+/* fields-wrapper */
+.fields-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+/* select*/
+.my-select {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
 }

@@ -5,7 +5,7 @@ import { GetRowBoundT } from '../../../../../types/typesExcelUtils';
 export const styleInvoiceBlRows = (
     products: ProductInfoExportT[],
     getRow: GetRowBoundT,
-    arrayClName: string
+    arrayClName: string,
 ) => {
     products.forEach((product, i) => {
         const row = getRow(arrayClName, -i - 1);

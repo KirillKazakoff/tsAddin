@@ -9,3 +9,11 @@ export const getExcelDateStr = (excelSerial: string, locale: string) => {
         year: 'numeric',
     });
 };
+
+export const getExcelDateNumeric = (excelSerial: string, locale: string) => {
+    return getExcelDate(excelSerial).toLocaleString(locale, {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+    });
+};

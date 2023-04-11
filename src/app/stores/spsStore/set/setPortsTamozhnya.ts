@@ -3,6 +3,8 @@ import { PortsTamozhnyaT } from '../../../types/typesSP';
 import spsStore from '../spsStore';
 
 export const setPortsTamozhnya = (spRange: any[][]) => {
+    spRange.shift();
+
     const transformed = spRange.reduce<PortsTamozhnyaT>((total, row) => {
         const [codeName, nameEng, fullName] = row;
 
