@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useInitExcel } from '../../logic/excel/useInitExcel';
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import { RequestSection } from './RequestSection';
+import { PortLetterSection } from './PortLetterSection';
 
 export const InnerRoute = observer(() => {
     useInitExcel();
@@ -12,6 +13,7 @@ export const InnerRoute = observer(() => {
     return (
         <div className='doc-links'>
             <RequestSection />
+            <PortLetterSection />
         </div>
     );
 });

@@ -65,7 +65,7 @@ export type InnerRowT = {
     pack: string;
     konosament: string;
     amount: AmountObjT;
-    bankSeller: BankProdavecT;
+    bankSeller: string;
     deliveryDate: string;
     paymentDate: string;
 };

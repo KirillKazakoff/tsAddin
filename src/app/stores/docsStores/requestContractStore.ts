@@ -1,25 +1,36 @@
 import { makeAutoObservable } from 'mobx';
-import { PortTamozhnyaT } from '../../types/typesSP';
-import { selectPortTamozhnyaSp } from '../spsStore/select';
+import { PortRuT, PortTamozhnyaT } from '../../types/typesSP';
+import { selectPortRu, selectPortTamozhnyaSp } from '../spsStore/select';
 
 class RequestContractStore {
     terms = '';
-    port: PortTamozhnyaT = {
+    portTamozhnya: PortTamozhnyaT = {
         codeName: '',
         eng: { name: '' },
         ru: { name: '' },
+    };
+    portRu: PortRuT = {
+        codeName: '',
+        director: '',
+        mail: '',
+        name: '',
+        phone: '',
     };
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setTerms(terms: string) {
-        this.terms = terms;
+    setTerms(value: string) {
+        this.terms = value;
     }
 
-    setPort(port: string) {
-        this.port = selectPortTamozhnyaSp(port);
+    setPortTamozhnya(value: string) {
+        this.portTamozhnya = selectPortTamozhnyaSp(value);
+    }
+
+    setPortRu(value: string) {
+        this.portRu = selectPortRu(value);
     }
 }
 

@@ -5,13 +5,14 @@ import { ContractT, groupByContractNo } from './groupByContractNo';
 
 export const useInitRequestSection = () => {
     const contracts = Object.values(groupByContractNo());
-    const { port, terms } = requestContractStore;
+    const { portTamozhnya, portRu, terms } = requestContractStore;
 
     const getRequest = async (contract: ContractT) => {
         await createRequestContract(contract);
     };
 
-    const setPort = (value: string) => requestContractStore.setPort(value);
+    const setPortTamozhnya = (value: string) => requestContractStore.setPortTamozhnya(value);
+    const setPortRu = (value: string) => requestContractStore.setPortRu(value);
     const setTerms = (value: string) => requestContractStore.setTerms(value);
 
     const getAllRequests = async () => {
@@ -19,16 +20,22 @@ export const useInitRequestSection = () => {
     };
 
     useEffect(() => {
-        setPort('Владивосток');
+        setTerms('CFR');
+        setPortTamozhnya('Владивосток');
+        setPortRu('ДВ-Порт');
     }, []);
 
     return {
         contracts,
         getRequest,
         getAllRequests,
-        setPort,
+
+        setPortTamozhnya,
         setTerms,
-        port,
+        setPortRu,
+
+        portTamozhnya,
+        portRu,
         terms,
     };
 };

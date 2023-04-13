@@ -13,7 +13,7 @@ export const SelectPortTamozhnya = observer((props: SelectSpecificT) => {
             current={props.current}
             setter={props.setter}
             options={options}
-            title={'Выберите город-порт:'}
+            title={'Город-порт:'}
         />
     );
 });

@@ -51,7 +51,7 @@ export const setInner = (table: any[][]) => {
                 price: initAmount(price, 2, 2),
                 priceTotal: initAmount(priceTotal, 2, 2),
             },
-            bankSeller: selectBankProdavecSp(bank),
+            bankSeller: bank,
             deliveryDate,
             paymentDate,
         };

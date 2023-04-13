@@ -13,7 +13,7 @@ export const SelectPodpisant = observer(({ current, setter }: SelectSpecificT) =
             current={current}
             setter={setter}
             options={options}
-            title={'Выберите подписанта:'}
+            title={'Подписант:'}
         />
     );
 });

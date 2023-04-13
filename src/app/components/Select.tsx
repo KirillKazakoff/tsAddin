@@ -12,9 +12,13 @@ export const Select = observer(({
     ));
 
     return (
-        <div className='my-select'>
+        <div className='select-wrapper'>
             <span className='select-title'>{title}</span>
-            <select onChange={(e) => setter(e.currentTarget.value)} value={current}>
+            <select
+                className='select'
+                onChange={(e) => setter(e.currentTarget.value)}
+                value={current}
+            >
                 {optionsList}
             </select>
         </div>

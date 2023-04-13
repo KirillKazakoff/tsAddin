@@ -28,8 +28,8 @@ export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
     sellerCl.value = row.seller.eng.name;
     sellerAdressCl.value = row.seller.eng.addres;
 
-    consigneeCl.value = row.consignee.fullName;
-    consigneeAdressCl.value = row.consignee.adress;
+    consigneeCl.value = row.consignee?.fullName || row.agent.name;
+    consigneeAdressCl.value = row.consignee?.adress || row.agent.addres;
 
     dateCl.value = getExcelDateStr(row.date, 'eng');
 

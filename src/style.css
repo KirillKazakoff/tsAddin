@@ -16,6 +16,10 @@ b {
     font-weight: bold;
 }
 
+.btn {
+    cursor: pointer;
+}
+
 .main-route {
     padding: 10px;
 }
@@ -24,6 +28,7 @@ b {
 .input-wrapper {
     display: flex;
     justify-content: space-between;
+    column-gap: 10px;
 }
 
 .input-checkbox {
@@ -75,7 +80,12 @@ b {
 
 /* request */
 .request-docs-title {
-    margin-top: 20px;
+    margin-top: 40px;
+}
+
+/* port-letter */
+.port-letter-title {
+    margin-top: 40px;
 }
 
 /* fields-wrapper */
@@ -86,8 +96,14 @@ b {
 }
 
 /* select*/
-.my-select {
+.select-wrapper {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    column-gap: 10px;
+}
+
+.select {
+    width: 120px;
+    cursor: pointer;
 }

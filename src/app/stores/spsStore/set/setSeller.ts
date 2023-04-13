@@ -10,7 +10,7 @@ export const setSellers = (spRange: any[][]) => {
             codeName,
             eng: {
                 name: nameEng,
-                addres: addresRu,
+                addres: addresEng,
             },
             ru: {
                 name: fullNameRu,

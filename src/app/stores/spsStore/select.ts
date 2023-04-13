@@ -47,3 +47,7 @@ export const selectBankProdavecSp = (name: string) => {
 export const selectClientRuSp = (name: string) => {
     return spsStore.clientsRu[name];
 };
+
+export const selectPortRu = (name: string) => {
+    return spsStore.portsRu[name];
+};

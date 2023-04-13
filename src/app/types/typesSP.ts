@@ -197,3 +197,16 @@ export type ClientRuT = {
 export type ClientsRuT = {
     [key: string]: ClientRuT;
 };
+
+// PortsRu
+export type PortRuT = {
+    codeName: string;
+    name: string;
+    phone: string;
+    director: string;
+    mail: string;
+};
+
+export type PortsRuT = {
+    [key: string]: PortRuT;
+};

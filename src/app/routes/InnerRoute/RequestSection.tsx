@@ -3,13 +3,22 @@ import { observer } from 'mobx-react-lite';
 import { useInitRequestSection } from '../../logic/docs/innerContract/useInitRequestSection';
 import Input from '../../components/Input';
 import { SelectPortTamozhnya } from '../../components/SelectPortTamozhnya';
+import { SelectPortRu } from '../../components/SelectPortRu';
 
 export const RequestSection = observer(() => {
     const {
-        contracts, getRequest, getAllRequests, setPort, setTerms, port, terms,
+        contracts,
+        getRequest,
+        getAllRequests,
+        setPortTamozhnya,
+        setPortRu,
+        setTerms,
+        portTamozhnya,
+        portRu,
+        terms,
     } = useInitRequestSection();
 
-    const contractList = Object.values(contracts).map((contract) => {
+    const contractList = contracts.map((contract) => {
         const { contractNo } = contract.record;
         const onClick = () => getRequest(contract);
         return (
@@ -25,7 +34,7 @@ export const RequestSection = observer(() => {
     return (
         <form className='docs__form request-section-form'>
             <h2 className='title request-section-title'>
-                Request for contract section
+                Request For Contract Section
             </h2>
 
             <h3 className='title request-title'>Заявка:</h3>
@@ -37,11 +46,22 @@ export const RequestSection = observer(() => {
                     setter={setTerms}
                     value={terms}
                 />
-                <SelectPortTamozhnya current={port.ru.name} setter={setPort} />
+                <SelectPortTamozhnya
+                    current={portTamozhnya.codeName}
+                    setter={setPortTamozhnya}
+                />
+                <SelectPortRu current={portRu.codeName} setter={setPortRu} />
             </div>
 
-            <h3 className='title request-docs-title'>Загрузить номера заявок</h3>
+            <h3 className='title request-docs-title'>Загрузить номера заявок:</h3>
             <ul className='docs request-docs'>{contractList}</ul>
+            <button
+                className='btn docs-all__btn'
+                onClick={getAllRequests}
+                type='button'
+            >
+                Загрузить все заявки
+            </button>
         </form>
     );
 });

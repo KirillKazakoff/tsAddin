@@ -10,7 +10,7 @@ export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
     const requestsArrayCl = getCell(cellName);
 
     rows.forEach((row, index) => {
-        const producerCol = row.seller.ru.name;
+        const producerCol = row.vessel.ru.name;
         const productCol = row.product.ru.name;
         const sortCol = row.sort;
         const packCol = row.product.ru.pack;
