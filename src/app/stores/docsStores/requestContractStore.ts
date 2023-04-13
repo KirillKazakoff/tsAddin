@@ -1,37 +1,22 @@
+/* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
-import { PortRuT, PortTamozhnyaT } from '../../types/typesSP';
+import { initPortRu, initPortTamozhnya } from '../initStoreObjects';
 import { selectPortRu, selectPortTamozhnyaSp } from '../spsStore/select';
 
 class RequestContractStore {
     terms = '';
-    portTamozhnya: PortTamozhnyaT = {
-        codeName: '',
-        eng: { name: '' },
-        ru: { name: '' },
-    };
-    portRu: PortRuT = {
-        codeName: '',
-        director: '',
-        mail: '',
-        name: '',
-        phone: '',
-    };
+    portTamozhnya = initPortTamozhnya();
+    portRu = initPortRu();
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setTerms(value: string) {
-        this.terms = value;
-    }
-
-    setPortTamozhnya(value: string) {
-        this.portTamozhnya = selectPortTamozhnyaSp(value);
-    }
-
-    setPortRu(value: string) {
-        this.portRu = selectPortRu(value);
-    }
+    setField = {
+        terms: (value: string) => (this.terms = value),
+        portTamozhnya: (value: string) => (this.portTamozhnya = selectPortTamozhnyaSp(value)),
+        portRu: (value: string) => (this.portRu = selectPortRu(value)),
+    };
 }
 
 const requestContractStore = new RequestContractStore();

@@ -10,9 +10,7 @@ export const RequestSection = observer(() => {
         contracts,
         getRequest,
         getAllRequests,
-        setPortTamozhnya,
-        setPortRu,
-        setTerms,
+        setField,
         portTamozhnya,
         portRu,
         terms,
@@ -26,7 +24,7 @@ export const RequestSection = observer(() => {
                 className='doc-link request' onClick={onClick}
                 key={contractNo}
             >
-                {contractNo}
+                {`№${contractNo}`}
             </li>
         );
     });
@@ -43,17 +41,19 @@ export const RequestSection = observer(() => {
                 <Input
                     title='Условия продажи:'
                     placeholder='Условия продажи'
-                    setter={setTerms}
+                    setter={setField.terms}
                     value={terms}
                 />
                 <SelectPortTamozhnya
                     current={portTamozhnya.codeName}
-                    setter={setPortTamozhnya}
+                    setter={setField.portTamozhnya}
                 />
-                <SelectPortRu current={portRu.codeName} setter={setPortRu} />
+                <SelectPortRu current={portRu.codeName} setter={setField.portRu} />
             </div>
 
-            <h3 className='title request-docs-title'>Загрузить номера заявок:</h3>
+            <h3 className='title request-docs-title'>
+                Загрузить заявки на договора:
+            </h3>
             <ul className='docs request-docs'>{contractList}</ul>
             <button
                 className='btn docs-all__btn'

@@ -1,20 +1,9 @@
 import { makeAutoObservable } from 'mobx';
-import { PodpisantT } from '../../types/typesSP';
+import { initPodpisant } from '../initStoreObjects';
 import { selectPodpisantSp } from '../spsStore/select';
 
 class ExportContractStore {
-    podpisant: PodpisantT = {
-        codeName: '',
-        ru: {
-            name: '',
-            comment: '',
-        },
-        eng: {
-            name: '',
-            comment: '',
-        },
-        declination: '',
-    };
+    podpisant = initPodpisant();
 
     constructor() {
         makeAutoObservable(this);

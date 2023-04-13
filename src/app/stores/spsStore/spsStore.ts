@@ -16,13 +16,10 @@ import {
     ClientsRuT,
     PortsRuT,
 } from '../../types/typesSP';
+import { initTransport } from '../initStoreObjects';
 
 class SpsStore {
-    transport = {
-        eng: { name: '' },
-        ru: { name: '' },
-        id: '',
-    };
+    transport = initTransport();
     vessels: VesselsT = {};
     production: ProductionNewT = {};
     sellers: SellersT = {};
