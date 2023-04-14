@@ -18,7 +18,7 @@ export const useInitRequestSection = () => {
     };
 
     useEffect(() => {
-        requestContractStore.setField.terms('CFR');
+        setField.terms('CFR');
         setField.portTamozhnya('Владивосток');
         setField.portRu('ДВ-Порт');
     }, []);

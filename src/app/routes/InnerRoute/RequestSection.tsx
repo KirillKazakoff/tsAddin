@@ -2,8 +2,8 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useInitRequestSection } from '../../logic/docs/innerContract/useInitRequestSection';
 import Input from '../../components/Input';
-import { SelectPortTamozhnya } from '../../components/SelectPortTamozhnya';
-import { SelectPortRu } from '../../components/SelectPortRu';
+import { SelectPortRu } from '../../components/Select/SelectPortRu';
+import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
 
 export const RequestSection = observer(() => {
     const {

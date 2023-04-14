@@ -1,6 +1,7 @@
 import { Workbook } from 'exceljs';
 import requestContractStore from '../../../../stores/docsStores/requestContractStore';
 import { selectTransportSp } from '../../../../stores/spsStore/select';
+import { CellObjT } from '../../../../types/typesExcelUtils';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
 import { ContractT } from '../groupByContractNo';
@@ -9,7 +10,6 @@ import { initRequestRows } from './initRequestRows';
 export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     const ws = book.getWorksheet('Request_Contract');
     const utils = initExcelUtils(ws);
-    const { setCell } = utils;
 
     const { record, priceTotal, rows } = contract;
     const { portRu, portTamozhnya, terms } = requestContractStore;
@@ -17,7 +17,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     const isVld = portTamozhnya.codeName === 'Владивосток';
     const isCfrVld = terms.includes('CFR') && isVld;
     // prettier-ignore
-    const cells = [
+    const cells: CellObjT[] = [
         { cell: 'Заявка', value: `Прошу разработать договор поставки № ${record.contractNo} от ${record.contractDate}` },
         { cell: 'Заявка_дата', value: getExcelDateNumeric(record.contractDate, 'ru') },
         { cell: 'Заявка_стороны', value: `между ${record.seller.ru.name} (ПОСТАВЩИК) и ${record.buyer.name}` },
@@ -33,5 +33,5 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
 
     initRequestRows(rows, utils);
 
-    cells.forEach((cell) => setCell(cell));
+    cells.forEach((cell) => utils.setCell(cell));
 };

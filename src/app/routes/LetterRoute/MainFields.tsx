@@ -44,9 +44,7 @@ export const MainFields = observer(() => {
                 value={fields.payment}
             />
             <CheckBox
-                type='checkbox'
                 title='Предложение на экспорт'
-                placeholder='Предложение на экспорт'
                 setter={toggleIsExport}
                 checked={fields.isExport}
             />

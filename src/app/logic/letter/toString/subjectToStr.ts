@@ -16,7 +16,7 @@ export const subjectToStrRu = () => {
 
             return total;
         },
-        ''
+        '',
     );
 
     return `Предложение ${subjectStr} ${transport.ru.name}`;
@@ -35,7 +35,7 @@ export const subjectToStrEng = () => {
 
             return total;
         },
-        ''
+        '',
     );
 
     return `Offer ${subjectStr} ${transport.eng.name}`;

@@ -1,9 +1,10 @@
+import { useEffect } from 'react';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { createPortLetter } from './createPortLetter';
 import { ContractT, groupByContractNo } from './groupByContractNo';
 
 export const useInitPortLetter = () => {
-    const { store } = portLetterStore;
+    const { store, setField } = portLetterStore;
 
     const contracts = Object.values(groupByContractNo());
 
@@ -15,14 +16,16 @@ export const useInitPortLetter = () => {
         contracts.forEach((contract) => getLetter(contract));
     };
 
-    // const setField ={
-    //     port: (value: string) => portLetterStore.setPort(value),
-    //     podpisant: (value: string) =>
-    // }
+    useEffect(() => {
+        setField.port('ДВ-Порт');
+        setField.podpisant('Котов Н.М.');
+    }, []);
 
     return {
         contracts,
         getLetter,
         getAllLetters,
+        store,
+        setField,
     };
 };

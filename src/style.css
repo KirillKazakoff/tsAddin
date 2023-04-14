@@ -1,3 +1,10 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
 html,
 body {
     width: 100%;
@@ -24,16 +31,45 @@ b {
     padding: 10px;
 }
 
-/* .input-wrapper */
+/* .input */
+.input {
+    width: 135px;
+    max-height: 25px;
+    min-height: 25px;
+}
+
 .input-wrapper {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    column-gap: 10px;
+    column-gap: 15px;
 }
 
 .input-checkbox {
     width: 20px;
     height: 20px;
+}
+
+.input-title {
+    width: 120px;
+}
+
+/* select*/
+.select-wrapper {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: 15px;
+}
+
+.select {
+    height: 25px;
+    width: 135px;
+    cursor: pointer;
+}
+
+.select-title {
+    width: 120px;
 }
 
 /* .letter__fields */
@@ -93,17 +129,4 @@ b {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
-}
-
-/* select*/
-.select-wrapper {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    column-gap: 10px;
-}
-
-.select {
-    width: 120px;
-    cursor: pointer;
 }

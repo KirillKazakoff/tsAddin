@@ -2,22 +2,21 @@
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { InnerRowT } from '../../../../types/typesTables';
 
-export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
+export const initPortLetterRows = (rows: InnerRowT[], utils: CellUtilsT) => {
     const {
         ws, getCell, deleteRow, getRow,
     } = utils;
-    const cellName = 'Заявка_массив';
+    const cellName = 'Письмо_массив';
     const arrayCl = getCell(cellName);
 
     rows.forEach((row, index) => {
         const rowArr = [
+            row.konosament,
+            `${row.product.ru.name} ${row.sort}`,
             row.vessel.ru.name,
-            row.product.ru.name,
-            row.sort,
-            row.product.ru.pack,
+            `1/${row.pack}`,
+            row.amount.places.str,
             row.amount.placesTotal.str,
-            row.amount.price.str,
-            row.amount.priceTotal.str,
         ];
 
         ws.insertRow(+arrayCl.row + index, rowArr).commit();
@@ -39,7 +38,7 @@ export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
             };
         });
 
-        row.height = 45;
+        row.height = 35;
         row.commit();
     });
 

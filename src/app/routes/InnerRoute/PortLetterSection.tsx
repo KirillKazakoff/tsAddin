@@ -1,10 +1,17 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useInitPortLetter } from '../../logic/docs/innerContract/useInitPortLetter';
-import { SelectPortRu } from '../../components/SelectPortRu';
+import { SelectPortRu } from '../../components/Select/SelectPortRu';
+import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
+import Input from '../../components/Input';
+import CheckBox from '../../components/CheckBox';
+import { SelectCargo } from '../../components/Select/SelectCargo';
 
 export const PortLetterSection = observer(() => {
-    const { contracts, getAllLetters, getLetter } = useInitPortLetter();
+    const {
+        contracts, getAllLetters, getLetter, setField, store,
+    } = useInitPortLetter();
+
     const letterList = contracts.map((contract) => {
         const { buyer, contractNo } = contract.record;
         const onClick = () => getLetter(contract);
@@ -23,8 +30,52 @@ export const PortLetterSection = observer(() => {
         <form className='docs__form port-letter-form'>
             <h2 className='title port-letter-title'>Port Letter Section</h2>
             <h3>Письмо:</h3>
-            {/* <SelectPortRu current=''> */}
-            <h3>Загрузить письма в порт</h3>
+            <div className='fields-wrapper'>
+                <SelectPortRu current={store.port.codeName} setter={setField.port} />
+                <SelectPodpisant
+                    current={store.podpisant.codeName}
+                    setter={setField.podpisant}
+                />
+                <Input
+                    title='Дата письма:'
+                    placeholder='Дата письма'
+                    setter={setField.dateLetter}
+                    value={store.dateLetter}
+                />
+                <SelectCargo
+                    current={store.cargoTo.auto}
+                    title='Грузовые работы склад-авто'
+                    setter={setField.cargoTo.auto}
+                />
+                <SelectCargo
+                    current={store.cargoTo.storage}
+                    title='Грузовые работы борт-склад'
+                    setter={setField.cargoTo.storage}
+                />
+                <CheckBox
+                    checked={store.isCFR}
+                    title={'Передача с борта'}
+                    setter={setField.isCFR}
+                />
+                {!store.isCFR ? (
+                    <>
+                        <Input
+                            title='Хранение продавца с:'
+                            placeholder='Хранение с'
+                            setter={setField.storage.from}
+                            value={store.storage.from}
+                        />
+                        <Input
+                            title='Хранение продавца до:'
+                            placeholder='Хранение до'
+                            setter={setField.storage.to}
+                            value={store.storage.to}
+                        />
+                    </>
+                ) : null}
+            </div>
+
+            <h3 className='title port-letter-title'>Загрузить письма в порт</h3>
             <ul className='docs port-letter-docs'>{letterList}</ul>
             <button
                 className='btn docs-all__btn'

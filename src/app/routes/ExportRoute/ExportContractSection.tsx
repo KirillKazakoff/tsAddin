@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { SelectPodpisant } from '../../components/SelectPodpisant';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
+import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 
 export const ExportContractSection = observer(() => {
     const { getContract, setPodpisant, agreements } = useInitContractSection();

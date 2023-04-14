@@ -1,22 +1,26 @@
 /* eslint-disable no-return-assign */
+import { makeAutoObservable } from 'mobx';
 import { initPodpisant, initPortRu } from '../initStoreObjects';
 import { selectPodpisantSp, selectPortRu } from '../spsStore/select';
 
 export type CargoT = 'Покупатель' | 'Продавец' | '';
 
 class PortLetterStore {
+    constructor() {
+        makeAutoObservable(this);
+    }
     store = {
         port: initPortRu(),
         podpisant: initPodpisant(),
-        dateLetter: '',
+        dateLetter: '12.12.23',
         isCFR: true,
         cargoTo: {
-            storage: <CargoT>'',
-            auto: <CargoT>'',
+            storage: <CargoT>'Покупатель',
+            auto: <CargoT>'Покупатель',
         },
         storage: {
-            from: '',
-            to: '',
+            from: '14.12.23',
+            to: '17.12.23',
         },
     };
 
@@ -24,7 +28,7 @@ class PortLetterStore {
         port: (value: string) => (this.store.port = selectPortRu(value)),
         podpisant: (value: string) => (this.store.podpisant = selectPodpisantSp(value)),
         dateLetter: (value: string) => (this.store.dateLetter = value),
-        isCFR: (value: boolean) => (this.store.isCFR = value),
+        isCFR: () => (this.store.isCFR = !this.store.isCFR),
         cargoTo: {
             storage: (value: CargoT) => (this.store.cargoTo.storage = value),
             auto: (value: CargoT) => (this.store.cargoTo.auto = value),
