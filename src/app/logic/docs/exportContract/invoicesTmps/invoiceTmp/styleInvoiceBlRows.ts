@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
-import { ProductInfoExportT } from '../../../../../types/typesContract';
 import { GetRowBoundT } from '../../../../../types/typesExcelUtils';
+import { ExportRowT } from '../../../../../types/typesTables';
 
 export const styleInvoiceBlRows = (
-    products: ProductInfoExportT[],
+    rows: ExportRowT[],
     getRow: GetRowBoundT,
     arrayClName: string,
 ) => {
-    products.forEach((product, i) => {
+    rows.forEach((product, i) => {
         const row = getRow(arrayClName, -i - 1);
         row.eachCell((cell) => {
             cell.font = {

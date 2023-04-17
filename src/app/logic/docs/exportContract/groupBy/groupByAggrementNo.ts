@@ -3,7 +3,9 @@
 import _ from 'lodash';
 import tablesStore from '../../../../stores/tablesStore/tablesStore';
 import { setMSC } from '../../../../stores/tablesStore/utils/setMSC';
+import { groupByConsignee } from './groupByConsignee';
 import { groupByInvoice } from './groupByInvoice';
+import { groupByVesselExport } from './groupByVesselExport';
 import { AgreementObjT, initAgreement } from './initAgreement';
 
 export const groupByAgreementNo = () => {
@@ -16,27 +18,22 @@ export const groupByAgreementNo = () => {
             total[agreementNo] = agreement;
         }
 
-        const isPriceUnique = agreement.products.every(
-            (product) => product.record.amount.price.count !== row.amount.price.count,
-        );
+        const clonedRow = _.cloneDeep(row);
+        if (row.msc) setMSC(clonedRow);
 
-        const product = _.cloneDeep(row.product);
-        if (row.msc) setMSC(product);
-
-        const productInfo = _.cloneDeep({
-            record: row,
-            product,
-            consignee: row.consignee,
-            isPriceUnique,
-        });
-
-        agreement.products.push(productInfo);
-        agreement.priceTotal += row.amount.priceTotal.count;
+        agreement.rows.push(clonedRow);
+        agreement.priceTotal += clonedRow.amount.priceTotal.count;
         return total;
     }, {});
 
-    Object.keys(agreements).forEach((key) => {
-        agreements[key] = groupByInvoice(agreements[key]);
+    Object.entries(agreements).forEach(([key, agreement]) => {
+        agreements[key] = groupByInvoice(agreement);
+        agreements[key] = groupByVesselExport(agreement);
+        agreements[key] = groupByConsignee(agreement);
+
+        const copy = _.cloneDeep(agreements[key].productsGroupedBy);
+        console.log(copy);
     });
+
     return agreements;
 };

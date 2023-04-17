@@ -3,7 +3,7 @@ import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 
 export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
     const { getCell, ws, getRow } = utils;
-    const { products } = invoice;
+    const { rows } = invoice;
 
     ['eng', 'ru'].forEach((language) => {
         // prettier-ignore
@@ -11,65 +11,55 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
         const blArrayCl = getCell(cellName);
 
         // insert rows
-        products.forEach((p, index) => {
-            const { record, product } = p;
+        rows.forEach((row, index) => {
             const {
                 places, placesTotal, price, priceTotal,
-            } = record.amount;
+            } = row.amount;
 
-            let blCol = '';
-            let descCol = '';
-            let packCol = '';
-            let placesCol = '';
-            let placesTotalCol = '';
-            let priceUnitCol = '';
-            let priceTotalCol = '';
+            const cols = {
+                bl: row.blNo,
+                vessel: row.vessel.eng.name,
+                desc: row.product.eng.name,
+                pack: `1/${row.pack} KG`,
+                places: `${places.str} PCS/`,
+                placesTotal: `${placesTotal.str} tn`,
+                priceUnit: `${price.str} USD`,
+                priceTotal: `${priceTotal.str} USD`,
+            };
 
-            if (language === 'eng') {
-                blCol = record.blNo;
-                descCol = product.eng.name;
-                packCol = `1/${record.pack} KG`;
-                placesCol = `${places.str} PCS/`;
-                placesTotalCol = `${placesTotal.str} tn`;
-                priceUnitCol = `${price.str} USD`;
-                priceTotalCol = `${priceTotal.str} USD`;
-            } else {
-                blCol = record.blNo;
-                descCol = product.ru.name;
-                packCol = `1/${record.pack} КГ`;
-                placesCol = `${places.str} шт/`;
-                placesTotalCol = `${placesTotal.str} тн`;
-                priceUnitCol = `${price.str} $`;
-                priceTotalCol = `${priceTotal.str} $`;
+            if (language === 'ru') {
+                cols.desc = row.product.ru.name;
+                cols.vessel = row.vessel.ru.name;
+                cols.pack = `1/${row.pack} КГ`;
+                cols.places = `${places.str} шт/`;
+                cols.placesTotal = `${placesTotal.str} тн`;
+                cols.priceUnit = `${price.str} $`;
+                cols.priceTotal = `${priceTotal.str} $`;
             }
 
-            const rowArr = [
-                blCol,
-                descCol,
-                packCol,
-                placesCol,
-                placesTotalCol,
-                priceUnitCol,
-                priceTotalCol,
-            ];
+            const rowArr = Object.values(cols);
 
             ws.insertRow(+blArrayCl.row + index, rowArr).commit();
         });
 
         // style inserted rows
-        products.forEach((product, i) => {
+        rows.forEach((product, i) => {
             const row = getRow(cellName, -i - 1);
             row.eachCell((cell) => {
                 cell.font = {
                     size: 10,
                     bold: false,
                 };
-                cell.alignment = { horizontal: 'center' };
+                cell.alignment = {
+                    horizontal: 'center',
+                    wrapText: true,
+                    vertical: 'middle',
+                };
             });
 
-            const amountPlacesCl = row.getCell(4);
-            amountPlacesCl.alignment = { horizontal: 'right' };
-            row.height = 25;
+            const amountPlacesCl = row.getCell(5);
+            amountPlacesCl.alignment = { horizontal: 'right', vertical: 'middle' };
+            row.height = 30;
             row.commit();
         });
     });

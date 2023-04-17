@@ -1,28 +1,23 @@
 /* eslint-disable no-param-reassign */
-import { ProductInfoExportT } from '../../../../types/typesContract';
-import { ConsigneeT } from '../../../../types/typesSP';
+import { AgreementT } from './initAgreement';
 
-type GroupedProductsT = {
-    [key: string]: {
-        products: ProductInfoExportT[];
-        consignee: ConsigneeT;
-    };
-};
+export const groupByConsignee = (agreement: AgreementT) => {
+    const { consignees } = agreement.productsGroupedBy;
 
-export const groupByConsignee = (products: ProductInfoExportT[]) => {
-    return products.reduce<GroupedProductsT>((total, product) => {
-        const { codeName } = product.consignee;
-        let group = total[codeName];
+    agreement.rows.forEach((row) => {
+        let consigneeGroup = consignees[row.consignee.codeName];
 
-        if (!group) {
-            group = {
-                products: [],
-                consignee: product.consignee,
+        if (!consigneeGroup) {
+            consigneeGroup = {
+                rows: [],
+                consignee: row.consignee,
             };
-            total[codeName] = group;
+
+            consignees[row.consignee.codeName] = consigneeGroup;
         }
 
-        group.products.push(product);
-        return total;
-    }, {});
+        consigneeGroup.rows.push(row);
+    });
+
+    return agreement;
 };

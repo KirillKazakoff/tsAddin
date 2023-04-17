@@ -7,7 +7,7 @@ export const clearInvoiceBlRows = (
     wsCopy: Worksheet,
     invoice: InvoiceT,
 ) => {
-    const { length } = invoice.products;
+    const { length } = invoice.rows;
 
     // dont change the cells order!
     ['Инвойс_Bl_массив_п', 'Инвойс_Bl_массив'].forEach((cellName) => {

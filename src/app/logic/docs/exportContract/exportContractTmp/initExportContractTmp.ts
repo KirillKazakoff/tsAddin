@@ -7,7 +7,7 @@ import { initExportContractDelivery } from './initExportContractDelivery';
 import { initExportContractHeader } from './initExportContractHeader';
 import { initExportContractSubject } from './initExportContractSubject';
 
-export const initExportContractTmp = (
+export const initExportContractTmp = async (
     book: ExcelJS.Workbook,
     agreement: AgreementT,
 ) => {
@@ -19,4 +19,6 @@ export const initExportContractTmp = (
     initExportContractCost(utils, agreement);
     initExportContractDelivery(utils, agreement);
     initExportContractAddreses(utils, agreement);
+
+    utils.getRow('Доставка_заголовок', -1).addPageBreak();
 };

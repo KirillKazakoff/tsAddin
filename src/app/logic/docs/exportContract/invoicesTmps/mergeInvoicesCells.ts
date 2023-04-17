@@ -24,15 +24,15 @@ export const mergeInvoicesCells = async (book: Workbook) => {
             const engRow = +consigneeTitleEngCl.row + 2;
             const ruRow = +consigneeTitleRuCl.row + 2;
 
-            ws.unMergeCells(engRow, 1, engRow, 3);
-            ws.mergeCells(engRow, 1, engRow, 3);
-            ws.unMergeCells(engRow, 4, engRow, 7);
-            ws.mergeCells(engRow, 4, engRow, 7);
+            ws.unMergeCells(engRow, 1, engRow, 4);
+            ws.mergeCells(engRow, 1, engRow, 4);
+            ws.unMergeCells(engRow, 5, engRow, 8);
+            ws.mergeCells(engRow, 5, engRow, 8);
 
-            ws.unMergeCells(ruRow, 4, ruRow, 7);
-            ws.mergeCells(ruRow, 4, ruRow, 7);
-            ws.unMergeCells(ruRow, 1, ruRow, 3);
-            ws.mergeCells(ruRow, 1, ruRow, 3);
+            ws.unMergeCells(ruRow, 1, ruRow, 4);
+            ws.mergeCells(ruRow, 1, ruRow, 4);
+            ws.unMergeCells(ruRow, 5, ruRow, 8);
+            ws.mergeCells(ruRow, 5, ruRow, 8);
         }
     });
 };

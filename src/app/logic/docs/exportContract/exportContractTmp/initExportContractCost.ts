@@ -3,23 +3,28 @@ import { deleteRow } from '../../../excel/utils/excelUtilsObj/deleteRow';
 import { formatCurrencyLong, formatCount } from '../../../utils/formatCount';
 
 export const initExportContractCost: InitContractPartT = (utils, agreement) => {
-    const { getCell, setCell } = utils;
-    const { products, priceTotal } = agreement;
+    const {
+        getCell, setCell, ws, getRow,
+    } = utils;
+    const { priceTotal, productsGroupedBy } = agreement;
+    const { cost: costs } = productsGroupedBy.vessels.all;
 
-    const costDescCl = getCell('Цена_описание').cellEng;
+    const inheritRow = getRow('Цена_описание', 0);
+    const prevHeight = inheritRow.height;
+    inheritRow.height = 55;
+    inheritRow.commit();
+
     const costArrayCl = getCell('Цена_массив').cellEng;
-    const ws = costDescCl.worksheet;
 
-    const costRows = products.reduce<string[][]>((total, productInfo) => {
-        const { product: desc } = productInfo;
-        const { price } = productInfo.record.amount;
+    const costRows = costs.reduce<string[][]>((total, row) => {
+        const { record, prices } = row;
+        const { product: desc, vessel } = record;
 
-        const colEng = `* ${desc.eng.name} - USD ${price.str} for one kg net weight`;
-        const colRu = `* ${desc.ru.name} - ${price.str} долл. за одну тонну (нетто)`;
-
-        if (productInfo.isPriceUnique) {
+        prices.forEach((price) => {
+            const colEng = `*  ${vessel.eng.name}\n    ${desc.eng.name}\n    - USD ${price.str} for one kg net weight`;
+            const colRu = `*  ${vessel.ru.name}\n    ${desc.ru.name}\n    - ${price.str} долл. за одну тонну (нетто)`;
             total.push([colEng, colRu]);
-        }
+        });
 
         return total;
     }, []);
@@ -35,6 +40,9 @@ export const initExportContractCost: InitContractPartT = (utils, agreement) => {
         eng: `2.2 Total amount of this Agreement is \n${shortCurrencyEngStr} (${fullCurrencyEngStr})`,
         ru: `2.2 Общая сумма настоящего Дополнения составляет \n${shortCurrencyRuStr} (${fullCurrencyRuStr})`,
     });
+
+    inheritRow.height = prevHeight;
+    inheritRow.commit();
 
     deleteRow(ws, 'Цена_массив');
 };
