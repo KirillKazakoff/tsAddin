@@ -1,18 +1,17 @@
-import ExcelJS from 'exceljs';
-import { initExcelUtilsDouble } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { AgreementT } from '../groupBy/initAgreement';
-import { initExportContractAddreses } from './initExportContractAddreses';
+import { InitExportContractTmp } from '../../../../../types/typesExcelUtils';
+import { initExcelUtilsDouble } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { initExportContractAddreses } from '../initExportContractAddreses';
 import { initExportContractCost } from './initExportContractCost';
 import { initExportContractDelivery } from './initExportContractDelivery';
 import { initExportContractHeader } from './initExportContractHeader';
 import { initExportContractSubject } from './initExportContractSubject';
 
-export const initExportContractTmp = async (
-    book: ExcelJS.Workbook,
-    agreement: AgreementT,
+export const initExportContractTmp: InitExportContractTmp = async (
+    book,
+    agreement,
 ) => {
     const ws = book.getWorksheet('Export_Contract');
-    const utils = initExcelUtilsDouble(ws);
+    const utils = initExcelUtilsDouble(ws, 1);
 
     initExportContractHeader(utils, agreement);
     initExportContractSubject(utils, agreement);

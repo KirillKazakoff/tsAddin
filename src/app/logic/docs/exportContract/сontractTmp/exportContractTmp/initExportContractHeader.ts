@@ -1,9 +1,9 @@
-import exportContractStore from '../../../../stores/docsStores/exportContractStore';
+import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
 import {
     CellObjDoubleT,
     InitContractPartT,
-} from '../../../../types/typesExcelUtils';
-import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
+} from '../../../../../types/typesExcelUtils';
+import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 
 export const initExportContractHeader: InitContractPartT = (utils, agreement) => {
     const {
@@ -11,7 +11,7 @@ export const initExportContractHeader: InitContractPartT = (utils, agreement) =>
     } = agreement.record;
     const { podpisant } = exportContractStore;
 
-    const headerCells: CellObjDoubleT[] = [
+    const cells: CellObjDoubleT[] = [
         {
             cell: 'Соглашение',
             // prettier-ignore
@@ -65,5 +65,5 @@ export const initExportContractHeader: InitContractPartT = (utils, agreement) =>
         },
     ];
 
-    headerCells.forEach((cell) => utils.setCell(cell));
+    cells.forEach((cell) => utils.setCell(cell));
 };

@@ -5,13 +5,13 @@ import { getCellByName, getCellsObj } from './getCell';
 import { setCell, setCellDouble } from './setCell';
 import { deleteRow } from './deleteRow';
 
-export const initExcelUtilsDouble = (ws: Worksheet) => {
+export const initExcelUtilsDouble = (ws: Worksheet, offset: number) => {
     return {
         ws,
         getRow: getRow.bind(this, ws),
         deleteRow: deleteRow.bind(this, ws),
-        getCell: getCellsObj.bind(this, ws),
-        setCell: setCellDouble.bind(this, ws),
+        getCell: getCellsObj.bind(this, ws, offset),
+        setCell: setCellDouble.bind(this, ws, offset),
     } as CellUtilsDoubleT;
 };
 

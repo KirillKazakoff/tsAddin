@@ -1,7 +1,9 @@
-import { Cell, Row, Worksheet } from 'exceljs';
+import {
+    Cell, Row, Workbook, Worksheet,
+} from 'exceljs';
 import { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
 import { LanguageT } from './types';
-import { InvoiceT } from './typesContract';
+import { InvoicesT, InvoiceT } from './typesContract';
 
 export type GetRowBoundT = (cellName: string, offset: number) => Row;
 export type DeleteRowBoundT = (cellName: string) => void;
@@ -63,3 +65,12 @@ export type InitInvoicePartLanguageT = (
     invoice: InvoiceT,
     language: LanguageT
 ) => void;
+
+export type InitExportContractTmp = (book: Workbook, agreement: AgreementT) => void;
+
+export type InvoicesTmpsSettingsT = {
+    book: Workbook;
+    sheetName: string;
+    initInvoiceTmpCb: (ws: Worksheet, invoice: InvoiceT) => void;
+    invoices: InvoicesT;
+};

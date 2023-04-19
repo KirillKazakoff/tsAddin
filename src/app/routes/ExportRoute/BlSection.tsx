@@ -1,10 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { initBlSection } from '../../logic/docs/bl/initBlSection';
-import blStore, { OperationT } from '../../stores/docsStores/blStore';
+import exportContractStore from '../../stores/docsStores/exportContractStore';
+import { OperationT } from '../../types/typesTables';
 import { InputEventT } from '../../types/typesUtils';
 
 const BlSection = observer(() => {
+    const { operation } = exportContractStore;
     const { getBl, getAllBl, table } = initBlSection();
 
     const blList = table.map((row) => {
@@ -21,7 +23,7 @@ const BlSection = observer(() => {
 
     const onChange = (e: InputEventT) => {
         const value = e.currentTarget.value as OperationT;
-        blStore.setOperation(value);
+        exportContractStore.setOperation(value);
     };
 
     return (
@@ -34,7 +36,7 @@ const BlSection = observer(() => {
                         name='operation'
                         value='export'
                         onChange={onChange}
-                        checked={blStore.operation === 'export'}
+                        checked={operation === 'export'}
                     />
                     <label htmlFor='export'>Экспорт</label>
                 </div>
@@ -45,7 +47,7 @@ const BlSection = observer(() => {
                         name='operation'
                         value='export_storage'
                         onChange={onChange}
-                        checked={blStore.operation === 'export_storage'}
+                        checked={operation === 'export_storage'}
                     />
                     <label htmlFor='export_storage'>Экспорт хранение</label>
                 </div>

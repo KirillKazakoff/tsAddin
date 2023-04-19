@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { InitContractPartT } from '../../../../types/typesExcelUtils';
-import { deleteRow } from '../../../excel/utils/excelUtilsObj/deleteRow';
+import { InitContractPartT } from '../../../../../types/typesExcelUtils';
+import { deleteRow } from '../../../../excel/utils/excelUtilsObj/deleteRow';
 
 export const initExportContractSubject: InitContractPartT = (utils, agreement) => {
     const { getCell, ws, getRow } = utils;

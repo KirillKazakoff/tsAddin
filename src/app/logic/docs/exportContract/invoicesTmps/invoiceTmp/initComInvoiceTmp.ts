@@ -20,7 +20,6 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         date,
         contract,
         terms,
-        vessel,
         bankSeller,
     } = invoice.agreement.record;
     const {
@@ -57,7 +56,6 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_контракт_дата', value: `Magadan, dated from ${getExcelDateStr(contract.date, 'en')}` },
         { cell: 'Инвойс_условия', value: `${terms}, ${portTo.eng.country}` },
 
-        // { cell: 'Инвойс_судно', value: vessel.eng.name },
         { cell: 'Инвойс_подвал_места', value: `${places.str} PCS /` },
         { cell: 'Инвойс_подвал_всего', value: `${placesTotal.str} tn` },
         { cell: 'Инвойс_подвал_сумма', value: `${priceTotal.str} USD` },
@@ -99,7 +97,6 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_контракт_дата_п', value: `Магадан, от ${getExcelDateStr(contract.date, 'ru')}` },
         { cell: 'Инвойс_условия_п', value: `${terms}, ${portTo.ru.country}` },
 
-        // { cell: 'Инвойс_судно_п', value: vessel.ru.name },
         { cell: 'Инвойс_подвал_места_п', value: `${places.str} шт /` },
         { cell: 'Инвойс_подвал_всего_п', value: `${placesTotal.str} тн` },
         { cell: 'Инвойс_подвал_сумма_п', value: `${priceTotal.str} $` },

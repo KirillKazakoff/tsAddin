@@ -69,3 +69,6 @@ export type InnerRowT = {
     deliveryDate: string;
     paymentDate: string;
 };
+
+// utilstype
+export type OperationT = 'export' | 'export_storage';

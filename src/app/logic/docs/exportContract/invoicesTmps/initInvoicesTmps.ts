@@ -1,24 +1,25 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { Workbook } from 'exceljs';
 import _ from 'lodash';
-import { InvoicesT } from '../../../../types/typesContract';
+import { InvoicesTmpsSettingsT } from '../../../../types/typesExcelUtils';
 import { clearInvoiceBlRows } from './invoiceTmp/clearInvoiceBlRows';
-import { initComInvoiceTmp } from './invoiceTmp/initComInvoiceTmp';
 import { mergeInvoicesCells } from './mergeInvoicesCells';
 
-export const initInvoicesTmps = async (book: Workbook, invoices: InvoicesT) => {
-    const wsOriginal = book.getWorksheet('Com_Invoice');
+export const initInvoicesTmps = async (settings: InvoicesTmpsSettingsT) => {
+    const {
+        book, initInvoiceTmpCb, invoices, sheetName,
+    } = settings;
+    const wsOriginal = book.getWorksheet(sheetName);
 
     Object.keys(invoices).forEach((key) => {
         const invoice = invoices[key];
-        initComInvoiceTmp(wsOriginal, invoice);
+        initInvoiceTmpCb(wsOriginal, invoice);
 
         const wsCopyTo = book.addWorksheet();
         wsCopyTo.model = _.cloneDeep(wsOriginal.model);
         wsCopyTo.name = `invoice ${key}`;
 
         clearInvoiceBlRows(wsOriginal, wsCopyTo, invoice);
-        book.removeWorksheet('Com_Invoice');
+        book.removeWorksheet(sheetName);
     });
 
     await mergeInvoicesCells(book);

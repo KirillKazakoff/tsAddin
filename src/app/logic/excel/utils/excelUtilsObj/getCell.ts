@@ -11,9 +11,13 @@ export const getCellByName = (worksheet: ExcelJS.Worksheet, name: string): Cell 
     return match;
 };
 
-export const getCellsObj = (ws: ExcelJS.Worksheet, cellName: string) => {
+export const getCellsObj = (
+    ws: ExcelJS.Worksheet,
+    offset: number,
+    cellName: string,
+) => {
     const cellEng = getCellByName(ws, cellName);
-    const cellRus = ws.getCell(cellEng.row, +cellEng.col + 1);
+    const cellRus = ws.getCell(cellEng.row, +cellEng.col + offset);
     return {
         cellEng,
         cellRus,
