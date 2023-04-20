@@ -48,6 +48,7 @@ export const setExportStorage = (table: any[][]) => {
             portFrom,
         ] = row;
 
+        console.log(contract);
         const contractSp = selectContractSp(contract);
 
         const rowObj: ExportRowT = {

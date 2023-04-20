@@ -82,6 +82,13 @@ export const initExportStorageContractTmp: InitExportContractTmp = (
 
             ru: `4. Настоящее дополнительное соглашение вступает в силу с момента его подписания и является неотъемлемой частью договора оказания услуг хранения № ${contract.contractNo} от ${date.contract('ru')}`,
         },
+        {
+            cell: 'Юридикция',
+
+            eng: '5. This Supplementary Agreement has been drawn up and signed in two original duplicates of equal legal force.',
+
+            ru: '5. Настоящее дополнительное соглашение составлено и подписано в двух подлинных экземплярах, имеющих одинаковую юридическую силу.',
+        },
     ];
 
     cells.forEach((cell) => utils.setCell(cell));

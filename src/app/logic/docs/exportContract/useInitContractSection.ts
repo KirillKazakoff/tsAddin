@@ -13,7 +13,7 @@ export const useInitContractSection = () => {
 
     useEffect(() => {
         setPodpisant('Котов Н.М.');
-        getContract(agreements[0]);
+        // getContract(agreements[0]);
     }, []);
 
     return { getContract, setPodpisant, agreements };
