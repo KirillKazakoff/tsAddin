@@ -1,21 +1,40 @@
 /* eslint-disable no-param-reassign */
-import { Row } from 'exceljs';
+import {
+    Alignment, Borders, Font, Row,
+} from 'exceljs';
 
-export const styleRowCells = (row: Row, rowHeight: number) => {
+type RowStyleSettingsT = {
+    height: number;
+    border?: Partial<Borders>;
+    alignment?: Partial<Alignment>;
+    font?: Partial<Font>;
+};
+
+export const styleRowCells = (row: Row, settings: RowStyleSettingsT) => {
     row.eachCell((cell) => {
-        cell.border = {
-            top: { style: 'thin' },
-            bottom: { style: 'thin' },
-            left: { style: 'thin' },
-            right: { style: 'thin' },
-        };
-        cell.alignment = {
-            horizontal: 'center',
-            wrapText: true,
-            vertical: 'middle',
-        };
+        cell.border = settings.border;
+        cell.alignment = settings.alignment;
+        cell.font = settings.font;
     });
 
-    row.height = rowHeight;
+    row.height = settings.height;
     row.commit();
+};
+
+export const borderAll: Partial<Borders> = {
+    top: { style: 'thin' },
+    bottom: { style: 'thin' },
+    left: { style: 'thin' },
+    right: { style: 'thin' },
+};
+
+export const alignmentCenter: Partial<Alignment> = {
+    horizontal: 'center',
+    wrapText: true,
+    vertical: 'middle',
+};
+
+export const fontDefault: Partial<Font> = {
+    size: 10,
+    bold: false,
 };

@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
+import { alignmentCenter, fontDefault, styleRowCells } from '../../../styleRowCells';
 
 export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
     const { getCell, ws, getRow } = utils;
@@ -16,7 +17,10 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
                 places, placesTotal, price, priceTotal,
             } = row.amount;
 
+            // there are two empty cols implemented for borders
+            // in excel template (merge removes borders in cells)
             const cols = {
+                emptyFirst: '',
                 bl: row.blNo,
                 vessel: row.vessel.eng.name,
                 desc: row.product.eng.name,
@@ -37,6 +41,7 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
                 cols.priceTotal = `${priceTotal.str} $`;
             }
 
+            if (ws.name.includes('Noncom')) delete cols.vessel;
             const rowArr = Object.values(cols);
 
             ws.insertRow(+blArrayCl.row + index, rowArr).commit();
@@ -45,22 +50,19 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
         // style inserted rows
         rows.forEach((product, i) => {
             const row = getRow(cellName, -i - 1);
-            row.eachCell((cell) => {
-                cell.font = {
-                    size: 10,
-                    bold: false,
-                };
-                cell.alignment = {
-                    horizontal: 'center',
-                    wrapText: true,
-                    vertical: 'middle',
-                };
+
+            styleRowCells(row, {
+                height: 30,
+                alignment: alignmentCenter,
+                font: fontDefault,
             });
 
-            const amountPlacesCl = row.getCell(5);
-            amountPlacesCl.alignment = { horizontal: 'right', vertical: 'middle' };
-            row.height = 30;
-            row.commit();
+            row.getCell(2).border = {
+                left: { style: 'thin' },
+            };
+            row.getCell(row.actualCellCount).border = {
+                right: { style: 'thin' },
+            };
         });
     });
 };

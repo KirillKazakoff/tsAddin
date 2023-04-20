@@ -6,7 +6,9 @@ import { readTmp } from '../readTmp';
 import { AgreementT } from './groupBy/initAgreement';
 import { initInvoicesTmps } from './invoicesTmps/initInvoicesTmps';
 import { initComInvoiceTmp } from './invoicesTmps/invoiceTmp/initComInvoiceTmp';
+import { initNonComInvoiceTmp } from './invoicesTmps/invoiceTmp/initNonComInvoiceTmp';
 import { initExportContractTmp } from './сontractTmp/exportContractTmp/initExportContractTmp';
+import { initExportStorageContractTmp } from './сontractTmp/exportStorageContractTmp/initExportStorageContractTmp';
 
 export const createExportContractDoc = async (agreement: AgreementT) => {
     const { invoices } = agreement.productsGroupedBy;
@@ -25,12 +27,17 @@ export const createExportContractDoc = async (agreement: AgreementT) => {
         invoices,
     };
     if (operation === 'export_storage') {
-        settings.sheetName = 'Export_Storage_Contract';
-        // settings.initInvoiceTmpCb = initNonComInvoiceTmp;
+        settings.sheetName = 'Noncom_Invoice';
+        settings.initInvoiceTmpCb = initNonComInvoiceTmp;
     }
 
+    // save call order (storage contract - invoices)
     await initInvoicesTmps(settings);
-    initExportContractTmp(book, agreement);
+    if (operation === 'export_storage') {
+        initExportStorageContractTmp(book, agreement);
+    } else {
+        initExportContractTmp(book, agreement);
+    }
 
     await saveFile(book, agreementNo);
 };

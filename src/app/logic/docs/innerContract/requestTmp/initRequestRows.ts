@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { InnerRowT } from '../../../../types/typesTables';
+import { alignmentCenter, borderAll, styleRowCells } from '../../styleRowCells';
 
 export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
     const {
@@ -25,23 +26,11 @@ export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
 
     rows.forEach((r, i) => {
         const row = getRow(cellName, -i - 1);
-        row.eachCell((cell) => {
-            cell.border = {
-                top: { style: 'thin' },
-                bottom: { style: 'thin' },
-                left: { style: 'thin' },
-                right: { style: 'thin' },
-            };
-            cell.alignment = {
-                horizontal: 'center',
-                wrapText: true,
-                vertical: 'middle',
-            };
+        styleRowCells(row, {
+            alignment: alignmentCenter,
+            height: 45,
+            border: borderAll,
         });
-
-        row.height = 45;
-        row.commit();
     });
-
     deleteRow(cellName);
 };

@@ -1,38 +1,49 @@
-import { Workbook, Cell } from 'exceljs';
+import { Workbook } from 'exceljs';
+import { mergeCells } from '../../../excel/utils/excelUtilsObj/mergeCells';
 
 export const mergeInvoicesCells = async (book: Workbook) => {
     const xls64 = await book.xlsx.writeBuffer();
     await book.xlsx.load(xls64);
     book.worksheets.forEach((ws) => {
-        if (ws.name !== 'Export_Contract') {
-            let consigneeTitleEngCl: Cell;
-            let consigneeTitleRuCl: Cell;
+        if (ws.name.toLowerCase().includes('invoice')) {
+            const merge = {
+                row: { eng: 0, ru: 0 },
+                col: { first: 0, second: 0 },
+            };
 
             ws.eachRow((row) => {
                 row.eachCell((cell) => {
                     if (!cell.value) return;
-                    const valueStr = cell.value.toString();
-                    if (valueStr.includes('Consignee')) {
-                        consigneeTitleEngCl = cell;
+                    const valueStr = cell.value.toString().toLowerCase();
+
+                    const { row: mergeRow, col } = merge;
+                    if (valueStr.includes('consignee')) {
+                        if (mergeRow.eng) return;
+                        mergeRow.eng = +cell.row + 2;
                     }
-                    if (valueStr.includes('Получатель')) {
-                        consigneeTitleRuCl = cell;
+                    if (valueStr.includes('получатель')) {
+                        if (mergeRow.ru) return;
+                        mergeRow.ru = +cell.row + 2;
+                    }
+
+                    if (valueStr.includes('вид упаковки')) {
+                        col.first = +cell.col;
+                    }
+                    if (valueStr.includes('msc certificate')) {
+                        col.second = +cell.col;
                     }
                 });
             });
 
-            const engRow = +consigneeTitleEngCl.row + 2;
-            const ruRow = +consigneeTitleRuCl.row + 2;
+            const { row, col } = merge;
+            const { eng, ru } = row;
 
-            ws.unMergeCells(engRow, 1, engRow, 4);
-            ws.mergeCells(engRow, 1, engRow, 4);
-            ws.unMergeCells(engRow, 5, engRow, 8);
-            ws.mergeCells(engRow, 5, engRow, 8);
+            mergeCells(ws, { row: eng, startCol: 2, endCol: col.first });
+            // prettier-ignore
+            mergeCells(ws, { row: eng, startCol: col.first + 1, endCol: col.second });
 
-            ws.unMergeCells(ruRow, 1, ruRow, 4);
-            ws.mergeCells(ruRow, 1, ruRow, 4);
-            ws.unMergeCells(ruRow, 5, ruRow, 8);
-            ws.mergeCells(ruRow, 5, ruRow, 8);
+            mergeCells(ws, { row: ru, startCol: 2, endCol: col.first });
+            mergeCells(ws, { row: ru, startCol: col.first + 1, endCol: col.second });
         }
     });
 };

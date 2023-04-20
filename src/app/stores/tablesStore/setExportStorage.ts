@@ -12,6 +12,7 @@ import {
     selectPortZarubezhSp,
     selectConsigneeSp,
     selectProductSp,
+    selectBankProdavecSp,
 } from '../spsStore/select';
 import tablesStore from './tablesStore';
 import { initAmount } from './utils/initAmount';
@@ -50,8 +51,9 @@ export const setExportStorage = (table: any[][]) => {
         const contractSp = selectContractSp(contract);
 
         const rowObj: ExportRowT = {
-            contract: selectContractSp(contract),
+            contract: contractSp,
             seller: selectSellerSp(seller),
+            bankSeller: selectBankProdavecSp(contractSp.bankSeller),
             agent: selectAgentSp(buyer),
             vessel: selectVesselSp(vessel),
             transport: selectTransportSp(),

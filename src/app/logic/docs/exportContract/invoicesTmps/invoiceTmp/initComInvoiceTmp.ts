@@ -45,7 +45,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'МСЦ_сертификат', value: msc ? 'MSC-C-52870' : '' },
 
         { cell: 'Инвойс_получатель', value: consignee.fullName },
-        { cell: 'Инвойс_получатель_адрес', value: consignee.adress },
+        { cell: 'Инвойс_получатель_адрес', value: consignee.addres },
         { cell: 'Инвойс_покупатель', value: agent.name },
         { cell: 'Инвойс_покупатель_адрес', value: agent.addres },
 
@@ -86,7 +86,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'МСЦ_сертификат_п', value: msc ? 'MSC-C-52870' : '' },
 
         { cell: 'Инвойс_получатель_п', value: consignee.fullName },
-        { cell: 'Инвойс_получатель_адрес_п', value: consignee.adress },
+        { cell: 'Инвойс_получатель_адрес_п', value: consignee.addres },
         { cell: 'Инвойс_покупатель_п', value: agent.name },
         { cell: 'Инвойс_покупатель_адрес_п', value: agent.addres },
 

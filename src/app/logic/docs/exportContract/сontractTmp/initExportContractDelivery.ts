@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { InitContractPartT } from '../../../../../types/typesExcelUtils';
+import { InitContractPartT } from '../../../../types/typesExcelUtils';
 
 export const initExportContractDelivery: InitContractPartT = (utils, agreement) => {
     const { getCell, setCell, ws } = utils;
@@ -40,8 +40,11 @@ export const initExportContractDelivery: InitContractPartT = (utils, agreement) 
 
     consignees.forEach((consignee, i) => {
         const row = utils.getRow('Сертификаты_описание', i + 1);
-        row.height = 40 + consignee.rows.length * 35;
+        row.height = 40 + consignee.rows.length * 40;
     });
+
+    // const inheritRow = utils.getRow('Сертификаты_описание', 0);
+    // inheritRow.font = { size: 10 };
 
     utils.deleteRow('Сертификаты_массив');
 };

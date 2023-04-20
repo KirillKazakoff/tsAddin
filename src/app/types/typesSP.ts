@@ -66,7 +66,7 @@ export type SellersT = {
 export type ConsigneeT = {
     codeName: string;
     fullName: string;
-    adress: string;
+    addres: string;
 };
 
 export type ConsigneesT = {
