@@ -6,23 +6,25 @@ import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import Input from '../../components/Input';
 import CheckBox from '../../components/CheckBox';
 import { SelectCargo } from '../../components/Select/SelectCargo';
+import { Doc } from '../../components/Doc';
+import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 
 export const PortLetterSection = observer(() => {
     const {
-        contracts, getAllLetters, getLetter, setField, store,
+        contracts, onLoad, onLoadAll, setField, store,
     } = useInitPortLetter();
 
     const letterList = contracts.map((contract) => {
         const { buyer, contractNo } = contract.record;
-        const onClick = () => getLetter(contract);
+        const onClick = () => onLoad(contract);
 
         return (
-            <li
-                className='doc-link port-letter' onClick={onClick}
+            <Doc
+                onClick={onClick}
+                title={`${buyer.codeName} №${contractNo}`}
                 key={contractNo}
-            >
-                {`${buyer.codeName} №${contractNo}`}
-            </li>
+                cls='port-letter'
+            />
         );
     });
 
@@ -77,13 +79,7 @@ export const PortLetterSection = observer(() => {
 
             <h3 className='title port-letter-title'>Загрузить письма в порт</h3>
             <ul className='docs port-letter-docs'>{letterList}</ul>
-            <button
-                className='btn docs-all__btn'
-                onClick={getAllLetters}
-                type='button'
-            >
-                Загрузить все письма
-            </button>
+            <DocsDownloadBtn title='Загрузить все письма' onClick={onLoadAll} />
         </form>
     );
 });

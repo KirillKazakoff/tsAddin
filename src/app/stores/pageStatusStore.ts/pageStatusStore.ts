@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import { PageStatusT } from '../../types/typesStore';
 import { initPageStatus } from './initPageStatus';
+import { PageStatusT } from './pageMessages';
 
 class PageStatusStore {
     status = initPageStatus();
@@ -12,8 +12,8 @@ class PageStatusStore {
     setPageStatus(status: PageStatusT) {
         this.status = status;
 
-        if (status.statusType === 'ok') return;
-        throw new Error(status.statusType);
+        // if (status.statusType === 'ok') return;
+        // throw new Error(status.statusType);
     }
 
     resetPageStatus() {

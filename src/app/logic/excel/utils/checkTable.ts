@@ -1,6 +1,6 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
-import { tableNotFulfilled } from '../../../stores/pageStatusStore.ts/pageMessages';
+import { tableError } from '../../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 import { ExportRowT, InnerRowT, MateRowT } from '../../../types/typesTables';
 
@@ -18,7 +18,7 @@ export const checkNotFulfilledRow = (rowUnknownType: any, tableName: TableNameT)
 
             if (!value && !possibleEmptyProps.includes(prop)) {
                 pageStatusStore.setPageStatus(
-                    tableNotFulfilled({ tableName, row: row.index, prop }),
+                    tableError({ tableName, row: +row.index + 1, prop }),
                 );
                 return;
             }

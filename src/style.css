@@ -114,6 +114,10 @@ b {
     border-color: black;
 }
 
+.doc--loading {
+    background-color: aquamarine;
+}
+
 /* request */
 .request-docs-title {
     margin-top: 40px;

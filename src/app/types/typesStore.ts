@@ -27,17 +27,3 @@ export type LetterFieldsT = {
     isExport: boolean;
     port: string;
 };
-
-// PageStatus
-export type PageStatusTypeT =
-    | 'notFilledTable'
-    | 'sameBl'
-    | 'excelInEditingMode'
-    | 'transportNotFound'
-    | 'ok';
-
-export type PageStatusT = {
-    statusType: PageStatusTypeT;
-    title: string;
-    desc: string;
-};

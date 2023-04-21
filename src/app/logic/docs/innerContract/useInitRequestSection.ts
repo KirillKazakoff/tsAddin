@@ -9,12 +9,12 @@ export const useInitRequestSection = () => {
         portTamozhnya, portRu, terms, setField,
     } = requestContractStore;
 
-    const getRequest = async (contract: ContractT) => {
+    const onLoad = async (contract: ContractT) => {
         await createRequestContract(contract);
     };
 
-    const getAllRequests = async () => {
-        contracts.forEach((contract) => getRequest(contract));
+    const onLoadAll = async () => {
+        await Promise.all(contracts.map((contract) => onLoad(contract)));
     };
 
     useEffect(() => {
@@ -25,9 +25,8 @@ export const useInitRequestSection = () => {
 
     return {
         contracts,
-        getRequest,
-        getAllRequests,
-
+        onLoad,
+        onLoadAll,
         setField,
         portTamozhnya,
         portRu,

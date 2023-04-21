@@ -1,23 +1,23 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { initBlSection } from '../../logic/docs/bl/initBlSection';
+import { Doc } from '../../components/Doc';
+import DocsDownloadBtn from '../../components/DocsDownloadBtn';
+import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import { OperationT } from '../../types/typesTables';
 import { InputEventT } from '../../types/typesUtils';
 
 const BlSection = observer(() => {
     const { operation } = exportContractStore;
-    const { getBl, getAllBl, table } = initBlSection();
+    const { onLoad, onLoadAll, table } = useInitBlSection();
 
     const blList = table.map((row) => {
-        const onClick = () => getBl(row);
+        const onClick = async () => onLoad(row);
         return (
-            <li
-                className='doc-link bl' onClick={onClick}
+            <Doc
+                onClick={onClick} title={row.blNo}
                 key={row.blNo}
-            >
-                {row.blNo}
-            </li>
+            />
         );
     });
 
@@ -54,12 +54,7 @@ const BlSection = observer(() => {
             </ul>
             <h2 className='title bl-title'>BL section</h2>
             <ul className='docs'>{blList}</ul>
-            <button
-                onClick={getAllBl} className='btn docs-all__btn'
-                type='button'
-            >
-                get all bl
-            </button>
+            <DocsDownloadBtn onClick={onLoadAll} title='Загрузить все BL' />
         </form>
     );
 });

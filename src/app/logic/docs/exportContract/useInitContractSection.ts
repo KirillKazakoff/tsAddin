@@ -8,13 +8,13 @@ export const useInitContractSection = () => {
     const agreementObj = groupByAgreementNo();
     const agreements = Object.values(agreementObj);
 
-    const getContract = (agreement: AgreementT) => createExportContractDoc(agreement);
+    const onLoad = async (agreement: AgreementT) => createExportContractDoc(agreement);
     const setPodpisant = (value: string) => exportContractStore.setPodpisant(value);
 
     useEffect(() => {
         setPodpisant('Котов Н.М.');
-        // getContract(agreements[0]);
+        // onLoad(agreements[0]);
     }, []);
 
-    return { getContract, setPodpisant, agreements };
+    return { onLoad, setPodpisant, agreements };
 };

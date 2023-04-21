@@ -4,28 +4,24 @@ import { useInitRequestSection } from '../../logic/docs/innerContract/useInitReq
 import Input from '../../components/Input';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
+import { Doc } from '../../components/Doc';
+import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 
 export const RequestSection = observer(() => {
     const {
-        contracts,
-        getRequest,
-        getAllRequests,
-        setField,
-        portTamozhnya,
-        portRu,
-        terms,
+        contracts, onLoad, onLoadAll, setField, portTamozhnya, portRu, terms,
     } = useInitRequestSection();
 
     const contractList = contracts.map((contract) => {
         const { contractNo } = contract.record;
-        const onClick = () => getRequest(contract);
+        const onClick = async () => onLoad(contract);
         return (
-            <li
-                className='doc-link request' onClick={onClick}
+            <Doc
+                onClick={onClick}
+                title={`№${contractNo}`}
                 key={contractNo}
-            >
-                {`№${contractNo}`}
-            </li>
+                cls={'request'}
+            />
         );
     });
 
@@ -55,13 +51,7 @@ export const RequestSection = observer(() => {
                 Загрузить заявки на договора:
             </h3>
             <ul className='docs request-docs'>{contractList}</ul>
-            <button
-                className='btn docs-all__btn'
-                onClick={getAllRequests}
-                type='button'
-            >
-                Загрузить все заявки
-            </button>
+            <DocsDownloadBtn onClick={onLoadAll} title='Загрузить все заявки' />
         </form>
     );
 });

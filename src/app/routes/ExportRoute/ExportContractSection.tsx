@@ -4,22 +4,22 @@ import { observer } from 'mobx-react-lite';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
+import { Doc } from '../../components/Doc';
 
 export const ExportContractSection = observer(() => {
-    const { getContract, setPodpisant, agreements } = useInitContractSection();
+    const { onLoad, setPodpisant, agreements } = useInitContractSection();
 
     const agreementsHtml = agreements.map((agreement) => {
         const { agreementNo } = agreement.record;
-        const onClick = () => getContract(agreement);
+        const onClick = async () => onLoad(agreement);
 
         return (
-            <li
-                key={agreementNo}
+            <Doc
                 onClick={onClick}
-                className='doc-link export-contract'
-            >
-                {`№ ${agreementNo}`}
-            </li>
+                title={`№ ${agreementNo}`}
+                key={agreementNo}
+                cls={'export-contract'}
+            />
         );
     });
 

@@ -10,12 +10,12 @@ export const useInitPortLetter = () => {
 
     const contracts = Object.values(groupByContractNo());
 
-    const getLetter = async (contract: ContractT) => {
+    const onLoad = async (contract: ContractT) => {
         await createPortLetter(contract);
     };
 
-    const getAllLetters = () => {
-        contracts.forEach((contract) => getLetter(contract));
+    const onLoadAll = async () => {
+        await Promise.all(contracts.map((contract) => onLoad(contract)));
     };
 
     useEffect(() => {
@@ -25,8 +25,8 @@ export const useInitPortLetter = () => {
 
     return {
         contracts,
-        getLetter,
-        getAllLetters,
+        onLoad,
+        onLoadAll,
         store,
         setField,
     };

@@ -1,4 +1,4 @@
-import { PageStatusT } from '../../types/typesStore';
+import { PageStatusT } from './pageMessages';
 
 export const initPageStatus = (): PageStatusT => ({
     statusType: 'ok',
