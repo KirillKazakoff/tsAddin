@@ -30,7 +30,7 @@ export const PortLetterSection = observer(() => {
 
     return (
         <form className='docs__form port-letter-form'>
-            <h2 className='title port-letter-title'>Port Letter Section</h2>
+            <h2 className='title port-letter-title'>Письма в порт</h2>
             <h3>Письмо:</h3>
             <div className='fields-wrapper'>
                 <SelectPortRu current={store.port.codeName} setter={setField.port} />

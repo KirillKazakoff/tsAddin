@@ -6,10 +6,16 @@ type InputT = {
     title: string;
     setter: any;
     type?: string;
+    required?: boolean;
 };
 
 export default function Input({
-    value, placeholder, setter, title, type,
+    value,
+    placeholder,
+    setter,
+    title,
+    type,
+    required,
 }: InputT) {
     const onChange = (e: any) => {
         setter(e.currentTarget.value);
@@ -19,6 +25,7 @@ export default function Input({
         <div className='input-wrapper'>
             <span className='input-title'>{title}</span>
             <input
+                required={required}
                 checked={!!value}
                 className='input'
                 placeholder={placeholder}
@@ -32,4 +39,5 @@ export default function Input({
 
 Input.defaultProps = {
     type: 'text',
+    required: false,
 };

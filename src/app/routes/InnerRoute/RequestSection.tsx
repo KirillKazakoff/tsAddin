@@ -27,9 +27,7 @@ export const RequestSection = observer(() => {
 
     return (
         <form className='docs__form request-section-form'>
-            <h2 className='title request-section-title'>
-                Request For Contract Section
-            </h2>
+            <h2 className='title request-section-title'>Заявки на договора</h2>
 
             <h3 className='title request-title'>Заявка:</h3>
 

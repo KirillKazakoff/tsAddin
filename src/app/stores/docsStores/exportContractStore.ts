@@ -6,7 +6,7 @@ import tablesStore from '../tablesStore/tablesStore';
 
 class ExportContractStore {
     podpisant = initPodpisant();
-    operation: OperationT = 'export_storage';
+    operation: OperationT = 'export';
 
     constructor() {
         makeAutoObservable(this);

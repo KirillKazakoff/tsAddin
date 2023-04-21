@@ -1,9 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { useInitLetter } from '../../logic/letter/useInitLetter';
-import { ExportFields } from './ExportFields';
-
-import { MainFields } from './MainFields';
+import { LetterExportFields } from './LetterExportFields';
+import { LetterMainFields } from './LetterMainFields';
 
 export const LetterRoute = observer(() => {
     const onLetterSubmit = useInitLetter();
@@ -12,8 +11,8 @@ export const LetterRoute = observer(() => {
         <div className='letter'>
             <form className='form letter__form'>
                 <div className='letter__fields-wrapper'>
-                    <MainFields />
-                    <ExportFields />
+                    <LetterMainFields />
+                    <LetterExportFields />
                 </div>
 
                 <button

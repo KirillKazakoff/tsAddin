@@ -4,7 +4,7 @@ import CheckBox from '../../components/CheckBox';
 import Input from '../../components/Input';
 import letterStore from '../../stores/letterStore/letterStore';
 
-export const MainFields = observer(() => {
+export const LetterMainFields = observer(() => {
     const { fields } = letterStore;
 
     const toggleIsExport = () => {
@@ -30,12 +30,14 @@ export const MainFields = observer(() => {
                 placeholder='ETA Владивосток'
                 setter={setDateArrival}
                 value={fields.arrivalVld}
+                required
             />
             <Input
                 title='Порт'
                 placeholder='Порт'
                 setter={setPort}
                 value={fields.port}
+                required
             />
             <Input
                 title='Дата оплаты'

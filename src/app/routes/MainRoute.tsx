@@ -17,13 +17,13 @@ export const MainRoute = observer(() => {
         <div className='main-route'>
             <nav className='nav'>
                 <NavLink to={'/letter'} className='nav-link'>
-                    Offer
+                    Предложение
                 </NavLink>
                 <NavLink to={'/export'} className='nav-link'>
-                    Export
+                    Экспорт
                 </NavLink>
                 <NavLink to={'/inner'} className='nav-link'>
-                    Inner
+                    Внутренний рынок
                 </NavLink>
             </nav>
             <Outlet />

@@ -1,9 +1,7 @@
-import { LetterFieldsT } from '../../types/typesStore';
-
 export const initLetterFields = () => {
     const mode = process.env.NODE_ENV;
 
-    const clearFields: LetterFieldsT = {
+    const initFields = {
         arrivalVld: '',
         arrivalForeign: '',
         payment: '',
@@ -22,6 +20,5 @@ export const initLetterFields = () => {
         port: 'Busan',
     };
 
-    return mode === 'production' ? clearFields : debugFields;
-    return clearFields;
+    return mode === 'production' ? initFields : debugFields;
 };

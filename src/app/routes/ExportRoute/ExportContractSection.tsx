@@ -25,7 +25,7 @@ export const ExportContractSection = observer(() => {
 
     return (
         <form className='docs__form export-contract-form'>
-            <h2>Export Contract Section</h2>
+            <h2>Экспорт Контракт</h2>
 
             <SelectPodpisant
                 current={exportContractStore.podpisant.codeName}

@@ -5,11 +5,24 @@ import { selectPodpisantSp, selectPortRu } from '../spsStore/select';
 
 export type CargoT = 'Покупатель' | 'Продавец' | '';
 
-class PortLetterStore {
-    constructor() {
-        makeAutoObservable(this);
-    }
-    store = {
+const initStore = () => {
+    const mode = process.env.NODE_ENV;
+
+    const initFields = {
+        port: initPortRu(),
+        podpisant: initPodpisant(),
+        dateLetter: '',
+        isCFR: true,
+        cargoTo: {
+            storage: <CargoT>'',
+            auto: <CargoT>'',
+        },
+        storage: {
+            from: '',
+            to: '',
+        },
+    };
+    const debugFields = {
         port: initPortRu(),
         podpisant: initPodpisant(),
         dateLetter: '12.12.23',
@@ -23,6 +36,15 @@ class PortLetterStore {
             to: '17.12.23',
         },
     };
+
+    return mode === 'production' ? initFields : debugFields;
+};
+
+class PortLetterStore {
+    constructor() {
+        makeAutoObservable(this);
+    }
+    store = initStore();
 
     setField = {
         port: (value: string) => (this.store.port = selectPortRu(value)),

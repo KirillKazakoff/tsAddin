@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import letterStore from '../../stores/letterStore/letterStore';
 import Input from '../../components/Input';
 
-export const ExportFields = observer(() => {
+export const LetterExportFields = observer(() => {
     const { fields } = letterStore;
 
     const setTerms = (terms: string) => {

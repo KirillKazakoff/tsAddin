@@ -52,7 +52,7 @@ const BlSection = observer(() => {
                     <label htmlFor='export_storage'>Экспорт хранение</label>
                 </div>
             </ul>
-            <h2 className='title bl-title'>BL section</h2>
+            <h2 className='title bl-title'>BL</h2>
             <ul className='docs'>{blList}</ul>
             <DocsDownloadBtn onClick={onLoadAll} title='Загрузить все BL' />
         </form>
