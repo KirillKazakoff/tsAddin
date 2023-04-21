@@ -2,7 +2,6 @@
 /* eslint-disable no-param-reassign */
 import _ from 'lodash';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import tablesStore from '../../../../stores/tablesStore/tablesStore';
 import { setMSC } from '../../../../stores/tablesStore/utils/setMSC';
 import { groupByConsignee } from './groupByConsignee';
 import { groupByInvoice } from './groupByInvoice';
@@ -10,8 +9,7 @@ import { groupByVesselExport } from './groupByVesselExport';
 import { AgreementObjT, initAgreement } from './initAgreement';
 
 export const groupByAgreementNo = () => {
-    const { operation } = exportContractStore;
-    const table = operation === 'export' ? tablesStore.exportT : tablesStore.exportStorageT;
+    const table = exportContractStore.getCurrentTable();
 
     const agreements = table.reduce<AgreementObjT>((total, row) => {
         const { agreementNo } = row;

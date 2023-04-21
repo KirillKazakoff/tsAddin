@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { OperationT } from '../../types/typesTables';
 import { initPodpisant } from '../initStoreObjects';
 import { selectPodpisantSp } from '../spsStore/select';
+import tablesStore from '../tablesStore/tablesStore';
 
 class ExportContractStore {
     podpisant = initPodpisant();
@@ -16,6 +17,11 @@ class ExportContractStore {
     }
     setOperation(operation: OperationT) {
         this.operation = operation;
+    }
+    getCurrentTable() {
+        return this.operation === 'export'
+            ? tablesStore.exportT
+            : tablesStore.exportStorageT;
     }
 }
 

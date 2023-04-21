@@ -1,7 +1,6 @@
-import { checkEmptyTable } from '../../logic/excel/utils/checkEmptyTable';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { checkEmptyTable } from '../../logic/excel/utils/checkTable';
 import { ExportRowT } from '../../types/typesTables';
-import { tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
-import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
 import {
     selectContractSp,
     selectSellerSp,
@@ -21,7 +20,7 @@ export const setExportStorage = (table: any[][]) => {
     table.shift();
     if (checkEmptyTable(table)) return;
 
-    const transformedTable = table.reduce<ExportRowT[]>((totalObj, row) => {
+    const transformedTable = table.reduce<ExportRowT[]>((totalObj, row, index) => {
         const [
             contract,
             seller,
@@ -48,13 +47,12 @@ export const setExportStorage = (table: any[][]) => {
             portFrom,
         ] = row;
 
-        console.log(contract);
         const contractSp = selectContractSp(contract);
 
         const rowObj: ExportRowT = {
             contract: contractSp,
             seller: selectSellerSp(seller),
-            bankSeller: selectBankProdavecSp(contractSp.bankSeller),
+            bankSeller: selectBankProdavecSp(contractSp?.bankSeller),
             agent: selectAgentSp(buyer),
             vessel: selectVesselSp(vessel),
             transport: selectTransportSp(),
@@ -76,6 +74,7 @@ export const setExportStorage = (table: any[][]) => {
             sort,
             pack,
             msc,
+            index: index.toString(),
         };
 
         // if (!product || !vessel || !blNo || !transport || !price || !date) {

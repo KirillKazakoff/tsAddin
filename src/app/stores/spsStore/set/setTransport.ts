@@ -1,4 +1,4 @@
-import { checkEmptyTable } from '../../../logic/excel/utils/checkEmptyTable';
+import { checkEmptyTable } from '../../../logic/excel/utils/checkTable';
 import { transportNotFound } from '../../pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../pageStatusStore.ts/pageStatusStore';
 import spsStore from '../spsStore';

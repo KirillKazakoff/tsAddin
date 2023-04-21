@@ -19,6 +19,7 @@ export type MateRowT = {
     amount: number;
     periodCreation: string;
     operation: string;
+    index: string;
 };
 
 export type AmountT = {
@@ -52,6 +53,7 @@ export type ExportRowT = {
     sort: string;
     pack: string;
     msc: string;
+    index: string;
 };
 
 export type InnerRowT = {
@@ -68,6 +70,7 @@ export type InnerRowT = {
     bankSeller: string;
     deliveryDate: string;
     paymentDate: string;
+    index: string;
 };
 
 // utilstype

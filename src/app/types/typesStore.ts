@@ -32,6 +32,7 @@ export type LetterFieldsT = {
 export type PageStatusTypeT =
     | 'notFilledTable'
     | 'sameBl'
+    | 'excelInEditingMode'
     | 'transportNotFound'
     | 'ok';
 

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { checkEmptyTable } from '../../logic/excel/utils/checkEmptyTable';
+import {
+    checkEmptyTable,
+    checkNotFulfilledRow,
+} from '../../logic/excel/utils/checkTable';
 import { MateRowT } from '../../types/typesTables';
-import { tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
-import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
 import tablesStore from './tablesStore';
 
 export const setMate = (table: any[][]) => {
@@ -33,11 +34,10 @@ export const setMate = (table: any[][]) => {
             sort,
             amount: amountTotal,
             periodCreation: periodCreation || '! NOT STATED !',
+            index: index.toString(),
         };
 
-        if (!operation || !vessel || !product || !transport) {
-            pageStatusStore.setPageStatus(tableNotFulfilled('Коносаменты'));
-        }
+        checkNotFulfilledRow(rowObj, 'Mates');
         if (operation === 'Образец') return totalObj;
 
         totalObj.push(rowObj);

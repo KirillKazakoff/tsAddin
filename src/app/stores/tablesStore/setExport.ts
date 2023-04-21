@@ -1,7 +1,8 @@
-import { checkEmptyTable } from '../../logic/excel/utils/checkEmptyTable';
+import {
+    checkEmptyTable,
+    checkNotFulfilledRow,
+} from '../../logic/excel/utils/checkTable';
 import { ExportRowT } from '../../types/typesTables';
-import { tableNotFulfilled } from '../pageStatusStore.ts/pageMessages';
-import pageStatusStore from '../pageStatusStore.ts/pageStatusStore';
 import {
     selectAgentSp,
     selectBankProdavecSp,
@@ -22,7 +23,7 @@ export const setExport = (table: any[][]) => {
     table.shift();
     if (checkEmptyTable(table)) return;
 
-    const transformedTable = table.reduce<ExportRowT[]>((totalObj, row) => {
+    const transformedTable = table.reduce<ExportRowT[]>((totalObj, row, index) => {
         const [
             contract,
             seller,
@@ -54,7 +55,7 @@ export const setExport = (table: any[][]) => {
         const rowObj: ExportRowT = {
             contract: contractSp,
             seller: selectSellerSp(seller),
-            bankSeller: selectBankProdavecSp(contractSp.bankSeller),
+            bankSeller: selectBankProdavecSp(contractSp?.bankSeller),
             agent: selectAgentSp(buyer),
             vessel: selectVesselSp(vessel),
             transport: selectTransportSp(),
@@ -76,11 +77,10 @@ export const setExport = (table: any[][]) => {
             sort,
             pack,
             msc,
+            index: index.toString(),
         };
 
-        if (!product || !vessel || !blNo || !transport || !price || !date) {
-            pageStatusStore.setPageStatus(tableNotFulfilled('Экспорт'));
-        }
+        checkNotFulfilledRow(rowObj, 'Export');
 
         totalObj.push(rowObj);
         return totalObj;

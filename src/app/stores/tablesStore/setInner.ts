@@ -1,7 +1,9 @@
-import { checkEmptyTable } from '../../logic/excel/utils/checkEmptyTable';
+import {
+    checkEmptyTable,
+    checkNotFulfilledRow,
+} from '../../logic/excel/utils/checkTable';
 import { InnerRowT } from '../../types/typesTables';
 import {
-    selectBankProdavecSp,
     selectClientRuSp,
     selectProductSp,
     selectSellerSp,
@@ -12,9 +14,10 @@ import { initAmount } from './utils/initAmount';
 
 export const setInner = (table: any[][]) => {
     table.shift();
+    table.pop();
     if (checkEmptyTable(table)) return;
 
-    const transformedTable = table.reduce<InnerRowT[]>((totalObj, row) => {
+    const transformedTable = table.reduce<InnerRowT[]>((totalObj, row, index) => {
         const [
             clientCodeName,
             sellerCodeName,
@@ -32,8 +35,6 @@ export const setInner = (table: any[][]) => {
             deliveryDate,
             paymentDate,
         ] = row;
-
-        // isPlacesNonInteger?
 
         const rowObj: InnerRowT = {
             buyer: selectClientRuSp(clientCodeName),
@@ -54,13 +55,13 @@ export const setInner = (table: any[][]) => {
             bankSeller: bank,
             deliveryDate,
             paymentDate,
+            index: index.toString(),
         };
 
         totalObj.push(rowObj);
+        checkNotFulfilledRow(rowObj, 'Inner');
         return totalObj;
     }, []);
-
-    transformedTable.pop();
 
     tablesStore.setInner(transformedTable);
 };

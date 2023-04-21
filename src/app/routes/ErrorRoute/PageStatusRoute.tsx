@@ -21,7 +21,7 @@ export const PageStatusRoute = observer(() => {
 
     return (
         <Error title={title} desc={desc}>
-            <ErrorBtn onClick={onClick} desc='Get back' />
+            <ErrorBtn onClick={onClick} desc='Вернуться назад' />
         </Error>
     );
 });

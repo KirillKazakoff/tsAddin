@@ -1,17 +1,22 @@
 /* eslint-disable max-len */
 import { PageStatusT } from '../../types/typesStore';
 
-export const tableNotFulfilled = (table: string): PageStatusT => ({
+type TableErrorT = {
+    tableName: string;
+    row: number;
+    prop: string;
+};
+export const tableNotFulfilled = (error: TableErrorT): PageStatusT => ({
     statusType: 'notFilledTable',
-    title: `В таблице ${table} ошибка`,
-    desc: `Проверьте таблицу ${table} заполните пустые ячейки либо удалите пустые строки`,
+    title: `В таблице ${error.tableName} ошибка`,
+    desc: `Ошибка в строке ${error.row}, в столбце ${error.prop}`,
 });
 
-// export const blSame = (table: string): PageStatusT => ({
-//     statusType: 'sameBl',
-//     title: `В таблице ${table} одинаковые Bl!`,
-//     desc: 'Исправьте одинаковые Bl',
-// });
+export const excelInEditingMode = (): PageStatusT => ({
+    statusType: 'excelInEditingMode',
+    title: 'Ячейки в Excel не должны быть активны',
+    desc: 'Выйдите из активной ячейки (нажмите tab или enter в excel-таблице)',
+});
 
 export const transportNotFound = (): PageStatusT => ({
     statusType: 'transportNotFound',

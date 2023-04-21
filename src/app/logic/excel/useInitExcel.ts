@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
+import { excelInEditingMode } from '../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import { addChangeHandler } from './addChangeHandler';
 import { initStores } from './initStores';
@@ -20,7 +21,10 @@ export const useInitExcel = () => {
                 excelSyncStore.setLoading(false);
             });
         } catch (e) {
-            console.log(e);
+            const message = e.message as string;
+            if (message.includes('Excel is in cell-editing mode')) {
+                pageStatusStore.setPageStatus(excelInEditingMode());
+            }
         }
     };
 
