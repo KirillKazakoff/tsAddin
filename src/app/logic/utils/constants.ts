@@ -5,7 +5,7 @@ export const p = {
 };
 
 export const pathObj = {
-    bl: './templates/BL.xlsx',
+    bl: './templates/BL.XLSX',
     exportContract: './templates/Export_Agreement_Vessels.xlsx',
     exportStorageContract: './templates/Export_Storage_Agreement.xlsx',
     requestContractRu: './templates/Request_Contract_Ru.xlsx',
