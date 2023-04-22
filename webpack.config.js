@@ -104,9 +104,9 @@ module.exports = async (env, options) => {
             compress: true,
             port: 3000,
         },
-        output: {
-            path: '/',
-        }
+        // output: {
+        //     path: '/',
+        // }
     };
 
     return config;

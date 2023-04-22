@@ -5,17 +5,17 @@ export const p = {
 };
 
 const mode = process.env.NODE_ENV;
-const baseUrl = mode === 'production' ? 'https://kirillkazakoff.github.io/tsAddin' : '.';
+const baseUrl = mode === 'production' ? 'https://kirillkazakoff.github.io/tsAddin/' : './';
 
 export const pathObj = {
-    bl: `${baseUrl}/templates/BL.xlsx`,
-    exportContract: `${baseUrl}/templates/Export_Agreement_Vessels.xlsx`,
-    exportStorageContract: `${baseUrl}/templates/Export_Storage_Agreement.xlsx`,
-    requestContractRu: `${baseUrl}/templates/Request_Contract_Ru.xlsx`,
-    portLetter: `${baseUrl}./templates/Port_Letter.xlsx`,
+    bl: `${baseUrl}templates/BL.xlsx`,
+    exportContract: `${baseUrl}templates/Export_Agreement_Vessels.xlsx`,
+    exportStorageContract: `${baseUrl}templates/Export_Storage_Agreement.xlsx`,
+    requestContractRu: `${baseUrl}templates/Request_Contract_Ru.xlsx`,
+    portLetter: `${baseUrl}templates/Port_Letter.xlsx`,
     bg: {
-        trk: `${baseUrl}/assets/TRK.png`,
-        msi: `${baseUrl}./assets/MSI.png`,
+        trk: `${baseUrl}assets/TRK.png`,
+        msi: `${baseUrl}assets/MSI.png`,
     },
 };
 
