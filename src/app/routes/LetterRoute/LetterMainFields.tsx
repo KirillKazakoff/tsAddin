@@ -25,7 +25,10 @@ export const LetterMainFields = observer(() => {
 
     return (
         <div className='letter__fields'>
-            <img src='./assets/icon-16.png' alt='icon-16.png' />
+            <img
+                src='https://kirillkazakoff.github.io/tsAddin/assets/icon-16.png'
+                alt='icon-16.png'
+            />
             <Input
                 title='ETA Владивосток'
                 placeholder='ETA Владивосток'

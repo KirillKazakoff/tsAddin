@@ -66,7 +66,7 @@ module.exports = async (env, options) => {
                         from: './assets',
                         to: './assets',
                     },
-                    { from: 'templates', to: 'templates' },
+                    { from: './templates', to: './templates' },
                     {
                         from: 'manifest*.xml',
                         to: '[name]' + '[ext]',
@@ -107,6 +107,9 @@ module.exports = async (env, options) => {
             compress: true,
             port: 3000,
         },
+        output: {
+            path: '/',
+        }
     };
 
     return config;
