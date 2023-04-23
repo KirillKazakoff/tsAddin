@@ -22,5 +22,5 @@ export const setSellers = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setSellers(transformed);
+    spsStore.setSp.sellers(transformed);
 };

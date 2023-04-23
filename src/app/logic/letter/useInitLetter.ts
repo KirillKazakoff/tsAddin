@@ -14,7 +14,7 @@ export const useInitLetter = () => {
     useEffect(() => {
         if (mode === 'production') return;
         const func = async () => {
-            const href = getHref();
+            // const href = getHref();
             // console.log(href);
         };
         func();

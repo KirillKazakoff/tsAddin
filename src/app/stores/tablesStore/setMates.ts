@@ -6,7 +6,7 @@ import {
 import { MateRowT } from '../../types/typesTables';
 import tablesStore from './tablesStore';
 
-export const setMate = (table: any[][]) => {
+export const setMates = (table: any[][]) => {
     table.shift();
     if (checkEmptyTable(table)) return;
 
@@ -44,5 +44,5 @@ export const setMate = (table: any[][]) => {
         return totalObj;
     }, []);
 
-    tablesStore.setMates(transformedTable);
+    tablesStore.setTable.mates(transformedTable);
 };

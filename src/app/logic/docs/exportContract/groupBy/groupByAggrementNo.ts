@@ -34,6 +34,7 @@ export const groupByAgreementNo = () => {
         agreements[key] = groupByConsignee(agreement);
 
         const copy = _.cloneDeep(agreements[key].productsGroupedBy);
+        // eslint-disable-next-line no-console
         console.log(copy);
     });
 

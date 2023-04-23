@@ -15,5 +15,5 @@ export const setConsignees = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setConsignees(transformed);
+    spsStore.setSp.consignees(transformed);
 };

@@ -1,5 +1,5 @@
 import type { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
-import { ConsigneeT, VesselT } from './typesSP';
+import { ConsigneeT } from './typesSP';
 import { AmountT, ExportRowT } from './typesTables';
 
 export type InvoiceT = {

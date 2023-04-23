@@ -63,5 +63,5 @@ export const setInner = (table: any[][]) => {
         return totalObj;
     }, []);
 
-    tablesStore.setInner(transformedTable);
+    tablesStore.setTable.inner(transformedTable);
 };

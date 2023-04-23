@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
 import { OperationT } from '../../types/typesTables';
 import { initPodpisant } from '../initStoreObjects';
@@ -12,12 +13,11 @@ class ExportContractStore {
         makeAutoObservable(this);
     }
 
-    setPodpisant(podpisant: string) {
-        this.podpisant = selectPodpisantSp(podpisant);
-    }
-    setOperation(operation: OperationT) {
-        this.operation = operation;
-    }
+    setField = {
+        podpisant: (value: string) => (this.podpisant = selectPodpisantSp(value)),
+        operation: (value: OperationT) => (this.operation = value),
+    };
+
     getCurrentTable() {
         return this.operation === 'export'
             ? tablesStore.exportT

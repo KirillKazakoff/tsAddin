@@ -7,7 +7,7 @@ import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { Doc } from '../../components/Doc';
 
 export const ExportContractSection = observer(() => {
-    const { onLoad, setPodpisant, agreements } = useInitContractSection();
+    const { onLoad, setField, agreements } = useInitContractSection();
 
     const agreementsHtml = agreements.map((agreement) => {
         const { agreementNo } = agreement.record;
@@ -29,7 +29,7 @@ export const ExportContractSection = observer(() => {
 
             <SelectPodpisant
                 current={exportContractStore.podpisant.codeName}
-                setter={setPodpisant}
+                setter={setField.podpisant}
             />
 
             <ul className='docs'>{agreementsHtml}</ul>

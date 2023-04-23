@@ -1,6 +1,14 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { SelectT } from '../../types/typesComponents';
+
+export type SelectT = {
+    current: string;
+    setter: (newCurrent: string) => void;
+    options: string[];
+    title: string;
+};
+
+export type SelectSpecificT = Omit<SelectT, 'options' | 'title'>;
 
 export const Select = observer(({
     current, setter, options, title,

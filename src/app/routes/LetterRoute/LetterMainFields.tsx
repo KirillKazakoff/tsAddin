@@ -5,53 +5,33 @@ import Input from '../../components/Input';
 import letterStore from '../../stores/letterStore/letterStore';
 
 export const LetterMainFields = observer(() => {
-    const { fields } = letterStore;
-
-    const toggleIsExport = () => {
-        letterStore.toggleIsExport();
-    };
-
-    const setDateArrival = (date: string) => {
-        letterStore.setArrivalVld(date);
-    };
-
-    const setDatePayment = (date: string) => {
-        letterStore.setPayment(date);
-    };
-
-    const setPort = (port: string) => {
-        letterStore.setPort(port);
-    };
+    const { fields, setField } = letterStore;
 
     return (
         <div className='letter__fields'>
-            <img
-                src='https://kirillkazakoff.github.io/tsAddin/assets/icon-16.png'
-                alt='icon-16.png'
-            />
             <Input
                 title='ETA Владивосток'
                 placeholder='ETA Владивосток'
-                setter={setDateArrival}
+                setter={setField.arrivalVld}
                 value={fields.arrivalVld}
                 required
             />
             <Input
                 title='Порт'
                 placeholder='Порт'
-                setter={setPort}
+                setter={setField.port}
                 value={fields.port}
                 required
             />
             <Input
                 title='Дата оплаты'
                 placeholder='Дата оплаты'
-                setter={setDatePayment}
+                setter={setField.payment}
                 value={fields.payment}
             />
             <CheckBox
                 title='Предложение на экспорт'
-                setter={toggleIsExport}
+                setter={letterStore.toggleIsExport}
                 checked={fields.isExport}
             />
         </div>

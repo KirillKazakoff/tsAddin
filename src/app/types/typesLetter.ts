@@ -48,10 +48,4 @@ export type ProductionToStr = (
     callback: (product: ProductT) => string
 ) => string;
 
-// RequestType
-export type RequestObjT = {
-    url?: string;
-    settings?: RequestInit;
-};
-
 export type LanguageT = 'eng' | 'ru';

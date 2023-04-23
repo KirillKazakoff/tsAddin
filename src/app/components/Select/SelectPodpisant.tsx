@@ -1,8 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import spsStore from '../../stores/spsStore/spsStore';
-import { SelectSpecificT } from '../../types/typesComponents';
-import { Select } from './Select';
+import { Select, SelectSpecificT } from './Select';
 
 export const SelectPodpisant = observer(({ current, setter }: SelectSpecificT) => {
     const { podpisants } = spsStore;

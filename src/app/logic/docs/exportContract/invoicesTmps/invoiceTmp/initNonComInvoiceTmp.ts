@@ -90,13 +90,7 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     ];
 
     const cells = [...cellsEng, ...cellsRu];
-    cells.forEach((cell) => {
-        try {
-            utils.setCell(cell);
-        } catch (e) {
-            console.log(cell);
-        }
-    });
+    cells.forEach((cell) => utils.setCell(cell));
 
     initInvoiceBlRows(utils, invoice);
 

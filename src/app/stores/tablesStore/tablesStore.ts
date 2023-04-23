@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
 import { MateRowT, ExportRowT, InnerRowT } from '../../types/typesTables';
 
@@ -11,21 +12,12 @@ class TablesStore {
         makeAutoObservable(this);
     }
 
-    setMates(table: MateRowT[]) {
-        this.matesT = table;
-    }
-
-    setExport(table: ExportRowT[]) {
-        this.exportT = table;
-    }
-
-    setExportStorage(table: ExportRowT[]) {
-        this.exportStorageT = table;
-    }
-
-    setInner(table: InnerRowT[]) {
-        this.innerT = table;
-    }
+    setTable = {
+        mates: (table: MateRowT[]) => (this.matesT = table),
+        export: (table: ExportRowT[]) => (this.exportT = table),
+        exportStorage: (table: ExportRowT[]) => (this.exportStorageT = table),
+        inner: (table: InnerRowT[]) => (this.innerT = table),
+    };
 }
 
 const tablesStore = new TablesStore();

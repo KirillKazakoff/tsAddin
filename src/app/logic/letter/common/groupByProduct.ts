@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { selectProductSp, selectVesselSp } from '../../../stores/spsStore/select';
-import { ProductT, ProductionInfoT } from '../../../types/types';
+import { ProductT, ProductionInfoT } from '../../../types/typesLetter';
 import { MateRowT } from '../../../types/typesTables';
 import { isStOff } from './isStOff';
 

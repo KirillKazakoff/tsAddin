@@ -22,7 +22,5 @@ export const addChangeHandler = (context: Excel.RequestContext) => {
         ws.load('name');
         await worksheets.context.sync();
         excelSyncStore.setSync(false);
-
-        console.log(ws.name);
     });
 };

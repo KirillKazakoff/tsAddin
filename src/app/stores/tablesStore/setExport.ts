@@ -86,5 +86,5 @@ export const setExport = (table: any[][]) => {
         return totalObj;
     }, []);
 
-    tablesStore.setExport(transformedTable);
+    tablesStore.setTable.export(transformedTable);
 };

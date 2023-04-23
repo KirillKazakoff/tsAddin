@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import letterStore from '../../../stores/letterStore/letterStore';
-import { DetailsT, ProductT } from '../../../types/types';
+import { DetailsT, ProductT } from '../../../types/typesLetter';
 import { formatCount } from '../../utils/formatCount';
 import { isStOff } from '../common/isStOff';
 import { p } from '../../utils/constants';

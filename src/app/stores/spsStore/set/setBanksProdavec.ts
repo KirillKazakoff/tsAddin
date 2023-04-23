@@ -39,5 +39,5 @@ export const setBanksProdavec = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setBanksProdavec(transformed);
+    spsStore.setSp.banksProdavec(transformed);
 };

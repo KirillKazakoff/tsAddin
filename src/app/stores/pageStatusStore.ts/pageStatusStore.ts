@@ -11,9 +11,6 @@ class PageStatusStore {
 
     setPageStatus(status: PageStatusT) {
         this.status = status;
-
-        // if (status.statusType === 'ok') return;
-        // throw new Error(status.statusType);
     }
 
     resetPageStatus() {

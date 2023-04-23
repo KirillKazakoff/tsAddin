@@ -8,13 +8,13 @@ import { setPortsRu } from '../../stores/spsStore/set/setPortsRu';
 import { setPortsTamozhnya } from '../../stores/spsStore/set/setPortsTamozhnya';
 import { setPortsZarubezh } from '../../stores/spsStore/set/setPortsZarubezh';
 import { setProduction } from '../../stores/spsStore/set/setProduction';
-import { setSellers } from '../../stores/spsStore/set/setSeller';
+import { setSellers } from '../../stores/spsStore/set/setSellers';
 import { setTransport } from '../../stores/spsStore/set/setTransport';
 import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { setExportStorage } from '../../stores/tablesStore/setExportStorage';
 import { setInner } from '../../stores/tablesStore/setInner';
-import { setMate } from '../../stores/tablesStore/setMate';
+import { setMates } from '../../stores/tablesStore/setMates';
 import { InitRangeBoundT, initRange as initRangeUnbound } from './utils/initRange';
 
 export const initStores = async (context: Excel.RequestContext) => {
@@ -45,7 +45,7 @@ export const initStores = async (context: Excel.RequestContext) => {
 
     await context.sync();
 
-    setMate(mateRange.values);
+    setMates(mateRange.values);
 
     setSellers(spSellersRange.values);
     setTransport(mateRange.values, spTransportRange.values);

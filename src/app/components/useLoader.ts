@@ -11,7 +11,7 @@ export const useLoader = (load: () => Promise<void>) => {
         } catch (e) {
             setStatus('error');
         }
-        setTimeout(() => setStatus('loaded'), 400);
+        setTimeout(() => setStatus('loaded'), 500);
     };
 
     return { onLoad, status };

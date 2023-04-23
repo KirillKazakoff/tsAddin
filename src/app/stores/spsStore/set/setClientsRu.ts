@@ -20,5 +20,5 @@ export const setClientsRu = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setClientsRu(transformed);
+    spsStore.setSp.clientsRu(transformed);
 };

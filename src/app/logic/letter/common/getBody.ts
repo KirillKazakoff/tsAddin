@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { selectVesselSp } from '../../../stores/spsStore/select';
-import { BodyRowT } from '../../../types/types';
+import { BodyRowT } from '../../../types/typesLetter';
 import { MateRowT } from '../../../types/typesTables';
 import { groupByProduct } from './groupByProduct';
 import { groupByVessel } from './groupByVessel';

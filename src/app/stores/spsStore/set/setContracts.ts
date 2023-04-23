@@ -31,5 +31,5 @@ export const setContracts = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setContracts(transformed);
+    spsStore.setSp.contracts(transformed);
 };

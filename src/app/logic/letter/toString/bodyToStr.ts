@@ -1,6 +1,6 @@
 import { selectVesselsStr } from '../../../stores/spsStore/selectUtils';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { ProductionToStr } from '../../../types/types';
+import { ProductionToStr } from '../../../types/typesLetter';
 import { getBody } from '../common/getBody';
 import { productToStringEng, productToStringRu } from './productToStr';
 

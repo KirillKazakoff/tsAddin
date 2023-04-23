@@ -1,6 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable import/no-unresolved */
-import _ from 'lodash';
 import numberToString from 'number-to-cyrillic';
 
 export function formatCount(

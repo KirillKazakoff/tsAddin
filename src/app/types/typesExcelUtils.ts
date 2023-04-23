@@ -3,7 +3,7 @@ import {
 } from 'exceljs';
 import { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
 import { MergeSettingsT } from '../logic/excel/utils/excelUtilsObj/mergeCells';
-import { LanguageT } from './types';
+import { LanguageT } from './typesLetter';
 import { InvoicesT, InvoiceT } from './typesContract';
 
 export type GetRowBoundT = (cellName: string, offset: number) => Row;

@@ -20,5 +20,5 @@ export const setPortsZarubezh = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setPortsZarubezh(transformed);
+    spsStore.setSp.portsZarubezh(transformed);
 };

@@ -1,4 +1,4 @@
-import { RequestObjT } from '../../types/types';
+import { RequestObjT } from '../../types/typesUtils';
 
 const baseUrl = 'http://localhost:9092/pdf';
 // const baseUrl = 'https://todos-mobx.cyclic.app/users';
@@ -23,8 +23,6 @@ export const request = async (reqObj?: RequestObjT) => {
     try {
         await timeoutMock(600);
 
-        console.log(url);
-        console.log(settings);
         const res = await fetch(url, settings);
         if (!res.ok) throw new Error(res.statusText);
 

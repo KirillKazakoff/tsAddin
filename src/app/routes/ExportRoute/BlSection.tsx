@@ -23,7 +23,7 @@ const BlSection = observer(() => {
 
     const onChange = (e: InputEventT) => {
         const value = e.currentTarget.value as OperationT;
-        exportContractStore.setOperation(value);
+        exportContractStore.setField.operation(value);
     };
 
     return (

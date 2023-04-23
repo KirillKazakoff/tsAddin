@@ -33,5 +33,5 @@ export const setProduction = (spRange: any[][]) => {
         return totalObj;
     }, {});
 
-    spsStore.setProduction(production);
+    spsStore.setSp.production(production);
 };

@@ -37,5 +37,5 @@ export const setAgents = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setAgents(transformed);
+    spsStore.setSp.agents(transformed);
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
 import { initLetterFields } from './initLetterFields';
 
@@ -8,33 +9,16 @@ class LetterStore {
         makeAutoObservable(this);
     }
 
-    setPayment(date: string) {
-        this.fields.payment = date;
-    }
+    setField = {
+        payment: (value: string) => (this.fields.payment = value),
+        arrivalVld: (value: string) => (this.fields.arrivalVld = value),
+        arrivalForeign: (value: string) => (this.fields.arrivalForeign = value),
+        terms: (value: string) => (this.fields.terms = value),
+        ground: (value: string) => (this.fields.ground = value),
+        port: (value: string) => (this.fields.port = value),
+    };
 
-    setArrivalVld(date: string) {
-        this.fields.arrivalVld = date;
-    }
-
-    setArrivalForeign(date: string) {
-        this.fields.arrivalForeign = date;
-    }
-
-    toggleIsExport() {
-        this.fields.isExport = !this.fields.isExport;
-    }
-
-    setTerms(terms: string) {
-        this.fields.terms = terms;
-    }
-
-    setGround(ground: string) {
-        this.fields.ground = ground;
-    }
-
-    setPort(port: string) {
-        this.fields.port = port;
-    }
+    toggleIsExport = () => (this.fields.isExport = !this.fields.isExport);
 }
 
 const letterStore = new LetterStore();

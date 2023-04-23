@@ -6,7 +6,7 @@ export const setPortsTamozhnya = (spRange: any[][]) => {
     spRange.shift();
 
     const transformed = spRange.reduce<PortsTamozhnyaT>((total, row) => {
-        const [codeName, nameEng, fullName] = row;
+        const [codeName, nameEng] = row;
 
         total[codeName] = {
             codeName,
@@ -20,5 +20,5 @@ export const setPortsTamozhnya = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setPortsTamozhnya(transformed);
+    spsStore.setSp.portsTamozhnya(transformed);
 };

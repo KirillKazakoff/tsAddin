@@ -1,8 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { CargoT } from '../../stores/docsStores/portLetterStore';
-import { Select } from './Select';
-import { SelectT } from '../../types/typesComponents';
+import { Select, SelectT } from './Select';
 
 export const SelectCargo = observer((props: Omit<SelectT, 'options'>) => {
     const options: CargoT[] = ['Покупатель', 'Продавец', ''];

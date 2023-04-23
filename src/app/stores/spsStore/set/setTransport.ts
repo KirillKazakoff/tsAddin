@@ -15,5 +15,5 @@ export const setTransport = (mateValues: any[][], dictionaryRange: any[][]) => {
     }
 
     const [nameRu, nameEng, id] = transport;
-    spsStore.setTransport({ eng: { name: nameEng }, ru: { name: nameRu }, id });
+    spsStore.setSp.transport({ eng: { name: nameEng }, ru: { name: nameRu }, id });
 };

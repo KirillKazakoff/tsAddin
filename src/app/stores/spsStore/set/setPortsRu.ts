@@ -19,5 +19,5 @@ export const setPortsRu = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setPortsRu(transformed);
+    spsStore.setSp.portsRu(transformed);
 };

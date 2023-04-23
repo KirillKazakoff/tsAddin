@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { SubjectT } from '../../../types/types';
+import { SubjectT } from '../../../types/typesLetter';
 import { checkOperation } from './checkOperation';
 import { isStOff } from './isStOff';
 

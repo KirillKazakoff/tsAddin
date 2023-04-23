@@ -4,17 +4,7 @@ import letterStore from '../../stores/letterStore/letterStore';
 import Input from '../../components/Input';
 
 export const LetterExportFields = observer(() => {
-    const { fields } = letterStore;
-
-    const setTerms = (terms: string) => {
-        letterStore.setTerms(terms);
-    };
-    const setGround = (ground: string) => {
-        letterStore.setGround(ground);
-    };
-    const setDateForeignArrival = (date: string) => {
-        letterStore.setArrivalForeign(date);
-    };
+    const { fields, setField } = letterStore;
 
     if (!fields.isExport) return null;
 
@@ -23,19 +13,19 @@ export const LetterExportFields = observer(() => {
             <Input
                 title='ETA экспорт'
                 placeholder={`ETA ${fields.port}`}
-                setter={setDateForeignArrival}
+                setter={setField.arrivalForeign}
                 value={fields.arrivalForeign}
             />
             <Input
                 title='Условия продажи'
                 placeholder='Условия продажи'
-                setter={setTerms}
+                setter={setField.terms}
                 value={fields.terms}
             />
             <Input
                 title='Фишинг земля'
                 placeholder='Fishing ground'
-                setter={setGround}
+                setter={setField.ground}
                 value={fields.ground}
             />
         </div>

@@ -23,5 +23,5 @@ export const setVessels = (spRange: any[][]) => {
         return total;
     }, {});
 
-    spsStore.setVessels(transformed);
+    spsStore.setSp.vessels(transformed);
 };

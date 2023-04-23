@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { checkEmptyTable } from '../../logic/excel/utils/checkTable';
+import {
+    checkEmptyTable,
+    checkNotFulfilledRow,
+} from '../../logic/excel/utils/checkTable';
 import { ExportRowT } from '../../types/typesTables';
 import {
     selectContractSp,
@@ -77,13 +80,11 @@ export const setExportStorage = (table: any[][]) => {
             index: index.toString(),
         };
 
-        // if (!product || !vessel || !blNo || !transport || !price || !date) {
-        //     pageStatusStore.setPageStatus(tableNotFulfilled('ЭкспортХранение'));
-        // }
+        checkNotFulfilledRow(rowObj, 'Export_Storage');
 
         totalObj.push(rowObj);
         return totalObj;
     }, []);
 
-    tablesStore.setExportStorage(transformedTable);
+    tablesStore.setTable.exportStorage(transformedTable);
 };

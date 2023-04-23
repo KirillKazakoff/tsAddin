@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import spsStore from '../../stores/spsStore/spsStore';
-import { SelectSpecificT } from '../../types/typesComponents';
-import { Select } from './Select';
+
+import { Select, SelectSpecificT } from './Select';
 
 export const SelectPortRu = observer((props: SelectSpecificT) => {
     const { portsRu } = spsStore;
