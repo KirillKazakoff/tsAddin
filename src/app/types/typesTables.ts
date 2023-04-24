@@ -29,9 +29,7 @@ export type MateRowT = {
     vessel: string;
     product: string;
     sort: string;
-    amount: {
-        total: AmountT;
-    };
+    amount: number;
     periodCreation: string;
     operation: string;
     index: string;
@@ -109,3 +107,5 @@ export type InnerRowT = {
 export type OperationT = 'export' | 'export_storage';
 
 export type CommonRowT = ExportRowT | InnerRowT | MateRowT;
+
+export type TableNameT = 'Export' | 'Export_Storage' | 'Inner' | 'Mates';

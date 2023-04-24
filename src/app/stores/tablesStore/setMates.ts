@@ -33,9 +33,7 @@ export const setMates = (table: any[][]) => {
             vessel,
             product: product.toLowerCase(),
             sort,
-            amount: {
-                total: initAmount(amountTotal, 2, 3),
-            },
+            amount: amountTotal,
             periodCreation: periodCreation || '! NOT STATED !',
             index: index.toString(),
         };

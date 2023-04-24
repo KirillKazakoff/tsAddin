@@ -2,35 +2,22 @@
 /* eslint-disable no-restricted-syntax */
 import { tableError } from '../../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
-import { AmountT, CommonRowT } from '../../../types/typesTables';
-
-export type TableNameT = 'Export' | 'Export_Storage' | 'Inner' | 'Mates';
+import { CommonRowT, TableNameT } from '../../../types/typesTables';
+import { checkNumber } from '../../utils/checkNumber';
 
 export const checkEmptyTable = (table: any[][]) => {
     const check = table[0].every((value) => !value || value === '-');
     return check;
 };
 
+// checkFulfilledRow
 const setTableError = (row: number, prop: string, tableName: string) => {
     pageStatusStore.setPageStatus(tableError({ tableName, row, prop }));
 };
 
-const checkAmountPropError = (
-    amountObj: { [key: string]: AmountT },
-    row: number,
-    tableName: string,
-) => {
-    const propError = Object.keys(amountObj).find((key) => {
-        return amountObj[key].str === 'не число';
-    });
-
-    if (propError) {
-        setTableError(row, propError, tableName);
-    }
-};
-
 export const checkNotFulfilledRow = (row: CommonRowT, tableName: TableNameT) => {
     const checkProps = (possibleEmptyProps: string[]) => {
+        // checkEmpty
         for (const prop in row) {
             const value = row[prop];
 
@@ -39,9 +26,24 @@ export const checkNotFulfilledRow = (row: CommonRowT, tableName: TableNameT) => 
                 return;
             }
         }
-        checkAmountPropError(row.amount, +row.index + 1, tableName);
+
+        // checkAmountError
+        if (typeof row.amount === 'number') {
+            if (!checkNumber(row.amount)) {
+                setTableError(+row.index + 1, 'amount', tableName);
+            }
+            return;
+        }
+
+        const propError = Object.keys(row.amount).find((key) => {
+            return row.amount[key].str === 'не число';
+        });
+        if (propError) {
+            setTableError(+row.index + 1, propError, tableName);
+        }
     };
 
+    // for every table
     if (tableName.includes('Export')) {
         const possibleEmptyProps = ['terms', 'sort', 'msc', 'consignee'];
         checkProps(possibleEmptyProps);

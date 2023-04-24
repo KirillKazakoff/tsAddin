@@ -44,7 +44,6 @@ export const setExportStorage = (table: any[][]) => {
             contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index,
         };
         const rowObj = getExportRow(rowInit);
-
         checkNotFulfilledRow(rowObj, 'Export_Storage');
 
         totalObj.push(rowObj);

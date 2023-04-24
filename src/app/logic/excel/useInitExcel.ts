@@ -28,7 +28,6 @@ export const useInitExcel = () => {
             if (message.includes('Excel is in cell-editing mode')) {
                 pageStatusStore.setPageStatus(excelInEditingMode());
             } else {
-                console.log(e);
                 pageStatusStore.setPageStatus(unknownError(message));
             }
         }
