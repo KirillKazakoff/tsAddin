@@ -2,6 +2,17 @@ import type { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreem
 import { ConsigneeT } from './typesSP';
 import { AmountT, ExportRowT } from './typesTables';
 
+// BlT
+export type BlGroupT = {
+    record: ExportRowT;
+    rows: ExportRowT[];
+};
+
+export type GroupedBlT = {
+    [key: string]: BlGroupT;
+};
+
+// InvoiceT
 export type InvoiceT = {
     agreement: AgreementT;
     rows: ExportRowT[];

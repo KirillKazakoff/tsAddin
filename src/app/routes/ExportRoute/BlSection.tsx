@@ -5,14 +5,15 @@ import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
 
 const BlSection = observer(() => {
-    const { onLoad, onLoadAll, table } = useInitBlSection();
+    const { onLoad, onLoadAll, blGroupsArr } = useInitBlSection();
 
-    const blList = table.map((row) => {
-        const onClick = async () => onLoad(row);
+    const blList = blGroupsArr.map((group) => {
+        const onClick = async () => onLoad(group);
         return (
             <Doc
-                onClick={onClick} title={row.blNo}
-                key={row.blNo}
+                onClick={onClick}
+                title={group.record.blNo}
+                key={group.record.blNo}
             />
         );
     });

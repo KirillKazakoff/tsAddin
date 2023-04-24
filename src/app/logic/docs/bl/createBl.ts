@@ -1,12 +1,12 @@
-import { ExportRowT } from '../../../types/typesTables';
+import { BlGroupT } from '../../../types/typesContract';
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
 import { initBlTmp } from './initBlTmp';
 
-export const createBL = async (row: ExportRowT) => {
+export const createBL = async (blGroup: BlGroupT) => {
     const book = await readTmp(pathObj.bl);
-    initBlTmp(book, row);
+    initBlTmp(book, blGroup.rows);
 
-    await saveFile(book, row.blNo);
+    await saveFile(book, blGroup.record.blNo);
 };

@@ -7,6 +7,7 @@ export const groupByConsignee = (agreement: AgreementT) => {
 
     agreement.rows.forEach((row) => {
         row.consignee = row.consignee || selectConsigneeSp(row.agent.code);
+        if (!row.consignee) return;
         let consigneeGroup = consignees[row.consignee.codeName];
 
         if (!consigneeGroup) {

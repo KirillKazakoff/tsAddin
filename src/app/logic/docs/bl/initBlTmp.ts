@@ -1,53 +1,29 @@
 import ExcelJS from 'exceljs';
+import { CellObjT } from '../../../types/typesExcelUtils';
 import { ExportRowT } from '../../../types/typesTables';
-import { getCellByName } from '../../excel/utils/excelUtilsObj/getCell';
+import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
+import { initBlRows } from './initBlRows';
 
-export const initBlTmp = (book: ExcelJS.Workbook, row: ExportRowT) => {
-    const blWs = book.getWorksheet('BL');
-    const getCellBl: (name: string) => ExcelJS.Cell = getCellByName.bind(this, blWs);
+export const initBlTmp = (book: ExcelJS.Workbook, blGroup: ExportRowT[]) => {
+    const ws = book.getWorksheet('BL');
+    const utils = initExcelUtils(ws);
 
-    const sellerCl = getCellBl('Продавец');
-    const sellerAdressCl = getCellBl('Продавец_адрес');
-    const consigneeCl = getCellBl('Получатель');
-    const consigneeAdressCl = getCellBl('Получатель_адрес');
-    const dateCl = getCellBl('Дата');
-    const vesselCl = getCellBl('Судно');
-    const transportCl = getCellBl('Транспорт');
-    const toCl = getCellBl('Куда');
-    const fromCl = getCellBl('Откуда');
-    const blNoCl = getCellBl('Bl');
-    const productCl = getCellBl('Продукт');
-    const sortCl = getCellBl('Сорт');
-    const packCl = getCellBl('Упаковка');
-    const amountPlacesCl = getCellBl('Места');
-    const amountTotalCl = getCellBl('Всего');
+    const record = blGroup[0];
+    // prettier-ignore
+    const cells: CellObjT[] = [
+        { cell: 'Продавец', value: record.seller.eng.name },
+        { cell: 'Продавец_адрес', value: record.seller.eng.addres },
+        { cell: 'Получатель', value: record.consignee?.fullName || record.agent.name },
+        { cell: 'Получатель_адрес', value: record.consignee?.addres || record.agent.addres },
+        { cell: 'Дата', value: getExcelDateStr(record.date, 'eng') },
+        { cell: 'Судно', value: record.vessel.eng.name },
+        { cell: 'Транспорт', value: record.transport.eng.name },
+        { cell: 'Куда', value: record.portTo.eng.name },
+        { cell: 'Откуда', value: record.portFrom.eng.name },
+    ];
 
-    blWs.getCell(sellerCl.row, sellerCl.col);
+    initBlRows(blGroup, utils);
 
-    sellerCl.value = row.seller.eng.name;
-    sellerAdressCl.value = row.seller.eng.addres;
-
-    consigneeCl.value = row.consignee?.fullName || row.agent.name;
-    consigneeAdressCl.value = row.consignee?.addres || row.agent.addres;
-
-    dateCl.value = getExcelDateStr(row.date, 'eng');
-
-    vesselCl.value = row.vessel.eng.name;
-
-    transportCl.value = row.transport.eng.name;
-
-    toCl.value = `${row.portTo.eng.name}, ${row.portTo.eng.country}`;
-
-    fromCl.value = row.portFrom.eng.name;
-
-    blNoCl.value = row.blNo;
-
-    productCl.value = row.product.eng.name;
-
-    sortCl.value = row.sort;
-    packCl.value = `1/${row.pack} KG`;
-    amountPlacesCl.value = `${row.amount.places.str} PCS /`;
-
-    amountTotalCl.value = `${row.amount.placesTotal.str} tn`;
+    cells.forEach((cell) => utils.setCell(cell));
 };
