@@ -1,23 +1,12 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
     checkEmptyTable,
     checkNotFulfilledRow,
 } from '../../logic/excel/utils/checkTable';
-import { ExportRowT } from '../../types/typesTables';
-import {
-    selectContractSp,
-    selectSellerSp,
-    selectAgentSp,
-    selectVesselSp,
-    selectTransportSp,
-    selectPortTamozhnyaSp,
-    selectPortZarubezhSp,
-    selectConsigneeSp,
-    selectProductSp,
-    selectBankProdavecSp,
-} from '../spsStore/select';
+import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
+import { getExportRow } from './getExportRow';
 import tablesStore from './tablesStore';
-import { initAmount } from './utils/initAmount';
 
 export const setExportStorage = (table: any[][]) => {
     table.shift();
@@ -27,7 +16,7 @@ export const setExportStorage = (table: any[][]) => {
         const [
             contract,
             seller,
-            buyer,
+            agent,
             vessel,
             transport,
             agreementNo,
@@ -50,35 +39,11 @@ export const setExportStorage = (table: any[][]) => {
             portFrom,
         ] = row;
 
-        const contractSp = selectContractSp(contract);
-
-        const rowObj: ExportRowT = {
-            contract: contractSp,
-            seller: selectSellerSp(seller),
-            bankSeller: selectBankProdavecSp(contractSp?.bankSeller),
-            agent: selectAgentSp(buyer),
-            vessel: selectVesselSp(vessel),
-            transport: selectTransportSp(),
-            portFrom: selectPortTamozhnyaSp(portFrom),
-            portTo: selectPortZarubezhSp(portTo),
-            consignee: selectConsigneeSp(consignee),
-            product: selectProductSp(product),
-            amount: {
-                places: initAmount(places, 0, 0),
-                placesTotal: initAmount(placesTotal, 3, 4),
-                price: initAmount(price, 2, 2),
-                priceTotal: initAmount(priceTotal, 3, 4),
-            },
-            agreementNo,
-            invoice,
-            date,
-            blNo,
-
-            sort,
-            pack,
-            msc,
-            index: index.toString(),
+        // prettier-ignore
+        const rowInit: ExportInitRowT = {
+            contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index,
         };
+        const rowObj = getExportRow(rowInit);
 
         checkNotFulfilledRow(rowObj, 'Export_Storage');
 

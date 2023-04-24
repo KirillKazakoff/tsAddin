@@ -29,13 +29,13 @@ export const groupByAgreementNo = () => {
     }, {});
 
     Object.entries(agreements).forEach(([key, agreement]) => {
+        agreements[key] = groupByConsignee(agreement);
         agreements[key] = groupByInvoice(agreement);
         agreements[key] = groupByVesselExport(agreement);
-        agreements[key] = groupByConsignee(agreement);
 
-        const copy = _.cloneDeep(agreements[key].productsGroupedBy);
+        // const copy = _.cloneDeep(agreements[key].productsGroupedBy);
         // eslint-disable-next-line no-console
-        console.log(copy);
+        // console.log(copy);
     });
 
     return agreements;

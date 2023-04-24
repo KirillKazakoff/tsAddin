@@ -16,5 +16,6 @@ export const initAmount = (
         str: formatCount(count, fractionMin, fractionMax),
         count,
     };
+    console.log(amount.str);
     return amount;
 };

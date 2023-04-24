@@ -5,6 +5,7 @@ import {
 } from '../../logic/excel/utils/checkTable';
 import { MateRowT } from '../../types/typesTables';
 import tablesStore from './tablesStore';
+import { initAmount } from './utils/initAmount';
 
 export const setMates = (table: any[][]) => {
     table.shift();
@@ -32,7 +33,9 @@ export const setMates = (table: any[][]) => {
             vessel,
             product: product.toLowerCase(),
             sort,
-            amount: amountTotal,
+            amount: {
+                total: initAmount(amountTotal, 2, 3),
+            },
             periodCreation: periodCreation || '! NOT STATED !',
             index: index.toString(),
         };

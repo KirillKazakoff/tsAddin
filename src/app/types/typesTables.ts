@@ -12,16 +12,7 @@ import {
     VesselT,
 } from './typesSP';
 
-export type MateRowT = {
-    vessel: string;
-    product: string;
-    sort: string;
-    amount: number;
-    periodCreation: string;
-    operation: string;
-    index: string;
-};
-
+// Amount
 export type AmountT = {
     str: string;
     count: number;
@@ -31,6 +22,47 @@ type AmountObjT = {
     placesTotal: AmountT;
     price: AmountT;
     priceTotal: AmountT;
+};
+
+// Tables
+export type MateRowT = {
+    vessel: string;
+    product: string;
+    sort: string;
+    amount: {
+        total: AmountT;
+    };
+    periodCreation: string;
+    operation: string;
+    index: string;
+};
+
+export type ExportInitRowT = {
+    contract: number;
+    seller: string;
+    bankSeller?: string;
+    agent: string;
+    vessel: string;
+    transport: string;
+    portFrom: string;
+    portTo: string;
+    consignee: string;
+    product: string;
+    places: number;
+    placesTotal: number;
+    price: number;
+    priceTotal: number;
+    agreementNo: number;
+    invoice: string;
+    date: string;
+    blNo: string;
+    blMode: string;
+    terms?: string;
+    sort: string;
+    pack: string;
+    msc: string;
+    id: string;
+    index: number;
 };
 
 export type ExportRowT = {
@@ -75,3 +107,5 @@ export type InnerRowT = {
 
 // utilstype
 export type OperationT = 'export' | 'export_storage';
+
+export type CommonRowT = ExportRowT | InnerRowT | MateRowT;

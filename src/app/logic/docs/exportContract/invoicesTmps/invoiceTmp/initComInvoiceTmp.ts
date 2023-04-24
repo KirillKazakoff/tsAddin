@@ -17,7 +17,6 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         portFrom,
         portTo,
         agreementNo,
-        date,
         contract,
         terms,
         bankSeller,
@@ -26,12 +25,19 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         invoiceDate, invoiceNo, msc, amount,
     } = invoice;
 
+    console.log(consignee);
+    console.log(agent.name);
+
     const { places, placesTotal, priceTotal } = amount;
+    const date = {
+        invoice: (language: string) => getExcelDateStr(invoiceDate, language),
+        contract: (language: string) => getExcelDateStr(contract.date, language),
+    };
 
     // invoiceEng
     const engDepartureCells = [
         { cell: 'Инвойс_декларация', value: '' },
-        { cell: 'Инвойс_дата', value: getExcelDateStr(invoiceDate, 'en') },
+        { cell: 'Инвойс_дата', value: date.invoice('eng') },
         { cell: 'Инвойс_транспорт', value: transport.eng.name },
         { cell: 'Инвойс_куда', value: `${portTo.eng.name}, ${portTo.eng.country}` },
         { cell: 'Инвойс_откуда', value: portFrom.eng.name },
@@ -40,7 +46,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const cellsEng = [
         { cell: 'Инвойс_продавец', value: seller.eng.name },
         { cell: 'Инвойс_продавец_адрес', value: seller.eng.addres },
-        { cell: 'Инвойс', value: `${invoiceNo} from ${getExcelDateStr(invoiceDate, 'en')}` },
+        { cell: 'Инвойс', value: `${invoiceNo} from ${date.invoice('eng')}` },
         { cell: 'МСЦ', value: msc ? 'MSC certified' : 'Non-MSC product' },
         { cell: 'МСЦ_сертификат', value: msc ? 'MSC-C-52870' : '' },
 
@@ -51,9 +57,9 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
 
         ...engDepartureCells,
 
-        { cell: 'Инвойс_соглашение', value: `AGREEMENT No.${agreementNo} from ${getExcelDateStr(date, 'en')}` },
+        { cell: 'Инвойс_соглашение', value: `AGREEMENT No.${agreementNo} from ${date.invoice('eng')}` },
         { cell: 'Инвойс_контракт', value: `to a contract of sale No. ${contract.contractNo}` },
-        { cell: 'Инвойс_контракт_дата', value: `Magadan, dated from ${getExcelDateStr(contract.date, 'en')}` },
+        { cell: 'Инвойс_контракт_дата', value: `Magadan, dated from ${date.contract('eng')}` },
         { cell: 'Инвойс_условия', value: `${terms}, ${portTo.eng.country}` },
 
         { cell: 'Инвойс_подвал_места', value: `${places.str} PCS /` },
@@ -71,7 +77,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     // invoiceRu
     const ruDepartureCells = [
         { cell: 'Инвойс_декларация_п', value: '' },
-        { cell: 'Инвойс_дата_п', value: getExcelDateStr(invoiceDate, 'ru') },
+        { cell: 'Инвойс_дата_п', value: date.invoice('ru') },
         { cell: 'Инвойс_транспорт_п', value: transport.ru.name },
         { cell: 'Инвойс_куда_п', value: `${portTo.ru.name}, ${portTo.ru.country}` },
         { cell: 'Инвойс_откуда_п', value: portFrom.ru.name },
@@ -81,7 +87,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const cellsRu = [
         { cell: 'Инвойс_продавец_п', value: seller.ru.name },
         { cell: 'Инвойс_продавец_адрес_п', value: seller.ru.addres },
-        { cell: 'Инвойс_п', value: `${invoiceNo} от ${getExcelDateStr(invoiceDate, 'ru')}` },
+        { cell: 'Инвойс_п', value: `${invoiceNo} от ${date.invoice('ru')}` },
         { cell: 'МСЦ_п', value: msc ? 'MSC certified' : 'Non-MSC product' },
         { cell: 'МСЦ_сертификат_п', value: msc ? 'MSC-C-52870' : '' },
 
@@ -92,9 +98,9 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
 
         ...ruDepartureCells,
 
-        { cell: 'Инвойс_соглашение_п', value: `Дополнение No.${agreementNo} от ${getExcelDateStr(date, 'ru')}` },
+        { cell: 'Инвойс_соглашение_п', value: `Дополнение No.${agreementNo} от ${date.invoice('ru')}}` },
         { cell: 'Инвойс_контракт_п', value: `к контракту купли-продажи №. ${contract.contractNo}` },
-        { cell: 'Инвойс_контракт_дата_п', value: `Магадан, от ${getExcelDateStr(contract.date, 'ru')}` },
+        { cell: 'Инвойс_контракт_дата_п', value: `Магадан, от ${date.contract('ru')}` },
         { cell: 'Инвойс_условия_п', value: `${terms}, ${portTo.ru.country}` },
 
         { cell: 'Инвойс_подвал_места_п', value: `${places.str} шт /` },
@@ -110,7 +116,14 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     ];
 
     const cells = [...cellsEng, ...cellsRu];
-    cells.forEach((cell) => utils.setCell(cell));
+
+    cells.forEach((cell) => {
+        try {
+            utils.setCell(cell);
+        } catch (e) {
+            console.log(e);
+        }
+    });
 
     initComInvoiceEXW([...engDepartureCells, ...ruDepartureCells], utils, terms);
 
