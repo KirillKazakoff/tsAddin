@@ -11,7 +11,6 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const {
         seller,
         agent,
-        consignee,
         transport,
         portFrom,
         portTo,
@@ -20,7 +19,7 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         vessel,
     } = invoice.agreement.record;
     const {
-        invoiceDate, invoiceNo, msc, amount,
+        invoiceDate, invoiceNo, msc, amount, consignee,
     } = invoice;
 
     const { places, placesTotal, priceTotal } = amount;
@@ -34,8 +33,8 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const cellsEng = [
         { cell: 'Инвойс_продавец', value: seller.eng.name },
         { cell: 'Инвойс_продавец_адрес', value: seller.eng.addres },
-        { cell: 'Инвойс', value: `${invoiceNo} from ${date.invoice('eng')}` },
-        { cell: 'МСЦ', value: msc ? 'MSC certified' : 'Non-MSC product' },
+        { cell: 'Инвойс', value: `${invoiceNo}N from ${date.invoice('eng')}` },
+        { cell: 'МСЦ', value: msc ? 'MSC certified' : 'Non-MSC certified' },
         { cell: 'МСЦ_сертификат', value: msc ? 'MSC-C-52870' : '' },
 
         { cell: 'Инвойс_получатель', value: agent.name },
@@ -64,8 +63,8 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const cellsRu = [
         { cell: 'Инвойс_продавец_п', value: seller.ru.name },
         { cell: 'Инвойс_продавец_адрес_п', value: seller.ru.addres },
-        { cell: 'Инвойс_п', value: `${invoiceNo} от ${date.invoice('ru')}` },
-        { cell: 'МСЦ_п', value: msc ? 'MSC certified' : 'Non-MSC product' },
+        { cell: 'Инвойс_п', value: `${invoiceNo}N от ${date.invoice('ru')}` },
+        { cell: 'МСЦ_п', value: msc ? 'MSC certified' : 'Non-MSC certified' },
         { cell: 'МСЦ_сертификат_п', value: msc ? 'MSC-C-52870' : '' },
 
         { cell: 'Инвойс_получатель_п', value: agent.name },

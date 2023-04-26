@@ -29,11 +29,21 @@ export const setMates = (table: any[][]) => {
         ] = row;
 
         const rowObj: MateRowT = {
+            reice,
+            konosament,
+            date,
+            transport,
+            company,
+            pack,
             operation,
             vessel,
             product: product.toLowerCase(),
             sort,
-            amount: amountTotal,
+            // amount: amountTotal,
+            amount: {
+                places: initAmount(amountPlaces, 0, 0),
+                total: initAmount(amountTotal, 0, 2),
+            },
             periodCreation: periodCreation || '! NOT STATED !',
             index: index.toString(),
         };

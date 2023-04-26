@@ -6,6 +6,7 @@ import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
 import { Doc } from '../../components/Doc';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
+import SelectTerms from '../../components/Select/SelectTerms';
 
 export const RequestSection = observer(() => {
     const {
@@ -32,11 +33,10 @@ export const RequestSection = observer(() => {
             <h3 className='title request-title'>Заявка:</h3>
 
             <div className='fields-wrapper'>
-                <Input
-                    title='Условия продажи:'
-                    placeholder='Условия продажи'
+                <SelectTerms
+                    current={terms}
                     setter={setField.terms}
-                    value={terms}
+                    title={'Условия продажи'}
                 />
                 <SelectPortTamozhnya
                     current={portTamozhnya.codeName}

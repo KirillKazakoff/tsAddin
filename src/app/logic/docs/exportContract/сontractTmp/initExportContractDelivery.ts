@@ -40,11 +40,8 @@ export const initExportContractDelivery: InitContractPartT = (utils, agreement) 
 
     consignees.forEach((consignee, i) => {
         const row = utils.getRow('Сертификаты_описание', i + 1);
-        row.height = 40 + consignee.rows.length * 40;
+        row.height = 50 + consignee.rows.length * 60;
     });
-
-    // const inheritRow = utils.getRow('Сертификаты_описание', 0);
-    // inheritRow.font = { size: 10 };
 
     utils.deleteRow('Сертификаты_массив');
 };

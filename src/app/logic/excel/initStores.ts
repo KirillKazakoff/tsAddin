@@ -19,6 +19,7 @@ import { InitRangeBoundT, initRange as initRangeUnbound } from './utils/initRang
 
 export const initStores = async (context: Excel.RequestContext) => {
     const { worksheets } = context.workbook;
+
     const initRange: InitRangeBoundT = initRangeUnbound.bind(this, worksheets);
 
     const mateRange = initRange('Коносаменты', 'Коносаменты');

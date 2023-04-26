@@ -1,14 +1,18 @@
 /* eslint-disable no-param-reassign */
-import { initAmount } from '../../../../stores/tablesStore/utils/initAmount';
-import { formatCount } from '../../../utils/formatCount';
+import {
+    addToAmount,
+    initAmount,
+} from '../../../../stores/tablesStore/utils/initAmount';
 import { AgreementT } from './initAgreement';
 
 export const groupByInvoice = (agreement: AgreementT) => {
+    const { invoices } = agreement.productsGroupedBy;
+
     agreement.rows.forEach((row) => {
         const {
             invoice: invoiceNo, date: invoiceDate, msc, consignee,
         } = row;
-        let invoice = agreement.productsGroupedBy.invoices[invoiceNo];
+        let invoice = invoices[invoiceNo];
 
         if (!invoice) {
             invoice = {
@@ -19,26 +23,32 @@ export const groupByInvoice = (agreement: AgreementT) => {
                 agreement,
                 consignee,
                 amount: {
-                    places: initAmount(),
-                    priceTotal: initAmount(),
-                    placesTotal: initAmount(),
+                    places: initAmount(0, 0, 0),
+                    priceTotal: initAmount(0, 3, 4),
+                    placesTotal: initAmount(0, 2, 2),
                 },
+                productGroups: {},
             };
-            agreement.productsGroupedBy.invoices[invoiceNo] = invoice;
+            invoices[invoiceNo] = invoice;
         }
+        invoice.rows.push(row);
+
+        let productGroup = invoice.productGroups[row.product.codeName];
+        if (!productGroup) {
+            productGroup = {
+                rows: [],
+                record: row,
+                total: initAmount(0, 3, 4),
+            };
+            invoice.productGroups[row.product.codeName] = productGroup;
+        }
+        productGroup.rows.push(row);
 
         const { places, priceTotal, placesTotal } = invoice.amount;
-
-        places.count += row.amount.places.count;
-        places.str = formatCount(places.count, 0, 0);
-
-        placesTotal.count += row.amount.placesTotal.count;
-        placesTotal.str = formatCount(placesTotal.count, 3, 4);
-
-        priceTotal.count += row.amount.priceTotal.count;
-        priceTotal.str = formatCount(priceTotal.count, 2, 2);
-
-        invoice.rows.push(row);
+        addToAmount(places, row.amount.places.count);
+        addToAmount(priceTotal, row.amount.priceTotal.count);
+        addToAmount(placesTotal, row.amount.placesTotal.count);
+        addToAmount(productGroup.total, row.amount.placesTotal.count);
     });
 
     return agreement;

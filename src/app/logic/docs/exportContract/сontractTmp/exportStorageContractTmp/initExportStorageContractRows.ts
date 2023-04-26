@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
-import { ConsigneeGroupT } from '../../../../../types/typesContract';
+import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
-import { ExportRowT } from '../../../../../types/typesTables';
 import { alignmentCenter, borderAll, styleRowCells } from '../../../styleRowCells';
 
 export const initExportStorageContractRows = (
-    consigneesGroup: ConsigneeGroupT,
+    // invoices
+    invoices: InvoicesT,
     utils: CellUtilsDoubleT,
 ) => {
     const {
@@ -14,19 +14,27 @@ export const initExportStorageContractRows = (
     const cellName = 'Сертификаты_массив';
     const arrayCl = getCell(cellName);
 
-    const groups = Object.values(consigneesGroup);
-    const rows = groups.reduce<ExportRowT[]>((total, group) => {
-        total.push(...group.rows);
+    // Get product groups
+    const invoicesArr = Object.values(invoices);
+    const rows = invoicesArr.reduce<ProductGroupT[]>((total, invoice) => {
+        const invoiceGroups = Object.values(invoice.productGroups);
+        total.push(...invoiceGroups);
         return total;
     }, []);
 
-    rows.forEach((row, index) => {
+    rows.forEach((group, index) => {
+        const { record } = group;
+        const QT = group.rows.reduce<string>((total, row) => {
+            total += `${row.amount.placesTotal.str}\n`;
+            return total;
+        }, `\nИТОГО ${group.total.str}\n`);
+
         const rowArr = [
             '',
-            `${row.consignee.fullName}\n${row.consignee.addres}`,
-            row.amount.placesTotal.str,
-            `${row.product.ru.name}\n${row.product.eng.name}`,
-            `${row.vessel.ru.name}\n${row.vessel.eng.name}`,
+            `${record.product.ru.name}\n${record.product.eng.name}`,
+            `${record.vessel.ru.name}\n${record.vessel.eng.name}`,
+            `${record.consignee.fullName}\n${record.consignee.addres}`,
+            QT,
         ];
 
         ws.insertRow(+arrayCl.cellEng.row + index, rowArr).commit();

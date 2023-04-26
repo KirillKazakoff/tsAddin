@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { initAmount } from '../../../../stores/tablesStore/utils/initAmount';
-import { formatCount } from '../../../utils/formatCount';
+import {
+    addToAmount,
+    initAmount,
+} from '../../../../stores/tablesStore/utils/initAmount';
 import { AgreementT } from './initAgreement';
 
 export const groupByVesselExport = (agreement: AgreementT) => {
@@ -26,13 +28,12 @@ export const groupByVesselExport = (agreement: AgreementT) => {
         if (!subject) {
             subject = {
                 record: row,
-                total: initAmount(),
+                total: initAmount(0, 3, 4),
             };
 
             vesselGroup.subject[product.codeName] = subject;
         }
-        subject.total.count += row.amount.placesTotal.count;
-        subject.total.str = formatCount(subject.total.count, 3, 4);
+        addToAmount(subject.total, row.amount.placesTotal.count);
 
         // getCost
         let cost = vesselGroup.cost[product.codeName];

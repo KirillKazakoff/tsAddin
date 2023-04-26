@@ -94,7 +94,7 @@ export const initExportStorageContractTmp: InitExportContractTmp = (
     cells.forEach((cell) => utils.setCell(cell));
 
     initExportContractAddreses(utils, agreement);
-    initExportStorageContractRows(agreement.productsGroupedBy.consignees, utils);
+    initExportStorageContractRows(agreement.productsGroupedBy.invoices, utils);
 
     // mergeCells
     const startRow = utils.getRow('Доставка_транспорт', 0).number;

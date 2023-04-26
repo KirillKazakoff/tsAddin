@@ -1,4 +1,5 @@
 import { ProductDescriptionT, VesselT } from './typesSP';
+import { AmountT } from './typesTables';
 
 // DictionaryTypes
 export type DictionaryT = {
@@ -19,7 +20,7 @@ export type ProductInfoT = {
 };
 
 export type DetailsT = {
-    amount: number;
+    amount: AmountT;
     sort: string;
 };
 

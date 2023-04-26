@@ -1,6 +1,9 @@
 /* eslint-disable no-param-reassign */
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { initAmount } from '../../../stores/tablesStore/utils/initAmount';
+import {
+    addToAmount,
+    initAmount,
+} from '../../../stores/tablesStore/utils/initAmount';
 import { InnerRowT } from '../../../types/typesTables';
 
 const initContract = (row: InnerRowT) => {
@@ -8,7 +11,7 @@ const initContract = (row: InnerRowT) => {
     return {
         record: row,
         rows,
-        priceTotal: initAmount(),
+        priceTotal: initAmount(0, 2, 2),
     };
 };
 
@@ -28,8 +31,7 @@ export const groupByContractNo = () => {
 
         contract.rows.push(row);
 
-        contract.priceTotal.count += row.amount.priceTotal.count;
-        contract.priceTotal = initAmount(contract.priceTotal.count, 2, 2);
+        addToAmount(contract.priceTotal, row.amount.priceTotal.count);
         return total;
     }, {});
 

@@ -25,7 +25,7 @@ export const initBlRows = (rows: ExportRowT[], utils: CellUtilsT) => {
         const row = utils.getRow(cellName, -i - 1);
         styleRowCells(row, {
             alignment: alignmentCenter,
-            height: 45,
+            height: 40,
         });
         row.getCell(2).border = {
             left: { style: 'thin' },

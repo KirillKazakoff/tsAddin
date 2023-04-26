@@ -11,7 +11,7 @@ export const initExportContractCost: InitContractPartT = (utils, agreement) => {
 
     const inheritRow = getRow('Цена_описание', 0);
     const prevHeight = inheritRow.height;
-    inheritRow.height = 55;
+    inheritRow.height = 50;
     inheritRow.commit();
 
     const costArrayCl = getCell('Цена_массив').cellEng;

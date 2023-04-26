@@ -12,7 +12,6 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const {
         seller,
         agent,
-        consignee,
         transport,
         portFrom,
         portTo,
@@ -22,11 +21,8 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         bankSeller,
     } = invoice.agreement.record;
     const {
-        invoiceDate, invoiceNo, msc, amount,
+        invoiceDate, invoiceNo, msc, amount, consignee,
     } = invoice;
-
-    console.log(consignee);
-    console.log(agent.name);
 
     const { places, placesTotal, priceTotal } = amount;
     const date = {

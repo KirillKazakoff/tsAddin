@@ -13,6 +13,12 @@ export type GroupedBlT = {
 };
 
 // InvoiceT
+export type ProductGroupT = {
+    rows: ExportRowT[];
+    record: ExportRowT;
+    total: AmountT;
+};
+
 export type InvoiceT = {
     agreement: AgreementT;
     rows: ExportRowT[];
@@ -25,6 +31,7 @@ export type InvoiceT = {
         places: AmountT;
         priceTotal: AmountT;
     };
+    productGroups: { [key: string]: ProductGroupT };
 };
 
 export type InvoicesT = {

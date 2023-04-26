@@ -3,7 +3,7 @@
 import { tableError } from '../../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 import { CommonRowT, TableNameT } from '../../../types/typesTables';
-import { checkNumber } from '../../utils/checkNumber';
+import { isNumber } from '../../utils/isNumber';
 
 export const checkEmptyTable = (table: any[][]) => {
     const check = table[0].every((value) => !value || value === '-');
@@ -29,17 +29,20 @@ export const checkNotFulfilledRow = (row: CommonRowT, tableName: TableNameT) => 
 
         // checkAmountError
         if (typeof row.amount === 'number') {
-            if (!checkNumber(row.amount)) {
+            if (!isNumber(row.amount)) {
                 setTableError(+row.index + 1, 'amount', tableName);
             }
-            return;
-        }
+        } else {
+            const keys = Object.keys(row.amount);
 
-        const propError = Object.keys(row.amount).find((key) => {
-            return row.amount[key].str === 'не число';
-        });
-        if (propError) {
-            setTableError(+row.index + 1, propError, tableName);
+            const propError = keys.find((key) => {
+                const { count } = row.amount[key];
+                return isNumber(count) === false;
+            });
+
+            if (propError) {
+                setTableError(+row.index + 1, propError, tableName);
+            }
         }
     };
 
@@ -49,7 +52,7 @@ export const checkNotFulfilledRow = (row: CommonRowT, tableName: TableNameT) => 
         checkProps(possibleEmptyProps);
     }
     if (tableName === 'Mates') {
-        const possibleEmptyProps = ['sort', 'periodCreation'];
+        const possibleEmptyProps = ['sort', 'periodCreation', 'reice', 'operation'];
         checkProps(possibleEmptyProps);
     }
     if (tableName === 'Inner') {

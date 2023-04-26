@@ -7,7 +7,7 @@ export const initExportContractSubject: InitContractPartT = (utils, agreement) =
     const { subject: subjects } = agreement.productsGroupedBy.vessels.all;
 
     const inheritRow = getRow('Предмет_описание', 0);
-    inheritRow.height = 35;
+    inheritRow.height = 40;
     inheritRow.commit();
 
     const subjectArrayCl = getCell('Предмет_массив');
@@ -24,7 +24,7 @@ export const initExportContractSubject: InitContractPartT = (utils, agreement) =
     }, []);
     ws.insertRows(+subjectArrayCl.cellEng.row, productRows, 'i');
 
-    inheritRow.height = 40;
+    // inheritRow.height = 40;
     inheritRow.commit();
 
     deleteRow(ws, 'Предмет_массив');

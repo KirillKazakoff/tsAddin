@@ -16,20 +16,27 @@ import {
 export type AmountT = {
     str: string;
     count: number;
+    fraction: {
+        min: number;
+        max: number;
+    };
 };
 type AmountObjT = {
-    places: AmountT;
-    placesTotal: AmountT;
-    price: AmountT;
-    priceTotal: AmountT;
+    [key: string]: AmountT;
 };
 
 // Tables
 export type MateRowT = {
+    reice: string;
+    konosament: string;
+    date: string;
+    transport: string;
+    company: string;
+    pack: number;
     vessel: string;
     product: string;
     sort: string;
-    amount: number;
+    amount: AmountObjT;
     periodCreation: string;
     operation: string;
     index: string;
