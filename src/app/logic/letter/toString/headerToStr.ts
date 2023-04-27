@@ -1,15 +1,11 @@
 import letterStore from '../../../stores/letterStore/letterStore';
-import {
-    selectVesselsStr,
-    selectVesselsStrEng,
-} from '../../../stores/spsStore/selectUtils';
-
 import spsStore from '../../../stores/spsStore/spsStore';
+import { getVesselsStrEng, getVesselsStrRu } from '../common/getFilteredVessels';
 
 export const headerToStrRu = () => {
     const { transport } = spsStore;
     const transportStr = `Продукция отгружена с ${transport.ru.name}`;
-    const vesselsStr = selectVesselsStr().join('; ');
+    const vesselsStr = getVesselsStrRu().join('; ');
     const greeting = 'Добрый день!';
     const info = 'Направляем информацию по новой партии продукции';
 
@@ -19,7 +15,7 @@ export const headerToStrRu = () => {
 export const headerToStrEng = () => {
     const { transport } = spsStore;
     const { port } = letterStore.fields;
-    const vesselsStr = selectVesselsStrEng().join(';  ');
+    const vesselsStr = getVesselsStrEng().join(';  ');
 
     const greeting = 'Dear Sir! Good day!';
     const info = 'Send you information for new production, discharging from';

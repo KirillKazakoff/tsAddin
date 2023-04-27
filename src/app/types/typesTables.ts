@@ -32,12 +32,11 @@ export type MateRowT = {
     date: string;
     transport: string;
     company: string;
-    pack: number;
-    vessel: string;
-    product: string;
-    sort: string;
+    vessel: VesselT;
+    product: ProductDescriptionT;
     amount: AmountObjT;
-    periodCreation: string;
+    pack: number;
+    sort: string;
     operation: string;
     index: string;
 };

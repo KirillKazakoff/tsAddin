@@ -1,21 +1,17 @@
 /* eslint-disable no-param-reassign */
-import { selectProductSp, selectVesselSp } from '../../../stores/spsStore/select';
 import { addToAmount } from '../../../stores/tablesStore/utils/initAmount';
 import { ProductT, ProductionInfoT } from '../../../types/typesLetter';
 import { MateRowT } from '../../../types/typesTables';
 import { isStOff } from './isStOff';
 
 const initProduct = (tableRow: MateRowT): ProductT => {
-    const { product, vessel, periodCreation } = tableRow;
-    const productSp = selectProductSp(product);
-    const vesselSp = selectVesselSp(vessel);
+    const { product, vessel } = tableRow;
 
     return {
         details: [],
         info: {
-            desc: { ...productSp },
-            producer: vesselSp,
-            periodCreation,
+            desc: { ...product },
+            producer: vessel,
         },
     };
 };
@@ -24,10 +20,10 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
     return groupVessel.reduce<ProductionInfoT>((productionTypes, tableRow) => {
         const { product, sort, amount } = tableRow;
 
-        let productObj = productionTypes[product];
+        let productObj = productionTypes[product.codeName];
         if (!productObj) {
             productObj = initProduct(tableRow);
-            productionTypes[product] = productObj;
+            productionTypes[product.codeName] = productObj;
         }
 
         const details = { sort, amount: amount.total };
@@ -43,7 +39,7 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
             return productionTypes;
         }
 
-        productionTypes[product].details.push(details);
+        productionTypes[product.codeName].details.push(details);
         return productionTypes;
     }, {});
 };

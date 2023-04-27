@@ -1,3 +1,4 @@
+import picturesStore from '../../stores/picturesStore/picturesStore';
 import { setAgents } from '../../stores/spsStore/set/setAgents';
 import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
 import { setClientsRu } from '../../stores/spsStore/set/setClientsRu';
@@ -44,12 +45,16 @@ export const initStores = async (context: Excel.RequestContext) => {
     const spClientsRange = initRange('SPClientsSell', 'SPClientsSell');
     const spPortsRuRange = initRange('SPPort', 'SPPort');
 
+    // const res = worksheets
+    //     .getItem('Pictures')
+    //     .shapes.getItem('KTI_seal')
+    //     .getAsImage('PNG');
+
     await context.sync();
 
-    setMates(mateRange.values);
+    // picturesStore.setPicture(res.value);
 
     setSellers(spSellersRange.values);
-    setTransport(mateRange.values, spTransportRange.values);
     setVessels(spVesselsRange.values);
     setConsignees(spConsigneesRange.values);
     setProduction(spProductionRange.values);
@@ -62,7 +67,10 @@ export const initStores = async (context: Excel.RequestContext) => {
     setClientsRu(spClientsRange.values);
     setPortsRu(spPortsRuRange.values);
 
+    setMates(mateRange.values);
     setExport(exportRange.values);
     setExportStorage(exportStorageRange.values);
     setInner(innerRange.values);
+
+    setTransport(mateRange.values, spTransportRange.values);
 };

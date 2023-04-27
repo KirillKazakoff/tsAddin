@@ -1,7 +1,7 @@
-import { selectVesselsStr } from '../../../stores/spsStore/selectUtils';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import { ProductionToStr } from '../../../types/typesLetter';
 import { getBody } from '../common/getBody';
+import { getFilteredVessels } from '../common/getFilteredVessels';
 import { productToStringEng, productToStringRu } from './productToStr';
 
 /* eslint-disable no-param-reassign */
@@ -19,14 +19,15 @@ const productionToStr: ProductionToStr = (bodyRow, callback) => {
 
 export const bodyToStrRu = () => {
     const { matesT: mates } = tablesStore;
-    const vessels = selectVesselsStr();
+    const vessels = getFilteredVessels();
+
     const bodyObj = getBody(mates, vessels);
 
     const body = bodyObj.reduce((bodyStr, bodyRow) => {
         const { vessel } = bodyRow;
         const productionStr = productionToStr(bodyRow, productToStringRu);
 
-        bodyStr = `\n${bodyStr}${vessel.eng.name}\n${productionStr}`;
+        bodyStr = `\n${bodyStr}${vessel.ru.name}\n${productionStr}`;
 
         return bodyStr;
     }, '');
@@ -36,7 +37,7 @@ export const bodyToStrRu = () => {
 
 export const bodyToStrEng = () => {
     const { matesT: mates } = tablesStore;
-    const vessels = selectVesselsStr();
+    const vessels = getFilteredVessels();
     const bodyObj = getBody(mates, vessels);
 
     const body = bodyObj.reduce((bodyStr, bodyRow) => {

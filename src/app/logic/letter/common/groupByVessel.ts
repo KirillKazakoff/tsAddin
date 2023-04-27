@@ -1,12 +1,12 @@
+import { VesselT } from '../../../types/typesSP';
 import { MateRowT } from '../../../types/typesTables';
-import { checkOperation } from './checkOperation';
 
-export const groupByVessel = (vessels: string[], table: MateRowT[]) => {
+export const groupByVessel = (vessels: VesselT[], mates: MateRowT[]) => {
     return vessels.reduce<MateRowT[][]>((groupVessel, vessel) => {
-        const group = table.reduce<MateRowT[]>((total, row) => {
-            if (!checkOperation(row)) return total;
+        const group = mates.reduce<MateRowT[]>((total, row) => {
+            // if (!checkOperation(row)) return total;
 
-            if (vessel === row.vessel) total.push(row);
+            if (vessel.codeName === row.vessel.codeName) total.push(row);
             return total;
         }, []);
 

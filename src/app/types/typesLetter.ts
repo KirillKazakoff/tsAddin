@@ -16,7 +16,6 @@ export type DictionaryT = {
 export type ProductInfoT = {
     desc: ProductDescriptionT;
     producer: VesselT;
-    periodCreation: string;
 };
 
 export type DetailsT = {

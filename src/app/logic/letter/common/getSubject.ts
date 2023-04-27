@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import { SubjectT } from '../../../types/typesLetter';
-import { checkOperation } from './checkOperation';
 import { isStOff } from './isStOff';
 
 export const getSubject = () => {
@@ -10,15 +9,17 @@ export const getSubject = () => {
     const subjectObj = mates.reduce<SubjectT>((total, row) => {
         const { product, sort } = row;
 
-        if (!checkOperation(row)) return total;
-        if (!total[product]) {
-            total[product] = [];
+        // if (!checkOperation(row)) return total;
+        let sorts = total[product.codeName];
+        if (!sorts) {
+            sorts = [];
+            total[product.codeName] = sorts;
         }
 
-        if (total[product].includes(sort)) return total;
+        if (sorts.includes(sort)) return total;
         if (isStOff(sort)) return total;
 
-        total[product].push(sort);
+        sorts.push(sort);
         return total;
     }, {});
 
