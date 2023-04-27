@@ -8,11 +8,9 @@ export const initExportStorageContractRows = (
     invoices: InvoicesT,
     utils: CellUtilsDoubleT,
 ) => {
-    const {
-        ws, getCell, deleteRow, getRow,
-    } = utils;
+    const { ws } = utils;
     const cellName = 'Сертификаты_массив';
-    const arrayCl = getCell(cellName);
+    const arrayCl = utils.getCell(cellName);
 
     // Get product groups
     const invoicesArr = Object.values(invoices);
@@ -27,7 +25,7 @@ export const initExportStorageContractRows = (
         const QT = group.rows.reduce<string>((total, row) => {
             total += `${row.amount.placesTotal.str}\n`;
             return total;
-        }, `\nИТОГО ${group.total.str}\n`);
+        }, `\nИТОГО: ${group.total.str}\n`);
 
         const rowArr = [
             '',
@@ -37,11 +35,11 @@ export const initExportStorageContractRows = (
             QT,
         ];
 
+        const rowIndex = +arrayCl.cellEng.row + index;
         ws.insertRow(+arrayCl.cellEng.row + index, rowArr).commit();
-    });
 
-    rows.forEach((r, i) => {
-        const row = getRow(cellName, -i - 1);
+        // styleRow
+        const row = ws.getRow(rowIndex);
         styleRowCells(row, {
             height: 45,
             border: borderAll,
@@ -52,5 +50,5 @@ export const initExportStorageContractRows = (
         row.getCell(1).border = {};
     });
 
-    deleteRow(cellName);
+    utils.deleteRow(cellName);
 };

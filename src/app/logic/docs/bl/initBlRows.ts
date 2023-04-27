@@ -5,24 +5,25 @@ import { alignmentCenter, styleRowCells } from '../styleRowCells';
 export const initBlRows = (rows: ExportRowT[], utils: CellUtilsT) => {
     const cellName = 'Bl_массив';
     const arrayCl = utils.getCell(cellName);
-
-    rows.forEach((row, index) => {
-        const rowArr = [
-            // firstEmptyCol ('')
-            '',
-            row.blNo,
-            row.product.eng.name,
-            row.sort,
-            `1/${row.pack} KG`,
-            `${row.amount.places.str} PCS /`,
-            `${row.amount.placesTotal.str} tn`,
-        ];
-
-        utils.ws.insertRow(+arrayCl.row + index, rowArr).commit();
-    });
+    const { ws } = utils;
 
     rows.forEach((r, i) => {
-        const row = utils.getRow(cellName, -i - 1);
+        const rowArr = [
+            // firstEmptyCol
+            '',
+            r.blNo,
+            r.product.eng.name,
+            r.sort,
+            `1/${r.pack} KG`,
+            `${r.amount.places.str} PCS /`,
+            `${r.amount.placesTotal.str} tn`,
+        ];
+
+        const rowIndex = +arrayCl.row + i;
+        utils.ws.insertRow(rowIndex, rowArr).commit();
+
+        // styleRow
+        const row = ws.getRow(rowIndex);
         styleRowCells(row, {
             alignment: alignmentCenter,
             height: 40,
@@ -34,5 +35,6 @@ export const initBlRows = (rows: ExportRowT[], utils: CellUtilsT) => {
             right: { style: 'thin' },
         };
     });
+
     utils.deleteRow(cellName);
 };

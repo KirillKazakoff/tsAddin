@@ -3,28 +3,28 @@ import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { alignmentCenter, fontDefault, styleRowCells } from '../../../styleRowCells';
 
 export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
-    const { getCell, ws, getRow } = utils;
+    const { ws } = utils;
     const { rows } = invoice;
 
     ['eng', 'ru'].forEach((language) => {
         // prettier-ignore
         const cellName = language === 'eng' ? 'Инвойс_Bl_массив' : 'Инвойс_Bl_массив_п';
-        const blArrayCl = getCell(cellName);
+        const arrayCl = utils.getCell(cellName);
 
         // insert rows
-        rows.forEach((row, index) => {
+        rows.forEach((r, i) => {
             const {
                 places, placesTotal, price, priceTotal,
-            } = row.amount;
+            } = r.amount;
 
             // there are two empty cols implemented for borders
             // in excel template (merge removes borders in cells)
             const cols = {
                 emptyFirst: '',
-                bl: row.blNo,
-                vessel: row.vessel.eng.name,
-                desc: row.product.eng.name,
-                pack: `1/${row.pack} KG`,
+                bl: r.blNo,
+                vessel: r.vessel.eng.name,
+                desc: r.product.eng.name,
+                pack: `1/${r.pack} KG`,
                 places: `${places.str} PCS/`,
                 placesTotal: `${placesTotal.str} tn`,
                 priceUnit: `${price.str} USD`,
@@ -32,9 +32,9 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
             };
 
             if (language === 'ru') {
-                cols.desc = row.product.ru.name;
-                cols.vessel = row.vessel.ru.name;
-                cols.pack = `1/${row.pack} КГ`;
+                cols.desc = r.product.ru.name;
+                cols.vessel = r.vessel.ru.name;
+                cols.pack = `1/${r.pack} КГ`;
                 cols.places = `${places.str} шт/`;
                 cols.placesTotal = `${placesTotal.str} тн`;
                 cols.priceUnit = `${price.str} $`;
@@ -44,12 +44,11 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
             if (ws.name.includes('Noncom')) delete cols.vessel;
             const rowArr = Object.values(cols);
 
-            ws.insertRow(+blArrayCl.row + index, rowArr).commit();
-        });
+            const rowIndex = +arrayCl.row + i;
+            ws.insertRow(rowIndex, rowArr).commit();
 
-        // style inserted rows
-        rows.forEach((product, i) => {
-            const row = getRow(cellName, -i - 1);
+            // styleRow
+            const row = ws.getRow(rowIndex);
 
             styleRowCells(row, {
                 height: 30,

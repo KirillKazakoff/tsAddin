@@ -4,27 +4,25 @@ import { InnerRowT } from '../../../../types/typesTables';
 import { alignmentCenter, borderAll, styleRowCells } from '../../styleRowCells';
 
 export const initPortLetterRows = (rows: InnerRowT[], utils: CellUtilsT) => {
-    const {
-        ws, getCell, deleteRow, getRow,
-    } = utils;
+    const { ws } = utils;
     const cellName = 'Письмо_массив';
-    const arrayCl = getCell(cellName);
-
-    rows.forEach((row, index) => {
-        const rowArr = [
-            row.konosament,
-            `${row.product.ru.name} ${row.sort}`,
-            row.vessel.ru.name,
-            `1/${row.pack}`,
-            row.amount.places.str,
-            row.amount.placesTotal.str,
-        ];
-
-        ws.insertRow(+arrayCl.row + index, rowArr).commit();
-    });
+    const arrayCl = utils.getCell(cellName);
 
     rows.forEach((r, i) => {
-        const row = getRow(cellName, -i - 1);
+        const rowArr = [
+            r.konosament,
+            `${r.product.ru.name} ${r.sort}`,
+            r.vessel.ru.name,
+            `1/${r.pack}`,
+            r.amount.places.str,
+            r.amount.placesTotal.str,
+        ];
+
+        const rowIndex = +arrayCl.row + i;
+        ws.insertRow(rowIndex, rowArr).commit();
+
+        // styleRow
+        const row = ws.getRow(rowIndex);
         styleRowCells(row, {
             border: borderAll,
             alignment: alignmentCenter,
@@ -32,5 +30,5 @@ export const initPortLetterRows = (rows: InnerRowT[], utils: CellUtilsT) => {
         });
     });
 
-    deleteRow(cellName);
+    utils.deleteRow(cellName);
 };

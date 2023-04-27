@@ -29,7 +29,7 @@ export const useInitExcel = () => {
                 pageStatusStore.setPageStatus(excelInEditingMode());
             } else {
                 // eslint-disable-next-line no-console
-                console.error(e);
+                console.log(e);
                 pageStatusStore.setPageStatus(unknownError(message));
             }
         }

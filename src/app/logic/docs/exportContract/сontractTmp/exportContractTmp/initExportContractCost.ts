@@ -3,18 +3,17 @@ import { deleteRow } from '../../../../excel/utils/excelUtilsObj/deleteRow';
 import { formatCurrencyLong, formatCount } from '../../../../utils/formatCount';
 
 export const initExportContractCost: InitContractPartT = (utils, agreement) => {
-    const {
-        getCell, setCell, ws, getRow,
-    } = utils;
+    const { ws } = utils;
     const { priceTotal, productsGroupedBy } = agreement;
     const { cost: costs } = productsGroupedBy.vessels.all;
 
-    const inheritRow = getRow('Цена_описание', 0);
+    // style rows from inherit row
+    const inheritRow = utils.getRow('Цена_описание', 0);
     const prevHeight = inheritRow.height;
     inheritRow.height = 50;
     inheritRow.commit();
 
-    const costArrayCl = getCell('Цена_массив').cellEng;
+    const costArrayCl = utils.getCell('Цена_массив').cellEng;
 
     const costRows = costs.reduce<string[][]>((total, row) => {
         const { record, prices } = row;
@@ -30,15 +29,21 @@ export const initExportContractCost: InitContractPartT = (utils, agreement) => {
     }, []);
     ws.insertRows(+costArrayCl.row, costRows, 'i');
 
-    const shortCurrencyEngStr = `USD ${formatCount(priceTotal, 2, 2)}`;
-    const fullCurrencyEngStr = formatCurrencyLong(priceTotal, 'en');
-    const shortCurrencyRuStr = `$${formatCount(priceTotal, 2, 2)}`;
-    const fullCurrencyRuStr = formatCurrencyLong(priceTotal, 'ru');
+    const currency = {
+        eng: {
+            short: `USD ${formatCount(priceTotal, 2, 2)}`,
+            full: formatCurrencyLong(priceTotal, 'en'),
+        },
+        ru: {
+            short: `$${formatCount(priceTotal, 2, 2)}`,
+            full: formatCurrencyLong(priceTotal, 'ru'),
+        },
+    };
 
-    setCell({
+    utils.setCell({
         cell: 'Цена_всего',
-        eng: `2.2 Total amount of this Agreement is \n${shortCurrencyEngStr} (${fullCurrencyEngStr})`,
-        ru: `2.2 Общая сумма настоящего Дополнения составляет \n${shortCurrencyRuStr} (${fullCurrencyRuStr})`,
+        eng: `2.2 Total amount of this Agreement is \n${currency.eng.short} (${currency.eng.full})`,
+        ru: `2.2 Общая сумма настоящего Дополнения составляет \n${currency.ru.short} (${currency.ru.full})`,
     });
 
     inheritRow.height = prevHeight;

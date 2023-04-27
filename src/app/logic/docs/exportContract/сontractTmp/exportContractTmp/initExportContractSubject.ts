@@ -3,14 +3,10 @@ import { InitContractPartT } from '../../../../../types/typesExcelUtils';
 import { deleteRow } from '../../../../excel/utils/excelUtilsObj/deleteRow';
 
 export const initExportContractSubject: InitContractPartT = (utils, agreement) => {
-    const { getCell, ws, getRow } = utils;
+    const { ws } = utils;
     const { subject: subjects } = agreement.productsGroupedBy.vessels.all;
 
-    const inheritRow = getRow('Предмет_описание', 0);
-    inheritRow.height = 40;
-    inheritRow.commit();
-
-    const subjectArrayCl = getCell('Предмет_массив');
+    const subjectArrayCl = utils.getCell('Предмет_массив');
 
     const productRows = subjects.reduce<string[][]>((total, row) => {
         const { record, total: placesTotal } = row;
@@ -23,9 +19,6 @@ export const initExportContractSubject: InitContractPartT = (utils, agreement) =
         return total;
     }, []);
     ws.insertRows(+subjectArrayCl.cellEng.row, productRows, 'i');
-
-    // inheritRow.height = 40;
-    inheritRow.commit();
 
     deleteRow(ws, 'Предмет_массив');
 };

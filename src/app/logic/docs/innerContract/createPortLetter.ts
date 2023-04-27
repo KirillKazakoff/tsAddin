@@ -24,7 +24,7 @@ export const createPortLetter = async (contract: ContractT) => {
     const reader = new FileReader();
     const reader2 = new FileReader();
 
-    const blob2 = blobFromBase64String(picturesStore.picture);
+    // const blob2 = blobFromBase64String(picturesStore.picture);
 
     reader.onload = async function callback() {
         const imgId = book.addImage({
@@ -35,21 +35,21 @@ export const createPortLetter = async (contract: ContractT) => {
         const ws = book.getWorksheet('Port_Letter');
         ws.addImage(imgId, 'A1:F14');
 
-        reader2.onload = async function callback2() {
-            const imgId2 = book.addImage({
-                base64: this.result as string,
-                extension: 'png',
-            });
+        // reader2.onload = async function callback2() {
+        //     const imgId2 = book.addImage({
+        //         base64: this.result as string,
+        //         extension: 'png',
+        //     });
 
-            const ws2 = book.getWorksheet('Port_Letter');
-            ws2.addImage(imgId2, 'C45:D54');
+        //     const ws2 = book.getWorksheet('Port_Letter');
+        //     ws2.addImage(imgId2, 'C45:D54');
 
-            initPortLetterTmp(book, contract);
-            await saveFile(book, `Письмо ${record.buyer.codeName}`);
-        };
-        reader2.readAsDataURL(blob2);
-        // initPortLetterTmp(book, contract);
-        // await saveFile(book, `Письмо ${record.buyer.codeName}`);
+        //     initPortLetterTmp(book, contract);
+        //     await saveFile(book, `Письмо ${record.buyer.codeName}`);
+        // };
+        // reader2.readAsDataURL(blob2);
+        initPortLetterTmp(book, contract);
+        await saveFile(book, `Письмо ${record.buyer.codeName}`);
     };
     reader.readAsDataURL(blob);
 };

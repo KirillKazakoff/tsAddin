@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { InitContractPartT } from '../../../../../types/typesExcelUtils';
+import { styleRowCells } from '../../../styleRowCells';
 
 export const initExportContractDelivery: InitContractPartT = (utils, agreement) => {
     const { getCell, setCell, ws } = utils;
@@ -17,17 +18,18 @@ export const initExportContractDelivery: InitContractPartT = (utils, agreement) 
         ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country}`,
     });
 
-    const sertificateArrayCl = getCell('Сертификаты_массив').cellEng;
+    const cellName = 'Сертификаты_массив';
+    const arrayCl = getCell(cellName).cellEng;
 
-    const consignees = Object.values(consigneeGroup);
-    consignees.forEach((consignee, i) => {
-        const { fullName, addres: adress } = consignee.consignee;
+    const groups = Object.values(consigneeGroup);
+    groups.forEach((group, i) => {
+        const { fullName, addres: adress } = group.consignee;
 
         const consigneeStr = `${i + 1}) ${fullName}\n${adress}\n`;
         let colEng = consigneeStr;
         let colRu = consigneeStr;
 
-        consignee.rows.forEach((row) => {
+        group.rows.forEach((row) => {
             const { product, amount, vessel } = row;
             const { placesTotal } = amount;
 
@@ -35,13 +37,20 @@ export const initExportContractDelivery: InitContractPartT = (utils, agreement) 
             colRu += `\n*  ${vessel.ru.name}\n    ${product.ru.name} - ${placesTotal.str} тн (нетто)`;
         }, []);
 
-        ws.insertRow(+sertificateArrayCl.row + i, [colEng, colRu], 'i').commit();
+        const rowIndex = +arrayCl.row + i;
+        ws.insertRow(rowIndex, [colEng, colRu]).commit();
+
+        // styleRow
+        const row = ws.getRow(rowIndex);
+        const height = 60 + group.rows.length * 35;
+
+        styleRowCells(row, {
+            height,
+            alignment: { wrapText: true, vertical: 'top' },
+            border: { left: { style: 'thin' }, right: { style: 'thin' } },
+            font: { size: 10 },
+        });
     });
 
-    consignees.forEach((consignee, i) => {
-        const row = utils.getRow('Сертификаты_описание', i + 1);
-        row.height = 40 + consignee.rows.length * 35;
-    });
-
-    utils.deleteRow('Сертификаты_массив');
+    utils.deleteRow(cellName);
 };
