@@ -1,7 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useInitRequestSection } from '../../logic/docs/innerContract/useInitRequestSection';
-import Input from '../../components/Input';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
 import { Doc } from '../../components/Doc';
@@ -19,7 +18,7 @@ export const RequestSection = observer(() => {
         return (
             <Doc
                 onClick={onClick}
-                title={`№${contractNo}`}
+                title={`${contract.record.buyer.codeName}`}
                 key={contractNo}
                 cls={'request'}
             />

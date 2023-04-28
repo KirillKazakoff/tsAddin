@@ -6,7 +6,7 @@ import { createPortLetter } from './createPortLetter';
 import { ContractT, groupByContractNo } from './groupByContractNo';
 
 export const useInitPortLetter = () => {
-    const { store, setField } = portLetterStore;
+    const { store, setField, toggle } = portLetterStore;
 
     const contracts = Object.values(groupByContractNo());
 
@@ -29,5 +29,6 @@ export const useInitPortLetter = () => {
         onLoadAll,
         store,
         setField,
+        toggle,
     };
 };

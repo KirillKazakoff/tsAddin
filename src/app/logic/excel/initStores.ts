@@ -45,14 +45,14 @@ export const initStores = async (context: Excel.RequestContext) => {
     const spClientsRange = initRange('SPClientsSell', 'SPClientsSell');
     const spPortsRuRange = initRange('SPPort', 'SPPort');
 
-    // const res = worksheets
-    //     .getItem('Pictures')
-    //     .shapes.getItem('KTI_seal')
-    //     .getAsImage('PNG');
+    const { shapes } = worksheets.getItem('Картинки');
+    const pictures = Object.keys(picturesStore.pictures).map((key) => {
+        return { key, base64: shapes.getItem(key).getAsImage('PNG') };
+    });
 
     await context.sync();
 
-    // picturesStore.setPicture(res.value);
+    pictures.forEach((item) => picturesStore.setBase64(item.key, item.base64.value));
 
     setSellers(spSellersRange.values);
     setVessels(spVesselsRange.values);

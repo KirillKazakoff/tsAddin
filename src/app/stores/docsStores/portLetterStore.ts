@@ -21,6 +21,7 @@ const initStore = () => {
             from: '',
             to: '',
         },
+        isPictures: true,
     };
     const debugFields = {
         port: initPortRu(),
@@ -35,6 +36,7 @@ const initStore = () => {
             from: '14.12.23',
             to: '17.12.23',
         },
+        isPictures: true,
     };
 
     return mode === 'production' ? initFields : debugFields;
@@ -50,7 +52,6 @@ class PortLetterStore {
         port: (value: string) => (this.store.port = selectPortRu(value)),
         podpisant: (value: string) => (this.store.podpisant = selectPodpisantSp(value)),
         dateLetter: (value: string) => (this.store.dateLetter = value),
-        isCFR: () => (this.store.isCFR = !this.store.isCFR),
         cargoTo: {
             storage: (value: CargoT) => (this.store.cargoTo.storage = value),
             auto: (value: CargoT) => (this.store.cargoTo.auto = value),
@@ -59,6 +60,11 @@ class PortLetterStore {
             from: (value: string) => (this.store.storage.from = value),
             to: (value: string) => (this.store.storage.to = value),
         },
+    };
+
+    toggle = {
+        pictures: () => (this.store.isPictures = !this.store.isPictures),
+        CFR: () => (this.store.isCFR = !this.store.isCFR),
     };
 }
 

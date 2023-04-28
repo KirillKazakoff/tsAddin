@@ -1,9 +1,27 @@
 import { makeAutoObservable } from 'mobx';
 
-type PicturesObjT = { [key: string]: string };
+export type PictureKey =
+    | 'Seal_KTI'
+    | 'Seal_TRK'
+    | 'Seal_MSI'
+    | 'Sign_KOTOVMN'
+    | 'Sign_KOTOVNM'
+    | 'Sign_KRUZINAMN'
+    | 'Sign_SOJI';
+
+type PicturesObjT = { [Key in PictureKey]: string };
 
 class PicturesStore {
-    pictures: PicturesObjT = {};
+    pictures: PicturesObjT = {
+        Seal_KTI: '',
+        Seal_TRK: '',
+        Seal_MSI: '',
+
+        Sign_KOTOVMN: '',
+        Sign_KOTOVNM: '',
+        Sign_SOJI: '',
+        Sign_KRUZINAMN: '',
+    };
     picture: string;
 
     constructor() {

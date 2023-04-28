@@ -11,7 +11,7 @@ import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 
 export const PortLetterSection = observer(() => {
     const {
-        contracts, onLoad, onLoadAll, setField, store,
+        contracts, onLoad, onLoadAll, setField, store, toggle,
     } = useInitPortLetter();
 
     const letterList = contracts.map((contract) => {
@@ -21,7 +21,7 @@ export const PortLetterSection = observer(() => {
         return (
             <Doc
                 onClick={onClick}
-                title={`${buyer.codeName} №${contractNo}`}
+                title={`${buyer.codeName}`}
                 key={contractNo}
                 cls='port-letter'
             />
@@ -37,6 +37,11 @@ export const PortLetterSection = observer(() => {
                 <SelectPodpisant
                     current={store.podpisant.codeName}
                     setter={setField.podpisant}
+                />
+                <CheckBox
+                    checked={store.isPictures}
+                    setter={toggle.pictures}
+                    title={'Включить картинки:'}
                 />
                 <Input
                     title='Дата письма:'
@@ -57,7 +62,7 @@ export const PortLetterSection = observer(() => {
                 <CheckBox
                     checked={store.isCFR}
                     title={'Передача с борта'}
-                    setter={setField.isCFR}
+                    setter={toggle.CFR}
                 />
                 {!store.isCFR ? (
                     <>

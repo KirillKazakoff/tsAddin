@@ -9,5 +9,5 @@ export const createRequestContract = async (contract: ContractT) => {
     const book = await readTmp(pathObj.requestContractRu);
 
     initRequestTmp(book, contract);
-    await saveFile(book, record.contractNo);
+    await saveFile(book, `Заявка ${record.buyer.codeName}`);
 };
