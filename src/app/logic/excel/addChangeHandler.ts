@@ -18,8 +18,8 @@ export const addChangeHandler = (context: Excel.RequestContext) => {
         await remove();
         pageStatusStore.resetPageStatus();
 
-        const ws = worksheets.getItem(e.worksheetId);
-        ws.load('name');
+        // const ws = worksheets.getItem(e.worksheetId);
+        // ws.load('name');
         await worksheets.context.sync();
         excelSyncStore.setSync(false);
     });

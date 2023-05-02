@@ -2,10 +2,13 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import CheckBox from '../../components/CheckBox';
 import Input from '../../components/Input';
+import { SelectPortRu } from '../../components/Select/SelectPortRu';
+import { SelectPortZarubezh } from '../../components/Select/SelectPortZarubezh';
 import letterStore from '../../stores/letterStore/letterStore';
 
 export const LetterMainFields = observer(() => {
     const { fields, setField } = letterStore;
+    const SelectPort = fields.isExport ? SelectPortZarubezh : SelectPortRu;
 
     return (
         <div className='letter__fields'>
@@ -16,13 +19,8 @@ export const LetterMainFields = observer(() => {
                 value={fields.arrivalVld}
                 required
             />
-            <Input
-                title='Порт'
-                placeholder='Порт'
-                setter={setField.port}
-                value={fields.port}
-                required
-            />
+
+            <SelectPort current={fields.port} setter={setField.port} />
             <Input
                 title='Дата оплаты'
                 placeholder='Дата оплаты'
