@@ -22,7 +22,8 @@ class PicturesStore {
         Sign_SOJI: '',
         Sign_KRUZINAMN: '',
     };
-    picture: string;
+
+    isPicturesFound = true;
 
     constructor() {
         makeAutoObservable(this);
@@ -31,9 +32,8 @@ class PicturesStore {
     setBase64(key: string, base64: string) {
         this.pictures[key] = base64;
     }
-
-    setPicture(base64: string) {
-        this.picture = base64;
+    setIsPicturesFound(value: boolean) {
+        this.isPicturesFound = value;
     }
 }
 

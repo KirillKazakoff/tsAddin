@@ -6,7 +6,9 @@ import { CommonRowT, TableNameT } from '../../../types/typesTables';
 import { isNumber } from '../../utils/isNumber';
 
 export const checkEmptyTable = (table: any[][]) => {
-    const check = table[0].every((value) => !value || value === '-');
+    const check = table[0].every(
+        (value) => !value || value === '-' || value === ' ',
+    );
     return check;
 };
 

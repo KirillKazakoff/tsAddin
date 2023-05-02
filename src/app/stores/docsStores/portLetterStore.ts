@@ -21,7 +21,7 @@ const initStore = () => {
             from: '',
             to: '',
         },
-        isPictures: true,
+        isPicturesActive: true,
     };
     const debugFields = {
         port: initPortRu(),
@@ -36,7 +36,7 @@ const initStore = () => {
             from: '14.12.23',
             to: '17.12.23',
         },
-        isPictures: true,
+        isPicturesActive: true,
     };
 
     return mode === 'production' ? initFields : debugFields;
@@ -63,7 +63,7 @@ class PortLetterStore {
     };
 
     toggle = {
-        pictures: () => (this.store.isPictures = !this.store.isPictures),
+        pictures: () => (this.store.isPicturesActive = !this.store.isPicturesActive),
         CFR: () => (this.store.isCFR = !this.store.isCFR),
     };
 }

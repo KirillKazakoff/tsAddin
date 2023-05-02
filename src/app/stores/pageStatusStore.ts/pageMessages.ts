@@ -5,6 +5,7 @@ export type PageStatusTypeT =
     | 'sameBl'
     | 'excelInEditingMode'
     | 'transportNotFound'
+    | 'picturesError'
     | 'unknownError'
     | 'ok';
 
@@ -38,4 +39,9 @@ export const unknownError = (message: string): PageStatusT => ({
     statusType: 'unknownError',
     title: 'Произошла неизвестная ошибка',
     desc: message,
+});
+export const noPictureFound = (): PageStatusT => ({
+    statusType: 'picturesError',
+    title: 'Не могу загрузить картинки',
+    desc: 'Проверьте наличие вкладки "Картинки"',
 });

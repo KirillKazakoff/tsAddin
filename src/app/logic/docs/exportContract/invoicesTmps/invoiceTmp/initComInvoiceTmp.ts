@@ -94,7 +94,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
 
         ...ruDepartureCells,
 
-        { cell: 'Инвойс_соглашение_п', value: `Дополнение No.${agreementNo} от ${date.invoice('ru')}}` },
+        { cell: 'Инвойс_соглашение_п', value: `Дополнение No.${agreementNo} от ${date.invoice('ru')}` },
         { cell: 'Инвойс_контракт_п', value: `к контракту купли-продажи №. ${contract.contractNo}` },
         { cell: 'Инвойс_контракт_дата_п', value: `Магадан, от ${date.contract('ru')}` },
         { cell: 'Инвойс_условия_п', value: `${terms}, ${portTo.ru.country}` },

@@ -1,4 +1,3 @@
-import picturesStore from '../../stores/picturesStore/picturesStore';
 import { setAgents } from '../../stores/spsStore/set/setAgents';
 import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
 import { setClientsRu } from '../../stores/spsStore/set/setClientsRu';
@@ -16,6 +15,7 @@ import { setExport } from '../../stores/tablesStore/setExport';
 import { setExportStorage } from '../../stores/tablesStore/setExportStorage';
 import { setInner } from '../../stores/tablesStore/setInner';
 import { setMates } from '../../stores/tablesStore/setMates';
+import { initExcelImages } from './initExcelImages';
 import { InitRangeBoundT, initRange as initRangeUnbound } from './utils/initRange';
 
 export const initStores = async (context: Excel.RequestContext) => {
@@ -45,14 +45,8 @@ export const initStores = async (context: Excel.RequestContext) => {
     const spClientsRange = initRange('SPClientsSell', 'SPClientsSell');
     const spPortsRuRange = initRange('SPPort', 'SPPort');
 
-    const { shapes } = worksheets.getItem('Картинки');
-    const pictures = Object.keys(picturesStore.pictures).map((key) => {
-        return { key, base64: shapes.getItem(key).getAsImage('PNG') };
-    });
-
+    await initExcelImages(context);
     await context.sync();
-
-    pictures.forEach((item) => picturesStore.setBase64(item.key, item.base64.value));
 
     setSellers(spSellersRange.values);
     setVessels(spVesselsRange.values);

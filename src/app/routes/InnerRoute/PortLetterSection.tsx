@@ -39,7 +39,7 @@ export const PortLetterSection = observer(() => {
                     setter={setField.podpisant}
                 />
                 <CheckBox
-                    checked={store.isPictures}
+                    checked={store.isPicturesActive}
                     setter={toggle.pictures}
                     title={'Включить картинки:'}
                 />
