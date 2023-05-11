@@ -3,6 +3,7 @@ import letterStore from '../../../stores/letterStore/letterStore';
 import { DetailsT, ProductT } from '../../../types/typesLetter';
 import { isStOff } from '../common/isStOff';
 import { p } from '../../utils/constants';
+import { PortZarubezhT } from '../../../types/typesSP';
 
 function getDetailsStr(details: DetailsT[], name: string, measure: string) {
     const detailsStr = details.reduce((total, detailsObj) => {
@@ -37,16 +38,17 @@ export const productToStringRu = (product: ProductT) => {
 };
 
 export const productToStringEng = (product: ProductT) => {
-    const { ground, port } = letterStore.fields;
+    const { ground } = letterStore.fields;
     const { details, info } = product;
     const { desc } = info;
+    const port = letterStore.fields.port as PortZarubezhT;
 
     const detailsStr = getDetailsStr(details, desc.eng.name, 'kg');
 
     const packStr = `${p.TAB}Packing - ${desc.eng.pack}`;
     const groundStr = `${p.TAB}Fishing ground: ${ground}`;
     const periodStr = `${p.TAB}Producing period: `;
-    const portStr = `${p.TAB}Port of discharging: ${port}`;
+    const portStr = `${p.TAB}Port of discharging: ${port.eng.name}`;
     const descStr = `${packStr}\n${groundStr}\n${periodStr}\n${portStr}`;
 
     const productStr = `${detailsStr}\n${descStr}\n\n`;

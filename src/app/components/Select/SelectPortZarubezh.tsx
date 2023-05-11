@@ -5,9 +5,6 @@ import { Select, SelectSpecificT } from './Select';
 
 export const SelectPortZarubezh = observer((props: SelectSpecificT) => {
     const { portsZarubezh } = spsStore;
-    // console.log(
-    //     Object.values(portsZarubezh).forEach((port) => console.log(port.codeName)),
-    // );
     const options = Object.values(portsZarubezh).map((port) => port.codeName);
 
     return (

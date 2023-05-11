@@ -19,8 +19,7 @@ export const LetterMainFields = observer(() => {
                 value={fields.arrivalVld}
                 required
             />
-
-            <SelectPort current={fields.port} setter={setField.port} />
+            <SelectPort current={fields.port.codeName} setter={setField.port} />
             <Input
                 title='Дата оплаты'
                 placeholder='Дата оплаты'

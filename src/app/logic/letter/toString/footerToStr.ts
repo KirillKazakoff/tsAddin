@@ -2,11 +2,13 @@
 /* eslint-disable no-useless-escape */
 import letterStore from '../../../stores/letterStore/letterStore';
 import spsStore from '../../../stores/spsStore/spsStore';
+import tablesStore from '../../../stores/tablesStore/tablesStore';
+import { PortZarubezhT } from '../../../types/typesSP';
 
 export const footerToStrRu = () => {
     const { arrivalVld, payment, port } = letterStore.fields;
 
-    const arrivalStr = `Прибытие в п. ${port} ${arrivalVld}`;
+    const arrivalStr = `Прибытие в п. ${port.codeName} ${arrivalVld}`;
     const paymentStr = payment ? `Оплата до ${payment}` : '';
     const conclusionStr = 'В случае Вашей заинтересованности, просим Вас направить предложение';
 
@@ -15,15 +17,23 @@ export const footerToStrRu = () => {
 
 export const footerToStrEng = () => {
     const {
-        port, terms, arrivalForeign, arrivalVld, payment,
+        terms, arrivalForeign, arrivalVld, payment,
     } = letterStore.fields;
+    const port = letterStore.fields.port as PortZarubezhT;
     const transport = spsStore.transport.eng.name;
 
-    const weightInformStr = 'Send for you weight reports in attached files.';
-    const termsStr = `Terms of sale: \n- ${terms} ${port}`;
+    let weightInformStr = 'Send you weight reports in attached files.';
+    if (terms === 'EXW') {
+        weightInformStr = 'Send you warehouse certificate reports in attached files.';
+    }
+    if (tablesStore.matesT[0].product.codeName === 'мука рыбная') {
+        weightInformStr
+            += '\nSend to you result of analysis and certificate of warehouse in attached files.';
+    }
 
+    const termsStr = `Terms of sale: \n- ${terms} ${port.eng.name}`;
     const arrivalVldStr = `- ETA Vladivostok - ${arrivalVld}`;
-    const arrivalForeignStr = `- ETA ${port} - ${arrivalForeign}`;
+    const arrivalForeignStr = `- ETA ${port.eng.name} - ${arrivalForeign}`;
     const scheduleStr = `Schedule ${transport}:\n${arrivalVldStr}\n${arrivalForeignStr}\n\n`;
     const arrivalStr = terms === 'CFR' ? scheduleStr : '';
 

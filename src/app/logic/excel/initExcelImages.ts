@@ -15,6 +15,5 @@ export const initExcelImages = async (context: Excel.RequestContext) => {
         picturesStore.setIsPicturesFound(true);
     } catch (e) {
         picturesStore.setIsPicturesFound(false);
-        console.log('no pictures found');
     }
 };

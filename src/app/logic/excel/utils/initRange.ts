@@ -2,7 +2,7 @@ type InitRangeT = (
     worksheets: Excel.WorksheetCollection,
     wsName: string,
     tableName: string
-) => Excel.Range;
+) => Excel.Range | false;
 
 export type InitRangeBoundT = (wsName: string, tableName: string) => Excel.Range;
 

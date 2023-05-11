@@ -26,20 +26,27 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
             productionTypes[product.codeName] = productObj;
         }
 
-        const details = { sort, amount: amount.total };
+        const newDetails = { sort, amount: amount.total };
 
-        const matchedDetails = productObj.details.find((d) => d.sort === sort);
-        if (isStOff(sort)) {
-            addToAmount(productObj.details[0].amount, details.amount.count);
+        if (productObj.details.length === 0) {
+            productObj.details.push(newDetails);
+            return productionTypes;
+        }
+
+        const matchedDetails = productObj.details.find(
+            (d) => d.sort === newDetails.sort,
+        );
+        if (isStOff(newDetails.sort)) {
+            addToAmount(productObj.details[0].amount, newDetails.amount.count);
             return productionTypes;
         }
 
         if (matchedDetails) {
-            addToAmount(matchedDetails.amount, details.amount.count);
+            addToAmount(matchedDetails.amount, newDetails.amount.count);
             return productionTypes;
         }
 
-        productionTypes[product.codeName].details.push(details);
+        productObj.details.push(newDetails);
         return productionTypes;
     }, {});
 };

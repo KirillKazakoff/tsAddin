@@ -27,6 +27,7 @@ export const Select = observer(({
                 onChange={(e) => setter(e.currentTarget.value)}
                 value={current}
             >
+                <option className='option--disabled'>{''}</option>
                 {optionsList}
             </select>
         </div>

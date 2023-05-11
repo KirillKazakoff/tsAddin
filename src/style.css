@@ -140,3 +140,7 @@ b {
     flex-direction: column;
     row-gap: 10px;
 }
+
+.option--disabled {
+    display: none;
+}

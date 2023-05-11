@@ -1,5 +1,9 @@
 import {
-    PodpisantT, PortRuT, PortTamozhnyaT, TransportT,
+    PodpisantT,
+    PortRuT,
+    PortTamozhnyaT,
+    PortZarubezhT,
+    TransportT,
 } from '../types/typesSP';
 
 export const initTransport = (): TransportT => ({
@@ -20,6 +24,18 @@ export const initPortTamozhnya = (): PortTamozhnyaT => ({
     codeName: '',
     eng: { name: '' },
     ru: { name: '' },
+});
+
+export const initPortZarubezh = (): PortZarubezhT => ({
+    codeName: '',
+    eng: {
+        name: '',
+        country: '',
+    },
+    ru: {
+        name: '',
+        country: '',
+    },
 });
 
 export const initPodpisant = (): PodpisantT => ({

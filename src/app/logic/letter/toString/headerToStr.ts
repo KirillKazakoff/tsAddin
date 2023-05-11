@@ -1,5 +1,6 @@
 import letterStore from '../../../stores/letterStore/letterStore';
 import spsStore from '../../../stores/spsStore/spsStore';
+import { PortZarubezhT } from '../../../types/typesSP';
 import { getVesselsStrEng, getVesselsStrRu } from '../common/getFilteredVessels';
 
 export const headerToStrRu = () => {
@@ -14,11 +15,11 @@ export const headerToStrRu = () => {
 
 export const headerToStrEng = () => {
     const { transport } = spsStore;
-    const { port } = letterStore.fields;
+    const port = letterStore.fields.port as PortZarubezhT;
     const vesselsStr = getVesselsStrEng().join(';  ');
 
     const greeting = 'Dear Sir! Good day!';
     const info = 'Send you information for new production, discharging from';
 
-    return `${greeting}\n\n${info} ${vesselsStr} to ${port} via ${transport.eng.name}\n`;
+    return `${greeting}\n\n${info} ${vesselsStr} to ${port.eng.name} via ${transport.eng.name}\n`;
 };
