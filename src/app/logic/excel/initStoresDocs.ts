@@ -63,11 +63,10 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     setProduction(spProductionRange.values);
     setPortsZarubezh(spPortsZarubezhRange.values);
     setPortsRu(spPortsRuRange.values);
+    setTransport(mateRange.values, spTransportRange.values);
 
     setExport(exportRange.values);
     setExportStorage(exportStorageRange.values);
     setInner(innerRange.values);
     setMates(mateRange.values);
-
-    setTransport(mateRange.values, spTransportRange.values);
 };

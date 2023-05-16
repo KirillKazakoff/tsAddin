@@ -8,7 +8,8 @@ export const setTransport = (mateValues: any[][], dictionaryRange: any[][]) => {
     if (isEmptyMates) return;
 
     // get transport cell from first table row
-    const transportMate = mateValues[0][4];
+    const transportMate = mateValues[1][4];
+
     const transport = dictionaryRange.find((row) => row[0] === transportMate);
     if (!transport) {
         pageStatusStore.setPageStatus(transportNotFound());
