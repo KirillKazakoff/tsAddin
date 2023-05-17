@@ -21,7 +21,7 @@ export type AmountT = {
         max: number;
     };
 };
-type AmountObjT = {
+export type AmountObjT = {
     [key: string]: AmountT;
 };
 

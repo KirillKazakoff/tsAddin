@@ -10,6 +10,7 @@ export const clearInvoiceBlRows = (
     const { length } = invoice.rows;
 
     // dont change the cells order!
+
     ['Инвойс_Bl_массив_п', 'Инвойс_Bl_массив'].forEach((cellName) => {
         clearRows(wsOriginal, wsCopy, length, cellName);
     });

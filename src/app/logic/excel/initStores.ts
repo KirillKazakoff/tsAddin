@@ -7,6 +7,7 @@ export const initStores = async (context: Excel.RequestContext) => {
     await context.sync();
 
     const isOffer = context.workbook.name.includes('Письмо суточные');
+
     if (isOffer) {
         await initStoresOffer(context);
         excelSyncStore.setAppStatus('Offer');

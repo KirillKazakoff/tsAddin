@@ -1,9 +1,6 @@
 /* eslint-disable no-param-reassign */
-import {
-    addToAmount,
-    initAmount,
-} from '../../../../stores/tablesStore/utils/initAmount';
 import { AgreementT } from './initAgreement';
+import { addInvoiceAmount, initInvoiceAmount } from './invoiceAmount';
 
 export const groupByInvoice = (agreement: AgreementT) => {
     const { invoices } = agreement.productsGroupedBy;
@@ -22,11 +19,7 @@ export const groupByInvoice = (agreement: AgreementT) => {
                 msc,
                 agreement,
                 consignee,
-                amount: {
-                    places: initAmount(0, 0, 0),
-                    priceTotal: initAmount(0, 3, 4),
-                    placesTotal: initAmount(0, 2, 2),
-                },
+                amount: initInvoiceAmount(),
                 productGroups: {},
             };
             invoices[invoiceNo] = invoice;
@@ -38,17 +31,14 @@ export const groupByInvoice = (agreement: AgreementT) => {
             productGroup = {
                 rows: [],
                 record: row,
-                total: initAmount(0, 3, 4),
+                total: initInvoiceAmount(),
             };
             invoice.productGroups[row.product.codeName] = productGroup;
         }
         productGroup.rows.push(row);
 
-        const { places, priceTotal, placesTotal } = invoice.amount;
-        addToAmount(places, row.amount.places.count);
-        addToAmount(priceTotal, row.amount.priceTotal.count);
-        addToAmount(placesTotal, row.amount.placesTotal.count);
-        addToAmount(productGroup.total, row.amount.placesTotal.count);
+        addInvoiceAmount(invoice.amount, row.amount);
+        addInvoiceAmount(productGroup.total, row.amount);
     });
 
     return agreement;

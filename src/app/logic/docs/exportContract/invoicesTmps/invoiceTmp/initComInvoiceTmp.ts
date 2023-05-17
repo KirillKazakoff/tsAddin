@@ -56,7 +56,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_соглашение', value: `AGREEMENT No.${agreementNo} from ${date.invoice('eng')}` },
         { cell: 'Инвойс_контракт', value: `to a contract of sale No. ${contract.contractNo}` },
         { cell: 'Инвойс_контракт_дата', value: `Magadan, dated from ${date.contract('eng')}` },
-        { cell: 'Инвойс_условия', value: `${terms}, ${portTo.eng.country}` },
+        { cell: 'Инвойс_условия', value: `${terms}, ${portTo.eng.name}` },
 
         { cell: 'Инвойс_подвал_места', value: `${places.str} PCS /` },
         { cell: 'Инвойс_подвал_всего', value: `${placesTotal.str} tn` },
@@ -65,7 +65,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_банк_получателя_адрес', value: bankSeller.adress },
         { cell: 'Инвойс_банк_получателя_свифт', value: `SWIFT: ${bankSeller.swift}` },
 
-        { cell: 'Инвойс_получатель_в_пользу', value: `in forward to ${bankSeller.eng.name}` },
+        { cell: 'Инвойс_получатель_в_пользу', value: `in forward to ${seller.eng.name}` },
         { cell: 'Инвойс_получатель_счет', value: `A/C: ${bankSeller.accountNo}` },
         { cell: 'Инвойс_подписант', value: `Signed by ${exportContractStore.podpisant.eng.name}` },
     ];
@@ -97,16 +97,16 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_соглашение_п', value: `Дополнение No.${agreementNo} от ${date.invoice('ru')}` },
         { cell: 'Инвойс_контракт_п', value: `к контракту купли-продажи №. ${contract.contractNo}` },
         { cell: 'Инвойс_контракт_дата_п', value: `Магадан, от ${date.contract('ru')}` },
-        { cell: 'Инвойс_условия_п', value: `${terms}, ${portTo.ru.country}` },
+        { cell: 'Инвойс_условия_п', value: `${terms}, ${portTo.ru.name}` },
 
-        { cell: 'Инвойс_подвал_места_п', value: `${places.str} шт /` },
+        { cell: 'Инвойс_подвал_места_п', value: `${places.str} мест /` },
         { cell: 'Инвойс_подвал_всего_п', value: `${placesTotal.str} тн` },
         { cell: 'Инвойс_подвал_сумма_п', value: `${priceTotal.str} $` },
         { cell: 'Инвойс_банк_получателя_п', value: `Beneficiary Bank: ${bankSeller.eng.name}` },
         { cell: 'Инвойс_банк_получателя_адрес_п', value: bankSeller.adress },
         { cell: 'Инвойс_банк_получателя_свифт_п', value: `SWIFT: ${bankSeller.swift}` },
 
-        { cell: 'Инвойс_получатель_в_пользу_п', value: `в пользу ${bankSeller.ru.name}` },
+        { cell: 'Инвойс_получатель_в_пользу_п', value: `в пользу ${seller.ru.name}` },
         { cell: 'Инвойс_получатель_счет_п', value: `A/C: ${bankSeller.accountNo}` },
         { cell: 'Инвойс_подписант_п', value: `Подписано ${exportContractStore.podpisant.ru.name}` },
     ];

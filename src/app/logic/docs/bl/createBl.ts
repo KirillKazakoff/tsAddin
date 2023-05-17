@@ -6,7 +6,7 @@ import { initBlTmp } from './initBlTmp';
 
 export const createBL = async (blGroup: BlGroupT) => {
     const book = await readTmp(pathObj.bl);
-    initBlTmp(book, blGroup.rows);
+    initBlTmp(book, blGroup);
 
     await saveFile(book, blGroup.record.blNo);
 };

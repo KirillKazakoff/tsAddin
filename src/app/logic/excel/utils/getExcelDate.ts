@@ -17,3 +17,17 @@ export const getExcelDateNumeric = (excelSerial: string, locale: string) => {
         year: 'numeric',
     });
 };
+
+export const getDeliveryDate = (excelSerial: string, locale: string) => {
+    const date = getExcelDate(excelSerial);
+
+    date.setMonth(date.getMonth() + 1);
+
+    const res = date.toLocaleString(locale, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    });
+
+    return res;
+};

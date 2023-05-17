@@ -14,18 +14,23 @@ export const initExportStorageContractRows = (
 
     // Get product groups
     const invoicesArr = Object.values(invoices);
-    const rows = invoicesArr.reduce<ProductGroupT[]>((total, invoice) => {
+    const groups = invoicesArr.reduce<ProductGroupT[]>((total, invoice) => {
         const invoiceGroups = Object.values(invoice.productGroups);
         total.push(...invoiceGroups);
         return total;
     }, []);
 
-    rows.forEach((group, index) => {
+    groups.forEach((group, index) => {
         const { record } = group;
-        const QT = group.rows.reduce<string>((total, row) => {
-            total += `${row.amount.placesTotal.str}\n`;
-            return total;
-        }, `\nИТОГО: ${group.total.str}\n`);
+
+        const QT = group.total.placesTotal.str;
+
+        // if (group.rows.length > 1) {
+        //     QT = group.rows.reduce<string>((total, row) => {
+        //         total += `${row.amount.placesTotal.str}\n`;
+        //         return total;
+        //     }, `\nИТОГО: ${group.total.placesTotal.str}\n`);
+        // }
 
         const rowArr = [
             '',

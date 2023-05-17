@@ -4,7 +4,7 @@ import { alignmentCenter, fontDefault, styleRowCells } from '../../../styleRowCe
 
 export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
     const { ws } = utils;
-    const { rows } = invoice;
+    const { productGroups } = invoice;
 
     ['eng', 'ru'].forEach((language) => {
         // prettier-ignore
@@ -12,10 +12,11 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
         const arrayCl = utils.getCell(cellName);
 
         // insert rows
-        rows.forEach((r, i) => {
-            const {
-                places, placesTotal, price, priceTotal,
-            } = r.amount;
+        Object.values(productGroups).forEach((group, i) => {
+            const r = group.record;
+            const { places, placesTotal, priceTotal } = group.total;
+
+            const { price } = r.amount;
 
             // there are two empty cols implemented for borders
             // in excel template (merge removes borders in cells)
@@ -25,8 +26,8 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
                 vessel: r.vessel.eng.name,
                 desc: r.product.eng.name,
                 pack: `1/${r.pack} KG`,
-                places: `${places.str} PCS/`,
-                placesTotal: `${placesTotal.str} tn`,
+                places: `${places.str} PCS /`,
+                placesTotal: ` ${placesTotal.str} tn`,
                 priceUnit: `${price.str} USD`,
                 priceTotal: `${priceTotal.str} USD`,
             };
@@ -35,13 +36,17 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
                 cols.desc = r.product.ru.name;
                 cols.vessel = r.vessel.ru.name;
                 cols.pack = `1/${r.pack} КГ`;
-                cols.places = `${places.str} шт/`;
-                cols.placesTotal = `${placesTotal.str} тн`;
+                cols.places = `${places.str} мест /`;
+                cols.placesTotal = ` ${placesTotal.str} тн`;
                 cols.priceUnit = `${price.str} $`;
                 cols.priceTotal = `${priceTotal.str} $`;
             }
 
-            if (ws.name.includes('Noncom')) delete cols.vessel;
+            let amountCellCount = 6;
+            if (ws.name.includes('Noncom')) {
+                delete cols.vessel;
+                amountCellCount = 5;
+            }
             const rowArr = Object.values(cols);
 
             const rowIndex = +arrayCl.row + i;
@@ -55,12 +60,21 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
                 alignment: alignmentCenter,
                 font: fontDefault,
             });
-
+            // styleEndAndStartBorders
             row.getCell(2).border = {
                 left: { style: 'thin' },
             };
             row.getCell(row.actualCellCount).border = {
                 right: { style: 'thin' },
+            };
+            // styleAmountCells
+            row.getCell(amountCellCount).style.alignment = {
+                vertical: 'middle',
+                horizontal: 'right',
+            };
+            row.getCell(amountCellCount + 1).style.alignment = {
+                vertical: 'middle',
+                horizontal: 'left',
             };
         });
     });

@@ -1,15 +1,15 @@
 import ExcelJS from 'exceljs';
 import { CellObjT } from '../../../types/typesExcelUtils';
-import { ExportRowT } from '../../../types/typesTables';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initBlRows } from './initBlRows';
+import { BlGroupT } from '../../../types/typesContract';
 
-export const initBlTmp = (book: ExcelJS.Workbook, blGroup: ExportRowT[]) => {
+export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT) => {
     const ws = book.getWorksheet('BL');
     const utils = initExcelUtils(ws);
 
-    const record = blGroup[0];
+    const { record } = blGroup;
     // prettier-ignore
     const cells: CellObjT[] = [
         { cell: 'Продавец', value: record.seller.eng.name },

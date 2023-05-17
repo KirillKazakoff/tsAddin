@@ -37,8 +37,8 @@ export const initExportContractAddreses: InitContractPartT = (utils, agreement) 
         },
         {
             cell: 'Адреса_получатель_в_пользу',
-            eng: `in forward to ${bankSeller.eng.name}`,
-            ru: `в пользу ${bankSeller.ru.name}`,
+            eng: `in forward to ${seller.eng.name}`,
+            ru: `в пользу ${seller.ru.name}`,
         },
         {
             cell: 'Адреса_получатель_счет',

@@ -1,4 +1,5 @@
 import type { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
+import type { BlAmountT } from '../logic/docs/exportContract/groupBy/invoiceAmount';
 import { ConsigneeT } from './typesSP';
 import { ExportRowT, AmountT } from './typesTables';
 
@@ -6,6 +7,7 @@ import { ExportRowT, AmountT } from './typesTables';
 export type BlGroupT = {
     record: ExportRowT;
     rows: ExportRowT[];
+    total: BlAmountT;
 };
 
 export type GroupedBlT = {
@@ -13,10 +15,16 @@ export type GroupedBlT = {
 };
 
 // InvoiceT
+export type InvoiceAmountT = {
+    placesTotal: AmountT;
+    places: AmountT;
+    priceTotal: AmountT;
+};
+
 export type ProductGroupT = {
     rows: ExportRowT[];
     record: ExportRowT;
-    total: AmountT;
+    total: InvoiceAmountT;
 };
 
 export type InvoiceT = {
@@ -26,11 +34,7 @@ export type InvoiceT = {
     invoiceNo: string;
     msc: string;
     consignee: ConsigneeT;
-    amount: {
-        placesTotal: AmountT;
-        places: AmountT;
-        priceTotal: AmountT;
-    };
+    amount: InvoiceAmountT;
     productGroups: { [key: string]: ProductGroupT };
 };
 
