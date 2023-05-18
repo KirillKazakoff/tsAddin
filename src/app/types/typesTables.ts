@@ -4,6 +4,7 @@ import {
     ClientRuT,
     ConsigneeT,
     ContractT,
+    PackageT,
     PortTamozhnyaT,
     PortZarubezhT,
     ProductDescriptionT,
@@ -63,7 +64,7 @@ export type ExportInitRowT = {
     blMode: string;
     terms?: string;
     sort: string;
-    pack: string;
+    pack: number;
     msc: string;
     id: string;
     index: number;
@@ -81,13 +82,14 @@ export type ExportRowT = {
     consignee: ConsigneeT;
     product: ProductDescriptionT;
     amount: AmountObjT;
+    packSp: PackageT;
     agreementNo: number;
     invoice: string;
     date: string;
     blNo: string;
     terms?: string;
     sort: string;
-    pack: string;
+    pack: number;
     msc: string;
     index: string;
 };

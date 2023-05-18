@@ -3,6 +3,7 @@ import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
 import { setClientsRu } from '../../stores/spsStore/set/setClientsRu';
 import { setConsignees } from '../../stores/spsStore/set/setConsignees';
 import { setContracts } from '../../stores/spsStore/set/setContracts';
+import { setPackages } from '../../stores/spsStore/set/setPackages';
 import { setPodpisants } from '../../stores/spsStore/set/setPodpisants';
 import { setPortsRu } from '../../stores/spsStore/set/setPortsRu';
 import { setPortsTamozhnya } from '../../stores/spsStore/set/setPortsTamozhnya';
@@ -46,6 +47,7 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     );
     const spClientsRange = initRange('SPClientsSell', 'SPClientsSell');
     const spPortsRuRange = initRange('SPPort', 'SPPort');
+    const spPackageRange = initRange('SPPackage', 'SPPackage');
 
     await initExcelImages(context);
     context.workbook.load('name');
@@ -63,6 +65,7 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     setProduction(spProductionRange.values);
     setPortsZarubezh(spPortsZarubezhRange.values);
     setPortsRu(spPortsRuRange.values);
+    setPackages(spPackageRange.values);
     setTransport(mateRange.values, spTransportRange.values);
 
     setExport(exportRange.values);

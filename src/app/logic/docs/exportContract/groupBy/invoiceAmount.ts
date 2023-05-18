@@ -26,12 +26,20 @@ export const initBlAmount = () => {
     return {
         places: initAmount(0, 0, 0),
         placesTotal: initAmount(0, 3, 4),
+        placesGross: initAmount(0, 3, 4),
     };
 };
 
 export type BlAmountT = ReturnType<typeof initBlAmount>;
 
-export const addBlAmount = (blAmount: BlAmountT, rowAmount: AmountObjT) => {
+export const addBlAmount = (
+    blAmount: BlAmountT,
+    rowAmount: AmountObjT,
+    coefficient: number | null = 1,
+) => {
     addToAmount(blAmount.places, rowAmount.places.count);
     addToAmount(blAmount.placesTotal, rowAmount.placesTotal.count);
+
+    if (!coefficient) console.log('null coefficient');
+    addToAmount(blAmount.placesGross, rowAmount.placesTotal.count * coefficient);
 };

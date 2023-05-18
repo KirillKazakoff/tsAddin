@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
 import { initPortRu, initPortTamozhnya } from '../initStoreObjects';
-import { selectPortRu, selectPortTamozhnyaSp } from '../spsStore/select';
+import { selectPortRuSp, selectPortTamozhnyaSp } from '../spsStore/select';
 
 class RequestContractStore {
     terms = '';
@@ -15,7 +15,7 @@ class RequestContractStore {
     setField = {
         terms: (value: string) => (this.terms = value),
         portTamozhnya: (value: string) => (this.portTamozhnya = selectPortTamozhnyaSp(value)),
-        portRu: (value: string) => (this.portRu = selectPortRu(value)),
+        portRu: (value: string) => (this.portRu = selectPortRuSp(value)),
     };
 }
 

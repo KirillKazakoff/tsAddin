@@ -40,8 +40,21 @@ export type ProductDescriptionT = {
     expirationDate: string;
 };
 
-export type ProductionNewT = {
+export type ProductionT = {
     [key: string]: ProductDescriptionT;
+};
+
+// Package
+export type PackageT = {
+    codeName: string;
+    vessel: string;
+    name: string;
+    pack: number;
+    coefficient: number;
+};
+
+export type PackagesT = {
+    [key: string]: PackageT;
 };
 
 // Sellers

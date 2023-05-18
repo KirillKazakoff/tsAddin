@@ -3,7 +3,7 @@
 // data already selected on init
 import { makeAutoObservable } from 'mobx';
 import {
-    ProductionNewT,
+    ProductionT,
     SellersT,
     TransportT,
     ConsigneesT,
@@ -16,13 +16,15 @@ import {
     BanksProdavecT,
     ClientsRuT,
     PortsRuT,
+    PackagesT,
 } from '../../types/typesSP';
 import { initTransport } from '../initStoreObjects';
 
 class SpsStore {
     transport = initTransport();
     vessels: VesselsT = {};
-    production: ProductionNewT = {};
+    production: ProductionT = {};
+    packages: PackagesT = {};
     sellers: SellersT = {};
     consignees: ConsigneesT = {};
     portsTamozhnya: PortsTamozhnyaT = {};
@@ -41,7 +43,8 @@ class SpsStore {
     setSp = {
         vessels: (vessels: VesselsT) => (this.vessels = vessels),
         transport: (transport: TransportT) => (this.transport = transport),
-        production: (production: ProductionNewT) => (this.production = production),
+        production: (production: ProductionT) => (this.production = production),
+        packages: (packages: PackagesT) => (this.packages = packages),
         sellers: (sellers: SellersT) => (this.sellers = sellers),
         consignees: (consignees: ConsigneesT) => (this.consignees = consignees),
         portsTamozhnya: (ports: PortsTamozhnyaT) => (this.portsTamozhnya = ports),

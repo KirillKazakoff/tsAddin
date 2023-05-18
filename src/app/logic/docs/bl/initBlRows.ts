@@ -15,8 +15,9 @@ export const initBlRows = (blGroup: BlGroupT, utils: CellUtilsT) => {
         record.product.eng.name,
         '',
         `1/${record.pack} KG`,
-        `${total.places.str} PCS /`,
-        `${total.placesTotal.str} tn`,
+        `${total.places.str}`,
+        `${total.placesTotal.str}`,
+        `${total.placesGross.str}`,
     ];
 
     const rowIndex = +arrayCl.row + 1;

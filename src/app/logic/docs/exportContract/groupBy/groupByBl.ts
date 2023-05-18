@@ -18,7 +18,7 @@ export const groupByBl = (rows: ExportRowT[]) => {
 
         group.rows.push(row);
 
-        addBlAmount(group.total, row.amount);
+        addBlAmount(group.total, row.amount, row?.packSp?.coefficient);
         return total;
     }, {});
 

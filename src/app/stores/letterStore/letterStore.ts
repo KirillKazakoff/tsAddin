@@ -1,6 +1,6 @@
 /* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
-import { selectPortRu, selectPortZarubezhSp } from '../spsStore/select';
+import { selectPortRuSp, selectPortZarubezhSp } from '../spsStore/select';
 import { initLetterFields } from './initLetterFields';
 
 class LetterStore {
@@ -20,7 +20,7 @@ class LetterStore {
             if (this.fields.isExport) {
                 this.fields.port = selectPortZarubezhSp(value);
             } else {
-                this.fields.port = selectPortRu(value);
+                this.fields.port = selectPortRuSp(value);
             }
         },
     };
