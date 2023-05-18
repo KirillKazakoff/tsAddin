@@ -16,21 +16,20 @@ export const mergeInvoicesCells = async (book: Workbook) => {
                     if (!cell.value) return;
                     const valueStr = cell.value.toString().toLowerCase();
 
-                    const { row: mergeRow, col } = merge;
                     if (valueStr.includes('consignee')) {
-                        if (mergeRow.eng) return;
-                        mergeRow.eng = +cell.row + 2;
+                        if (merge.row.eng) return;
+                        merge.row.eng = +cell.row + 2;
                     }
                     if (valueStr.includes('получатель')) {
-                        if (mergeRow.ru) return;
-                        mergeRow.ru = +cell.row + 2;
+                        if (merge.row.ru) return;
+                        merge.row.ru = +cell.row + 2;
                     }
 
                     if (valueStr.includes('вид упаковки')) {
-                        col.first = +cell.col;
+                        merge.col.first = +cell.col;
                     }
                     if (valueStr.includes('msc certificate')) {
-                        col.second = +cell.col;
+                        merge.col.second = +cell.col;
                     }
                 });
             });

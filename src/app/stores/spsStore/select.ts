@@ -58,6 +58,5 @@ export const selectPackageSp = (
     pack: number,
 ) => {
     const codeName = `${vesselName}${productName}${pack}`;
-    console.log(codeName);
     return spsStore.packages[codeName];
 };

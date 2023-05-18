@@ -7,7 +7,7 @@ export const clearInvoiceBlRows = (
     wsCopy: Worksheet,
     invoice: InvoiceT,
 ) => {
-    const { length } = invoice.rows;
+    const { length } = Object.values(invoice.productGroups);
 
     // dont change the cells order!
 

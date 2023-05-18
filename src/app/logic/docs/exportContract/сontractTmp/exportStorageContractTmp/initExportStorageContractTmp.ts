@@ -34,7 +34,6 @@ export const initExportStorageContractTmp: InitExportContractTmp = (
         delivery: (locale: string) => getDeliveryDate(dateAgreement, locale),
     };
 
-    console.log('here');
     // prettier-ignore
     const cells: CellObjDoubleT[] = [
         {
