@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { AgreementT } from './initAgreement';
 
-export const groupByConsignee = (agreement: AgreementT) => {
+export const groupAgByConsignee = (agreement: AgreementT) => {
     const { consignees } = agreement.productsGroupedBy;
 
     agreement.rows.forEach((row) => {

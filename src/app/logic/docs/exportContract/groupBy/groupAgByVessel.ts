@@ -5,7 +5,7 @@ import {
 } from '../../../../stores/tablesStore/utils/initAmount';
 import { AgreementT } from './initAgreement';
 
-export const groupByVesselExport = (agreement: AgreementT) => {
+export const groupAgByVessel = (agreement: AgreementT) => {
     const { vessels } = agreement.productsGroupedBy;
 
     // groupBy

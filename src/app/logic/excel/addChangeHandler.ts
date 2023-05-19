@@ -14,7 +14,7 @@ export const addChangeHandler = (context: Excel.RequestContext) => {
         });
     }
 
-    eventResult = worksheets.onChanged.add(async (e) => {
+    eventResult = worksheets.onChanged.add(async () => {
         await remove();
         pageStatusStore.resetPageStatus();
 

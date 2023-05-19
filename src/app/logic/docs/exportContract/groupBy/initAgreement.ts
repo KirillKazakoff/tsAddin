@@ -36,4 +36,4 @@ export type AgreementT = {
     priceTotal: number;
 };
 
-export type AgreementObjT = { [key: string]: AgreementT };
+export type AgreementsT = { [key: string]: AgreementT };

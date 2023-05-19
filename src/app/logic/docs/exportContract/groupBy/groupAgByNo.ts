@@ -3,15 +3,15 @@
 import _ from 'lodash';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { setMSC } from '../../../../stores/tablesStore/utils/setMSC';
-import { groupByConsignee } from './groupByConsignee';
-import { groupByInvoice } from './groupByInvoice';
-import { groupByVesselExport } from './groupByVesselExport';
-import { AgreementObjT, initAgreement } from './initAgreement';
+import { groupAgByConsignee } from './groupAgByConsignee';
+import { groupAgByInvoice } from './groupAgByInvoice';
+import { groupAgByVessel } from './groupAgByVessel';
+import { AgreementsT, initAgreement } from './initAgreement';
 
-export const groupByAgreementNo = () => {
+export const groupAgByNo = () => {
     const table = exportContractStore.getCurrentTable();
 
-    const agreements = table.reduce<AgreementObjT>((total, row) => {
+    const agreements = table.reduce<AgreementsT>((total, row) => {
         const { agreementNo } = row;
         let agreement = total[agreementNo];
 
@@ -29,14 +29,14 @@ export const groupByAgreementNo = () => {
     }, {});
 
     Object.entries(agreements).forEach(([key, agreement]) => {
-        agreements[key] = groupByConsignee(agreement);
-        agreements[key] = groupByInvoice(agreement);
-        agreements[key] = groupByVesselExport(agreement);
+        agreements[key] = groupAgByInvoice(agreement);
+        agreements[key] = groupAgByConsignee(agreement);
+        agreements[key] = groupAgByVessel(agreement);
 
         // const copy = _.cloneDeep(agreements[key].productsGroupedBy);
-        // eslint-disable-next-line no-console
         // console.log(copy);
     });
 
+    console.log(agreements);
     return agreements;
 };

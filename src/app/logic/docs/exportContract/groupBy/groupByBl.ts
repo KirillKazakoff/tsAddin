@@ -1,7 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { GroupedBlT } from '../../../../types/typesContract';
 import { ExportRowT } from '../../../../types/typesTables';
-import { addBlAmount, initBlAmount } from './invoiceAmount';
+import {
+    addBlAmount,
+    initBlAmount,
+} from '../../../../stores/tablesStore/utils/invoiceAmount';
 
 export const groupByBl = (rows: ExportRowT[]) => {
     const blGrouped = rows.reduce<GroupedBlT>((total, row) => {

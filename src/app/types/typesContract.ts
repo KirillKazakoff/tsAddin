@@ -1,5 +1,5 @@
 import type { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
-import type { BlAmountT } from '../logic/docs/exportContract/groupBy/invoiceAmount';
+import type { BlAmountT } from '../stores/tablesStore/utils/invoiceAmount';
 import { ConsigneeT } from './typesSP';
 import { ExportRowT, AmountT } from './typesTables';
 

@@ -1,9 +1,6 @@
-import {
-    addToAmount,
-    initAmount,
-} from '../../../../stores/tablesStore/utils/initAmount';
-import { InvoiceAmountT } from '../../../../types/typesContract';
-import { AmountObjT } from '../../../../types/typesTables';
+import { addToAmount, initAmount } from './initAmount';
+import { InvoiceAmountT } from '../../../types/typesContract';
+import { AmountObjT } from '../../../types/typesTables';
 
 export const initInvoiceAmount = () => {
     return {

@@ -1,8 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { AgreementT } from './initAgreement';
-import { addInvoiceAmount, initInvoiceAmount } from './invoiceAmount';
+import {
+    addInvoiceAmount,
+    initInvoiceAmount,
+} from '../../../../stores/tablesStore/utils/invoiceAmount';
 
-export const groupByInvoice = (agreement: AgreementT) => {
+export const groupAgByInvoice = (agreement: AgreementT) => {
     const { invoices } = agreement.productsGroupedBy;
 
     agreement.rows.forEach((row) => {
