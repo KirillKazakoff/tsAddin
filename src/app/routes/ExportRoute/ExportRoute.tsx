@@ -6,6 +6,7 @@ import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import BlSection from './BlSection';
 import { ExportContractSection } from './ExportContractSection';
 import { ExportRadio } from './ExportRadio';
+import { AssortimentSection } from './AssortimentSection';
 
 export const ExportRoute = observer(() => {
     useInitExcel();
@@ -31,6 +32,7 @@ export const ExportRoute = observer(() => {
         <div className='doc-links'>
             <ExportRadio />
             <ExportSection />
+            <AssortimentSection />
         </div>
     );
 });

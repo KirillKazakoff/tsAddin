@@ -17,6 +17,7 @@ import {
     ClientsRuT,
     PortsRuT,
     PackagesT,
+    SortsAssortimentT,
 } from '../../types/typesSP';
 import { initTransport } from '../initStoreObjects';
 
@@ -35,6 +36,7 @@ class SpsStore {
     banksProdavec: BanksProdavecT = {};
     clientsRu: ClientsRuT = {};
     portsRu: PortsRuT = {};
+    sortsAssortiment: SortsAssortimentT = {};
 
     constructor() {
         makeAutoObservable(this);
@@ -55,6 +57,7 @@ class SpsStore {
         banksProdavec: (banks: BanksProdavecT) => (this.banksProdavec = banks),
         clientsRu: (clients: ClientsRuT) => (this.clientsRu = clients),
         portsRu: (portsRu: PortsRuT) => (this.portsRu = portsRu),
+        sortsAssortiment: (sorts: SortsAssortimentT) => (this.sortsAssortiment = sorts),
     };
 }
 

@@ -10,6 +10,7 @@ import { setPortsTamozhnya } from '../../stores/spsStore/set/setPortsTamozhnya';
 import { setPortsZarubezh } from '../../stores/spsStore/set/setPortsZarubezh';
 import { setProduction } from '../../stores/spsStore/set/setProduction';
 import { setSellers } from '../../stores/spsStore/set/setSellers';
+import { setSortsAssortiment } from '../../stores/spsStore/set/setSortsAssortiment';
 import { setTransport } from '../../stores/spsStore/set/setTransport';
 import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
@@ -48,6 +49,7 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     const spClientsRange = initRange('SPClientsSell', 'SPClientsSell');
     const spPortsRuRange = initRange('SPPort', 'SPPort');
     const spPackageRange = initRange('SPPackage', 'SPPackage');
+    const spSortAssortiment = initRange('SPSortAssortiment', 'SPSortAssortiment');
 
     await initExcelImages(context);
     context.workbook.load('name');
@@ -66,6 +68,7 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     setPortsZarubezh(spPortsZarubezhRange.values);
     setPortsRu(spPortsRuRange.values);
     setPackages(spPackageRange.values);
+    setSortsAssortiment(spSortAssortiment.values);
     setTransport(mateRange.values, spTransportRange.values);
 
     setExport(exportRange.values);

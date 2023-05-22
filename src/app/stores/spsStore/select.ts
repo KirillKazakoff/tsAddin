@@ -60,3 +60,8 @@ export const selectPackageSp = (
     const codeName = `${vesselName}${productName}${pack}`;
     return spsStore.packages[codeName];
 };
+
+export const selectSortAssortiment = (sort: string, product: string) => {
+    const codeName = `${sort}${product}`.toLowerCase();
+    return spsStore.sortsAssortiment[codeName];
+};

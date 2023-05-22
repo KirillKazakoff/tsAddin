@@ -57,6 +57,18 @@ export type PackagesT = {
     [key: string]: PackageT;
 };
 
+// SortAssortiment
+export type SortAssortimentT = {
+    codeName: string;
+    sort: string;
+    product: string;
+    weight: string;
+};
+
+export type SortsAssortimentT = {
+    [key: string]: SortAssortimentT;
+};
+
 // Sellers
 export type SellerT = {
     codeName: string;
