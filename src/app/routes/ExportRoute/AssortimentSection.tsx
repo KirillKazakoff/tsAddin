@@ -3,8 +3,11 @@ import { observer } from 'mobx-react-lite';
 import { useInitAssortimentSection } from '../../logic/docs/assortiment/useInitAssortimentSection';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import { Doc } from '../../components/Doc';
+import Input from '../../components/Input';
+import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const AssortimentSection = observer(() => {
+    const { setField } = exportContractStore;
     const { onLoad, onLoadAll, samplesArr } = useInitAssortimentSection();
     const sampleDocs = samplesArr.map((sample) => {
         const consignee = sample.record.consignee.codeName;
@@ -21,17 +24,34 @@ export const AssortimentSection = observer(() => {
         // onLoad.assortiment();
     }, []);
 
+    const dateTitle = `ETA ${samplesArr[0].record.portTo.eng.name}:`;
+
     return (
         <form className='docs__form assortiment-form'>
-            <h2>Ассортимент</h2>
-            <DocsDownloadBtn
-                onClick={onLoad.assortiment}
-                title='Загрузить ассортимент'
-            />
+            <h2>Ассортимент и Образцы</h2>
+            <div className='assortiment__wrapper'>
+                <Input
+                    title={dateTitle}
+                    placeholder={dateTitle}
+                    setter={setField.dischargeDate}
+                    value={exportContractStore.dischargeDate}
+                />
 
-            <h2>Образцы</h2>
-            <ul className='docs'>{sampleDocs}</ul>
-            <DocsDownloadBtn onClick={onLoadAll} title='Загрузить все образцы' />
+                <div className='assortiment__body'>
+                    <h3>Ассортимент</h3>
+                    <DocsDownloadBtn
+                        onClick={onLoad.assortiment}
+                        title='Загрузить ассортимент'
+                    />
+
+                    <h3>Образцы</h3>
+                    <ul className='docs'>{sampleDocs}</ul>
+                    <DocsDownloadBtn
+                        onClick={onLoadAll}
+                        title='Загрузить все образцы'
+                    />
+                </div>
+            </div>
         </form>
     );
 });

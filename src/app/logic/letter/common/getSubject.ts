@@ -9,7 +9,6 @@ export const getSubject = () => {
     const subjectObj = mates.reduce<SubjectT>((total, row) => {
         const { product, sort } = row;
 
-        // if (!checkOperation(row)) return total;
         let sorts = total[product.codeName];
         if (!sorts) {
             sorts = [];

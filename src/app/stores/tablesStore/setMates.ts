@@ -4,7 +4,7 @@ import {
     checkNotFulfilledRow,
 } from '../../logic/excel/utils/checkTable';
 import { MateRowT } from '../../types/typesTables';
-import { selectProductSp, selectVesselSp } from '../spsStore/select';
+import { selectSp } from '../spsStore/select';
 import tablesStore from './tablesStore';
 import { initAmount } from './utils/initAmount';
 
@@ -30,8 +30,8 @@ export const setMates = (table: any[][]) => {
 
         const rowObj: MateRowT = {
             transport,
-            vessel: selectVesselSp(vessel),
-            product: selectProductSp(product.toLowerCase()),
+            vessel: selectSp.vessel(vessel),
+            product: selectSp.product(product.toLowerCase()),
             reice,
             konosament,
             date,

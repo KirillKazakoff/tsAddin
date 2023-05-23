@@ -33,7 +33,7 @@ b {
 
 /* .input */
 .input {
-    width: 135px;
+    width: 140px;
     max-height: 25px;
     min-height: 25px;
 }
@@ -64,7 +64,7 @@ b {
 
 .select {
     height: 25px;
-    width: 135px;
+    width: 140px;
     cursor: pointer;
 }
 
@@ -131,6 +131,11 @@ b {
 
 /* port-letter */
 .port-letter-title {
+    margin-top: 40px;
+}
+
+/* .assortiment */
+.assortiment-form {
     margin-top: 40px;
 }
 

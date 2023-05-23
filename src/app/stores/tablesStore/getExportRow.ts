@@ -1,37 +1,24 @@
 import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
-import {
-    selectContractSp,
-    selectConsigneeSp,
-    selectSellerSp,
-    selectBankProdavecSp,
-    selectAgentSp,
-    selectVesselSp,
-    selectTransportSp,
-    selectPortTamozhnyaSp,
-    selectPortZarubezhSp,
-    selectProductSp,
-    selectPackageSp,
-    selectSortAssortimentSp,
-} from '../spsStore/select';
+import { selectSp } from '../spsStore/select';
 import { initAmount } from './utils/initAmount';
 
 export const getExportRow = (row: ExportInitRowT): ExportRowT => {
-    const contractSp = selectContractSp(row.contract);
-    const consigneeSp = selectConsigneeSp(row.consignee) || selectConsigneeSp(row.agent);
+    const contractSp = selectSp.contract(row.contract);
+    const consigneeSp = selectSp.consignee(row.consignee) || selectSp.consignee(row.agent);
 
     return {
         contract: contractSp,
-        seller: selectSellerSp(row.seller),
-        bankSeller: selectBankProdavecSp(contractSp?.bankSeller),
-        agent: selectAgentSp(row.agent),
-        vessel: selectVesselSp(row.vessel),
-        transport: selectTransportSp(),
-        portFrom: selectPortTamozhnyaSp(row.portFrom),
-        portTo: selectPortZarubezhSp(row.portTo),
+        seller: selectSp.seller(row.seller),
+        bankSeller: selectSp.bankProdavec(contractSp?.bankSeller),
+        agent: selectSp.agent(row.agent),
+        vessel: selectSp.vessel(row.vessel),
+        transport: selectSp.transport(),
+        portFrom: selectSp.portTamozhnya(row.portFrom),
+        portTo: selectSp.portZarubezh(row.portTo),
         consignee: consigneeSp,
-        product: selectProductSp(row.product),
-        packSp: selectPackageSp(row.vessel, row.product, row.pack),
-        sortSp: selectSortAssortimentSp(row.sort, row.product),
+        product: selectSp.product(row.product),
+        packSp: selectSp.package(`${row.vessel}${row.product}${row.pack}`),
+        sortSp: selectSp.sortAssortiment(`${row.sort}${row.product}`),
         amount: {
             places: initAmount(row.places, 0, 0),
             placesTotal: initAmount(row.placesTotal, 3, 4),

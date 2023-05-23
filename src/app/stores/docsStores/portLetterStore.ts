@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
 import { initPodpisant, initPortRu } from '../initStoreObjects';
-import { selectPodpisantSp, selectPortRuSp } from '../spsStore/select';
+import { selectSp } from '../spsStore/select';
 
 export type CargoT = 'Покупатель' | 'Продавец' | '';
 
@@ -49,8 +49,8 @@ class PortLetterStore {
     store = initStore();
 
     setField = {
-        port: (value: string) => (this.store.port = selectPortRuSp(value)),
-        podpisant: (value: string) => (this.store.podpisant = selectPodpisantSp(value)),
+        port: (value: string) => (this.store.port = selectSp.portRu(value)),
+        podpisant: (value: string) => (this.store.podpisant = selectSp.podpisant(value)),
         dateLetter: (value: string) => (this.store.dateLetter = value),
         cargoTo: {
             storage: (value: CargoT) => (this.store.cargoTo.storage = value),

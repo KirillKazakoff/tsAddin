@@ -17,7 +17,7 @@ export const addAssortimentTable = (
 
     const sampleClStyle: Partial<Style> = {
         alignment: { horizontal: 'center' },
-        font: { color: { argb: 'FF4500' } },
+        font: { color: { argb: 'FF0000' } },
         border: borderAll,
     };
 
@@ -46,9 +46,9 @@ export const addAssortimentTable = (
 
     const titlesRow = ws.addRow(rows.titles);
     styleRowCells(titlesRow, {
-        height: 25,
+        height: 40,
         font: { bold: true },
-        alignment: { horizontal: 'center' },
+        alignment: { horizontal: 'center', vertical: 'middle' },
         border: borderAll,
     });
 

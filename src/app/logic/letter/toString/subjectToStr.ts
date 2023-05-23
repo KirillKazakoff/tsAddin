@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { selectProductSp } from '../../../stores/spsStore/select';
+import { selectSp } from '../../../stores/spsStore/select';
 import spsStore from '../../../stores/spsStore/spsStore';
 import { getSubject } from '../common/getSubject';
 
@@ -9,7 +9,7 @@ export const subjectToStrRu = () => {
 
     const subjectStr = Object.entries(subjectObj).reduce(
         (total, [productKey, sorts]) => {
-            const productSp = selectProductSp(productKey);
+            const productSp = selectSp.product(productKey);
 
             const sortsStr = sorts.join(', ');
             total = `${total}${productSp.ru.name} ${sortsStr}; `;
@@ -28,7 +28,7 @@ export const subjectToStrEng = () => {
 
     const subjectStr = Object.entries(subjectObj).reduce(
         (total, [productKey, sorts]) => {
-            const productSp = selectProductSp(productKey);
+            const productSp = selectSp.product(productKey);
 
             const sortsStr = sorts.join(', ');
             total = `${total}${productSp.eng.name} ${sortsStr}; `;

@@ -1,6 +1,6 @@
 import { Workbook } from 'exceljs';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
-import { selectTransportSp } from '../../../../stores/spsStore/select';
+import { selectSp } from '../../../../stores/spsStore/select';
 import { CellObjT } from '../../../../types/typesExcelUtils';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { ContractT } from '../groupByContractNo';
@@ -16,7 +16,7 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
     const letterHeaderStr = `Просим вас рыбопродукцию, ${
         store.isCFR
             ? `которая прибудет в п. Владивосток на ${
-                selectTransportSp().ru.name
+                selectSp.transport().ru.name
             } в адрес ${record.seller.ru.name} по следующим коносаментам:`
             : `находящуюся на хранении ${record.seller.ru.name}`
     }`;

@@ -2,6 +2,7 @@
 import { Worksheet } from 'exceljs';
 import { addAssortimentTable } from './addAssortimentTable';
 import { AssortimentT } from '../../../types/typesAssortiment';
+import exportContractStore from '../../../stores/docsStores/exportContractStore';
 
 export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) => {
     // column width setup
@@ -10,13 +11,13 @@ export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) 
     columns[1].width = 25;
     columns[2].width = 15;
     columns[3].width = 20;
-    columns[4].width = 25;
+    columns[4].width = 20;
 
     // header style and add
     const { transport, portTo } = assortiment.record;
     const rows = ws.addRows([
         [`Transport vessel ${transport.eng.name.toUpperCase()}`],
-        [`ETA ${portTo.eng.name} DATE HERE`],
+        [`ETA ${portTo.eng.name} ${exportContractStore.dischargeDate}`],
         [''],
     ]);
 

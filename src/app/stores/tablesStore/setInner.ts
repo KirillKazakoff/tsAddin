@@ -3,12 +3,7 @@ import {
     checkNotFulfilledRow,
 } from '../../logic/excel/utils/checkTable';
 import { InnerRowT } from '../../types/typesTables';
-import {
-    selectClientRuSp,
-    selectProductSp,
-    selectSellerSp,
-    selectVesselSp,
-} from '../spsStore/select';
+import { selectSp } from '../spsStore/select';
 import tablesStore from './tablesStore';
 import { initAmount } from './utils/initAmount';
 
@@ -19,8 +14,8 @@ export const setInner = (table: any[][]) => {
 
     const transformedTable = table.reduce<InnerRowT[]>((totalObj, row, index) => {
         const [
-            clientCodeName,
-            sellerCodeName,
+            client,
+            seller,
             contractNo,
             contractDate,
             vessel,
@@ -37,12 +32,12 @@ export const setInner = (table: any[][]) => {
         ] = row;
 
         const rowObj: InnerRowT = {
-            buyer: selectClientRuSp(clientCodeName),
-            seller: selectSellerSp(sellerCodeName),
+            buyer: selectSp.clientRu(client),
+            seller: selectSp.seller(seller),
             contractNo,
             contractDate,
-            vessel: selectVesselSp(vessel),
-            product: selectProductSp(product),
+            vessel: selectSp.vessel(vessel),
+            product: selectSp.product(product),
             sort,
             pack,
             konosament,
