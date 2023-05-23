@@ -11,6 +11,7 @@ import {
     selectPortZarubezhSp,
     selectProductSp,
     selectPackageSp,
+    selectSortAssortimentSp,
 } from '../spsStore/select';
 import { initAmount } from './utils/initAmount';
 
@@ -30,6 +31,7 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
         consignee: consigneeSp,
         product: selectProductSp(row.product),
         packSp: selectPackageSp(row.vessel, row.product, row.pack),
+        sortSp: selectSortAssortimentSp(row.sort, row.product),
         amount: {
             places: initAmount(row.places, 0, 0),
             placesTotal: initAmount(row.placesTotal, 3, 4),

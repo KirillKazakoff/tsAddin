@@ -9,6 +9,7 @@ import {
     PortZarubezhT,
     ProductDescriptionT,
     SellerT,
+    SortAssortimentT,
     TransportT,
     VesselT,
 } from './typesSP';
@@ -83,6 +84,7 @@ export type ExportRowT = {
     product: ProductDescriptionT;
     amount: AmountObjT;
     packSp: PackageT;
+    sortSp: SortAssortimentT;
     agreementNo: number;
     invoice: string;
     date: string;

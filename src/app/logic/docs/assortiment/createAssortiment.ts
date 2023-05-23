@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import ExcelJS from 'exceljs';
-import { AssortimentT } from './group/groupAssortiment';
 import { saveFile } from '../../excel/utils/saveFile';
 import { initAssortiment } from './initAssortiment';
+import { AssortimentT } from '../../../types/typesAssortiment';
 
 export const createAssortiment = async (assortiment: AssortimentT) => {
     try {

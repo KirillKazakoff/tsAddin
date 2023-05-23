@@ -1,18 +1,25 @@
-import { Worksheet } from 'exceljs';
+import { Style, Worksheet } from 'exceljs';
 import { styleRowCells, borderAll } from '../styleRowCells';
-import { AssortimentTableT } from './group/groupAssortiment';
-import { selectSortAssortiment } from '../../../stores/spsStore/select';
+import { AssortimentTableT } from '../../../types/typesAssortiment';
 
 /* eslint-disable no-param-reassign */
+
 export const addAssortimentTable = (
-    assortiment: AssortimentTableT,
+    table: AssortimentTableT,
     ws: Worksheet,
     rowIndex: number,
+    isSample: boolean,
 ) => {
     const {
         product, vessel, pack, blNo, seller,
-    } = assortiment.record;
-    const { places, placesTotal } = assortiment.amount;
+    } = table.record;
+    const { places, placesTotal } = table.amount;
+
+    const sampleClStyle: Partial<Style> = {
+        alignment: { horizontal: 'center' },
+        font: { color: { argb: 'FF4500' } },
+        border: borderAll,
+    };
 
     // headerInsert
     // prettier-ignore
@@ -21,18 +28,23 @@ export const addAssortimentTable = (
         pack: [`package - carton box 1/${pack} kg`],
         empty: [''],
         info: ['', '', seller.codeName, blNo],
-        titles: ['grade', 'weight', 'c/t', 'kg'],
+        titles: ['grade', 'weight', 'c/t', 'kg', 'Sampling Plan'],
     };
 
     ws.addRows([rows.product, rows.pack, rows.empty]);
-    const infoRow = ws.addRow(rows.info);
-    const titlesRow = ws.addRow(rows.titles);
 
-    styleRowCells(infoRow, {
-        height: 25,
-        font: { bold: true },
-        alignment: { horizontal: 'center' },
-    });
+    if (!isSample) {
+        const infoRow = ws.addRow(rows.info);
+        styleRowCells(infoRow, {
+            height: 25,
+            font: { bold: true },
+            alignment: { horizontal: 'center' },
+        });
+
+        rows.titles.pop();
+    }
+
+    const titlesRow = ws.addRow(rows.titles);
     styleRowCells(titlesRow, {
         height: 25,
         font: { bold: true },
@@ -41,15 +53,16 @@ export const addAssortimentTable = (
     });
 
     // tableInsert
-    assortiment.rows.forEach((row) => {
-        const sortSp = selectSortAssortiment(row.sort, row.product.codeName);
-
-        const rowTable = ws.addRow([
-            row.sort,
-            sortSp?.weight,
-            row.amount.places.str,
-            row.amount.placesTotal.str,
-        ]);
+    table.rows.forEach((row, i) => {
+        const fields = {
+            sort: row.sort,
+            weight: row?.sortSp?.weight,
+            places: row.amount.places.str,
+            placesTotal: row.amount.placesTotal.str,
+            samples: table.samples.rows[i],
+        };
+        if (!isSample) delete fields.samples;
+        const rowTable = ws.addRow(Object.values(fields));
 
         styleRowCells(rowTable, {
             height: 25,
@@ -62,9 +75,21 @@ export const addAssortimentTable = (
                 horizontal: 'right',
             };
         });
+
+        if (isSample) rowTable.getCell(5).style = sampleClStyle;
     });
 
-    const totalRow = ws.addRow(['', 'Total:', places.str, placesTotal.str]);
+    // addTotalRow
+    const totalFields = {
+        empty: '',
+        title: 'Total:',
+        places: places.str,
+        placesTotal: placesTotal.str,
+        samples: table.samples.total,
+    };
+    if (!isSample) delete totalFields.samples;
+    const totalRow = ws.addRow(Object.values(totalFields));
+
     styleRowCells(totalRow, {
         height: 25,
         border: borderAll,
@@ -72,5 +97,6 @@ export const addAssortimentTable = (
         font: { bold: true },
     });
 
+    if (isSample) totalRow.getCell(5).style = sampleClStyle;
     ws.addRows([[''], ['']]);
 };

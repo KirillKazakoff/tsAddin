@@ -37,6 +37,5 @@ export const groupAgByNo = () => {
         // console.log(copy);
     });
 
-    console.log(agreements);
     return agreements;
 };

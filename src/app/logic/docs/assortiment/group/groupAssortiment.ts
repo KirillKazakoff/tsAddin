@@ -1,66 +1,27 @@
-/* eslint-disable no-param-reassign */
+import { addToAmount } from '../../../../stores/tablesStore/utils/initAmount';
 import {
-    addToAmount,
-    initAmount,
-} from '../../../../stores/tablesStore/utils/initAmount';
-import { AmountT, ExportRowT } from '../../../../types/typesTables';
-
-export type AssortimentTableT = {
-    record: ExportRowT;
-    rows: ExportRowT[];
-    amount: {
-        places: AmountT;
-        placesTotal: AmountT;
-    };
-};
-export type AssortimentTablesT = {
-    [key: string]: AssortimentTableT;
-};
-export type AssortimentT = {
-    tables: AssortimentTablesT;
-    record: ExportRowT;
-};
-
-function getGroup<ReturnT>(
-    total: any,
-    initObj: any,
-    code: string | number,
-): ReturnT {
-    let group = total[code];
-
-    if (!group) {
-        group = initObj;
-        total[code] = group;
-    }
-    return group;
-}
+    AssortimentTablesT,
+    AssortimentTableT,
+} from '../../../../types/typesAssortiment';
+import { ExportRowT } from '../../../../types/typesTables';
+import { getGroup } from '../../../utils/getGroup';
+import { initAssortimentObj, initAssortimentTable } from '../initAssortimentTable';
 
 export const groupAssortiment = (rows: ExportRowT[]) => {
-    const grouped = rows.reduce<AssortimentTablesT>((total, row) => {
+    const tables = rows.reduce<AssortimentTablesT>((total, row) => {
         if (!row.product.eng.name.includes('crab')) return total;
 
-        const initObj: AssortimentTableT = {
-            record: row,
-            rows: [],
-            amount: {
-                places: initAmount(0, 0, 0),
-                placesTotal: initAmount(0, 1, 1),
-            },
-        };
+        const initObj = initAssortimentTable(row);
 
-        const group = getGroup<AssortimentTableT>(total, initObj, row.blNo);
+        const table = getGroup<AssortimentTableT>(total, initObj, row.blNo);
 
-        addToAmount(group.amount.places, row.amount.places.count);
-        addToAmount(group.amount.placesTotal, row.amount.placesTotal.count * 1000);
-        group.rows.push(row);
+        addToAmount(table.amount.places, row.amount.places.count);
+        addToAmount(table.amount.placesTotal, row.amount.placesTotal.count * 1000);
+        table.rows.push(row);
 
         return total;
     }, {});
 
-    const assortiment: AssortimentT = {
-        record: Object.values(grouped)[0].record,
-        tables: grouped,
-    };
-
+    const assortiment = initAssortimentObj(tables, false);
     return assortiment;
 };

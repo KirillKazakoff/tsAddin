@@ -1,15 +1,16 @@
 /* eslint-disable no-param-reassign */
 import { Worksheet } from 'exceljs';
-import { AssortimentT } from './group/groupAssortiment';
 import { addAssortimentTable } from './addAssortimentTable';
+import { AssortimentT } from '../../../types/typesAssortiment';
 
 export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) => {
     // column width setup
-    const columns = [1, 2, 3, 4].map((index) => ws.getColumn(index));
+    const columns = [1, 2, 3, 4, 5].map((index) => ws.getColumn(index));
     columns[0].width = 15;
     columns[1].width = 25;
     columns[2].width = 15;
     columns[3].width = 20;
+    columns[4].width = 25;
 
     // header style and add
     const { transport, portTo } = assortiment.record;
@@ -34,6 +35,6 @@ export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) 
     });
 
     tables.forEach((table, i) => {
-        addAssortimentTable(table, ws, i);
+        addAssortimentTable(table, ws, i, assortiment.isSample);
     });
 };

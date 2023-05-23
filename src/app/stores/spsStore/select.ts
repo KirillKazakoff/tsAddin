@@ -61,7 +61,7 @@ export const selectPackageSp = (
     return spsStore.packages[codeName];
 };
 
-export const selectSortAssortiment = (sort: string, product: string) => {
+export const selectSortAssortimentSp = (sort: string, product: string) => {
     const codeName = `${sort}${product}`.toLowerCase();
     return spsStore.sortsAssortiment[codeName];
 };

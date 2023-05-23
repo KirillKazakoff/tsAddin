@@ -7,7 +7,7 @@ import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
 const BlSection = observer(() => {
     const { onLoad, onLoadAll, blGroupsArr } = useInitBlSection();
 
-    const blList = blGroupsArr.map((group) => {
+    const blDocs = blGroupsArr.map((group) => {
         const onClick = async () => onLoad(group);
         return (
             <Doc
@@ -21,7 +21,7 @@ const BlSection = observer(() => {
     return (
         <form className='docs__form bl-form'>
             <h2 className='title bl-title'>BL</h2>
-            <ul className='docs'>{blList}</ul>
+            <ul className='docs'>{blDocs}</ul>
             <DocsDownloadBtn onClick={onLoadAll} title='Загрузить все BL' />
         </form>
     );
