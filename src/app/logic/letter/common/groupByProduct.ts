@@ -2,6 +2,7 @@
 import { addToAmount } from '../../../stores/tablesStore/utils/initAmount';
 import { ProductT, ProductionInfoT } from '../../../types/typesLetter';
 import { MateRowT } from '../../../types/typesTables';
+import { groupify } from '../../utils/getGroup';
 import { isStOff } from './isStOff';
 
 const initProduct = (tableRow: MateRowT): ProductT => {
@@ -20,11 +21,11 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
     return groupVessel.reduce<ProductionInfoT>((productionTypes, tableRow) => {
         const { product, sort, amount } = tableRow;
 
-        let productObj = productionTypes[product.codeName];
-        if (!productObj) {
-            productObj = initProduct(tableRow);
-            productionTypes[product.codeName] = productObj;
-        }
+        const productObj = groupify<ProductT>(
+            productionTypes,
+            initProduct(tableRow),
+            product.codeName,
+        );
 
         const newDetails = { sort, amount: amount.total };
 

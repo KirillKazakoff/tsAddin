@@ -1,27 +1,23 @@
 /* eslint-disable no-param-reassign */
-import { GroupedBlT } from '../../../../types/typesContract';
+import { BlGroupT, GroupedBlT } from '../../../../types/typesContract';
 import { ExportRowT } from '../../../../types/typesTables';
 import {
     addBlAmount,
     initBlAmount,
 } from '../../../../stores/tablesStore/utils/invoiceAmount';
+import { groupify } from '../../../utils/getGroup';
 
 export const groupByBl = (rows: ExportRowT[]) => {
     const blGrouped = rows.reduce<GroupedBlT>((total, row) => {
-        let group = total[row.blNo];
+        const initObj = {
+            record: row,
+            rows: [],
+            total: initBlAmount(),
+        };
+        const bl = groupify<BlGroupT>(total, initObj, row.blNo);
+        bl.rows.push(row);
 
-        if (!group) {
-            group = {
-                record: row,
-                rows: [],
-                total: initBlAmount(),
-            };
-            total[row.blNo] = group;
-        }
-
-        group.rows.push(row);
-
-        addBlAmount(group.total, row.amount, row?.packSp?.coefficient);
+        addBlAmount(bl.total, row.amount, row?.packSp?.coefficient);
         return total;
     }, {});
 

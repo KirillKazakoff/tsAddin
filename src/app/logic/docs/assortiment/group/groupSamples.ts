@@ -7,7 +7,7 @@ import {
     SamplesT,
 } from '../../../../types/typesAssortiment';
 import { ExportRowT } from '../../../../types/typesTables';
-import { getGroup } from '../../../utils/getGroup';
+import { groupify } from '../../../utils/getGroup';
 import { calcSamples } from '../calcSamples';
 import { initAssortimentTable } from '../initAssortimentTable';
 
@@ -17,7 +17,7 @@ export const groupSamples = (rows: ExportRowT[]) => {
 
         const tableCode = `${row.consignee.codeName}${row.vessel.codeName}${row.product.codeName}`;
         const initTableObj = initAssortimentTable(row);
-        const table = getGroup<AssortimentTableT>(total, initTableObj, tableCode);
+        const table = groupify<AssortimentTableT>(total, initTableObj, tableCode);
 
         // groupBySort
         const rowSameSort = table.rows.find((r) => r.sort === row.sort);
@@ -58,7 +58,7 @@ export const groupSamples = (rows: ExportRowT[]) => {
             tables: {},
         };
 
-        const assortiment = getGroup<AssortimentT>(
+        const assortiment = groupify<AssortimentT>(
             total,
             initAssortimentObj,
             table.record.consignee.codeName,

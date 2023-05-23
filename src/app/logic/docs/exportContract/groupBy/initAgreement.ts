@@ -1,7 +1,7 @@
 import {
     InvoicesT,
-    VesselGroupT,
-    ConsigneeGroupT,
+    VesselsGroupT,
+    ConsigneesGroupT,
 } from '../../../../types/typesContract';
 import { ExportRowT } from '../../../../types/typesTables';
 
@@ -30,8 +30,8 @@ export type AgreementT = {
     rows: ExportRowT[];
     productsGroupedBy: {
         invoices: InvoicesT;
-        consignees: ConsigneeGroupT;
-        vessels: VesselGroupT;
+        consignees: ConsigneesGroupT;
+        vessels: VesselsGroupT;
     };
     priceTotal: number;
 };

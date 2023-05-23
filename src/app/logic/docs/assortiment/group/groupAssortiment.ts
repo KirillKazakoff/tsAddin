@@ -4,7 +4,7 @@ import {
     AssortimentTableT,
 } from '../../../../types/typesAssortiment';
 import { ExportRowT } from '../../../../types/typesTables';
-import { getGroup } from '../../../utils/getGroup';
+import { groupify } from '../../../utils/getGroup';
 import { initAssortimentObj, initAssortimentTable } from '../initAssortimentTable';
 
 export const groupAssortiment = (rows: ExportRowT[]) => {
@@ -13,7 +13,7 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
 
         const initObj = initAssortimentTable(row);
 
-        const table = getGroup<AssortimentTableT>(total, initObj, row.blNo);
+        const table = groupify<AssortimentTableT>(total, initObj, row.blNo);
 
         addToAmount(table.amount.places, row.amount.places.count);
         addToAmount(table.amount.placesTotal, row.amount.placesTotal.count * 1000);

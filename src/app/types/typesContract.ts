@@ -42,32 +42,34 @@ export type InvoicesT = {
     [key: string]: InvoiceT;
 };
 
-export type ConsigneeGroupT = {
+export type ConsigneesGroupT = {
     [key: string]: {
         rows: ExportRowT[];
         consignee: ConsigneeT;
     };
 };
 
-type SubjectT = {
+export type SubjectT = {
     record: ExportRowT;
     total: AmountT;
 };
 
-type CostT = {
+export type CostT = {
     record: ExportRowT;
     prices: AmountT[];
 };
 // VesselGroupT
 export type VesselGroupT = {
+    subject: { [key: string]: SubjectT };
+    cost: { [key: string]: CostT };
+};
+
+export type VesselsGroupT = {
     all: {
         subject: SubjectT[];
         cost: CostT[];
     };
     byVesselGroup: {
-        [key: string]: {
-            subject: { [key: string]: SubjectT };
-            cost: { [key: string]: CostT };
-        };
+        [key: string]: VesselGroupT;
     };
 };

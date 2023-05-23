@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-export function getGroup<ReturnT>(
+export function groupify<ReturnT>(
     total: any,
     initObj: any,
     code: string | number,

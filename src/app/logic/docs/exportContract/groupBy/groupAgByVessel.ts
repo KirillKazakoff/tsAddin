@@ -3,6 +3,8 @@ import {
     addToAmount,
     initAmount,
 } from '../../../../stores/tablesStore/utils/initAmount';
+import { CostT, SubjectT, VesselGroupT } from '../../../../types/typesContract';
+import { groupify } from '../../../utils/getGroup';
 import { AgreementT } from './initAgreement';
 
 export const groupAgByVessel = (agreement: AgreementT) => {
@@ -13,38 +15,30 @@ export const groupAgByVessel = (agreement: AgreementT) => {
         const { vessel, product } = row;
 
         // getVesselGroup
-        let vesselGroup = vessels.byVesselGroup[vessel.codeName];
-        if (!vesselGroup) {
-            vesselGroup = {
-                subject: {},
-                cost: {},
-            };
-
-            vessels.byVesselGroup[vessel.codeName] = vesselGroup;
-        }
+        const initVesselGroupObj = { subject: {}, cost: {} };
+        const vesselGroup = groupify<VesselGroupT>(
+            vessels.byVesselGroup,
+            initVesselGroupObj,
+            vessel.codeName,
+        );
 
         // getSubject
-        let subject = vesselGroup.subject[product.codeName];
-        if (!subject) {
-            subject = {
-                record: row,
-                total: initAmount(0, 3, 4),
-            };
-
-            vesselGroup.subject[product.codeName] = subject;
-        }
+        const initSubjectObj = { record: row, total: initAmount(0, 3, 4) };
+        const subject = groupify<SubjectT>(
+            vesselGroup.subject,
+            initSubjectObj,
+            product.codeName,
+        );
         addToAmount(subject.total, row.amount.placesTotal.count);
 
         // getCost
-        let cost = vesselGroup.cost[product.codeName];
-        if (!cost) {
-            cost = {
-                record: row,
-                prices: [],
-            };
+        const initCostObj = { record: row, prices: [] };
+        const cost = groupify<CostT>(
+            vesselGroup.cost,
+            initCostObj,
+            product.codeName,
+        );
 
-            vesselGroup.cost[product.codeName] = cost;
-        }
         const isSamePrice = cost.prices.some(
             (price) => price.count === row.amount.price.count,
         );

@@ -5,6 +5,7 @@ import {
     initAmount,
 } from '../../../stores/tablesStore/utils/initAmount';
 import { InnerRowT } from '../../../types/typesTables';
+import { groupify } from '../../utils/getGroup';
 
 const initContract = (row: InnerRowT) => {
     const rows: InnerRowT[] = [];
@@ -21,14 +22,11 @@ export type ContractsT = { [key: string]: ContractT };
 
 export const groupByContractNo = () => {
     const contracts = tablesStore.innerT.reduce<ContractsT>((total, row) => {
-        const { contractNo } = row;
-        let contract = total[contractNo];
-
-        if (!contract) {
-            contract = initContract(row);
-            total[contractNo] = contract;
-        }
-
+        const contract = groupify<ContractT>(
+            total,
+            initContract(row),
+            row.contractNo,
+        );
         contract.rows.push(row);
 
         addToAmount(contract.priceTotal, row.amount.priceTotal.count);
