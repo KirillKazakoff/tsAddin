@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
+import letterStore from '../../../stores/letterStore/letterStore';
 import { selectSp } from '../../../stores/spsStore/select';
-import spsStore from '../../../stores/spsStore/spsStore';
 import { getSubject } from '../common/getSubject';
 
 export const subjectToStrRu = () => {
-    const { transport } = spsStore;
+    const transport = letterStore.fields.transport.ru.name;
     const subjectObj = getSubject();
 
     const subjectStr = Object.entries(subjectObj).reduce(
@@ -19,11 +19,11 @@ export const subjectToStrRu = () => {
         '',
     );
 
-    return `Предложение ${subjectStr} ${transport.ru.name}`;
+    return `Предложение ${subjectStr} ${transport}`;
 };
 
 export const subjectToStrEng = () => {
-    const { transport } = spsStore;
+    const transport = letterStore.fields.transport.eng.name;
     const subjectObj = getSubject();
 
     const subjectStr = Object.entries(subjectObj).reduce(
@@ -38,5 +38,5 @@ export const subjectToStrEng = () => {
         '',
     );
 
-    return `Offer ${subjectStr} ${transport.eng.name}`;
+    return `Offer ${subjectStr} ${transport}`;
 };

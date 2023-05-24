@@ -1,20 +1,25 @@
-import { checkEmptyTable } from '../../../logic/excel/utils/checkTable';
-import { transportNotFound } from '../../pageStatusStore.ts/pageMessages';
-import pageStatusStore from '../../pageStatusStore.ts/pageStatusStore';
+/* eslint-disable no-param-reassign */
+import { TransportT, TransportsT } from '../../../types/typesSP';
 import spsStore from '../spsStore';
 
-export const setTransport = (mateValues: any[][], dictionaryRange: any[][]) => {
-    const isEmptyMates = checkEmptyTable(mateValues);
-    if (isEmptyMates) return;
+export const setTransports = (spRange: any[][]) => {
+    const transports = spRange.reduce<TransportsT>((total, row) => {
+        const [codeName, nameEng, id] = row;
 
-    // get transport cell from first table row
-    const transportMate = mateValues[1][4];
+        const rowObj: TransportT = {
+            codeName,
+            eng: {
+                name: nameEng,
+            },
+            ru: {
+                name: codeName,
+            },
+            id,
+        };
 
-    const transport = dictionaryRange.find((row) => row[0] === transportMate);
-    if (!transport) {
-        pageStatusStore.setPageStatus(transportNotFound());
-    }
+        total[codeName] = rowObj;
+        return total;
+    }, {});
 
-    const [nameRu, nameEng, id] = transport;
-    spsStore.setSp.transport({ eng: { name: nameEng }, ru: { name: nameRu }, id });
+    spsStore.setSp.transports(transports);
 };

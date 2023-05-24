@@ -11,7 +11,7 @@ import { setPortsZarubezh } from '../../stores/spsStore/set/setPortsZarubezh';
 import { setProduction } from '../../stores/spsStore/set/setProduction';
 import { setSellers } from '../../stores/spsStore/set/setSellers';
 import { setSortsAssortiment } from '../../stores/spsStore/set/setSortsAssortiment';
-import { setTransport } from '../../stores/spsStore/set/setTransport';
+import { setTransports } from '../../stores/spsStore/set/setTransport';
 import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { setExportStorage } from '../../stores/tablesStore/setExportStorage';
@@ -68,7 +68,7 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     setPortsRu(spPortsRuRange.values);
     setPackages(spPackageRange.values);
     setSortsAssortiment(spSortAssortiment.values);
-    setTransport(mateRange.values, spTransportRange.values);
+    setTransports(spTransportRange.values);
 
     setExport(exportRange.values);
     setExportStorage(exportStorageRange.values);

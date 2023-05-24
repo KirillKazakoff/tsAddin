@@ -4,6 +4,7 @@ import {
     checkNotFulfilledRow,
 } from '../../logic/excel/utils/checkTable';
 import { MateRowT } from '../../types/typesTables';
+import letterStore from '../letterStore/letterStore';
 import { selectSp } from '../spsStore/select';
 import tablesStore from './tablesStore';
 import { initAmount } from './utils/initAmount';
@@ -12,7 +13,7 @@ export const setMates = (table: any[][]) => {
     table.shift();
     if (checkEmptyTable(table)) return;
 
-    const transformedTable = table.reduce((totalObj, row, index) => {
+    const mates = table.reduce<MateRowT[]>((totalObj, row, index) => {
         const [
             reice,
             konosament,
@@ -53,5 +54,6 @@ export const setMates = (table: any[][]) => {
         return totalObj;
     }, []);
 
-    tablesStore.setTable.mates(transformedTable);
+    tablesStore.setTable.mates(mates);
+    letterStore.setField.transport(mates[0].transport);
 };

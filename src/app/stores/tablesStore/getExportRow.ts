@@ -12,7 +12,7 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
         bankSeller: selectSp.bankProdavec(contractSp?.bankSeller),
         agent: selectSp.agent(row.agent),
         vessel: selectSp.vessel(row.vessel),
-        transport: selectSp.transport(),
+        transport: selectSp.transport(row.transport),
         portFrom: selectSp.portTamozhnya(row.portFrom),
         portTo: selectSp.portZarubezh(row.portTo),
         consignee: consigneeSp,

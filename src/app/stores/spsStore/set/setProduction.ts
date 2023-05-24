@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
-import { ProductionT, ProductDescriptionT } from '../../../types/typesSP';
+import { ProductionsT, ProductionT } from '../../../types/typesSP';
 import spsStore from '../spsStore';
 
 export const setProduction = (spRange: any[][]) => {
-    const production = spRange.reduce<ProductionT>((totalObj, row) => {
+    const production = spRange.reduce<ProductionsT>((total, row) => {
         const [
             fullNameRu,
             nameEng,
@@ -15,7 +15,7 @@ export const setProduction = (spRange: any[][]) => {
         ] = row;
         const codeName = codeNameUncased.toLowerCase();
 
-        const rowObj: ProductDescriptionT = {
+        const rowObj: ProductionT = {
             codeName,
             eng: {
                 name: nameEng,
@@ -29,8 +29,8 @@ export const setProduction = (spRange: any[][]) => {
             standart: standart || 'Нет стандарта',
         };
 
-        totalObj[codeName] = rowObj;
-        return totalObj;
+        total[codeName] = rowObj;
+        return total;
     }, {});
 
     spsStore.setSp.production(production);

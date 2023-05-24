@@ -11,7 +11,6 @@ export const MainRoute = observer(() => {
     useInitExcel();
 
     useEffect(() => {
-        console.log(statusType);
         if (statusType !== 'ok') {
             navigate('/pageStatus');
         }

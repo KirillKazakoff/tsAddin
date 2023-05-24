@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import _ from 'lodash';
 import { useEffect } from 'react';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { createPortLetter } from './createPortLetter';

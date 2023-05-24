@@ -1,5 +1,5 @@
-import { ProductDescriptionT, VesselT } from './typesSP';
-import { AmountT } from './typesTables';
+import { ProductionT, VesselT } from './typesSP';
+import { AmountT, MateRowT } from './typesTables';
 
 // DictionaryTypes
 export type DictionaryT = {
@@ -14,7 +14,7 @@ export type DictionaryT = {
 
 // ProductionInfoTypes
 export type ProductInfoT = {
-    desc: ProductDescriptionT;
+    desc: ProductionT;
     producer: VesselT;
 };
 

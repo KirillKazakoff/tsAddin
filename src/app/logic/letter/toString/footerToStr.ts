@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-useless-escape */
 import letterStore from '../../../stores/letterStore/letterStore';
-import spsStore from '../../../stores/spsStore/spsStore';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import { PortZarubezhT } from '../../../types/typesSP';
 
@@ -20,7 +19,7 @@ export const footerToStrEng = () => {
         terms, arrivalForeign, arrivalVld, payment,
     } = letterStore.fields;
     const port = letterStore.fields.port as PortZarubezhT;
-    const transport = spsStore.transport.eng.name;
+    const transport = letterStore.fields.transport.eng.name;
 
     let weightInformStr = 'Send you weight reports in attached files.';
     if (terms === 'EXW') {

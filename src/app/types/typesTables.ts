@@ -7,7 +7,7 @@ import {
     PackageT,
     PortTamozhnyaT,
     PortZarubezhT,
-    ProductDescriptionT,
+    ProductionT,
     SellerT,
     SortAssortimentT,
     TransportT,
@@ -35,7 +35,7 @@ export type MateRowT = {
     transport: string;
     company: string;
     vessel: VesselT;
-    product: ProductDescriptionT;
+    product: ProductionT;
     amount: AmountObjT;
     pack: number;
     sort: string;
@@ -81,7 +81,7 @@ export type ExportRowT = {
     portFrom: PortTamozhnyaT;
     portTo: PortZarubezhT;
     consignee: ConsigneeT;
-    product: ProductDescriptionT;
+    product: ProductionT;
     amount: AmountObjT;
     packSp: PackageT;
     sortSp: SortAssortimentT;
@@ -101,8 +101,9 @@ export type InnerRowT = {
     seller: SellerT;
     contractNo: number;
     contractDate: string;
+    transport: TransportT;
     vessel: VesselT;
-    product: ProductDescriptionT;
+    product: ProductionT;
     sort: string;
     pack: string;
     konosament: string;

@@ -1,4 +1,6 @@
+// Transport
 export type TransportT = {
+    codeName: string;
     eng: {
         name: string;
     };
@@ -6,6 +8,10 @@ export type TransportT = {
         name: string;
     };
     id: string;
+};
+
+export type TransportsT = {
+    [key: string]: TransportT;
 };
 
 // Vessels
@@ -25,7 +31,7 @@ export type VesselsT = {
 };
 
 // Production
-export type ProductDescriptionT = {
+export type ProductionT = {
     codeName: string;
     eng: {
         name: string;
@@ -40,8 +46,8 @@ export type ProductDescriptionT = {
     expirationDate: string;
 };
 
-export type ProductionT = {
-    [key: string]: ProductDescriptionT;
+export type ProductionsT = {
+    [key: string]: ProductionT;
 };
 
 // Package

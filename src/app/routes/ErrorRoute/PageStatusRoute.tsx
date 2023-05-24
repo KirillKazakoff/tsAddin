@@ -14,8 +14,6 @@ export const PageStatusRoute = observer(() => {
     };
 
     useEffect(() => {
-        console.log('hey');
-
         if (statusType === 'ok') {
             navigate(-1);
         }

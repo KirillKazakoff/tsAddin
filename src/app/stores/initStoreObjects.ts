@@ -7,6 +7,7 @@ import {
 } from '../types/typesSP';
 
 export const initTransport = (): TransportT => ({
+    codeName: '',
     eng: { name: '' },
     ru: { name: '' },
     id: '',

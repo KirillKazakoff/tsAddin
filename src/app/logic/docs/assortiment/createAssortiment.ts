@@ -5,14 +5,10 @@ import { initAssortiment } from './initAssortiment';
 import { AssortimentT } from '../../../types/typesAssortiment';
 
 export const createAssortiment = async (assortiment: AssortimentT) => {
-    try {
-        const book = new ExcelJS.Workbook();
-        const ws = book.addWorksheet('assortiment');
-        initAssortiment(assortiment, ws);
+    const book = new ExcelJS.Workbook();
+    const ws = book.addWorksheet('assortiment');
+    initAssortiment(assortiment, ws);
 
-        const { transport } = assortiment.record;
-        await saveFile(book, `Assortiment ${transport.eng.name}`);
-    } catch (e) {
-        console.log(e);
-    }
+    const { transport } = assortiment.record;
+    await saveFile(book, `Assortiment ${transport.eng.name}`);
 };

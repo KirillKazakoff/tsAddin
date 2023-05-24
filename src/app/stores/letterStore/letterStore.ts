@@ -11,6 +11,7 @@ class LetterStore {
     }
 
     setField = {
+        transport: (value: string) => (this.fields.transport = selectSp.transport(value)),
         payment: (value: string) => (this.fields.payment = value),
         arrivalVld: (value: string) => (this.fields.arrivalVld = value),
         arrivalForeign: (value: string) => (this.fields.arrivalForeign = value),

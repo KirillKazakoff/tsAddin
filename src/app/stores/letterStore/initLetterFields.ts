@@ -1,5 +1,5 @@
-import { PortRuT, PortZarubezhT } from '../../types/typesSP';
-import { initPortZarubezh } from '../initStoreObjects';
+import { PortRuT, PortZarubezhT, TransportT } from '../../types/typesSP';
+import { initPortZarubezh, initTransport } from '../initStoreObjects';
 
 export const initLetterFields = () => {
     const mode = process.env.NODE_ENV;
@@ -12,6 +12,7 @@ export const initLetterFields = () => {
         terms: string;
         ground: string;
         port: PortRuT | PortZarubezhT;
+        transport: TransportT;
     };
 
     const initFields: LetterFieldsT = {
@@ -22,6 +23,7 @@ export const initLetterFields = () => {
         terms: '',
         ground: '',
         port: initPortZarubezh(),
+        transport: initTransport(),
     };
     const debugFields: LetterFieldsT = {
         arrivalVld: '18.03.23',
@@ -31,6 +33,7 @@ export const initLetterFields = () => {
         terms: 'CFR',
         ground: 'Okhotsk Sea',
         port: initPortZarubezh(),
+        transport: initTransport(),
     };
 
     return mode === 'production' ? initFields : debugFields;

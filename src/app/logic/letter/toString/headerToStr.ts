@@ -1,10 +1,9 @@
 import letterStore from '../../../stores/letterStore/letterStore';
-import spsStore from '../../../stores/spsStore/spsStore';
 import { PortZarubezhT } from '../../../types/typesSP';
 import { getVesselsStrEng, getVesselsStrRu } from '../common/getFilteredVessels';
 
 export const headerToStrRu = () => {
-    const { transport } = spsStore;
+    const { transport } = letterStore.fields;
     const transportStr = `Продукция отгружена с ${transport.ru.name}`;
     const vesselsStr = getVesselsStrRu().join('; ');
     const greeting = 'Добрый день!';
@@ -14,7 +13,7 @@ export const headerToStrRu = () => {
 };
 
 export const headerToStrEng = () => {
-    const { transport } = spsStore;
+    const { transport } = letterStore.fields;
     const port = letterStore.fields.port as PortZarubezhT;
     const vesselsStr = getVesselsStrEng().join(';  ');
 
