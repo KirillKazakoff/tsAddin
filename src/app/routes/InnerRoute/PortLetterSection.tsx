@@ -10,9 +10,11 @@ import { Doc } from '../../components/Doc';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 
 export const PortLetterSection = observer(() => {
+    const initObj = useInitPortLetter();
+    if (!initObj) return null;
     const {
         contracts, onLoad, onLoadAll, setField, store, toggle,
-    } = useInitPortLetter();
+    } = initObj;
 
     const letterList = contracts.map((contract) => {
         const { buyer, contractNo } = contract.record;

@@ -8,9 +8,11 @@ import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import SelectTerms from '../../components/Select/SelectTerms';
 
 export const RequestSection = observer(() => {
+    const initObj = useInitRequestSection();
+    if (!initObj) return null;
     const {
         contracts, onLoad, onLoadAll, setField, portTamozhnya, portRu, terms,
-    } = useInitRequestSection();
+    } = initObj;
 
     const contractList = contracts.map((contract) => {
         const { contractNo } = contract.record;

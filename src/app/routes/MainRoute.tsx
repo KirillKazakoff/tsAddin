@@ -3,12 +3,15 @@ import React, { useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import excelSyncStore from '../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../stores/pageStatusStore.ts/pageStatusStore';
+import { useInitExcel } from '../logic/excel/useInitExcel';
 
 export const MainRoute = observer(() => {
     const { statusType } = pageStatusStore.status;
     const navigate = useNavigate();
+    useInitExcel();
 
     useEffect(() => {
+        console.log(statusType);
         if (statusType !== 'ok') {
             navigate('/pageStatus');
         }

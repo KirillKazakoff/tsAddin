@@ -7,7 +7,9 @@ import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { Doc } from '../../components/Doc';
 
 export const ExportContractSection = observer(() => {
-    const { onLoad, setField, agreements } = useInitContractSection();
+    const initObj = useInitContractSection();
+    if (!initObj) return null;
+    const { onLoad, setField, agreements } = initObj;
 
     const agreementsHtml = agreements.map((agreement) => {
         const { agreementNo } = agreement.record;

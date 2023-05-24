@@ -5,7 +5,6 @@ import { initStoresOffer } from './initStoresOffer';
 export const initStores = async (context: Excel.RequestContext) => {
     context.workbook.load('name');
     await context.sync();
-
     const isOffer = context.workbook.name.includes('Письмо суточные');
 
     if (isOffer) {

@@ -5,7 +5,9 @@ import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
 
 const BlSection = observer(() => {
-    const { onLoad, onLoadAll, blGroupsArr } = useInitBlSection();
+    const initObj = useInitBlSection();
+    if (!initObj) return null;
+    const { blGroupsArr, onLoad, onLoadAll } = initObj;
 
     const blDocs = blGroupsArr.map((group) => {
         const onClick = async () => onLoad(group);

@@ -4,8 +4,9 @@ import { useEffect } from 'react';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { createPortLetter } from './createPortLetter';
 import { ContractT, groupByContractNo } from './groupByContractNo';
+import { tryCatch } from '../../excel/utils/tryCatch';
 
-export const useInitPortLetter = () => {
+const initPortLetter = () => {
     const { store, setField, toggle } = portLetterStore;
 
     const contracts = Object.values(groupByContractNo());
@@ -18,11 +19,6 @@ export const useInitPortLetter = () => {
         await Promise.all(contracts.map((contract) => onLoad(contract)));
     };
 
-    useEffect(() => {
-        setField.port('ДВ-Порт');
-        setField.podpisant('Котов Н.М.');
-    }, []);
-
     return {
         contracts,
         onLoad,
@@ -31,4 +27,15 @@ export const useInitPortLetter = () => {
         setField,
         toggle,
     };
+};
+
+export const useInitPortLetter = () => {
+    const { setField } = portLetterStore;
+
+    useEffect(() => {
+        setField.port('ДВ-Порт');
+        setField.podpisant('Котов Н.М.');
+    }, []);
+
+    return tryCatch<typeof initPortLetter>(initPortLetter);
 };

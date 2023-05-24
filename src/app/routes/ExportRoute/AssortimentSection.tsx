@@ -8,7 +8,10 @@ import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const AssortimentSection = observer(() => {
     const { setField } = exportContractStore;
-    const { onLoad, onLoadAll, samplesArr } = useInitAssortimentSection();
+    const initObj = useInitAssortimentSection();
+    if (!initObj) return null;
+    const { onLoad, onLoadAll, samplesArr } = initObj;
+
     const sampleDocs = samplesArr.map((sample) => {
         const consignee = sample.record.consignee.codeName;
         return (
@@ -38,13 +41,13 @@ export const AssortimentSection = observer(() => {
                 />
 
                 <div className='assortiment__body'>
-                    <h3>Ассортимент</h3>
+                    <h3>Ассортимент:</h3>
                     <DocsDownloadBtn
                         onClick={onLoad.assortiment}
                         title='Загрузить ассортимент'
                     />
 
-                    <h3>Образцы</h3>
+                    <h3>Образцы:</h3>
                     <ul className='docs'>{sampleDocs}</ul>
                     <DocsDownloadBtn
                         onClick={onLoadAll}

@@ -6,8 +6,9 @@ import { groupAssortiment } from './group/groupAssortiment';
 import { AssortimentT } from '../../../types/typesAssortiment';
 import { groupSamples } from './group/groupSamples';
 import { createSample } from './createSample';
+import { tryCatch } from '../../excel/utils/tryCatch';
 
-export const useInitAssortimentSection = () => {
+const initAssortimentSection = () => {
     const { exportStorageT, exportT } = tablesStore;
     const rows = _.cloneDeep([...exportStorageT, ...exportT]);
 
@@ -24,4 +25,8 @@ export const useInitAssortimentSection = () => {
     };
 
     return { onLoad, onLoadAll, samplesArr };
+};
+
+export const useInitAssortimentSection = () => {
+    return tryCatch<typeof initAssortimentSection>(initAssortimentSection);
 };

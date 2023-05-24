@@ -52,7 +52,6 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     const spSortAssortiment = initRange('SPSortAssortiment', 'SPSortAssortiment');
 
     await initExcelImages(context);
-    context.workbook.load('name');
     await context.sync();
 
     setSellers(spSellersRange.values);
