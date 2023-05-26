@@ -12,11 +12,7 @@ export const groupAgByNo = () => {
     const table = exportContractStore.getCurrentTable();
 
     const agreements = table.reduce<AgreementsT>((total, row) => {
-        const agreement = groupify<AgreementT>(
-            total,
-            initAgreement(row),
-            row.agreementNo,
-        );
+        const agreement = groupify<AgreementT>(total, initAgreement(row), row.id);
 
         const clonedRow = _.cloneDeep(row);
         if (row.msc) setMSC(clonedRow);

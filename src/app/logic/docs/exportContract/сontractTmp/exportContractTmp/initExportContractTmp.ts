@@ -26,4 +26,11 @@ export const initExportContractTmp: InitExportContractTmp = async (
 
     initExportContractAddreses(utils, agreement);
     utils.getRow('Доставка_заголовок', -1).addPageBreak();
+
+    if (agreement.rows.length === 1) {
+        ws.pageSetup.fitToHeight = 1;
+        ws.pageSetup.fitToWidth = 1;
+        ws.pageSetup.fitToPage = true;
+        ws.pageSetup.printArea = 'A1:B45';
+    }
 };

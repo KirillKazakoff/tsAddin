@@ -94,6 +94,7 @@ export type ExportRowT = {
     pack: number;
     msc: string;
     index: string;
+    id: string;
 };
 
 export type InnerRowT = {

@@ -13,6 +13,7 @@ import { initExportStorageContractTmp } from './сontractTmp/exportStorageContra
 export const createExportContractDoc = async (agreement: AgreementT) => {
     const { invoices } = agreement.productsGroupedBy;
     const { operation } = exportContractStore;
+    const { agreementNo, id } = agreement.record;
 
     // getPathToTemplate
     let path = operation === 'export'
@@ -43,6 +44,6 @@ export const createExportContractDoc = async (agreement: AgreementT) => {
         initExportContractTmp(book, agreement);
     }
 
-    const fileName = `Доп №${agreement.record.agreementNo}`;
+    const fileName = `Доп №${agreementNo} (${id})`;
     await saveFile(book, fileName);
 };

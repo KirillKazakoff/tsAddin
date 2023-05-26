@@ -33,6 +33,7 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
         sort: row.sort,
         pack: row.pack,
         msc: row.msc,
+        id: row.id,
         index: row.index.toString(),
     };
 };

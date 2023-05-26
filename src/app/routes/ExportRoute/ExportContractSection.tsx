@@ -12,14 +12,14 @@ export const ExportContractSection = observer(() => {
     const { onLoad, setField, agreements } = initObj;
 
     const agreementsHtml = agreements.map((agreement) => {
-        const { agreementNo } = agreement.record;
+        const { id } = agreement.record;
         const onClick = async () => onLoad(agreement);
 
         return (
             <Doc
                 onClick={onClick}
-                title={`№ ${agreementNo}`}
-                key={agreementNo}
+                title={`№ ${id}`}
+                key={id}
                 cls={'export-contract'}
             />
         );
