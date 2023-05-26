@@ -7,7 +7,11 @@ import { isNumber } from '../../utils/isNumber';
 
 export const checkEmptyTable = (table: any[][]) => {
     const check = table[0].every(
-        (value) => !value || value === '-' || value === ' ',
+        (value) => !value
+            || value === '-'
+            || value === ' '
+            || value === '-M'
+            || value === '-T',
     );
     return check;
 };
