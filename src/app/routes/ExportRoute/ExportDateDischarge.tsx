@@ -4,7 +4,8 @@ import Input from '../../components/Input';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const ExportDateDischarge = observer(() => {
-    const portName = exportContractStore.getCurrentTable()[0].portTo.eng.name;
+    const portName = exportContractStore.getCurrentTable()[0]?.portTo?.eng?.name;
+    if (!portName) return null;
     const title = `ETA ${portName}:`;
 
     return (
