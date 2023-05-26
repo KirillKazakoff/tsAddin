@@ -4,11 +4,13 @@ import { getCellByName, getCellsObj } from './getCell';
 
 export const setCellDouble = (
     ws: Worksheet,
-    offset: number,
+    offsetCol: number,
     setObj: CellObjDoubleT,
 ) => {
-    const { cell, eng, ru } = setObj;
-    const cellObj = getCellsObj(ws, offset, cell);
+    const {
+        cell, eng, ru, offsetRow,
+    } = setObj;
+    const cellObj = getCellsObj(ws, offsetCol, cell, offsetRow);
 
     cellObj.cellEng.value = eng;
     cellObj.cellRus.value = ru;
@@ -16,9 +18,9 @@ export const setCellDouble = (
 };
 
 export const setCell = (ws: Worksheet, setObj: CellObjT) => {
-    const { cell, value } = setObj;
+    const { cell, value, offsetRow } = setObj;
 
-    const cellObj = getCellByName(ws, cell);
+    const cellObj = getCellByName(ws, cell, offsetRow);
     cellObj.value = value;
     return cellObj;
 };

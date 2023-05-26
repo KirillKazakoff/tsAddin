@@ -3,6 +3,7 @@ import { initExcelUtilsDouble } from '../../../../excel/utils/excelUtilsObj/init
 import { initExportContractAddreses } from '../initExportContractAddreses';
 import { initExportContractCost } from './initExportContractCost';
 import { initExportContractDelivery } from './initExportContractDelivery';
+import { initExportContractDeliveryZarubino } from './initExportContractDeliveryZarubino';
 import { initExportContractHeader } from './initExportContractHeader';
 import { initExportContractSubject } from './initExportContractSubject';
 
@@ -16,8 +17,13 @@ export const initExportContractTmp: InitExportContractTmp = async (
     initExportContractHeader(utils, agreement);
     initExportContractSubject(utils, agreement);
     initExportContractCost(utils, agreement);
-    initExportContractDelivery(utils, agreement);
-    initExportContractAddreses(utils, agreement);
 
+    if (agreement.record.terms === 'FCA') {
+        initExportContractDeliveryZarubino(utils, agreement);
+    } else {
+        initExportContractDelivery(utils, agreement);
+    }
+
+    initExportContractAddreses(utils, agreement);
     utils.getRow('Доставка_заголовок', -1).addPageBreak();
 };

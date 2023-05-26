@@ -3,8 +3,10 @@ import exportContractStore from '../../../../../stores/docsStores/exportContract
 import { InvoiceT } from '../../../../../types/typesContract';
 import { initExcelUtils } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
-import { initComInvoiceEXW } from './initComInvoiceEXW';
-import { initInvoiceBlRows } from './initInvoiceBlRows';
+import { initComInvoiceDeparture } from './initComInvoiceDeparture';
+import { initInvoiceRows } from './initInvoiceRows';
+import { initComInvoiceFooter } from './initComInvoiceFooter';
+import { initInvoiceRowsFCA } from './initInvoiceRowsFCA';
 
 export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const utils = initExcelUtils(ws);
@@ -38,6 +40,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_куда', value: `${portTo.eng.name}, ${portTo.eng.country}` },
         { cell: 'Инвойс_откуда', value: portFrom.eng.name },
     ];
+
     // prettier-ignore
     const cellsEng = [
         { cell: 'Инвойс_продавец', value: seller.eng.name },
@@ -61,6 +64,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_подвал_места', value: `${places.str} PCS /` },
         { cell: 'Инвойс_подвал_всего', value: `${placesTotal.str} tn` },
         { cell: 'Инвойс_подвал_сумма', value: `${priceTotal.str} USD` },
+
         { cell: 'Инвойс_банк_получателя', value: `Beneficiary Bank: ${bankSeller.eng.name}` },
         { cell: 'Инвойс_банк_получателя_адрес', value: bankSeller.adress },
         { cell: 'Инвойс_банк_получателя_свифт', value: `SWIFT: ${bankSeller.swift}` },
@@ -102,6 +106,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_подвал_места_п', value: `${places.str} мест /` },
         { cell: 'Инвойс_подвал_всего_п', value: `${placesTotal.str} тн` },
         { cell: 'Инвойс_подвал_сумма_п', value: `${priceTotal.str} $` },
+
         { cell: 'Инвойс_банк_получателя_п', value: `Beneficiary Bank: ${bankSeller.eng.name}` },
         { cell: 'Инвойс_банк_получателя_адрес_п', value: bankSeller.adress },
         { cell: 'Инвойс_банк_получателя_свифт_п', value: `SWIFT: ${bankSeller.swift}` },
@@ -121,9 +126,21 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         }
     });
 
-    initComInvoiceEXW([...engDepartureCells, ...ruDepartureCells], utils, terms);
+    // need refactor this functions to transform invoice
+    // init terms-depended parts
+    initComInvoiceDeparture(
+        [...engDepartureCells, ...ruDepartureCells],
+        utils,
+        terms,
+    );
+    initComInvoiceFooter(invoice, utils);
+    //
 
-    initInvoiceBlRows(utils, invoice);
+    if (invoice.agreement.record.terms === 'FCA') {
+        initInvoiceRowsFCA(utils, invoice);
+    } else {
+        initInvoiceRows(utils, invoice);
+    }
 
     return cells;
 };

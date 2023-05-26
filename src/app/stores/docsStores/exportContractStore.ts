@@ -7,7 +7,7 @@ import { selectSp } from '../spsStore/select';
 
 class ExportContractStore {
     podpisant = initPodpisant();
-    operation: OperationT = 'export_storage';
+    operation: OperationT = 'export';
     dischargeDate = '';
 
     constructor() {

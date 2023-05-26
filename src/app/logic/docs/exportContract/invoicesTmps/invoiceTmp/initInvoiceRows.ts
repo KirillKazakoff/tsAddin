@@ -2,7 +2,7 @@
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { alignmentCenter, fontDefault, styleRowCells } from '../../../styleRowCells';
 
-export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
+export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
     const { ws } = utils;
     const { productGroups } = invoice;
 
@@ -15,7 +15,6 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
         Object.values(productGroups).forEach((group, i) => {
             const r = group.record;
             const { places, placesTotal, priceTotal } = group.total;
-
             const { price } = r.amount;
 
             // there are two empty cols implemented for borders
@@ -42,10 +41,8 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
                 cols.priceTotal = `${priceTotal.str} $`;
             }
 
-            let amountCellCount = 6;
             if (ws.name.includes('Noncom')) {
                 delete cols.vessel;
-                amountCellCount = 5;
             }
             const rowArr = Object.values(cols);
 
@@ -66,15 +63,6 @@ export const initInvoiceBlRows: InitInvoicePartT = (utils, invoice) => {
             };
             row.getCell(row.actualCellCount).border = {
                 right: { style: 'thin' },
-            };
-            // styleAmountCells
-            row.getCell(amountCellCount).style.alignment = {
-                vertical: 'middle',
-                horizontal: 'right',
-            };
-            row.getCell(amountCellCount + 1).style.alignment = {
-                vertical: 'middle',
-                horizontal: 'left',
             };
         });
     });

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useInitAssortimentSection } from '../../logic/docs/assortiment/useInitAssortimentSection';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
@@ -23,22 +23,18 @@ export const AssortimentSection = observer(() => {
         );
     });
 
-    useEffect(() => {
-        // onLoad.assortiment();
-    }, []);
-
     const dateTitle = `ETA ${samplesArr[0].record.portTo.eng.name}:`;
 
     return (
         <form className='docs__form assortiment-form'>
             <h2>Ассортимент и Образцы</h2>
             <div className='assortiment__wrapper'>
-                <Input
+                {/* <Input
                     title={dateTitle}
                     placeholder={dateTitle}
                     setter={setField.dischargeDate}
                     value={exportContractStore.dischargeDate}
-                />
+                /> */}
 
                 <div className='assortiment__body'>
                     <h3>Ассортимент:</h3>

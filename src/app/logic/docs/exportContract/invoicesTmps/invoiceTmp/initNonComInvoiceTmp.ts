@@ -3,7 +3,7 @@ import exportContractStore from '../../../../../stores/docsStores/exportContract
 import { InvoiceT } from '../../../../../types/typesContract';
 import { initExcelUtils } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
-import { initInvoiceBlRows } from './initInvoiceBlRows';
+import { initInvoiceRows } from './initInvoiceRows';
 
 export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const utils = initExcelUtils(ws);
@@ -93,6 +93,6 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         utils.setCell(cell);
     });
 
-    initInvoiceBlRows(utils, invoice);
+    initInvoiceRows(utils, invoice);
     return cells;
 };

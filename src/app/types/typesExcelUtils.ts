@@ -6,8 +6,8 @@ import { MergeSettingsT } from '../logic/excel/utils/excelUtilsObj/mergeCells';
 import { LanguageT } from './typesLetter';
 import { InvoicesT, InvoiceT } from './typesContract';
 
-export type GetRowBoundT = (cellName: string, offset: number) => Row;
-export type DeleteRowBoundT = (cellName: string) => void;
+export type GetRowBoundT = (cellName: string, offsetRow: number) => Row;
+export type DeleteRowBoundT = (cellName: string, offsetRow?: number) => void;
 export type MergeCellsBoundT = (settings: MergeSettingsT) => void;
 
 // Cell utils
@@ -22,6 +22,7 @@ export type CellObjDoubleT = {
     cell: string;
     eng: string;
     ru: string;
+    offsetRow?: number;
 };
 
 export type SetCellDoubleBoundT = (setObj: CellObjDoubleT) => CellDouble;
@@ -41,6 +42,7 @@ export type GetCellBoundT = (name: string) => Cell;
 export type CellObjT = {
     cell: string;
     value: string;
+    offsetRow?: number;
 };
 export type SetCellBoundT = (setObj: CellObjT) => Cell;
 export type CellUtilsT = {

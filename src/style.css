@@ -136,7 +136,7 @@ b {
 
 /* .assortiment */
 .assortiment-form {
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 /* fields-wrapper */
@@ -148,4 +148,9 @@ b {
 
 .option--disabled {
     display: none;
+}
+
+.export-section__date {
+    margin-top: 40px;
+    margin-bottom: 30px;
 }

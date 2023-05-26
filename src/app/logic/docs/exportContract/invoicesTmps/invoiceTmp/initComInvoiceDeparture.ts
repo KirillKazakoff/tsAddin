@@ -1,6 +1,6 @@
 import { CellObjT, CellUtilsT } from '../../../../../types/typesExcelUtils';
 
-export const initComInvoiceEXW = (
+export const initComInvoiceDeparture = (
     cells: CellObjT[],
     utils: CellUtilsT,
     terms: string,
@@ -21,5 +21,11 @@ export const initComInvoiceEXW = (
             cell: 'Инвойс_декларация',
             value: 'Temporary Customs Declaration',
         });
+    }
+    if (terms === 'FCA') {
+        utils.setCell({ cell: 'Инвойс_откуда', value: '' });
+        utils.setCell({ cell: 'Инвойс_откуда', value: '', offsetRow: -1 });
+        utils.setCell({ cell: 'Инвойс_откуда_п', value: '' });
+        utils.setCell({ cell: 'Инвойс_откуда_п', value: '', offsetRow: -1 });
     }
 };
