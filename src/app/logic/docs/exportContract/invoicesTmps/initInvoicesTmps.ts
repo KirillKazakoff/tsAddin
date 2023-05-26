@@ -25,7 +25,8 @@ export const initInvoicesTmps = async (settings: InvoicesTmpsSettingsT) => {
             book.removeWorksheet(sheetName);
         });
 
-        await mergeInvoicesCells(book);
+        const { agreement } = Object.values(invoices)[0];
+        await mergeInvoicesCells(book, agreement);
     } catch (e) {
         console.log(e);
     }

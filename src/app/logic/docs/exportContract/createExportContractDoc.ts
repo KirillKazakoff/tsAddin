@@ -14,9 +14,12 @@ export const createExportContractDoc = async (agreement: AgreementT) => {
     const { invoices } = agreement.productsGroupedBy;
     const { operation } = exportContractStore;
 
-    const path = operation === 'export'
+    // getPathToTemplate
+    let path = operation === 'export'
         ? pathObj.exportContract
         : pathObj.exportStorageContract;
+    if (agreement.record.terms === 'FCA') path = pathObj.exportContractFCA;
+
     const book = await readTmp(path);
 
     const settings: InvoicesTmpsSettingsT = {

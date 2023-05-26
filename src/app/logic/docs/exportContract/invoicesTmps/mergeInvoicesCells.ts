@@ -1,7 +1,8 @@
 import { Workbook } from 'exceljs';
 import { mergeCells } from '../../../excel/utils/excelUtilsObj/mergeCells';
+import { AgreementT } from '../groupBy/initAgreement';
 
-export const mergeInvoicesCells = async (book: Workbook) => {
+export const mergeInvoicesCells = async (book: Workbook, agreement: AgreementT) => {
     const xls64 = await book.xlsx.writeBuffer();
     await book.xlsx.load(xls64);
     book.worksheets.forEach((ws) => {
@@ -36,6 +37,10 @@ export const mergeInvoicesCells = async (book: Workbook) => {
 
             const { row, col } = merge;
             const { eng, ru } = row;
+
+            if (agreement.record.terms === 'FCA') {
+                merge.col.first = 3;
+            }
 
             mergeCells(ws, { row: eng, startCol: 2, endCol: col.first });
             // prettier-ignore

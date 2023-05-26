@@ -44,6 +44,13 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
             if (ws.name.includes('Noncom')) {
                 delete cols.vessel;
             }
+            if (invoice.agreement.record.terms === 'FCA') {
+                // delete cols.bl
+                delete cols.vessel;
+                delete cols.pack;
+                delete cols.places;
+            }
+
             const rowArr = Object.values(cols);
 
             const rowIndex = +arrayCl.row + i;

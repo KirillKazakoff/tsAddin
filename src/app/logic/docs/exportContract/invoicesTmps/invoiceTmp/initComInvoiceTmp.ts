@@ -5,15 +5,13 @@ import { initExcelUtils } from '../../../../excel/utils/excelUtilsObj/initExcelU
 import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 import { initComInvoiceDeparture } from './initComInvoiceDeparture';
 import { initInvoiceRows } from './initInvoiceRows';
-import { initComInvoiceFooter } from './initComInvoiceFooter';
-import { initInvoiceRowsFCA } from './initInvoiceRowsFCA';
+import { initAgent } from '../initAgent';
 
 export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const utils = initExcelUtils(ws);
 
     const {
         seller,
-        agent,
         transport,
         portFrom,
         portTo,
@@ -25,6 +23,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const {
         invoiceDate, invoiceNo, msc, amount, consignee,
     } = invoice;
+    const agent = initAgent(invoice);
 
     const { places, placesTotal, priceTotal } = amount;
     const date = {
@@ -117,12 +116,22 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     ];
 
     const cells = [...cellsEng, ...cellsRu];
+    if (terms === 'FCA') {
+        cells.forEach((cell, i) => {
+            if (
+                cell.cell === 'Инвойс_подвал_места'
+                || cell.cell === 'Инвойс_подвал_места_п'
+            ) {
+                cells.splice(i, 1);
+            }
+        });
+    }
 
     cells.forEach((cell) => {
         try {
             utils.setCell(cell);
         } catch (e) {
-            console.log(e);
+            console.log(cell);
         }
     });
 
@@ -133,14 +142,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         utils,
         terms,
     );
-    initComInvoiceFooter(invoice, utils);
-    //
-
-    if (invoice.agreement.record.terms === 'FCA') {
-        initInvoiceRowsFCA(utils, invoice);
-    } else {
-        initInvoiceRows(utils, invoice);
-    }
+    initInvoiceRows(utils, invoice);
 
     return cells;
 };

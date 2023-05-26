@@ -4,26 +4,20 @@ import { InvoiceT } from '../../../../../types/typesContract';
 import { initExcelUtils } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 import { initInvoiceRows } from './initInvoiceRows';
+import { initAgent } from '../initAgent';
 
 export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const utils = initExcelUtils(ws);
 
     const {
-        seller,
-        agent,
-        transport,
-        portFrom,
-        portTo,
-        agreementNo,
-        contract,
-        vessel,
+        seller, transport, portFrom, portTo, agreementNo, contract, vessel,
     } = invoice.agreement.record;
     const {
         invoiceDate, invoiceNo, msc, amount, consignee,
     } = invoice;
+    const agent = initAgent(invoice);
 
     const { places, placesTotal, priceTotal } = amount;
-
     const date = {
         invoice: (language: string) => getExcelDateStr(invoiceDate, language),
         contract: (language: string) => getExcelDateStr(contract.date, language),
@@ -37,8 +31,8 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'МСЦ', value: msc ? 'MSC certified' : 'Non-MSC certified' },
         { cell: 'МСЦ_сертификат', value: msc ? 'MSC-C-52870' : '' },
 
-        { cell: 'Инвойс_получатель', value: consignee?.fullName },
-        { cell: 'Инвойс_получатель_адрес', value: consignee?.addres },
+        { cell: 'Инвойс_получатель', value: consignee.fullName },
+        { cell: 'Инвойс_получатель_адрес', value: consignee.addres },
         { cell: 'Инвойс_покупатель', value: agent.name },
         { cell: 'Инвойс_покупатель_адрес', value: agent.addres },
 
