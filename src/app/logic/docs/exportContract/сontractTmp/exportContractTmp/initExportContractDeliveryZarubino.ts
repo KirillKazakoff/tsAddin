@@ -6,6 +6,7 @@ export const initExportContractDeliveryZarubino: InitContractPartT = (
     agreement,
 ) => {
     const cellName = 'Доставка_условия';
+    const { consignee } = agreement.record;
 
     utils.setCell({
         cell: cellName,
@@ -14,8 +15,8 @@ export const initExportContractDeliveryZarubino: InitContractPartT = (
     });
     utils.setCell({
         cell: cellName,
-        eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of Zarubino on behalf of the Buyer will be carried out by: ${agreement.record.consignee.fullName}`,
-        ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. Зарубино от имени покупателя будет осуществлять: ${agreement.record.consignee.fullName}`,
+        eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of Zarubino on behalf of the Buyer will be carried out by: ${consignee.fullName} ${consignee.addres}`,
+        ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. Зарубино от имени покупателя будет осуществлять: ${consignee.fullName} ${consignee.addres}`,
         offsetRow: 1,
     });
     utils.setCell({
