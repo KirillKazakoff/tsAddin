@@ -3,7 +3,7 @@ import exportContractStore from '../../../../../stores/docsStores/exportContract
 import { InvoiceT } from '../../../../../types/typesContract';
 import { initExcelUtils } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
-import { initComInvoiceDeparture } from './initComInvoiceDeparture';
+import { initComInvoiceTerms } from './initComInvoiceTerms';
 import { initInvoiceRows } from './initInvoiceRows';
 import { initAgent } from '../initAgent';
 
@@ -32,14 +32,6 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     };
 
     // invoiceEng
-    const engDepartureCells = [
-        { cell: 'Инвойс_декларация', value: '' },
-        { cell: 'Инвойс_дата', value: date.invoice('eng') },
-        { cell: 'Инвойс_транспорт', value: transport.eng.name },
-        { cell: 'Инвойс_куда', value: `${portTo.eng.name}, ${portTo.eng.country}` },
-        { cell: 'Инвойс_откуда', value: portFrom.eng.name },
-    ];
-
     // prettier-ignore
     const cellsEng = [
         { cell: 'Инвойс_продавец', value: seller.eng.name },
@@ -53,7 +45,11 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_покупатель', value: agent.name },
         { cell: 'Инвойс_покупатель_адрес', value: agent.addres },
 
-        ...engDepartureCells,
+        { cell: 'Инвойс_декларация', value: '' },
+        { cell: 'Инвойс_дата', value: date.invoice('eng') },
+        { cell: 'Инвойс_транспорт', value: transport.eng.name },
+        { cell: 'Инвойс_куда', value: `${portTo.eng.name}, ${portTo.eng.country}` },
+        { cell: 'Инвойс_откуда', value: portFrom.eng.name },
 
         { cell: 'Инвойс_соглашение', value: `AGREEMENT No.${agreementNo} from ${date.invoice('eng')}` },
         { cell: 'Инвойс_контракт', value: `to a contract of sale No. ${contract.contractNo}` },
@@ -74,14 +70,6 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     ];
 
     // invoiceRu
-    const ruDepartureCells = [
-        { cell: 'Инвойс_декларация_п', value: '' },
-        { cell: 'Инвойс_дата_п', value: date.invoice('ru') },
-        { cell: 'Инвойс_транспорт_п', value: transport.ru.name },
-        { cell: 'Инвойс_куда_п', value: `${portTo.ru.name}, ${portTo.ru.country}` },
-        { cell: 'Инвойс_откуда_п', value: portFrom.ru.name },
-    ];
-
     // prettier-ignore
     const cellsRu = [
         { cell: 'Инвойс_продавец_п', value: seller.ru.name },
@@ -95,7 +83,11 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_покупатель_п', value: agent.name },
         { cell: 'Инвойс_покупатель_адрес_п', value: agent.addres },
 
-        ...ruDepartureCells,
+        { cell: 'Инвойс_декларация_п', value: '' },
+        { cell: 'Инвойс_дата_п', value: date.invoice('ru') },
+        { cell: 'Инвойс_транспорт_п', value: transport.ru.name },
+        { cell: 'Инвойс_куда_п', value: `${portTo.ru.name}, ${portTo.ru.country}` },
+        { cell: 'Инвойс_откуда_п', value: portFrom.ru.name },
 
         { cell: 'Инвойс_соглашение_п', value: `Дополнение No.${agreementNo} от ${date.invoice('ru')}` },
         { cell: 'Инвойс_контракт_п', value: `к контракту купли-продажи №. ${contract.contractNo}` },
@@ -115,33 +107,12 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_подписант_п', value: `Подписано ${exportContractStore.podpisant.ru.name}` },
     ];
 
-    const cells = [...cellsEng, ...cellsRu];
-    if (terms === 'FCA') {
-        cells.forEach((cell, i) => {
-            if (
-                cell.cell === 'Инвойс_подвал_места'
-                || cell.cell === 'Инвойс_подвал_места_п'
-            ) {
-                cells.splice(i, 1);
-            }
-        });
-    }
+    const cells = initComInvoiceTerms([...cellsEng, ...cellsRu], utils, terms);
 
     cells.forEach((cell) => {
-        try {
-            utils.setCell(cell);
-        } catch (e) {
-            console.log(cell);
-        }
+        utils.setCell(cell);
     });
 
-    // need refactor this functions to transform invoice
-    // init terms-depended parts
-    initComInvoiceDeparture(
-        [...engDepartureCells, ...ruDepartureCells],
-        utils,
-        terms,
-    );
     initInvoiceRows(utils, invoice);
 
     return cells;
