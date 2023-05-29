@@ -9,6 +9,8 @@ import { groupify } from '../../../utils/getGroup';
 
 export const groupByBl = (rows: ExportRowT[]) => {
     const blGrouped = rows.reduce<GroupedBlT>((total, row) => {
+        if (!row.blNo) return total;
+
         const initObj = {
             record: row,
             rows: [],
@@ -16,8 +18,6 @@ export const groupByBl = (rows: ExportRowT[]) => {
         };
         const bl = groupify<BlGroupT>(total, initObj, row.blNo);
         bl.rows.push(row);
-
-        // console.log(total.checkError.record);
 
         addBlAmount(bl.total, row.amount, row?.packSp?.coefficient);
         return total;

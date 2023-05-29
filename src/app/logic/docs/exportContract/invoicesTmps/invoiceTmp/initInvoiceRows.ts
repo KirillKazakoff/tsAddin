@@ -21,7 +21,7 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
             // in excel template (merge removes borders in cells)
             const cols = {
                 emptyFirst: '',
-                bl: r.blNo,
+                bl: r.blNo || '-',
                 vessel: r.vessel.eng.name,
                 desc: r.product.eng.name,
                 pack: `1/${r.pack} KG`,

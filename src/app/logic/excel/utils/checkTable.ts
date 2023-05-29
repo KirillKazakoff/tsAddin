@@ -53,6 +53,7 @@ export const checkNotFulfilledRow = (row: CommonRowT, tableName: TableNameT) => 
     };
 
     // for every table
+
     if (tableName.includes('Export')) {
         const possibleEmptyProps = [
             'terms',
@@ -62,6 +63,10 @@ export const checkNotFulfilledRow = (row: CommonRowT, tableName: TableNameT) => 
             'packSp',
             'sortSp',
         ];
+        if (row.terms === 'FCA') {
+            possibleEmptyProps.push('blNo', 'portFrom');
+        }
+
         checkProps(possibleEmptyProps);
     }
     if (tableName === 'Mates') {

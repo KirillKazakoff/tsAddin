@@ -118,6 +118,6 @@ export type InnerRowT = {
 // utilstype
 export type OperationT = 'export' | 'export_storage';
 
-export type CommonRowT = ExportRowT | InnerRowT | MateRowT;
+export type CommonRowT = (ExportRowT | InnerRowT | MateRowT) & { terms?: string };
 
 export type TableNameT = 'Export' | 'Export_Storage' | 'Inner' | 'Mates';

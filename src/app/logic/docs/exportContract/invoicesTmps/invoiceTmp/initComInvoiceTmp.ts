@@ -49,7 +49,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_дата', value: date.invoice('eng') },
         { cell: 'Инвойс_транспорт', value: transport.eng.name },
         { cell: 'Инвойс_куда', value: `${portTo.eng.name}, ${portTo.eng.country}` },
-        { cell: 'Инвойс_откуда', value: portFrom.eng.name },
+        { cell: 'Инвойс_откуда', value: portFrom?.eng?.name },
 
         { cell: 'Инвойс_соглашение', value: `AGREEMENT No.${agreementNo} from ${date.invoice('eng')}` },
         { cell: 'Инвойс_контракт', value: `to a contract of sale No. ${contract.contractNo}` },
@@ -87,7 +87,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_дата_п', value: date.invoice('ru') },
         { cell: 'Инвойс_транспорт_п', value: transport.ru.name },
         { cell: 'Инвойс_куда_п', value: `${portTo.ru.name}, ${portTo.ru.country}` },
-        { cell: 'Инвойс_откуда_п', value: portFrom.ru.name },
+        { cell: 'Инвойс_откуда_п', value: portFrom?.ru?.name },
 
         { cell: 'Инвойс_соглашение_п', value: `Дополнение No.${agreementNo} от ${date.invoice('ru')}` },
         { cell: 'Инвойс_контракт_п', value: `к контракту купли-продажи №. ${contract.contractNo}` },
