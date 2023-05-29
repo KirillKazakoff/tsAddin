@@ -60,7 +60,7 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
             const row = ws.getRow(rowIndex);
 
             styleRowCells(row, {
-                height: 30,
+                height: 40,
                 alignment: alignmentCenter,
                 font: fontDefault,
             });

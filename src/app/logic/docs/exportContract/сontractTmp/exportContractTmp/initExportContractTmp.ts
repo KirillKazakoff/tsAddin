@@ -3,7 +3,7 @@ import { initExcelUtilsDouble } from '../../../../excel/utils/excelUtilsObj/init
 import { initExportContractAddreses } from '../initExportContractAddreses';
 import { initExportContractCost } from './initExportContractCost';
 import { initExportContractDelivery } from './initExportContractDelivery';
-import { initExportContractDeliveryZarubino } from './initExportContractDeliveryZarubino';
+import { initExportContractDeliveryFCA } from './initExportContractDeliveryFCA';
 import { initExportContractHeader } from './initExportContractHeader';
 import { initExportContractSubject } from './initExportContractSubject';
 
@@ -19,18 +19,20 @@ export const initExportContractTmp: InitExportContractTmp = async (
     initExportContractCost(utils, agreement);
 
     if (agreement.record.terms === 'FCA') {
-        initExportContractDeliveryZarubino(utils, agreement);
+        initExportContractDeliveryFCA(utils, agreement);
     } else {
         initExportContractDelivery(utils, agreement);
     }
-
     initExportContractAddreses(utils, agreement);
-    utils.getRow('Доставка_заголовок', -1).addPageBreak();
 
+    // printSettings
+    utils.getRow('Доставка_заголовок', -1).addPageBreak();
     if (agreement.rows.length === 1) {
         ws.pageSetup.fitToHeight = 1;
         ws.pageSetup.fitToWidth = 1;
         ws.pageSetup.fitToPage = true;
-        ws.pageSetup.printArea = 'A1:B45';
+
+        const lastRow = utils.getRow('Адреса_подпись', 0);
+        ws.pageSetup.printArea = `A1:B${lastRow.number}`;
     }
 };
