@@ -49,7 +49,7 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_подвал_всего', value: `${placesTotal.str} tn` },
         { cell: 'Инвойс_подвал_сумма', value: `${priceTotal.str} USD` },
 
-        { cell: 'Инвойс_подписант', value: `Signed by ${exportContractStore.podpisant.eng.name}` },
+        { cell: 'Инвойс_подписант', value: `Signed by ${exportContractStore.fields.podpisant.eng.name}` },
     ];
 
     // invoiceRu
@@ -79,7 +79,7 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_подвал_всего_п', value: `${placesTotal.str} тн` },
         { cell: 'Инвойс_подвал_сумма_п', value: `${priceTotal.str} $` },
 
-        { cell: 'Инвойс_подписант_п', value: `Подписано ${exportContractStore.podpisant.ru.name}` },
+        { cell: 'Инвойс_подписант_п', value: `Подписано ${exportContractStore.fields.podpisant.ru.name}` },
     ];
 
     const cells = [...cellsEng, ...cellsRu];

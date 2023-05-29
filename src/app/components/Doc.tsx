@@ -12,9 +12,12 @@ export const Doc = ({ title, onClick, cls }: DocT) => {
     className = `${className} ${clsSuffix}`;
 
     return (
-        <li onClick={onLoad} className={className}>
+        <button
+            type='submit' onClick={onLoad}
+            className={className}
+        >
             {title}
-        </li>
+        </button>
     );
 };
 

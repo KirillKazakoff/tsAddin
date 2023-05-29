@@ -45,7 +45,6 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
                 delete cols.vessel;
             }
             if (invoice.agreement.record.terms === 'FCA') {
-                // delete cols.bl
                 delete cols.vessel;
                 delete cols.pack;
                 delete cols.places;

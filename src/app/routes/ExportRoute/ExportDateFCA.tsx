@@ -4,10 +4,10 @@ import Input from '../../components/Input';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const ExportDateFCA = observer(() => {
-    const record = exportContractStore.getExportRecord();
-    const title = `ETA ${record.portTo.eng.name}:`;
+    const record = exportContractStore.exportRecord;
+    const title = `ETA ${record?.portTo.eng.name}:`;
 
-    if (record.terms !== 'FCA') return null;
+    if (record?.terms !== 'FCA') return null;
 
     return (
         <div className='export__FCA'>
@@ -15,7 +15,7 @@ export const ExportDateFCA = observer(() => {
                 title={title}
                 placeholder={title}
                 setter={exportContractStore.setField.dischargeDate}
-                value={exportContractStore.dischargeDate}
+                value={exportContractStore.fields.dischargeDate}
             />
         </div>
     );

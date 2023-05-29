@@ -44,7 +44,6 @@ export const initComInvoiceTerms = (
     }
 
     if (terms === 'FCA') {
-        console.log('FCA');
         spliceCells.push(
             'Инвойс_подвал_места',
             'Инвойс_подвал_места_п',
@@ -55,7 +54,5 @@ export const initComInvoiceTerms = (
 
     // filter spliced cells
     const filtered = cells.filter((cell) => !spliceCells.includes(cell.cell));
-    console.log(filtered);
-    console.log(terms);
     return filtered;
 };

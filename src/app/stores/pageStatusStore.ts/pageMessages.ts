@@ -30,11 +30,6 @@ export const excelInEditingMode = (): PageStatusT => ({
     title: 'Ячейки в Excel не должны быть активны',
     desc: 'Выйдите из активной ячейки (нажмите tab или enter в excel-таблице)',
 });
-export const transportNotFound = (): PageStatusT => ({
-    statusType: 'transportNotFound',
-    title: 'Не найден транспорт',
-    desc: 'Не могу найти указанный транспорт в первой строке таблицы "Коносаменты" в БД, проверьте правильность заполнения либо обновите связи в Excel',
-});
 export const unknownError = (message: string): PageStatusT => ({
     statusType: 'unknownError',
     title: 'Произошла неизвестная ошибка',

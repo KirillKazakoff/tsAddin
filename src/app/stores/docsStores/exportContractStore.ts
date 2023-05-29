@@ -7,18 +7,21 @@ import tablesStore from '../tablesStore/tablesStore';
 import { selectSp } from '../spsStore/select';
 
 class ExportContractStore {
-    podpisant = initPodpisant();
+    fields = {
+        podpisant: initPodpisant(),
+        dischargeDate: '',
+    };
+
     operation: OperationT = 'export';
-    dischargeDate = '';
 
     constructor() {
         makeAutoObservable(this);
     }
 
     setField = {
-        podpisant: (value: string) => (this.podpisant = selectSp.podpisant(value)),
+        podpisant: (value: string) => (this.fields.podpisant = selectSp.podpisant(value)),
         operation: (value: OperationT) => (this.operation = value),
-        dischargeDate: (value: string) => (this.dischargeDate = value),
+        dischargeDate: (value: string) => (this.fields.dischargeDate = value),
     };
 
     getCurrentTable() {
@@ -27,8 +30,11 @@ class ExportContractStore {
             : tablesStore.exportStorageT;
     }
 
-    getExportRecord() {
+    get exportRecord() {
         return tablesStore.exportT[0];
+    }
+    get terms() {
+        return this.exportRecord?.terms;
     }
 }
 

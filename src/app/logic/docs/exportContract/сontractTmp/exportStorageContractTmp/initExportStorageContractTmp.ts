@@ -26,7 +26,7 @@ export const initExportStorageContractTmp: InitExportContractTmp = (
         portTo,
         transport,
     } = agreement.record;
-    const { podpisant } = exportContractStore;
+    const { podpisant } = exportContractStore.fields;
 
     const date = {
         agreement: (locale: string) => getExcelDateStr(dateAgreement, locale),

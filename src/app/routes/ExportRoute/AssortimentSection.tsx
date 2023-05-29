@@ -10,7 +10,7 @@ export const AssortimentSection = observer(() => {
     if (!initObj) return null;
     const { onLoad, onLoadAll, samplesArr } = initObj;
 
-    if (exportContractStore.getExportRecord().terms === 'FCA') return null;
+    if (exportContractStore.terms === 'FCA') return null;
 
     const sampleDocs = samplesArr.map((sample) => {
         const consignee = sample.record.consignee.codeName;

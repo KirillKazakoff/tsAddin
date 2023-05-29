@@ -6,7 +6,7 @@ import {
 
 export const initExportContractAddreses: InitContractPartT = (utils, agreement) => {
     const { seller, bankSeller, agent } = agreement.record;
-    const { podpisant } = exportContractStore;
+    const { podpisant } = exportContractStore.fields;
     const { setCell } = utils;
 
     const cells: CellObjDoubleT[] = [

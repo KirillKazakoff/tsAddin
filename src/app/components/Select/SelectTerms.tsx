@@ -1,7 +1,6 @@
 import React from 'react';
 import { Select, SelectT } from './Select';
-
-export type TermsT = 'CFR' | 'EXW' | 'CFR (контейнер)';
+import { TermsT } from '../../types/typesTables';
 
 export default function SelectTerms(props: Omit<SelectT, 'options'>) {
     const options: TermsT[] = ['CFR', 'CFR (контейнер)', 'EXW'];

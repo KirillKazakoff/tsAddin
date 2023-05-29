@@ -66,7 +66,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
 
         { cell: 'Инвойс_получатель_в_пользу', value: `in forward to ${seller.eng.name}` },
         { cell: 'Инвойс_получатель_счет', value: `A/C: ${bankSeller.accountNo}` },
-        { cell: 'Инвойс_подписант', value: `Signed by ${exportContractStore.podpisant.eng.name}` },
+        { cell: 'Инвойс_подписант', value: `Signed by ${exportContractStore.fields.podpisant.eng.name}` },
     ];
 
     // invoiceRu
@@ -104,7 +104,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
 
         { cell: 'Инвойс_получатель_в_пользу_п', value: `в пользу ${seller.ru.name}` },
         { cell: 'Инвойс_получатель_счет_п', value: `A/C: ${bankSeller.accountNo}` },
-        { cell: 'Инвойс_подписант_п', value: `Подписано ${exportContractStore.podpisant.ru.name}` },
+        { cell: 'Инвойс_подписант_п', value: `Подписано ${exportContractStore.fields.podpisant.ru.name}` },
     ];
 
     const cells = initComInvoiceTerms([...cellsEng, ...cellsRu], utils, terms);

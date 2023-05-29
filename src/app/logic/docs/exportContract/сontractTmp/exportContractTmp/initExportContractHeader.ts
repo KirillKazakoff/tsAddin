@@ -9,7 +9,7 @@ export const initExportContractHeader: InitContractPartT = (utils, agreement) =>
     const {
         date, agreementNo, contract, seller, agent,
     } = agreement.record;
-    const { podpisant } = exportContractStore;
+    const { podpisant } = exportContractStore.fields;
 
     const cells: CellObjDoubleT[] = [
         {

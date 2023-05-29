@@ -14,6 +14,8 @@ import {
     VesselT,
 } from './typesSP';
 
+export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'CFR (контейнер)';
+
 // Amount
 export type AmountT = {
     str: string;
@@ -63,7 +65,7 @@ export type ExportInitRowT = {
     date: string;
     blNo: string;
     blMode: string;
-    terms?: string;
+    terms?: TermsT;
     sort: string;
     pack: number;
     msc: string;
@@ -89,7 +91,7 @@ export type ExportRowT = {
     invoice: string;
     date: string;
     blNo: string;
-    terms?: string;
+    terms?: TermsT;
     sort: string;
     pack: number;
     msc: string;
