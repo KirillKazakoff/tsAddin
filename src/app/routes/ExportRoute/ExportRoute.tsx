@@ -6,7 +6,6 @@ import BlSection from './BlSection';
 import { ExportContractSection } from './ExportContractSection';
 import { ExportRadio } from './ExportRadio';
 import { AssortimentSection } from './AssortimentSection';
-import { ExportDateDischarge } from './ExportDateDischarge';
 
 export const ExportRoute = observer(() => {
     const table = exportContractStore.getCurrentTable();
@@ -16,7 +15,6 @@ export const ExportRoute = observer(() => {
     let ExportSection = () => (
         <>
             <BlSection />
-            <ExportDateDischarge />
             <ExportContractSection />
             <AssortimentSection />
         </>

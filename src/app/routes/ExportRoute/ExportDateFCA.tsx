@@ -3,15 +3,14 @@ import { observer } from 'mobx-react-lite';
 import Input from '../../components/Input';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 
-export const ExportDateDischarge = observer(() => {
-    const portName = exportContractStore.getCurrentTable()[0]?.portTo?.eng?.name;
-    if (!portName) return null;
-    const title = `ETA ${portName}:`;
+export const ExportDateFCA = observer(() => {
+    const record = exportContractStore.getExportRecord();
+    const title = `ETA ${record.portTo.eng.name}:`;
+
+    if (record.terms !== 'FCA') return null;
 
     return (
-        <div className='export-section__date'>
-            <h2 className='title'>Дата прибытия:</h2>
-
+        <div className='export__FCA'>
             <Input
                 title={title}
                 placeholder={title}

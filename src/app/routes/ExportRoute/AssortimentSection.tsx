@@ -3,14 +3,14 @@ import { observer } from 'mobx-react-lite';
 import { useInitAssortimentSection } from '../../logic/docs/assortiment/useInitAssortimentSection';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import { Doc } from '../../components/Doc';
-import Input from '../../components/Input';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const AssortimentSection = observer(() => {
-    const { setField } = exportContractStore;
     const initObj = useInitAssortimentSection();
     if (!initObj) return null;
     const { onLoad, onLoadAll, samplesArr } = initObj;
+
+    if (exportContractStore.getExportRecord().terms === 'FCA') return null;
 
     const sampleDocs = samplesArr.map((sample) => {
         const consignee = sample.record.consignee.codeName;
@@ -23,19 +23,11 @@ export const AssortimentSection = observer(() => {
         );
     });
 
-    const dateTitle = `ETA ${samplesArr[0].record.portTo.eng.name}:`;
-
     return (
         <form className='docs__form assortiment-form'>
             <h2>Ассортимент и Образцы</h2>
-            <div className='assortiment__wrapper'>
-                {/* <Input
-                    title={dateTitle}
-                    placeholder={dateTitle}
-                    setter={setField.dischargeDate}
-                    value={exportContractStore.dischargeDate}
-                /> */}
 
+            <div className='assortiment__wrapper'>
                 <div className='assortiment__body'>
                     <h3>Ассортимент:</h3>
                     <DocsDownloadBtn

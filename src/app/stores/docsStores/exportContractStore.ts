@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
 import { OperationT } from '../../types/typesTables';
@@ -24,6 +25,10 @@ class ExportContractStore {
         return this.operation === 'export'
             ? tablesStore.exportT
             : tablesStore.exportStorageT;
+    }
+
+    getExportRecord() {
+        return tablesStore.exportT[0];
     }
 }
 

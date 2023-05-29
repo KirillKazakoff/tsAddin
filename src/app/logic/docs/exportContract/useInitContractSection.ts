@@ -11,8 +11,13 @@ export const initContractSection = () => {
     const { setField } = exportContractStore;
 
     const onLoad = async (agreement: AgreementT) => createExportContractDoc(agreement);
+    const title = exportContractStore.getExportRecord().terms === 'FCA'
+        ? 'Экспорт Контракт(FCA)'
+        : 'Экспорт Контракт';
 
-    return { onLoad, setField, agreements };
+    return {
+        onLoad, setField, agreements, title,
+    };
 };
 
 export const useInitContractSection = () => {
