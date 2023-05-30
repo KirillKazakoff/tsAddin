@@ -16,7 +16,7 @@ export const ExportContractSection = observer(() => {
         onLoad, setField, agreements, title,
     } = initObj;
 
-    const { initialValues, onSubmit, validate } = useExportSettings();
+    const { initialValues, onSubmit, validate } = useExportSettings(onLoad);
 
     const agreementsHtml = agreements.map((agreement) => {
         const { id } = agreement.record;

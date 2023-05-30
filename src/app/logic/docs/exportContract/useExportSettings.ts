@@ -24,11 +24,7 @@ export const useExportSettings = () => {
         values: FormValuesT,
         actions: FormikHelpers<FormValuesT>,
     ) => {
-        try {
-            console.log(values);
-        } catch (e) {
-            console.log('error');
-        }
+        exportContractStore.setField.dischargeDate(values.dischargeDate);
     };
 
     return { onSubmit, validate, initialValues };

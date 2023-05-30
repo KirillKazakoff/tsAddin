@@ -10,6 +10,7 @@ export const useLoader = (load: () => Promise<void>) => {
             await load();
         } catch (e) {
             setStatus('error');
+            console.log(e);
         }
         setTimeout(() => setStatus('loaded'), 500);
     };

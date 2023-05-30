@@ -8,8 +8,8 @@ import { BlGroupT } from '../../../types/typesContract';
 export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT) => {
     const ws = book.getWorksheet('BL');
     const utils = initExcelUtils(ws);
-
     const { record } = blGroup;
+
     // prettier-ignore
     const cells: CellObjT[] = [
         { cell: 'Продавец', value: record.seller.eng.name },
