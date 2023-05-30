@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import Input from '../../components/Input';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import InputText from '../../components/Form/InputText';
 
@@ -19,6 +18,3 @@ export const ExportDateFCA = observer(() => {
         </div>
     );
 });
-
-// setter={exportContractStore.setField.dischargeDate}
-// value={exportContractStore.fields.dischargeDate}
