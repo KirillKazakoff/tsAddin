@@ -1,19 +1,14 @@
-import { useFormikContext } from 'formik';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import { createExportContractDoc } from './createExportContractDoc';
 import { groupAgByNo } from './groupBy/groupAgByNo';
 import { AgreementT } from './groupBy/initAgreement';
 
-export const useInitContractSection = () => {
+export const useInitContractSection = (formik: any) => {
     const agreementObj = groupAgByNo();
     const agreements = Object.values(agreementObj);
-    const { setField, fields } = exportContractStore;
-
-    type FormValues = typeof fields;
-    const context = useFormikContext<FormValues>();
 
     const onLoad = async (agreement: AgreementT) => {
-        if (!context.isValid) {
+        if (!formik.current.isValid) {
             throw new Error('invalid input');
         }
         createExportContractDoc(agreement);
@@ -25,7 +20,6 @@ export const useInitContractSection = () => {
 
     return {
         onLoad,
-        setField,
         agreements,
         title,
     };

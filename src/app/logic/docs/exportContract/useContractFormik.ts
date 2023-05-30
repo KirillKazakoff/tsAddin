@@ -1,29 +1,40 @@
+import { FormikProps } from 'formik';
+import { useRef, useEffect } from 'react';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import getErrorsDescription from '../../../components/Form/getErrorsDescription';
 import { OnSubmitT } from '../../../types/typesUtils';
 
 export const useContractFormik = () => {
-    const { setField, fields } = exportContractStore;
-    type FormValuesT = typeof fields;
+    const initialFields = {
+        podpisant: '',
+        dischargeDate: '',
+    };
+    type FormValuesT = typeof initialFields;
 
     const validate = (values: FormValuesT) => {
-        const { dischargeDate, podpisant } = values;
         const errors: { [key: string]: string } = {};
 
-        if (!dischargeDate) {
+        if (!values.dischargeDate) {
             errors.dischargeDate = 'valueMissing';
         }
-        if (!podpisant) {
+        if (!values.podpisant) {
             errors.podpisant = 'valueMissing';
         }
 
         return getErrorsDescription(errors);
     };
 
-    const onSubmit: OnSubmitT<FormValuesT> = async (values, actions) => {
-        setField.dischargeDate(values.dischargeDate);
-        setField.podpisant(values.podpisant.codeName);
+    const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
+        exportContractStore.setField.dischargeDate(values.dischargeDate);
+        exportContractStore.setField.podpisant(values.podpisant);
     };
 
-    return { onSubmit, validate, fields };
+    const formRef = useRef<FormikProps<FormValuesT>>();
+    useEffect(() => {
+        formRef.current.validateForm();
+    }, []);
+
+    return {
+        onSubmit, validate, initialFields, formRef,
+    };
 };

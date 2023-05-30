@@ -10,11 +10,11 @@ export const ExportDateFCA = observer(() => {
     if (record?.terms !== 'FCA') return null;
 
     return (
-        <div className='export__FCA'>
-            <InputText
-                name='dischargeDate' title={title}
-                placeholder={title}
-            />
-        </div>
+        <InputText
+            name='dischargeDate'
+            title={title}
+            placeholder={title}
+            wrapperCls='export__FCA'
+        />
     );
 });

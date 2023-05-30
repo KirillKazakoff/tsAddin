@@ -15,7 +15,7 @@ export default function SelectFormik(props: Props) {
     ));
 
     return (
-        <div className={`select-wrapper ${invalidCls}`}>
+        <div className={`form__control select-wrapper ${invalidCls}`}>
             <span className='select-title'>{props.title}</span>
             <Field
                 as='select' className='select'

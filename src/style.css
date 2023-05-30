@@ -1,3 +1,26 @@
+:root {
+    /* colors */
+    --black: #000000;
+    --black-lighter: #383838;
+    --red: #d8605b;
+    --red-lighter: #d27e7b;
+    --yellow: #f4c27f;
+    --yellow-lighter: #f8d6a9;
+    --main-gradient: linear-gradient(267.72deg, #d8605b -0.89%, #f4c27f 112.29%);
+    --body-color: var(--red);
+
+    --block-max-width: 500px;
+    --main-padding: 25px;
+
+    --royalblue-filter: brightness(0) saturate(100%) invert(33%) sepia(64%) saturate(1371%) hue-rotate(203deg) brightness(100%) contrast(92%);
+    --black-filter: brightness(0) saturate(100%) invert(13%) sepia(9%) saturate(0%) hue-rotate(240deg) brightness(107%) contrast(95%);
+    --aux-main-filter: brightness(0) saturate(100%) invert(62%) sepia(25%) saturate(3221%) hue-rotate(2deg) brightness(109%) contrast(103%);
+    --red-filter: brightness(0) saturate(100%) invert(30%) sepia(37%) saturate(5375%) hue-rotate(1deg) brightness(101%) contrast(106%);
+    --green-filter: brightness(0) saturate(100%) invert(78%) sepia(52%) saturate(512%) hue-rotate(53deg) brightness(95%) contrast(103%);
+    --bg-main-filter: brightness(0) saturate(100%) invert(62%) sepia(25%) saturate(3221%) hue-rotate(2deg) brightness(109%) contrast(103%);
+}
+
+
 *,
 *::before,
 *::after {
@@ -167,20 +190,20 @@ b {
     padding: 8px 10px;
     border-radius: 5px;
     position: absolute;
-    top: 120%;
+    top: 150%;
     right: 0px;
-    max-width: 250px;
+    max-width: 200px;
     background-color: var(--red);
 }
 
 .feedback-top {
-    top: -110%;
+    top: -120%;
 }
 
 .feedback-arrow {
     position: absolute;
     left: 43%;
-    top: -6px;
+    top: -10px;
     margin: auto;
     width: 1px;
     height: 1px;
