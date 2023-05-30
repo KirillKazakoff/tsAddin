@@ -1,39 +1,52 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
+import { ExportContractForm } from './ExportContractForm';
+import getErrorsDescription from '../../components/Form/getErrorsDescription';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
-import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
-import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
-import { ExportDateFCA } from './ExportDateFCA';
-import { useContractFormik } from '../../logic/docs/exportContract/useContractFormik';
-import AgreementList from './AgreementList';
+import { OnSubmitT } from '../../types/typesUtils';
 
 export const ExportContractSection = observer(() => {
-    const initObj = useInitContractSection();
-    const formik = useContractFormik(initObj);
-    const { setField, fields } = exportContractStore;
+    const initialFormFields = {
+        podpisant: '',
+        dischargeDate: '',
+    };
+    type FormFieldsT = typeof initialFormFields;
+
+    const validate = (values: FormFieldsT) => {
+        const { dischargeDate, podpisant } = values;
+        const errors: { [key: string]: string } = {};
+
+        if (!dischargeDate) {
+            errors.dischargeDate = 'valueMissing';
+        }
+        if (!podpisant) {
+            errors.podpisant = 'valueMissing';
+        }
+        console.log(errors);
+        return getErrorsDescription(errors);
+    };
+
+    const onSubmit: OnSubmitT<FormFieldsT> = async (values) => {
+        exportContractStore.setField.dischargeDate(values.dischargeDate);
+        exportContractStore.setField.podpisant(values.podpisant);
+    };
+
+    const formRef = useRef<FormikProps<FormFieldsT>>();
+    useEffect(() => {
+        formRef.current.validateForm();
+    }, []);
 
     return (
         <Formik
-            initialValues={formik.fields}
-            validate={formik.validate}
-            onSubmit={formik.onSubmit}
+            initialValues={initialFormFields}
+            validate={validate}
+            onSubmit={onSubmit}
+            innerRef={formRef}
         >
             <Form className='docs__form export-contract-form'>
-                <h2>{initObj.title}</h2>
-
-                <ExportDateFCA />
-                <SelectPodpisant
-                    current={fields.podpisant.codeName}
-                    setter={setField.podpisant}
-                />
-                <AgreementList
-                    agreements={initObj.agreements}
-                    onLoad={initObj.onLoad}
-                />
-
-                <button type='submit'>Submit</button>
+                <ExportContractForm />
             </Form>
         </Formik>
     );

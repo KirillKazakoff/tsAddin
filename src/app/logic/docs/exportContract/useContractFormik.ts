@@ -1,9 +1,8 @@
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import getErrorsDescription from '../../../components/Form/getErrorsDescription';
-import { InitContractObjT } from './useInitContractSection';
-import { AgreementT } from './groupBy/initAgreement';
+import { OnSubmitT } from '../../../types/typesUtils';
 
-export const useContractFormik = (initObj: InitContractObjT) => {
+export const useContractFormik = () => {
     const { setField, fields } = exportContractStore;
     type FormValuesT = typeof fields;
 
@@ -21,13 +20,9 @@ export const useContractFormik = (initObj: InitContractObjT) => {
         return getErrorsDescription(errors);
     };
 
-    const onSubmit = async (values: FormValuesT) => {
+    const onSubmit: OnSubmitT<FormValuesT> = async (values, actions) => {
         setField.dischargeDate(values.dischargeDate);
         setField.podpisant(values.podpisant.codeName);
-    };
-
-    const onLoad = async (agreement: AgreementT) => {
-        initObj.onLoad(agreement);
     };
 
     return { onSubmit, validate, fields };

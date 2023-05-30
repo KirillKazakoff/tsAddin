@@ -11,6 +11,8 @@ import { initExportContractTmp } from './сontractTmp/exportContractTmp/initExpo
 import { initExportStorageContractTmp } from './сontractTmp/exportStorageContractTmp/initExportStorageContractTmp';
 
 export const createExportContractDoc = async (agreement: AgreementT) => {
+    console.log('heyy');
+
     const { invoices } = agreement.productsGroupedBy;
     const { operation } = exportContractStore;
     const { agreementNo, id } = agreement.record;

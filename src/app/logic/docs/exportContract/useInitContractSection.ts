@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useFormikContext } from 'formik';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import { createExportContractDoc } from './createExportContractDoc';
 import { groupAgByNo } from './groupBy/groupAgByNo';
@@ -7,16 +7,21 @@ import { AgreementT } from './groupBy/initAgreement';
 export const useInitContractSection = () => {
     const agreementObj = groupAgByNo();
     const agreements = Object.values(agreementObj);
-    const { setField } = exportContractStore;
+    const { setField, fields } = exportContractStore;
 
-    const onLoad = async (agreement: AgreementT) => createExportContractDoc(agreement);
+    type FormValues = typeof fields;
+    const context = useFormikContext<FormValues>();
+
+    const onLoad = async (agreement: AgreementT) => {
+        if (!context.isValid) {
+            throw new Error('invalid input');
+        }
+        createExportContractDoc(agreement);
+    };
+
     const title = exportContractStore.terms === 'FCA'
         ? 'Экспорт Контракт(FCA)'
         : 'Экспорт Контракт';
-
-    useEffect(() => {
-        exportContractStore.setField.podpisant('Котов Н.М.');
-    }, []);
 
     return {
         onLoad,
@@ -25,5 +30,3 @@ export const useInitContractSection = () => {
         title,
     };
 };
-
-export type InitContractObjT = ReturnType<typeof useInitContractSection>;
