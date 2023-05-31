@@ -24,8 +24,8 @@ export const SelectPodpisantFormik = observer(() => {
 
     return (
         <SelectFormik
-            options={options} title={'Подписант:'}
-            name='podpisant'
+            name='podpisant' options={options}
+            title={'Подписант:'}
         />
     );
 });

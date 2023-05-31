@@ -15,7 +15,7 @@ class RequestContractStore {
     setField = {
         terms: (value: string) => (this.terms = value),
         portTamozhnya: (value: string) => (this.portTamozhnya = selectSp.portTamozhnya(value)),
-        portRu: (value: string) => (this.portRu = selectSp.portRu(value)),
+        portRu: (value: string) => (this.portRu = selectSp.portRu(value) || initPortRu()),
     };
 }
 

@@ -3,9 +3,9 @@ import { observer } from 'mobx-react-lite';
 import { useInitRequestSection } from '../../logic/docs/innerContract/useInitRequestSection';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
-import { Doc } from '../../components/Doc';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import SelectTerms from '../../components/Select/SelectTerms';
+import RequestList from './RequestList';
 
 export const RequestSection = observer(() => {
     const initObj = useInitRequestSection();
@@ -13,19 +13,6 @@ export const RequestSection = observer(() => {
     const {
         contracts, onLoad, onLoadAll, setField, portTamozhnya, portRu, terms,
     } = initObj;
-
-    const contractList = contracts.map((contract) => {
-        const { contractNo } = contract.record;
-        const onClick = async () => onLoad(contract);
-        return (
-            <Doc
-                onClick={onClick}
-                title={`${contract.record.buyer.codeName}`}
-                key={contractNo}
-                cls={'request'}
-            />
-        );
-    });
 
     return (
         <form className='docs__form request-section-form'>
@@ -49,7 +36,7 @@ export const RequestSection = observer(() => {
             <h3 className='title request-docs-title'>
                 Загрузить заявки на договора:
             </h3>
-            <ul className='docs request-docs'>{contractList}</ul>
+            <RequestList contracts={contracts} onLoad={onLoad} />
             <DocsDownloadBtn onClick={onLoadAll} title='Загрузить все заявки' />
         </form>
     );

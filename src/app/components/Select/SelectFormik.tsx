@@ -2,7 +2,11 @@ import { Field, FieldHookConfig, useField } from 'formik';
 import React from 'react';
 import Feedback from '../Form/Feedback';
 
-type Props = FieldHookConfig<string> & { title: string; options: string[] };
+type Props = FieldHookConfig<string> & {
+    title: string;
+    options: string[];
+    wrapperCls?: string;
+};
 
 export default function SelectFormik(props: Props) {
     const [field, meta, helpers] = useField(props);
@@ -15,7 +19,9 @@ export default function SelectFormik(props: Props) {
     ));
 
     return (
-        <div className={`form__control select-wrapper ${invalidCls}`}>
+        <div
+            className={`form__control select-wrapper ${invalidCls} ${props.wrapperCls}`}
+        >
             <span className='select-title'>{props.title}</span>
             <Field
                 as='select' className='select'
@@ -29,3 +35,7 @@ export default function SelectFormik(props: Props) {
         </div>
     );
 }
+
+SelectFormik.defaultProps = {
+    wrapperCls: '',
+};

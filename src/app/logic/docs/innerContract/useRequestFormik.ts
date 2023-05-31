@@ -1,32 +1,37 @@
 import { FormikProps } from 'formik';
 import { useRef, useEffect } from 'react';
-import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import getErrorsDescription from '../../../components/Form/getErrorsDescription';
+import requestContractStore from '../../../stores/docsStores/requestContractStore';
 import { OnSubmitT } from '../../../types/typesUtils';
 
-export const useContractFormik = () => {
+export const useRequestFormik = () => {
     const initialFields = {
-        podpisant: '',
-        dischargeDate: '',
+        terms: '',
+        portTamozhnya: '',
+        portRu: '',
     };
     type FormValuesT = typeof initialFields;
 
     const validate = (values: FormValuesT) => {
         const errors: { [key: string]: string } = {};
 
-        if (!values.dischargeDate) {
-            errors.dischargeDate = 'valueMissing';
+        if (!values.terms) {
+            errors.terms = 'valueMissing';
         }
-        if (!values.podpisant) {
-            errors.podpisant = 'valueMissing';
+        if (!values.portTamozhnya) {
+            errors.portTamozhnya = 'valueMissing';
+        }
+        if (!values.portRu) {
+            errors.portRu = 'valueMissing';
         }
 
         return getErrorsDescription(errors);
     };
 
     const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
-        exportContractStore.setField.dischargeDate(values.dischargeDate);
-        exportContractStore.setField.podpisant(values.podpisant);
+        requestContractStore.setField.terms(values.portRu);
+        requestContractStore.setField.portTamozhnya(values.portRu);
+        requestContractStore.setField.portRu(values.portRu);
     };
 
     const formRef = useRef<FormikProps<FormValuesT>>();
