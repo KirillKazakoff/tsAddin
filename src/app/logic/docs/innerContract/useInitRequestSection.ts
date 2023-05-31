@@ -2,13 +2,16 @@ import requestContractStore from '../../../stores/docsStores/requestContractStor
 import { createRequestContract } from './createRequestContract';
 import { ContractT, groupByContractNo } from './groupByContractNo';
 
-export const useInitRequestSection = () => {
+export const useInitRequestSection = (formik: any) => {
     const contracts = Object.values(groupByContractNo());
     const {
         portTamozhnya, portRu, terms, setField,
     } = requestContractStore;
 
     const onLoad = async (contract: ContractT) => {
+        if (!formik.current.isValid) {
+            throw new Error('invalid input');
+        }
         await createRequestContract(contract);
     };
 

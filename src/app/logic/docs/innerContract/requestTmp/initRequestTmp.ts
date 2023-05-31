@@ -42,7 +42,6 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     initRequestRows(rows, utils);
 
     cells.forEach((cell) => {
-        console.log(cell);
         utils.setCell(cell);
     });
 };

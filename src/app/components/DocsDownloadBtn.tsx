@@ -12,7 +12,7 @@ export default function DocsDownloadBtn({ title, onClick }: PropsT) {
     return (
         <button
             onClick={onLoad} className={className}
-            type='button'
+            type='submit'
         >
             {title}
         </button>

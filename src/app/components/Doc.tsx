@@ -13,7 +13,7 @@ export const Doc = ({ title, onClick, cls }: DocT) => {
 
     return (
         <button
-            type='button' onClick={onLoad}
+            type='submit' onClick={onLoad}
             className={className}
         >
             {title}

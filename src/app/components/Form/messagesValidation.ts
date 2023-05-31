@@ -5,6 +5,15 @@ export const messages: MessagesT = {
         valueMissing: 'Введите дату прибытия в порт',
     },
     podpisant: {
-        valueMissing: 'Укажите подписанта',
+        valueMissing: 'Выберите подписанта',
+    },
+    terms: {
+        valueMissing: 'Выберите условия доставки',
+    },
+    portTamozhnya: {
+        valueMissing: 'Выберите город-порт',
+    },
+    portRu: {
+        valueMissing: 'Выберите конкретный порт',
     },
 };
