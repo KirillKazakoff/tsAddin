@@ -8,6 +8,7 @@ import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import { SelectTermsFormik } from '../../components/Select/SelectTerms';
 import RequestList from './RequestList';
 import { useRequestFormik } from '../../logic/docs/innerContract/useRequestFormik';
+import CheckBoxFormik from '../../components/CheckBoxFormik';
 
 export const RequestSection = observer(() => {
     const formik = useRequestFormik();

@@ -9,7 +9,7 @@ type Props = FieldHookConfig<string> & {
 };
 
 export default function SelectFormik(props: Props) {
-    const [field, meta, helpers] = useField(props);
+    const [field, meta] = useField(props);
     const invalidCls = meta.error && meta.touched ? 'form__control--invalid' : '';
 
     const optionsList = props.options.map((option) => (
