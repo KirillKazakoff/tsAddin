@@ -14,19 +14,21 @@ export const SelectPortRu = observer((props: SelectSpecificT) => {
             current={props.current}
             setter={props.setter}
             options={options}
-            title={'Конкретный порт:'}
+            title={'Порт РФ:'}
         />
     );
 });
 
-export const SelectPortRuFormik = observer(() => {
-    const { portsRu } = spsStore;
-    const options = Object.values(portsRu).map((port) => port.codeName);
+export const SelectPortRuFormik = observer(
+    ({ name = 'portRu' }: { name?: string }) => {
+        const { portsRu } = spsStore;
+        const options = Object.values(portsRu).map((port) => port.codeName);
 
-    return (
-        <SelectFormik
-            name='portRu' title={'Конкретный порт:'}
-            options={options}
-        />
-    );
-});
+        return (
+            <SelectFormik
+                name={name} title={'Порт РФ:'}
+                options={options}
+            />
+        );
+    },
+);

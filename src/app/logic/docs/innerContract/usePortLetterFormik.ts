@@ -37,12 +37,7 @@ export const usePortLetterFormik = () => {
         return getErrorsDescription(errors);
     };
 
-    const onSubmit: OnSubmitT<FormValuesT> = async (values, actions) => {
-        if (values.isCFR) {
-            actions.setFieldError('storageTo', '');
-            actions.setFieldError('storageFrom', '');
-        }
-
+    const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
         portLetterStore.setField.port(values.portRu);
         portLetterStore.setField.podpisant(values.podpisant);
         portLetterStore.setField.dateLetter(values.dateLetter);

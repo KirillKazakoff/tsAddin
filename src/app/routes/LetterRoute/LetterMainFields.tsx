@@ -1,36 +1,37 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
-import CheckBox from '../../components/CheckBox';
-import Input from '../../components/Input';
-import { SelectPortRu } from '../../components/Select/SelectPortRu';
-import { SelectPortZarubezh } from '../../components/Select/SelectPortZarubezh';
-import letterStore from '../../stores/letterStore/letterStore';
+import React, { useEffect } from 'react';
+import { useFormikContext } from 'formik';
+import { SelectPortRuFormik } from '../../components/Select/SelectPortRu';
+import { SelectPortZarubezhFormik } from '../../components/Select/SelectPortZarubezh';
+import InputText from '../../components/Form/InputText';
+import CheckBoxFormik from '../../components/CheckBoxFormik';
 
 export const LetterMainFields = observer(() => {
-    const { fields, setField } = letterStore;
-    const SelectPort = fields.isExport ? SelectPortZarubezh : SelectPortRu;
+    const context = useFormikContext<{ port: string; isExport: boolean }>();
+    const SelectPort = context.values.isExport
+        ? SelectPortZarubezhFormik
+        : SelectPortRuFormik;
+
+    useEffect(() => {
+        context.setFieldValue('port', '');
+    }, [context.values.isExport]);
 
     return (
         <div className='letter__fields'>
-            <Input
+            <InputText
                 title='ETA Владивосток'
-                placeholder='ETA Владивосток'
-                setter={setField.arrivalVld}
-                value={fields.arrivalVld}
-                required
+                placeholder={
+                    context.values.isExport ? 'Дата отбытия' : 'Дата прибытия'
+                }
+                name='arrivalVld'
             />
-            <SelectPort current={fields.port.codeName} setter={setField.port} />
-            <Input
+            <SelectPort name='port' />
+            <InputText
                 title='Дата оплаты'
                 placeholder='Дата оплаты'
-                setter={setField.payment}
-                value={fields.payment}
+                name='payment'
             />
-            <CheckBox
-                title='Предложение на экспорт'
-                setter={letterStore.toggleIsExport}
-                checked={fields.isExport}
-            />
+            <CheckBoxFormik title='Предложение на экспорт' name='isExport' />
         </div>
     );
 });

@@ -28,10 +28,19 @@ export const messages: MessagesT = {
     storageTo: {
         valueMissing: 'Введите дату хранения продавца до',
     },
-    // cargoToAuto: {
-    //     valueMissing: 'Выберите сторону оплачивающую грузовые работы (склад-авто)',
-    // },
-    // cargoToStorage: {
-    //     valueMissing: 'Выберите сторону оплачивающую грузовые работы (борт-склад)',
-    // },
+    arrivalVld: {
+        valueMissing: 'Введите дату прибытия во Владивосток',
+    },
+    payment: {
+        valueMissing: 'Введите дату оплаты',
+    },
+    arrivalForeign: {
+        valueMissing: 'Введите дату прибытия в зарубежный порт',
+    },
+    ground: {
+        valueMissing: 'Введите фишинг-землю',
+    },
+    port: {
+        valueMissing: 'Выберите порт',
+    },
 };

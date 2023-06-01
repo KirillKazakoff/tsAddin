@@ -24,9 +24,8 @@ class LetterStore {
                 this.fields.port = selectSp.portRu(value);
             }
         },
+        isExport: (value: boolean) => (this.fields.isExport = value),
     };
-
-    toggleIsExport = () => (this.fields.isExport = !this.fields.isExport);
 }
 
 const letterStore = new LetterStore();
