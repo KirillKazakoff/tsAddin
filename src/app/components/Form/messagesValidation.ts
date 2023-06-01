@@ -1,4 +1,7 @@
-type MessagesT = { [key: string]: any };
+type ValidationMsg = {
+    valueMissing?: string;
+};
+type MessagesT = { [key: string]: ValidationMsg };
 
 export const messages: MessagesT = {
     dischargeDate: {
@@ -16,4 +19,19 @@ export const messages: MessagesT = {
     portRu: {
         valueMissing: 'Выберите конкретный порт',
     },
+    dateLetter: {
+        valueMissing: 'Введите дату письма',
+    },
+    storageFrom: {
+        valueMissing: 'Введите дату хранения продавца с',
+    },
+    storageTo: {
+        valueMissing: 'Введите дату хранения продавца до',
+    },
+    // cargoToAuto: {
+    //     valueMissing: 'Выберите сторону оплачивающую грузовые работы (склад-авто)',
+    // },
+    // cargoToStorage: {
+    //     valueMissing: 'Выберите сторону оплачивающую грузовые работы (борт-склад)',
+    // },
 };

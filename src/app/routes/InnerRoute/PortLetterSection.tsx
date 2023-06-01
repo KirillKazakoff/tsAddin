@@ -1,92 +1,58 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Form, Formik } from 'formik';
 import { useInitPortLetter } from '../../logic/docs/innerContract/useInitPortLetter';
-import { SelectPortRu } from '../../components/Select/SelectPortRu';
-import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
-import Input from '../../components/Input';
-import CheckBox from '../../components/CheckBox';
-import { SelectCargo } from '../../components/Select/SelectCargo';
-import { Doc } from '../../components/Doc';
+import { SelectPortRuFormik } from '../../components/Select/SelectPortRu';
+import { SelectPodpisantFormik } from '../../components/Select/SelectPodpisant';
+import { SelectCargoFormik } from '../../components/Select/SelectCargo';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
+import CheckBoxFormik from '../../components/CheckBoxFormik';
+import InputText from '../../components/Form/InputText';
+import LetterList from './LetterList';
+import { usePortLetterFormik } from '../../logic/docs/innerContract/usePortLetterFormik';
+import DischargeStorage from './DischargeStorage';
 
 export const PortLetterSection = observer(() => {
-    const initObj = useInitPortLetter();
-    if (!initObj) return null;
-    const {
-        contracts, onLoad, onLoadAll, setField, store, toggle,
-    } = initObj;
-
-    const letterList = contracts.map((contract) => {
-        const { buyer, contractNo } = contract.record;
-        const onClick = () => onLoad(contract);
-
-        return (
-            <Doc
-                onClick={onClick}
-                title={`${buyer.codeName}`}
-                key={contractNo}
-                cls='port-letter'
-            />
-        );
-    });
+    const formik = usePortLetterFormik();
+    const initObj = useInitPortLetter(formik.formRef);
 
     return (
-        <form className='docs__form port-letter-form'>
-            <h2 className='title port-letter-title'>Письма в порт</h2>
-            <h3>Письмо:</h3>
-            <div className='fields-wrapper'>
-                <SelectPortRu current={store.port.codeName} setter={setField.port} />
-                <SelectPodpisant
-                    current={store.podpisant.codeName}
-                    setter={setField.podpisant}
-                />
-                <CheckBox
-                    checked={store.isPicturesActive}
-                    setter={toggle.pictures}
-                    title={'Включить картинки:'}
-                />
-                <Input
-                    title='Дата письма:'
-                    placeholder='Дата письма'
-                    setter={setField.dateLetter}
-                    value={store.dateLetter}
-                />
-                <SelectCargo
-                    current={store.cargoTo.auto}
-                    title='Грузовые работы склад-авто'
-                    setter={setField.cargoTo.auto}
-                />
-                <SelectCargo
-                    current={store.cargoTo.storage}
-                    title='Грузовые работы борт-склад'
-                    setter={setField.cargoTo.storage}
-                />
-                <CheckBox
-                    checked={store.isCFR}
-                    title={'Передача с борта'}
-                    setter={toggle.CFR}
-                />
-                {!store.isCFR ? (
-                    <>
-                        <Input
-                            title='Хранение продавца с:'
-                            placeholder='Хранение с'
-                            setter={setField.storage.from}
-                            value={store.storage.from}
-                        />
-                        <Input
-                            title='Хранение продавца до:'
-                            placeholder='Хранение до'
-                            setter={setField.storage.to}
-                            value={store.storage.to}
-                        />
-                    </>
-                ) : null}
-            </div>
+        <Formik
+            initialValues={formik.initialFields}
+            validate={formik.validate}
+            onSubmit={formik.onSubmit}
+            innerRef={formik.formRef}
+        >
+            <Form className='docs__form port-letter-form'>
+                <h2 className='title port-letter-title'>Письма в порт</h2>
+                <h3>Письмо:</h3>
+                <div className='fields-wrapper'>
+                    <SelectPortRuFormik />
+                    <SelectPodpisantFormik />
+                    <CheckBoxFormik title={'Включить картинки:'} name='pictures' />
+                    <InputText
+                        name='dateLetter'
+                        title='Дата письма:'
+                        placeholder='Дата письма'
+                    />
+                    <SelectCargoFormik
+                        title='Грузовые работы склад-авто'
+                        name='cargoToAuto'
+                    />
+                    <SelectCargoFormik
+                        title='Грузовые работы борт-склад'
+                        name='cargoToStorage'
+                    />
+                    <DischargeStorage />
+                </div>
 
-            <h3 className='title port-letter-title'>Загрузить письма в порт</h3>
-            <ul className='docs port-letter-docs'>{letterList}</ul>
-            <DocsDownloadBtn title='Загрузить все письма' onClick={onLoadAll} />
-        </form>
+                <h3 className='title port-letter-title'>Загрузить письма в порт</h3>
+                <LetterList contracts={initObj.contracts} onLoad={initObj.onLoad} />
+                <DocsDownloadBtn
+                    title='Загрузить все письма'
+                    onClick={initObj.onLoadAll}
+                />
+            </Form>
+        </Formik>
     );
 });

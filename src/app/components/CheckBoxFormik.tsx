@@ -1,5 +1,5 @@
 import { Field, FieldHookConfig, useField } from 'formik';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Feedback from './Form/Feedback';
 
 type Props = FieldHookConfig<string> & {
@@ -10,10 +10,6 @@ type Props = FieldHookConfig<string> & {
 export default function CheckBoxFormik(props: Props) {
     const [field, meta] = useField(props);
     const invalidCls = meta.error && meta.touched ? 'form__control--invalid' : '';
-
-    useEffect(() => {
-        console.log(field.value);
-    });
 
     return (
         <div

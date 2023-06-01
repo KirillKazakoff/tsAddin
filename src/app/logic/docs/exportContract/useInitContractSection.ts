@@ -11,7 +11,7 @@ export const useInitContractSection = (formik: any) => {
         if (!formik.current.isValid) {
             throw new Error('invalid input');
         }
-        createExportContractDoc(agreement);
+        await createExportContractDoc(agreement);
     };
 
     const title = exportContractStore.terms === 'FCA'

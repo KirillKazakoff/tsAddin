@@ -1,15 +1,17 @@
-import { useEffect } from 'react';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { createPortLetter } from './createPortLetter';
 import { ContractT, groupByContractNo } from './groupByContractNo';
-import { tryCatch } from '../../excel/utils/tryCatch';
 
-const initPortLetter = () => {
+export const useInitPortLetter = (formik: any) => {
     const { store, setField, toggle } = portLetterStore;
 
     const contracts = Object.values(groupByContractNo());
 
     const onLoad = async (contract: ContractT) => {
+        if (!formik.current.isValid) {
+            console.log(formik.current);
+            throw new Error('invalid input');
+        }
         await createPortLetter(contract);
     };
 
@@ -25,15 +27,4 @@ const initPortLetter = () => {
         setField,
         toggle,
     };
-};
-
-export const useInitPortLetter = () => {
-    const { setField } = portLetterStore;
-
-    useEffect(() => {
-        setField.port('ДВ-Порт');
-        setField.podpisant('Котов Н.М.');
-    }, []);
-
-    return tryCatch<typeof initPortLetter>(initPortLetter);
 };
