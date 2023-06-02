@@ -2,27 +2,23 @@
 import { makeAutoObservable } from 'mobx';
 import { initPortRu, initPortTamozhnya } from '../initStoreObjects';
 import { selectSp } from '../spsStore/select';
-import { PortRuT, PortTamozhnyaT } from '../../types/typesSP';
 import { FormValuesT } from '../../types/typesUtils';
 
-type RequestContractStoreT = {
-    terms: string;
-    portTamozhnya: PortTamozhnyaT;
-    portRu: PortRuT;
-};
+const initFields = () => ({
+    terms: '',
+    portTamozhnya: initPortTamozhnya(),
+    portRu: initPortRu(),
+});
+type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class RequestContractStore {
-    fields: RequestContractStoreT = {
-        terms: '',
-        portTamozhnya: initPortTamozhnya(),
-        portRu: initPortRu(),
-    };
+    fields = initFields();
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setFields(values: FormValuesT<RequestContractStoreT>) {
+    setFields(values: FormFieldsT) {
         this.fields.terms = values.terms;
         this.fields.portTamozhnya = selectSp.portTamozhnya(values.portTamozhnya);
         this.fields.portRu = selectSp.portRu(values.portRu);

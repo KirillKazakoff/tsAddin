@@ -1,9 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Form, Formik } from 'formik';
-import { SelectPortRuFormik } from '../../components/Select/SelectPortRu';
-import { SelectPodpisantFormik } from '../../components/Select/SelectPodpisant';
-import { SelectCargoFormik } from '../../components/Select/SelectCargo';
+import { SelectPortRu } from '../../components/Select/SelectPortRu';
+import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
+import { SelectCargo } from '../../components/Select/SelectCargo';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import CheckBoxFormik from '../../components/CheckBoxFormik';
 import InputText from '../../components/Form/InputText';
@@ -25,19 +25,19 @@ export const PortLetterSection = observer(() => {
                 <h2 className='title port-letter-title'>Письма в порт</h2>
                 <h3>Письмо:</h3>
                 <div className='fields-wrapper'>
-                    <SelectPortRuFormik />
-                    <SelectPodpisantFormik />
+                    <SelectPortRu />
+                    <SelectPodpisant />
                     <CheckBoxFormik title={'Включить картинки:'} name='isPictures' />
                     <InputText
                         name='dateLetter'
                         title='Дата письма:'
                         placeholder='Дата письма'
                     />
-                    <SelectCargoFormik
+                    <SelectCargo
                         title='Грузовые работы склад-авто'
                         name='cargoToAuto'
                     />
-                    <SelectCargoFormik
+                    <SelectCargo
                         title='Грузовые работы борт-склад'
                         name='cargoToStorage'
                     />

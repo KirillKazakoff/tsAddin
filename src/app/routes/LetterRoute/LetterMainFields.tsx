@@ -1,16 +1,14 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { useFormikContext } from 'formik';
-import { SelectPortRuFormik } from '../../components/Select/SelectPortRu';
-import { SelectPortZarubezhFormik } from '../../components/Select/SelectPortZarubezh';
+import { SelectPortRu } from '../../components/Select/SelectPortRu';
+import { SelectPortZarubezh } from '../../components/Select/SelectPortZarubezh';
 import InputText from '../../components/Form/InputText';
 import CheckBoxFormik from '../../components/CheckBoxFormik';
 
 export const LetterMainFields = observer(() => {
     const context = useFormikContext<{ port: string; isExport: boolean }>();
-    const SelectPort = context.values.isExport
-        ? SelectPortZarubezhFormik
-        : SelectPortRuFormik;
+    const SelectPort = context.values.isExport ? SelectPortZarubezh : SelectPortRu;
 
     useEffect(() => {
         context.setFieldValue('port', '');

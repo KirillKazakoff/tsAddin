@@ -6,30 +6,26 @@ import { FormValuesT } from '../../types/typesUtils';
 
 export type CargoT = 'Покупатель' | 'Продавец' | '';
 
-const initStore = () => {
-    const initFields = {
-        portRu: initPortRu(),
-        podpisant: initPodpisant(),
-        dateLetter: '',
-        isCFR: true,
-        cargoToStorage: '',
-        cargoToAuto: '',
-        storageFrom: '',
-        storageTo: '',
-        isPictures: true,
-    };
-    return initFields;
-};
-
-type PortLetterFieldsT = FormValuesT<ReturnType<typeof initStore>>;
+const initFields = () => ({
+    portRu: initPortRu(),
+    podpisant: initPodpisant(),
+    dateLetter: '',
+    isCFR: true,
+    cargoToStorage: '',
+    cargoToAuto: '',
+    storageFrom: '',
+    storageTo: '',
+    isPictures: true,
+});
+type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class PortLetterStore {
     constructor() {
         makeAutoObservable(this);
     }
-    fields = initStore();
+    fields = initFields();
 
-    setFields(values: PortLetterFieldsT) {
+    setFields(values: FormFieldsT) {
         this.fields.portRu = selectSp.portRu(values.portRu);
         this.fields.podpisant = selectSp.podpisant(values.podpisant);
         this.fields.dateLetter = values.dateLetter;

@@ -1,19 +1,30 @@
 /* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
-import { LetterStoreT, initLetterFields } from './initLetterFields';
 import { selectSp } from '../spsStore/select';
 import { FormValuesT } from '../../types/typesUtils';
-import { initTransport } from '../initStoreObjects';
+import { initPortRu, initTransport } from '../initStoreObjects';
+import { PortRuT, PortZarubezhT } from '../../types/typesSP';
+
+export const initFields = () => ({
+    arrivalVld: '',
+    arrivalForeign: '',
+    payment: '',
+    isExport: false,
+    terms: '',
+    ground: '',
+    port: <PortZarubezhT | PortRuT>initPortRu(),
+});
+type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class LetterStore {
-    fields = initLetterFields();
+    fields = initFields();
     transport = initTransport();
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setFields(values: FormValuesT<LetterStoreT>) {
+    setFields(values: FormFieldsT) {
         this.fields.payment = values.payment;
         this.fields.arrivalVld = values.arrivalVld;
         this.fields.arrivalForeign = values.arrivalForeign;

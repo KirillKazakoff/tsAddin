@@ -7,7 +7,6 @@ import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const AssortimentSection = observer(() => {
     const initObj = useInitAssortimentSection();
-    if (!initObj) return null;
     const { onLoad, onLoadAll, samplesArr } = initObj;
 
     if (exportContractStore.terms === 'FCA') return null;

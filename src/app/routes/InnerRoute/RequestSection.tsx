@@ -2,10 +2,10 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik, Form } from 'formik';
 import { useInitRequestSection } from '../../logic/docs/innerContract/useInitRequestSection';
-import { SelectPortRuFormik } from '../../components/Select/SelectPortRu';
-import { SelectPortTamozhnyaFormik } from '../../components/Select/SelectPortTamozhnya';
+import { SelectPortRu } from '../../components/Select/SelectPortRu';
+import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
-import { SelectTermsFormik } from '../../components/Select/SelectTerms';
+import { SelectTerms } from '../../components/Select/SelectTerms';
 import RequestList from './RequestList';
 
 export const RequestSection = observer(() => {
@@ -24,9 +24,9 @@ export const RequestSection = observer(() => {
                 <h3 className='title request-title'>Заявка:</h3>
 
                 <div className='fields-wrapper'>
-                    <SelectTermsFormik />
-                    <SelectPortTamozhnyaFormik />
-                    <SelectPortRuFormik />
+                    <SelectTerms />
+                    <SelectPortTamozhnya />
+                    <SelectPortRu />
                 </div>
 
                 <h3 className='title request-docs-title'>

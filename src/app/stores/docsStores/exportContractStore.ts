@@ -6,26 +6,22 @@ import { initPodpisant } from '../initStoreObjects';
 import tablesStore from '../tablesStore/tablesStore';
 import { selectSp } from '../spsStore/select';
 import { FormValuesT } from '../../types/typesUtils';
-import { PodpisantT } from '../../types/typesSP';
 
-type ContractStoreT = {
-    podpisant: PodpisantT;
-    dischargeDate: string;
-};
+const initFields = () => ({
+    podpisant: initPodpisant(),
+    dischargeDate: '',
+});
+type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class ExportContractStore {
-    fields: ContractStoreT = {
-        podpisant: initPodpisant(),
-        dischargeDate: '',
-    };
-
+    fields = initFields();
     operation: OperationT = 'export';
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setFields(values: FormValuesT<ContractStoreT>) {
+    setFields(values: FormFieldsT) {
         this.fields.podpisant = selectSp.podpisant(values.podpisant);
         this.fields.dischargeDate = values.dischargeDate;
     }

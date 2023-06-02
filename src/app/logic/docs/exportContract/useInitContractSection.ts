@@ -11,6 +11,7 @@ export const useInitContractSection = () => {
 
     const onLoad = async (agreement: AgreementT) => {
         if (!formik.formRef.current.isValid) {
+            console.log(formik.formRef.current);
             throw new Error('invalid input');
         }
         await createExportContractDoc(agreement);

@@ -20,6 +20,9 @@ export const useContractFormik = () => {
         if (!values.podpisant) {
             errors.podpisant = 'valueMissing';
         }
+        if (exportContractStore.terms !== 'FCA') {
+            delete errors.dischargeDate;
+        }
 
         return getErrorsDescription(errors);
     };

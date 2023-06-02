@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFormikContext } from 'formik';
-import { SelectTermsFormik } from '../../components/Select/SelectTerms';
+import { SelectTerms } from '../../components/Select/SelectTerms';
 import InputText from '../../components/Form/InputText';
 
 export const LetterExportFields = observer(() => {
@@ -15,7 +15,7 @@ export const LetterExportFields = observer(() => {
                 placeholder={'Дата прибытия'}
                 name={'arrivalForeign'}
             />
-            <SelectTermsFormik />
+            <SelectTerms />
             <InputText
                 title='Фишинг земля'
                 placeholder='Fishing ground'
