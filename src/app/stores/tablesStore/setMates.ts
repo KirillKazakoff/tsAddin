@@ -55,5 +55,6 @@ export const setMates = (table: any[][]) => {
     }, []);
 
     tablesStore.setTable.mates(mates);
-    letterStore.setField.transport(mates[0].transport);
+    letterStore.setTransport(mates[0].transport);
+    // letterStore.setField.transport(mates[0].transport);
 };

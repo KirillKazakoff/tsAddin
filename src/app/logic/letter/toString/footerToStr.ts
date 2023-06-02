@@ -19,7 +19,7 @@ export const footerToStrEng = () => {
         terms, arrivalForeign, arrivalVld, payment,
     } = letterStore.fields;
     const port = letterStore.fields.port as PortZarubezhT;
-    const transport = letterStore.fields.transport.eng.name;
+    const transport = letterStore.transport.eng.name;
 
     let weightInformStr = 'Send you weight reports in attached files.';
     if (terms === 'EXW') {
@@ -38,7 +38,7 @@ export const footerToStrEng = () => {
 
     const paymentInfoStr = '- payment 100% during 10 banking days after sign a contract';
     const paymentStr = payment
-        ? `If you get interested, please advise us your price offer, we are going to sell this lot at ${payment}`
+        ? `\nIf you get interested, please advise us your price offer, we are going to sell this lot at ${payment}`
         : '';
 
     return `\n${weightInformStr}\n\n${arrivalStr}${termsStr}\n${paymentInfoStr}\n${paymentStr}`;

@@ -25,8 +25,7 @@ export const useContractFormik = () => {
     };
 
     const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
-        exportContractStore.setField.dischargeDate(values.dischargeDate);
-        exportContractStore.setField.podpisant(values.podpisant);
+        exportContractStore.setFields(values);
     };
 
     const formRef = useRef<FormikProps<FormValuesT>>();

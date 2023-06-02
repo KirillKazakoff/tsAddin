@@ -9,7 +9,7 @@ import { initPortLetterTmp } from './portLetterTmp/initPortLetterTmp';
 export const createPortLetter = async (contract: ContractT) => {
     const { record } = contract;
     const book = await readTmp(pathObj.portLetter);
-    const { podpisant, isPicturesActive } = portLetterStore.store;
+    const { podpisant, isPictures } = portLetterStore.fields;
 
     const { seller } = contract.record;
     const url = seller.codeName === 'ТРК' ? pathObj.bg.trk : pathObj.bg.msi;
@@ -43,7 +43,7 @@ export const createPortLetter = async (contract: ContractT) => {
                     book,
                 },
             ],
-            isPicturesActive,
+            isPictures,
         );
 
         await saveFile(book, `Письмо ${record.buyer.codeName}`);

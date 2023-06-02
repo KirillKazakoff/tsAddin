@@ -9,7 +9,7 @@ export const ExportRadio = observer(() => {
 
     const onChange = (e: InputEventT) => {
         const value = e.currentTarget.value as OperationT;
-        exportContractStore.setField.operation(value);
+        exportContractStore.setOperation(value);
     };
 
     return (

@@ -37,15 +37,7 @@ export const useLetterFormik = () => {
     };
 
     const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
-        console.log(values.port);
-        letterStore.setField.arrivalVld(values.arrivalVld);
-        letterStore.setField.payment(values.payment);
-        letterStore.setField.isExport(values.isExport);
-        letterStore.setField.arrivalForeign(values.arrivalForeign);
-        letterStore.setField.terms(values.terms);
-        letterStore.setField.ground(values.ground);
-        letterStore.setField.port(values.port);
-        console.log({ ...letterStore.fields });
+        letterStore.setFields(values);
     };
 
     const formRef = useRef<FormikProps<FormValuesT>>();

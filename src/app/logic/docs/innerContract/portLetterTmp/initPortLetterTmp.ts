@@ -10,46 +10,46 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
     const utils = initExcelUtils(ws);
 
     const { record, rows } = contract;
-    const { store } = portLetterStore;
+    const { fields } = portLetterStore;
 
     const letterHeaderStr = `Просим вас рыбопродукцию, ${
-        store.isCFR
+        fields.isCFR
             ? `которая прибудет в п. Владивосток на ${record.transport.ru.name} в адрес ${record.seller.ru.name} по следующим коносаментам:`
             : `находящуюся на хранении ${record.seller.ru.name}`
     }`;
     const letterFooterStr = `передать с ${
-        store.isCFR ? 'борта судна' : 'нашего хранения'
+        fields.isCFR ? 'борта судна' : 'нашего хранения'
     } компании ${record.buyer.name} ИНН ${record.buyer.inn}`;
 
     const cargoToStorageStr = `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
-        store.cargoTo.storage === 'Покупатель'
+        fields.cargoToStorage === 'Покупатель'
             ? record.buyer.name
             : record.seller.ru.name
     }`;
     const cargoToAutoStr = `Оплата грузовых работ (склад-авто) будет производиться за счет ${
-        store.cargoTo.auto === 'Покупатель'
+        fields.cargoToAuto === 'Покупатель'
             ? record.buyer.name
             : record.seller.ru.name
     }`;
 
-    const storageStr = !store.isCFR
-        ? `Хранение стороной продавца осуществляется до ${store.storage.to}. Хранение покупателя осуществляется с ${store.storage.from}`
+    const storageStr = !fields.isCFR
+        ? `Хранение стороной продавца осуществляется до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`
         : '';
 
     // prettier-ignore
     const cells: CellObjT[] = [
-        { cell: 'Порт', value: `${store.port.name}` },
-        { cell: 'Порт_директор', value: `${store.port.director}` },
-        { cell: 'Порт_почта', value: `${store.port.mail}` },
+        { cell: 'Порт', value: `${fields.portRu.name}` },
+        { cell: 'Порт_директор', value: `${fields.portRu.director}` },
+        { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
         { cell: 'Письмо_описание_шапка', value: letterHeaderStr },
         { cell: 'Письмо_описание_подвал', value: letterFooterStr },
         { cell: 'Покупатель_телефон', value: `( контактный телефон ${record.buyer.phone} )` },
         { cell: 'Грузовые_борт_склад', value: cargoToStorageStr },
         { cell: 'Грузовые_склад_авто', value: cargoToAutoStr },
         { cell: 'Хранение', value: storageStr },
-        { cell: 'Подписант_комментарий', value: store.podpisant.ru.comment },
-        { cell: 'Подписант', value: store.podpisant.ru.name },
-        { cell: 'Письмо_дата', value: store.dateLetter },
+        { cell: 'Подписант_комментарий', value: fields.podpisant.ru.comment },
+        { cell: 'Подписант', value: fields.podpisant.ru.name },
+        { cell: 'Письмо_дата', value: fields.dateLetter },
     ];
 
     initPortLetterRows(rows, utils);

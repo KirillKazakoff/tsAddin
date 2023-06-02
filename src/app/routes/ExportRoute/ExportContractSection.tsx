@@ -6,11 +6,9 @@ import { SelectPodpisantFormik } from '../../components/Select/SelectPodpisant';
 import AgreementList from './AgreementList';
 import { ExportDateFCA } from './ExportDateFCA';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
-import { useContractFormik } from '../../logic/docs/exportContract/useContractFormik';
 
 export const ExportContractSection = observer(() => {
-    const formik = useContractFormik();
-    const initObj = useInitContractSection(formik.formRef);
+    const { formik, initObj } = useInitContractSection();
 
     return (
         <Formik
@@ -28,8 +26,6 @@ export const ExportContractSection = observer(() => {
                     agreements={initObj.agreements}
                     onLoad={initObj.onLoad}
                 />
-
-                <button type='submit'>Submit</button>
             </Form>
         </Formik>
     );

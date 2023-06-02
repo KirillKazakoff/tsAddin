@@ -29,9 +29,7 @@ export const useRequestFormik = () => {
     };
 
     const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
-        requestContractStore.setField.terms(values.terms);
-        requestContractStore.setField.portTamozhnya(values.portTamozhnya);
-        requestContractStore.setField.portRu(values.portRu);
+        requestContractStore.setFields(values);
     };
 
     const formRef = useRef<FormikProps<FormValuesT>>();

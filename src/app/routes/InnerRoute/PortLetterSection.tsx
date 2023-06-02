@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Form, Formik } from 'formik';
-import { useInitPortLetter } from '../../logic/docs/innerContract/useInitPortLetter';
 import { SelectPortRuFormik } from '../../components/Select/SelectPortRu';
 import { SelectPodpisantFormik } from '../../components/Select/SelectPodpisant';
 import { SelectCargoFormik } from '../../components/Select/SelectCargo';
@@ -9,12 +8,11 @@ import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import CheckBoxFormik from '../../components/CheckBoxFormik';
 import InputText from '../../components/Form/InputText';
 import LetterList from './LetterList';
-import { usePortLetterFormik } from '../../logic/docs/innerContract/usePortLetterFormik';
 import DischargeStorage from './DischargeStorage';
+import { useInitPortLetter } from '../../logic/docs/innerContract/useInitPortLetter';
 
 export const PortLetterSection = observer(() => {
-    const formik = usePortLetterFormik();
-    const initObj = useInitPortLetter(formik.formRef);
+    const { formik, initObj } = useInitPortLetter();
 
     return (
         <Formik
@@ -29,7 +27,7 @@ export const PortLetterSection = observer(() => {
                 <div className='fields-wrapper'>
                     <SelectPortRuFormik />
                     <SelectPodpisantFormik />
-                    <CheckBoxFormik title={'Включить картинки:'} name='pictures' />
+                    <CheckBoxFormik title={'Включить картинки:'} name='isPictures' />
                     <InputText
                         name='dateLetter'
                         title='Дата письма:'

@@ -2,13 +2,15 @@ import exportContractStore from '../../../stores/docsStores/exportContractStore'
 import { createExportContractDoc } from './createExportContractDoc';
 import { groupAgByNo } from './groupBy/groupAgByNo';
 import { AgreementT } from './groupBy/initAgreement';
+import { useContractFormik } from './useContractFormik';
 
-export const useInitContractSection = (formik: any) => {
+export const useInitContractSection = () => {
+    const formik = useContractFormik();
     const agreementObj = groupAgByNo();
     const agreements = Object.values(agreementObj);
 
     const onLoad = async (agreement: AgreementT) => {
-        if (!formik.current.isValid) {
+        if (!formik.formRef.current.isValid) {
             throw new Error('invalid input');
         }
         await createExportContractDoc(agreement);
@@ -18,9 +20,9 @@ export const useInitContractSection = (formik: any) => {
         ? 'Экспорт Контракт(FCA)'
         : 'Экспорт Контракт';
 
+    const initObj = { onLoad, agreements, title };
     return {
-        onLoad,
-        agreements,
-        title,
+        initObj,
+        formik,
     };
 };

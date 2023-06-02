@@ -1,15 +1,16 @@
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { createPortLetter } from './createPortLetter';
 import { ContractT, groupByContractNo } from './groupByContractNo';
+import { usePortLetterFormik } from './usePortLetterFormik';
 
-export const useInitPortLetter = (formik: any) => {
-    const { store, setField, toggle } = portLetterStore;
+export const useInitPortLetter = () => {
+    const formik = usePortLetterFormik();
+    const { fields } = portLetterStore;
 
     const contracts = Object.values(groupByContractNo());
 
     const onLoad = async (contract: ContractT) => {
-        if (!formik.current.isValid) {
-            console.log(formik.current);
+        if (!formik.formRef.current.isValid) {
             throw new Error('invalid input');
         }
         await createPortLetter(contract);
@@ -19,12 +20,11 @@ export const useInitPortLetter = (formik: any) => {
         await Promise.all(contracts.map((contract) => onLoad(contract)));
     };
 
-    return {
+    const initObj = {
         contracts,
         onLoad,
         onLoadAll,
-        store,
-        setField,
-        toggle,
+        fields,
     };
+    return { initObj, formik };
 };

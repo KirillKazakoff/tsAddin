@@ -1,31 +1,33 @@
 /* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
-import { initLetterFields } from './initLetterFields';
+import { LetterStoreT, initLetterFields } from './initLetterFields';
 import { selectSp } from '../spsStore/select';
+import { FormValuesT } from '../../types/typesUtils';
+import { initTransport } from '../initStoreObjects';
 
 class LetterStore {
     fields = initLetterFields();
+    transport = initTransport();
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setField = {
-        transport: (value: string) => (this.fields.transport = selectSp.transport(value)),
-        payment: (value: string) => (this.fields.payment = value),
-        arrivalVld: (value: string) => (this.fields.arrivalVld = value),
-        arrivalForeign: (value: string) => (this.fields.arrivalForeign = value),
-        terms: (value: string) => (this.fields.terms = value),
-        ground: (value: string) => (this.fields.ground = value),
-        port: (value: string) => {
-            if (this.fields.isExport) {
-                this.fields.port = selectSp.portZarubezh(value);
-            } else {
-                this.fields.port = selectSp.portRu(value);
-            }
-        },
-        isExport: (value: boolean) => (this.fields.isExport = value),
-    };
+    setFields(values: FormValuesT<LetterStoreT>) {
+        this.fields.payment = values.payment;
+        this.fields.arrivalVld = values.arrivalVld;
+        this.fields.arrivalForeign = values.arrivalForeign;
+        this.fields.terms = values.terms;
+        this.fields.ground = values.ground;
+        this.fields.isExport = values.isExport;
+        this.fields.port = this.fields.isExport
+            ? selectSp.portZarubezh(values.port)
+            : selectSp.portRu(values.port);
+    }
+
+    setTransport(value: string) {
+        this.transport = selectSp.transport(value);
+    }
 }
 
 const letterStore = new LetterStore();

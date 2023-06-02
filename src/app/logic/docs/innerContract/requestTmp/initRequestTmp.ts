@@ -11,7 +11,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     const utils = initExcelUtils(ws);
 
     const { record, priceTotal, rows } = contract;
-    const { portRu, portTamozhnya, terms } = requestContractStore;
+    const { portRu, portTamozhnya, terms } = requestContractStore.fields;
 
     const isVld = portTamozhnya.codeName === 'Владивосток';
     const isCfrVld = terms.includes('CFR') && isVld;

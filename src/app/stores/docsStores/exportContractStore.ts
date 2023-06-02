@@ -5,9 +5,16 @@ import { OperationT } from '../../types/typesTables';
 import { initPodpisant } from '../initStoreObjects';
 import tablesStore from '../tablesStore/tablesStore';
 import { selectSp } from '../spsStore/select';
+import { FormValuesT } from '../../types/typesUtils';
+import { PodpisantT } from '../../types/typesSP';
+
+type ContractStoreT = {
+    podpisant: PodpisantT;
+    dischargeDate: string;
+};
 
 class ExportContractStore {
-    fields = {
+    fields: ContractStoreT = {
         podpisant: initPodpisant(),
         dischargeDate: '',
     };
@@ -18,11 +25,14 @@ class ExportContractStore {
         makeAutoObservable(this);
     }
 
-    setField = {
-        podpisant: (value: string) => (this.fields.podpisant = selectSp.podpisant(value)),
-        operation: (value: OperationT) => (this.operation = value),
-        dischargeDate: (value: string) => (this.fields.dischargeDate = value),
-    };
+    setFields(values: FormValuesT<ContractStoreT>) {
+        this.fields.podpisant = selectSp.podpisant(values.podpisant);
+        this.fields.dischargeDate = values.dischargeDate;
+    }
+
+    setOperation(value: OperationT) {
+        this.operation = value;
+    }
 
     getCurrentTable() {
         return this.operation === 'export'

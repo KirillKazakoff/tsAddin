@@ -1,14 +1,16 @@
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import { getHref } from './getHref';
+import { useLetterFormik } from './useLetterFormik';
 
-export const useInitLetter = (formik: any) => {
-    const onLoad = async () => {
+export const useInitLetter = () => {
+    const formik = useLetterFormik();
+
+    const onSubmit = async () => {
         if (!formik.formRef.current.isValid) {
-            console.log('invalid input');
+            throw new Error('invalid input!');
             return;
         }
 
-        console.log('heyy');
         await formik.onSubmit(formik.formRef.current.values);
 
         const href = getHref();
@@ -17,5 +19,5 @@ export const useInitLetter = (formik: any) => {
         excelSyncStore.setSync(false);
     };
 
-    return onLoad;
+    return { onSubmit, formik };
 };

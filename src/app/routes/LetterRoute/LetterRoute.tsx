@@ -4,11 +4,9 @@ import { Form, Formik } from 'formik';
 import { useInitLetter } from '../../logic/letter/useInitLetter';
 import { LetterExportFields } from './LetterExportFields';
 import { LetterMainFields } from './LetterMainFields';
-import { useLetterFormik } from '../../logic/letter/useLetterFormik';
 
 export const LetterRoute = observer(() => {
-    const formik = useLetterFormik();
-    const onSubmit = useInitLetter(formik);
+    const { onSubmit, formik } = useInitLetter();
 
     return (
         <Formik
