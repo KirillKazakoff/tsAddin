@@ -3,6 +3,7 @@ import { makeAutoObservable } from 'mobx';
 import { initPodpisant, initPortRu } from '../initStoreObjects';
 import { selectSp } from '../spsStore/select';
 import { FormValuesT } from '../../types/typesUtils';
+import { TermsT } from '../../types/typesTables';
 
 export type CargoT = 'Покупатель' | 'Продавец' | '';
 
@@ -10,12 +11,12 @@ const initFields = () => ({
     portRu: initPortRu(),
     podpisant: initPodpisant(),
     dateLetter: '',
-    isCFR: true,
     cargoToStorage: '',
     cargoToAuto: '',
     storageFrom: '',
     storageTo: '',
     isPictures: true,
+    termsPort: <TermsT>'',
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
@@ -34,7 +35,6 @@ class PortLetterStore {
         this.fields.storageFrom = values.storageFrom;
         this.fields.storageTo = values.storageTo;
         this.fields.isPictures = values.isPictures;
-        this.fields.isCFR = values.isCFR;
     }
 }
 

@@ -226,3 +226,7 @@ b {
     border: 1px solid transparent;
     border-radius: 20px;
 }
+
+.radio-wrapper input {
+    cursor: pointer;
+}

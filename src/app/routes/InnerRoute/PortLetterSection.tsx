@@ -10,6 +10,7 @@ import InputText from '../../components/Form/InputText';
 import LetterList from './LetterList';
 import DischargeStorage from './DischargeStorage';
 import { useInitPortLetter } from '../../logic/docs/innerContract/useInitPortLetter';
+import { SelectTerms } from '../../components/Select/SelectTerms';
 
 export const PortLetterSection = observer(() => {
     const { formik, initObj } = useInitPortLetter();
@@ -25,14 +26,14 @@ export const PortLetterSection = observer(() => {
                 <h2 className='title port-letter-title'>Письма в порт</h2>
                 <h3>Письмо:</h3>
                 <div className='fields-wrapper'>
-                    <SelectPortRu />
-                    <SelectPodpisant />
-                    <CheckBoxFormik title={'Включить картинки:'} name='isPictures' />
                     <InputText
                         name='dateLetter'
                         title='Дата письма:'
                         placeholder='Дата письма'
                     />
+                    <SelectPortRu />
+                    <SelectPodpisant />
+                    <SelectTerms name='termsPort' />
                     <SelectCargo
                         title='Грузовые работы склад-авто'
                         name='cargoToAuto'
@@ -42,6 +43,7 @@ export const PortLetterSection = observer(() => {
                         name='cargoToStorage'
                     />
                     <DischargeStorage />
+                    <CheckBoxFormik title={'Включить картинки:'} name='isPictures' />
                 </div>
 
                 <h3 className='title port-letter-title'>Загрузить письма в порт</h3>

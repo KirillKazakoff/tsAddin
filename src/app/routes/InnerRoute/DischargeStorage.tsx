@@ -1,15 +1,14 @@
 import React from 'react';
 import { useFormikContext } from 'formik';
-import CheckBoxFormik from '../../components/CheckBoxFormik';
 import InputText from '../../components/Form/InputText';
+import { TermsT } from '../../types/typesTables';
 
 export default function DischargeStorage() {
-    const context = useFormikContext<{ isCFR: boolean }>();
+    const context = useFormikContext<{ termsPort: TermsT }>();
 
     return (
         <div className='port-letter__discharge'>
-            <CheckBoxFormik name='isCFR' title='Передача с борта' />
-            {!context.values.isCFR ? (
+            {!context.values.termsPort.includes('CFR') ? (
                 <>
                     <InputText
                         name='storageFrom'

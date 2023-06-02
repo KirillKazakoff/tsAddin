@@ -26,6 +26,9 @@ export const ExportRoute = observer(() => {
             </div>
         );
     }
+    if (exportContractStore.terms === 'FCA') {
+        ExportSection = ExportContractSection;
+    }
 
     return (
         <div className='doc-links'>

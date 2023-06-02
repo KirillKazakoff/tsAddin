@@ -3,6 +3,7 @@ import { FormikProps } from 'formik';
 import getErrorsDescription from '../../../components/Form/getErrorsDescription';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { OnSubmitT } from '../../../types/typesUtils';
+import { TermsT } from '../../../types/typesTables';
 
 export const usePortLetterFormik = () => {
     const initialFields = {
@@ -12,11 +13,10 @@ export const usePortLetterFormik = () => {
         dateLetter: '',
         cargoToAuto: '',
         cargoToStorage: '',
-        isCFR: false,
+        termsPort: <TermsT>'',
         storageFrom: '',
         storageTo: '',
     };
-
     type FormValuesT = typeof initialFields;
 
     const validate = (values: FormValuesT) => {
@@ -26,10 +26,14 @@ export const usePortLetterFormik = () => {
         if (!values.podpisant) errors.podpisant = 'valueMissing';
         if (!values.dateLetter) errors.dateLetter = 'valueMissing';
 
-        if (!values.isCFR) {
+        if (!values.termsPort) {
+            errors.terms = 'valueMissing';
+        }
+
+        if (!values.termsPort.includes('CFR')) {
             if (!values.storageFrom) errors.storageFrom = 'valueMissing';
             if (!values.storageTo) errors.storageTo = 'valueMissing';
-        } else if (values.isCFR) {
+        } else if (values.termsPort.includes('CFR')) {
             delete errors.storageFrom;
             delete errors.storageTo;
         }

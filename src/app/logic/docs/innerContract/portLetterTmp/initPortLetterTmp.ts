@@ -13,12 +13,12 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
     const { fields } = portLetterStore;
 
     const letterHeaderStr = `Просим вас рыбопродукцию, ${
-        fields.isCFR
+        fields.termsPort.includes('CFR')
             ? `которая прибудет в п. Владивосток на ${record.transport.ru.name} в адрес ${record.seller.ru.name} по следующим коносаментам:`
             : `находящуюся на хранении ${record.seller.ru.name}`
     }`;
     const letterFooterStr = `передать с ${
-        fields.isCFR ? 'борта судна' : 'нашего хранения'
+        fields.termsPort.includes('CFR') ? 'борта судна' : 'нашего хранения'
     } компании ${record.buyer.name} ИНН ${record.buyer.inn}`;
 
     const cargoToStorageStr = `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
@@ -32,7 +32,7 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
             : record.seller.ru.name
     }`;
 
-    const storageStr = !fields.isCFR
+    const storageStr = !fields.termsPort.includes('CFR')
         ? `Хранение стороной продавца осуществляется до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`
         : '';
 

@@ -3,13 +3,10 @@ import { observer } from 'mobx-react-lite';
 import { useInitAssortimentSection } from '../../logic/docs/assortiment/useInitAssortimentSection';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import { Doc } from '../../components/Doc';
-import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const AssortimentSection = observer(() => {
     const initObj = useInitAssortimentSection();
     const { onLoad, onLoadAll, samplesArr } = initObj;
-
-    if (exportContractStore.terms === 'FCA') return null;
 
     const sampleDocs = samplesArr.map((sample) => {
         const consignee = sample.record.consignee.codeName;

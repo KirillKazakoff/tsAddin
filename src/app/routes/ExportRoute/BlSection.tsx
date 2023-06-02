@@ -6,7 +6,6 @@ import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
 
 const BlSection = observer(() => {
     const initObj = useInitBlSection();
-    if (!initObj) return null;
     const { blGroupsArr, onLoad, onLoadAll } = initObj;
 
     const blDocs = blGroupsArr.map((group) => {

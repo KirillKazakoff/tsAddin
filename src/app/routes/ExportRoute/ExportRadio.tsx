@@ -12,6 +12,8 @@ export const ExportRadio = observer(() => {
         exportContractStore.setOperation(value);
     };
 
+    if (exportContractStore.terms === 'FCA') return null;
+
     return (
         <div className='export-radio'>
             <h2 className='export-radio__title'>Выберите таблицу</h2>
