@@ -1,24 +1,26 @@
 import { useEffect, useRef } from 'react';
 import { FormikProps } from 'formik';
-import _ from 'lodash';
 import getErrorsDescription from '../../../components/Form/getErrorsDescription';
-import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { OnSubmitT } from '../../../types/typesUtils';
 import { TermsT } from '../../../types/typesTables';
+import portLetterStore from '../../../stores/docsStores/portLetterStore';
+import { debugPortLetter } from '../../../stores/tablesStore/utils/debug';
 
 export const usePortLetterFormik = () => {
+    // const initialFields = debugPortLetter;
     const initialFields = {
-        dateLetter: '12.12.23',
-        portRu: 'ВМРП',
-        podpisant: 'Котов М.Н.',
+        dateLetter: '',
+        portRu: '',
+        podpisant: '',
+        termsPort: <TermsT>'',
         isPictures: true,
-        termsPort: <TermsT>'FCA',
-        personDischarge: 'Афанасьева В.В.',
         cargoToAuto: '',
         cargoToStorage: '',
         storageFrom: '',
         storageTo: '',
+        personDischarge: '',
     };
+
     type FormValuesT = typeof initialFields;
 
     const validate = (values: FormValuesT) => {
@@ -55,7 +57,6 @@ export const usePortLetterFormik = () => {
 
     const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
         portLetterStore.setFields(values);
-        console.log(_.cloneDeep(portLetterStore.fields));
     };
 
     const formRef = useRef<FormikProps<FormValuesT>>();
@@ -70,16 +71,3 @@ export const usePortLetterFormik = () => {
         formRef,
     };
 };
-
-// const initialFields = {
-//     portRu: '',
-//     podpisant: '',
-//     isPictures: false,
-//     dateLetter: '',
-//     termsPort: <TermsT>'',
-//     cargoToAuto: '',
-//     cargoToStorage: '',
-//     storageFrom: '',
-//     storageTo: '',
-//     personDischarge: '',
-// };

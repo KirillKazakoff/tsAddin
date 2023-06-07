@@ -14,6 +14,7 @@ export const useInitPortLetter = () => {
             throw new Error('invalid input');
         }
 
+        await formik.onSubmit(formik.formRef.current.values);
         await createPortLetter(contract);
     };
 

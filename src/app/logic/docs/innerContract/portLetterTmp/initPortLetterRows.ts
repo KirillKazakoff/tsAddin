@@ -21,7 +21,7 @@ export const initPortLetterRows = (rows: InnerRowT[], utils: CellUtilsT) => {
 
         if (portLetterStore.fields.termsPort === 'FCA') {
             delete cols.places;
-            cols.pack = '-';
+            delete cols.pack;
         }
 
         const rowArr = Object.values(cols);
