@@ -43,4 +43,7 @@ export const messages: MessagesT = {
     port: {
         valueMissing: 'Выберите порт',
     },
+    personDischarge: {
+        valueMissing: 'Выберите ответственного за диспетчеризацию',
+    },
 };

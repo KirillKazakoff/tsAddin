@@ -8,7 +8,6 @@ export const useInitLetter = () => {
     const onSubmit = async () => {
         if (!formik.formRef.current.isValid) {
             throw new Error('invalid input!');
-            return;
         }
 
         await formik.onSubmit(formik.formRef.current.values);

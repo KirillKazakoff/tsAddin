@@ -20,7 +20,6 @@ export const createExportContractDoc = async (agreement: AgreementT) => {
         ? pathObj.exportContract
         : pathObj.exportStorageContract;
     if (agreement.record.terms === 'FCA') path = pathObj.exportContractFCA;
-
     const book = await readTmp(path);
 
     const settings: InvoicesTmpsSettingsT = {

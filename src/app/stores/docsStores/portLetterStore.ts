@@ -11,12 +11,13 @@ const initFields = () => ({
     portRu: initPortRu(),
     podpisant: initPodpisant(),
     dateLetter: '',
+    isPictures: true,
+    termsPort: <TermsT>'',
     cargoToStorage: '',
     cargoToAuto: '',
     storageFrom: '',
     storageTo: '',
-    isPictures: true,
-    termsPort: <TermsT>'',
+    personDischarge: '',
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
@@ -35,6 +36,8 @@ class PortLetterStore {
         this.fields.storageFrom = values.storageFrom;
         this.fields.storageTo = values.storageTo;
         this.fields.isPictures = values.isPictures;
+        this.fields.personDischarge = values.personDischarge;
+        this.fields.termsPort = values.termsPort as TermsT;
     }
 }
 

@@ -3,12 +3,11 @@ import { observer } from 'mobx-react-lite';
 import { Form, Formik } from 'formik';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
-import { SelectCargo } from '../../components/Select/SelectCargo';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import CheckBoxFormik from '../../components/CheckBoxFormik';
 import InputText from '../../components/Form/InputText';
 import LetterList from './LetterList';
-import DischargeStorage from './DischargeStorage';
+import DischargeTerms from './DischargeTerms';
 import { useInitPortLetter } from '../../logic/docs/innerContract/useInitPortLetter';
 import { SelectTerms } from '../../components/Select/SelectTerms';
 
@@ -34,15 +33,7 @@ export const PortLetterSection = observer(() => {
                     <SelectPortRu />
                     <SelectPodpisant />
                     <SelectTerms name='termsPort' />
-                    <SelectCargo
-                        title='Грузовые работы склад-авто'
-                        name='cargoToAuto'
-                    />
-                    <SelectCargo
-                        title='Грузовые работы борт-склад'
-                        name='cargoToStorage'
-                    />
-                    <DischargeStorage />
+                    <DischargeTerms />
                     <CheckBoxFormik title={'Включить картинки:'} name='isPictures' />
                 </div>
 

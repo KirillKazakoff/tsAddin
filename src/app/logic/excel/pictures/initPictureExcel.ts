@@ -1,4 +1,4 @@
-import { Workbook } from 'exceljs';
+import { Worksheet } from 'exceljs';
 import { noPictureFound } from '../../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 import picturesStore from '../../../stores/picturesStore/picturesStore';
@@ -6,48 +6,33 @@ import { selectPicture } from '../../../stores/picturesStore/selectPicture';
 import { initExcelUtils } from '../utils/excelUtilsObj/initExcelUtils';
 import { blobFromBase64 } from './blobFromBase64';
 import { getPictureRange } from './getPictureRange';
+import { loadPicture } from './loadPicture';
 
 export type PictureSettingsT = {
     key: string;
-    book: Workbook;
+    ws: Worksheet;
     rangeObj: { start: string; end: string };
-    sheetName: string;
 };
-export const initPicture = async (settings: PictureSettingsT) => {
-    const {
-        key: keyCode, book, rangeObj, sheetName,
-    } = settings;
+
+export const initPictureExcel = async (settings: PictureSettingsT) => {
+    const { key: keyCode, ws, rangeObj } = settings;
 
     const key = selectPicture(keyCode);
     const blob = blobFromBase64(picturesStore.pictures[key]);
     if (!blob) return;
 
-    const reader = new FileReader();
+    const range = getPictureRange(rangeObj, ws);
 
-    const ws = book.getWorksheet(sheetName);
-    const range = getPictureRange(rangeObj.start, rangeObj.end, ws);
-
-    await new Promise((resolve) => {
-        reader.onload = async function callback() {
-            const imgId = book.addImage({
-                base64: this.result as string,
-                extension: 'png',
-            });
-
-            ws.addImage(imgId, range);
-            resolve(true);
-        };
-        reader.readAsDataURL(blob);
-    });
+    await loadPicture({ ws, blob, range });
 };
 
-export const initPictures = async (
+export const initPicturesExcel = async (
     settingsArr: PictureSettingsT[],
     isActive: boolean,
 ) => {
     if (!isActive || !picturesStore.isPicturesFound) {
         // clear picture fields if dont need pictures
-        const ws = settingsArr[0].book.getWorksheet(settingsArr[0].sheetName);
+        const { ws } = settingsArr[0];
         const utils = initExcelUtils(ws);
 
         settingsArr.forEach((settings) => {
@@ -61,6 +46,6 @@ export const initPictures = async (
         return;
     }
 
-    const promises = settingsArr.map((settings) => initPicture(settings));
+    const promises = settingsArr.map((settings) => initPictureExcel(settings));
     await Promise.all(promises);
 };

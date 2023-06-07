@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { InnerRowT } from '../../../../types/typesTables';
 import { alignmentCenter, borderAll, styleRowCells } from '../../styleRowCells';
@@ -9,14 +10,21 @@ export const initPortLetterRows = (rows: InnerRowT[], utils: CellUtilsT) => {
     const arrayCl = utils.getCell(cellName);
 
     rows.forEach((r, i) => {
-        const rowArr = [
-            r.konosament,
-            `${r.product.ru.name} ${r.sort}`,
-            r.vessel.ru.name,
-            `1/${r.pack}`,
-            r.amount.places.str,
-            r.amount.placesTotal.str,
-        ];
+        const cols = {
+            konosament: r.konosament,
+            product: `${r.product.ru.name} ${r.sort}`,
+            vessel: r.vessel.ru.name,
+            pack: `1/${r.pack}`,
+            places: r.amount.places.str,
+            placesTotal: r.amount.placesTotal.str,
+        };
+
+        if (portLetterStore.fields.termsPort === 'FCA') {
+            delete cols.places;
+            cols.pack = '-';
+        }
+
+        const rowArr = Object.values(cols);
 
         const rowIndex = +arrayCl.row + i;
         ws.insertRow(rowIndex, rowArr).commit();

@@ -1,52 +1,64 @@
+import _ from 'lodash';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
-import { initPictures } from '../../excel/pictures/initPicture';
+import { initPicturesExcel } from '../../excel/pictures/initPictureExcel';
+import { initPictureGit } from '../../excel/pictures/initPictureGit';
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
 import { ContractT } from './groupByContractNo';
 import { initPortLetterTmp } from './portLetterTmp/initPortLetterTmp';
+import { initPortLetterTmpFCA } from './portLetterTmp/initPortLetterTmpFCA';
 
 export const createPortLetter = async (contract: ContractT) => {
-    const { record } = contract;
-    const book = await readTmp(pathObj.portLetter);
-    const { podpisant, isPictures } = portLetterStore.fields;
+    setTimeout(async () => {
+        const { record } = contract;
+        const { podpisant, isPictures } = portLetterStore.fields;
+        const { seller } = contract.record;
 
-    const { seller } = contract.record;
-    const url = seller.codeName === 'ТРК' ? pathObj.bg.trk : pathObj.bg.msi;
-    const blob = await (await fetch(url)).blob();
-    const reader = new FileReader();
+        // getPathToTemplate
+        console.log(_.cloneDeep(portLetterStore));
 
-    reader.onload = async function callback() {
-        const imgId = book.addImage({
-            base64: this.result as string,
-            extension: 'png',
-        });
-
+        const path = portLetterStore.fields.termsPort === 'FCA'
+            ? pathObj.portLetterFCA
+            : pathObj.portLetter;
+        const book = await readTmp(path);
         const ws = book.getWorksheet('Port_Letter');
-        ws.addImage(imgId, 'A1:F14');
 
         // save order (tmp first then pictures)
-        initPortLetterTmp(book, contract);
-        // prettier-ignore
-        await initPictures(
+        if (portLetterStore.fields.termsPort === 'FCA') {
+            initPortLetterTmpFCA(book, contract);
+        } else {
+            initPortLetterTmp(book, contract);
+        }
+
+        await initPictureGit({
+            url: seller.codeName === 'ТРК' ? pathObj.bg.trk : pathObj.bg.msi,
+            ws,
+            rangeObj: { start: 'Banner_start', end: 'Banner_end' },
+        });
+        await initPicturesExcel(
             [
                 {
                     key: podpisant.codeName,
-                    rangeObj: { start: 'Sign_seller_start', end: 'Sign_seller_end' },
-                    sheetName: 'Port_Letter',
-                    book,
+                    rangeObj: {
+                        start: 'Sign_seller_start',
+                        end: `${
+                            portLetterStore.fields.termsPort === 'FCA'
+                                ? 'Sign_seller_start'
+                                : 'Sign_seller_end'
+                        }`,
+                    },
+                    ws,
                 },
                 {
                     key: seller.codeName,
                     rangeObj: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
-                    sheetName: 'Port_Letter',
-                    book,
+                    ws,
                 },
             ],
             isPictures,
         );
 
         await saveFile(book, `Письмо ${record.buyer.codeName}`);
-    };
-    reader.readAsDataURL(blob);
+    }, 1000);
 };

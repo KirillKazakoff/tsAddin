@@ -13,6 +13,7 @@ export const useInitPortLetter = () => {
         if (!formik.formRef.current.isValid) {
             throw new Error('invalid input');
         }
+
         await createPortLetter(contract);
     };
 

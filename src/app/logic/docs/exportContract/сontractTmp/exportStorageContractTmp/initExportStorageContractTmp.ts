@@ -54,7 +54,7 @@ export const initExportStorageContractTmp: InitExportContractTmp = (
         {
             cell: 'Контракт_стороны',
             eng: `${agent.name} ( ${portTo.eng.country}, ${portTo.eng.name} ), here in after referred to as Contractor, represented by the President ${agent.eng.signatory} on one part, and ${seller.eng.name}, (Russia, Magadan), here in after referred to as Customer, represented by the ${podpisant.eng.comment}${podpisant.eng.name}, acting on the basis of the Charter, on the other part, have concluded this Supplementary Agreement on the following:`,
-            ru: `${agent.name} ( ${portTo.ru.country}, г.${portTo.ru.name} ), именуемое в дальнейшем "Исполнитель", в лице президента ${agent.ru.signatory} с одной стороны, и ${seller.ru.name} (Россия, г. Магадан) именуемое в дальнейшем "Заказчик", в лице ${podpisant.ru.comment}${podpisant.declination}, действующего на основании Устава, с другой стороны, заключили настоящее Дополнительное соглашение о нижеследующем:`,
+            ru: `${agent.name} ( ${portTo.ru.country}, г.${portTo.ru.name} ), именуемое в дальнейшем "Исполнитель", в лице президента ${agent.ru.signatory} с одной стороны, и ${seller.ru.name} (Россия, г. Магадан) именуемое в дальнейшем "Заказчик", ${podpisant.ru.comment}${podpisant.declination}, действующего на основании Устава, с другой стороны, заключили настоящее Дополнительное соглашение о нижеследующем:`,
         },
         {
             cell: 'Обязательство_хранение',
