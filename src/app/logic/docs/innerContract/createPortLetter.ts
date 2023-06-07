@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { initPicturesExcel } from '../../excel/pictures/initPictureExcel';
 import { initPictureGit } from '../../excel/pictures/initPictureGit';
@@ -14,7 +13,6 @@ export const createPortLetter = async (contract: ContractT) => {
     const { podpisant, isPictures } = portLetterStore.fields;
     const { seller } = contract.record;
 
-    console.log(_.cloneDeep(portLetterStore.fields));
     // getPathToTemplate
     const path = portLetterStore.fields.termsPort === 'FCA'
         ? pathObj.portLetterFCA
@@ -26,7 +24,6 @@ export const createPortLetter = async (contract: ContractT) => {
     if (portLetterStore.fields.termsPort === 'FCA') {
         initPortLetterTmpFCA(book, contract);
     } else {
-        console.log('here');
         initPortLetterTmp(book, contract);
     }
 

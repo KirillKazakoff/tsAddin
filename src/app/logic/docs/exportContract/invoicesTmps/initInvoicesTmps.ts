@@ -18,8 +18,7 @@ export const initInvoicesTmps = async (settings: InvoicesTmpsSettingsT) => {
             const wsCopyTo = book.addWorksheet();
             wsCopyTo.model = _.cloneDeep(wsOriginal.model);
 
-            const suffix = sheetName === 'Com_Invoice' ? '' : 'N';
-            wsCopyTo.name = `invoice ${key}${suffix}`;
+            wsCopyTo.name = `invoice ${key}`;
 
             clearInvoiceBlRows(wsOriginal, wsCopyTo, invoice);
             book.removeWorksheet(sheetName);

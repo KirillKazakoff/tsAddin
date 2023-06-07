@@ -1,7 +1,6 @@
 import spsStore from './spsStore';
 
 export const selectSp = {
-    // transport: () => spsStore.transport,
     transport: (codeName: string) => spsStore.transports[codeName],
     product: (codeName: string) => spsStore.production[codeName.toLowerCase()],
     vessel: (codeName: string) => spsStore.vessels[codeName],

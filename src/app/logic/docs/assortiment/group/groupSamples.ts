@@ -10,10 +10,11 @@ import { ExportRowT } from '../../../../types/typesTables';
 import { groupify } from '../../../utils/getGroup';
 import { calcSamples } from '../calcSamples';
 import { initAssortimentTable } from '../initAssortimentTable';
+import { isProductForAssortiment } from './isProductForAssortiment';
 
 export const groupSamples = (rows: ExportRowT[]) => {
     const tables = rows.reduce<AssortimentTablesT>((total, row) => {
-        if (!row.product.eng.name.includes('crab')) return total;
+        if (!isProductForAssortiment(row.product)) return total;
 
         const tableCode = `${row.consignee.codeName}${row.vessel.codeName}${row.product.codeName}`;
         const initTableObj = initAssortimentTable(row);

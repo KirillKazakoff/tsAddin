@@ -6,11 +6,11 @@ import {
 import { ExportRowT } from '../../../../types/typesTables';
 import { groupify } from '../../../utils/getGroup';
 import { initAssortimentObj, initAssortimentTable } from '../initAssortimentTable';
+import { isProductForAssortiment } from './isProductForAssortiment';
 
 export const groupAssortiment = (rows: ExportRowT[]) => {
     const tables = rows.reduce<AssortimentTablesT>((total, row) => {
-        if (!row.product.eng.name.includes('crab')) return total;
-
+        if (!isProductForAssortiment(row.product)) return total;
         const initObj = initAssortimentTable(row);
 
         const table = groupify<AssortimentTableT>(total, initObj, row.blNo);
@@ -22,6 +22,7 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
         return total;
     }, {});
 
+    console.log(tables);
     const assortiment = initAssortimentObj(tables, false);
     return assortiment;
 };
