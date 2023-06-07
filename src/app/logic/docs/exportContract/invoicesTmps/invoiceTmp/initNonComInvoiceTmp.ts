@@ -10,11 +10,12 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const utils = initExcelUtils(ws);
 
     const {
-        seller, transport, portFrom, portTo, agreementNo, contract, vessel,
+        seller, transport, portFrom, portTo, agreementNo, contract,
     } = invoice.agreement.record;
     const {
         invoiceDate, invoiceNo, msc, amount, consignee,
     } = invoice;
+    const { vessel } = invoice.rows[0];
     const agent = initAgent(invoice);
 
     const { places, placesTotal, priceTotal } = amount;

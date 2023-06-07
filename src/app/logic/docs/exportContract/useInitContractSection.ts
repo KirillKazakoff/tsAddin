@@ -10,10 +10,13 @@ export const useInitContractSection = () => {
     const agreements = Object.values(agreementObj);
 
     const onLoad = async (agreement: AgreementT) => {
-        if (!formik.formRef.current.isValid) {
+        const { isValid, values } = formik.formRef.current;
+        if (!isValid) {
             console.log(formik.formRef.current);
             throw new Error('invalid input');
         }
+
+        await formik.onSubmit(values);
         await createExportContractDoc(agreement);
     };
 

@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import spsStore from '../../stores/spsStore/spsStore';
-import SelectFormik from './SelectFormik';
+import Select from './Select';
 
 export const SelectPortZarubezh = observer(
     ({ name = 'portZarubezh' }: { name?: string }) => {
@@ -9,7 +9,7 @@ export const SelectPortZarubezh = observer(
         const options = Object.values(portsZarubezh).map((port) => port.codeName);
 
         return (
-            <SelectFormik
+            <Select
                 name={name} options={options}
                 title='Зарубежный порт'
             />

@@ -1,13 +1,12 @@
 import React from 'react';
-import SelectFormik from './SelectFormik';
+import Select from './Select';
 
 export default function SelectPersonDischarge() {
     const options = ['Афанасьева В.В.'];
 
     return (
-        <SelectFormik
-            name='personDischarge'
-            title='Выставлять на'
+        <Select
+            name='personDischarge' title='Выставлять на'
             options={options}
         />
     );

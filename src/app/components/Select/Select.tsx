@@ -8,7 +8,7 @@ type Props = FieldHookConfig<string> & {
     wrapperCls?: string;
 };
 
-export default function SelectFormik(props: Props) {
+export default function Select(props: Props) {
     const [field, meta] = useField(props);
     const invalidCls = meta.error && meta.touched ? 'form__control--invalid' : '';
 
@@ -36,6 +36,6 @@ export default function SelectFormik(props: Props) {
     );
 }
 
-SelectFormik.defaultProps = {
+Select.defaultProps = {
     wrapperCls: '',
 };

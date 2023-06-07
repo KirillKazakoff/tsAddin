@@ -22,7 +22,6 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
         return total;
     }, {});
 
-    console.log(tables);
     const assortiment = initAssortimentObj(tables, false);
     return assortiment;
 };

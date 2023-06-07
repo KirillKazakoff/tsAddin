@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { StatusT } from './Doc';
 
-export const useLoader = (load: () => Promise<void>) => {
+export const useLoader = (load: () => Promise<void>, isPreventDefault?: boolean) => {
     const [status, setStatus] = useState<StatusT>('init');
 
     const onLoad = async (e: React.SyntheticEvent) => {
-        e.preventDefault();
+        if (isPreventDefault) e.preventDefault();
+
         setStatus('loading');
         try {
             await load();

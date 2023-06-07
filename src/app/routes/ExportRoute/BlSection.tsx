@@ -15,6 +15,7 @@ const BlSection = observer(() => {
                 onClick={onClick}
                 title={group.record.blNo}
                 key={group.record.blNo}
+                isPreventDefault
             />
         );
     });
@@ -23,7 +24,11 @@ const BlSection = observer(() => {
         <form className='docs__form bl-form'>
             <h2 className='title bl-title'>BL</h2>
             <ul className='docs'>{blDocs}</ul>
-            <DocsDownloadBtn onClick={onLoadAll} title='Загрузить все BL' />
+            <DocsDownloadBtn
+                onClick={onLoadAll}
+                title='Загрузить все BL'
+                isPreventDefault
+            />
         </form>
     );
 });
