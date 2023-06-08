@@ -1,19 +1,18 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
-import { InnerRowT } from '../../../../types/typesTables';
+import { NordmileRowT } from '../../../../types/typesTables';
 import { alignmentCenter, borderAll, styleRowCells } from '../../styleRowCells';
 
-export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
+export const initRequestRowsNordmile = (rows: NordmileRowT[], utils: CellUtilsT) => {
     const { ws } = utils;
     const cellName = 'Заявка_массив';
     const arrayCl = utils.getCell(cellName);
 
     rows.forEach((r, i) => {
         const rowArr = [
-            r.vessel.ru.name,
-            r.product.ru.name,
-            r.product.ru.pack,
-            r.sort,
+            r.producer,
+            r.product,
+            r.pack,
             r.amount.placesTotal.str,
             r.amount.price.str,
             r.amount.priceTotal.str,

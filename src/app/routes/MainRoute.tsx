@@ -17,9 +17,14 @@ export const MainRoute = observer(() => {
     }, [statusType, navigate]);
 
     const Offer = () => (
-        <NavLink to={'/letter'} className='nav-link'>
-            Предложение
-        </NavLink>
+        <>
+            <NavLink to={'/letter'} className='nav-link'>
+                Предложение
+            </NavLink>
+            <NavLink to={'/nordmile'} className='nav-link'>
+                Заявка Nordmile
+            </NavLink>
+        </>
     );
 
     const Docs = () => (

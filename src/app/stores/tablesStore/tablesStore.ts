@@ -1,12 +1,18 @@
 /* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
-import { MateRowT, ExportRowT, InnerRowT } from '../../types/typesTables';
+import {
+    MateRowT,
+    ExportRowT,
+    InnerRowT,
+    NordmileRowT,
+} from '../../types/typesTables';
 
 class TablesStore {
     matesT: MateRowT[] = [];
     exportT: ExportRowT[] = [];
     exportStorageT: ExportRowT[] = [];
     innerT: InnerRowT[] = [];
+    nordmileT: NordmileRowT[] = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -17,6 +23,7 @@ class TablesStore {
         export: (table: ExportRowT[]) => (this.exportT = table),
         exportStorage: (table: ExportRowT[]) => (this.exportStorageT = table),
         inner: (table: InnerRowT[]) => (this.innerT = table),
+        nordmile: (table: NordmileRowT[]) => (this.nordmileT = table),
     };
 }
 

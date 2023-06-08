@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
     checkEmptyTable,
     checkNotFulfilledRow,
@@ -56,5 +55,4 @@ export const setMates = (table: any[][]) => {
 
     tablesStore.setTable.mates(mates);
     letterStore.setTransport(mates[0].transport);
-    // letterStore.setField.transport(mates[0].transport);
 };

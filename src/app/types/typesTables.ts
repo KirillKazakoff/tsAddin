@@ -117,6 +117,19 @@ export type InnerRowT = {
     index: string;
 };
 
+export type NordmileRowT = {
+    contractNo: number;
+    contractDate: string;
+    seller: SellerT;
+    buyer: string;
+    producer: string;
+    product: string;
+    pack: PackageT;
+    amount: AmountObjT;
+    bankSeller: string;
+    paymentDate: string;
+};
+
 // utilstype
 export type OperationT = 'export' | 'export_storage';
 
