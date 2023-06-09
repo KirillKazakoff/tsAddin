@@ -21,8 +21,8 @@ export const MainRoute = observer(() => {
             <NavLink to={'/letter'} className='nav-link'>
                 Предложение
             </NavLink>
-            <NavLink to={'/nordmile'} className='nav-link'>
-                Заявка Nordmile
+            <NavLink to={'/request'} className='nav-link'>
+                Заявки
             </NavLink>
         </>
     );

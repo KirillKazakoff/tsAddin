@@ -9,7 +9,7 @@ export const useInitRequestSection = () => {
     const { portTamozhnya, portRu, terms } = requestContractStore.fields;
 
     const onLoad = async (contract: ContractT) => {
-        if (!formik.formRef.current.isValid) {
+        if (!formik.formRef?.current?.isValid) {
             throw new Error('invalid input');
         }
         await createRequestContract(contract);

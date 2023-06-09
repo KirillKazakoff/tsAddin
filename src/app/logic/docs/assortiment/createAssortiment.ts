@@ -10,5 +10,5 @@ export const createAssortiment = async (assortiment: AssortimentT) => {
     initAssortiment(assortiment, ws);
 
     const { transport } = assortiment.record;
-    await saveFile(book, `Assortiment ${transport.eng.name}`);
+    await saveFile(book, `Assortment ${transport.eng.name}`);
 };

@@ -12,8 +12,8 @@ export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
         const rowArr = [
             r.vessel.ru.name,
             r.product.ru.name,
-            r.product.ru.pack,
             r.sort,
+            r.product.ru.pack,
             r.amount.placesTotal.str,
             r.amount.price.str,
             r.amount.priceTotal.str,
@@ -26,7 +26,7 @@ export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
         const row = ws.getRow(rowIndex);
         styleRowCells(row, {
             alignment: alignmentCenter,
-            height: 45,
+            height: 55,
             border: borderAll,
         });
     });
