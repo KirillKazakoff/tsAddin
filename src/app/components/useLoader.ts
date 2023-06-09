@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { StatusT } from './Doc';
 
+// here trycatch on every doc load callback
 export const useLoader = (load: () => Promise<void>, isPreventDefault?: boolean) => {
     const [status, setStatus] = useState<StatusT>('init');
 

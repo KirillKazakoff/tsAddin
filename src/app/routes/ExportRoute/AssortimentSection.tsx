@@ -12,6 +12,7 @@ export const AssortimentSection = observer(() => {
         const consignee = sample.record.consignee.codeName;
         return (
             <Doc
+                isPreventDefault
                 onClick={() => onLoad.sample(sample)}
                 key={consignee}
                 title={consignee}
@@ -27,6 +28,7 @@ export const AssortimentSection = observer(() => {
                 <div className='assortiment__body'>
                     <h3>Ассортимент:</h3>
                     <DocsDownloadBtn
+                        isPreventDefault
                         onClick={onLoad.assortiment}
                         title='Загрузить ассортимент'
                     />
@@ -34,6 +36,7 @@ export const AssortimentSection = observer(() => {
                     <h3>Образцы:</h3>
                     <ul className='docs'>{sampleDocs}</ul>
                     <DocsDownloadBtn
+                        isPreventDefault
                         onClick={onLoadAll}
                         title='Загрузить все образцы'
                     />

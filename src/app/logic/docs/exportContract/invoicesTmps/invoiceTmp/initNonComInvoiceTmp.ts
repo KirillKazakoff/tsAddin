@@ -15,7 +15,6 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const {
         invoiceDate, invoiceNo, msc, amount, consignee,
     } = invoice;
-    const { vessel } = invoice.rows[0];
     const agent = initAgent(invoice);
 
     const { places, placesTotal, priceTotal } = amount;
@@ -45,7 +44,6 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_контракт', value: `to the Storage services contract of sale No. ${contract.contractNo}` },
         { cell: 'Инвойс_контракт_дата', value: `Magadan, dated from ${date.contract('eng')}` },
 
-        { cell: 'Инвойс_судно', value: vessel.eng.name },
         { cell: 'Инвойс_подвал_места', value: `${places.str} PCS /` },
         { cell: 'Инвойс_подвал_всего', value: `${placesTotal.str} tn` },
         { cell: 'Инвойс_подвал_сумма', value: `${priceTotal.str} USD` },
@@ -75,7 +73,6 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_контракт_п', value: `к контракту оказания услуг хранения №. ${contract.contractNo}` },
         { cell: 'Инвойс_контракт_дата_п', value: `Магадан, от ${date.contract('ru')}` },
 
-        { cell: 'Инвойс_судно_п', value: vessel.ru.name },
         { cell: 'Инвойс_подвал_места_п', value: `${places.str} мест /` },
         { cell: 'Инвойс_подвал_всего_п', value: `${placesTotal.str} тн` },
         { cell: 'Инвойс_подвал_сумма_п', value: `${priceTotal.str} $` },

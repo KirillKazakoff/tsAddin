@@ -1,3 +1,4 @@
+import { setClientsRu } from '../../stores/spsStore/set/setClientsRu';
 import { setPortsRu } from '../../stores/spsStore/set/setPortsRu';
 import { setPortsZarubezh } from '../../stores/spsStore/set/setPortsZarubezh';
 import { setProduction } from '../../stores/spsStore/set/setProduction';
@@ -22,6 +23,7 @@ export const initStoresOffer = async (context: Excel.RequestContext) => {
     const spPortsZarubezhRange = initRange('SPPortZarubezh', 'SPPortZarubezh');
     const spPortsRuRange = initRange('SPPort', 'SPPort');
     const spSellersRange = initRange('SPProdavec', 'SPProdavec');
+    const spClientsRange = initRange('SPClientsSell', 'SPClientsSell');
 
     await context.sync();
 
@@ -31,6 +33,7 @@ export const initStoresOffer = async (context: Excel.RequestContext) => {
     setPortsRu(spPortsRuRange.values);
     setTransports(spTransportRange.values);
     setSellers(spSellersRange.values);
+    setClientsRu(spClientsRange.values);
 
     setMates(mateRange.values);
     setNordmile(nordmileRange.values);

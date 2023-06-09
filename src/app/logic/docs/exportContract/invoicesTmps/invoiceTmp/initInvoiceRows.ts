@@ -41,9 +41,9 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
                 cols.priceTotal = `${priceTotal.str} $`;
             }
 
-            if (ws.name.includes('Noncom')) {
-                delete cols.vessel;
-            }
+            // if (ws.name.includes('Noncom')) {
+            //     delete cols.vessel;
+            // }
             if (invoice.agreement.record.terms === 'FCA') {
                 delete cols.vessel;
                 delete cols.pack;
@@ -59,7 +59,7 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
             const row = ws.getRow(rowIndex);
 
             styleRowCells(row, {
-                height: 40,
+                height: 45,
                 alignment: alignmentCenter,
                 font: fontDefault,
             });

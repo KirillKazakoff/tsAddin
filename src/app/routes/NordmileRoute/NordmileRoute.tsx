@@ -7,22 +7,24 @@ import { createRequestNordmile } from '../../logic/docs/innerContract/createRequ
 import tablesStore from '../../stores/tablesStore/tablesStore';
 
 export const NordmileRoute = observer(() => {
-    const { nordmileT } = tablesStore;
-    const onLoad = async () => {
-        createRequestNordmile(tablesStore.nordmileT[0]);
+    // const { nordmileT } = tablesStore;
+    const onLoad = {
+        nordmile: async () => {
+            createRequestNordmile(tablesStore.nordmileT[0]);
+        },
     };
 
-    useEffect(() => {
-        if (tablesStore.nordmileT.length === 0) return;
-        onLoad();
-    }, [nordmileT]);
+    // useEffect(() => {
+    //     if (tablesStore.nordmileT.length === 0) return;
+    //     onLoad();
+    // }, [nordmileT]);
 
     return (
         <form className='docs__form bl-form'>
             <h2 className='title bl-title'>Заявка Nordmile</h2>
 
             <DocsDownloadBtn
-                onClick={onLoad}
+                onClick={onLoad.nordmile}
                 title='Загрузить заявку'
                 isPreventDefault
             />

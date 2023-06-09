@@ -5,28 +5,24 @@ import { clearInvoiceBlRows } from './invoiceTmp/clearInvoiceBlRows';
 import { mergeInvoicesCells } from './mergeInvoicesCells';
 
 export const initInvoicesTmps = async (settings: InvoicesTmpsSettingsT) => {
-    try {
-        const {
-            book, initInvoiceTmpCb, invoices, sheetName,
-        } = settings;
-        const wsOriginal = book.getWorksheet(sheetName);
+    const {
+        book, initInvoiceTmpCb, invoices, sheetName,
+    } = settings;
+    const wsOriginal = book.getWorksheet(sheetName);
 
-        Object.keys(invoices).forEach((key) => {
-            const invoice = invoices[key];
-            initInvoiceTmpCb(wsOriginal, invoice);
+    Object.keys(invoices).forEach((key) => {
+        const invoice = invoices[key];
+        initInvoiceTmpCb(wsOriginal, invoice);
 
-            const wsCopyTo = book.addWorksheet();
-            wsCopyTo.model = _.cloneDeep(wsOriginal.model);
+        const wsCopyTo = book.addWorksheet();
+        wsCopyTo.model = _.cloneDeep(wsOriginal.model);
 
-            wsCopyTo.name = `invoice ${key}`;
+        wsCopyTo.name = `invoice ${key}`;
 
-            clearInvoiceBlRows(wsOriginal, wsCopyTo, invoice);
-            book.removeWorksheet(sheetName);
-        });
+        clearInvoiceBlRows(wsOriginal, wsCopyTo, invoice);
+        book.removeWorksheet(sheetName);
+    });
 
-        const { agreement } = Object.values(invoices)[0];
-        await mergeInvoicesCells(book, agreement);
-    } catch (e) {
-        console.log(e);
-    }
+    const { agreement } = Object.values(invoices)[0];
+    await mergeInvoicesCells(book, agreement);
 };

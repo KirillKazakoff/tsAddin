@@ -11,7 +11,7 @@ export const pathObj = {
     bl: `${baseUrl}templates/BL.xlsx`,
     exportContract: `${baseUrl}templates/Export_Agreement_Vessels.xlsx`,
     exportContractFCA: `${baseUrl}templates/Export_Agreement_FCA.xlsx`,
-    exportStorageContract: `${baseUrl}templates/Export_Storage_Agreement.xlsx`,
+    exportStorageContract: `${baseUrl}templates/Export_Storage_Agreement_Vessels.xlsx`,
     requestContractRu: `${baseUrl}templates/Request_Contract_Ru.xlsx`,
     requestContractNordmileRu: `${baseUrl}templates/Request_Contract_Ru_Nordmile.xlsx`,
     portLetter: `${baseUrl}templates/Port_Letter.xlsx`,
