@@ -29,22 +29,17 @@ export const usePortLetterFormik = () => {
         if (!values.portRu) errors.portRu = 'valueMissing';
         if (!values.podpisant) errors.podpisant = 'valueMissing';
         if (!values.dateLetter) errors.dateLetter = 'valueMissing';
-
-        if (!values.termsPort) {
-            errors.terms = 'valueMissing';
-        }
+        if (!values.termsPort) errors.termsPort = 'valueMissing';
 
         if (!values.termsPort.includes('CFR')) {
             if (!values.storageFrom) errors.storageFrom = 'valueMissing';
             if (!values.storageTo) errors.storageTo = 'valueMissing';
-        } else if (values.termsPort.includes('CFR')) {
+        } else {
             delete errors.storageFrom;
             delete errors.storageTo;
         }
 
         if (values.termsPort === 'FCA') {
-            delete errors.cargoToAuto;
-            delete errors.cargoToStorage;
             delete errors.storageFrom;
             delete errors.storageTo;
             if (!values.personDischarge) errors.personDischarge = 'valueMissing';

@@ -1,9 +1,9 @@
 import { Style, Worksheet } from 'exceljs';
 import { styleRowCells, borderAll } from '../styleRowCells';
 import { AssortimentTableT } from '../../../types/typesAssortiment';
+import { calcFreezing } from './calcFreezing';
 
 /* eslint-disable no-param-reassign */
-
 export const addAssortimentTable = (
     table: AssortimentTableT,
     ws: Worksheet,
@@ -23,13 +23,22 @@ export const addAssortimentTable = (
 
     // headerInsert
     // prettier-ignore
+    const freezing = calcFreezing(product.codeName, vessel.codeName);
     const rows = {
-        product: [`${rowIndex + 1}. ${product.eng.name} producing by "${vessel.eng.name.toUpperCase()}"`],
+        product: [
+            `${rowIndex + 1}. ${freezing} ${
+                product.eng.name
+            } producing by "${vessel.eng.name.toUpperCase()}"`,
+        ],
         pack: [`package - carton box 1/${pack} kg`],
         empty: [''],
         info: ['', '', seller.codeName, blNo],
         titles: ['grade', 'weight', 'c/t', 'kg', 'Sampling Plan'],
     };
+
+    if (vessel.codeName.includes('Шалин')) {
+        rows.pack = [`package - laminated bag 1/${pack} kg`];
+    }
 
     ws.addRows([rows.product, rows.pack, rows.empty]);
 

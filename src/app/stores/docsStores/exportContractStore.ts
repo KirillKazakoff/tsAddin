@@ -15,7 +15,7 @@ type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class ExportContractStore {
     fields = initFields();
-    operation: OperationT = 'export';
+    operation: OperationT = 'export_storage';
 
     constructor() {
         makeAutoObservable(this);

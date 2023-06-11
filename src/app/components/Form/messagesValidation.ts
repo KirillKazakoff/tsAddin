@@ -13,6 +13,9 @@ export const messages: MessagesT = {
     terms: {
         valueMissing: 'Выберите условия доставки',
     },
+    termsPort: {
+        valueMissing: 'Выберите условия доставки',
+    },
     portTamozhnya: {
         valueMissing: 'Выберите город-порт',
     },
