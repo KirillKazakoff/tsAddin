@@ -1,22 +1,20 @@
 import { addToAmount, initAmount } from './initAmount';
-import { InvoiceAmountT } from '../../../types/typesContract';
 import { AmountObjT } from '../../../types/typesTables';
 
-export const initInvoiceAmount = () => {
+export const initProductAmount = () => {
     return {
         places: initAmount(0, 0, 0),
-        priceTotal: initAmount(0, 3, 4),
-        placesTotal: initAmount(0, 3, 3),
+        priceTotal: initAmount(0, 2, 2),
+        placesTotal: initAmount(0, 3, 4),
     };
 };
-
-export const addInvoiceAmount = (
-    invoiceAmount: InvoiceAmountT,
+export const addProductAmount = (
+    productAmount: AmountObjT,
     rowAmount: AmountObjT,
 ) => {
-    addToAmount(invoiceAmount.places, rowAmount.places.count);
-    addToAmount(invoiceAmount.priceTotal, rowAmount.priceTotal.count);
-    addToAmount(invoiceAmount.placesTotal, rowAmount.placesTotal.count);
+    addToAmount(productAmount.places, rowAmount.places.count);
+    addToAmount(productAmount.priceTotal, rowAmount.priceTotal.count);
+    addToAmount(productAmount.placesTotal, rowAmount.placesTotal.count);
 };
 
 export const initBlAmount = () => {
@@ -26,9 +24,7 @@ export const initBlAmount = () => {
         placesGross: initAmount(0, 3, 4),
     };
 };
-
 export type BlAmountT = ReturnType<typeof initBlAmount>;
-
 export const addBlAmount = (
     blAmount: BlAmountT,
     rowAmount: AmountObjT,
@@ -36,7 +32,5 @@ export const addBlAmount = (
 ) => {
     addToAmount(blAmount.places, rowAmount.places.count);
     addToAmount(blAmount.placesTotal, rowAmount.placesTotal.count);
-
-    if (!coefficient) console.log('null coefficient');
     addToAmount(blAmount.placesGross, rowAmount.placesTotal.count * coefficient);
 };

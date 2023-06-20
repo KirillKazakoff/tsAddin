@@ -6,6 +6,7 @@ import { initExportContractDelivery } from './initExportContractDelivery';
 import { initExportContractDeliveryFCA } from './initExportContractDeliveryFCA';
 import { initExportContractHeader } from './initExportContractHeader';
 import { initExportContractSubject } from './initExportContractSubject';
+import { initExportContractDeliveryEXW } from './initExportContractDeliveryEXW';
 
 export const initExportContractTmp: InitExportContractTmp = async (
     book,
@@ -20,6 +21,8 @@ export const initExportContractTmp: InitExportContractTmp = async (
 
     if (agreement.record.terms === 'FCA') {
         initExportContractDeliveryFCA(utils, agreement);
+    } else if (agreement.record.terms === 'EXW') {
+        initExportContractDeliveryEXW(utils, agreement);
     } else {
         initExportContractDelivery(utils, agreement);
     }
@@ -27,7 +30,8 @@ export const initExportContractTmp: InitExportContractTmp = async (
 
     // printSettings
     utils.getRow('Доставка_заголовок', -1).addPageBreak();
-    if (agreement.rows.length === 1) {
+    console.log(agreement.productsGroupedBy.vessels.all.subject.length);
+    if (agreement.productsGroupedBy.vessels.all.subject.length === 1) {
         ws.pageSetup.fitToHeight = 1;
         ws.pageSetup.fitToWidth = 1;
         ws.pageSetup.fitToPage = true;

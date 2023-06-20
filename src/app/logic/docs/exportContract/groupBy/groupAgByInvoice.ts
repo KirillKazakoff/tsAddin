@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { AgreementT } from './initAgreement';
 import {
-    addInvoiceAmount,
-    initInvoiceAmount,
+    addProductAmount,
+    initProductAmount,
 } from '../../../../stores/tablesStore/utils/invoiceAmount';
 import { InvoiceT, ProductGroupT } from '../../../../types/typesContract';
 import { groupify } from '../../../utils/getGroup';
@@ -22,7 +22,7 @@ export const groupAgByInvoice = (agreement: AgreementT) => {
             msc,
             agreement,
             consignee,
-            amount: initInvoiceAmount(),
+            amount: initProductAmount(),
             productGroups: {},
         };
         const invoice = groupify<InvoiceT>(invoices, initInvoice, invoiceNo);
@@ -31,7 +31,7 @@ export const groupAgByInvoice = (agreement: AgreementT) => {
         const initProductGroup = {
             rows: [],
             record: row,
-            total: initInvoiceAmount(),
+            total: initProductAmount(),
         };
         const productGroup = groupify<ProductGroupT>(
             invoice.productGroups,
@@ -40,8 +40,8 @@ export const groupAgByInvoice = (agreement: AgreementT) => {
         );
         productGroup.rows.push(row);
 
-        addInvoiceAmount(invoice.amount, row.amount);
-        addInvoiceAmount(productGroup.total, row.amount);
+        addProductAmount(invoice.amount, row.amount);
+        addProductAmount(productGroup.total, row.amount);
     });
 
     return agreement;

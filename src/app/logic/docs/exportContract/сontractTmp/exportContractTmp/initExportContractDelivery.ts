@@ -29,9 +29,11 @@ export const initExportContractDelivery: InitContractPartT = (utils, agreement) 
         let colEng = consigneeStr;
         let colRu = consigneeStr;
 
-        group.rows.forEach((row) => {
-            const { product, amount, vessel } = row;
-            const { placesTotal } = amount;
+        const productGroups = Object.values(group.productGroups);
+        productGroups.forEach((productGroup) => {
+            const { record, total } = productGroup;
+            const { placesTotal } = total;
+            const { product, vessel } = record;
 
             colEng += `\n*  ${vessel.eng.name}\n    ${product.eng.name} - ${placesTotal.str} tn (net weight)`;
             colRu += `\n*  ${vessel.ru.name}\n    ${product.ru.name} - ${placesTotal.str} тн (нетто)`;
@@ -42,7 +44,7 @@ export const initExportContractDelivery: InitContractPartT = (utils, agreement) 
 
         // styleRow
         const row = ws.getRow(rowIndex);
-        const height = 60 + group.rows.length * 35;
+        const height = 70 + productGroups.length * 35;
 
         styleRowCells(row, {
             height,

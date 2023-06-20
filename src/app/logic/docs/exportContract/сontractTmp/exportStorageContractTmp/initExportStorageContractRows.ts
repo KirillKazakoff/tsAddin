@@ -25,13 +25,6 @@ export const initExportStorageContractRows = (
 
         const QT = group.total.placesTotal.str;
 
-        // if (group.rows.length > 1) {
-        //     QT = group.rows.reduce<string>((total, row) => {
-        //         total += `${row.amount.placesTotal.str}\n`;
-        //         return total;
-        //     }, `\nИТОГО: ${group.total.placesTotal.str}\n`);
-        // }
-
         const rowArr = [
             '',
             `${record.product.ru.name}\n${record.product.eng.name}`,

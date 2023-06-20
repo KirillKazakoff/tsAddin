@@ -1,7 +1,7 @@
 import type { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
 import type { BlAmountT } from '../stores/tablesStore/utils/invoiceAmount';
 import { ConsigneeT } from './typesSP';
-import { ExportRowT, AmountT } from './typesTables';
+import { ExportRowT, AmountT, AmountObjT } from './typesTables';
 
 // BlT
 export type BlGroupT = {
@@ -24,7 +24,11 @@ export type InvoiceAmountT = {
 export type ProductGroupT = {
     rows: ExportRowT[];
     record: ExportRowT;
-    total: InvoiceAmountT;
+    total: AmountObjT;
+};
+
+export type ProductGroupsT = {
+    [key: string]: ProductGroupT;
 };
 
 export type InvoiceT = {
@@ -34,8 +38,8 @@ export type InvoiceT = {
     invoiceNo: string;
     msc: string;
     consignee: ConsigneeT;
-    amount: InvoiceAmountT;
-    productGroups: { [key: string]: ProductGroupT };
+    amount: AmountObjT;
+    productGroups: ProductGroupsT;
 };
 
 export type InvoicesT = {
@@ -46,6 +50,7 @@ export type ConsigneesGroupT = {
     [key: string]: {
         rows: ExportRowT[];
         consignee: ConsigneeT;
+        productGroups: ProductGroupsT;
     };
 };
 
