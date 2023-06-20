@@ -8,6 +8,7 @@ export const useContractFormik = () => {
     const initialFields = {
         podpisant: '',
         dischargeDate: '',
+        declaration: '',
     };
     type FormValuesT = typeof initialFields;
 
@@ -17,11 +18,18 @@ export const useContractFormik = () => {
         if (!values.dischargeDate) {
             errors.dischargeDate = 'valueMissing';
         }
+        if (!values.declaration) {
+            errors.declaration = 'valueMissing';
+        }
         if (!values.podpisant) {
             errors.podpisant = 'valueMissing';
         }
+
         if (exportContractStore.terms !== 'FCA') {
             delete errors.dischargeDate;
+        }
+        if (exportContractStore.terms !== 'EXW') {
+            delete errors.declaration;
         }
 
         return getErrorsDescription(errors);

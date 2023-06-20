@@ -49,4 +49,7 @@ export const messages: MessagesT = {
     personDischarge: {
         valueMissing: 'Выберите ответственного за диспетчеризацию',
     },
+    declaration: {
+        valueMissing: 'Введите номер ВТД декларации',
+    },
 };

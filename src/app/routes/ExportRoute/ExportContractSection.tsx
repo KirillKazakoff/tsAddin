@@ -6,6 +6,7 @@ import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import AgreementList from './AgreementList';
 import { ExportDateFCA } from './ExportDateFCA';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
+import { ExportDeclarationEXW } from './ExportDeclarationEXW';
 
 export const ExportContractSection = observer(() => {
     const { formik, initObj } = useInitContractSection();
@@ -22,6 +23,7 @@ export const ExportContractSection = observer(() => {
 
                 <ExportDateFCA />
                 <SelectPodpisant />
+                <ExportDeclarationEXW />
                 <AgreementList
                     agreements={initObj.agreements}
                     onLoad={initObj.onLoad}

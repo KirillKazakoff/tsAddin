@@ -1,3 +1,4 @@
+import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
 import { CellObjT, CellUtilsT } from '../../../../../types/typesExcelUtils';
 
 export const initComInvoiceTerms = (
@@ -33,11 +34,11 @@ export const initComInvoiceTerms = (
         // setDeclarationFields
         utils.setCell({
             cell: 'Инвойс_декларация_п',
-            value: '№ временной декларации на товары',
+            value: `№ временной декларации на товары ${exportContractStore.fields.declaration}`,
         });
         utils.setCell({
             cell: 'Инвойс_декларация',
-            value: 'Temporary Customs Declaration',
+            value: `Temporary Customs Declaration ${exportContractStore.fields.declaration}`,
         });
 
         spliceCells.push(...cellsEXW);
