@@ -12,12 +12,17 @@ export const useInitContractSection = () => {
     const onLoad = async (agreement: AgreementT) => {
         const { isValid, values } = formik.formRef.current;
         if (!isValid) {
-            console.log(formik.formRef.current);
+            // eslint-disable-next-line no-console
+            console.warn(formik.formRef.current);
             throw new Error('invalid input');
         }
 
         await formik.onSubmit(values);
         await createExportContractDoc(agreement);
+
+        if (exportContractStore.terms === 'EXW') {
+            formik.formRef.current.setFieldValue('declaration', '');
+        }
     };
 
     const title = exportContractStore.terms === 'FCA'
