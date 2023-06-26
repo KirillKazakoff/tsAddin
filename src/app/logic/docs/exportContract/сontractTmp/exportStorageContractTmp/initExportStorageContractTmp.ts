@@ -96,4 +96,8 @@ export const initExportStorageContractTmp: InitExportContractTmp = (
         utils.mergeCells({ row: i, startCol: 2, endCol: 3 });
         utils.mergeCells({ row: i, startCol: 4, endCol: 5 });
     }
+
+    // printAreaSettings
+    const lastRow = utils.getRow('Адреса_подпись', 1);
+    ws.pageSetup.printArea = `A1:F${lastRow.number}`;
 };

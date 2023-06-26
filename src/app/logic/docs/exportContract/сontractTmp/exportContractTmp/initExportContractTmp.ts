@@ -28,15 +28,15 @@ export const initExportContractTmp: InitExportContractTmp = async (
     }
     initExportContractAddreses(utils, agreement);
 
-    // printSettings
-    utils.getRow('Доставка_заголовок', -1).addPageBreak();
-    console.log(agreement.productsGroupedBy.vessels.all.subject.length);
+    // printAreaSettings
+    const lastRow = utils.getRow('Адреса_подпись', 0);
+    ws.pageSetup.printArea = `A1:B${lastRow.number}`;
+
     if (agreement.productsGroupedBy.vessels.all.subject.length === 1) {
         ws.pageSetup.fitToHeight = 1;
         ws.pageSetup.fitToWidth = 1;
         ws.pageSetup.fitToPage = true;
-
-        const lastRow = utils.getRow('Адреса_подпись', 0);
-        ws.pageSetup.printArea = `A1:B${lastRow.number}`;
+    } else {
+        utils.getRow('Доставка_заголовок', -1).addPageBreak();
     }
 };
