@@ -6,9 +6,9 @@ import getErrorsDescription from '../../components/Form/getErrorsDescription';
 
 export const useLetterFormik = () => {
     const initialFields = {
-        port: 'ВМРП',
-        arrivalVld: '123',
-        payment: '123',
+        port: '',
+        arrivalVld: '',
+        payment: '',
         isExport: false,
         arrivalForeign: '',
         terms: '',
