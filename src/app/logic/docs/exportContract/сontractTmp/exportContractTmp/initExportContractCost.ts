@@ -20,7 +20,7 @@ export const initExportContractCost: InitContractPartT = (utils, agreement) => {
         const { product: desc, vessel } = record;
 
         prices.forEach((price) => {
-            const colEng = `*  ${vessel.eng.name}\n    ${desc.eng.name}\n    - USD ${price.str} for one kg net weight`;
+            const colEng = `*  ${vessel.eng.name}\n    ${desc.eng.name}\n    - USD ${price.str} for one tn net weight`;
             const colRu = `*  ${vessel.ru.name}\n    ${desc.ru.name}\n    - ${price.str} долл. за одну тонну (нетто)`;
             total.push([colEng, colRu]);
         });
