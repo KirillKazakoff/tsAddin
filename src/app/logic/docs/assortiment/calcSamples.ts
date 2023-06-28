@@ -16,21 +16,26 @@ export const calcSamples = (weight: number, pack: number) => {
             return weight / 6000;
         }
 
-        // if pack === 20
-        if (weight < 1000) {
-            return weight / 1000;
+        if (pack === 20) {
+            if (weight < 1000) {
+                return weight / 1000;
+            }
+            if (weight < 6000) {
+                return weight / 3000;
+            }
+            if (weight < 15000) {
+                return weight / 5000;
+            }
+            if (weight < 30000) {
+                return weight / 7000;
+            }
+            return weight / 8000;
         }
-        if (weight < 6000) {
-            return weight / 3000;
-        }
-        if (weight < 15000) {
-            return weight / 5000;
-        }
-        if (weight < 30000) {
-            return weight / 7000;
-        }
-        return weight / 8000;
+
+        // if (pack === 22) {
+        return weight / 25000;
+        // }
     };
 
-    return Math.ceil(getFloatSamples());
+    return Math.round(getFloatSamples());
 };

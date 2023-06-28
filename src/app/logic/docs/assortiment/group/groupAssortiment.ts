@@ -19,6 +19,20 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
         addToAmount(table.amount.placesTotal, row.amount.placesTotal.count * 1000);
         table.rows.push(row);
 
+        // sort
+        table.rows = table.rows.sort((a, b) => {
+            const prev = a.sort.length;
+            const next = b.sort.length;
+
+            if (prev < next) return 1;
+            if (prev > next) return -1;
+            if (prev === next) {
+                if (a.sort < b.sort) return 1;
+            }
+
+            return -1;
+        });
+
         return total;
     }, {});
 

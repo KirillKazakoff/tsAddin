@@ -28,10 +28,9 @@ export const addAssortimentTable = (
         product: [
             `${rowIndex + 1}. ${freezing} ${
                 product.eng.name
-            } producing by "${vessel.eng.name.toUpperCase()}"`,
+            } producing by ${vessel.eng.name.toUpperCase()}`,
         ],
         pack: [`package - carton box 1/${pack} kg`],
-        empty: [''],
         info: ['', '', seller.codeName, blNo],
         titles: ['grade', 'weight', 'c/t', 'kg', 'Sampling Plan'],
     };
@@ -40,7 +39,7 @@ export const addAssortimentTable = (
         rows.pack = [`package - laminated bag 1/${pack} kg`];
     }
 
-    ws.addRows([rows.product, rows.pack, rows.empty]);
+    ws.addRows([rows.product, rows.pack]);
 
     if (!isSample) {
         const infoRow = ws.addRow(rows.info);
@@ -55,7 +54,7 @@ export const addAssortimentTable = (
 
     const titlesRow = ws.addRow(rows.titles);
     styleRowCells(titlesRow, {
-        height: 40,
+        height: 25,
         font: { bold: true },
         alignment: { horizontal: 'center', vertical: 'middle' },
         border: borderAll,
