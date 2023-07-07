@@ -5,7 +5,7 @@ import {
     initProductAmount,
 } from '../../../../stores/tablesStore/utils/invoiceAmount';
 import { InvoiceT, ProductGroupT } from '../../../../types/typesContract';
-import { groupify } from '../../../utils/getGroup';
+import { groupify } from '../../../utils/groupify';
 
 export const groupAgByInvoice = (agreement: AgreementT) => {
     const { invoices } = agreement.productsGroupedBy;

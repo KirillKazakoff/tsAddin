@@ -4,7 +4,7 @@ import {
     initAmount,
 } from '../../../../stores/tablesStore/utils/initAmount';
 import { CostT, SubjectT, VesselGroupT } from '../../../../types/typesContract';
-import { groupify } from '../../../utils/getGroup';
+import { groupify } from '../../../utils/groupify';
 import { AgreementT } from './initAgreement';
 
 export const groupAgByVessel = (agreement: AgreementT) => {

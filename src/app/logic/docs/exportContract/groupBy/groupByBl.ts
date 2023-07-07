@@ -5,7 +5,7 @@ import {
     addBlAmount,
     initBlAmount,
 } from '../../../../stores/tablesStore/utils/invoiceAmount';
-import { groupify } from '../../../utils/getGroup';
+import { groupify } from '../../../utils/groupify';
 
 export const groupByBl = (rows: ExportRowT[]) => {
     const blGrouped = rows.reduce<GroupedBlT>((total, row) => {

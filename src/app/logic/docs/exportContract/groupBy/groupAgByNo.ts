@@ -6,7 +6,7 @@ import { groupAgByConsignee } from './groupAgByConsignee';
 import { groupAgByInvoice } from './groupAgByInvoice';
 import { groupAgByVessel } from './groupAgByVessel';
 import { AgreementT, AgreementsT, initAgreement } from './initAgreement';
-import { groupify } from '../../../utils/getGroup';
+import { groupify } from '../../../utils/groupify';
 
 export const groupAgByNo = () => {
     const table = exportContractStore.getCurrentTable();

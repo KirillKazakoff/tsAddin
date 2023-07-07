@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import { SubjectT } from '../../../types/typesLetter';
-import { groupify } from '../../utils/getGroup';
+import { groupify } from '../../utils/groupify';
 import { isStOff } from './isStOff';
 
 export const getSubject = () => {

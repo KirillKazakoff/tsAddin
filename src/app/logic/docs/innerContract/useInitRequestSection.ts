@@ -6,6 +6,7 @@ import { useRequestFormik } from './useRequestFormik';
 export const useInitRequestSection = () => {
     const formik = useRequestFormik();
     const contracts = Object.values(groupByContractNo());
+
     const { portTamozhnya, portRu, terms } = requestContractStore.fields;
 
     const onLoad = async (contract: ContractT) => {

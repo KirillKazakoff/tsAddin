@@ -7,7 +7,7 @@ import {
     SamplesT,
 } from '../../../../types/typesAssortiment';
 import { ExportRowT } from '../../../../types/typesTables';
-import { groupify } from '../../../utils/getGroup';
+import { groupify } from '../../../utils/groupify';
 import { calcSamples } from '../calcSamples';
 import { initAssortimentTable } from '../initAssortimentTable';
 import { isProductForAssortiment } from './isProductForAssortiment';

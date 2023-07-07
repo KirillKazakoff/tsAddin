@@ -10,7 +10,9 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     const ws = book.getWorksheet('Request_Contract');
     const utils = initExcelUtils(ws);
 
-    const { record, priceTotal, rows } = contract;
+    const {
+        record, priceTotal, rows, requests,
+    } = contract;
     const { portRu, portTamozhnya, terms } = requestContractStore.fields;
 
     const isVld = portTamozhnya.codeName === 'Владивосток';
@@ -39,7 +41,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
         { cell: 'ВСД_далее', value: isCfrVld ? 'Дальнейшее оформление ВСД осуществляет Покупатель за свой счет и своими силами.' : '' },
     ];
 
-    initRequestRows(rows, utils);
+    initRequestRows(requests, utils);
 
     cells.forEach((cell) => {
         utils.setCell(cell);

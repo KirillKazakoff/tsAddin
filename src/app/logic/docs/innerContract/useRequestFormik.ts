@@ -6,9 +6,9 @@ import { OnSubmitT } from '../../../types/typesUtils';
 
 export const useRequestFormik = () => {
     const initialFields = {
-        terms: '',
-        portTamozhnya: '',
-        portRu: '',
+        terms: 'CFR',
+        portTamozhnya: 'Магадан',
+        portRu: 'ВМРП',
     };
     type FormValuesT = typeof initialFields;
 

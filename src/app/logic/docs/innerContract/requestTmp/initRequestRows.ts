@@ -1,22 +1,23 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
-import { InnerRowT } from '../../../../types/typesTables';
 import { alignmentCenter, borderAll, styleRowCells } from '../../styleRowCells';
+import { RequestT } from '../groupContractByNameSort';
 
-export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
+export const initRequestRows = (requests: RequestT[], utils: CellUtilsT) => {
     const { ws } = utils;
     const cellName = 'Заявка_массив';
     const arrayCl = utils.getCell(cellName);
 
-    rows.forEach((r, i) => {
+    requests.forEach((r, i) => {
+        const { record, amountTotal, priceTotal } = r;
         const rowArr = [
-            r.vessel.ru.name,
-            r.product.ru.name,
-            r.sort,
-            r.product.ru.pack,
-            r.amount.placesTotal.str,
-            r.amount.price.str,
-            r.amount.priceTotal.str,
+            record.vessel.ru.name,
+            record.product.ru.name,
+            record.sort,
+            record.product.ru.pack,
+            amountTotal.str,
+            record.amount.price.str,
+            priceTotal.str,
         ];
 
         const rowIndex = +arrayCl.row + i;

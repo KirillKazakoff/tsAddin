@@ -8,7 +8,7 @@ import {
     initProductAmount,
 } from '../../../../stores/tablesStore/utils/invoiceAmount';
 import { ProductGroupsT } from '../../../../types/typesContract';
-import { groupify } from '../../../utils/getGroup';
+import { groupify } from '../../../utils/groupify';
 import { AgreementT } from './initAgreement';
 
 export const groupAgByConsignee = (agreement: AgreementT) => {
