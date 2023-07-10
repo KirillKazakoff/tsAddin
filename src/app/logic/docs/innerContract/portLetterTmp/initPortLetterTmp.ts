@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { Workbook } from 'exceljs';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { CellObjT } from '../../../../types/typesExcelUtils';
@@ -36,19 +37,23 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
         },
         {
             cell: 'Грузовые_борт_склад',
-            value: `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
-                fields.cargoToStorage === 'Покупатель'
-                    ? record.buyer.name
-                    : record.seller.ru.name
-            }`,
+            value: !fields.cargoToStorage
+                ? ''
+                : `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
+                    fields.cargoToStorage === 'Покупатель'
+                        ? record.buyer.name
+                        : record.seller.ru.name
+                }`,
         },
         {
             cell: 'Грузовые_склад_авто',
-            value: `Оплата грузовых работ (склад-авто) будет производиться за счет ${
-                fields.cargoToAuto === 'Покупатель'
-                    ? record.buyer.name
-                    : record.seller.ru.name
-            }`,
+            value: !fields.cargoToAuto
+                ? ''
+                : `Оплата грузовых работ (склад-авто) будет производиться за счет ${
+                    fields.cargoToAuto === 'Покупатель'
+                        ? record.buyer.name
+                        : record.seller.ru.name
+                }`,
         },
         {
             cell: 'Хранение',
@@ -66,10 +71,8 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
     cells.forEach((cell) => utils.setCell(cell));
 
     const rowCargoStorage = +utils.getCell('Грузовые_борт_склад').row;
-    ws.unMergeCells(rowCargoStorage, 1, rowCargoStorage, 6);
-    ws.mergeCells(rowCargoStorage, 1, rowCargoStorage, 6);
+    utils.mergeCells({ row: rowCargoStorage, startCol: 1, endCol: 6 });
 
     const rowCargoAuto = +utils.getCell('Грузовые_склад_авто').row;
-    ws.unMergeCells(rowCargoAuto, 1, rowCargoAuto, 6);
-    ws.mergeCells(rowCargoAuto, 1, rowCargoAuto, 6);
+    utils.mergeCells({ row: rowCargoAuto, startCol: 1, endCol: 6 });
 };

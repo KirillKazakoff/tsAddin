@@ -16,7 +16,7 @@ const TemplateEXW = () => (
         <TemplateCFR />
         <InputText
             name='storageFrom'
-            title='Хранение продавца с:'
+            title='Хранение покупателя с:'
             placeholder='Хранение с'
         />
         <InputText
