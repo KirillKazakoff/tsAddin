@@ -34,7 +34,7 @@ export const footerToStrEng = () => {
     const arrivalVldStr = `- ETA Vladivostok - ${arrivalVld}`;
     const arrivalForeignStr = `- ETA ${port.eng.name} - ${arrivalForeign}`;
     const scheduleStr = `Schedule ${transport}:\n${arrivalVldStr}\n${arrivalForeignStr}\n\n`;
-    const arrivalStr = terms === 'CFR' ? scheduleStr : '';
+    const arrivalStr = terms.includes('CFR') ? scheduleStr : '';
 
     const paymentInfoStr = '- payment 100% during 10 banking days after sign a contract';
     const paymentStr = payment

@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
-import {
-    checkEmptyTable,
-    checkNotFulfilledRow,
-} from '../../logic/excel/utils/checkTable';
+import { checkEmptyTable } from '../../logic/excel/utils/checkIsEmptyTable';
+import { checkNotFulfilledRow } from '../../logic/excel/utils/checkTable';
 import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
 import { getExportRow } from './getExportRow';
 import tablesStore from './tablesStore';

@@ -102,12 +102,16 @@ b {
     row-gap: 5px;
 }
 
+.letter__checkbox {
+    align-items: center;
+}
+
 .letter__fields--export {
     margin-top: 30px;
 }
 
 .letter__fields-wrapper {
-    min-height: 250px;
+    min-height: 300px;
 }
 
 /* .nav */

@@ -1,7 +1,5 @@
-import {
-    checkEmptyTable,
-    checkNotFulfilledRow,
-} from '../../logic/excel/utils/checkTable';
+import { checkEmptyTable } from '../../logic/excel/utils/checkIsEmptyTable';
+import { checkNotFulfilledRow } from '../../logic/excel/utils/checkTable';
 import { MateRowT } from '../../types/typesTables';
 import letterStore from '../letterStore/letterStore';
 import { selectSp } from '../spsStore/select';

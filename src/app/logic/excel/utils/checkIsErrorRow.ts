@@ -8,7 +8,7 @@ import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore'
 import { CommonRowT, TableNameT } from '../../../types/typesTables';
 
 // checkFulfilledRow
-export const checkNotFulfilledRow = (row: CommonRowT, tableName: TableNameT) => {
+export const checkIsErrorRow = (row: CommonRowT, tableName: TableNameT) => {
     const checkProps = (possibleEmptyProps: string[]) => {
         // checkEmpty
         for (const prop in row) {

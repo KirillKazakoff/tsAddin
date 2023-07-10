@@ -16,6 +16,11 @@ export const LetterMainFields = observer(() => {
 
     return (
         <div className='letter__fields'>
+            <CheckBoxFormik
+                wrapperCls='letter__checkbox'
+                title='Предложение на экспорт:'
+                name='isExport'
+            />
             <InputText
                 title='ETA Владивосток'
                 placeholder={
@@ -29,7 +34,6 @@ export const LetterMainFields = observer(() => {
                 placeholder='Дата оплаты'
                 name='payment'
             />
-            <CheckBoxFormik title='Предложение на экспорт' name='isExport' />
         </div>
     );
 });

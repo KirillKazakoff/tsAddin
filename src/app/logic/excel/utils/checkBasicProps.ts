@@ -1,40 +1,24 @@
-export const checkBasicProps = (prop: string) => {
-    const basicProps = [
-        'contract',
-        'seller',
-        'agent',
-        'vessel',
-        'transport',
-        'agreementNo',
-        'invoice',
-        'date',
-        'blMode',
-        'blNo',
-        'portFrom',
-        'terms',
-        'portTo',
-        'consignee',
-        'msc',
-        'product',
-        'sort',
-        'pack',
-        'places',
-        'placesTotal',
-        'price',
-        'priceTotal',
-        'id',
-        'operationUseless',
-        'reice',
-        'konosament',
-        'company',
-        'operation',
-        'client',
-        'contractNo',
-        'contractDate',
-        'bank',
-        'deliveryDate',
-        'paymentDate',
-    ];
+import { CommonRowT } from '../../../types/typesTables';
 
-    return basicProps.includes(prop);
+export const getNonObligatoryProps = (row: CommonRowT) => {
+    const resProps = {
+        export: [
+            'terms',
+            'sort',
+            'msc',
+            'consignee',
+            'packSp',
+            'sortSp',
+            'datePusan',
+            'placesLeft',
+            'dateClose',
+        ],
+        mates: ['sort', 'periodCreation', 'reice', 'operation'],
+        inner: ['sort', 'deliveryDate', 'paymentDate'],
+    };
+
+    if (row.terms === 'FCA') {
+        resProps.export.push('blNo', 'portFrom');
+    }
+    return resProps;
 };
