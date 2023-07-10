@@ -6,61 +6,37 @@ import {
 } from '../../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 import { CommonRowT, TableNameT } from '../../../types/typesTables';
-import { isNumber } from '../../utils/isNumber';
+import { checkIsExcludedProp } from './checkIsExcludedProp';
 
 export const checkEmptyTable = (table: any[][]) => {
-    const check = table[0].every(
-        (value) => !value
-            || value === '-'
-            || value === ' '
-            || value === '-M'
-            || value === '-T'
-            || value === '#N/A',
-    );
+    const excludeValues = ['-', ' ', '-M', '-T', '#N/A'];
+    const check = table[0].every((value) => !value || excludeValues.includes(value));
     return check;
 };
 
 // checkFulfilledRow
-
 export const checkNotFulfilledRow = (row: CommonRowT, tableName: TableNameT) => {
     const checkProps = (possibleEmptyProps: string[]) => {
         // checkEmpty
         for (const prop in row) {
-            const value = row[prop];
+            if (possibleEmptyProps.includes(prop)) return;
+            if (checkIsExcludedProp(prop)) return;
 
-            if (!value && !possibleEmptyProps.includes(prop)) {
+            const value = row[prop];
+            if (!value) {
                 const error: TableErrorT = {
                     row: +row.index + 1,
                     prop,
                     tableName,
-                    desc: 'Пустая ячейка',
+                    desc: 'Пустая ячейка или ошибка в БД.',
                 };
                 pageStatusStore.setPageStatus(tableError(error));
                 return;
             }
         }
-
-        // // checkAmountError
-        // if (typeof row.amount === 'number') {
-        //     if (!isNumber(row.amount)) {
-        //         setTableError(+row.index + 1, 'amount', tableName);
-        //     }
-        // } else {
-        //     const keys = Object.keys(row.amount);
-
-        //     const propError = keys.find((key) => {
-        //         const { count } = row.amount[key];
-        //         return isNumber(count) === false;
-        //     });
-
-        //     if (propError) {
-        //         setTableError(+row.index + 1, propError, tableName);
-        //     }
-        // }
     };
 
     // for every table
-
     if (tableName.includes('Export')) {
         const possibleEmptyProps = [
             'terms',
@@ -69,6 +45,9 @@ export const checkNotFulfilledRow = (row: CommonRowT, tableName: TableNameT) => 
             'consignee',
             'packSp',
             'sortSp',
+            'datePusan',
+            'placesLeft',
+            'dateClose',
         ];
         if (row.terms === 'FCA') {
             possibleEmptyProps.push('blNo', 'portFrom');

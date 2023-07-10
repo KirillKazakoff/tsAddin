@@ -23,8 +23,8 @@ export const setMates = (table: any[][]) => {
             product,
             sort,
             pack,
-            amountPlaces,
-            amountTotal,
+            places,
+            placesTotal,
             operation,
         ] = row;
 
@@ -40,8 +40,8 @@ export const setMates = (table: any[][]) => {
             operation,
             sort,
             amount: {
-                places: initAmount(amountPlaces, 0, 0),
-                total: initAmount(amountTotal, 0, 2),
+                places: initAmount(places, 0, 0),
+                total: initAmount(placesTotal, 0, 2),
             },
             index: index.toString(),
         };

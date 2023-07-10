@@ -5,7 +5,7 @@ export const getCellByName = (
     name: string,
     offsetRow?: number,
 ): Cell => {
-    let match;
+    let match: ExcelJS.Cell;
 
     worksheet.eachRow((row) => row.eachCell((cell) => {
         if (cell.name === name) {

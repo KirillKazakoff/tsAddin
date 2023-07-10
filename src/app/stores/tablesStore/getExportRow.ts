@@ -35,5 +35,8 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
         msc: row.msc,
         id: row.id,
         index: row.index.toString(),
+        placesLeft: row.placesLeft,
+        dateClose: row.dateClose,
+        datePusan: row.datePusan,
     };
 };

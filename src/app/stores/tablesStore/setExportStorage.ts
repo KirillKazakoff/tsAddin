@@ -37,11 +37,14 @@ export const setExportStorage = (table: any[][]) => {
             id,
             consignee,
             portFrom,
+            placesLeft,
+            datePusan,
+            dateClose,
         ] = row;
 
         // prettier-ignore
         const rowInit: ExportInitRowT = {
-            contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index,
+            contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index, placesLeft, datePusan, dateClose,
         };
         const rowObj = getExportRow(rowInit);
         checkNotFulfilledRow(rowObj, 'Export_Storage');

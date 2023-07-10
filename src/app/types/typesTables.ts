@@ -71,6 +71,9 @@ export type ExportInitRowT = {
     msc: string;
     id: string;
     index: number;
+    placesLeft?: string;
+    datePusan?: string;
+    dateClose?: string;
 };
 
 export type ExportRowT = {
@@ -97,6 +100,9 @@ export type ExportRowT = {
     msc: string;
     index: string;
     id: string;
+    placesLeft?: string;
+    datePusan?: string;
+    dateClose?: string;
 };
 
 export type InnerRowT = {
