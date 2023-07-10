@@ -16,6 +16,7 @@ export type PageStatusT = {
 };
 export type TableErrorT = {
     tableName: string;
+    desc: string;
     row: number;
     prop: string;
 };
@@ -23,7 +24,7 @@ export type TableErrorT = {
 export const tableError = (error: TableErrorT): PageStatusT => ({
     statusType: 'notFilledTable',
     title: `В таблице ${error.tableName} ошибка`,
-    desc: `Ошибка в строке ${error.row}, в столбце ${error.prop}`,
+    desc: `Ошибка (${error.desc}) в строке ${error.row}, в столбце ${error.prop}`,
 });
 export const excelInEditingMode = (): PageStatusT => ({
     statusType: 'excelInEditingMode',
