@@ -41,6 +41,7 @@ export const setExport = (table: any[][]) => {
         const rowInit: ExportInitRowT = {
             contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, terms, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index,
         };
+        console.log('setExport');
         const rowObj = getExportRow(rowInit);
         checkRowProps(rowObj, 'Export');
 

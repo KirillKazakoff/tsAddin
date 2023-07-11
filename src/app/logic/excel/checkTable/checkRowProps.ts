@@ -1,5 +1,3 @@
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
 import {
     TableErrorT,
     tableError,
@@ -11,10 +9,13 @@ import { getNonObligatoryProps } from './getNonObligatoryProps';
 export const checkRowProps = (row: CommonRowT, tableName: string) => {
     const nonObligatoryProps = getNonObligatoryProps(row, tableName);
 
-    for (const prop in row) {
+    const keys = Object.keys(row);
+
+    keys.forEach((prop) => {
         if (nonObligatoryProps.includes(prop)) return;
 
         const value = row[prop];
+
         if (!value) {
             const error: TableErrorT = {
                 row: +row.index + 1,
@@ -23,7 +24,6 @@ export const checkRowProps = (row: CommonRowT, tableName: string) => {
                 desc: 'Пустая ячейка или ошибка в БД.',
             };
             pageStatusStore.setPageStatus(tableError(error));
-            return;
         }
-    }
+    });
 };

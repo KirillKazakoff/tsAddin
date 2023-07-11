@@ -2,7 +2,6 @@
 // PageStatus
 export type PageStatusTypeT =
     | 'notFilledTable'
-    | 'sameBl'
     | 'excelInEditingMode'
     | 'transportNotFound'
     | 'picturesError'
@@ -40,4 +39,10 @@ export const noPictureFound = (): PageStatusT => ({
     statusType: 'picturesError',
     title: 'Не могу загрузить картинки',
     desc: 'Проверьте наличие вкладки "Картинки"',
+});
+
+export const initPageStatus = (): PageStatusT => ({
+    statusType: 'ok',
+    title: 'Вернитесь назад',
+    desc: 'Возвращайтесь...',
 });

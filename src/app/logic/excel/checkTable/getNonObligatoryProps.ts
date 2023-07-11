@@ -1,7 +1,7 @@
 import { CommonRowT } from '../../../types/typesTables';
 
 export const getNonObligatoryProps = (row: CommonRowT, tableName: string) => {
-    const resProps = {
+    const nonObligatoryProps = {
         export: [
             'terms',
             'sort',
@@ -13,15 +13,15 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: string) => {
             'placesLeft',
             'dateClose',
         ],
-        mates: ['sort', 'periodCreation', 'reice', 'operation'],
+        mates: ['sort', 'periodCreation', 'reice', 'operation', 'index'],
         inner: ['sort', 'deliveryDate', 'paymentDate'],
     };
 
     if (row.terms === 'FCA') {
-        resProps.export.push('blNo', 'portFrom');
+        nonObligatoryProps.export.push('blNo', 'portFrom');
     }
 
-    if (tableName.includes('Export')) return resProps.export;
-    if (tableName.includes('Mates')) return resProps.mates;
-    return resProps.inner;
+    if (tableName.includes('Export')) return nonObligatoryProps.export;
+    if (tableName.includes('Mates')) return nonObligatoryProps.mates;
+    return nonObligatoryProps.inner;
 };

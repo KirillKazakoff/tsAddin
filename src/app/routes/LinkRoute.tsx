@@ -5,7 +5,7 @@ import excelSyncStore from '../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../stores/pageStatusStore.ts/pageStatusStore';
 import { useInitExcel } from '../logic/excel/useInitExcel';
 
-export const MainRoute = observer(() => {
+export const LinkRoute = observer(() => {
     const { statusType } = pageStatusStore.status;
     const navigate = useNavigate();
     useInitExcel();
@@ -38,6 +38,7 @@ export const MainRoute = observer(() => {
         </>
     );
 
+    if (statusType !== 'ok') return <Outlet />;
     return (
         <div className='main-route'>
             <nav className='nav'>

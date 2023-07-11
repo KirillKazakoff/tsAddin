@@ -37,6 +37,7 @@ export const useInitExcel = () => {
 
     useEffect(() => {
         if (statusType === 'ok' || !isSync) {
+            console.log('initExcel');
             initExcel();
         }
     }, [statusType, isSync]);

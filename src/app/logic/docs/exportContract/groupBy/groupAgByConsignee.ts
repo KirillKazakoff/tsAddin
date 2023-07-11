@@ -1,9 +1,5 @@
 /* eslint-disable no-param-reassign */
 import {
-    addToAmount,
-    initAmount,
-} from '../../../../stores/tablesStore/utils/initAmount';
-import {
     addProductAmount,
     initProductAmount,
 } from '../../../../stores/tablesStore/utils/invoiceAmount';

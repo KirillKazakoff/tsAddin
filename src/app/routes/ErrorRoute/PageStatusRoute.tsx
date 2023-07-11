@@ -15,13 +15,15 @@ export const PageStatusRoute = observer(() => {
 
     useEffect(() => {
         if (statusType === 'ok') {
-            navigate(-1);
+            navigate(-2);
         }
     }, [statusType, navigate]);
 
     return (
-        <Error title={title} desc={desc}>
-            <ErrorBtn onClick={onClick} desc='Вернуться назад' />
-        </Error>
+        <div className='main-route'>
+            <Error title={title} desc={desc}>
+                <ErrorBtn onClick={onClick} desc='Вернуться назад' />
+            </Error>
+        </div>
     );
 });

@@ -1,6 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { initPageStatus } from './initPageStatus';
-import { PageStatusT } from './pageMessages';
+import { PageStatusT, initPageStatus } from './pageMessages';
 
 class PageStatusStore {
     status = initPageStatus();
