@@ -5,7 +5,6 @@ import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
 import { getExportRow } from './getExportRow';
 import tablesStore from './tablesStore';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 export const setExport = (table: any[][]) => {
     table.shift();
     if (checkEmptyTable(table)) return;

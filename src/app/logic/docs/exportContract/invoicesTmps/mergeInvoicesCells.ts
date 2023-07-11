@@ -45,7 +45,6 @@ export const mergeInvoicesCells = async (book: Workbook, agreement: AgreementT) 
             mergeCells(ws, { row: eng, startCol: 2, endCol: col.first });
             // prettier-ignore
             mergeCells(ws, { row: eng, startCol: col.first + 1, endCol: col.second });
-
             mergeCells(ws, { row: ru, startCol: 2, endCol: col.first });
             mergeCells(ws, { row: ru, startCol: col.first + 1, endCol: col.second });
         }

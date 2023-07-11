@@ -10,9 +10,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     const ws = book.getWorksheet('Request_Contract');
     const utils = initExcelUtils(ws);
 
-    const {
-        record, priceTotal, rows, requests,
-    } = contract;
+    const { record, priceTotal, requests } = contract;
     const { portRu, portTamozhnya, terms } = requestContractStore.fields;
 
     const isVld = portTamozhnya.codeName === 'Владивосток';

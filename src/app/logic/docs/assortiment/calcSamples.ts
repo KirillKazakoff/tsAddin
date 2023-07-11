@@ -32,9 +32,8 @@ export const calcSamples = (weight: number, pack: number) => {
             return weight / 8000;
         }
 
-        // if (pack === 22) {
+        // pack 22 and more
         return weight / 25000;
-        // }
     };
 
     return Math.round(getFloatSamples());

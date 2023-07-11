@@ -41,9 +41,6 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
                 cols.priceTotal = `${priceTotal.str} $`;
             }
 
-            // if (ws.name.includes('Noncom')) {
-            //     delete cols.vessel;
-            // }
             if (invoice.agreement.record.terms === 'FCA') {
                 delete cols.vessel;
                 delete cols.pack;

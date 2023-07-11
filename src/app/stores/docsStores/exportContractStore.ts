@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-/* eslint-disable no-return-assign */
 import { makeAutoObservable } from 'mobx';
 import { OperationT } from '../../types/typesTables';
 import { initPodpisant } from '../initStoreObjects';

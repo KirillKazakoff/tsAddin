@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { checkEmptyTable } from '../../logic/excel/checkTable/checkIsEmptyTable';
 import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
 import { ExportInitRowT, ExportRowT } from '../../types/typesTables';

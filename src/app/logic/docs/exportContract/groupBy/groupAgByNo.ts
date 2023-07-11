@@ -26,9 +26,6 @@ export const groupAgByNo = () => {
         agreements[key] = groupAgByInvoice(agreement);
         agreements[key] = groupAgByConsignee(agreement);
         agreements[key] = groupAgByVessel(agreement);
-
-        // const copy = _.cloneDeep(agreements[key].productsGroupedBy);
-        // console.log(copy);
     });
 
     return agreements;

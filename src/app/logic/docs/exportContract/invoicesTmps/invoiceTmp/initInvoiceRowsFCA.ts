@@ -41,8 +41,6 @@ export const initInvoiceRowsFCA: InitInvoicePartT = (utils, invoice) => {
             }
 
             // mergeRowCells
-            // ws.mergeCells()
-
             const rowArr = Object.values(cols);
             const rowIndex = +arrayCl.row + i;
             utils.mergeCells({ startCol: 1, endCol: 4, row: rowIndex });

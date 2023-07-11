@@ -36,34 +36,5 @@ export const initBlRows = (blGroup: BlGroupT, utils: CellUtilsT) => {
         right: { style: 'thin' },
     };
 
-    // blGroup.rows.forEach((r, i) => {
-    //     const rowArr = [
-    //         // firstEmptyCol
-    //         '',
-    //         r.blNo,
-    //         r.product.eng.name,
-    //         r.sort,
-    //         `1/${r.pack} KG`,
-    //         `${r.amount.places.str} PCS /`,
-    //         `${r.amount.placesTotal.str} tn`,
-    //     ];
-
-    //     const rowIndex = +arrayCl.row + i;
-    //     utils.ws.insertRow(rowIndex, rowArr).commit();
-
-    //     // styleRow
-    //     const row = ws.getRow(rowIndex);
-    //     styleRowCells(row, {
-    //         alignment: alignmentCenter,
-    //         height: 40,
-    //     });
-    //     row.getCell(2).border = {
-    //         left: { style: 'thin' },
-    //     };
-    //     row.getCell(row.actualCellCount).border = {
-    //         right: { style: 'thin' },
-    //     };
-    // });
-
     utils.deleteRow(cellName);
 };

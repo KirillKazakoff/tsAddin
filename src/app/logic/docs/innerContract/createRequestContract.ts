@@ -5,9 +5,8 @@ import { ContractT } from './groupByContractNo';
 import { initRequestTmp } from './requestTmp/initRequestTmp';
 
 export const createRequestContract = async (contract: ContractT) => {
-    const { record } = contract;
     const book = await readTmp(pathObj.requestContractRu);
 
     initRequestTmp(book, contract);
-    await saveFile(book, `Заявка ${record.buyer.codeName}`);
+    await saveFile(book, `Заявка ${contract.record.buyer.codeName}`);
 };

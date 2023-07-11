@@ -2,7 +2,7 @@ import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 
 export const addChangeHandler = (context: Excel.RequestContext) => {
-    let eventResult;
+    let eventResult: OfficeExtension.EventHandlerResult<Excel.WorksheetChangedEventArgs>;
     const { worksheets } = context.workbook;
 
     async function remove() {

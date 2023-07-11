@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-// PageStatus
 export type PageStatusTypeT =
     | 'notFilledTable'
     | 'excelInEditingMode'
