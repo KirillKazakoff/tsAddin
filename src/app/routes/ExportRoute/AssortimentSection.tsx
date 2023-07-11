@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useInitAssortimentSection } from '../../logic/docs/assortiment/useInitAssortimentSection';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
@@ -19,10 +19,6 @@ export const AssortimentSection = observer(() => {
             />
         );
     });
-
-    // useEffect(() => {
-    //     initObj.onLoad.assortiment();
-    // });
 
     return (
         <form className='docs__form assortiment-form'>

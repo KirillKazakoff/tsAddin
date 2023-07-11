@@ -17,6 +17,7 @@ export const RequestSection = observer(() => {
             validate={formik.validate}
             onSubmit={formik.onSubmit}
             innerRef={formik.formRef}
+            validateOnMount
         >
             <Form className='docs__form request-section-form'>
                 <h2 className='title request-section-title'>Заявки на договора</h2>

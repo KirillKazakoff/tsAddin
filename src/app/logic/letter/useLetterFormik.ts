@@ -1,5 +1,5 @@
 import { FormikProps } from 'formik';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import letterStore from '../../stores/letterStore/letterStore';
 import { OnSubmitT } from '../../types/typesUtils';
 import getErrorsDescription from '../../components/Form/getErrorsDescription';
@@ -41,9 +41,6 @@ export const useLetterFormik = () => {
     };
 
     const formRef = useRef<FormikProps<FormValuesT>>();
-    useEffect(() => {
-        formRef.current.validateForm();
-    }, []);
 
     return {
         onSubmit,

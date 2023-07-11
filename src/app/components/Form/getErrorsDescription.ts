@@ -8,6 +8,7 @@ export default function getErrorsDescription(errors: any) {
                 total[key] = messages[key][value as string];
                 return total;
             } catch (e) {
+                // eslint-disable-next-line no-console
                 console.log(key, e);
                 return total;
             }

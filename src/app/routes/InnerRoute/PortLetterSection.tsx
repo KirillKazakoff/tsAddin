@@ -20,6 +20,7 @@ export const PortLetterSection = observer(() => {
             validate={formik.validate}
             onSubmit={formik.onSubmit}
             innerRef={formik.formRef}
+            validateOnMount
         >
             <Form className='docs__form port-letter-form'>
                 <h2 className='title port-letter-title'>Письма в порт</h2>

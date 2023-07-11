@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import _ from 'lodash';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import { createRequestNordmile } from '../../logic/docs/innerContract/createRequestNordmile';
 import tablesStore from '../../stores/tablesStore/tablesStore';

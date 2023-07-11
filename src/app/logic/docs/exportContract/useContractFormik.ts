@@ -1,5 +1,5 @@
 import { FormikProps } from 'formik';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import getErrorsDescription from '../../../components/Form/getErrorsDescription';
 import { OnSubmitT } from '../../../types/typesUtils';
@@ -40,9 +40,6 @@ export const useContractFormik = () => {
     };
 
     const formRef = useRef<FormikProps<FormValuesT>>();
-    useEffect(() => {
-        formRef.current.validateForm();
-    }, []);
 
     return {
         onSubmit,

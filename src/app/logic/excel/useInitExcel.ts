@@ -37,6 +37,7 @@ export const useInitExcel = () => {
 
     useEffect(() => {
         if (statusType === 'ok' || !isSync) {
+            // eslint-disable-next-line no-console
             console.log('initExcel');
             initExcel();
         }

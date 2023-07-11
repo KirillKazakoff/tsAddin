@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Form, Formik } from 'formik';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
@@ -17,6 +16,7 @@ export const ExportContractSection = observer(() => {
             validate={formik.validate}
             onSubmit={formik.onSubmit}
             innerRef={formik.formRef}
+            validateOnMount
         >
             <Form className='docs__form export-contract-form'>
                 <h2>{initObj.title}</h2>

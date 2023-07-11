@@ -14,6 +14,7 @@ export const LetterRoute = observer(() => {
             validate={formik.validate}
             onSubmit={onSubmit}
             innerRef={formik.formRef}
+            validateOnMount
         >
             <Form className='form letter__form'>
                 <div className='letter__fields-wrapper'>

@@ -4,7 +4,6 @@ import getErrorsDescription from '../../../components/Form/getErrorsDescription'
 import { OnSubmitT } from '../../../types/typesUtils';
 import { TermsT } from '../../../types/typesTables';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
-import { debugPortLetter } from '../../../stores/tablesStore/utils/debug';
 
 export const usePortLetterFormik = () => {
     // const initialFields = debugPortLetter;
@@ -55,9 +54,6 @@ export const usePortLetterFormik = () => {
     };
 
     const formRef = useRef<FormikProps<FormValuesT>>();
-    useEffect(() => {
-        formRef.current.validateForm();
-    }, []);
 
     return {
         onSubmit,
