@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { checkEmptyTable } from '../../logic/excel/utils/checkIsEmptyTable';
-import { checkNotFulfilledRow } from '../../logic/excel/utils/checkTable';
+import { checkEmptyTable } from '../../logic/excel/checkTable/checkIsEmptyTable';
+import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
 import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
 import { getExportRow } from './getExportRow';
 import tablesStore from './tablesStore';
@@ -45,7 +45,7 @@ export const setExportStorage = (table: any[][]) => {
             contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index, placesLeft, datePusan, dateClose,
         };
         const rowObj = getExportRow(rowInit);
-        checkNotFulfilledRow(rowObj, 'Export_Storage');
+        checkRowProps(rowObj, 'Export_Storage');
 
         totalObj.push(rowObj);
         return totalObj;

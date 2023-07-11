@@ -1,4 +1,4 @@
-import { checkEmptyTable } from '../../logic/excel/utils/checkIsEmptyTable';
+import { checkEmptyTable } from '../../logic/excel/checkTable/checkIsEmptyTable';
 import { NordmileRowT } from '../../types/typesTables';
 import { selectSp } from '../spsStore/select';
 import tablesStore from './tablesStore';

@@ -1,5 +1,5 @@
-import { checkEmptyTable } from '../../logic/excel/utils/checkIsEmptyTable';
-import { checkNotFulfilledRow } from '../../logic/excel/utils/checkTable';
+import { checkEmptyTable } from '../../logic/excel/checkTable/checkIsEmptyTable';
+import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
 import { InnerRowT } from '../../types/typesTables';
 import { selectSp } from '../spsStore/select';
 import tablesStore from './tablesStore';
@@ -54,7 +54,7 @@ export const setInner = (table: any[][]) => {
         };
 
         totalObj.push(rowObj);
-        checkNotFulfilledRow(rowObj, 'Inner');
+        checkRowProps(rowObj, 'Inner');
         return totalObj;
     }, []);
 

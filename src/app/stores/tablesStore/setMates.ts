@@ -1,5 +1,5 @@
-import { checkEmptyTable } from '../../logic/excel/utils/checkIsEmptyTable';
-import { checkNotFulfilledRow } from '../../logic/excel/utils/checkTable';
+import { checkEmptyTable } from '../../logic/excel/checkTable/checkIsEmptyTable';
+import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
 import { MateRowT } from '../../types/typesTables';
 import letterStore from '../letterStore/letterStore';
 import { selectSp } from '../spsStore/select';
@@ -44,7 +44,7 @@ export const setMates = (table: any[][]) => {
             index: index.toString(),
         };
 
-        checkNotFulfilledRow(rowObj, 'Mates');
+        checkRowProps(rowObj, 'Mates');
         if (operation === 'Образец') return totalObj;
 
         totalObj.push(rowObj);
