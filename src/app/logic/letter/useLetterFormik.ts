@@ -3,9 +3,11 @@ import { useRef } from 'react';
 import letterStore from '../../stores/letterStore/letterStore';
 import { OnSubmitT } from '../../types/typesUtils';
 import getErrorsDescription from '../../components/Form/getErrorsDescription';
+import { mySessionStorage } from '../utils/sessionStorage';
 
 export const useLetterFormik = () => {
-    const initialFields = {
+    const storedValues = mySessionStorage.getItem('letter');
+    const initialFields = storedValues || {
         port: '',
         arrivalVld: '',
         payment: '',
@@ -32,6 +34,8 @@ export const useLetterFormik = () => {
             delete errors.terms;
             delete errors.ground;
         }
+
+        mySessionStorage.setItem('letter', values);
 
         return getErrorsDescription(errors);
     };

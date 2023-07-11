@@ -1,13 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { FormikProps } from 'formik';
 import getErrorsDescription from '../../../components/Form/getErrorsDescription';
 import { OnSubmitT } from '../../../types/typesUtils';
 import { TermsT } from '../../../types/typesTables';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
+import { mySessionStorage } from '../../utils/sessionStorage';
 
 export const usePortLetterFormik = () => {
-    // const initialFields = debugPortLetter;
-    const initialFields = {
+    const storedValues = mySessionStorage.getItem('portLetter');
+    const initialFields = storedValues || {
         dateLetter: '',
         portRu: '',
         podpisant: '',
@@ -45,6 +46,8 @@ export const usePortLetterFormik = () => {
         } else {
             delete errors.personDischarge;
         }
+
+        mySessionStorage.setItem('portLetter', values);
 
         return getErrorsDescription(errors);
     };

@@ -3,13 +3,16 @@ import { useRef } from 'react';
 import getErrorsDescription from '../../../components/Form/getErrorsDescription';
 import requestContractStore from '../../../stores/docsStores/requestContractStore';
 import { OnSubmitT } from '../../../types/typesUtils';
+import { mySessionStorage } from '../../utils/sessionStorage';
 
 export const useRequestFormik = () => {
-    const initialFields = {
+    const storedValues = mySessionStorage.getItem('request');
+    const initialFields = storedValues || {
         terms: '',
         portTamozhnya: '',
         portRu: '',
     };
+
     type FormValuesT = typeof initialFields;
 
     const validate = (values: FormValuesT) => {
@@ -25,6 +28,7 @@ export const useRequestFormik = () => {
             errors.portRu = 'valueMissing';
         }
 
+        mySessionStorage.setItem('request', values);
         return getErrorsDescription(errors);
     };
 

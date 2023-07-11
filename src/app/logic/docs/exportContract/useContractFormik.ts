@@ -3,9 +3,11 @@ import { useRef } from 'react';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import getErrorsDescription from '../../../components/Form/getErrorsDescription';
 import { OnSubmitT } from '../../../types/typesUtils';
+import { mySessionStorage } from '../../utils/sessionStorage';
 
 export const useContractFormik = () => {
-    const initialFields = {
+    const storedValues = mySessionStorage.getItem('exportContract');
+    const initialFields = storedValues || {
         podpisant: '',
         dischargeDate: '',
         declaration: '',
@@ -31,6 +33,8 @@ export const useContractFormik = () => {
         if (exportContractStore.terms !== 'EXW') {
             delete errors.declaration;
         }
+
+        mySessionStorage.setItem('exportContract', values);
 
         return getErrorsDescription(errors);
     };
