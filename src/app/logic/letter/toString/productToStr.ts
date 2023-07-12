@@ -27,7 +27,7 @@ export const productToStringRu = (product: ProductT) => {
 
     const packStr = `${p.TAB}Упаковка - ${desc.ru.pack}`;
     const producerStr = `${p.TAB}Изготовитель: ${producer.ru.name}`;
-    const periodStr = `${p.TAB}Период изготовления: `;
+    const periodStr = `${p.TAB}Период изготовления: XXX`;
     const expirationStr = `${p.TAB}Cрок годности - ${expirationDate} месяцев`;
     const standartStr = `${p.TAB}${standart}`;
 

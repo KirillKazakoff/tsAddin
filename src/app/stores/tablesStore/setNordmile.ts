@@ -1,4 +1,4 @@
-import { checkEmptyTable } from '../../logic/excel/checkTable/checkIsEmptyTable';
+import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
 import { NordmileRowT } from '../../types/typesTables';
 import { selectSp } from '../spsStore/select';
 import tablesStore from './tablesStore';
@@ -6,9 +6,9 @@ import { initAmount } from './utils/initAmount';
 
 export const setNordmile = (table: any[][]) => {
     table.shift();
-    if (checkEmptyTable(table)) return;
+    const excluded = excludeOfEmptyRows(table);
 
-    const requests = table.reduce<NordmileRowT[]>((totalObj, row) => {
+    const requests = excluded.reduce<NordmileRowT[]>((totalObj, row) => {
         const [
             contractNo,
             contractDate,

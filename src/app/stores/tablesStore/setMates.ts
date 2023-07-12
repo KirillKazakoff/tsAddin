@@ -1,4 +1,4 @@
-import { checkEmptyTable } from '../../logic/excel/checkTable/checkIsEmptyTable';
+import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
 import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
 import { MateRowT } from '../../types/typesTables';
 import letterStore from '../letterStore/letterStore';
@@ -8,9 +8,9 @@ import { initAmount } from './utils/initAmount';
 
 export const setMates = (table: any[][]) => {
     table.shift();
-    if (checkEmptyTable(table)) return;
+    const excluded = excludeOfEmptyRows(table);
 
-    const mates = table.reduce<MateRowT[]>((totalObj, row, index) => {
+    const mates = excluded.reduce<MateRowT[]>((totalObj, row, index) => {
         const [
             reice,
             konosament,
@@ -47,6 +47,7 @@ export const setMates = (table: any[][]) => {
         checkRowProps(rowObj, 'Mates');
         if (operation === 'Образец') return totalObj;
 
+        console.log(rowObj);
         totalObj.push(rowObj);
         return totalObj;
     }, []);

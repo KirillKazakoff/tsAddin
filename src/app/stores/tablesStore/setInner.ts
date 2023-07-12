@@ -1,4 +1,4 @@
-import { checkEmptyTable } from '../../logic/excel/checkTable/checkIsEmptyTable';
+import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
 import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
 import { InnerRowT } from '../../types/typesTables';
 import { selectSp } from '../spsStore/select';
@@ -8,9 +8,9 @@ import { initAmount } from './utils/initAmount';
 export const setInner = (table: any[][]) => {
     table.shift();
     table.pop();
-    if (checkEmptyTable(table)) return;
+    const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = table.reduce<InnerRowT[]>((totalObj, row, index) => {
+    const transformedTable = excluded.reduce<InnerRowT[]>((totalObj, row, index) => {
         const [
             client,
             seller,
