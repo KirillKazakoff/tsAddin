@@ -4,7 +4,7 @@ import { ExportRowT } from '../../../../types/typesTables';
 import {
     addBlAmount,
     initBlAmount,
-} from '../../../../stores/tablesStore/utils/invoiceAmount';
+} from '../../../../stores/tablesStore/utils/specialAmount';
 import { groupify } from '../../../utils/groupify';
 
 export const groupByBl = (rows: ExportRowT[]) => {

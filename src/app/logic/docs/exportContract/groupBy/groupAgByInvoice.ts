@@ -3,7 +3,7 @@ import { AgreementT } from './initAgreement';
 import {
     addProductAmount,
     initProductAmount,
-} from '../../../../stores/tablesStore/utils/invoiceAmount';
+} from '../../../../stores/tablesStore/utils/specialAmount';
 import { InvoiceT, ProductGroupT } from '../../../../types/typesContract';
 import { groupify } from '../../../utils/groupify';
 

@@ -5,6 +5,7 @@ import {
     ExportRowT,
     InnerRowT,
     NordmileRowT,
+    DischargeInvoiceRowT,
 } from '../../types/typesTables';
 
 class TablesStore {
@@ -13,6 +14,7 @@ class TablesStore {
     exportStorageT: ExportRowT[] = [];
     innerT: InnerRowT[] = [];
     nordmileT: NordmileRowT[] = [];
+    dischargeInvoicesT: DischargeInvoiceRowT[] = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -22,6 +24,7 @@ class TablesStore {
         mates: (table: MateRowT[]) => (this.matesT = table),
         export: (table: ExportRowT[]) => (this.exportT = table),
         exportStorage: (table: ExportRowT[]) => (this.exportStorageT = table),
+        dischargeInvoices: (table: DischargeInvoiceRowT[]) => (this.dischargeInvoicesT = table),
         inner: (table: InnerRowT[]) => (this.innerT = table),
         nordmile: (table: NordmileRowT[]) => (this.nordmileT = table),
     };

@@ -136,9 +136,29 @@ export type NordmileRowT = {
     paymentDate: string;
 };
 
+export type DischargeInvoiceRowT = {
+    blNo: string;
+    vessel: VesselT;
+    product: ProductionT;
+    invoiceNo: string;
+    invoiceDate: string;
+    dischargeDate: string;
+    amount: {
+        placesTotal: AmountT;
+        price: AmountT;
+        priceTotal: AmountT;
+    };
+    index: string;
+};
+
 // utilstype
 export type OperationT = 'export' | 'export_storage';
 
-export type CommonRowT = (ExportRowT | InnerRowT | MateRowT) & { terms?: string };
+export type CommonRowT = (
+    | ExportRowT
+    | InnerRowT
+    | MateRowT
+    | DischargeInvoiceRowT
+) & { terms?: string };
 
 export type TableNameT = 'Export' | 'Export_Storage' | 'Inner' | 'Mates';

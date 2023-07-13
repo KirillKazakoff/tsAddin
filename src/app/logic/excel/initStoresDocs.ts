@@ -3,6 +3,7 @@ import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
 import { setClientsRu } from '../../stores/spsStore/set/setClientsRu';
 import { setConsignees } from '../../stores/spsStore/set/setConsignees';
 import { setContracts } from '../../stores/spsStore/set/setContracts';
+import { setDischargeInvoices } from '../../stores/spsStore/set/setDischargeInvoices';
 import { setPackages } from '../../stores/spsStore/set/setPackages';
 import { setPodpisants } from '../../stores/spsStore/set/setPodpisants';
 import { setPortsRu } from '../../stores/spsStore/set/setPortsRu';
@@ -31,6 +32,8 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     const exportRange = initRange('Экспорт', 'Экспорт');
     const exportStorageRange = initRange('Экспорт Хранение', 'Экспорт_хранение');
     const innerRange = initRange('Внутренний рынок', 'Продажи_ВР');
+
+    const dischargeInvoicesRange = initRange('Инвойсы выгрузка', 'Инвойсы_выгрузка');
 
     const spTransportRange = initRange('Транспорта', 'SPTransport');
     const spVesselsRange = initRange('Суда', 'SPSudno');
@@ -74,4 +77,6 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     setExportStorage(exportStorageRange.values);
     setInner(innerRange.values);
     setMates(mateRange.values);
+
+    setDischargeInvoices(dischargeInvoicesRange.values);
 };

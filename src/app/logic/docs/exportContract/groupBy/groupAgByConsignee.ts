@@ -2,7 +2,7 @@
 import {
     addProductAmount,
     initProductAmount,
-} from '../../../../stores/tablesStore/utils/invoiceAmount';
+} from '../../../../stores/tablesStore/utils/specialAmount';
 import { ProductGroupsT } from '../../../../types/typesContract';
 import { groupify } from '../../../utils/groupify';
 import { AgreementT } from './initAgreement';

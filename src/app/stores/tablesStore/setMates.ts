@@ -47,7 +47,6 @@ export const setMates = (table: any[][]) => {
         checkRowProps(rowObj, 'Mates');
         if (operation === 'Образец') return totalObj;
 
-        console.log(rowObj);
         totalObj.push(rowObj);
         return totalObj;
     }, []);
