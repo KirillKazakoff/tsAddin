@@ -23,5 +23,5 @@ export const groupByBl = (rows: ExportRowT[]) => {
         return total;
     }, {});
 
-    return Object.values(blGrouped);
+    return blGrouped;
 };

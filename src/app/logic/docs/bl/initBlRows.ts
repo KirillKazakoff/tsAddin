@@ -5,7 +5,6 @@ import { alignmentCenter, styleRowCells } from '../styleRowCells';
 export const initBlRows = (blGroup: BlGroupT, utils: CellUtilsT) => {
     const cellName = 'Bl_массив';
     const arrayCl = utils.getCell(cellName);
-    const { ws } = utils;
     const { record, total } = blGroup;
 
     const rowArr = [
@@ -24,7 +23,7 @@ export const initBlRows = (blGroup: BlGroupT, utils: CellUtilsT) => {
     utils.ws.insertRow(rowIndex, rowArr).commit();
 
     // styleRow
-    const row = ws.getRow(rowIndex);
+    const row = utils.ws.getRow(rowIndex);
     styleRowCells(row, {
         alignment: alignmentCenter,
         height: 40,

@@ -7,7 +7,7 @@ import { createBL } from './createBl';
 export const useInitBlSection = () => {
     const table = exportContractStore.getCurrentTable();
 
-    const blGroupsArr = groupByBl(table);
+    const blGroupsArr = Object.values(groupByBl(table));
     const onLoad = async (group: BlGroupT) => createBL(group);
 
     const onLoadAll = async () => {

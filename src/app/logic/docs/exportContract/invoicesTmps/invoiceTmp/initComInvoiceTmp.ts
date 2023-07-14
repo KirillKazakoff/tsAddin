@@ -114,6 +114,5 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     });
 
     initInvoiceRows(utils, invoice);
-
     return cells;
 };

@@ -4,7 +4,6 @@ import { alignmentCenter, borderAll, styleRowCells } from '../../styleRowCells';
 import { RequestT } from '../groupContractByNameSort';
 
 export const initRequestRows = (requests: RequestT[], utils: CellUtilsT) => {
-    const { ws } = utils;
     const cellName = 'Заявка_массив';
     const arrayCl = utils.getCell(cellName);
 
@@ -21,10 +20,10 @@ export const initRequestRows = (requests: RequestT[], utils: CellUtilsT) => {
         ];
 
         const rowIndex = +arrayCl.row + i;
-        ws.insertRow(rowIndex, rowArr).commit();
+        utils.ws.insertRow(rowIndex, rowArr).commit();
 
         // styleRow
-        const row = ws.getRow(rowIndex);
+        const row = utils.ws.getRow(rowIndex);
         styleRowCells(row, {
             alignment: alignmentCenter,
             height: 55,

@@ -1,9 +1,13 @@
 import { AmountT, DischargeInvoiceRowT } from './typesTables';
 
-type DischargeInvoiceT = {
+export type DischargeInvoiceT = {
     rows: DischargeInvoiceRowT[];
-    record: DischargeInvoiceT;
+    record: DischargeInvoiceRowT;
     amount: {
         priceTotal: AmountT;
     };
+};
+
+export type DischargeInvoicesT = {
+    [key: string]: DischargeInvoiceT;
 };
