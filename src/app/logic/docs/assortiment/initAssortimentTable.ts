@@ -26,8 +26,11 @@ export const initAssortimentObj = (
     tables: AssortimentTablesT,
     isSample: boolean,
 ) => {
+    const tablesArr = Object.values(tables);
+    if (tablesArr.length === 0) return null;
+
     const assortiment: AssortimentT = {
-        record: Object.values(tables)[0].record,
+        record: tablesArr[0].record,
         tables,
         isSample,
     };

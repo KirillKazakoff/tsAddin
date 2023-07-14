@@ -7,6 +7,7 @@ import { initAmount } from '../../tablesStore/utils/initAmount';
 export const setDischargeInvoices = (table: any[][]) => {
     table.shift();
     const excluded = excludeOfEmptyRows(table);
+    console.log(excluded);
 
     const transformedTable = excluded.reduce<DischargeInvoiceRowT[]>(
         (totalObj, row, index) => {
@@ -24,6 +25,7 @@ export const setDischargeInvoices = (table: any[][]) => {
             ] = row;
 
             const rowObj: DischargeInvoiceRowT = {
+                i,
                 blNo,
                 vessel,
                 product,

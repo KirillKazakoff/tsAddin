@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import _ from 'lodash';
 import {
@@ -9,13 +10,16 @@ import { createDischargeInvoice } from '../../logic/docs/dischargeInvoice/create
 import { Doc } from '../../components/Doc';
 
 export const DischargeSection = observer(() => {
+    const invoicesGrouped = groupInvoiceByNo();
     const onLoad = async (invoice: DischargeInvoiceT) => {
         await createDischargeInvoice(invoice);
     };
 
-    // console.log(_.cloneDeep(groupInvoiceByNo()));
+    useEffect(() => {
+        onLoad(invoicesGrouped[0]);
+    }, []);
 
-    const invoices = groupInvoiceByNo().map((invoice) => {
+    const invoices = invoicesGrouped.map((invoice) => {
         const onClick = async () => onLoad(invoice);
         return (
             <Doc

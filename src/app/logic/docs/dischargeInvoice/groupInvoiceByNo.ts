@@ -9,8 +9,10 @@ import { groupByBl } from '../exportContract/groupBy/groupByBl';
 
 // DischargeInvoices
 const initInvoice = (row: DischargeInvoiceRowT) => {
+    const blGrouped = groupByBl(tablesStore.exportStorageT);
     return {
         priceTotal: initAmount(0, 2, 2),
+        exportRecord: blGrouped[row.blNo].record,
         record: row,
         rows: <{ exportRow: ExportRowT; row: DischargeInvoiceRowT }[]>[],
     };

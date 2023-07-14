@@ -66,6 +66,6 @@ export const initDischargeInvoice = (
         utils.setCell(cell);
     });
 
-    initDishargeRows(rows, utils);
+    initDishargeRows(invoice, utils);
     return cells;
 };

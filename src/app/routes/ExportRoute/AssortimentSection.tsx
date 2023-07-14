@@ -20,6 +20,8 @@ export const AssortimentSection = observer(() => {
         );
     });
 
+    if (samplesArr.length === 0) return null;
+
     return (
         <form className='docs__form assortiment-form'>
             <h2>Ассортимент и Образцы</h2>

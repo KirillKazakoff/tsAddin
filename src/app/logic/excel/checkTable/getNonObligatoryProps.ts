@@ -15,7 +15,7 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: string) => {
         ],
         mates: ['sort', 'periodCreation', 'reice', 'operation', 'index'],
         inner: ['sort', 'deliveryDate', 'paymentDate'],
-        dischargeInvoices: [''],
+        dischargeInvoices: ['i', 'invoiceDate'],
     };
 
     if (row.terms === 'FCA') {
@@ -24,6 +24,8 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: string) => {
 
     if (tableName.includes('Export')) return nonObligatoryProps.export;
     if (tableName.includes('Mates')) return nonObligatoryProps.mates;
-    if (tableName.includes('DischargeInvoices')) { return nonObligatoryProps.dischargeInvoices; }
+    if (tableName.includes('DischargeInvoices')) {
+        return nonObligatoryProps.dischargeInvoices;
+    }
     return nonObligatoryProps.inner;
 };
