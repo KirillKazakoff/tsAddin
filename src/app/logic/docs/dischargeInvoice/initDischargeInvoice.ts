@@ -11,7 +11,7 @@ export const initDischargeInvoice = (
 ) => {
     const ws = book.getWorksheet('Invoice_discharge');
     const utils = initExcelUtils(ws);
-    const { record, exportRecord, rows } = invoice;
+    const { record, exportRecord } = invoice;
 
     const date = {
         invoice: (locale: string) => getExcelDateStr(record.invoiceDate, locale),

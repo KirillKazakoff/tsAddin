@@ -1,23 +1,20 @@
 import { CellUtilsT } from '../../../types/typesExcelUtils';
-import { DischargeInvoiceRowT } from '../../../types/typesTables';
 import { styleRowCells } from '../styleRowCells';
+import { DischargeInvoiceT } from './groupInvoiceByNo';
 
-export const initDishargeRows = (
-    rows: DischargeInvoiceRowT[],
-    utils: CellUtilsT,
-) => {
+export const initDishargeRows = (invoice: DischargeInvoiceT, utils: CellUtilsT) => {
     ['eng', 'ru'].forEach((language) => {
         const cellName = language === 'eng' ? 'Инвойс_массив' : 'Инвойс_массив_п';
         const arrayCl = utils.getCell(cellName);
 
-        rows.forEach((r, i) => {
+        invoice.rows.forEach((r, i) => {
             const rowArr = [
                 '',
-                `${r.vessel.eng.name} ${r.product.eng.name}\n${r.amount.placesTotal.str} mt`,
+                `${r.row.vessel.eng.name} ${r.row.product.eng.name}\n${r.row.amount.placesTotal.str} mt`,
                 '',
-                r.amount.price.str,
+                r.row.amount.price.str,
                 '',
-                r.amount.priceTotal.str,
+                r.row.amount.priceTotal.str,
             ];
 
             const rowIndex = +arrayCl.row + i;

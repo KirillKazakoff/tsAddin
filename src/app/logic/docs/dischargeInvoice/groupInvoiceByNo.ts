@@ -3,20 +3,16 @@ import {
     addToAmount,
     initAmount,
 } from '../../../stores/tablesStore/utils/initAmount';
-import { DischargeInvoiceRowT } from '../../../types/typesTables';
+import { DischargeInvoiceRowT, ExportRowT } from '../../../types/typesTables';
 import { groupify } from '../../utils/groupify';
 import { groupByBl } from '../exportContract/groupBy/groupByBl';
 
 // DischargeInvoices
 const initInvoice = (row: DischargeInvoiceRowT) => {
-    const blGrouped = groupByBl(tablesStore.exportStorageT);
-    const sameRow = blGrouped[row.blNo];
-
     return {
         priceTotal: initAmount(0, 2, 2),
         record: row,
-        exportRecord: sameRow.record,
-        rows: [],
+        rows: <{ exportRow: ExportRowT; row: DischargeInvoiceRowT }[]>[],
     };
 };
 
@@ -26,7 +22,9 @@ export type DischargeInvoicesT = {
 };
 
 export const groupInvoiceByNo = () => {
-    const { dischargeInvoicesT } = tablesStore;
+    const { dischargeInvoicesT, exportStorageT } = tablesStore;
+    const blGrouped = groupByBl(exportStorageT);
+
     const dischargeInvoices = dischargeInvoicesT.reduce<DischargeInvoicesT>(
         (total, row) => {
             const initObj = initInvoice(row);
@@ -35,7 +33,7 @@ export const groupInvoiceByNo = () => {
                 initObj,
                 row.invoiceNo,
             );
-            invoice.rows.push(row);
+            invoice.rows.push({ row, exportRow: blGrouped[row.blNo].record });
             addToAmount(invoice.priceTotal, row.amount.priceTotal.count);
 
             return total;
@@ -43,5 +41,6 @@ export const groupInvoiceByNo = () => {
         {},
     );
 
+    // console.log(dischargeInvoices);
     return Object.values(dischargeInvoices);
 };

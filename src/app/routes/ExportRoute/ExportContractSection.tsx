@@ -6,6 +6,7 @@ import AgreementList from './AgreementList';
 import { ExportDateFCA } from './ExportDateFCA';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
 import { ExportDeclarationEXW } from './ExportDeclarationEXW';
+import { DischargeSection } from './DischargeSection';
 
 export const ExportContractSection = observer(() => {
     const { formik, initObj } = useInitContractSection();
