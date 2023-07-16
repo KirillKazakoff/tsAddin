@@ -28,12 +28,11 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
 
     const initRange: InitRangeBoundT = initRangeUnbound.bind(this, worksheets);
 
+    // const dischargeInvoicesRange = initRange('Инвойсы выгрузка', 'Инвойсы_выгрузка');
     const mateRange = initRange('Коносаменты', 'Коносаменты');
     const exportRange = initRange('Экспорт', 'Экспорт');
     const exportStorageRange = initRange('Экспорт Хранение', 'Экспорт_хранение');
     const innerRange = initRange('Внутренний рынок', 'Продажи_ВР');
-
-    const dischargeInvoicesRange = initRange('Инвойсы выгрузка', 'Инвойсы_выгрузка');
 
     const spTransportRange = initRange('Транспорта', 'SPTransport');
     const spVesselsRange = initRange('Суда', 'SPSudno');
@@ -78,5 +77,5 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     setInner(innerRange.values);
     setMates(mateRange.values);
 
-    setDischargeInvoices(dischargeInvoicesRange.values);
+    // setDischargeInvoices(dischargeInvoicesRange.values);
 };

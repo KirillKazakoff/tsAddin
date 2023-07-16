@@ -15,9 +15,9 @@ export const DischargeSection = observer(() => {
         await createDischargeInvoice(invoice);
     };
 
-    useEffect(() => {
-        onLoad(invoicesGrouped[0]);
-    }, []);
+    // useEffect(() => {
+    //     onLoad(invoicesGrouped[0]);
+    // }, []);
 
     const invoices = invoicesGrouped.map((invoice) => {
         const onClick = async () => onLoad(invoice);

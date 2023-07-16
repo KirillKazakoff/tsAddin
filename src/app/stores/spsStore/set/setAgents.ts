@@ -26,7 +26,7 @@ export const setAgents = (spRange: any[][]) => {
             ru: {
                 signatory: signatoryRu,
             },
-            name,
+            name: name.toUpperCase(),
             beneficiaryBank,
             branch,
             bankAdress,

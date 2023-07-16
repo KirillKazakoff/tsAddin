@@ -8,8 +8,8 @@ export const setConsignees = (spRange: any[][]) => {
         const [fullName, codeName, addres] = row;
         total[codeName] = {
             codeName,
-            fullName,
-            addres,
+            fullName: fullName.toUpperCase(),
+            addres: addres.toUpperCase(),
         };
 
         return total;
