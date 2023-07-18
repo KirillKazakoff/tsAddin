@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+// import _ from 'lodash';
 import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
 import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
 import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
@@ -53,5 +54,7 @@ export const setExportStorage = (table: any[][]) => {
         [],
     );
 
+    // setTimeout(() => {
     tablesStore.setTable.exportStorage(transformedTable);
+    // }, 3000);
 };

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import { createExportContractDoc } from './createExportContractDoc';
 import { groupAgByNo } from './groupBy/groupAgByNo';
@@ -24,6 +25,10 @@ export const useInitContractSection = () => {
             formik.formRef.current.setFieldValue('declaration', '');
         }
     };
+
+    // useEffect(() => {
+    //     formik.formRef.current.handleSubmit();
+    // }, []);
 
     const title = exportContractStore.terms === 'FCA'
         ? 'Экспорт Контракт(FCA)'

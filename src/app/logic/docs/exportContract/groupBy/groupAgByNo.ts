@@ -10,11 +10,18 @@ import { groupify } from '../../../utils/groupify';
 
 export const groupAgByNo = () => {
     const table = exportContractStore.getCurrentTable();
+    const res = _.cloneDeep(table);
 
-    const agreements = table.reduce<AgreementsT>((total, row) => {
-        const agreement = groupify<AgreementT>(total, initAgreement(row), row.id);
+    // console.log(res);
 
+    const agreements = res.reduce<AgreementsT>((total, row) => {
         const clonedRow = _.cloneDeep(row);
+        const agreement = groupify<AgreementT>(
+            total,
+            initAgreement(clonedRow),
+            row.id,
+        );
+
         if (row.msc) setMSC(clonedRow);
 
         agreement.rows.push(clonedRow);
@@ -27,6 +34,8 @@ export const groupAgByNo = () => {
         agreements[key] = groupAgByConsignee(agreement);
         agreements[key] = groupAgByVessel(agreement);
     });
+
+    console.log(_.cloneDeep(agreements));
 
     return agreements;
 };

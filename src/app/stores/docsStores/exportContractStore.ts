@@ -9,13 +9,14 @@ import { FormValuesT } from '../../types/typesUtils';
 const initFields = () => ({
     podpisant: initPodpisant(),
     dischargeDate: '',
+    departureDate: '',
     declaration: '',
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class ExportContractStore {
     fields = initFields();
-    operation: OperationT = 'export';
+    operation: OperationT = 'export_storage';
 
     constructor() {
         makeAutoObservable(this);
@@ -25,6 +26,7 @@ class ExportContractStore {
         this.fields.podpisant = selectSp.podpisant(values.podpisant);
         this.fields.dischargeDate = values.dischargeDate;
         this.fields.declaration = values.declaration;
+        this.fields.departureDate = values.departureDate;
     }
 
     setOperation(value: OperationT) {

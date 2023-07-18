@@ -18,3 +18,16 @@ export const ExportDateFCA = observer(() => {
         />
     );
 });
+
+export const ExportDateCFR = observer(() => {
+    if (!exportContractStore.exportRecord?.terms.includes('CFR')) return null;
+
+    return (
+        <InputText
+            name='departureDate'
+            title='Departure date:'
+            placeholder='ETA VLD:'
+            wrapperCls='export__FCA'
+        />
+    );
+});

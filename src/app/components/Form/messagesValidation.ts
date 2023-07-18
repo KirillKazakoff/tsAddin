@@ -52,4 +52,7 @@ export const messages: MessagesT = {
     declaration: {
         valueMissing: 'Введите номер ВТД декларации',
     },
+    departureDate: {
+        valueMissing: 'Введите дату отбытия Владивосток',
+    },
 };

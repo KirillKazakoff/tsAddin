@@ -10,6 +10,7 @@ export const useContractFormik = () => {
     const initialFields = storedValues || {
         podpisant: '',
         dischargeDate: '',
+        departureDate: '',
         declaration: '',
     };
     type FormValuesT = typeof initialFields;
@@ -26,9 +27,17 @@ export const useContractFormik = () => {
         if (!values.podpisant) {
             errors.podpisant = 'valueMissing';
         }
+        if (!values.departureDate) {
+            errors.departureDate = 'valueMissing';
+        }
 
-        if (exportContractStore.terms !== 'FCA') {
-            delete errors.dischargeDate;
+        if (exportContractStore.terms) {
+            if (exportContractStore.terms !== 'FCA') {
+                delete errors.dischargeDate;
+            }
+            if (!exportContractStore.terms.includes('CFR')) {
+                delete errors.departureDate;
+            }
         }
         if (exportContractStore.terms !== 'EXW') {
             delete errors.declaration;

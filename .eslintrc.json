@@ -40,7 +40,10 @@
         "jsx-a11y/click-events-have-key-events": "off",
         "no-alert": "off",
         "no-multiple-empty-lines": "warn",
-        "quote-props": "off",
+        "quote-props": [
+            "error",
+            "as-needed"
+        ],
         "no-continue": "off",
         "camelcase": "off",
         "indent": [

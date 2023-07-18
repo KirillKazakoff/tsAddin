@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Form, Formik } from 'formik';
+
+// import _ from 'lodash';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import AgreementList from './AgreementList';
-import { ExportDateFCA } from './ExportDateFCA';
+import { ExportDateCFR, ExportDateFCA } from './ExportDate';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
 import { ExportDeclarationEXW } from './ExportDeclarationEXW';
-import { DischargeSection } from './DischargeSection';
+// import tablesStore from '../../stores/tablesStore/tablesStore';
 
 export const ExportContractSection = observer(() => {
     const { formik, initObj } = useInitContractSection();
+
+    // useEffect(() => {
+    // console.log('updated');
+    // console.log(_.cloneDeep(tablesStore));
+    // }, [tablesStore]);
 
     return (
         <Formik
@@ -23,6 +30,7 @@ export const ExportContractSection = observer(() => {
                 <h2>{initObj.title}</h2>
 
                 <ExportDateFCA />
+                <ExportDateCFR />
                 <SelectPodpisant />
                 <ExportDeclarationEXW />
                 <AgreementList

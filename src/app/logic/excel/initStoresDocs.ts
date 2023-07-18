@@ -24,11 +24,18 @@ import { InitRangeBoundT, initRange as initRangeUnbound } from './utils/initRang
 export const initStoresDocs = async (context: Excel.RequestContext) => {
     const { worksheets } = context.workbook;
     context.workbook.load('name');
+    context.workbook.worksheets.load('items');
     await context.sync();
 
+    let dischargeInvoicesRange: any;
+    const isDischarge = context.workbook.worksheets.items.find(
+        (item) => item.name === 'Инвойсы выгрузка',
+    );
     const initRange: InitRangeBoundT = initRangeUnbound.bind(this, worksheets);
 
-    // const dischargeInvoicesRange = initRange('Инвойсы выгрузка', 'Инвойсы_выгрузка');
+    if (isDischarge) {
+        dischargeInvoicesRange = initRange('Инвойсы выгрузка', 'Инвойсы_выгрузка');
+    }
     const mateRange = initRange('Коносаменты', 'Коносаменты');
     const exportRange = initRange('Экспорт', 'Экспорт');
     const exportStorageRange = initRange('Экспорт Хранение', 'Экспорт_хранение');
@@ -54,6 +61,7 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     const spSortAssortiment = initRange('SPSortAssortiment', 'SPSortAssortiment');
 
     await initExcelImages(context);
+
     await context.sync();
 
     setSellers(spSellersRange.values);
@@ -77,5 +85,5 @@ export const initStoresDocs = async (context: Excel.RequestContext) => {
     setInner(innerRange.values);
     setMates(mateRange.values);
 
-    // setDischargeInvoices(dischargeInvoicesRange.values);
+    setDischargeInvoices(dischargeInvoicesRange?.values);
 };
