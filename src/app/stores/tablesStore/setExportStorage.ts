@@ -54,7 +54,5 @@ export const setExportStorage = (table: any[][]) => {
         [],
     );
 
-    // setTimeout(() => {
     tablesStore.setTable.exportStorage(transformedTable);
-    // }, 3000);
 };

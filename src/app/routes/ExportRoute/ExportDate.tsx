@@ -20,7 +20,7 @@ export const ExportDateFCA = observer(() => {
 });
 
 export const ExportDateCFR = observer(() => {
-    if (!exportContractStore.exportRecord?.terms.includes('CFR')) return null;
+    if (!exportContractStore.terms || !exportContractStore.terms.includes('CFR')) { return null; }
 
     return (
         <InputText

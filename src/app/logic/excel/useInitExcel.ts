@@ -15,10 +15,8 @@ export const useInitExcel = () => {
     const initExcel = async () => {
         try {
             await Excel.run(async (context) => {
-                excelSyncStore.setLoading(true);
-
-                addChangeHandler(context);
                 await initStores(context);
+                await addChangeHandler(context);
 
                 excelSyncStore.setSync(true);
                 excelSyncStore.setLoading(false);
@@ -36,11 +34,14 @@ export const useInitExcel = () => {
     };
 
     useEffect(() => {
-        if (statusType === 'ok' || !isSync) {
-            // eslint-disable-next-line no-console
-            console.log('initExcel');
-            initExcel();
-        }
+        excelSyncStore.setLoading(true);
+        setTimeout(() => {
+            if (statusType === 'ok' || !isSync) {
+                // eslint-disable-next-line no-console
+                console.log('initExcel');
+                initExcel();
+            }
+        }, 1000);
     }, [statusType, isSync]);
 
     return initExcel;

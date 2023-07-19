@@ -29,6 +29,7 @@ export const ExportRoute = observer(() => {
         );
     }
     if (exportContractStore.terms === 'FCA') {
+        exportContractStore.setOperation('export');
         ExportSection = ExportContractSection;
     }
 

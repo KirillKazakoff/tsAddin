@@ -16,30 +16,31 @@ export const useContractFormik = () => {
     type FormValuesT = typeof initialFields;
 
     const validate = (values: FormValuesT) => {
+        const { terms } = exportContractStore;
         const errors: { [key: string]: string } = {};
 
-        if (!values.dischargeDate) {
-            errors.dischargeDate = 'valueMissing';
-        }
-        if (!values.declaration) {
-            errors.declaration = 'valueMissing';
-        }
         if (!values.podpisant) {
             errors.podpisant = 'valueMissing';
+        }
+        if (!values.dischargeDate) {
+            errors.dischargeDate = 'valueMissing';
         }
         if (!values.departureDate) {
             errors.departureDate = 'valueMissing';
         }
-
-        if (exportContractStore.terms) {
-            if (exportContractStore.terms !== 'FCA') {
-                delete errors.dischargeDate;
-            }
-            if (!exportContractStore.terms.includes('CFR')) {
-                delete errors.departureDate;
-            }
+        if (!values.declaration) {
+            errors.declaration = 'valueMissing';
         }
-        if (exportContractStore.terms !== 'EXW') {
+
+        if (terms !== 'FCA') {
+            delete errors.dischargeDate;
+        }
+        if (!terms) {
+            delete errors.declaration;
+            delete errors.departureDate;
+        }
+        if (terms && !terms.includes('CFR')) {
+            delete errors.departureDate;
             delete errors.declaration;
         }
 

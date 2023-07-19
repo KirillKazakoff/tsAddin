@@ -10,11 +10,9 @@ import { groupify } from '../../../utils/groupify';
 
 export const groupAgByNo = () => {
     const table = exportContractStore.getCurrentTable();
-    const res = _.cloneDeep(table);
+    // const res = _.cloneDeep(table);
 
-    // console.log(res);
-
-    const agreements = res.reduce<AgreementsT>((total, row) => {
+    const agreements = table.reduce<AgreementsT>((total, row) => {
         const clonedRow = _.cloneDeep(row);
         const agreement = groupify<AgreementT>(
             total,
