@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Form, Formik } from 'formik';
-
-// import _ from 'lodash';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import AgreementList from './AgreementList';
 import { ExportDate } from './ExportDate';

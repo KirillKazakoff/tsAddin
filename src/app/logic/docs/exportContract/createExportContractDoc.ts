@@ -34,7 +34,7 @@ export const createExportContractDoc = async (agreement: AgreementT) => {
         settings.initInvoiceTmpCb = initNonComInvoiceTmp;
     }
 
-    // save call order (contract - invoices)
+    // save call order (init invoices then contract)
     await initInvoicesTmps(settings);
 
     if (operation === 'export_storage') {

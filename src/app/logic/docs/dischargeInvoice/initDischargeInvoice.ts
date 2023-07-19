@@ -38,32 +38,38 @@ export const initDischargeInvoice = (
                 exportRecord.agreementNo
             } dated ${date.agreement('eng')}`,
         },
+        { cell: 'Инвойс_всего', value: `$   ${invoice.priceTotal.str}` },
     ];
 
     const cellsRu: CellObjT[] = [
         { cell: 'Инвойс_номер_п', value: record.invoiceNo },
         { cell: 'Инвойс_компания_п', value: exportRecord.seller.ru.name },
-        { cell: 'Инвойс_дата', value: date.invoice('ru') },
+        { cell: 'Инвойс_дата_п', value: date.invoice('ru') },
         {
-            cell: 'Инвойс_контракт',
+            cell: 'Инвойс_контракт_п',
             value: `Договор оказания услуг хранения № ${
                 exportRecord.contract.contractNo
             } from ${date.contract('ru')}`,
         },
-        { cell: 'Инвойс_выгрузка_дата', value: date.discharge('ru') },
-        { cell: 'Инвойс_транспорт', value: exportRecord.transport.ru.name },
+        { cell: 'Инвойс_выгрузка_дата_п', value: date.discharge('ru') },
+        { cell: 'Инвойс_транспорт_п', value: exportRecord.transport.ru.name },
         {
-            cell: 'Инвойс_соглашение',
+            cell: 'Инвойс_соглашение_п',
             value: `Дополнительное соглашение №${
                 exportRecord.agreementNo
             } от ${date.agreement('ru')}`,
         },
+        { cell: 'Инвойс_всего_п', value: `$   ${invoice.priceTotal.str}` },
     ];
 
     const cells = [...cellsEng, ...cellsRu];
 
     cells.forEach((cell) => {
-        utils.setCell(cell);
+        try {
+            utils.setCell(cell);
+        } catch (e) {
+            console.log(cell);
+        }
     });
 
     initDishargeRows(invoice, utils);
