@@ -8,7 +8,6 @@ import { FormValuesT } from '../../types/typesUtils';
 
 const initFields = () => ({
     podpisant: initPodpisant(),
-    dischargeDate: '',
     departureDate: '',
     declaration: '',
 });
@@ -24,7 +23,6 @@ class ExportContractStore {
 
     setFields(values: FormFieldsT) {
         this.fields.podpisant = selectSp.podpisant(values.podpisant);
-        this.fields.dischargeDate = values.dischargeDate;
         this.fields.declaration = values.declaration;
         this.fields.departureDate = values.departureDate;
     }

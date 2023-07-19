@@ -33,7 +33,5 @@ export const groupAgByNo = () => {
         agreements[key] = groupAgByVessel(agreement);
     });
 
-    console.log(_.cloneDeep(agreements));
-
     return agreements;
 };

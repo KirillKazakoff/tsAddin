@@ -3,30 +3,18 @@ import { observer } from 'mobx-react-lite';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import InputText from '../../components/Form/InputText';
 
-export const ExportDateFCA = observer(() => {
-    const record = exportContractStore.exportRecord;
-    const title = `ETA ${record?.portTo.eng.name}:`;
+export const ExportDate = observer(() => {
+    const { exportRecord, terms } = exportContractStore;
+    const title = `ETA ${exportRecord?.portTo?.eng?.name}:`;
 
-    if (record?.terms !== 'FCA') return null;
-
-    return (
-        <InputText
-            name='dischargeDate'
-            title={title}
-            placeholder={title}
-            wrapperCls='export__FCA'
-        />
-    );
-});
-
-export const ExportDateCFR = observer(() => {
-    if (!exportContractStore.terms || !exportContractStore.terms.includes('CFR')) { return null; }
+    const isCFRorFCA = terms && (terms.includes('CFR') || terms.includes('FCA'));
+    if (!isCFRorFCA) return null;
 
     return (
         <InputText
             name='departureDate'
-            title='Departure date:'
-            placeholder='ETA VLD:'
+            title={title}
+            placeholder={title}
             wrapperCls='export__FCA'
         />
     );

@@ -17,7 +17,7 @@ export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) 
     const { transport, portTo } = assortiment.record;
     const rows = ws.addRows([
         [`Transport vessel ${transport.eng.name.toUpperCase()}`],
-        [`ETA ${portTo.eng.name} ${exportContractStore.fields.dischargeDate}`],
+        [`ETA ${portTo.eng.name} ${exportContractStore.fields.departureDate}`],
         [''],
     ]);
 

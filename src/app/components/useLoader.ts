@@ -13,6 +13,7 @@ export const useLoader = (load: () => Promise<void>, isPreventDefault?: boolean)
             await load();
         } catch (error) {
             setStatus('error');
+            // eslint-disable-next-line no-console
             console.log(error);
         }
         setTimeout(() => setStatus('loaded'), 500);

@@ -9,7 +9,6 @@ export const useContractFormik = () => {
     const storedValues = mySessionStorage.getItem('exportContract');
     const initialFields = storedValues || {
         podpisant: '',
-        dischargeDate: '',
         departureDate: '',
         declaration: '',
     };
@@ -22,19 +21,10 @@ export const useContractFormik = () => {
         if (!values.podpisant) {
             errors.podpisant = 'valueMissing';
         }
-        if (!values.dischargeDate) {
-            errors.dischargeDate = 'valueMissing';
-        }
-        if (!values.departureDate) {
-            errors.departureDate = 'valueMissing';
-        }
         if (!values.declaration) {
             errors.declaration = 'valueMissing';
         }
 
-        if (terms !== 'FCA') {
-            delete errors.dischargeDate;
-        }
         if (!terms) {
             delete errors.declaration;
             delete errors.departureDate;
@@ -42,6 +32,9 @@ export const useContractFormik = () => {
         if (terms && !terms.includes('CFR')) {
             delete errors.departureDate;
             delete errors.declaration;
+        }
+        if (terms === 'FCA' && !values.departureDate) {
+            errors.departureDate = 'valueMissing';
         }
 
         mySessionStorage.setItem('exportContract', values);

@@ -5,18 +5,12 @@ import { Form, Formik } from 'formik';
 // import _ from 'lodash';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import AgreementList from './AgreementList';
-import { ExportDateCFR, ExportDateFCA } from './ExportDate';
+import { ExportDate } from './ExportDate';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
 import { ExportDeclarationEXW } from './ExportDeclarationEXW';
-// import tablesStore from '../../stores/tablesStore/tablesStore';
 
 export const ExportContractSection = observer(() => {
     const { formik, initObj } = useInitContractSection();
-
-    // useEffect(() => {
-    // console.log('updated');
-    // console.log(_.cloneDeep(tablesStore));
-    // }, [tablesStore]);
 
     return (
         <Formik
@@ -29,8 +23,7 @@ export const ExportContractSection = observer(() => {
             <Form className='docs__form export-contract-form'>
                 <h2>{initObj.title}</h2>
 
-                <ExportDateFCA />
-                <ExportDateCFR />
+                <ExportDate />
                 <SelectPodpisant />
                 <ExportDeclarationEXW />
                 <AgreementList

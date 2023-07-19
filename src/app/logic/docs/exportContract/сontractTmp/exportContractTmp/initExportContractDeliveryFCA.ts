@@ -19,7 +19,7 @@ export const initExportContractDeliveryFCA: InitContractPartT = (
     });
     utils.setCell({
         cell: 'Доставка_дата',
-        eng: `Expected delivery date ${exportContractStore.fields.dischargeDate}`,
-        ru: `Дата поставки ориентировочно ${exportContractStore.fields.dischargeDate}`,
+        eng: `Expected delivery date: ${exportContractStore.fields.departureDate}`,
+        ru: `Дата поставки ориентировочно: ${exportContractStore.fields.departureDate}`,
     });
 };
