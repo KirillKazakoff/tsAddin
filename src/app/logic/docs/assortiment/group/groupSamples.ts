@@ -13,6 +13,7 @@ import { initAssortimentTable } from '../initAssortimentTable';
 import { isProductForAssortiment } from './isProductForAssortiment';
 
 export const groupSamples = (rows: ExportRowT[]) => {
+    console.log('heere');
     const tables = rows.reduce<AssortimentTablesT>((total, row) => {
         if (!isProductForAssortiment(row.product)) return total;
 

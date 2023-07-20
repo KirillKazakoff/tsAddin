@@ -9,11 +9,10 @@ import { createSample } from './createSample';
 
 export const useInitAssortimentSection = () => {
     const { exportStorageT, exportT } = tablesStore;
-    // first table in rows array should be exportT!
     const rows = _.cloneDeep([...exportT, ...exportStorageT]);
 
-    const assortiment = groupAssortiment(rows);
-    const samplesArr = Object.values(groupSamples(rows));
+    const assortiment = groupAssortiment(_.cloneDeep(rows));
+    const samplesArr = Object.values(groupSamples(_.cloneDeep(rows)));
 
     const onLoad = {
         assortiment: async () => createAssortiment(assortiment),

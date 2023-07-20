@@ -65,8 +65,8 @@ export const addAssortimentTable = (
         const fields = {
             sort: row.sort,
             weight: row?.sortSp?.weight,
-            places: row.amount.places.str,
-            placesTotal: row.amount.placesTotal.str,
+            places: row.amount.places.count,
+            placesTotal: row.amount.placesTotal.count * 1000,
             samples: table.samples.rows[i],
         };
         if (!isSample) delete fields.samples;
@@ -77,26 +77,37 @@ export const addAssortimentTable = (
             border: borderAll,
         });
 
-        const cells = [rowTable.getCell(3), rowTable.getCell(4)];
-        cells.forEach((cell) => {
+        const rowObj = {
+            places: rowTable.getCell(3),
+            placesTotal: rowTable.getCell(4),
+            sample: rowTable.getCell(5),
+        };
+        [rowObj.places, rowObj.placesTotal].forEach((cell) => {
             cell.style.alignment = {
                 horizontal: 'right',
             };
         });
+        rowObj.placesTotal.numFmt = '# ###.00';
 
-        if (isSample) rowTable.getCell(5).style = sampleClStyle;
+        if (isSample) rowObj.sample.style = sampleClStyle;
     });
 
     // addTotalRow
     const totalFields = {
         empty: '',
         title: 'Total:',
-        places: places.str,
-        placesTotal: placesTotal.str,
+        places: places.count,
+        placesTotal: placesTotal.count,
         samples: table.samples.total,
     };
     if (!isSample) delete totalFields.samples;
     const totalRow = ws.addRow(Object.values(totalFields));
+
+    const rowObj = {
+        places: totalRow.getCell(3),
+        placesTotal: totalRow.getCell(4),
+        samples: totalRow.getCell(5),
+    };
 
     styleRowCells(totalRow, {
         height: 25,
@@ -104,7 +115,8 @@ export const addAssortimentTable = (
         alignment: { horizontal: 'right' },
         font: { bold: true },
     });
+    rowObj.placesTotal.numFmt = '# ###.00';
 
-    if (isSample) totalRow.getCell(5).style = sampleClStyle;
+    if (isSample) rowObj.samples.style = sampleClStyle;
     ws.addRows([[''], ['']]);
 };

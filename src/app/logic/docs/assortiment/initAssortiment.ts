@@ -30,12 +30,15 @@ export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) 
     };
 
     // sort by seller and add tables
-    const tables = Object.values(assortiment.tables).sort((a, b) => {
-        if (a.record.seller.codeName < b.record.seller.codeName) return -1;
-        return 1;
-    });
-
-    console.log(tables);
+    const tables = Object.values(assortiment.tables)
+        .sort((a, b) => {
+            if (a.record.vessel.eng.name > b.record.vessel.eng.name) return -1;
+            return 1;
+        })
+        .sort((a, b) => {
+            if (a.record.product.eng.name > b.record.product.eng.name) return -1;
+            return 1;
+        });
 
     tables.forEach((table, i) => {
         addAssortimentTable(table, ws, i, assortiment.isSample);
