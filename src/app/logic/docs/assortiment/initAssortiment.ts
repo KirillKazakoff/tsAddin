@@ -35,6 +35,8 @@ export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) 
         return 1;
     });
 
+    console.log(tables);
+
     tables.forEach((table, i) => {
         addAssortimentTable(table, ws, i, assortiment.isSample);
     });

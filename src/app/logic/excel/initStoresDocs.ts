@@ -23,19 +23,20 @@ import { InitRangeBoundT, initRange as initRangeUnbound } from './utils/initRang
 
 export const initStoresDocs = async (context: Excel.RequestContext) => {
     const { worksheets } = context.workbook;
+    const initRange: InitRangeBoundT = initRangeUnbound.bind(this, worksheets);
     context.workbook.load('name');
     context.workbook.worksheets.load('items');
     await context.sync();
 
+    // checkDischargeListPresence
     let dischargeInvoicesRange: any;
     const isDischarge = context.workbook.worksheets.items.find(
         (item) => item.name === 'Инвойсы выгрузка',
     );
-    const initRange: InitRangeBoundT = initRangeUnbound.bind(this, worksheets);
-
     if (isDischarge) {
         dischargeInvoicesRange = initRange('Инвойсы выгрузка', 'Инвойсы_выгрузка');
     }
+
     const mateRange = initRange('Коносаменты', 'Коносаменты');
     const exportRange = initRange('Экспорт', 'Экспорт');
     const exportStorageRange = initRange('Экспорт Хранение', 'Экспорт_хранение');

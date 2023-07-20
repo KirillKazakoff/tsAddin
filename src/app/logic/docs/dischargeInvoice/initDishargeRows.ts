@@ -1,7 +1,7 @@
 // import _ from 'lodash';
 import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { styleRowCells } from '../styleRowCells';
-import { DischargeInvoiceT } from './groupInvoiceByNo';
+import { DischargeInvoiceT } from './groupDischargeInvoiceByNo';
 
 export const initDishargeRows = (invoice: DischargeInvoiceT, utils: CellUtilsT) => {
     ['eng', 'ru'].forEach((language) => {

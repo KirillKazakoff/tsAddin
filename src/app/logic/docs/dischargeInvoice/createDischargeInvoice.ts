@@ -1,4 +1,4 @@
-import { DischargeInvoiceT } from './groupInvoiceByNo';
+import { DischargeInvoiceT } from './groupDischargeInvoiceByNo';
 import { saveFile } from '../../excel/utils/saveFile';
 import { readTmp } from '../readTmp';
 import { pathObj } from '../../utils/constants';

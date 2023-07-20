@@ -1,23 +1,22 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import _ from 'lodash';
 import {
     DischargeInvoiceT,
-    groupInvoiceByNo,
-} from '../../logic/docs/dischargeInvoice/groupInvoiceByNo';
+    groupDischargeInvoiceByNo,
+} from '../../logic/docs/dischargeInvoice/groupDischargeInvoiceByNo';
 import { createDischargeInvoice } from '../../logic/docs/dischargeInvoice/createDischargeInvoice';
 import { Doc } from '../../components/Doc';
 
 export const DischargeSection = observer(() => {
-    const invoicesGrouped = groupInvoiceByNo();
+    const invoicesGrouped = groupDischargeInvoiceByNo();
     const onLoad = async (invoice: DischargeInvoiceT) => {
         await createDischargeInvoice(invoice);
     };
 
-    useEffect(() => {
-        onLoad(invoicesGrouped[0]);
-    }, []);
+    // useEffect(() => {
+    //     onLoad(invoicesGrouped[0]);
+    // }, []);
 
     const invoices = invoicesGrouped.map((invoice) => {
         const onClick = async () => onLoad(invoice);

@@ -12,7 +12,6 @@ export const setDischargeInvoices = (table: any[][]) => {
     const transformedTable = excluded.reduce<DischargeInvoiceRowT[]>(
         (totalObj, row, index) => {
             const [
-                i,
                 blNo,
                 vessel,
                 product,
@@ -25,7 +24,6 @@ export const setDischargeInvoices = (table: any[][]) => {
             ] = row;
 
             const rowObj: DischargeInvoiceRowT = {
-                i,
                 blNo,
                 vessel,
                 product,

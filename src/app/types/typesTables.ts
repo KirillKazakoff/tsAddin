@@ -137,7 +137,6 @@ export type NordmileRowT = {
 };
 
 export type DischargeInvoiceRowT = {
-    i: number;
     blNo: string;
     vessel: VesselT;
     product: ProductionT;

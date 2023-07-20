@@ -31,7 +31,6 @@ export const useContractFormik = () => {
         }
         if (terms && !terms.includes('CFR')) {
             delete errors.departureDate;
-            delete errors.declaration;
         }
         if (terms === 'FCA' && !values.departureDate) {
             errors.departureDate = 'valueMissing';

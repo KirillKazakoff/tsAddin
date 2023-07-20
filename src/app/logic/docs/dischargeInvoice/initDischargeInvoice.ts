@@ -1,5 +1,5 @@
 import ExcelJS from 'exceljs';
-import { DischargeInvoiceT } from './groupInvoiceByNo';
+import { DischargeInvoiceT } from './groupDischargeInvoiceByNo';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';

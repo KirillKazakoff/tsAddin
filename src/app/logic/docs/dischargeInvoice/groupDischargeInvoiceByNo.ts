@@ -23,7 +23,7 @@ export type DischargeInvoicesT = {
     [key: string]: DischargeInvoiceT;
 };
 
-export const groupInvoiceByNo = () => {
+export const groupDischargeInvoiceByNo = () => {
     const { dischargeInvoicesT, exportStorageT } = tablesStore;
     const blGrouped = groupByBl(exportStorageT);
 
@@ -43,6 +43,5 @@ export const groupInvoiceByNo = () => {
         {},
     );
 
-    // console.log(dischargeInvoices);
     return Object.values(dischargeInvoices);
 };
