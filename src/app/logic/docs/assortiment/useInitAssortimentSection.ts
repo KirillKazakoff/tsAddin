@@ -9,6 +9,7 @@ import { createSample } from './createSample';
 
 export const useInitAssortimentSection = () => {
     const { exportStorageT, exportT } = tablesStore;
+    // first export rows then storage order!
     const rows = _.cloneDeep([...exportT, ...exportStorageT]);
 
     const assortiment = groupAssortiment(_.cloneDeep(rows));
