@@ -15,6 +15,9 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
 
         const table = groupify<AssortimentTableT>(total, initObj, row.blNo);
 
+        const isStorageRowInExport = table.record.terms && !row.terms;
+        if (isStorageRowInExport) return total;
+
         addToAmount(table.amount.places, row.amount.places.count);
         addToAmount(table.amount.placesTotal, row.amount.placesTotal.count * 1000);
         table.rows.push(row);
@@ -39,3 +42,47 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
     const assortiment = initAssortimentObj(tables, false);
     return assortiment;
 };
+
+// /* eslint-disable no-param-reassign */
+// /* eslint-disable import/no-extraneous-dependencies */
+// import _ from 'lodash';
+// import tablesStore from '../../../stores/tablesStore/tablesStore';
+// import { createAssortiment } from './createAssortiment';
+// import { groupAssortiment } from './group/groupAssortiment';
+// import { AssortimentT, AssortimentTablesT } from '../../../types/typesAssortiment';
+// import { groupSamples } from './group/groupSamples';
+// import { createSample } from './createSample';
+// import { initAssortimentObj } from './initAssortimentTable';
+
+// export const useInitAssortimentSection = () => {
+//     const { exportStorageT, exportT } = tablesStore;
+//     const rowsExport = _.cloneDeep(exportT);
+//     const rowsExportStorage = _.cloneDeep(exportStorageT);
+
+//     const assortimentExport = groupAssortiment(rowsExport);
+//     const assortimentExportStorage = groupAssortiment(rowsExportStorage);
+//     const assortimentTables = Object.entries(
+//         assortimentExportStorage.tables,
+//     ).reduce<AssortimentTablesT>((total, [key, value]) => {
+//         if (assortimentExport.tables[key]) {
+//             total[key] = assortimentExport.tables[key];
+//         } else {
+//             total[key] = value;
+//         }
+//         return total;
+//     }, {});
+//     const assortiment = initAssortimentObj(assortimentTables, false);
+
+//     const samplesArr = Object.values(groupSamples(rowsExport));
+
+//     const onLoad = {
+//         assortiment: async () => createAssortiment(assortiment),
+//         sample: async (sample: AssortimentT) => createSample(sample),
+//     };
+
+//     const onLoadAll = async () => {
+//         await Promise.all(samplesArr.map((sample) => onLoad.sample(sample)));
+//     };
+
+//     return { onLoad, onLoadAll, samplesArr };
+// };
