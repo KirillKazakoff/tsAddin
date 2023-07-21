@@ -8,6 +8,7 @@ import { mySessionStorage } from '../../utils/sessionStorage';
 export const useRequestFormik = () => {
     const storedValues = mySessionStorage.getItem('request');
     const initialFields = {
+        isInvoiceOnly: false,
         reiceNo: '',
         terms: '',
         portTamozhnya: '',

@@ -5,8 +5,8 @@ import InputText from '../../components/Form/InputText';
 export const ReiceNo = observer(() => {
     return (
         <InputText
-            name='reiceNo' title='Введите рейс'
-            placeholder='Номер рейса'
+            name='reiceNo' title='Введите № рейса:'
+            placeholder='№ рейса'
         />
     );
 });

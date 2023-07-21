@@ -8,6 +8,7 @@ import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import { SelectTerms } from '../../components/Select/SelectTerms';
 import RequestList from './RequestList';
 import { ReiceNo } from './ReiceNo';
+import CheckBoxFormik from '../../components/CheckBoxFormik';
 
 export const RequestSection = observer(() => {
     const { initObj, formik } = useInitRequestSection();
@@ -26,6 +27,7 @@ export const RequestSection = observer(() => {
                 <h3 className='title request-title'>Заявка:</h3>
 
                 <div className='fields-wrapper'>
+                    <CheckBoxFormik title={'Только счет:'} name='isInvoiceOnly' />
                     <ReiceNo />
                     <SelectTerms />
                     <SelectPortTamozhnya />

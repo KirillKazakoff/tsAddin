@@ -8,7 +8,7 @@ export const SelectTerms = ({ name }: { name?: string }) => {
     return (
         <Select
             name={name} options={options}
-            title={'Условия доставки'}
+            title={'Условия доставки:'}
         />
     );
 };

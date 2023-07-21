@@ -5,6 +5,7 @@ import { selectSp } from '../spsStore/select';
 import { FormValuesT } from '../../types/typesUtils';
 
 const initFields = () => ({
+    isInvoiceOnly: false,
     terms: '',
     reiceNo: '',
     portTamozhnya: initPortTamozhnya(),
@@ -20,6 +21,7 @@ class RequestContractStore {
     }
 
     setFields(values: FormFieldsT) {
+        this.fields.isInvoiceOnly = values.isInvoiceOnly;
         this.fields.reiceNo = values.reiceNo;
         this.fields.terms = values.terms;
         this.fields.portTamozhnya = selectSp.portTamozhnya(values.portTamozhnya);

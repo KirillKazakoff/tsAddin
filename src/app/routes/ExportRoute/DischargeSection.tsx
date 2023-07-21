@@ -1,5 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import {
     DischargeInvoiceT,
@@ -14,10 +13,6 @@ export const DischargeSection = observer(() => {
         await createDischargeInvoice(invoice);
     };
 
-    // useEffect(() => {
-    //     onLoad(invoicesGrouped[0]);
-    // }, []);
-
     const invoices = invoicesGrouped.map((invoice) => {
         const onClick = async () => onLoad(invoice);
         return (
@@ -29,6 +24,8 @@ export const DischargeSection = observer(() => {
             />
         );
     });
+
+    if (invoicesGrouped.length === 0) return null;
 
     return (
         <form className='docs__form kti-invoices-form'>
