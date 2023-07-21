@@ -6,6 +6,7 @@ import { FormValuesT } from '../../types/typesUtils';
 
 const initFields = () => ({
     terms: '',
+    reiceNo: '',
     portTamozhnya: initPortTamozhnya(),
     portRu: initPortRu(),
 });
@@ -19,6 +20,7 @@ class RequestContractStore {
     }
 
     setFields(values: FormFieldsT) {
+        this.fields.reiceNo = values.reiceNo;
         this.fields.terms = values.terms;
         this.fields.portTamozhnya = selectSp.portTamozhnya(values.portTamozhnya);
         this.fields.portRu = selectSp.portRu(values.portRu);

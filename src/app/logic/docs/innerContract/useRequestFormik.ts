@@ -7,7 +7,8 @@ import { mySessionStorage } from '../../utils/sessionStorage';
 
 export const useRequestFormik = () => {
     const storedValues = mySessionStorage.getItem('request');
-    const initialFields = storedValues || {
+    const initialFields = {
+        reiceNo: '',
         terms: '',
         portTamozhnya: '',
         portRu: '',
@@ -18,6 +19,9 @@ export const useRequestFormik = () => {
     const validate = (values: FormValuesT) => {
         const errors: { [key: string]: string } = {};
 
+        if (!values.reiceNo) {
+            errors.reiceNo = 'valueMissing';
+        }
         if (!values.terms) {
             errors.terms = 'valueMissing';
         }
@@ -41,7 +45,7 @@ export const useRequestFormik = () => {
     return {
         onSubmit,
         validate,
-        initialFields,
+        initialFields: storedValues || initialFields,
         formRef,
     };
 };

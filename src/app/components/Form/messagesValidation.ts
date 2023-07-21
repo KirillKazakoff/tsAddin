@@ -22,6 +22,9 @@ export const messages: MessagesT = {
     portRu: {
         valueMissing: 'Выберите конкретный порт',
     },
+    reiceNo: {
+        valueMissing: 'Введите номер рейса',
+    },
     dateLetter: {
         valueMissing: 'Введите дату письма',
     },

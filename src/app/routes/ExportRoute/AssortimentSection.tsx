@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useInitAssortimentSection } from '../../logic/docs/assortiment/useInitAssortimentSection';
 import DocsDownloadBtn from '../../components/DocsDownloadBtn';
@@ -7,10 +7,6 @@ import { Doc } from '../../components/Doc';
 export const AssortimentSection = observer(() => {
     const initObj = useInitAssortimentSection();
     const { onLoad, onLoadAll, samplesArr } = initObj;
-
-    useEffect(() => {
-        initObj.onLoad.assortiment();
-    });
 
     const sampleDocs = samplesArr.map((sample) => {
         const consignee = sample.record.consignee.codeName;

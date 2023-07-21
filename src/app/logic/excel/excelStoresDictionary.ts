@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable dot-notation */
 /* eslint-disable @typescript-eslint/quotes */
 import { setAgents } from '../../stores/spsStore/set/setAgents';
 import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
@@ -14,32 +16,17 @@ import { setProduction } from '../../stores/spsStore/set/setProduction';
 import { setSellers } from '../../stores/spsStore/set/setSellers';
 import { setSortsAssortiment } from '../../stores/spsStore/set/setSortsAssortiment';
 import { setTransports } from '../../stores/spsStore/set/setTransport';
+import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
 import { setExportStorage } from '../../stores/tablesStore/setExportStorage';
 import { setInner } from '../../stores/tablesStore/setInner';
 import { setMates } from '../../stores/tablesStore/setMates';
-import { initRange } from './utils/initRange';
+import { setNordmile } from '../../stores/tablesStore/setNordmile';
 
-export const excelStoresDictionary = {
+const excelStoresDictionary = {
     'Инвойсы выгрузка': {
         table: 'Инвойсы_выгрузка',
         setter: setDischargeInvoices,
-    },
-    Коносаменты: {
-        table: 'Коносаменты',
-        setter: setMates,
-    },
-    Экспорт: {
-        table: 'Экспорт',
-        setter: setExport,
-    },
-    'Экспорт Хранение': {
-        table: 'Экспорт_хранение',
-        setter: setExportStorage,
-    },
-    'Внутренний рынок': {
-        table: 'Продажи_ВР',
-        setter: setInner,
     },
     Транспорта: {
         table: 'SPTransport',
@@ -47,7 +34,7 @@ export const excelStoresDictionary = {
     },
     Суда: {
         table: 'SPSudno',
-        setter: setTransports,
+        setter: setVessels,
     },
     Продавец: {
         table: 'SPProdavec',
@@ -101,20 +88,56 @@ export const excelStoresDictionary = {
         table: 'SPSortAssortiment',
         setter: setSortsAssortiment,
     },
+    Коносаменты: {
+        table: 'Коносаменты',
+        setter: setMates,
+    },
+    Экспорт: {
+        table: 'Экспорт',
+        setter: setExport,
+    },
+    'Экспорт Хранение': {
+        table: 'Экспорт_хранение',
+        setter: setExportStorage,
+    },
+    'Внутренний рынок': {
+        table: 'Продажи_ВР',
+        setter: setInner,
+    },
+    Nordmile: {
+        table: 'Nordmile',
+        setter: setNordmile,
+    },
 };
 
-// concept init stores
+const d = excelStoresDictionary;
 
-// const storeObjects = Object.entries(excelStoresDictionary).map(([key, store]) => {
-//     return {
-//         range: initRange('worksheets' as any, key, store.table),
-//         setter: store.setter,
-//     }
-// });
+// prettier-ignore
+export const excelStoresNonObligatory = [
+    d['Инвойсы выгрузка'],
+];
 
-// await context.sync();
+export const excelStoreOffer = {
+    Транспорта: d['Транспорта'],
+    Суда: d['Суда'],
+    Продукция: d['Продукция'],
+    SPPortZarubezh: d['SPPortZarubezh'],
+    SPPort: d['SPPort'],
+    Продавец: d['Продавец'],
+    SPClientsSell: d['SPClientsSell'],
+    SPTamozhnya: d['SPTamozhnya'],
+    'Внутренний рынок': d['Внутренний рынок'],
+    Коносаменты: d['Коносаменты'],
+    Nordmile: d['Nordmile'],
+};
 
-// storeObjects.forEach((obj) => {
-//     if (!obj.range) return;
-//     obj.setter(obj.range.values);
-// });
+export const excelStoreDocs = { ...excelStoresDictionary };
+delete excelStoreDocs.Nordmile;
+delete excelStoreDocs['Инвойсы выгрузка'];
+
+export type ExcelStoreT = {
+    [key: string]: {
+        table: string;
+        setter: (values: any[][]) => void;
+    };
+};
