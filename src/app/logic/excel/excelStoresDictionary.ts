@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable dot-notation */
-/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable quote-props */
 import { setAgents } from '../../stores/spsStore/set/setAgents';
 import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
 import { setClientsRu } from '../../stores/spsStore/set/setClientsRu';
@@ -28,71 +28,71 @@ const excelStoresDictionary = {
         table: 'Инвойсы_выгрузка',
         setter: setDischargeInvoices,
     },
-    Транспорта: {
+    'Транспорта': {
         table: 'SPTransport',
         setter: setTransports,
     },
-    Суда: {
+    'Суда': {
         table: 'SPSudno',
         setter: setVessels,
     },
-    Продавец: {
+    'Продавец': {
         table: 'SPProdavec',
         setter: setSellers,
     },
-    SP_Consignee: {
+    'SP_Consignee': {
         table: 'SP_Consignee',
         setter: setConsignees,
     },
-    Продукция: {
+    'Продукция': {
         table: 'SPProductMSC',
         setter: setProduction,
     },
-    SPPortZarubezh: {
+    'SPPortZarubezh': {
         table: 'SPPortZarubezh',
         setter: setPortsZarubezh,
     },
-    SPTamozhnya: {
+    'SPTamozhnya': {
         table: 'SPTamozhnya',
         setter: setPortsTamozhnya,
     },
-    SPContract: {
+    'SPContract': {
         table: 'SPContract',
         setter: setContracts,
     },
-    SPPodpisant: {
+    'SPPodpisant': {
         table: 'SPPodpisant',
         setter: setPodpisants,
     },
-    SPAgent: {
+    'SPAgent': {
         table: 'SPAgent',
         setter: setAgents,
     },
-    SPRekvizitBankProdavec: {
+    'SPRekvizitBankProdavec': {
         table: 'SPRekvizitBankProdavec',
         setter: setBanksProdavec,
     },
-    SPClientsSell: {
+    'SPClientsSell': {
         table: 'SPClientsSell',
         setter: setClientsRu,
     },
-    SPPort: {
+    'SPPort': {
         table: 'SPPort',
         setter: setPortsRu,
     },
-    SPPackage: {
+    'SPPackage': {
         table: 'SPPackage',
         setter: setPackages,
     },
-    SPSortAssortiment: {
+    'SPSortAssortiment': {
         table: 'SPSortAssortiment',
         setter: setSortsAssortiment,
     },
-    Коносаменты: {
+    'Коносаменты': {
         table: 'Коносаменты',
         setter: setMates,
     },
-    Экспорт: {
+    'Экспорт': {
         table: 'Экспорт',
         setter: setExport,
     },
@@ -104,40 +104,55 @@ const excelStoresDictionary = {
         table: 'Продажи_ВР',
         setter: setInner,
     },
-    Nordmile: {
+    'Nordmile': {
         table: 'Nordmile',
         setter: setNordmile,
     },
 };
 
-const d = excelStoresDictionary;
+const ESD = excelStoresDictionary;
 
-// prettier-ignore
-export const excelStoresNonObligatory = [
-    d['Инвойсы выгрузка'],
-];
+export type ExcelStoresDictionaryT = Partial<typeof ESD>;
 
-export const excelStoreOffer = {
-    Транспорта: d['Транспорта'],
-    Суда: d['Суда'],
-    Продукция: d['Продукция'],
-    SPPortZarubezh: d['SPPortZarubezh'],
-    SPPort: d['SPPort'],
-    Продавец: d['Продавец'],
-    SPClientsSell: d['SPClientsSell'],
-    SPTamozhnya: d['SPTamozhnya'],
-    'Внутренний рынок': d['Внутренний рынок'],
-    Коносаменты: d['Коносаменты'],
-    Nordmile: d['Nordmile'],
+export const excelStoreOffer: ExcelStoresDictionaryT = {
+    'Транспорта': ESD['Транспорта'],
+    'Суда': ESD['Суда'],
+    'Продукция': ESD['Продукция'],
+    'SPPortZarubezh': ESD['SPPortZarubezh'],
+    'SPPort': ESD['SPPort'],
+    'Продавец': ESD['Продавец'],
+    'SPClientsSell': ESD['SPClientsSell'],
+    'SPTamozhnya': ESD['SPTamozhnya'],
+    'Внутренний рынок': ESD['Внутренний рынок'],
+    'Коносаменты': ESD['Коносаменты'],
+    'Nordmile': ESD['Nordmile'],
+    'Инвойсы выгрузка': ESD['Инвойсы выгрузка'],
 };
 
-export const excelStoreDocs = { ...excelStoresDictionary };
-delete excelStoreDocs.Nordmile;
-delete excelStoreDocs['Инвойсы выгрузка'];
+export const excelStoreDocs: ExcelStoresDictionaryT = {
+    'Инвойсы выгрузка': ESD['Инвойсы выгрузка'],
+    'Транспорта': ESD['Транспорта'],
+    'Суда': ESD['Суда'],
+    'Продавец': ESD['Продавец'],
+    'SP_Consignee': ESD['SP_Consignee'],
+    'Продукция': ESD['Продукция'],
+    'SPPortZarubezh': ESD['SPPortZarubezh'],
+    'SPTamozhnya': ESD['SPTamozhnya'],
+    'SPContract': ESD['SPContract'],
+    'SPPodpisant': ESD['SPPodpisant'],
+    'SPAgent': ESD['SPAgent'],
+    'SPRekvizitBankProdavec': ESD['SPRekvizitBankProdavec'],
+    'SPClientsSell': ESD['SPClientsSell'],
+    'SPPort': ESD['SPPort'],
+    'SPPackage': ESD['SPPackage'],
+    'SPSortAssortiment': ESD['SPSortAssortiment'],
+    'Коносаменты': ESD['Коносаменты'],
+    'Экспорт': ESD['Экспорт'],
+    'Экспорт Хранение': ESD['Экспорт Хранение'],
+    'Внутренний рынок': ESD['Внутренний рынок'],
+};
 
-export type ExcelStoreT = {
-    [key: string]: {
-        table: string;
-        setter: (values: any[][]) => void;
-    };
+// prettier-ignore
+export const excelStoresNonObligatory = {
+    'Инвойсы выгрузка': ESD['Инвойсы выгрузка'],
 };
