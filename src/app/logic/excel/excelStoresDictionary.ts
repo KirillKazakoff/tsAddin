@@ -114,6 +114,8 @@ const ESD = excelStoresDictionary;
 
 export type ExcelStoresDictionaryT = Partial<typeof ESD>;
 
+// two stores initialize desc objects - for offer and docs add-in versions;
+// first goes sp dictionaries and then tables with data itself
 export const excelStoreOffer: ExcelStoresDictionaryT = {
     'Транспорта': ESD['Транспорта'],
     'Суда': ESD['Суда'],
@@ -126,11 +128,9 @@ export const excelStoreOffer: ExcelStoresDictionaryT = {
     'Внутренний рынок': ESD['Внутренний рынок'],
     'Коносаменты': ESD['Коносаменты'],
     'Nordmile': ESD['Nordmile'],
-    'Инвойсы выгрузка': ESD['Инвойсы выгрузка'],
 };
 
 export const excelStoreDocs: ExcelStoresDictionaryT = {
-    'Инвойсы выгрузка': ESD['Инвойсы выгрузка'],
     'Транспорта': ESD['Транспорта'],
     'Суда': ESD['Суда'],
     'Продавец': ESD['Продавец'],
@@ -150,9 +150,5 @@ export const excelStoreDocs: ExcelStoresDictionaryT = {
     'Экспорт': ESD['Экспорт'],
     'Экспорт Хранение': ESD['Экспорт Хранение'],
     'Внутренний рынок': ESD['Внутренний рынок'],
-};
-
-// prettier-ignore
-export const excelStoresNonObligatory = {
     'Инвойсы выгрузка': ESD['Инвойсы выгрузка'],
 };

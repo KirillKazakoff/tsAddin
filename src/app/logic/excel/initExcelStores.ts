@@ -30,7 +30,7 @@ const getExistedStores = (
     );
 };
 
-const initStoresCb = async (
+const initStores = async (
     context: Excel.RequestContext,
     excelStores: ExcelStoresDictionaryT,
 ) => {
@@ -57,17 +57,17 @@ const initStoresCb = async (
     });
 };
 
-export const initStores = async (context: Excel.RequestContext) => {
+export const initStoresOnFilename = async (context: Excel.RequestContext) => {
     context.workbook.load('name');
     await context.sync();
     const isOffer = context.workbook.name.includes('Письмо суточные');
 
     if (isOffer) {
-        await initStoresCb(context, excelStoreOffer);
+        await initStores(context, excelStoreOffer);
         excelSyncStore.setAppStatus('Offer');
     } else {
         await initExcelImages(context);
-        await initStoresCb(context, excelStoreDocs);
+        await initStores(context, excelStoreDocs);
         excelSyncStore.setAppStatus('Docs');
     }
 };
