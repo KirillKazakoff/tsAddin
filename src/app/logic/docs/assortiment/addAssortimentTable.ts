@@ -44,7 +44,6 @@ export const addAssortimentTable = (
     if (!isSample) {
         const infoRow = ws.addRow(rows.info);
         styleRowCells(infoRow, {
-            height: 25,
             font: { bold: true },
             alignment: { horizontal: 'center' },
         });
@@ -52,9 +51,11 @@ export const addAssortimentTable = (
         rows.titles.pop();
     }
 
+    // Add percentage column in the end
+    rows.titles.push('Percentage');
+
     const titlesRow = ws.addRow(rows.titles);
     styleRowCells(titlesRow, {
-        height: 25,
         font: { bold: true },
         alignment: { horizontal: 'center', vertical: 'middle' },
         border: borderAll,
@@ -68,12 +69,12 @@ export const addAssortimentTable = (
             places: row.amount.places.count,
             placesTotal: row.amount.placesTotal.count * 1000,
             samples: table.samples.rows[i],
+            percentage: (row.amount.placesTotal.count * 1000) / placesTotal.count,
         };
         if (!isSample) delete fields.samples;
         const rowTable = ws.addRow(Object.values(fields));
 
         styleRowCells(rowTable, {
-            height: 25,
             border: borderAll,
         });
 
@@ -81,13 +82,22 @@ export const addAssortimentTable = (
             places: rowTable.getCell(3),
             placesTotal: rowTable.getCell(4),
             sample: rowTable.getCell(5),
+            percentage: isSample ? rowTable.getCell(6) : rowTable.getCell(5),
         };
         [rowObj.places, rowObj.placesTotal].forEach((cell) => {
             cell.style.alignment = {
                 horizontal: 'right',
             };
         });
+        rowObj.places.numFmt = '# ###';
         rowObj.placesTotal.numFmt = '# ###.00';
+        rowObj.percentage.numFmt = '0.00%';
+        rowObj.percentage.value = {
+            formula: `${rowObj.placesTotal.$col$row} / ${placesTotal.count}`,
+            result: (row.amount.placesTotal.count * 1000) / placesTotal.count,
+            sharedFormula: `${rowObj.placesTotal.$col$row} / ${placesTotal.count}`,
+            date1904: false,
+        };
 
         if (isSample) rowObj.sample.style = sampleClStyle;
     });
@@ -110,13 +120,14 @@ export const addAssortimentTable = (
     };
 
     styleRowCells(totalRow, {
-        height: 25,
         border: borderAll,
         alignment: { horizontal: 'right' },
         font: { bold: true },
     });
     rowObj.placesTotal.numFmt = '# ###.00';
+    rowObj.places.numFmt = '# ###';
 
     if (isSample) rowObj.samples.style = sampleClStyle;
+    // creating empty space for next tables
     ws.addRows([[''], ['']]);
 };

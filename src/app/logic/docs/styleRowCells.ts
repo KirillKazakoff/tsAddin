@@ -4,7 +4,7 @@ import {
 } from 'exceljs';
 
 type RowStyleSettingsT = {
-    height: number;
+    height?: number;
     border?: Partial<Borders>;
     alignment?: Partial<Alignment>;
     font?: Partial<Font>;
@@ -17,7 +17,9 @@ export const styleRowCells = (row: Row, settings: RowStyleSettingsT) => {
         cell.font = settings.font;
     });
 
-    row.height = settings.height;
+    if (settings.height) {
+        row.height = settings.height;
+    }
     row.commit();
 };
 
