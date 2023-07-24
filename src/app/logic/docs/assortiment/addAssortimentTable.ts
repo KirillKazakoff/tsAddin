@@ -2,6 +2,11 @@ import { Style, Worksheet } from 'exceljs';
 import { styleRowCells, borderAll } from '../styleRowCells';
 import { AssortimentTableT } from '../../../types/typesAssortiment';
 import { calcFreezing } from './calcFreezing';
+import {
+    AddressT,
+    createFormula,
+    getAddress,
+} from '../../excel/utils/createFormula';
 
 /* eslint-disable no-param-reassign */
 export const addAssortimentTable = (
@@ -92,12 +97,16 @@ export const addAssortimentTable = (
         rowObj.places.numFmt = '# ###';
         rowObj.placesTotal.numFmt = '# ###.00';
         rowObj.percentage.numFmt = '0.00%';
-        rowObj.percentage.value = {
-            formula: `${rowObj.placesTotal.$col$row} / ${placesTotal.count}`,
-            result: (row.amount.placesTotal.count * 1000) / placesTotal.count,
-            sharedFormula: `${rowObj.placesTotal.$col$row} / ${placesTotal.count}`,
-            date1904: false,
-        };
+
+        rowObj.percentage.value = createFormula({
+            cell: rowObj.percentage,
+            formulaCb: (address) => {
+                const colTotal = getAddress(rowObj.placesTotal).col;
+                return `${colTotal}${address.row} / ${colTotal}${
+                    +address.row + table.rows.length - i
+                }`;
+            },
+        });
 
         if (isSample) rowObj.sample.style = sampleClStyle;
     });
@@ -118,6 +127,19 @@ export const addAssortimentTable = (
         placesTotal: totalRow.getCell(4),
         samples: totalRow.getCell(5),
     };
+
+    // initializeFormulas
+    const sumCb = (address: AddressT) => `SUM(${address.col}${+address.row - 1}:${address.col}${
+        +address.row - table.rows.length
+    })`;
+    rowObj.places.value = createFormula({
+        cell: rowObj.places,
+        formulaCb: sumCb,
+    });
+    rowObj.placesTotal.value = createFormula({
+        cell: rowObj.placesTotal,
+        formulaCb: sumCb,
+    });
 
     styleRowCells(totalRow, {
         border: borderAll,
