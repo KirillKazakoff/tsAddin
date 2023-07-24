@@ -82,8 +82,8 @@ export const addAssortimentTable = (
         styleRowCells(rowTable, {
             border: borderAll,
         });
-
         const rowObj = {
+            grades: rowTable.getCell(1),
             places: rowTable.getCell(3),
             placesTotal: rowTable.getCell(4),
             sample: rowTable.getCell(5),
@@ -94,6 +94,12 @@ export const addAssortimentTable = (
                 horizontal: 'right',
             };
         });
+        rowObj.percentage.style = {
+            border: borderAll,
+            alignment: { horizontal: 'center' },
+        };
+        if (isSample) rowObj.sample.style = sampleClStyle;
+
         rowObj.places.numFmt = '# ###';
         rowObj.placesTotal.numFmt = '# ###.00';
         rowObj.percentage.numFmt = '0.00%';
@@ -107,8 +113,6 @@ export const addAssortimentTable = (
                 }`;
             },
         });
-
-        if (isSample) rowObj.sample.style = sampleClStyle;
     });
 
     // addTotalRow
@@ -140,6 +144,12 @@ export const addAssortimentTable = (
         cell: rowObj.placesTotal,
         formulaCb: sumCb,
     });
+    if (isSample) {
+        rowObj.samples.value = createFormula({
+            cell: rowObj.samples,
+            formulaCb: sumCb,
+        });
+    }
 
     styleRowCells(totalRow, {
         border: borderAll,

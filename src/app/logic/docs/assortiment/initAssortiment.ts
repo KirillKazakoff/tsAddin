@@ -6,12 +6,13 @@ import exportContractStore from '../../../stores/docsStores/exportContractStore'
 
 export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) => {
     // column width setup
-    const columns = [1, 2, 3, 4, 5].map((index) => ws.getColumn(index));
+    const columns = [1, 2, 3, 4, 5, 6].map((index) => ws.getColumn(index));
     columns[0].width = 15;
     columns[1].width = 25;
     columns[2].width = 15;
     columns[3].width = 20;
     columns[4].width = 20;
+    columns[5].width = 15;
 
     // header style and add
     const { transport, portTo } = assortiment.record;
