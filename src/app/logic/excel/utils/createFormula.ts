@@ -19,15 +19,16 @@ export const getAddress = (cell: ExcelJS.Cell) => {
 export type AddressT = ReturnType<typeof getAddress>;
 type FormulaObjT = {
     formulaCb: (address: AddressT) => string;
+    result: string | number;
     cell: ExcelJS.Cell;
 };
 
-export const createFormula = ({ cell, formulaCb }: FormulaObjT) => {
+export const createFormula = ({ cell, result, formulaCb }: FormulaObjT) => {
     const formula = formulaCb(getAddress(cell));
 
     return {
         formula,
-        result: 0,
+        result,
         sharedFormula: formula,
         date1904: false,
     };

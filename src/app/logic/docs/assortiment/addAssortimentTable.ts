@@ -106,6 +106,7 @@ export const addAssortimentTable = (
 
         rowObj.percentage.value = createFormula({
             cell: rowObj.percentage,
+            result: fields.percentage,
             formulaCb: (address) => {
                 const colTotal = getAddress(rowObj.placesTotal).col;
                 return `${colTotal}${address.row} / ${colTotal}${
@@ -139,15 +140,18 @@ export const addAssortimentTable = (
     rowObj.places.value = createFormula({
         cell: rowObj.places,
         formulaCb: sumCb,
+        result: totalFields.places,
     });
     rowObj.placesTotal.value = createFormula({
         cell: rowObj.placesTotal,
         formulaCb: sumCb,
+        result: totalFields.placesTotal,
     });
     if (isSample) {
         rowObj.samples.value = createFormula({
             cell: rowObj.samples,
             formulaCb: sumCb,
+            result: totalFields.samples,
         });
     }
 
