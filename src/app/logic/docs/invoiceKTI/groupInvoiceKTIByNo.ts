@@ -6,6 +6,7 @@ import { groupByBl } from '../exportContract/groupBy/groupByBl';
 
 const initInvoice = (blGrouped: GroupedBlT, row: InvoiceKTIRowT) => {
     return {
+        type: row.dateDischarge ? 'discharge' : 'storage',
         priceTotal: 0,
         exportRecord: blGrouped[row.blNo].record,
         record: row,
@@ -16,12 +17,13 @@ const initInvoice = (blGrouped: GroupedBlT, row: InvoiceKTIRowT) => {
 export type InvoiceKTIT = ReturnType<typeof initInvoice>;
 export type InvoicesKTIT = { [key: string]: InvoiceKTIT };
 
-export const groupInvoiceKTIByNo = (type: 'discharge' | 'storage') => {
+// refactor to group everything without params
+export const groupInvoiceKTIByNo = () => {
     const { dischargeInvoicesT, storageInvoicesT, exportStorageT } = tablesStore;
-    const table = type === 'discharge' ? dischargeInvoicesT : storageInvoicesT;
+    const rowsArray = [...dischargeInvoicesT, ...storageInvoicesT];
     const blGrouped = groupByBl(exportStorageT);
 
-    const invoicesKTI = table.reduce<InvoicesKTIT>((total, row) => {
+    const invoicesKTI = rowsArray.reduce<InvoicesKTIT>((total, row) => {
         const initObj = initInvoice(blGrouped, row);
         const invoice = groupify<InvoiceKTIT>(total, initObj, row.invoiceNo);
 

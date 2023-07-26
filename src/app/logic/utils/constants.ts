@@ -16,8 +16,8 @@ export const pathObj = {
     requestContractNordmileRu: `${baseUrl}templates/Request_Contract_Ru_Nordmile.xlsx`,
     portLetter: `${baseUrl}templates/Port_Letter.xlsx`,
     portLetterFCA: `${baseUrl}templates/Port_Letter_FCA.xlsx`,
-    dischargeInvoice: `${baseUrl}templates/KTI_Discharge_Invoice.xlsx`,
-    storageInvoice: `${baseUrl}templates/KTI_Storage_Invoice.xlsx`,
+    InvoiceKTIDischarge: `${baseUrl}templates/Invoice_KTI_Discharge.xlsx`,
+    invoiceKTIStorage: `${baseUrl}templates/Invoice_KTI_Storage.xlsx`,
     bg: {
         trk: `${baseUrl}assets/TRK.png`,
         msi: `${baseUrl}assets/MSI.png`,

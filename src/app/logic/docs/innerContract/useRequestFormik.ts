@@ -20,9 +20,6 @@ export const useRequestFormik = () => {
     const validate = (values: FormValuesT) => {
         const errors: { [key: string]: string } = {};
 
-        if (!values.reiceNo) {
-            errors.reiceNo = 'valueMissing';
-        }
         if (!values.terms) {
             errors.terms = 'valueMissing';
         }

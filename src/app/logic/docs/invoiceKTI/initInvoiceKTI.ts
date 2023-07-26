@@ -1,9 +1,9 @@
 import ExcelJS from 'exceljs';
-import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { CellObjT } from '../../../../types/typesExcelUtils';
-import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
+import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
+import { CellObjT } from '../../../types/typesExcelUtils';
+import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initDishargeRows } from './initDishargeRows';
-import { InvoiceKTIT } from '../groupInvoiceKTIByNo';
+import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 
 export const initDischargeInvoice = (
     book: ExcelJS.Workbook,

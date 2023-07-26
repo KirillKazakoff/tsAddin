@@ -1,5 +1,5 @@
 import { Workbook } from 'exceljs';
-import { mergeTotal } from '../../../excel/utils/excelUtilsObj/mergeCells';
+import { mergeTotal } from '../../excel/utils/excelUtilsObj/mergeCells';
 
 export const mergeDischargeInvoiceCells = async (book: Workbook) => {
     const xls64 = await book.xlsx.writeBuffer();

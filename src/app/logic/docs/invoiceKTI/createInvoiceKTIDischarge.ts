@@ -1,12 +1,12 @@
-import { saveFile } from '../../../excel/utils/saveFile';
-import { readTmp } from '../../readTmp';
-import { pathObj } from '../../../utils/constants';
-import { initDischargeInvoice } from './initDischargeInvoice';
+import { saveFile } from '../../excel/utils/saveFile';
+import { readTmp } from '../readTmp';
+import { pathObj } from '../../utils/constants';
+import { initDischargeInvoice } from './initInvoiceKTI';
+import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 import { mergeDischargeInvoiceCells } from './mergeDischargeInvoiceCells';
-import { InvoiceKTIT } from '../groupInvoiceKTIByNo';
 
 export const createDischargeInvoice = async (invoice: InvoiceKTIT) => {
-    const book = await readTmp(pathObj.dischargeInvoice);
+    const book = await readTmp(pathObj.InvoiceKTIDischarge);
 
     initDischargeInvoice(book, invoice);
     await mergeDischargeInvoiceCells(book);
