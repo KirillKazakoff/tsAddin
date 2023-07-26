@@ -13,10 +13,10 @@ export const mergeCells = (ws: Worksheet, settings: MergeSettingsT) => {
 
 export const mergeTotal = (settings: {
     rows: number[];
-    cols: number[][];
+    ranges: number[][];
     ws: Worksheet;
 }) => {
-    const { rows, cols, ws } = settings;
+    const { rows, ranges: cols, ws } = settings;
 
     rows.forEach((mergeRow) => cols.forEach(([startCol, endCol]) => {
         mergeCells(ws, {

@@ -1,22 +1,22 @@
 import ExcelJS from 'exceljs';
-import { DischargeInvoiceT } from './groupDischargeInvoiceByNo';
-import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
-import { CellObjT } from '../../../types/typesExcelUtils';
-import { getExcelDateStr } from '../../excel/utils/getExcelDate';
+import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { CellObjT } from '../../../../types/typesExcelUtils';
+import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 import { initDishargeRows } from './initDishargeRows';
+import { InvoiceKTIT } from '../groupInvoiceKTIByNo';
 
 export const initDischargeInvoice = (
     book: ExcelJS.Workbook,
-    invoice: DischargeInvoiceT,
+    invoice: InvoiceKTIT,
 ) => {
     const ws = book.getWorksheet('Invoice_discharge');
     const utils = initExcelUtils(ws);
     const { record, exportRecord } = invoice;
 
     const date = {
-        invoice: (locale: string) => getExcelDateStr(record.invoiceDate, locale),
+        invoice: (locale: string) => getExcelDateStr(record.dateInvoice, locale),
         agreement: (locale: string) => getExcelDateStr(exportRecord.date, locale),
-        discharge: (locale: string) => getExcelDateStr(record.dischargeDate, locale),
+        discharge: (locale: string) => getExcelDateStr(record.dateDischarge, locale),
         contract: (locale: string) => getExcelDateStr(exportRecord.contract.date, locale),
     };
 
@@ -38,7 +38,7 @@ export const initDischargeInvoice = (
                 exportRecord.agreementNo
             } dated ${date.agreement('eng')}`,
         },
-        { cell: 'Инвойс_всего', value: `$   ${invoice.priceTotal.str}` },
+        { cell: 'Инвойс_всего', value: `$   ${invoice.priceTotal}` },
     ];
 
     const cellsRu: CellObjT[] = [
@@ -59,7 +59,7 @@ export const initDischargeInvoice = (
                 exportRecord.agreementNo
             } от ${date.agreement('ru')}`,
         },
-        { cell: 'Инвойс_всего_п', value: `$   ${invoice.priceTotal.str}` },
+        { cell: 'Инвойс_всего_п', value: `$   ${invoice.priceTotal}` },
     ];
 
     const cells = [...cellsEng, ...cellsRu];

@@ -136,54 +136,73 @@ export type NordmileRowT = {
     paymentDate: string;
 };
 
-export type DischargeInvoiceRowT = {
-    blNo: string;
-    vessel: VesselT;
-    product: ProductionT;
-    invoiceNo: string;
-    invoiceDate: string;
-    dischargeDate: string;
-    amount: {
-        placesTotal: AmountT;
-        price: AmountT;
-        priceTotal: AmountT;
-    };
-    index: string;
-};
-
-export type StorageInvoiceRowT = {
-    blNo: string;
+export type InvoiceKTIRowT = {
     agreementNo: string;
+    blNo: string;
+    invoiceNo: string;
     vessel: VesselT;
-    seller: SellerT;
     product: ProductionT;
+    seller: SellerT;
+    dateInvoice: string;
+    index: string;
     amount: {
-        storage: number;
         price: number;
         priceTotal: number;
-        days: number;
-        operationResult: number;
+        placesTotal: number;
+        days?: number;
+        operationResult?: number;
     };
-
-    dateStorageStart: string;
-    dateStorageEnd: string;
-    dateInvoice: string;
-    dateAccountSent: string;
-
-    invoiceNo: string;
-    operation: string;
-    index: string;
+    dateStorageStart?: string;
+    dateStorageEnd?: string;
+    dateDischarge?: string;
+    dateAccountSent?: string;
+    operation?: string;
 };
 
 // utilstype
 export type OperationT = 'export' | 'export_storage';
 
-export type CommonRowT = (
-    | ExportRowT
-    | InnerRowT
-    | MateRowT
-    | DischargeInvoiceRowT
-    | StorageInvoiceRowT
-) & { terms?: string };
+export type CommonRowT = (ExportRowT | InnerRowT | MateRowT | InvoiceKTIRowT) & {
+    terms?: string;
+};
 
 export type TableNameT = 'Export' | 'Export_Storage' | 'Inner' | 'Mates';
+
+// export type DischargeInvoiceRowT = {
+//     blNo: string;
+//     vessel: VesselT;
+//     product: ProductionT;
+//     invoiceNo: string;
+//     dateInvoice: string;
+//     dateDischarge: string;
+//     amount: {
+//         placesTotal: AmountT;
+//         price: AmountT;
+//         priceTotal: AmountT;
+//     };
+//     index: string;
+// };
+
+// export type StorageInvoiceRowT = {
+//     blNo: string;
+//     agreementNo: string;
+//     vessel: VesselT;
+//     seller: SellerT;
+//     product: ProductionT;
+//     amount: {
+//         storage: number;
+//         price: number;
+//         priceTotal: number;
+//         days: number;
+//         operationResult: number;
+//     };
+
+//     dateStorageStart: string;
+//     dateStorageEnd: string;
+//     dateInvoice: string;
+//     dateAccountSent: string;
+
+//     invoiceNo: string;
+//     operation: string;
+//     index: string;
+// };

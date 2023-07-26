@@ -1,15 +1,16 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import {
-    DischargeInvoiceT,
-    groupDischargeInvoiceByNo,
-} from '../../logic/docs/dischargeInvoice/groupDischargeInvoiceByNo';
-import { createDischargeInvoice } from '../../logic/docs/dischargeInvoice/createDischargeInvoice';
+import { createDischargeInvoice } from '../../logic/docs/invoiceKTI/dischargeInvoice/createDischargeInvoice';
 import { Doc } from '../../components/Doc';
+import {
+    InvoiceKTIT,
+    groupInvoiceKTIByNo,
+} from '../../logic/docs/invoiceKTI/groupInvoiceKTIByNo';
 
 export const DischargeSection = observer(() => {
-    const invoicesGrouped = groupDischargeInvoiceByNo();
-    const onLoad = async (invoice: DischargeInvoiceT) => {
+    // const invoicesGrouped = groupDischargeInvoiceByNo();
+    const invoicesGrouped = groupInvoiceKTIByNo('discharge');
+    const onLoad = async (invoice: InvoiceKTIT) => {
         await createDischargeInvoice(invoice);
     };
 

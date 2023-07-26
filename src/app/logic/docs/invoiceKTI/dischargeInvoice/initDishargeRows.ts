@@ -1,9 +1,9 @@
 // import _ from 'lodash';
-import { CellUtilsT } from '../../../types/typesExcelUtils';
-import { styleRowCells } from '../styleRowCells';
-import { DischargeInvoiceT } from './groupDischargeInvoiceByNo';
+import { CellUtilsT } from '../../../../types/typesExcelUtils';
+import { styleRowCells } from '../../styleRowCells';
+import { InvoiceKTIT } from '../groupInvoiceKTIByNo';
 
-export const initDishargeRows = (invoice: DischargeInvoiceT, utils: CellUtilsT) => {
+export const initDishargeRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
     ['eng', 'ru'].forEach((language) => {
         const cellName = language === 'eng' ? 'Инвойс_массив' : 'Инвойс_массив_п';
         const arrayCl = utils.getCell(cellName);
@@ -11,19 +11,19 @@ export const initDishargeRows = (invoice: DischargeInvoiceT, utils: CellUtilsT) 
         invoice.rows.forEach((r, i) => {
             const cols = {
                 emptyFirst: '',
-                description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${r.row.amount.placesTotal.str} mt`,
+                description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${r.row.amount.placesTotal} mt`,
                 emptyMergeFirst: '',
                 emptyMergeSecond: '',
                 emptyMergeThird: '',
                 emptyMergeFourth: '',
                 emptyMergeFifth: '',
-                price: `$   ${r.row.amount.price.str}`,
+                price: `$   ${r.row.amount.price}`,
                 emptyBetweenPrices: '',
-                priceTotal: `$   ${r.row.amount.priceTotal.str}`,
+                priceTotal: `$   ${r.row.amount.priceTotal}`,
             };
 
             if (language === 'ru') {
-                cols.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${r.row.amount.placesTotal.str} тн`;
+                cols.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${r.row.amount.placesTotal} тн`;
             }
 
             const rowArr = Object.values(cols);

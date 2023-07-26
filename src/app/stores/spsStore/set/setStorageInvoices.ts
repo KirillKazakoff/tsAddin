@@ -1,6 +1,6 @@
 import { checkRowProps } from '../../../logic/excel/checkTable/checkRowProps';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
-import { StorageInvoiceRowT } from '../../../types/typesTables';
+import { InvoiceKTIRowT } from '../../../types/typesTables';
 import tablesStore from '../../tablesStore/tablesStore';
 import { selectSp } from '../select';
 
@@ -9,7 +9,7 @@ export const setStorageInvoices = (table: any[][]) => {
     table.shift();
     const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<StorageInvoiceRowT[]>(
+    const transformedTable = excluded.reduce<InvoiceKTIRowT[]>(
         (totalObj, row, index) => {
             const [
                 blNo,
@@ -19,8 +19,8 @@ export const setStorageInvoices = (table: any[][]) => {
                 product,
                 dateStorageStart,
                 dateStorageEnd,
-                storageAmount,
-                daysAmount,
+                placesTotal,
+                days,
                 invoiceNo,
                 invoiceDate,
                 price,
@@ -30,7 +30,7 @@ export const setStorageInvoices = (table: any[][]) => {
                 dateAccountSent,
             ] = row;
 
-            const rowObj: StorageInvoiceRowT = {
+            const rowObj: InvoiceKTIRowT = {
                 blNo,
                 agreementNo,
                 invoiceNo,
@@ -42,10 +42,10 @@ export const setStorageInvoices = (table: any[][]) => {
                 dateAccountSent,
                 dateInvoice: invoiceDate,
                 amount: {
-                    storage: storageAmount,
-                    days: daysAmount,
+                    placesTotal,
                     price,
                     priceTotal,
+                    days,
                     operationResult,
                 },
                 operation,

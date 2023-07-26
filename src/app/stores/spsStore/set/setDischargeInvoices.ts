@@ -1,18 +1,20 @@
 import { checkRowProps } from '../../../logic/excel/checkTable/checkRowProps';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
-import { DischargeInvoiceRowT } from '../../../types/typesTables';
+import { InvoiceKTIRowT } from '../../../types/typesTables';
 import tablesStore from '../../tablesStore/tablesStore';
-import { initAmount } from '../../tablesStore/utils/initAmount';
+import { selectSp } from '../select';
 
 export const setDischargeInvoices = (table: any[][]) => {
     if (!table) return;
     table.shift();
     const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<DischargeInvoiceRowT[]>(
+    const transformedTable = excluded.reduce<InvoiceKTIRowT[]>(
         (totalObj, row, index) => {
             const [
                 blNo,
+                seller,
+                agreementNo,
                 vessel,
                 product,
                 placesTotal,
@@ -23,17 +25,19 @@ export const setDischargeInvoices = (table: any[][]) => {
                 priceTotal,
             ] = row;
 
-            const rowObj: DischargeInvoiceRowT = {
-                blNo,
-                vessel,
-                product,
+            const rowObj: InvoiceKTIRowT = {
+                agreementNo,
                 invoiceNo,
-                dischargeDate,
-                invoiceDate,
+                blNo,
+                seller: selectSp.seller(seller),
+                vessel: selectSp.vessel(vessel),
+                product: selectSp.product(product),
+                dateDischarge: dischargeDate,
+                dateInvoice: invoiceDate,
                 amount: {
-                    price: initAmount(+price, 2, 2),
-                    placesTotal: initAmount(+placesTotal, 4, 4),
-                    priceTotal: initAmount(+priceTotal, 2, 2),
+                    price,
+                    placesTotal,
+                    priceTotal,
                 },
                 index: index.toString(),
             };

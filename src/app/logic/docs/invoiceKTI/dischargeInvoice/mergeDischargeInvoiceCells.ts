@@ -1,5 +1,5 @@
 import { Workbook } from 'exceljs';
-import { mergeCells } from '../../excel/utils/excelUtilsObj/mergeCells';
+import { mergeTotal } from '../../../excel/utils/excelUtilsObj/mergeCells';
 
 export const mergeDischargeInvoiceCells = async (book: Workbook) => {
     const xls64 = await book.xlsx.writeBuffer();
@@ -22,13 +22,11 @@ export const mergeDischargeInvoiceCells = async (book: Workbook) => {
             });
 
             // prettier-ignore
-            const mergeCols = [[2, 6], [7, 8], [9, 10]];
-            mergeCols.forEach(([startCol, endCol]) => {
-                mergeCells(ws, {
-                    row: rowNumber,
-                    startCol,
-                    endCol,
-                });
+            const ranges = [[2, 6], [7, 8], [9, 10]];
+            mergeTotal({
+                rows: [rowNumber],
+                ranges,
+                ws,
             });
         }
     });
