@@ -7,6 +7,7 @@ import { ExportContractSection } from './ExportContractSection';
 import { ExportRadio } from './ExportRadio';
 import { AssortimentSection } from './AssortimentSection';
 import { DischargeSection } from './DischargeSection';
+import { StorageSectionKTI } from './StorageSectionKTI';
 
 export const ExportRoute = observer(() => {
     const table = exportContractStore.getCurrentTable();
@@ -19,6 +20,7 @@ export const ExportRoute = observer(() => {
             <ExportContractSection />
             <AssortimentSection />
             <DischargeSection />
+            <StorageSectionKTI />
         </>
     );
     if (table.length === 0) {

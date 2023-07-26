@@ -17,6 +17,7 @@ export const pathObj = {
     portLetter: `${baseUrl}templates/Port_Letter.xlsx`,
     portLetterFCA: `${baseUrl}templates/Port_Letter_FCA.xlsx`,
     dischargeInvoice: `${baseUrl}templates/KTI_Discharge_Invoice.xlsx`,
+    storageInvoice: `${baseUrl}templates/KTI_Storage_Invoice.xlsx`,
     bg: {
         trk: `${baseUrl}assets/TRK.png`,
         msi: `${baseUrl}assets/MSI.png`,

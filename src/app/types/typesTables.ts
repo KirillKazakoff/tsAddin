@@ -151,6 +151,30 @@ export type DischargeInvoiceRowT = {
     index: string;
 };
 
+export type StorageInvoiceRowT = {
+    blNo: string;
+    agreementNo: string;
+    vessel: VesselT;
+    seller: SellerT;
+    product: ProductionT;
+    amount: {
+        storage: number;
+        price: number;
+        priceTotal: number;
+        days: number;
+        operationResult: number;
+    };
+
+    dateStorageStart: string;
+    dateStorageEnd: string;
+    dateInvoice: string;
+    dateAccountSent: string;
+
+    invoiceNo: string;
+    operation: string;
+    index: string;
+};
+
 // utilstype
 export type OperationT = 'export' | 'export_storage';
 
@@ -159,6 +183,7 @@ export type CommonRowT = (
     | InnerRowT
     | MateRowT
     | DischargeInvoiceRowT
+    | StorageInvoiceRowT
 ) & { terms?: string };
 
 export type TableNameT = 'Export' | 'Export_Storage' | 'Inner' | 'Mates';

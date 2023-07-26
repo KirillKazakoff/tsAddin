@@ -15,6 +15,7 @@ import { setPortsZarubezh } from '../../stores/spsStore/set/setPortsZarubezh';
 import { setProduction } from '../../stores/spsStore/set/setProduction';
 import { setSellers } from '../../stores/spsStore/set/setSellers';
 import { setSortsAssortiment } from '../../stores/spsStore/set/setSortsAssortiment';
+import { setStorageInvoices } from '../../stores/spsStore/set/setStorageInvoices';
 import { setTransports } from '../../stores/spsStore/set/setTransport';
 import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setExport } from '../../stores/tablesStore/setExport';
@@ -24,6 +25,10 @@ import { setMates } from '../../stores/tablesStore/setMates';
 import { setNordmile } from '../../stores/tablesStore/setNordmile';
 
 const excelStoresDictionary = {
+    'Инвойсы хранение': {
+        table: 'Инвойсы_хранение',
+        setter: setStorageInvoices,
+    },
     'Инвойсы выгрузка': {
         table: 'Инвойсы_выгрузка',
         setter: setDischargeInvoices,
@@ -151,4 +156,5 @@ export const excelStoreDocs: ExcelStoresDictionaryT = {
     'Экспорт Хранение': ESD['Экспорт Хранение'],
     'Внутренний рынок': ESD['Внутренний рынок'],
     'Инвойсы выгрузка': ESD['Инвойсы выгрузка'],
+    'Инвойсы хранение': ESD['Инвойсы хранение'],
 };

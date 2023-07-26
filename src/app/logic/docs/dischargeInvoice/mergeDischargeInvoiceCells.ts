@@ -7,7 +7,7 @@ export const mergeDischargeInvoiceCells = async (book: Workbook) => {
 
     book.worksheets.forEach((ws) => {
         if (ws.name.toLocaleLowerCase().includes('invoice')) {
-            let rowNumber;
+            let rowNumber: number;
 
             ws.eachRow((row) => {
                 row.eachCell((cell) => {
@@ -21,29 +21,14 @@ export const mergeDischargeInvoiceCells = async (book: Workbook) => {
                 });
             });
 
-            const cols = {
-                first: 2,
-                second: 6,
-                third: 7,
-                fourth: 8,
-                fifth: 9,
-                sixth: 10,
-            };
-
-            mergeCells(ws, {
-                row: rowNumber,
-                startCol: cols.first,
-                endCol: cols.second,
-            });
-            mergeCells(ws, {
-                row: rowNumber,
-                startCol: cols.third,
-                endCol: cols.fourth,
-            });
-            mergeCells(ws, {
-                row: rowNumber,
-                startCol: cols.fifth,
-                endCol: cols.sixth,
+            // prettier-ignore
+            const mergeCols = [[2, 6], [7, 8], [9, 10]];
+            mergeCols.forEach(([startCol, endCol]) => {
+                mergeCells(ws, {
+                    row: rowNumber,
+                    startCol,
+                    endCol,
+                });
             });
         }
     });

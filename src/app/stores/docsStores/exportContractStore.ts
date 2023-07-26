@@ -41,6 +41,7 @@ class ExportContractStore {
         return tablesStore.exportT[0];
     }
     get terms() {
+        if (this.operation === 'export_storage') return null;
         return this.exportRecord?.terms;
     }
 }

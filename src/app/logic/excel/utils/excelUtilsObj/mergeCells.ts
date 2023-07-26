@@ -10,3 +10,19 @@ export const mergeCells = (ws: Worksheet, settings: MergeSettingsT) => {
     ws.unMergeCells(settings.row, settings.startCol, settings.row, settings.endCol);
     ws.mergeCells(settings.row, settings.startCol, settings.row, settings.endCol);
 };
+
+export const mergeTotal = (settings: {
+    rows: number[];
+    cols: number[][];
+    ws: Worksheet;
+}) => {
+    const { rows, cols, ws } = settings;
+
+    rows.forEach((mergeRow) => cols.forEach(([startCol, endCol]) => {
+        mergeCells(ws, {
+            row: mergeRow,
+            startCol,
+            endCol,
+        });
+    }));
+};
