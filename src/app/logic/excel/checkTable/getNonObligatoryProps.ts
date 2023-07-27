@@ -22,6 +22,7 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: string) => {
             'dateStorageEnd',
             'dateInvoice',
             'dateAccountSent',
+            'invoiceNo',
         ],
     };
 

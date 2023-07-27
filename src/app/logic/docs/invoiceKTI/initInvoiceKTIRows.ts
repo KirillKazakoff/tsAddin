@@ -1,4 +1,6 @@
 import { CellUtilsT } from '../../../types/typesExcelUtils';
+import { formats } from '../../utils/constants';
+import { formatCount } from '../../utils/formatCount';
 import { styleRowCells } from '../styleRowCells';
 import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 
@@ -10,17 +12,20 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
         invoice.rows.forEach((r, i) => {
             const cols = {
                 emptyFirst: '',
-                description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${r.row.amount.placesTotal} mt`,
+                description: `${r.exportRow.vessel.eng.name} (${
+                    r.exportRow.blNo
+                })\n${r.exportRow.product.eng.name}\n${formatCount(
+                    r.row.amount.placesTotal,
+                    3,
+                    4,
+                )} mt`,
                 emptyMergeFirst: '',
                 emptyMergeSecond: '',
                 emptyMergeThird: '',
                 emptyMergeFourth: '',
-                emptyMergeFifth: '',
                 days: `${r.row.amount?.days}`,
-                emptyIfStorageTmp: '',
-                price: `$   ${r.row.amount.price}`,
-                emptyBetweenPrices: '',
-                priceTotal: `$   ${r.row.amount.priceTotal}`,
+                price: r.row.amount.price,
+                priceTotal: r.row.amount.priceTotal,
             };
 
             if (language === 'ru') {
@@ -28,18 +33,14 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
             }
             if (invoice.type === 'discharge') {
                 delete cols.days;
-                delete cols.emptyIfStorageTmp;
-            } else {
-                delete cols.emptyMergeFifth;
             }
 
             const rowArr = Object.values(cols);
-
             const rowIndex = +arrayCl.row + i;
             utils.ws.insertRow(rowIndex, rowArr).commit();
-
             utils.mergeCells({ startCol: 2, endCol: 6, row: rowIndex });
-            // styleRow
+
+            // styling
             const row = utils.ws.getRow(rowIndex);
             styleRowCells(row, {
                 height: invoice.type === 'discharge' ? 45 : 60,
@@ -47,35 +48,38 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
                     wrapText: true,
                 },
             });
-            row.getCell(7).border = {
-                left: { style: 'thin' },
+            const colsHeader = {
+                desc: utils.getCell('Инвойс_таблица_заголовок').col,
+                days: utils.getCell('Инвойсы_таблица_дни')?.col,
+                price: utils.getCell('Инвойсы_таблица_стоимость').col,
+                priceTotal: utils.getCell('Инвойсы_таблица_сумма').col,
             };
-            if (invoice.type === 'discharge') {
-                row.getCell(8).alignment = {
-                    horizontal: 'right',
-                    vertical: 'middle',
-                };
-                row.getCell(9).border = {
-                    left: { style: 'thin' },
-                };
-                row.getCell(10).alignment = {
-                    horizontal: 'right',
-                    vertical: 'middle',
-                };
-            } else {
-                row.getCell(7).style = {
+            const rowObj = {
+                desc: row.getCell(2),
+                days:
+                    invoice.type === 'storage'
+                        ? row.getCell(+colsHeader.days)
+                        : null,
+                price: row.getCell(+colsHeader.price),
+                priceTotal: row.getCell(+colsHeader.priceTotal),
+            };
+            rowObj.price.style = {
+                border: { right: { style: 'thin' }, left: { style: 'thin' } },
+                alignment: { horizontal: 'right', vertical: 'middle' },
+            };
+            rowObj.priceTotal.alignment = {
+                horizontal: 'right',
+                vertical: 'middle',
+            };
+            if (invoice.type === 'storage') {
+                rowObj.days.style = {
                     border: { left: { style: 'thin' }, right: { style: 'thin' } },
                     alignment: { horizontal: 'center', vertical: 'middle' },
                 };
-                row.getCell(9).style = {
-                    alignment: { horizontal: 'right', vertical: 'middle' },
-                    border: { right: { style: 'thin' } },
-                };
-                row.getCell(11).alignment = {
-                    horizontal: 'right',
-                    vertical: 'middle',
-                };
             }
+            // format
+            rowObj.price.numFmt = formats.priceDollar;
+            rowObj.priceTotal.numFmt = formats.priceDollar;
         });
 
         utils.deleteRow(cellName);

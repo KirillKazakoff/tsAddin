@@ -22,7 +22,7 @@ export const setStorageInvoices = (table: any[][]) => {
                 placesTotal,
                 days,
                 invoiceNo,
-                invoiceDate,
+                dateInvoice,
                 price,
                 priceTotal,
                 operation,
@@ -40,7 +40,7 @@ export const setStorageInvoices = (table: any[][]) => {
                 dateStorageStart,
                 dateStorageEnd,
                 dateAccountSent,
-                dateInvoice: invoiceDate,
+                dateInvoice,
                 amount: {
                     placesTotal,
                     price,

@@ -3,10 +3,11 @@ import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initInvoiceKTIRows } from './initInvoiceKTIRows';
+import { formats } from '../../utils/constants';
 import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 
 export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) => {
-    const ws = book.getWorksheet('Invoice_discharge');
+    const ws = book.getWorksheet('Invoice_KTI');
     const utils = initExcelUtils(ws);
     const { record, exportRecord } = invoice;
 
@@ -18,7 +19,7 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) 
     };
 
     const cellsEng: CellObjT[] = [
-        { cell: 'Инвойс_номер', value: record.invoiceNo },
+        { cell: 'Инвойс_номер', value: `KTICOLTD - ${record.invoiceNo}` },
         { cell: 'Инвойс_компания', value: exportRecord.seller.eng.name },
         { cell: 'Инвойс_дата', value: date.invoice('eng') },
         {
@@ -35,11 +36,15 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) 
                 exportRecord.agreementNo
             } dated ${date.agreement('eng')}`,
         },
-        { cell: 'Инвойс_всего', value: `$   ${invoice.priceTotal}` },
+        {
+            cell: 'Инвойс_всего',
+            value: invoice.priceTotal,
+            numFmt: formats.priceDollar,
+        },
     ];
 
     const cellsRu: CellObjT[] = [
-        { cell: 'Инвойс_номер_п', value: record.invoiceNo },
+        { cell: 'Инвойс_номер_п', value: `KTICOLTD - ${record.invoiceNo}` },
         { cell: 'Инвойс_компания_п', value: exportRecord.seller.ru.name },
         { cell: 'Инвойс_дата_п', value: date.invoice('ru') },
         {
@@ -56,7 +61,11 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) 
                 exportRecord.agreementNo
             } от ${date.agreement('ru')}`,
         },
-        { cell: 'Инвойс_всего_п', value: `$   ${invoice.priceTotal}` },
+        {
+            cell: 'Инвойс_всего_п',
+            value: invoice.priceTotal,
+            numFmt: formats.priceDollar,
+        },
     ];
 
     const cells = [...cellsEng, ...cellsRu];

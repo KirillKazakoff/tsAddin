@@ -9,9 +9,9 @@ const createInvoiceKTIStorage = async (invoice: InvoiceKTIT) => {
     const book = await readTmp(pathObj.invoiceKTIStorage);
 
     initInvoiceKTItmp(book, invoice);
-    await mergeInvoiceKTICells(book, [[]]);
+    await mergeInvoiceKTICells(book, [[2, 6]]);
 
-    const fileName = `KTI Storage invoice ${invoice.record.invoiceNo}`;
+    const fileName = `KTI Storage invoice - ${invoice.record.invoiceNo}`;
     await saveFile(book, fileName);
 };
 
@@ -19,9 +19,9 @@ const createInvoiceKTIDischarge = async (invoice: InvoiceKTIT) => {
     const book = await readTmp(pathObj.InvoiceKTIDischarge);
     initInvoiceKTItmp(book, invoice);
     // prettier-ignore
-    await mergeInvoiceKTICells(book, [[2, 6], [7, 8], [9, 10]]);
+    await mergeInvoiceKTICells(book, [[2, 6]]);
 
-    const fileName = `KTI Discharge invoice ${invoice.record.invoiceNo}`;
+    const fileName = `KTI Discharge invoice - ${invoice.record.invoiceNo}`;
     await saveFile(book, fileName);
 };
 

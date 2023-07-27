@@ -18,9 +18,13 @@ export const setCellDouble = (
 };
 
 export const setCell = (ws: Worksheet, setObj: CellObjT) => {
-    const { cell, value, offsetRow } = setObj;
+    const {
+        cell, value, offsetRow, numFmt,
+    } = setObj;
 
     const cellObj = getCellByName(ws, cell, offsetRow);
     cellObj.value = value;
+
+    if (numFmt) cellObj.numFmt = numFmt;
     return cellObj;
 };

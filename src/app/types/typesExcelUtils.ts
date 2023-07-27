@@ -20,9 +20,10 @@ export type GetCellDoubleBoundT = (name: string) => CellDouble;
 
 export type CellObjDoubleT = {
     cell: string;
-    eng: string;
-    ru: string;
+    eng: string | number;
+    ru: string | number;
     offsetRow?: number;
+    numFmt?: string;
 };
 
 export type SetCellDoubleBoundT = (setObj: CellObjDoubleT) => CellDouble;
@@ -41,7 +42,8 @@ export type CellUtilsDoubleT = {
 export type GetCellBoundT = (name: string) => Cell;
 export type CellObjT = {
     cell: string;
-    value: string;
+    value: string | number;
+    numFmt?: string;
     offsetRow?: number;
 };
 export type SetCellBoundT = (setObj: CellObjT) => Cell;

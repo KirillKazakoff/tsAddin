@@ -19,8 +19,8 @@ export const setDischargeInvoices = (table: any[][]) => {
                 product,
                 placesTotal,
                 invoiceNo,
-                invoiceDate,
-                dischargeDate,
+                dateInvoice,
+                dateDischarge,
                 price,
                 priceTotal,
             ] = row;
@@ -32,8 +32,8 @@ export const setDischargeInvoices = (table: any[][]) => {
                 seller: selectSp.seller(seller),
                 vessel: selectSp.vessel(vessel),
                 product: selectSp.product(product),
-                dateDischarge: dischargeDate,
-                dateInvoice: invoiceDate,
+                dateDischarge,
+                dateInvoice,
                 amount: {
                     price,
                     placesTotal,
