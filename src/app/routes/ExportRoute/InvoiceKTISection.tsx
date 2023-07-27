@@ -1,17 +1,16 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { useInitInvoiceKTISection } from '../../logic/docs/invoiceKTI/useInitInvoicesKTI';
 import { Doc } from '../../components/Doc';
-import { createDischargeInvoice } from '../../logic/docs/invoiceKTI/createInvoiceKTIDischarge';
 import {
     groupInvoiceKTIByNo,
     InvoiceKTIT,
 } from '../../logic/docs/invoiceKTI/groupInvoiceKTIByNo';
+import { createInvoiceKTI } from '../../logic/docs/invoiceKTI/createInvoiceKTI';
 
 export const InvoiceKTISection = observer(() => {
     const invoicesGrouped = groupInvoiceKTIByNo();
     const onLoad = async (invoice: InvoiceKTIT) => {
-        await createDischargeInvoice(invoice);
+        await createInvoiceKTI(invoice);
     };
 
     const invoices = invoicesGrouped.map((invoice) => {

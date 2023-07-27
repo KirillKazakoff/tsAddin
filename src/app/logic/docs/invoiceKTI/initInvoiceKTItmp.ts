@@ -2,13 +2,10 @@ import ExcelJS from 'exceljs';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
-import { initDishargeRows } from './initDishargeRows';
+import { initInvoiceKTIRows } from './initInvoiceKTIRows';
 import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 
-export const initDischargeInvoice = (
-    book: ExcelJS.Workbook,
-    invoice: InvoiceKTIT,
-) => {
+export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) => {
     const ws = book.getWorksheet('Invoice_discharge');
     const utils = initExcelUtils(ws);
     const { record, exportRecord } = invoice;
@@ -72,6 +69,6 @@ export const initDischargeInvoice = (
         }
     });
 
-    initDishargeRows(invoice, utils);
+    initInvoiceKTIRows(invoice, utils);
     return cells;
 };

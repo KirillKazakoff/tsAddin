@@ -1,7 +1,7 @@
 import { Workbook } from 'exceljs';
 import { mergeTotal } from '../../excel/utils/excelUtilsObj/mergeCells';
 
-export const mergeDischargeInvoiceCells = async (book: Workbook) => {
+export const mergeInvoiceKTICells = async (book: Workbook, ranges: number[][]) => {
     const xls64 = await book.xlsx.writeBuffer();
     await book.xlsx.load(xls64);
 
@@ -22,7 +22,6 @@ export const mergeDischargeInvoiceCells = async (book: Workbook) => {
             });
 
             // prettier-ignore
-            const ranges = [[2, 6], [7, 8], [9, 10]];
             mergeTotal({
                 rows: [rowNumber],
                 ranges,

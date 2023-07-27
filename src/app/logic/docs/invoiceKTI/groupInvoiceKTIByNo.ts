@@ -14,7 +14,9 @@ const initInvoice = (blGrouped: GroupedBlT, row: InvoiceKTIRowT) => {
     };
 };
 
-export type InvoiceKTIT = ReturnType<typeof initInvoice>;
+export type InvoiceKTIT = ReturnType<typeof initInvoice> & {
+    type: 'discharge' | 'storage';
+};
 export type InvoicesKTIT = { [key: string]: InvoiceKTIT };
 
 // refactor to group everything without params

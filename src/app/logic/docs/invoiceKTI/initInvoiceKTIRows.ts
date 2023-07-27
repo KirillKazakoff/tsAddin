@@ -2,7 +2,7 @@ import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { styleRowCells } from '../styleRowCells';
 import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 
-export const initDishargeRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
+export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
     ['eng', 'ru'].forEach((language) => {
         const cellName = language === 'eng' ? 'Инвойс_массив' : 'Инвойс_массив_п';
         const arrayCl = utils.getCell(cellName);
@@ -16,6 +16,8 @@ export const initDishargeRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
                 emptyMergeThird: '',
                 emptyMergeFourth: '',
                 emptyMergeFifth: '',
+                days: `${r.row.amount?.days}`,
+                emptyIfStorageTmp: '',
                 price: `$   ${r.row.amount.price}`,
                 emptyBetweenPrices: '',
                 priceTotal: `$   ${r.row.amount.priceTotal}`,
@@ -23,6 +25,12 @@ export const initDishargeRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
 
             if (language === 'ru') {
                 cols.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${r.row.amount.placesTotal} тн`;
+            }
+            if (invoice.type === 'discharge') {
+                delete cols.days;
+                delete cols.emptyIfStorageTmp;
+            } else {
+                delete cols.emptyMergeFifth;
             }
 
             const rowArr = Object.values(cols);
@@ -34,7 +42,7 @@ export const initDishargeRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
             // styleRow
             const row = utils.ws.getRow(rowIndex);
             styleRowCells(row, {
-                height: 45,
+                height: invoice.type === 'discharge' ? 45 : 60,
                 alignment: {
                     wrapText: true,
                 },
@@ -42,17 +50,32 @@ export const initDishargeRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
             row.getCell(7).border = {
                 left: { style: 'thin' },
             };
-            row.getCell(8).alignment = {
-                horizontal: 'right',
-                vertical: 'middle',
-            };
-            row.getCell(9).border = {
-                left: { style: 'thin' },
-            };
-            row.getCell(10).alignment = {
-                horizontal: 'right',
-                vertical: 'middle',
-            };
+            if (invoice.type === 'discharge') {
+                row.getCell(8).alignment = {
+                    horizontal: 'right',
+                    vertical: 'middle',
+                };
+                row.getCell(9).border = {
+                    left: { style: 'thin' },
+                };
+                row.getCell(10).alignment = {
+                    horizontal: 'right',
+                    vertical: 'middle',
+                };
+            } else {
+                row.getCell(7).style = {
+                    border: { left: { style: 'thin' }, right: { style: 'thin' } },
+                    alignment: { horizontal: 'center', vertical: 'middle' },
+                };
+                row.getCell(9).style = {
+                    alignment: { horizontal: 'right', vertical: 'middle' },
+                    border: { right: { style: 'thin' } },
+                };
+                row.getCell(11).alignment = {
+                    horizontal: 'right',
+                    vertical: 'middle',
+                };
+            }
         });
 
         utils.deleteRow(cellName);
