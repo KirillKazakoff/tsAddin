@@ -10,15 +10,10 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
         const arrayCl = utils.getCell(cellName);
 
         invoice.rows.forEach((r, i) => {
+            const placesTotal = formatCount(r.row.amount.placesTotal, 3, 4);
             const cols = {
                 emptyFirst: '',
-                description: `${r.exportRow.vessel.eng.name} (${
-                    r.exportRow.blNo
-                })\n${r.exportRow.product.eng.name}\n${formatCount(
-                    r.row.amount.placesTotal,
-                    3,
-                    4,
-                )} mt`,
+                description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${placesTotal} mt`,
                 emptyMergeFirst: '',
                 emptyMergeSecond: '',
                 emptyMergeThird: '',
@@ -29,7 +24,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
             };
 
             if (language === 'ru') {
-                cols.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${r.row.amount.placesTotal} тн`;
+                cols.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${placesTotal} тн`;
             }
             if (invoice.type === 'discharge') {
                 delete cols.days;
@@ -63,6 +58,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
                 price: row.getCell(+colsHeader.price),
                 priceTotal: row.getCell(+colsHeader.priceTotal),
             };
+            rowObj.desc.style.alignment = { vertical: 'middle' };
             rowObj.price.style = {
                 border: { right: { style: 'thin' }, left: { style: 'thin' } },
                 alignment: { horizontal: 'right', vertical: 'middle' },

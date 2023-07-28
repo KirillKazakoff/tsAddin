@@ -19,7 +19,6 @@ export type InvoiceKTIT = ReturnType<typeof initInvoice> & {
 };
 export type InvoicesKTIT = { [key: string]: InvoiceKTIT };
 
-// refactor to group everything without params
 export const groupInvoiceKTIByNo = () => {
     const { dischargeInvoicesT, storageInvoicesT, exportStorageT } = tablesStore;
     const rowsArray = [...dischargeInvoicesT, ...storageInvoicesT];
@@ -27,6 +26,7 @@ export const groupInvoiceKTIByNo = () => {
 
     const invoicesKTI = rowsArray.reduce<InvoicesKTIT>((total, row) => {
         const initObj = initInvoice(blGrouped, row);
+        if (!row.invoiceNo) return total;
         const invoice = groupify<InvoiceKTIT>(total, initObj, row.invoiceNo);
 
         invoice.rows.push({ row, exportRow: blGrouped[row.blNo].record });
