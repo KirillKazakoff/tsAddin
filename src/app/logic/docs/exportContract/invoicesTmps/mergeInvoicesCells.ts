@@ -35,11 +35,12 @@ export const mergeInvoicesCells = async (book: Workbook, agreement: AgreementT) 
                 });
             });
 
-            merge.ranges.second[0] = merge.ranges.first[1] + 1;
-
             if (agreement.record.terms === 'FCA') {
+                console.log('hello');
                 merge.ranges.first[1] = 3;
             }
+
+            merge.ranges.second[0] = merge.ranges.first[1] + 1;
 
             mergeTotal({
                 rows: Object.values(merge.rows),

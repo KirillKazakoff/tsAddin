@@ -21,9 +21,9 @@ export const useContractFormik = () => {
         if (!values.podpisant) {
             errors.podpisant = 'valueMissing';
         }
-        if (!values.declaration) {
-            errors.declaration = 'valueMissing';
-        }
+        // if (!values.declaration) {
+        //     errors.declaration = 'valueMissing';
+        // }
 
         if (!terms) {
             delete errors.declaration;
