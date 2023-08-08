@@ -68,7 +68,9 @@ export const groupSamples = (rows: ExportRowT[]) => {
             table.record.consignee.codeName,
         );
 
-        assortiment.tables[table.record.vessel.codeName] = table;
+        assortiment.tables[
+            `${table.record.vessel.codeName}${table.record.product.codeName}`
+        ] = table;
         return total;
     }, {});
 

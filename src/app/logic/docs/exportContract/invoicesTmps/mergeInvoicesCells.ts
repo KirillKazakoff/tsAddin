@@ -36,7 +36,6 @@ export const mergeInvoicesCells = async (book: Workbook, agreement: AgreementT) 
             });
 
             if (agreement.record.terms === 'FCA') {
-                console.log('hello');
                 merge.ranges.first[1] = 3;
             }
 
