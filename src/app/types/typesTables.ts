@@ -159,10 +159,36 @@ export type InvoiceKTIRowT = {
     operation?: string;
 };
 
+export type CertificateRowT = {
+    blNo: string;
+    rNo: string;
+    agreementNo: string;
+    contract: ContractT;
+    seller: SellerT;
+    amount: {
+        placesRemain: number;
+        placesTotal: number;
+    };
+    product: ProductionT;
+    consignee: ConsigneeT;
+    coNo: string;
+    hcNo: string;
+    iuuNo: string;
+    country: string;
+    date: string;
+    index: string;
+};
+
 // utilstype
 export type OperationT = 'export' | 'export_storage';
 
-export type CommonRowT = (ExportRowT | InnerRowT | MateRowT | InvoiceKTIRowT) & {
+export type CommonRowT = (
+    | ExportRowT
+    | InnerRowT
+    | MateRowT
+    | InvoiceKTIRowT
+    | CertificateRowT
+) & {
     terms?: string;
 };
 

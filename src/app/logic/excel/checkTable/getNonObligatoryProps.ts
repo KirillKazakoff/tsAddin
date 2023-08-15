@@ -24,6 +24,7 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: string) => {
             'dateAccountSent',
             'invoiceNo',
         ],
+        certificates: ['coNo', 'hcNo', 'iuuNo', 'date', 'placesRemain'],
     };
 
     if (row.terms === 'FCA') {
@@ -37,6 +38,9 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: string) => {
     }
     if (tableName.includes('StorageInvoice')) {
         return nonObligatoryProps.storageInvoices;
+    }
+    if (tableName.includes('Certificates')) {
+        return nonObligatoryProps.certificates;
     }
     return nonObligatoryProps.inner;
 };
