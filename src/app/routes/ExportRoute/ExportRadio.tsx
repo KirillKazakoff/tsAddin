@@ -12,7 +12,7 @@ export const ExportRadio = observer(() => {
         exportContractStore.setOperation(value);
     };
 
-    if (exportContractStore.terms === 'FCA') return null;
+    if (exportContractStore.firstRowTerms === 'FCA') return null;
 
     return (
         <div className='export-radio'>

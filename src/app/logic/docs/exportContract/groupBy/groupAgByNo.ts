@@ -9,7 +9,7 @@ import { AgreementT, AgreementsT, initAgreement } from './initAgreement';
 import { groupify } from '../../../utils/groupify';
 
 export const groupAgByNo = () => {
-    const table = exportContractStore.getCurrentTable();
+    const table = exportContractStore.currentTable;
 
     const agreements = table.reduce<AgreementsT>((total, row) => {
         const clonedRow = _.cloneDeep(row);

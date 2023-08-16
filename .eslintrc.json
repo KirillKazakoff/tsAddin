@@ -34,6 +34,8 @@
         "react/jsx-curly-brace-presence": "off",
         "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-expressions": "off",
+        "no-unused-expressions": "off",
         "no-unused-vars": "off",
         "jsx-a11y/label-has-associated-control": "off",
         "jsx-a11y/no-noninteractive-element-interactions": "off",
@@ -127,11 +129,3 @@
         ]
     }
 }
-// {
-//     "plugins": [
-//         "office-addins"
-//     ],
-//     "extends": [
-//         "plugin:office-addins/react"
-//     ]
-// }

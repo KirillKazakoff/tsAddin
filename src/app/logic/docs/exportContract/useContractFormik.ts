@@ -15,25 +15,19 @@ export const useContractFormik = () => {
     type FormValuesT = typeof initialFields;
 
     const validate = (values: FormValuesT) => {
-        const { terms } = exportContractStore;
+        const { currentTerms: terms } = exportContractStore;
         const errors: { [key: string]: string } = {};
 
         if (!values.podpisant) {
             errors.podpisant = 'valueMissing';
         }
-        // if (!values.declaration) {
-        //     errors.declaration = 'valueMissing';
-        // }
-
-        if (!terms) {
-            delete errors.declaration;
-            delete errors.departureDate;
-        }
-        if (terms && !terms.includes('CFR')) {
-            delete errors.departureDate;
-        }
-        if (terms === 'FCA' && !values.departureDate) {
+        if ((terms === 'FCA' || terms.includes('CFR')) && !values.departureDate) {
             errors.departureDate = 'valueMissing';
+        }
+        // if export exw closed
+        const isEXWClosed = exportContractStore.currentAgreementRecord.terms === 'EXW';
+        if (isEXWClosed && !values.declaration) {
+            errors.declaration = 'valueMissing';
         }
 
         mySessionStorage.setItem('exportContract', values);

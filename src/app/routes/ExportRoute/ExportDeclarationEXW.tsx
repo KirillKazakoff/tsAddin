@@ -4,8 +4,8 @@ import exportContractStore from '../../stores/docsStores/exportContractStore';
 import InputText from '../../components/Form/InputText';
 
 export const ExportDeclarationEXW = observer(() => {
-    if (exportContractStore.terms !== 'EXW') return null;
     if (exportContractStore.operation !== 'export') return null;
+    if (exportContractStore.currentTerms !== 'EXW') return null;
 
     return (
         <InputText

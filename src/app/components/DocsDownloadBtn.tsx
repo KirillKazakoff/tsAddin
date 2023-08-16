@@ -5,13 +5,16 @@ type PropsT = {
     title: string;
     onClick: () => Promise<void>;
     isPreventDefault?: boolean;
+    cls?: string;
 };
 
 export default function DocsDownloadBtn(props: PropsT) {
-    const { title, onClick, isPreventDefault } = props;
+    const {
+        title, onClick, isPreventDefault, cls,
+    } = props;
     const { status, onLoad } = useLoader(onClick, isPreventDefault);
 
-    let className = 'btn docs-all__btn';
+    let className = `btn docs-all__btn ${cls}`;
     className = status === 'loading' ? `${className} doc--loading` : className;
 
     return (
@@ -26,4 +29,5 @@ export default function DocsDownloadBtn(props: PropsT) {
 
 DocsDownloadBtn.defaultProps = {
     isPreventDefault: false,
+    cls: '',
 };

@@ -9,8 +9,6 @@ import { AssortimentSection } from './AssortimentSection';
 import { InvoiceKTISection } from './InvoiceKTISection';
 
 export const ExportRoute = observer(() => {
-    const table = exportContractStore.getCurrentTable();
-
     if (excelSyncStore.isLoading) return null;
 
     let ExportSection = () => (
@@ -21,14 +19,14 @@ export const ExportRoute = observer(() => {
             <InvoiceKTISection />
         </>
     );
-    if (table.length === 0) {
+    if (exportContractStore.currentTable.length === 0) {
         ExportSection = () => (
             <div className='docs__form docs__form--empty'>
                 {`Таблица ${exportContractStore.operation} пуста`}
             </div>
         );
     }
-    if (exportContractStore.terms === 'FCA') {
+    if (exportContractStore.firstRowTerms === 'FCA') {
         exportContractStore.setOperation('export');
         ExportSection = ExportContractSection;
     }

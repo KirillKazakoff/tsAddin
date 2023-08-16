@@ -8,6 +8,9 @@ export const useInitContractSection = () => {
     const formik = useContractFormik();
     const agreementObj = groupAgByNo();
     const agreements = Object.values(agreementObj);
+    const currentAgreement = agreements.find(
+        (a) => a.record.agreementNo === exportContractStore.agreementNo,
+    );
 
     const onLoad = async (agreement: AgreementT) => {
         const { isValid, values } = formik.formRef.current;
@@ -20,20 +23,20 @@ export const useInitContractSection = () => {
         await formik.onSubmit(values);
         await createExportContractDoc(agreement);
 
-        if (exportContractStore.terms === 'EXW') {
+        if (exportContractStore.currentTerms === 'EXW') {
             formik.formRef.current.setFieldValue('declaration', '');
         }
     };
+    const onLoadHandler = async () => onLoad(currentAgreement);
 
-    // useEffect(() => {
-    //     formik.formRef.current.handleSubmit();
-    // }, []);
+    const title = `Контракт №${currentAgreement?.record?.id}`;
 
-    const title = exportContractStore.terms === 'FCA'
-        ? 'Экспорт Контракт(FCA)'
-        : 'Экспорт Контракт';
-
-    const initObj = { onLoad, agreements, title };
+    const initObj = {
+        onLoad: onLoadHandler,
+        agreements,
+        title,
+        currentAgreement,
+    };
     return {
         initObj,
         formik,

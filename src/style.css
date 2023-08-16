@@ -27,7 +27,6 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
@@ -147,8 +146,17 @@ b {
     border-color: black;
 }
 
+.doc-tab--active {
+    background-color: var(--yellow);
+}
+
 .doc--loading {
     background-color: aquamarine;
+}
+
+/* .docs-download--export */
+.docs-download--export {
+    margin-top: 10px;
 }
 
 /* request */
@@ -177,7 +185,12 @@ b {
     display: none;
 }
 
-.export__FCA {
+/* .export */
+.export-contract-form {
+    margin-top: 20px;
+}
+
+.export__date {
     margin-bottom: 10px;
 }
 
