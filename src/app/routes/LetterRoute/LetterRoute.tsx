@@ -21,7 +21,6 @@ export const LetterRoute = observer(() => {
                     <LetterMainFields />
                     <LetterExportFields />
                 </div>
-
                 <button type='submit' className='btn letter__btn'>
                     Создать письмо
                 </button>

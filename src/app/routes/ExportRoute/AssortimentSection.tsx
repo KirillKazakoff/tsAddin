@@ -1,8 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useInitAssortimentSection } from '../../logic/docs/assortiment/useInitAssortimentSection';
-import DocsDownloadBtn from '../../components/DocsDownloadBtn';
-import { Doc } from '../../components/Doc';
+
+import { Doc } from '../../components/Doc/Doc';
+import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 
 export const AssortimentSection = observer(() => {
     const initObj = useInitAssortimentSection();

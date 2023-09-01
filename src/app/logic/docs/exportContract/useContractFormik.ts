@@ -1,13 +1,15 @@
+/* eslint-disable no-param-reassign */
 import { FormikProps } from 'formik';
 import { useRef } from 'react';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
-import getErrorsDescription from '../../../components/Form/getErrorsDescription';
+import { getValidationError } from '../../../components/Form/getValidationError';
 import { OnSubmitT } from '../../../types/typesUtils';
 import { mySessionStorage } from '../../utils/sessionStorage';
+import { useRevalidate } from '../../../components/Form/useRevalidate';
 
 export const useContractFormik = () => {
     const storedValues = mySessionStorage.getItem('exportContract');
-    const initialFields = storedValues || {
+    const initialFields = {
         podpisant: '',
         departureDate: '',
         declaration: '',
@@ -15,24 +17,22 @@ export const useContractFormik = () => {
     type FormValuesT = typeof initialFields;
 
     const validate = (values: FormValuesT) => {
-        const { currentTerms: terms } = exportContractStore;
-        const errors: { [key: string]: string } = {};
-
-        if (!values.podpisant) {
-            errors.podpisant = 'valueMissing';
-        }
-        if ((terms === 'FCA' || terms.includes('CFR')) && !values.departureDate) {
-            errors.departureDate = 'valueMissing';
-        }
-        // if export exw closed
-        const isEXWClosed = exportContractStore.currentAgreementRecord.terms === 'EXW';
-        if (isEXWClosed && !values.declaration) {
-            errors.declaration = 'valueMissing';
-        }
-
         mySessionStorage.setItem('exportContract', values);
-
-        return getErrorsDescription(errors);
+        return getValidationError((errors) => {
+            const { currentTerms: terms } = exportContractStore;
+            if (!values.podpisant) {
+                errors.podpisant = 'valueMissing';
+            }
+            const isMissingETD = (terms === 'FCA' || terms.includes('CFR')) && !values.departureDate;
+            if (isMissingETD) {
+                errors.departureDate = 'valueMissing';
+            }
+            // if export exw closed
+            const isEXWClosed = exportContractStore.currentAgreementRecord.terms === 'EXW';
+            if (isEXWClosed && !values.declaration) {
+                errors.declaration = 'valueMissing';
+            }
+        });
     };
 
     const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
@@ -40,11 +40,12 @@ export const useContractFormik = () => {
     };
 
     const formRef = useRef<FormikProps<FormValuesT>>();
+    useRevalidate(formRef);
 
     return {
         onSubmit,
         validate,
-        initialFields,
+        initialFields: storedValues || initialFields,
         formRef,
     };
 };

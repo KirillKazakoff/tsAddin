@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { Doc } from '../../components/Doc';
-import DocsDownloadBtn from '../../components/DocsDownloadBtn';
+import { Doc } from '../../components/Doc/Doc';
 import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
+import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 
 const BlSection = observer(() => {
     const initObj = useInitBlSection();

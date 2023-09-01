@@ -4,6 +4,7 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import excelSyncStore from '../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../stores/pageStatusStore.ts/pageStatusStore';
 import { useInitExcel } from '../logic/excel/useInitExcel';
+import { CheckBoxValidation } from '../components/CheckBoxValidation';
 
 export const LinkRoute = observer(() => {
     const { statusType } = pageStatusStore.status;
@@ -44,7 +45,9 @@ export const LinkRoute = observer(() => {
             <nav className='nav'>
                 {excelSyncStore.appStatus === 'Docs' ? <Docs /> : <Offer />}
             </nav>
+
             <Outlet />
+            <CheckBoxValidation />
         </div>
     );
 });

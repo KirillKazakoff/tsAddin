@@ -1,27 +1,56 @@
+import {
+    Field,
+    FieldHookConfig,
+    FieldInputProps,
+    useField,
+    useFormikContext,
+} from 'formik';
 import React from 'react';
+import Feedback from './Form/Feedback';
 
-type InputT = {
+type Props = FieldHookConfig<string> & {
     title: string;
-    setter: any;
-    checked: boolean;
+    wrapperCls?: string;
 };
 
-export default function CheckBox(props: InputT) {
-    const { title, setter, checked } = props;
+const CheckBoxComponent = ({
+    field,
+    checked,
+}: {
+    field: FieldInputProps<string>;
+    checked: boolean;
+}) => {
+    return (
+        <input
+            {...field}
+            type='checkbox'
+            className='input-checkbox'
+            checked={checked}
+        />
+    );
+};
 
-    const onChange = (e: any) => {
-        setter(e.currentTarget.checked);
-    };
+export default function CheckBox(props: Props) {
+    const [field, meta] = useField(props);
+    const { values } = useFormikContext() as any;
+    const invalidCls = meta.error && meta.touched ? 'form__control--invalid' : '';
 
     return (
-        <div className='input-wrapper'>
-            <span className='input-title'>{title}</span>
-            <input
-                checked={checked}
-                className='input-checkbox'
-                onChange={onChange}
+        <div
+            className={`form__control select-wrapper ${invalidCls} ${props.wrapperCls}`}
+        >
+            <span className='input-title'>{props.title}</span>
+            <Field
                 type='checkbox'
+                name={field.name}
+                checked={values[field.name]}
+                component={CheckBoxComponent}
             />
+            <Feedback name={props.name} />
         </div>
     );
 }
+
+CheckBox.defaultProps = {
+    wrapperCls: '',
+};

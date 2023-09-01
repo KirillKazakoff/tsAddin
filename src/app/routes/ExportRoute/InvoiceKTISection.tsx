@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Doc } from '../../components/Doc';
+import { Doc } from '../../components/Doc/Doc';
 import {
     groupInvoiceKTIByNo,
     InvoiceKTIT,

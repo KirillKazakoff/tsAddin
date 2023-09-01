@@ -1,5 +1,5 @@
 import React from 'react';
-import { Doc } from '../../components/Doc';
+import { Doc } from '../../components/Doc/Doc';
 import { ContractT } from '../../logic/docs/innerContract/groupByContractNo';
 
 type Props = { contracts: ContractT[]; onLoad: any };

@@ -4,7 +4,7 @@ import { useFormikContext } from 'formik';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPortZarubezh } from '../../components/Select/SelectPortZarubezh';
 import InputText from '../../components/Form/InputText';
-import CheckBoxFormik from '../../components/CheckBoxFormik';
+import CheckBox from '../../components/CheckBox';
 
 export const LetterMainFields = observer(() => {
     const context = useFormikContext<{ port: string; isExport: boolean }>();
@@ -16,7 +16,7 @@ export const LetterMainFields = observer(() => {
 
     return (
         <div className='letter__fields'>
-            <CheckBoxFormik
+            <CheckBox
                 wrapperCls='letter__checkbox'
                 title='Предложение на экспорт:'
                 name='isExport'

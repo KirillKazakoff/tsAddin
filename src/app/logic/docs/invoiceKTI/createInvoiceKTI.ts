@@ -16,7 +16,7 @@ const createInvoiceKTIStorage = async (invoice: InvoiceKTIT) => {
 };
 
 const createInvoiceKTIDischarge = async (invoice: InvoiceKTIT) => {
-    const book = await readTmp(pathObj.InvoiceKTIDischarge);
+    const book = await readTmp(pathObj.invoiceKTIDischarge);
     initInvoiceKTItmp(book, invoice);
     // prettier-ignore
     await mergeInvoiceKTICells(book, [[2, 6]]);

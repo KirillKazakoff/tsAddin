@@ -43,5 +43,5 @@ export const noPictureFound = (): PageStatusT => ({
 export const initPageStatus = (): PageStatusT => ({
     statusType: 'ok',
     title: 'Вернитесь назад',
-    desc: 'Возвращайтесь...',
+    desc: 'Возвращайтесь назад',
 });

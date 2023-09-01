@@ -4,11 +4,11 @@ import { Formik, Form } from 'formik';
 import { useInitRequestSection } from '../../logic/docs/innerContract/useInitRequestSection';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
-import DocsDownloadBtn from '../../components/DocsDownloadBtn';
 import { SelectTerms } from '../../components/Select/SelectTerms';
 import RequestList from './RequestList';
 import { ReiceNo } from './ReiceNo';
-import CheckBoxFormik from '../../components/CheckBoxFormik';
+import CheckBox from '../../components/CheckBox';
+import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 
 export const RequestSection = observer(() => {
     const { initObj, formik } = useInitRequestSection();
@@ -23,11 +23,9 @@ export const RequestSection = observer(() => {
         >
             <Form className='docs__form request-section-form'>
                 <h2 className='title request-section-title'>Заявки на договора</h2>
-
                 <h3 className='title request-title'>Заявка:</h3>
-
                 <div className='fields-wrapper'>
-                    <CheckBoxFormik title={'Только счет:'} name='isInvoiceOnly' />
+                    <CheckBox title={'Только счет:'} name='isInvoiceOnly' />
                     <ReiceNo />
                     <SelectTerms />
                     <SelectPortTamozhnya />

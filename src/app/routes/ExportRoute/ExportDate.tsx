@@ -5,7 +5,7 @@ import InputText from '../../components/Form/InputText';
 
 export const ExportDate = observer(() => {
     const { currentTerms: terms } = exportContractStore;
-    const title = 'ETD to port:';
+    const title = 'ETD порт:';
 
     const isCFRorFCA = terms && (terms.includes('CFR') || terms.includes('FCA'));
     if (!isCFRorFCA) return null;

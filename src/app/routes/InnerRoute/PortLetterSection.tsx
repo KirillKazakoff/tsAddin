@@ -3,13 +3,13 @@ import { observer } from 'mobx-react-lite';
 import { Form, Formik } from 'formik';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
-import DocsDownloadBtn from '../../components/DocsDownloadBtn';
-import CheckBoxFormik from '../../components/CheckBoxFormik';
+import CheckBox from '../../components/CheckBox';
 import InputText from '../../components/Form/InputText';
 import LetterList from './LetterList';
 import DischargeTerms from './DischargeTerms';
 import { useInitPortLetter } from '../../logic/docs/innerContract/useInitPortLetter';
 import { SelectTerms } from '../../components/Select/SelectTerms';
+import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 
 export const PortLetterSection = observer(() => {
     const { formik, initObj } = useInitPortLetter();
@@ -35,7 +35,7 @@ export const PortLetterSection = observer(() => {
                     <SelectPodpisant />
                     <SelectTerms name='termsPort' />
                     <DischargeTerms />
-                    <CheckBoxFormik title={'Включить картинки:'} name='isPictures' />
+                    <CheckBox title={'Включить картинки:'} name='isPictures' />
                 </div>
 
                 <h3 className='title port-letter-title'>Загрузить письма в порт</h3>

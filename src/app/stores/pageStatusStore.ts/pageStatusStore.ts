@@ -3,6 +3,7 @@ import { PageStatusT, initPageStatus } from './pageMessages';
 
 class PageStatusStore {
     status = initPageStatus();
+    isValidation = true;
 
     constructor() {
         makeAutoObservable(this);
@@ -14,6 +15,10 @@ class PageStatusStore {
 
     resetPageStatus() {
         this.status = initPageStatus();
+    }
+
+    setIsValidation(value: boolean) {
+        this.isValidation = value;
     }
 }
 

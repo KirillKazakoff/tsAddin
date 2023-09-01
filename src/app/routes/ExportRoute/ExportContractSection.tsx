@@ -6,7 +6,7 @@ import { AgreementList } from './AgreementList';
 import { ExportDate } from './ExportDate';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
 import { ExportDeclarationEXW } from './ExportDeclarationEXW';
-import DocsDownloadBtn from '../../components/DocsDownloadBtn';
+import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 
 export const ExportContractSection = observer(() => {
     const { formik, initObj } = useInitContractSection();

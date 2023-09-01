@@ -1,13 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import { LetterRoute } from './app/routes/LetterRoute/LetterRoute';
 import { LinkRoute } from './app/routes/LinkRoute';
 import NavigatorRoute from './app/routes/NavigatorRoute';
 import { PageStatusRoute } from './app/routes/ErrorRoute/PageStatusRoute';
 import { ExportRoute } from './app/routes/ExportRoute/ExportRoute';
 import { InnerRoute } from './app/routes/InnerRoute/InnerRoute';
-import { RequestRoute } from './app/routes/RequestRoute/RequestRoute';
+import { RequestNordmileRoute } from './app/routes/RequestNordmileRoute';
 
 export default function App() {
     return (
@@ -17,10 +16,8 @@ export default function App() {
                 <Route path='/' element={<LinkRoute />}>
                     <Route path='/export' element={<ExportRoute />} />
                     <Route path='/inner' element={<InnerRoute />} />
-
                     <Route path='/letter' element={<LetterRoute />} />
-                    <Route path='/request' element={<RequestRoute />} />
-
+                    <Route path='/request' element={<RequestNordmileRoute />} />
                     <Route path='/pageStatus' element={<PageStatusRoute />} />
                 </Route>
             </Routes>

@@ -1,12 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import DocsDownloadBtn from '../../components/DocsDownloadBtn';
-import { createRequestNordmile } from '../../logic/docs/innerContract/createRequestNordmile';
-import tablesStore from '../../stores/tablesStore/tablesStore';
-import { RequestSection } from '../InnerRoute/RequestSection';
+import { createRequestNordmile } from '../logic/docs/innerContract/createRequestNordmile';
+import tablesStore from '../stores/tablesStore/tablesStore';
+import { RequestSection } from './InnerRoute/RequestSection';
+import DocsDownloadBtn from '../components/Doc/DocsDownloadBtn';
 
-export const RequestRoute = observer(() => {
+export const RequestNordmileRoute = observer(() => {
     const requestNordmile = {
         onLoad: async () => {
             createRequestNordmile(tablesStore.nordmileT[0]);

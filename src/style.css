@@ -50,7 +50,10 @@ b {
 }
 
 .main-route {
+    display: flex;
+    flex-direction: column;
     padding: 10px;
+    min-height: 100vh;
 }
 
 /* .input */
@@ -246,4 +249,9 @@ b {
 
 .radio-wrapper input {
     cursor: pointer;
+}
+
+.checkbox-validation {
+    padding-top: 20px;
+    margin-top: auto;
 }

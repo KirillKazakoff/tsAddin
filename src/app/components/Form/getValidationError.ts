@@ -1,7 +1,8 @@
+import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import { messages } from './messagesValidation';
 
 /* eslint-disable no-param-reassign */
-export default function getErrorsDescription(errors: any) {
+function getErrorsDescription(errors: any) {
     const res = Object.entries(errors).reduce<{ [key: string]: any }>(
         (total, [key, value]) => {
             try {
@@ -17,3 +18,12 @@ export default function getErrorsDescription(errors: any) {
     );
     return res;
 }
+
+type ErrorsT = { [key: string]: string };
+
+export const getValidationError = (mutateErrorsCb: (errors: ErrorsT) => void) => {
+    let errors: ErrorsT = {};
+    mutateErrorsCb(errors);
+    if (!pageStatusStore.isValidation) errors = {};
+    return getErrorsDescription(errors);
+};
