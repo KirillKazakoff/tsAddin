@@ -15,6 +15,11 @@ import {
 } from './typesSP';
 
 export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'CFR (контейнер)';
+export type TableStatusT = {
+    statusType: 'ok' | 'notFilledTable';
+    title: string;
+    desc: string;
+};
 
 // Amount
 export type AmountT = {

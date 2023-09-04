@@ -1,4 +1,4 @@
-import { checkRowProps } from '../../../logic/excel/checkTable/checkRowProps';
+import { checkTable } from '../../../logic/excel/checkTable/checkTable';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { InvoiceKTIRowT } from '../../../types/typesTables';
 import tablesStore from '../../tablesStore/tablesStore';
@@ -42,13 +42,12 @@ export const setDischargeInvoices = (table: any[][]) => {
                 index: index.toString(),
             };
 
-            checkRowProps(rowObj, 'Discharge');
-
             totalObj.push(rowObj);
             return totalObj;
         },
         [],
     );
 
+    checkTable(transformedTable, 'dischargeInvoices');
     tablesStore.setTable.dischargeInvoices(transformedTable);
 };

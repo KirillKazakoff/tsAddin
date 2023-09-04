@@ -1,4 +1,4 @@
-import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
+import { checkTable } from '../../logic/excel/checkTable/checkTable';
 import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
 import { CertificateRowT } from '../../types/typesTables';
 import { selectSp } from '../spsStore/select';
@@ -46,11 +46,11 @@ export const setCertificates = (table: any[][]) => {
                 index: index.toString(),
             };
 
-            checkRowProps(rowObj, 'Certificates');
-
             totalObj.push(rowObj);
             return totalObj;
         },
         [],
     );
+
+    checkTable(transformedTable, 'certificates');
 };

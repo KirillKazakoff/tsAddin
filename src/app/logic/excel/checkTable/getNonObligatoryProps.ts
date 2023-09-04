@@ -1,6 +1,7 @@
+import type { TableKeyT } from '../../../stores/tablesStore/tablesStore';
 import { CommonRowT } from '../../../types/typesTables';
 
-export const getNonObligatoryProps = (row: CommonRowT, tableName: string) => {
+export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => {
     const nonObligatoryProps = {
         export: [
             'terms',
@@ -31,15 +32,15 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: string) => {
         nonObligatoryProps.export.push('blNo', 'portFrom');
     }
 
-    if (tableName.includes('Export')) return nonObligatoryProps.export;
-    if (tableName.includes('Mates')) return nonObligatoryProps.mates;
-    if (tableName.includes('Discharge')) {
+    if (tableName.includes('export')) return nonObligatoryProps.export;
+    if (tableName.includes('mates')) return nonObligatoryProps.mates;
+    if (tableName.includes('discharge')) {
         return nonObligatoryProps.dischargeInvoices;
     }
-    if (tableName.includes('StorageInvoice')) {
+    if (tableName.includes('storageInvoice')) {
         return nonObligatoryProps.storageInvoices;
     }
-    if (tableName.includes('Certificates')) {
+    if (tableName.includes('certificates')) {
         return nonObligatoryProps.certificates;
     }
     return nonObligatoryProps.inner;

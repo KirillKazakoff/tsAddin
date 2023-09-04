@@ -1,5 +1,5 @@
 import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
-import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
+import { checkTable } from '../../logic/excel/checkTable/checkTable';
 import { InnerRowT } from '../../types/typesTables';
 import { selectSp } from '../spsStore/select';
 import tablesStore from './tablesStore';
@@ -54,9 +54,9 @@ export const setInner = (table: any[][]) => {
         };
 
         totalObj.push(rowObj);
-        checkRowProps(rowObj, 'Inner');
         return totalObj;
     }, []);
 
+    checkTable(transformedTable, 'inner');
     tablesStore.setTable.inner(transformedTable);
 };

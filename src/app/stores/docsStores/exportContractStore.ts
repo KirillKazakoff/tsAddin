@@ -52,6 +52,10 @@ class ExportContractStore {
         if (this.currentTable.length === 0) return '';
         return this.currentTable[0].terms;
     }
+    get sectionStatus() {
+        if (this.operation === 'export') return tablesStore.status.export;
+        return tablesStore.status.exportStorage;
+    }
 }
 
 const exportContractStore = new ExportContractStore();
