@@ -10,8 +10,10 @@ import DischargeTerms from './DischargeTerms';
 import { useInitPortLetter } from '../../logic/docs/innerContract/useInitPortLetter';
 import { SelectTerms } from '../../components/Select/SelectTerms';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
+import { SectionErrorHOC } from '../../components/SectionErrorHOC';
+import tablesStore from '../../stores/tablesStore/tablesStore';
 
-export const PortLetterSection = observer(() => {
+const SectionComponent = observer(() => {
     const { formik, initObj } = useInitPortLetter();
 
     return (
@@ -23,7 +25,6 @@ export const PortLetterSection = observer(() => {
             validateOnMount
         >
             <Form className='docs__form port-letter-form'>
-                <h2 className='title port-letter-title'>Письма в порт</h2>
                 <h3>Письмо:</h3>
                 <div className='fields-wrapper'>
                     <InputText
@@ -48,3 +49,11 @@ export const PortLetterSection = observer(() => {
         </Formik>
     );
 });
+
+export const PortLetterSection = () => {
+    return (
+        <SectionErrorHOC status={tablesStore.status.inner} title='Письма в порт:'>
+            <SectionComponent />
+        </SectionErrorHOC>
+    );
+};

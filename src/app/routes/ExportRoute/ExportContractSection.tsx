@@ -15,7 +15,7 @@ const SectionComponent = observer(() => {
     return (
         <div className='export-section'>
             <div className='export-sectioin__choose'>
-                <h3>Выберите контракт:</h3>
+                <h3 className='mb0'>Выберите контракт:</h3>
                 <AgreementList agreements={initObj.agreements} />
             </div>
             {initObj.currentAgreement ? (
@@ -45,11 +45,8 @@ const SectionComponent = observer(() => {
 
 export const ExportContractSection = observer(() => {
     return (
-        <>
-            <h2>Контракт</h2>
-            <SectionErrorHOC status={exportContractStore.sectionStatus}>
-                <SectionComponent />
-            </SectionErrorHOC>
-        </>
+        <SectionErrorHOC status={exportContractStore.sectionStatus} title='Контракт'>
+            <SectionComponent />
+        </SectionErrorHOC>
     );
 });

@@ -120,7 +120,7 @@ b {
 .nav {
     display: flex;
     column-gap: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 /* docs */
@@ -254,4 +254,12 @@ b {
 .checkbox-validation {
     padding-top: 20px;
     margin-top: auto;
+}
+
+.mb0 {
+    margin-bottom: 0;
+}
+
+.error-route {
+    margin-bottom: 30px;
 }

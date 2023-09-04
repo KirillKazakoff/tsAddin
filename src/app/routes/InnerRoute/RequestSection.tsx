@@ -9,8 +9,10 @@ import RequestList from './RequestList';
 import { ReiceNo } from './ReiceNo';
 import CheckBox from '../../components/CheckBox';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
+import { SectionErrorHOC } from '../../components/SectionErrorHOC';
+import tablesStore from '../../stores/tablesStore/tablesStore';
 
-export const RequestSection = observer(() => {
+const SectionComponent = observer(() => {
     const { initObj, formik } = useInitRequestSection();
 
     return (
@@ -22,7 +24,6 @@ export const RequestSection = observer(() => {
             validateOnMount
         >
             <Form className='docs__form request-section-form'>
-                <h2 className='title request-section-title'>Заявки на договора</h2>
                 <h3 className='title request-title'>Заявка:</h3>
                 <div className='fields-wrapper'>
                     <CheckBox title={'Только счет:'} name='isInvoiceOnly' />
@@ -42,5 +43,16 @@ export const RequestSection = observer(() => {
                 />
             </Form>
         </Formik>
+    );
+});
+
+export const RequestSection = observer(() => {
+    return (
+        <SectionErrorHOC
+            status={tablesStore.status.inner}
+            title='Заявки на договора:'
+        >
+            <SectionComponent />
+        </SectionErrorHOC>
     );
 });

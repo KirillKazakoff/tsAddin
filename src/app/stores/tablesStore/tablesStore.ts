@@ -48,7 +48,6 @@ class TablesStore {
     };
     setStatus(status: TableStatusT, key: TableKeyT) {
         this.status[key] = status;
-        console.log(this.status[key].statusType);
     }
 }
 
