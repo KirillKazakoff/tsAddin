@@ -16,7 +16,7 @@ const initRequest = (record: InnerRowT) => ({
 export type RequestT = ReturnType<typeof initRequest>;
 
 export const groupContractByNameSort = (contract: ContractT) => {
-    contract.rows.forEach((row) => {
+    contract.rows.forEach(({ row }) => {
         const request = groupify<RequestT>(
             contract.requests,
             initRequest(row),

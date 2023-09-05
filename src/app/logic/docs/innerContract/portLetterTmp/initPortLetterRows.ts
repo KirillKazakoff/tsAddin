@@ -1,17 +1,28 @@
 /* eslint-disable no-param-reassign */
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
+import { mismatchKonosamentId } from '../../../../stores/pageStatusStore.ts/pageMessages';
+import pageStatusStore from '../../../../stores/pageStatusStore.ts/pageStatusStore';
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
-import { InnerRowT } from '../../../../types/typesTables';
+import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
 import { alignmentCenter, borderAll, styleRowCells } from '../../styleRowCells';
+import { ContractRowT } from '../groupByContractNo';
 
-export const initPortLetterRows = (rows: InnerRowT[], utils: CellUtilsT) => {
+export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT) => {
     const { ws } = utils;
     const cellName = 'Письмо_массив';
     const arrayCl = utils.getCell(cellName);
 
-    rows.forEach((r, i) => {
+    rows.forEach(({ row: r, mateRow }, i) => {
+        const date = mateRow?.date;
+        if (!date) {
+            pageStatusStore.setPageStatus(mismatchKonosamentId(r.konosament));
+            return;
+        }
         const cols = {
-            konosament: r.konosament,
+            konosament: `${r.konosament} от ${getExcelDateNumeric(
+                mateRow.date,
+                'ru',
+            )}`,
             product: `${r.product.ru.name} ${r.sort}`,
             vessel: r.vessel.ru.name,
             pack: `1/${r.pack}`,

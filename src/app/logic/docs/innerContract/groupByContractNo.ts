@@ -4,23 +4,22 @@ import {
     addToAmount,
     initAmount,
 } from '../../../stores/tablesStore/utils/initAmount';
-import { InnerRowT } from '../../../types/typesTables';
+import { InnerRowT, MateRowT } from '../../../types/typesTables';
 import { groupify } from '../../utils/groupify';
 import { RequestT, groupContractByNameSort } from './groupContractByNameSort';
 
 const initContract = (row: InnerRowT) => {
-    const rows: InnerRowT[] = [];
     return {
         record: row,
-        rows,
+        rows: <{ row: InnerRowT; mateRow: MateRowT }[]>[],
         priceTotal: initAmount(0, 2, 2),
         requests: <RequestT[]>[],
     };
 };
 
 export type ContractT = ReturnType<typeof initContract>;
-
 export type ContractsT = { [key: string]: ContractT };
+export type ContractRowT = ContractT['rows'][number];
 
 export const groupByContractNo = () => {
     const contracts = tablesStore.innerT.reduce<ContractsT>((total, row) => {
@@ -29,7 +28,13 @@ export const groupByContractNo = () => {
             initContract(row),
             row.contractNo,
         );
-        contract.rows.push(row);
+        const mateRow = tablesStore.matesT.find(
+            (r) => r.konosament === row.konosament,
+        );
+        // ошибка несоответствие номера кнс в таблицах обработать
+        // if (!mateRow) { pageStatusStore.setPageStatus(mismatchKonosamentId(row.konosament)); }
+
+        contract.rows.push({ mateRow, row });
 
         addToAmount(contract.priceTotal, row.amount.priceTotal.count);
         return total;

@@ -5,7 +5,8 @@ export type PageStatusTypeT =
     | 'transportNotFound'
     | 'picturesError'
     | 'unknownError'
-    | 'ok';
+    | 'ok'
+    | 'mismatchKonosamentId';
 
 export type PageStatusT = {
     statusType: PageStatusTypeT;
@@ -27,6 +28,11 @@ export const noPictureFound = (): PageStatusT => ({
     statusType: 'picturesError',
     title: 'Не могу загрузить картинки',
     desc: 'Проверьте наличие вкладки "Картинки"',
+});
+export const mismatchKonosamentId = (innerRowKnsId: string): PageStatusT => ({
+    statusType: 'mismatchKonosamentId',
+    title: 'Несоответствие номеров коносамента',
+    desc: `Коносамент с номером ${innerRowKnsId} не был найден в таблице Коносаменты - номер из таблицы Внутренний Рынок должен совпадать с номером в таблице Коносаменты`,
 });
 
 export const initPageStatus = (): PageStatusT => ({

@@ -14,7 +14,6 @@ export const SectionErrorHOC = observer(({ status, children, title }: Props) => 
     if (status.statusType !== 'ok') {
         return (
             <div className='error-route'>
-                <div>hdssd</div>
                 <h2>{title}</h2>
                 <h3 className='error-title mb0'>{status.title}</h3>
                 <div className='error-desc'>{status.desc}</div>
