@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import { useInitRequestSection } from '../../logic/docs/innerContract/useInitRequestSection';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
@@ -11,6 +11,7 @@ import CheckBox from '../../components/CheckBox';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
+import { Form } from '../../components/Form/Form';
 
 const SectionComponent = observer(() => {
     const { initObj, formik } = useInitRequestSection();

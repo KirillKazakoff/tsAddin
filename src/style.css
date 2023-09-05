@@ -263,3 +263,8 @@ b {
 .error-route {
     margin-bottom: 30px;
 }
+
+.invalid-highlight {
+    outline-offset: 5px;
+    outline: 2px red solid;
+}

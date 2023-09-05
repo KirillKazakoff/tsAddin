@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { AgreementList } from './AgreementList';
 import { ExportDate } from './ExportDate';
@@ -9,6 +9,7 @@ import { ExportDeclarationEXW } from './ExportDeclarationEXW';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
+import { Form } from '../../components/Form/Form';
 
 const SectionComponent = observer(() => {
     const { formik, initObj } = useInitContractSection();

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import {
     addToAmount,
@@ -31,8 +30,6 @@ export const groupByContractNo = () => {
         const mateRow = tablesStore.matesT.find(
             (r) => r.konosament === row.konosament,
         );
-        // ошибка несоответствие номера кнс в таблицах обработать
-        // if (!mateRow) { pageStatusStore.setPageStatus(mismatchKonosamentId(row.konosament)); }
 
         contract.rows.push({ mateRow, row });
 

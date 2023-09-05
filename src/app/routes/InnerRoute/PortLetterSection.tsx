@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import CheckBox from '../../components/CheckBox';
@@ -12,6 +12,7 @@ import { SelectTerms } from '../../components/Select/SelectTerms';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
+import { Form } from '../../components/Form/Form';
 
 const SectionComponent = observer(() => {
     const { formik, initObj } = useInitPortLetter();

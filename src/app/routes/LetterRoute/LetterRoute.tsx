@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import { useInitLetter } from '../../logic/letter/useInitLetter';
 import { LetterExportFields } from './LetterExportFields';
 import { LetterMainFields } from './LetterMainFields';
+import { Form } from '../../components/Form/Form';
 
 export const LetterRoute = observer(() => {
     const { onSubmit, formik } = useInitLetter();
