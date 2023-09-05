@@ -6,8 +6,10 @@ import {
     InvoiceKTIT,
 } from '../../logic/docs/invoiceKTI/groupInvoiceKTIByNo';
 import { createInvoiceKTI } from '../../logic/docs/invoiceKTI/createInvoiceKTI';
+import { SectionErrorHOC } from '../../components/SectionErrorHOC';
+import tablesStore from '../../stores/tablesStore/tablesStore';
 
-export const InvoiceKTISection = observer(() => {
+export const SectionComponent = observer(() => {
     const invoicesGrouped = groupInvoiceKTIByNo();
     const onLoad = async (invoice: InvoiceKTIT) => {
         await createInvoiceKTI(invoice);
@@ -29,8 +31,18 @@ export const InvoiceKTISection = observer(() => {
 
     return (
         <form className='docs__form kti-invoices-form'>
-            <h2 className='title kti-invoices-title'>KTI Invoices</h2>
             <ul className='docs'>{invoices}</ul>
         </form>
     );
 });
+
+export const InvoiceKTISection = () => {
+    const { dischargeInvoices, storageInvoices } = tablesStore.status;
+    const status = dischargeInvoices.statusType !== 'ok' ? dischargeInvoices : storageInvoices;
+
+    return (
+        <SectionErrorHOC status={status} title='KTI Инвойсы'>
+            <SectionComponent />
+        </SectionErrorHOC>
+    );
+};

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
-import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
+import { checkTable } from '../../logic/excel/checkTable/checkTable';
 import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
 import { getExportRow } from './getExportRow';
 import tablesStore from './tablesStore';
@@ -43,7 +43,6 @@ export const setExport = (table: any[][]) => {
             };
 
             const rowObj = getExportRow(rowInit);
-            checkRowProps(rowObj, 'Export');
 
             totalObj.push(rowObj);
             return totalObj;
@@ -51,5 +50,6 @@ export const setExport = (table: any[][]) => {
         [],
     );
 
+    checkTable(transformedTable, 'export');
     tablesStore.setTable.export(transformedTable);
 };

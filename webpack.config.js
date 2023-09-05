@@ -1,6 +1,7 @@
 const devCerts = require('office-addin-dev-certs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const urlDev = 'https://localhost:3000/';
 const urlProd = 'https://kirillkazakoff.github.io/tsAddin/'; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
@@ -20,7 +21,7 @@ module.exports = async (env, options) => {
     const config = {
         devtool: 'source-map',
         entry: {
-            polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
+            polyfill: ["core-js/stable"],
             index: ['./src/index.tsx', './src/index.html'],
             commands: './src/app/commands/commands.ts',
         },
@@ -37,6 +38,7 @@ module.exports = async (env, options) => {
                         loader: 'babel-loader',
                         options: {
                             presets: ['@babel/preset-typescript'],
+                            plugins: ['react-refresh/babel'],
                         },
                     },
                 },
@@ -60,6 +62,7 @@ module.exports = async (env, options) => {
             ],
         },
         plugins: [
+            new ReactRefreshWebpackPlugin(),
             new CopyWebpackPlugin({
                 patterns: [
                     { from: 'assets', to: 'assets' },
@@ -82,7 +85,7 @@ module.exports = async (env, options) => {
             new HtmlWebpackPlugin({
                 filename: 'index.html',
                 template: './src/index.html',
-                chunks: ['index', 'polyfill'],
+                chunks: ['index'],
             }),
             new HtmlWebpackPlugin({
                 filename: 'commands.html',
@@ -100,13 +103,9 @@ module.exports = async (env, options) => {
                 type: "https",
                 options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
             },
-            // port: process.env.npm_package_config_dev_server_port || 3000,
             compress: true,
             port: 3000,
         },
-        // output: {
-        //     path: '/',
-        // }
     };
 
     return config;

@@ -1,5 +1,5 @@
 import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
-import { checkRowProps } from '../../logic/excel/checkTable/checkRowProps';
+import { checkTable } from '../../logic/excel/checkTable/checkTable';
 import { MateRowT } from '../../types/typesTables';
 import letterStore from '../letterStore/letterStore';
 import { selectSp } from '../spsStore/select';
@@ -10,7 +10,7 @@ export const setMates = (table: any[][]) => {
     table.shift();
     const excluded = excludeOfEmptyRows(table);
 
-    const mates = excluded.reduce<MateRowT[]>((totalObj, row, index) => {
+    const transformedTable = excluded.reduce<MateRowT[]>((totalObj, row, index) => {
         const [
             reice,
             konosament,
@@ -44,13 +44,14 @@ export const setMates = (table: any[][]) => {
             index: index.toString(),
         };
 
-        checkRowProps(rowObj, 'Mates');
         if (operation === 'Образец') return totalObj;
 
         totalObj.push(rowObj);
         return totalObj;
     }, []);
 
-    tablesStore.setTable.mates(mates);
-    letterStore.setTransport(mates[0].transport);
+    checkTable(transformedTable, 'mates');
+    tablesStore.setTable.mates(transformedTable);
+
+    letterStore.setTransport(transformedTable[0].transport);
 };
