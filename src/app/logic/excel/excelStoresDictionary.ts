@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/dot-notation */
-/* eslint-disable dot-notation */
 /* eslint-disable quote-props */
 import { setAgents } from '../../stores/spsStore/set/setAgents';
 import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
@@ -25,7 +23,7 @@ import { setInner } from '../../stores/tablesStore/setInner';
 import { setMates } from '../../stores/tablesStore/setMates';
 import { setNordmile } from '../../stores/tablesStore/setNordmile';
 
-const excelStoresDictionary = {
+export const excelStoresDictionary = {
     'Инвойсы хранение': {
         table: 'Инвойсы_хранение',
         setter: setStorageInvoices,
@@ -123,44 +121,3 @@ const excelStoresDictionary = {
 const ESD = excelStoresDictionary;
 
 export type ExcelStoresDictionaryT = Partial<typeof ESD>;
-
-// two stores initialize desc objects - for offer and docs add-in versions;
-// first goes sp dictionaries and then tables with data itself
-export const excelStoreOffer: ExcelStoresDictionaryT = {
-    'Транспорта': ESD['Транспорта'],
-    'Суда': ESD['Суда'],
-    'Продукция': ESD['Продукция'],
-    'SPPortZarubezh': ESD['SPPortZarubezh'],
-    'SPPort': ESD['SPPort'],
-    'Продавец': ESD['Продавец'],
-    'SPClientsSell': ESD['SPClientsSell'],
-    'SPTamozhnya': ESD['SPTamozhnya'],
-    'Внутренний рынок': ESD['Внутренний рынок'],
-    'Коносаменты': ESD['Коносаменты'],
-    'Nordmile': ESD['Nordmile'],
-};
-
-export const excelStoreDocs: ExcelStoresDictionaryT = {
-    'Транспорта': ESD['Транспорта'],
-    'Суда': ESD['Суда'],
-    'Продавец': ESD['Продавец'],
-    'SP_Consignee': ESD['SP_Consignee'],
-    'Продукция': ESD['Продукция'],
-    'SPPortZarubezh': ESD['SPPortZarubezh'],
-    'SPTamozhnya': ESD['SPTamozhnya'],
-    'SPContract': ESD['SPContract'],
-    'SPPodpisant': ESD['SPPodpisant'],
-    'SPAgent': ESD['SPAgent'],
-    'SPRekvizitBankProdavec': ESD['SPRekvizitBankProdavec'],
-    'SPClientsSell': ESD['SPClientsSell'],
-    'SPPort': ESD['SPPort'],
-    'SPPackage': ESD['SPPackage'],
-    'SPSortAssortiment': ESD['SPSortAssortiment'],
-    'Коносаменты': ESD['Коносаменты'],
-    'Экспорт': ESD['Экспорт'],
-    'Экспорт Хранение': ESD['Экспорт Хранение'],
-    'Внутренний рынок': ESD['Внутренний рынок'],
-    'Инвойсы выгрузка': ESD['Инвойсы выгрузка'],
-    'Инвойсы хранение': ESD['Инвойсы хранение'],
-    'Сертификаты': ESD['Сертификаты'],
-};

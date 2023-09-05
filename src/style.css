@@ -98,6 +98,10 @@ b {
 }
 
 /* .letter__fields */
+.letter__form {
+    margin-top: 20px;
+}
+
 .letter__fields {
     display: flex;
     flex-direction: column;

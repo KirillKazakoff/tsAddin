@@ -1,18 +1,15 @@
+/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import {
     ExcelStoresDictionaryT,
-    excelStoreDocs,
-    excelStoreOffer,
+    excelStoresDictionary,
 } from './excelStoresDictionary';
 import { initExcelImages } from './initExcelImages';
 import { InitRangeBoundT, initRange as initRangeUnbound } from './utils/initRange';
 
-const getExistedStores = (
-    stores: ExcelStoresDictionaryT,
-    context: Excel.RequestContext,
-) => {
-    return Object.entries(stores).reduce<ExcelStoresDictionaryT>(
+const getExistedStores = (context: Excel.RequestContext) => {
+    return Object.entries(excelStoresDictionary).reduce<ExcelStoresDictionaryT>(
         (total, [key, store]) => {
             const storeWS = context.workbook.worksheets.items.find(
                 (item) => item.name === key,
@@ -30,23 +27,25 @@ const getExistedStores = (
     );
 };
 
-const initStores = async (
-    context: Excel.RequestContext,
-    excelStores: ExcelStoresDictionaryT,
-) => {
+const initStores = async (context: Excel.RequestContext) => {
     const { worksheets } = context.workbook;
     const initRange: InitRangeBoundT = initRangeUnbound.bind(this, worksheets);
     context.workbook.load('name');
     context.workbook.worksheets.load('items');
 
     await context.sync();
-    const existingStores = getExistedStores(excelStores, context);
+    const existingStores = getExistedStores(context);
 
+    // eslint-disable-next-line array-callback-return, consistent-return
     const storeObjects = Object.entries(existingStores).map(([key, store]) => {
-        return {
-            range: initRange(key, store.table),
-            setter: store.setter,
-        };
+        try {
+            return {
+                range: initRange(key, store.table),
+                setter: store.setter,
+            };
+        } catch (e) {
+            console.log(key);
+        }
     });
 
     await context.sync();
@@ -62,12 +61,12 @@ export const initStoresOnFilename = async (context: Excel.RequestContext) => {
     await context.sync();
     const isOffer = context.workbook.name.includes('Письмо суточные');
 
+    await initStores(context);
+
     if (isOffer) {
-        await initStores(context, excelStoreOffer);
         excelSyncStore.setAppStatus('Offer');
     } else {
         await initExcelImages(context);
-        await initStores(context, excelStoreDocs);
         excelSyncStore.setAppStatus('Docs');
     }
 };
