@@ -7,11 +7,9 @@ import { ExportDepartureDate } from './ExportDepartureDate';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
 import { ExportDeclarationEXW } from './ExportDeclarationEXW';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
-import exportContractStore from '../../stores/docsStores/exportContractStore';
-import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import { Form } from '../../components/Form/Form';
 
-const SectionComponent = observer(() => {
+export const ExportContractSection = observer(() => {
     const { formik, initObj } = useInitContractSection();
     return (
         <div className='export-section'>
@@ -41,13 +39,5 @@ const SectionComponent = observer(() => {
                 </Formik>
             ) : null}
         </div>
-    );
-});
-
-export const ExportContractSection = observer(() => {
-    return (
-        <SectionErrorHOC status={exportContractStore.sectionStatus} title='Контракт'>
-            <SectionComponent />
-        </SectionErrorHOC>
     );
 });

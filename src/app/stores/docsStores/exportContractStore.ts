@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from 'mobx';
 import { OperationT } from '../../types/typesTables';
 import { initPodpisant } from '../initStoreObjects';

@@ -30,30 +30,34 @@ export const setStorageInvoices = (table: any[][]) => {
                 dateAccountSent,
             ] = row;
 
-            const rowObj: InvoiceKTIRowT = {
-                blNo,
-                agreementNo,
-                invoiceNo,
-                seller: selectSp.seller(seller),
-                vessel: selectSp.vessel(vessel),
-                product: selectSp.product(product),
-                dateStorageStart,
-                dateStorageEnd,
-                dateAccountSent,
-                dateInvoice,
-                amount: {
-                    placesTotal,
-                    price,
-                    priceTotal,
-                    days,
-                    operationResult,
-                },
-                operation,
-                index: index.toString(),
-            };
+            try {
+                const rowObj: InvoiceKTIRowT = {
+                    blNo,
+                    agreementNo,
+                    invoiceNo,
+                    seller: selectSp.seller(seller),
+                    vessel: selectSp.vessel(vessel),
+                    product: selectSp.product(product),
+                    dateStorageStart,
+                    dateStorageEnd,
+                    dateAccountSent,
+                    dateInvoice,
+                    amount: {
+                        placesTotal,
+                        price,
+                        priceTotal,
+                        days,
+                        operationResult,
+                    },
+                    operation,
+                    index: index.toString(),
+                };
 
-            totalObj.push(rowObj);
-            return totalObj;
+                totalObj.push(rowObj);
+                return totalObj;
+            } catch (e) {
+                return totalObj;
+            }
         },
         [],
     );

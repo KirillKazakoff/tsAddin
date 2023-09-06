@@ -37,15 +37,19 @@ export const setExport = (table: any[][]) => {
                 id,
             ] = row;
 
-            // prettier-ignore
-            const rowInit: ExportInitRowT = {
-                contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, terms, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index,
-            };
+            try {
+                // prettier-ignore
+                const rowInit: ExportInitRowT = {
+                    contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, terms, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index,
+                };
 
-            const rowObj = getExportRow(rowInit);
+                const rowObj = getExportRow(rowInit);
 
-            totalObj.push(rowObj);
-            return totalObj;
+                totalObj.push(rowObj);
+                return totalObj;
+            } catch (e) {
+                return totalObj;
+            }
         },
         [],
     );

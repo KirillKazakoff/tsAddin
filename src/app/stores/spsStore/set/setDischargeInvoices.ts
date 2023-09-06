@@ -25,25 +25,29 @@ export const setDischargeInvoices = (table: any[][]) => {
                 priceTotal,
             ] = row;
 
-            const rowObj: InvoiceKTIRowT = {
-                agreementNo,
-                invoiceNo,
-                blNo,
-                seller: selectSp.seller(seller),
-                vessel: selectSp.vessel(vessel),
-                product: selectSp.product(product),
-                dateDischarge,
-                dateInvoice,
-                amount: {
-                    price,
-                    placesTotal,
-                    priceTotal,
-                },
-                index: index.toString(),
-            };
+            try {
+                const rowObj: InvoiceKTIRowT = {
+                    agreementNo,
+                    invoiceNo,
+                    blNo,
+                    seller: selectSp.seller(seller),
+                    vessel: selectSp.vessel(vessel),
+                    product: selectSp.product(product),
+                    dateDischarge,
+                    dateInvoice,
+                    amount: {
+                        price,
+                        placesTotal,
+                        priceTotal,
+                    },
+                    index: index.toString(),
+                };
 
-            totalObj.push(rowObj);
-            return totalObj;
+                totalObj.push(rowObj);
+                return totalObj;
+            } catch (e) {
+                return totalObj;
+            }
         },
         [],
     );

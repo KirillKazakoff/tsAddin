@@ -7,17 +7,20 @@ import { ExportContractSection } from './ExportContractSection';
 import { ExportRadio } from './ExportRadio';
 import { AssortimentSection } from './AssortimentSection';
 import { InvoiceKTISection } from './InvoiceKTISection';
+import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 
 export const ExportRoute = observer(() => {
     if (excelSyncStore.isLoading) return null;
 
     let ExportSection = () => (
-        <>
-            <BlSection />
-            <ExportContractSection />
-            <AssortimentSection />
-            <InvoiceKTISection />
-        </>
+        <SectionErrorHOC status={exportContractStore.sectionStatus} title=''>
+            <>
+                <BlSection />
+                <ExportContractSection />
+                <AssortimentSection />
+                <InvoiceKTISection />
+            </>
+        </SectionErrorHOC>
     );
     if (exportContractStore.currentTable.length === 0) {
         ExportSection = () => (

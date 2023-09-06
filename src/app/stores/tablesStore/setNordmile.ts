@@ -24,25 +24,29 @@ export const setNordmile = (table: any[][]) => {
             paymentDate,
         ] = row;
 
-        const rowObj: NordmileRowT = {
-            contractNo,
-            contractDate,
-            seller: selectSp.seller(seller),
-            buyer,
-            producer,
-            product,
-            pack,
-            amount: {
-                placesTotal: initAmount(placesTotal, 2, 2),
-                price: initAmount(price, 2, 2),
-                priceTotal: initAmount(priceTotal, 2, 2),
-            },
-            bankSeller,
-            paymentDate,
-        };
+        try {
+            const rowObj: NordmileRowT = {
+                contractNo,
+                contractDate,
+                seller: selectSp.seller(seller),
+                buyer,
+                producer,
+                product,
+                pack,
+                amount: {
+                    placesTotal: initAmount(placesTotal, 2, 2),
+                    price: initAmount(price, 2, 2),
+                    priceTotal: initAmount(priceTotal, 2, 2),
+                },
+                bankSeller,
+                paymentDate,
+            };
 
-        totalObj.push(rowObj);
-        return totalObj;
+            totalObj.push(rowObj);
+            return totalObj;
+        } catch (e) {
+            return totalObj;
+        }
     }, []);
 
     tablesStore.setTable.nordmile(requests);

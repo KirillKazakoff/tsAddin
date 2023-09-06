@@ -1,11 +1,12 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useInitAssortimentSection } from '../../logic/docs/assortiment/useInitAssortimentSection';
-
 import { Doc } from '../../components/Doc/Doc';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
+import tablesStore from '../../stores/tablesStore/tablesStore';
+import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 
-export const AssortimentSection = observer(() => {
+export const SectionComponent = observer(() => {
     const initObj = useInitAssortimentSection();
     const { onLoad, onLoadAll, samplesArr } = initObj;
 
@@ -25,8 +26,6 @@ export const AssortimentSection = observer(() => {
 
     return (
         <form className='docs__form assortiment-form'>
-            <h2>Ассортимент и Образцы</h2>
-
             <div className='assortiment__wrapper'>
                 <div className='assortiment__body'>
                     <h3>Ассортимент:</h3>
@@ -48,3 +47,14 @@ export const AssortimentSection = observer(() => {
         </form>
     );
 });
+
+export const AssortimentSection = () => {
+    const { export: exportS, exportStorage } = tablesStore.status;
+    const status = exportS.statusType !== 'ok' ? exportS : exportStorage;
+
+    return (
+        <SectionErrorHOC status={status} title='Ассортимент и Образцы'>
+            <SectionComponent />
+        </SectionErrorHOC>
+    );
+};

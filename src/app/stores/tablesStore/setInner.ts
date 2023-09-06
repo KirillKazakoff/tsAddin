@@ -30,31 +30,35 @@ export const setInner = (table: any[][]) => {
             paymentDate,
         ] = row;
 
-        const rowObj: InnerRowT = {
-            buyer: selectSp.clientRu(client),
-            seller: selectSp.seller(seller),
-            contractNo,
-            contractDate,
-            vessel: selectSp.vessel(vessel),
-            product: selectSp.product(product),
-            transport: selectSp.transport(transport),
-            sort,
-            pack,
-            konosament,
-            amount: {
-                places: initAmount(placesTotal / pack, 0, 0),
-                placesTotal: initAmount(placesTotal, 1, 3),
-                price: initAmount(price, 2, 2),
-                priceTotal: initAmount(priceTotal, 2, 2),
-            },
-            bankSeller: bank,
-            deliveryDate,
-            paymentDate,
-            index: index.toString(),
-        };
+        try {
+            const rowObj: InnerRowT = {
+                buyer: selectSp.clientRu(client),
+                seller: selectSp.seller(seller),
+                contractNo,
+                contractDate,
+                vessel: selectSp.vessel(vessel),
+                product: selectSp.product(product),
+                transport: selectSp.transport(transport),
+                sort,
+                pack,
+                konosament,
+                amount: {
+                    places: initAmount(placesTotal / pack, 0, 0),
+                    placesTotal: initAmount(placesTotal, 1, 3),
+                    price: initAmount(price, 2, 2),
+                    priceTotal: initAmount(priceTotal, 2, 2),
+                },
+                bankSeller: bank,
+                deliveryDate,
+                paymentDate,
+                index: index.toString(),
+            };
 
-        totalObj.push(rowObj);
-        return totalObj;
+            totalObj.push(rowObj);
+            return totalObj;
+        } catch (e) {
+            return totalObj;
+        }
     }, []);
 
     checkTable(transformedTable, 'inner');

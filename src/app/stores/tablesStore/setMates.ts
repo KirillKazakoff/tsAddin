@@ -26,28 +26,32 @@ export const setMates = (table: any[][]) => {
             operation,
         ] = row;
 
-        const rowObj: MateRowT = {
-            transport,
-            vessel: selectSp.vessel(vessel),
-            product: selectSp.product(product.toLowerCase()),
-            reice,
-            konosament,
-            date,
-            company,
-            pack,
-            operation,
-            sort,
-            amount: {
-                places: initAmount(places, 0, 0),
-                total: initAmount(placesTotal, 0, 2),
-            },
-            index: index.toString(),
-        };
+        try {
+            const rowObj: MateRowT = {
+                transport,
+                vessel: selectSp.vessel(vessel),
+                product: selectSp.product(product.toLowerCase()),
+                reice,
+                konosament,
+                date,
+                company,
+                pack,
+                operation,
+                sort,
+                amount: {
+                    places: initAmount(places, 0, 0),
+                    total: initAmount(placesTotal, 0, 2),
+                },
+                index: index.toString(),
+            };
 
-        if (operation === 'Образец') return totalObj;
+            if (operation === 'Образец') return totalObj;
 
-        totalObj.push(rowObj);
-        return totalObj;
+            totalObj.push(rowObj);
+            return totalObj;
+        } catch (e) {
+            return totalObj;
+        }
     }, []);
 
     checkTable(transformedTable, 'mates');

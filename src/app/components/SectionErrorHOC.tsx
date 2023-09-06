@@ -25,9 +25,9 @@ export const SectionErrorHOC = observer(({ status, children, title }: Props) => 
     if (!html) return null;
 
     return (
-        <>
-            <h2>{title}</h2>
+        <div className='section__wrapper'>
+            <h2 className='section__title'>{title}</h2>
             {children}
-        </>
+        </div>
     );
 });
