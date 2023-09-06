@@ -6,7 +6,7 @@ import {
     excelStoresDictionary,
 } from './excelStoresDictionary';
 import { initExcelImages } from './initExcelImages';
-import { InitRangeBoundT, initRange as initRangeUnbound } from './utils/initRange';
+import { initRange } from './utils/initRange';
 
 const getExistedStores = (context: Excel.RequestContext) => {
     return Object.entries(excelStoresDictionary).reduce<ExcelStoresDictionaryT>(
@@ -14,9 +14,18 @@ const getExistedStores = (context: Excel.RequestContext) => {
             const storeWS = context.workbook.worksheets.items.find(
                 (item) => item.name === key,
             );
+            const table = context.workbook.tables.items.find(
+                (item) => item.name === store.table,
+            );
+
             if (!storeWS) {
-                // eslint-disable-next-line no-console
-                console.log(`В excel-книге нет Листа с названием ${key}`);
+                console.warn(`В excel-книге нет Листа с названием ${key}`);
+                return total;
+            }
+            if (!table) {
+                console.error(
+                    `В листе ${key} не удалось найти диапазон значений таблицы по названию ${store.table}`,
+                );
                 return total;
             }
 
@@ -28,24 +37,20 @@ const getExistedStores = (context: Excel.RequestContext) => {
 };
 
 const initStores = async (context: Excel.RequestContext) => {
-    const { worksheets } = context.workbook;
-    const initRange: InitRangeBoundT = initRangeUnbound.bind(this, worksheets);
-    context.workbook.load('name');
-    context.workbook.worksheets.load('items');
+    const { worksheets, tables } = context.workbook;
+    context.workbook.load('tables');
+    worksheets.load('items');
+    tables.load('items');
 
     await context.sync();
+
     const existingStores = getExistedStores(context);
 
-    // eslint-disable-next-line array-callback-return, consistent-return
     const storeObjects = Object.entries(existingStores).map(([key, store]) => {
-        try {
-            return {
-                range: initRange(key, store.table),
-                setter: store.setter,
-            };
-        } catch (e) {
-            console.log(key);
-        }
+        return {
+            range: initRange(worksheets, key, store.table),
+            setter: store.setter,
+        };
     });
 
     await context.sync();

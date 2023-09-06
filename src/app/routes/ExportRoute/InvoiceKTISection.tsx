@@ -37,8 +37,17 @@ export const SectionComponent = observer(() => {
 });
 
 export const InvoiceKTISection = () => {
-    const { dischargeInvoices, storageInvoices } = tablesStore.status;
-    const status = dischargeInvoices.statusType !== 'ok' ? dischargeInvoices : storageInvoices;
+    const {
+        dischargeInvoices,
+        storageInvoices,
+        export: exportS,
+        exportStorage,
+    } = tablesStore.status;
+
+    let status = dischargeInvoices.statusType !== 'ok' ? dischargeInvoices : storageInvoices;
+    if (status.statusType === 'ok') {
+        status = exportS.statusType !== 'ok' ? exportS : exportStorage;
+    }
 
     return (
         <SectionErrorHOC status={status} title='KTI Инвойсы'>
