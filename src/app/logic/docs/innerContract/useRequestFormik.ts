@@ -19,10 +19,10 @@ export const useRequestFormik = () => {
 
     type FormValuesT = typeof initialFields;
 
-    const validate = (values: FormValuesT) => {
-        mySessionStorage.setItem('request', values);
+    const validate = (formValues: FormValuesT) => {
+        mySessionStorage.setItem('request', formValues);
 
-        return getValidationError((errors) => {
+        return getValidationError(formValues, (errors, values) => {
             if (!values.terms) {
                 errors.terms = 'valueMissing';
             }

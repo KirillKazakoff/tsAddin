@@ -21,9 +21,18 @@ function getErrorsDescription(errors: any) {
 
 type ErrorsT = { [key: string]: string };
 
-export const getValidationError = (mutateErrorsCb: (errors: ErrorsT) => void) => {
+export const getValidationError = (
+    values: { [key: string]: string | boolean },
+    mutateErrorsCb: (errors: ErrorsT, valuesTrimed: any) => void,
+) => {
     let errors: ErrorsT = {};
-    mutateErrorsCb(errors);
+    const valuesTrimmed = Object.entries(values).reduce((total, [key, val]) => {
+        if (typeof val === 'boolean') return total;
+        total[key] = val.trim();
+        return total;
+    });
+
+    mutateErrorsCb(errors, valuesTrimmed);
     if (!pageStatusStore.isValidation) errors = {};
     return getErrorsDescription(errors);
 };

@@ -16,10 +16,12 @@ export const useContractFormik = () => {
     };
     type FormValuesT = typeof initialFields;
 
-    const validate = (values: FormValuesT) => {
-        mySessionStorage.setItem('exportContract', values);
-        return getValidationError((errors) => {
+    const validate = (formValues: FormValuesT) => {
+        mySessionStorage.setItem('exportContract', formValues);
+
+        return getValidationError(formValues, (errors, values) => {
             const { currentTerms: terms } = exportContractStore;
+
             if (!values.podpisant) {
                 errors.podpisant = 'valueMissing';
             }

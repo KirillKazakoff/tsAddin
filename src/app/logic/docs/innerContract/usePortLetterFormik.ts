@@ -25,10 +25,10 @@ export const usePortLetterFormik = () => {
 
     type FormValuesT = typeof initialFields;
 
-    const validate = (values: FormValuesT) => {
-        mySessionStorage.setItem('portLetter', values);
+    const validate = (formValues: FormValuesT) => {
+        mySessionStorage.setItem('portLetter', formValues);
 
-        return getValidationError((errors) => {
+        return getValidationError(formValues, (errors, values) => {
             if (!values.portRu) errors.portRu = 'valueMissing';
             if (!values.podpisant) errors.podpisant = 'valueMissing';
             if (!values.dateLetter) errors.dateLetter = 'valueMissing';

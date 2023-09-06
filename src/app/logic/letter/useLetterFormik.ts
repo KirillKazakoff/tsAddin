@@ -21,10 +21,10 @@ export const useLetterFormik = () => {
 
     type FormValuesT = typeof initialFields;
 
-    const validate = (values: FormValuesT) => {
-        mySessionStorage.setItem('letter', values);
+    const validate = (formValues: FormValuesT) => {
+        mySessionStorage.setItem('letter', formValues);
 
-        return getValidationError((errors) => {
+        return getValidationError(formValues, (errors, values) => {
             if (!values.port) errors.port = 'valueMissing';
             if (!values.arrivalVld) errors.arrivalVld = 'valueMissing';
             if (!values.payment) errors.payment = 'valueMissing';
