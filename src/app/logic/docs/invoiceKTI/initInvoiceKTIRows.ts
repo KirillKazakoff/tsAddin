@@ -58,7 +58,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
                 price: row.getCell(+colsHeader.price),
                 priceTotal: row.getCell(+colsHeader.priceTotal),
             };
-            rowObj.desc.style.alignment = { vertical: 'middle' };
+            rowObj.desc.style.alignment = { vertical: 'middle', wrapText: true };
             rowObj.price.style = {
                 border: { right: { style: 'thin' }, left: { style: 'thin' } },
                 alignment: { horizontal: 'right', vertical: 'middle' },

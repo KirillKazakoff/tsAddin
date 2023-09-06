@@ -22,7 +22,9 @@ export const LetterMainFields = observer(() => {
                 name='isExport'
             />
             <InputText
-                title='ETA Владивосток'
+                title={
+                    context.values.isExport ? 'ETD Владивосток' : 'ETA Владивосток'
+                }
                 placeholder={
                     context.values.isExport ? 'Дата отбытия' : 'Дата прибытия'
                 }

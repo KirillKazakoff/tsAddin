@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { AgreementList } from './AgreementList';
-import { ExportDate } from './ExportDate';
+import { ExportDepartureDate } from './ExportDepartureDate';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
 import { ExportDeclarationEXW } from './ExportDeclarationEXW';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
@@ -30,7 +30,7 @@ const SectionComponent = observer(() => {
                     <Form className='docs__form export-contract-form'>
                         <h3>{initObj.title}</h3>
                         <SelectPodpisant />
-                        <ExportDate />
+                        <ExportDepartureDate />
                         <ExportDeclarationEXW />
                         <DocsDownloadBtn
                             title='Загрузить контракт'

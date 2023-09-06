@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import InputText from '../../components/Form/InputText';
 
-export const ExportDate = observer(() => {
+export const ExportDepartureDate = observer(() => {
     const { currentTerms: terms } = exportContractStore;
     const title = 'ETD порт:';
 

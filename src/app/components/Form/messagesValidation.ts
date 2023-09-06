@@ -1,5 +1,6 @@
 type ValidationMsg = {
     valueMissing?: string;
+    formatMismatch?: string;
 };
 type MessagesT = { [key: string]: ValidationMsg };
 
@@ -54,8 +55,10 @@ export const messages: MessagesT = {
     },
     declaration: {
         valueMissing: 'Введите номер ВТД декларации',
+        formatMismatch: 'Неправильный формат (8 цифр/6 цифр/7 цифр)',
     },
     departureDate: {
         valueMissing: 'Введите дату отбытия Владивосток',
+        formatMismatch: 'Неправильный формат даты (2 цифры. 2 цифры. 4 цифры)',
     },
 };
