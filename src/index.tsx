@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import './app/logic/utils/consoleRedefine';
 
+console.log('hello thiis hell');
 const render = () => {
-    console.log('hello thiis hell');
     const container = document.getElementById('container');
     const root = createRoot(container);
     root.render(<App />);
