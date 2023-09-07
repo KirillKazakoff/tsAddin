@@ -40,6 +40,17 @@ export const ExportRadio = observer(() => {
                     />
                     <label htmlFor='export_storage'>Экспорт хранение</label>
                 </li>
+                <li className='radio-wrapper'>
+                    <input
+                        type='radio'
+                        id='certificates'
+                        name='operation'
+                        value='certificates'
+                        onChange={onChange}
+                        checked={operation === 'certificates'}
+                    />
+                    <label htmlFor='certificates'>Сертификаты</label>
+                </li>
             </ul>
         </div>
     );

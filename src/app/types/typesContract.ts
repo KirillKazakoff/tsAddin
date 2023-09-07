@@ -1,7 +1,9 @@
 import type { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
 import type { BlAmountT } from '../stores/tablesStore/utils/specialAmount';
 import { ConsigneeT } from './typesSP';
-import { ExportRowT, AmountT, AmountObjT } from './typesTables';
+import {
+    ExportRowT, AmountT, AmountObjT, CertificateRowT,
+} from './typesTables';
 
 // BlT
 export type BlGroupT = {
@@ -63,6 +65,7 @@ export type CostT = {
     record: ExportRowT;
     prices: AmountT[];
 };
+
 // VesselGroupT
 export type VesselGroupT = {
     subject: { [key: string]: SubjectT };
@@ -77,4 +80,14 @@ export type VesselsGroupT = {
     byVesselGroup: {
         [key: string]: VesselGroupT;
     };
+};
+
+// AgreementR
+export type AgreementR = {
+    rows: { row: CertificateRowT; exportRow: ExportRowT };
+    // blGrouped:
+};
+
+export type AgreementsR = {
+    [key: string]: AgreementR;
 };

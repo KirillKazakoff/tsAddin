@@ -34,7 +34,7 @@ export const initExportStorageContractRows = (
         ];
 
         const rowIndex = +arrayCl.cellEng.row + index;
-        ws.insertRow(+arrayCl.cellEng.row + index, rowArr).commit();
+        ws.insertRow(rowIndex, rowArr).commit();
 
         // styleRow
         const row = ws.getRow(rowIndex);

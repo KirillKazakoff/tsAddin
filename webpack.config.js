@@ -17,7 +17,8 @@ async function getHttpsOptions() {
 }
 
 module.exports = async (env, options) => {
-    const dev = options.mode === 'development';
+    const isDevelopment = options.mode === 'development';
+
     const config = {
         devtool: 'source-map',
         entry: {
@@ -38,7 +39,7 @@ module.exports = async (env, options) => {
                         loader: 'babel-loader',
                         options: {
                             presets: ['@babel/preset-typescript'],
-                            plugins: ['react-refresh/babel'],
+                            plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean),
                         },
                     },
                 },
@@ -62,7 +63,6 @@ module.exports = async (env, options) => {
             ],
         },
         plugins: [
-            new ReactRefreshWebpackPlugin(),
             new CopyWebpackPlugin({
                 patterns: [
                     { from: 'assets', to: 'assets' },
@@ -71,7 +71,7 @@ module.exports = async (env, options) => {
                         from: 'manifest*.xml',
                         to: '[name]' + '[ext]',
                         transform(content) {
-                            if (dev) {
+                            if (isDevelopment) {
                                 return content;
                             } else {
                                 return content
@@ -92,7 +92,8 @@ module.exports = async (env, options) => {
                 template: './src/app/commands/commands.html',
                 chunks: ['commands'],
             }),
-        ],
+            isDevelopment && new ReactRefreshWebpackPlugin(),
+        ].filter(Boolean),
         devtool: 'inline-source-map',
         devServer: {
             historyApiFallback: true,

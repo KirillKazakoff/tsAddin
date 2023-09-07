@@ -54,6 +54,7 @@ export const setCertificates = (table: any[][]) => {
                 return totalObj;
             }
         },
+
         [],
     );
 

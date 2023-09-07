@@ -1,7 +1,8 @@
-import {
+import type {
     InvoicesT,
     VesselsGroupT,
     ConsigneesGroupT,
+    AgreementsR,
 } from '../../../../types/typesContract';
 import { ExportRowT } from '../../../../types/typesTables';
 
@@ -19,6 +20,7 @@ export const initAgreement = (row: ExportRowT) => {
                 },
                 byVesselGroup: {},
             },
+            agreementsR: {},
         },
         priceTotal: 0,
     };
@@ -32,6 +34,7 @@ export type AgreementT = {
         invoices: InvoicesT;
         consignees: ConsigneesGroupT;
         vessels: VesselsGroupT;
+        agreementsR: AgreementsR;
     };
     priceTotal: number;
 };

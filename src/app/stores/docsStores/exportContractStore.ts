@@ -40,9 +40,9 @@ class ExportContractStore {
         );
     }
     get currentTable() {
-        return this.operation === 'export'
-            ? tablesStore.exportT
-            : tablesStore.exportStorageT;
+        if (this.operation === 'export') return tablesStore.exportT;
+        return tablesStore.exportStorageT;
+        // return tablesStore.certificatesT;
     }
     get currentTerms() {
         if (!this.agreementNo) return '';

@@ -185,7 +185,7 @@ export type CertificateRowT = {
 };
 
 // utilstype
-export type OperationT = 'export' | 'export_storage';
+export type OperationT = 'export' | 'export_storage' | 'certificates';
 
 export type CommonRowT = (
     | ExportRowT

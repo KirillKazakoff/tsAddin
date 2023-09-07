@@ -127,6 +127,10 @@ b {
     margin-bottom: 10px;
 }
 
+.nav-link {
+    text-align: center;
+}
+
 /* docs */
 .docs {
     display: flex;
