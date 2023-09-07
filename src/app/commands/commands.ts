@@ -2,10 +2,6 @@
 /* eslint-disable no-nested-ternary */
 /* global Office */
 
-Office.onReady(() => {
-    // If needed, Office.js is ready to be called
-});
-
 /**
  * Shows a notification when the add-in command is executed.
  * @param event
@@ -35,7 +31,11 @@ function getGlobal() {
                 : undefined;
 }
 
-const g = getGlobal() as any;
+Office.onReady(() => {
+    const g = getGlobal() as any;
 
-// The add-in command functions need to be available in global scope
-g.action = action;
+    // The add-in command functions need to be available in global scope
+    g.action = action;
+
+    // If needed, Office.js is ready to be called
+});

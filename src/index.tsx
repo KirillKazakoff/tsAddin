@@ -4,6 +4,7 @@ import App from './App';
 import './app/logic/utils/consoleRedefine';
 
 const render = () => {
+    console.log('hello this hell');
     const container = document.getElementById('container');
     const root = createRoot(container);
     root.render(<App />);
@@ -12,3 +13,5 @@ const render = () => {
 Office.onReady(() => {
     render();
 });
+
+Office.initialize = function () {};
