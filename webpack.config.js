@@ -1,7 +1,6 @@
 const devCerts = require('office-addin-dev-certs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const urlDev = 'https://localhost:3000/';
 const urlProd = 'https://kirillkazakoff.github.io/tsAddin/'; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
@@ -39,7 +38,6 @@ module.exports = async (env, options) => {
                         loader: 'babel-loader',
                         options: {
                             presets: ['@babel/preset-typescript'],
-                            plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean),
                         },
                     },
                 },
@@ -92,8 +90,7 @@ module.exports = async (env, options) => {
                 template: './src/app/commands/commands.html',
                 chunks: ['commands'],
             }),
-            isDevelopment && new ReactRefreshWebpackPlugin(),
-        ].filter(Boolean),
+        ],
         devtool: 'inline-source-map',
         devServer: {
             historyApiFallback: true,
