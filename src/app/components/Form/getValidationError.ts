@@ -26,11 +26,12 @@ export const getValidationError = (
     mutateErrorsCb: (errors: ErrorsT, valuesTrimed: any) => void,
 ) => {
     let errors: ErrorsT = {};
+
     const valuesTrimmed = Object.entries(values).reduce((total, [key, val]) => {
         if (typeof val === 'boolean') return total;
         total[key] = val.trim();
         return total;
-    });
+    }, {});
 
     mutateErrorsCb(errors, valuesTrimmed);
     if (!pageStatusStore.isValidation) errors = {};

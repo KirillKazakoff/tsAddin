@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import './app/logic/utils/consoleRedefine';
 
-console.log('hello thiis hell');
+console.log('initializing index tsx');
 const render = () => {
     const container = document.getElementById('container');
     const root = createRoot(container);

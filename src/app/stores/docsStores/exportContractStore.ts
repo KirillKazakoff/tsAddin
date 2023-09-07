@@ -42,7 +42,6 @@ class ExportContractStore {
     get currentTable() {
         if (this.operation === 'export') return tablesStore.exportT;
         return tablesStore.exportStorageT;
-        // return tablesStore.certificatesT;
     }
     get currentTerms() {
         if (!this.agreementNo) return '';

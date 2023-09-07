@@ -7,7 +7,6 @@ import { PageStatusRoute } from './app/routes/ErrorRoute/PageStatusRoute';
 import { ExportRoute } from './app/routes/ExportRoute/ExportRoute';
 import { InnerRoute } from './app/routes/InnerRoute/InnerRoute';
 import { RequestNordmileRoute } from './app/routes/RequestNordmileRoute';
-import { CertificatesRoute } from './app/routes/CertificatesRoute';
 
 export default function App() {
     return (
@@ -20,10 +19,6 @@ export default function App() {
                     <Route path='/letter' element={<LetterRoute />} />
                     <Route path='/request' element={<RequestNordmileRoute />} />
                     <Route path='/pageStatus' element={<PageStatusRoute />} />
-                    <Route
-                        path='/certificates'
-                        element={<CertificatesRoute />}
-                    />
                 </Route>
             </Routes>
         </Router>

@@ -36,9 +36,6 @@ export const LinkRoute = observer(() => {
             <NavLink to={'/inner'} className='nav-link'>
                 Внутренний рынок
             </NavLink>
-            <NavLink to={'/certificates'} className={'nav-link'}>
-                Сертификаты
-            </NavLink>
         </>
     );
 
