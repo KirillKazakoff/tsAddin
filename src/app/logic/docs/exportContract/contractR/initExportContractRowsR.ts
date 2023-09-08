@@ -1,43 +1,42 @@
 /* eslint-disable no-param-reassign */
-import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
-import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
-import { alignmentCenter, borderAll, styleRowCells } from '../../../styleRowCells';
+import type { GroupedBlT } from '../../../../types/typesContract';
+import { CellUtilsDoubleT } from '../../../../types/typesExcelUtils';
+import { styleRowCells, borderAll, alignmentCenter } from '../../styleRowCells';
 
-export const initExportStorageContractRows = (
-    // invoices
-    invoices: InvoicesT,
+export const initExportContractRowsR = (
+    blGrouped: GroupedBlT,
     utils: CellUtilsDoubleT,
 ) => {
     const { ws } = utils;
     const cellName = 'Сертификаты_массив';
     const arrayCl = utils.getCell(cellName);
-
-    // Get product groups
-    const invoicesArr = Object.values(invoices);
-    const groups = invoicesArr.reduce<ProductGroupT[]>((total, invoice) => {
-        const invoiceGroups = Object.values(invoice.productGroups);
-        total.push(...invoiceGroups);
-        return total;
-    }, []);
+    const groups = Object.values(blGrouped);
 
     groups.forEach((group, index) => {
         const { record } = group;
+        const Qt = `\nИТОГО: ${group.total.placesTotal.str}`;
+        let amount = group.rows.reduce<string>((total, row) => {
+            total = `${total} ${row.amount.placesTotal.str}\n`;
+            return total;
+        }, '');
+        amount += Qt;
 
         const rowArr = [
             '',
             `${record.product.ru.name}\n${record.product.eng.name}`,
             `${record.vessel.ru.name}\n${record.vessel.eng.name}`,
             `${record.consignee.fullName}\n${record.consignee.addres}`,
-            group.total.placesTotal.str,
+            amount,
         ];
 
         const rowIndex = +arrayCl.cellEng.row + index;
         ws.insertRow(rowIndex, rowArr).commit();
 
-        // styleRow
         const row = ws.getRow(rowIndex);
+        const height = 30 + group.rows.length * 15;
+
         styleRowCells(row, {
-            height: 45,
+            height,
             border: borderAll,
             alignment: alignmentCenter,
             font: { size: 9 },

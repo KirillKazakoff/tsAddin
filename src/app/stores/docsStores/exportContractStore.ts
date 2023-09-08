@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from 'mobx';
 import { OperationT } from '../../types/typesTables';
 import { initPodpisant } from '../initStoreObjects';
@@ -16,7 +15,7 @@ type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 class ExportContractStore {
     fields = initFields();
     operation: OperationT = 'export';
-    agreementNo = 0;
+    agreementId = '';
 
     constructor() {
         makeAutoObservable(this);
@@ -30,21 +29,24 @@ class ExportContractStore {
     setOperation(value: OperationT) {
         this.operation = value;
     }
-    setCurrentAgreementNo(agreementNo: number) {
-        this.agreementNo = agreementNo;
+    setCurrentAgreementNo(agreementId: string) {
+        this.agreementId = agreementId;
     }
 
     get currentAgreementRecord() {
-        return [...tablesStore.exportStorageT, ...tablesStore.exportT].find(
-            (row) => row.agreementNo === this.agreementNo,
-        );
+        return [
+            ...tablesStore.exportStorageT,
+            ...tablesStore.exportT,
+            ...tablesStore.certificatesT.map((row) => row.exportRow),
+        ].find((row) => row.id === this.agreementId);
     }
     get currentTable() {
         if (this.operation === 'export') return tablesStore.exportT;
-        return tablesStore.exportStorageT;
+        if (this.operation === 'export_storage') return tablesStore.exportStorageT;
+        return tablesStore.certificatesT.map((r) => r.exportRow);
     }
     get currentTerms() {
-        if (!this.agreementNo) return '';
+        if (!this.agreementId) return '';
         const terms = this.currentAgreementRecord.terms || 'EXW';
         return terms;
     }

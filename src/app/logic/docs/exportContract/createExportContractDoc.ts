@@ -3,6 +3,7 @@ import { InvoicesTmpsSettingsT } from '../../../types/typesExcelUtils';
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
+import { createExportContractDocR } from './contractR/createExportContractDocR';
 import { AgreementT } from './groupBy/initAgreement';
 import { initInvoicesTmps } from './invoicesTmps/initInvoicesTmps';
 import { initComInvoiceTmp } from './invoicesTmps/invoiceTmp/initComInvoiceTmp';
@@ -15,6 +16,10 @@ export const createExportContractDoc = async (agreement: AgreementT) => {
     const { operation } = exportContractStore;
     const { agreementNo, id } = agreement.record;
 
+    if (operation === 'certificates') {
+        await createExportContractDocR(agreement);
+        return;
+    }
     // getPathToTemplate
     let path = operation === 'export'
         ? pathObj.exportContract

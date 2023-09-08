@@ -165,6 +165,7 @@ export type InvoiceKTIRowT = {
 };
 
 export type CertificateRowT = {
+    exportRow: ExportRowT;
     blNo: string;
     rNo: string;
     agreementNo: string;

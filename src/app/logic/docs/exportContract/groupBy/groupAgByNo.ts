@@ -7,6 +7,7 @@ import { groupAgByInvoice } from './groupAgByInvoice';
 import { groupAgByVessel } from './groupAgByVessel';
 import { AgreementT, AgreementsT, initAgreement } from './initAgreement';
 import { groupify } from '../../../utils/groupify';
+import { groupByBl } from './groupByBl';
 
 export const groupAgByNo = () => {
     const table = exportContractStore.currentTable;
@@ -30,6 +31,7 @@ export const groupAgByNo = () => {
         agreements[key] = groupAgByInvoice(agreement);
         agreements[key] = groupAgByConsignee(agreement);
         agreements[key] = groupAgByVessel(agreement);
+        agreements[key].productsGroupedBy.bl = groupByBl(agreement.rows);
     });
 
     return agreements;

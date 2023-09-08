@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
@@ -14,4 +15,4 @@ Office.onReady(() => {
     render();
 });
 
-Office.initialize = function () {};
+Office.initialize = function initializeEmpty() {};

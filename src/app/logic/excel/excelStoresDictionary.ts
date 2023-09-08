@@ -100,6 +100,7 @@ export const excelStoresDictionary = {
         table: 'Экспорт',
         setter: setExport,
     },
+    // save initialize order (Сертификаты after Экспорт Хранение);
     'Экспорт Хранение': {
         table: 'Экспорт_хранение',
         setter: setExportStorage,

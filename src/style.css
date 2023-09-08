@@ -65,7 +65,6 @@ b {
 
 .input-wrapper {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     column-gap: 15px;
 }
@@ -82,7 +81,6 @@ b {
 /* select*/
 .select-wrapper {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     column-gap: 15px;
 }
@@ -102,11 +100,6 @@ b {
     margin-top: 20px;
 }
 
-.letter__fields {
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-}
 
 .letter__checkbox {
     align-items: center;
@@ -189,7 +182,7 @@ b {
 .fields-wrapper {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 5px;
 }
 
 .option--disabled {
@@ -264,10 +257,6 @@ b {
     margin-top: auto;
 }
 
-.mb0 {
-    margin-bottom: 0;
-}
-
 .error-route {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -284,4 +273,13 @@ b {
 
 .section__title {
     margin-bottom: 0px;
+}
+
+/* utils */
+.mb0 {
+    margin-bottom: 0;
+}
+
+.mt20 {
+    margin-top: 20px;
 }

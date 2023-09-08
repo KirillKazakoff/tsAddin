@@ -8,6 +8,7 @@ import {
     getDeliveryDate,
     getExcelDateStr,
 } from '../../../../excel/utils/getExcelDate';
+import { initExportContractRowsR } from '../../contractR/initExportContractRowsR';
 import { initExportContractAddreses } from '../initExportContractAddreses';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
 
@@ -86,7 +87,12 @@ export const initExportStorageContractTmp: InitExportContractTmp = (
     cells.forEach((cell) => utils.setCell(cell));
 
     initExportContractAddreses(utils, agreement);
-    initExportStorageContractRows(agreement.productsGroupedBy.invoices, utils);
+
+    if (exportContractStore.operation === 'export_storage') {
+        initExportStorageContractRows(agreement.productsGroupedBy.invoices, utils);
+    } else {
+        initExportContractRowsR(agreement.productsGroupedBy.bl, utils);
+    }
 
     // mergeCells
     const startRow = utils.getRow('Доставка_транспорт', 0).number;

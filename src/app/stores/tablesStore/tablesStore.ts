@@ -21,6 +21,7 @@ class TablesStore {
     dischargeInvoicesT: InvoiceKTIRowT[] = [];
     storageInvoicesT: InvoiceKTIRowT[] = [];
     certificatesT: CertificateRowT[] = [];
+
     status = {
         export: initTableStatus(),
         exportStorage: initTableStatus(),

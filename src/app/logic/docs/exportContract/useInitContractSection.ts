@@ -9,7 +9,7 @@ export const useInitContractSection = () => {
     const agreementObj = groupAgByNo();
     const agreements = Object.values(agreementObj);
     const currentAgreement = agreements.find(
-        (a) => a.record.agreementNo === exportContractStore.agreementNo,
+        (a) => a.record.id === exportContractStore.agreementId,
     );
 
     const onLoad = async (agreement: AgreementT) => {

@@ -27,14 +27,16 @@ export const ExportContractSection = observer(() => {
                 >
                     <Form className='docs__form export-contract-form'>
                         <h3>{initObj.title}</h3>
-                        <SelectPodpisant />
-                        <ExportDepartureDate />
-                        <ExportDeclarationEXW />
-                        <DocsDownloadBtn
-                            title='Загрузить контракт'
-                            onClick={initObj.onLoad}
-                            cls='docs-download--export'
-                        />
+                        <div className='fields-wrapper'>
+                            <SelectPodpisant />
+                            <ExportDepartureDate />
+                            <ExportDeclarationEXW />
+                            <DocsDownloadBtn
+                                title='Загрузить контракт'
+                                onClick={initObj.onLoad}
+                                cls='docs-download--export'
+                            />
+                        </div>
                     </Form>
                 </Formik>
             ) : null}

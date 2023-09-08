@@ -15,7 +15,7 @@ export const LetterMainFields = observer(() => {
     }, [context.values.isExport]);
 
     return (
-        <div className='letter__fields'>
+        <div className='fields-wrapper'>
             <CheckBox
                 wrapperCls='letter__checkbox'
                 title='Предложение на экспорт:'

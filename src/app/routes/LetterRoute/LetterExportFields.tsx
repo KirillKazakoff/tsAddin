@@ -9,7 +9,7 @@ export const LetterExportFields = observer(() => {
     if (!context.values.isExport) return null;
 
     return (
-        <div className='letter__fields letter__fields--export'>
+        <div className='fields-wrapper mt20'>
             <InputText
                 title='ETA экспорт'
                 placeholder={'Дата прибытия'}
