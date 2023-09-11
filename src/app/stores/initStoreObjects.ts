@@ -32,10 +32,12 @@ export const initPortZarubezh = (): PortZarubezhT => ({
     eng: {
         name: '',
         country: '',
+        countryFull: '',
     },
     ru: {
         name: '',
         country: '',
+        countryFull: '',
     },
 });
 

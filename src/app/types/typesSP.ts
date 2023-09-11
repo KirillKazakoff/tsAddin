@@ -110,10 +110,12 @@ export type PortZarubezhT = {
     eng: {
         name: string;
         country: string;
+        countryFull: string;
     };
     ru: {
         name: string;
         country: string;
+        countryFull: string;
     };
 };
 
