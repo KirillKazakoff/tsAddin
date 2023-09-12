@@ -14,7 +14,7 @@ export const ExportContractSection = observer(() => {
     return (
         <div className='export-section'>
             <div className='export-sectioin__choose'>
-                <h3 className='mb0'>Выберите контракт:</h3>
+                <h2 className='mb0'>Выберите контракт:</h2>
                 <AgreementList agreements={initObj.agreements} />
             </div>
             {initObj.currentAgreement ? (

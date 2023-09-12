@@ -13,14 +13,12 @@ export const ExportRoute = observer(() => {
     if (excelSyncStore.isLoading) return null;
 
     let ExportSection = () => (
-        <SectionErrorHOC status={exportContractStore.sectionStatus} title=''>
-            <>
-                <BlSection />
-                <ExportContractSection />
-                <AssortimentSection />
-                <InvoiceKTISection />
-            </>
-        </SectionErrorHOC>
+        <>
+            <BlSection />
+            <ExportContractSection />
+            <AssortimentSection />
+            <InvoiceKTISection />
+        </>
     );
     if (exportContractStore.currentTable.length === 0) {
         ExportSection = () => (
@@ -37,7 +35,9 @@ export const ExportRoute = observer(() => {
     return (
         <div className='doc-links'>
             <ExportRadio />
-            <ExportSection />
+            <SectionErrorHOC status={exportContractStore.sectionStatus} title=''>
+                <ExportSection />
+            </SectionErrorHOC>
         </div>
     );
 });
