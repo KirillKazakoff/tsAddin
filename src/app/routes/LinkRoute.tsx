@@ -8,6 +8,7 @@ import { CheckBoxValidation } from '../components/CheckBoxValidation';
 
 export const LinkRoute = observer(() => {
     const { statusType } = pageStatusStore.status;
+    const { appStatus } = excelSyncStore;
     const navigate = useNavigate();
     useInitExcel();
 
@@ -17,33 +18,46 @@ export const LinkRoute = observer(() => {
         }
     }, [statusType, navigate]);
 
-    const Offer = () => (
-        <>
-            <NavLink to={'/letter'} className='nav-link'>
-                Предложение
-            </NavLink>
-            <NavLink to={'/request'} className='nav-link'>
-                Заявки
-            </NavLink>
-        </>
-    );
-
-    const Docs = () => (
-        <>
-            <NavLink to={'/export'} className='nav-link'>
-                Экспорт
-            </NavLink>
-            <NavLink to={'/inner'} className='nav-link'>
-                Внутренний рынок
-            </NavLink>
-        </>
-    );
+    const Links = () => {
+        if (appStatus === 'Offer') {
+            return (
+                <>
+                    <NavLink to={'/letter'} className='nav-link'>
+                        Предложение
+                    </NavLink>
+                    <NavLink to={'/request'} className='nav-link'>
+                        Заявки
+                    </NavLink>
+                </>
+            );
+        }
+        if (appStatus === 'Sales') {
+            return (
+                <NavLink to={'/sales'} className={'nav-link'}>
+                    Продажи
+                </NavLink>
+            );
+        }
+        if (appStatus === 'Docs') {
+            return (
+                <>
+                    <NavLink to={'/export'} className='nav-link'>
+                        Экспорт
+                    </NavLink>
+                    <NavLink to={'/inner'} className='nav-link'>
+                        Внутренний рынок
+                    </NavLink>
+                </>
+            );
+        }
+        return <div>Initializing app...</div>;
+    };
 
     if (statusType !== 'ok') return <Outlet />;
     return (
         <div className='main-route'>
             <nav className='nav'>
-                {excelSyncStore.appStatus === 'Docs' ? <Docs /> : <Offer />}
+                <Links />
             </nav>
 
             <Outlet />

@@ -1,12 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 
-export type AppStatusT = 'Offer' | 'Docs';
+export type AppStatusT = 'Offer' | 'Docs' | 'Sales' | 'Init';
 
 class ExcelSyncStore {
     isSync = true;
     isLoading = true;
     changedTable = '';
-    appStatus: AppStatusT = 'Docs';
+    appStatus: AppStatusT = 'Init';
 
     constructor() {
         makeAutoObservable(this);

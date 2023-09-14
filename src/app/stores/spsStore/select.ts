@@ -16,4 +16,5 @@ export const selectSp = {
     portRu: (codeName: string) => spsStore.portsRu[codeName],
     package: (codeName: string) => spsStore.packages[codeName],
     sortAssortiment: (codeName: string) => spsStore.sortsAssortiment[codeName.toLowerCase()],
+    productSales: (codeName: string) => spsStore.productionSales[codeName],
 };

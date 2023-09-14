@@ -1,9 +1,9 @@
-import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
-import { checkTable } from '../../logic/excel/checkTable/checkTable';
-import { InnerRowT } from '../../types/typesTables';
-import { selectSp } from '../spsStore/select';
-import tablesStore from './tablesStore';
-import { initAmount } from './utils/initAmount';
+import { checkTable } from '../../../logic/excel/checkTable/checkTable';
+import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
+import { InnerRowT } from '../../../types/typesTables';
+import { selectSp } from '../../spsStore/select';
+import tablesStore from '../tablesStore';
+import { initAmount } from '../utils/initAmount';
 
 export const setInner = (table: any[][]) => {
     table.shift();

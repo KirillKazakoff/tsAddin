@@ -243,3 +243,14 @@ export type PortRuT = {
 export type PortsRuT = {
     [key: string]: PortRuT;
 };
+
+// Sales
+export type ProductionSalesT = {
+    codeName: string;
+    name: string;
+    expirationDate: number;
+};
+
+export type ProductionsSalesT = {
+    [key: string]: ProductionSalesT;
+};

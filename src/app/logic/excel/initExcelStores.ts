@@ -64,14 +64,18 @@ const initStores = async (context: Excel.RequestContext) => {
 export const initStoresOnFilename = async (context: Excel.RequestContext) => {
     context.workbook.load('name');
     await context.sync();
-    const isOffer = context.workbook.name.includes('Письмо суточные');
+    const filename = context.workbook.name.toLowerCase();
 
     await initStores(context);
 
-    if (isOffer) {
+    if (filename.includes('письмо суточные')) {
         excelSyncStore.setAppStatus('Offer');
-    } else {
+    }
+    if (filename.includes('движение продукции')) {
         await initExcelImages(context);
         excelSyncStore.setAppStatus('Docs');
+    }
+    if (filename.includes('продажи')) {
+        excelSyncStore.setAppStatus('Sales');
     }
 };

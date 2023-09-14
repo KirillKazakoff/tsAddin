@@ -9,6 +9,7 @@ import {
     InvoiceKTIRowT,
     CertificateRowT,
     TableStatusT,
+    SalesRowT,
 } from '../../types/typesTables';
 import { initTableStatus } from './utils/tableStatus';
 
@@ -21,6 +22,7 @@ class TablesStore {
     dischargeInvoicesT: InvoiceKTIRowT[] = [];
     storageInvoicesT: InvoiceKTIRowT[] = [];
     certificatesT: CertificateRowT[] = [];
+    sales: SalesRowT[] = [];
 
     status = {
         export: initTableStatus(),
@@ -31,6 +33,7 @@ class TablesStore {
         certificates: initTableStatus(),
         dischargeInvoices: initTableStatus(),
         storageInvoices: initTableStatus(),
+        sales: initTableStatus(),
     };
 
     constructor() {
@@ -46,6 +49,7 @@ class TablesStore {
         certificates: (table: CertificateRowT[]) => (this.certificatesT = table),
         inner: (table: InnerRowT[]) => (this.innerT = table),
         nordmile: (table: NordmileRowT[]) => (this.nordmileT = table),
+        sales: (table: SalesRowT[]) => (this.sales = table),
     };
     setStatus(status: TableStatusT, key: TableKeyT) {
         this.status[key] = status;

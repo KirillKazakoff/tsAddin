@@ -1,10 +1,9 @@
 /* eslint-disable max-len */
-// import _ from 'lodash';
-import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
-import { checkTable } from '../../logic/excel/checkTable/checkTable';
-import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
-import { getExportRow } from './getExportRow';
-import tablesStore from './tablesStore';
+import { checkTable } from '../../../logic/excel/checkTable/checkTable';
+import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
+import { ExportRowT, ExportInitRowT } from '../../../types/typesTables';
+import { getExportRow } from '../getExportRow';
+import tablesStore from '../tablesStore';
 
 export const setExportStorage = (table: any[][]) => {
     table.shift();

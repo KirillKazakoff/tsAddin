@@ -1,10 +1,10 @@
-/* eslint-disable max-len */
-import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
-import { checkTable } from '../../logic/excel/checkTable/checkTable';
-import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
-import { getExportRow } from './getExportRow';
-import tablesStore from './tablesStore';
+import { checkTable } from '../../../logic/excel/checkTable/checkTable';
+import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
+import { ExportRowT, ExportInitRowT } from '../../../types/typesTables';
+import { getExportRow } from '../getExportRow';
+import tablesStore from '../tablesStore';
 
+/* eslint-disable max-len */
 export const setExport = (table: any[][]) => {
     table.shift();
     const excluded = excludeOfEmptyRows(table);

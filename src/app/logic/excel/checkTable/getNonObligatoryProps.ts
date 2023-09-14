@@ -2,18 +2,21 @@ import type { TableKeyT } from '../../../stores/tablesStore/tablesStore';
 import { CommonRowT } from '../../../types/typesTables';
 
 export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => {
+    const exportProps = [
+        'terms',
+        'sort',
+        'msc',
+        'consignee',
+        'packSp',
+        'sortSp',
+        'datePusan',
+        'placesLeft',
+        'dateClose',
+    ];
+
     const nonObligatoryProps = {
-        export: [
-            'terms',
-            'sort',
-            'msc',
-            'consignee',
-            'packSp',
-            'sortSp',
-            'datePusan',
-            'placesLeft',
-            'dateClose',
-        ],
+        export: exportProps,
+        exportStorage: exportProps,
         mates: ['sort', 'periodCreation', 'reice', 'operation', 'index'],
         inner: ['sort', 'deliveryDate', 'paymentDate'],
         dischargeInvoices: ['i', 'invoiceDate', 'invoiceNo', 'dischargeDate'],
@@ -26,22 +29,24 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
             'invoiceNo',
         ],
         certificates: ['coNo', 'hcNo', 'iuuNo', 'date', 'placesRemain'],
+        sales: [],
     };
 
     if (row.terms === 'FCA') {
         nonObligatoryProps.export.push('blNo', 'portFrom');
     }
 
-    if (tableName.includes('export')) return nonObligatoryProps.export;
-    if (tableName.includes('mates')) return nonObligatoryProps.mates;
-    if (tableName.includes('discharge')) {
-        return nonObligatoryProps.dischargeInvoices;
-    }
-    if (tableName.includes('storageInvoice')) {
-        return nonObligatoryProps.storageInvoices;
-    }
-    if (tableName.includes('certificates')) {
-        return nonObligatoryProps.certificates;
-    }
-    return nonObligatoryProps.inner;
+    return nonObligatoryProps[tableName];
+    // if (tableName.includes('export')) return nonObligatoryProps.export;
+    // if (tableName.includes('mates')) return nonObligatoryProps.mates;
+    // if (tableName.includes('discharge')) {
+    //     return nonObligatoryProps.dischargeInvoices;
+    // }
+    // if (tableName.includes('storageInvoice')) {
+    //     return nonObligatoryProps.storageInvoices;
+    // }
+    // if (tableName.includes('certificates')) {
+    //     return nonObligatoryProps.certificates;
+    // }
+    // return nonObligatoryProps.inner;
 };

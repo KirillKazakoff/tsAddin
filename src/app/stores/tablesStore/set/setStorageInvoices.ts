@@ -1,10 +1,10 @@
 import { checkTable } from '../../../logic/excel/checkTable/checkTable';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { InvoiceKTIRowT } from '../../../types/typesTables';
-import tablesStore from '../../tablesStore/tablesStore';
-import { selectSp } from '../select';
+import tablesStore from '../tablesStore';
+import { selectSp } from '../../spsStore/select';
 
-export const setDischargeInvoices = (table: any[][]) => {
+export const setStorageInvoices = (table: any[][]) => {
     if (!table) return;
     table.shift();
     const excluded = excludeOfEmptyRows(table);
@@ -13,33 +13,43 @@ export const setDischargeInvoices = (table: any[][]) => {
         (totalObj, row, index) => {
             const [
                 blNo,
-                seller,
                 agreementNo,
+                seller,
                 vessel,
                 product,
+                dateStorageStart,
+                dateStorageEnd,
                 placesTotal,
+                days,
                 invoiceNo,
                 dateInvoice,
-                dateDischarge,
                 price,
                 priceTotal,
+                operation,
+                operationResult,
+                dateAccountSent,
             ] = row;
 
             try {
                 const rowObj: InvoiceKTIRowT = {
+                    blNo,
                     agreementNo,
                     invoiceNo,
-                    blNo,
                     seller: selectSp.seller(seller),
                     vessel: selectSp.vessel(vessel),
                     product: selectSp.product(product),
-                    dateDischarge,
+                    dateStorageStart,
+                    dateStorageEnd,
+                    dateAccountSent,
                     dateInvoice,
                     amount: {
-                        price,
                         placesTotal,
+                        price,
                         priceTotal,
+                        days,
+                        operationResult,
                     },
+                    operation,
                     index: index.toString(),
                 };
 
@@ -52,6 +62,6 @@ export const setDischargeInvoices = (table: any[][]) => {
         [],
     );
 
-    checkTable(transformedTable, 'dischargeInvoices');
-    tablesStore.setTable.dischargeInvoices(transformedTable);
+    checkTable(transformedTable, 'storageInvoices');
+    tablesStore.setTable.storageInvoices(transformedTable);
 };

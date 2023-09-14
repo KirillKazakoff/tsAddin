@@ -7,6 +7,7 @@ import {
     PackageT,
     PortTamozhnyaT,
     PortZarubezhT,
+    ProductionSalesT,
     ProductionT,
     SellerT,
     SortAssortimentT,
@@ -128,19 +129,6 @@ export type InnerRowT = {
     index: string;
 };
 
-export type NordmileRowT = {
-    contractNo: number;
-    contractDate: string;
-    seller: SellerT;
-    buyer: string;
-    producer: string;
-    product: string;
-    pack: PackageT;
-    amount: AmountObjT;
-    bankSeller: string;
-    paymentDate: string;
-};
-
 export type InvoiceKTIRowT = {
     agreementNo: string;
     blNo: string;
@@ -185,6 +173,43 @@ export type CertificateRowT = {
     index: string;
 };
 
+export type NordmileRowT = {
+    contractNo: number;
+    contractDate: string;
+    seller: SellerT;
+    buyer: string;
+    producer: string;
+    product: string;
+    pack: PackageT;
+    amount: AmountObjT;
+    bankSeller: string;
+    paymentDate: string;
+};
+
+export type SalesRowT = {
+    contractNo: string;
+    contractDate: string;
+    seller: AgentT;
+    buyer: ConsigneeT;
+    blNo: string;
+    transport: string;
+    dateETA: string;
+    port: string;
+    terms: TermsT;
+    vessel: string;
+    product: ProductionSalesT;
+    sort: string;
+    pack: number;
+    amount: {
+        places: AmountT;
+        placesTotal: AmountT;
+        price: AmountT;
+        priceTotal: AmountT;
+    };
+    certificateDate: string;
+    index: string;
+};
+
 // utilstype
 export type OperationT = 'export' | 'export_storage' | 'certificates';
 
@@ -194,8 +219,7 @@ export type CommonRowT = (
     | MateRowT
     | InvoiceKTIRowT
     | CertificateRowT
+    | SalesRowT
 ) & {
     terms?: string;
 };
-
-export type TableNameT = 'Export' | 'Export_Storage' | 'Inner' | 'Mates';

@@ -28,7 +28,7 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
         agreementNo: row.agreementNo,
         invoice: row.invoice,
         date: row.date,
-        blNo: row.blNo,
+        blNo: row.terms !== 'FCA' ? row.blNo : '',
         terms: row.terms,
         sort: row.sort,
         pack: row.pack,

@@ -1,10 +1,10 @@
-import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
-import { checkTable } from '../../logic/excel/checkTable/checkTable';
-import { MateRowT } from '../../types/typesTables';
-import letterStore from '../letterStore/letterStore';
-import { selectSp } from '../spsStore/select';
-import tablesStore from './tablesStore';
-import { initAmount } from './utils/initAmount';
+import { checkTable } from '../../../logic/excel/checkTable/checkTable';
+import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
+import { MateRowT } from '../../../types/typesTables';
+import letterStore from '../../letterStore/letterStore';
+import { selectSp } from '../../spsStore/select';
+import tablesStore from '../tablesStore';
+import { initAmount } from '../utils/initAmount';
 
 export const setMates = (table: any[][]) => {
     table.shift();

@@ -1,8 +1,8 @@
-import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
-import { NordmileRowT } from '../../types/typesTables';
-import { selectSp } from '../spsStore/select';
-import tablesStore from './tablesStore';
-import { initAmount } from './utils/initAmount';
+import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
+import { NordmileRowT } from '../../../types/typesTables';
+import { selectSp } from '../../spsStore/select';
+import tablesStore from '../tablesStore';
+import { initAmount } from '../utils/initAmount';
 
 export const setNordmile = (table: any[][]) => {
     table.shift();

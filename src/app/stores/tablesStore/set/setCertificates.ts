@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import _ from 'lodash';
-import { checkTable } from '../../logic/excel/checkTable/checkTable';
-import { excludeOfEmptyRows } from '../../logic/excel/checkTable/excludeOfEmptyRows';
-import { CertificateRowT } from '../../types/typesTables';
-import { selectSp } from '../spsStore/select';
-import tablesStore from './tablesStore';
-import { initAmount } from './utils/initAmount';
+import { checkTable } from '../../../logic/excel/checkTable/checkTable';
+import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
+import { CertificateRowT } from '../../../types/typesTables';
+import { selectSp } from '../../spsStore/select';
+import tablesStore from '../tablesStore';
+import { initAmount } from '../utils/initAmount';
 
 export const setCertificates = (table: any[][]) => {
     table.shift();
