@@ -1,3 +1,4 @@
+import type { TableKeyT } from '../stores/tablesStore/tablesStore';
 import {
     AgentT,
     BankProdavecT,
@@ -14,6 +15,12 @@ import {
     TransportT,
     VesselT,
 } from './typesSP';
+
+export type CommonRowT = {
+    index: string;
+    terms?: string;
+    type: TableKeyT;
+};
 
 export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'CFR (контейнер)';
 export type TableStatusT = {
@@ -36,7 +43,7 @@ export type AmountObjT = {
 };
 
 // Tables
-export type MateRowT = {
+export interface MateRowT extends CommonRowT {
     reice: string;
     konosament: string;
     date: string;
@@ -49,9 +56,9 @@ export type MateRowT = {
     sort: string;
     operation: string;
     index: string;
-};
+}
 
-export type ExportInitRowT = {
+export interface ExportInitRowT {
     contract: number;
     seller: string;
     bankSeller?: string;
@@ -80,9 +87,9 @@ export type ExportInitRowT = {
     placesLeft?: string;
     datePusan?: string;
     dateClose?: string;
-};
+}
 
-export type ExportRowT = {
+export interface ExportRowT extends CommonRowT {
     contract: ContractT;
     seller: SellerT;
     bankSeller?: BankProdavecT;
@@ -109,9 +116,9 @@ export type ExportRowT = {
     placesLeft?: string;
     datePusan?: string;
     dateClose?: string;
-};
+}
 
-export type InnerRowT = {
+export interface InnerRowT extends CommonRowT {
     buyer: ClientRuT;
     seller: SellerT;
     contractNo: number;
@@ -127,9 +134,9 @@ export type InnerRowT = {
     deliveryDate: string;
     paymentDate: string;
     index: string;
-};
+}
 
-export type InvoiceKTIRowT = {
+export interface InvoiceKTIRowT extends CommonRowT {
     agreementNo: string;
     blNo: string;
     invoiceNo: string;
@@ -150,9 +157,9 @@ export type InvoiceKTIRowT = {
     dateDischarge?: string;
     dateAccountSent?: string;
     operation?: string;
-};
+}
 
-export type CertificateRowT = {
+export interface CertificateRowT extends CommonRowT {
     exportRow: ExportRowT;
     blNo: string;
     rNo: string;
@@ -171,9 +178,9 @@ export type CertificateRowT = {
     country: string;
     date: string;
     index: string;
-};
+}
 
-export type NordmileRowT = {
+export interface NordmileRowT extends CommonRowT {
     contractNo: number;
     contractDate: string;
     seller: SellerT;
@@ -184,9 +191,9 @@ export type NordmileRowT = {
     amount: AmountObjT;
     bankSeller: string;
     paymentDate: string;
-};
+}
 
-export type SalesRowT = {
+export interface SalesRowT extends CommonRowT {
     contractNo: string;
     contractDate: string;
     seller: AgentT;
@@ -208,18 +215,7 @@ export type SalesRowT = {
     };
     certificateDate: string;
     index: string;
-};
+}
 
 // utilstype
 export type OperationT = 'export' | 'export_storage' | 'certificates';
-
-export type CommonRowT = (
-    | ExportRowT
-    | InnerRowT
-    | MateRowT
-    | InvoiceKTIRowT
-    | CertificateRowT
-    | SalesRowT
-) & {
-    terms?: string;
-};

@@ -4,8 +4,9 @@ import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initBlRows } from './initBlRows';
 import { BlGroupT } from '../../../types/typesContract';
+import { ExportRowT } from '../../../types/typesTables';
 
-export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT) => {
+export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>) => {
     const ws = book.getWorksheet('BL');
     const utils = initExcelUtils(ws);
     const { record } = blGroup;

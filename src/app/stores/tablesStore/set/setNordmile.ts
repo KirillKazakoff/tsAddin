@@ -8,7 +8,7 @@ export const setNordmile = (table: any[][]) => {
     table.shift();
     const excluded = excludeOfEmptyRows(table);
 
-    const requests = excluded.reduce<NordmileRowT[]>((totalObj, row) => {
+    const requests = excluded.reduce<NordmileRowT[]>((totalObj, row, index) => {
         const [
             contractNo,
             contractDate,
@@ -26,6 +26,7 @@ export const setNordmile = (table: any[][]) => {
 
         try {
             const rowObj: NordmileRowT = {
+                type: 'nordmile',
                 contractNo,
                 contractDate,
                 seller: selectSp.seller(seller),
@@ -40,6 +41,7 @@ export const setNordmile = (table: any[][]) => {
                 },
                 bankSeller,
                 paymentDate,
+                index: index.toString(),
             };
 
             totalObj.push(rowObj);

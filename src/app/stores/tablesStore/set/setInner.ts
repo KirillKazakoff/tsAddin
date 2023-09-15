@@ -32,6 +32,7 @@ export const setInner = (table: any[][]) => {
 
         try {
             const rowObj: InnerRowT = {
+                type: 'inner',
                 buyer: selectSp.clientRu(client),
                 seller: selectSp.seller(seller),
                 contractNo,

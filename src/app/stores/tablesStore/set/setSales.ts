@@ -2,6 +2,7 @@ import { checkTable } from '../../../logic/excel/checkTable/checkTable';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { SalesRowT } from '../../../types/typesTables';
 import { selectSp } from '../../spsStore/select';
+import tablesStore from '../tablesStore';
 import { initAmount } from '../utils/initAmount';
 
 export const setSales = (table: any[][]) => {
@@ -32,6 +33,7 @@ export const setSales = (table: any[][]) => {
 
         try {
             const rowObj: SalesRowT = {
+                type: 'sales',
                 contractNo,
                 contractDate,
                 seller: selectSp.agent(seller),
@@ -63,4 +65,5 @@ export const setSales = (table: any[][]) => {
     }, []);
 
     checkTable(transformedTable, 'sales');
+    tablesStore.setTable.sales(transformedTable);
 };

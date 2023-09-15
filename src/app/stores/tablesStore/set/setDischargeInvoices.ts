@@ -27,6 +27,7 @@ export const setDischargeInvoices = (table: any[][]) => {
 
             try {
                 const rowObj: InvoiceKTIRowT = {
+                    type: 'dischargeInvoices',
                     agreementNo,
                     invoiceNo,
                     blNo,

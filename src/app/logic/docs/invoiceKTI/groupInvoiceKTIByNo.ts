@@ -4,7 +4,7 @@ import { ExportRowT, InvoiceKTIRowT } from '../../../types/typesTables';
 import { groupify } from '../../utils/groupify';
 import { groupByBl } from '../exportContract/groupBy/groupByBl';
 
-const initInvoice = (blGrouped: GroupedBlT, row: InvoiceKTIRowT) => {
+const initInvoice = (blGrouped: GroupedBlT<ExportRowT>, row: InvoiceKTIRowT) => {
     return {
         type: row.dateDischarge ? 'discharge' : 'storage',
         priceTotal: 0,

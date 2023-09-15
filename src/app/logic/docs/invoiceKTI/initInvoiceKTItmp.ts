@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import ExcelJS from 'exceljs';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { CellObjT } from '../../../types/typesExcelUtils';
@@ -71,11 +72,7 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) 
     const cells = [...cellsEng, ...cellsRu];
 
     cells.forEach((cell) => {
-        try {
-            utils.setCell(cell);
-        } catch (e) {
-            console.log(cell);
-        }
+        utils.setCell(cell);
     });
 
     initInvoiceKTIRows(invoice, utils);

@@ -6,14 +6,14 @@ import {
 } from './typesTables';
 
 // BlT
-export type BlGroupT = {
-    record: ExportRowT;
-    rows: ExportRowT[];
+export type BlGroupT<RowT> = {
+    record: RowT;
+    rows: RowT[];
     total: BlAmountT;
 };
 
-export type GroupedBlT = {
-    [key: string]: BlGroupT;
+export type GroupedBlT<RowT> = {
+    [key: string]: BlGroupT<RowT>;
 };
 
 // InvoiceT

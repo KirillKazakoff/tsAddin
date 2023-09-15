@@ -1,8 +1,9 @@
 import { BlGroupT } from '../../../types/typesContract';
 import { CellUtilsT } from '../../../types/typesExcelUtils';
+import { ExportRowT } from '../../../types/typesTables';
 import { alignmentCenter, styleRowCells } from '../styleRowCells';
 
-export const initBlRows = (blGroup: BlGroupT, utils: CellUtilsT) => {
+export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT) => {
     const cellName = 'Bl_массив';
     const arrayCl = utils.getCell(cellName);
     const { record, total } = blGroup;

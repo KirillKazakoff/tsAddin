@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
 import type { GroupedBlT } from '../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../types/typesExcelUtils';
+import { ExportRowT } from '../../../../types/typesTables';
 import { styleRowCells, borderAll, alignmentCenter } from '../../styleRowCells';
 
 export const initExportContractRowsR = (
-    blGrouped: GroupedBlT,
+    blGrouped: GroupedBlT<ExportRowT>,
     utils: CellUtilsDoubleT,
 ) => {
     const { ws } = utils;

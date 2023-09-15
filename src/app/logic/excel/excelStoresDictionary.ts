@@ -117,7 +117,7 @@ export const excelStoresDictionary = {
     },
     'Продажи': {
         table: 'Sales',
-        setter: () => setSales,
+        setter: setSales,
     },
     'Nordmile': {
         table: 'Nordmile',

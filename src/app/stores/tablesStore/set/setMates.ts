@@ -28,6 +28,7 @@ export const setMates = (table: any[][]) => {
 
         try {
             const rowObj: MateRowT = {
+                type: 'mates',
                 transport,
                 vessel: selectSp.vessel(vessel),
                 product: selectSp.product(product.toLowerCase()),

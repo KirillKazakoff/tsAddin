@@ -32,6 +32,7 @@ export const setStorageInvoices = (table: any[][]) => {
 
             try {
                 const rowObj: InvoiceKTIRowT = {
+                    type: 'storageInvoices',
                     blNo,
                     agreementNo,
                     invoiceNo,

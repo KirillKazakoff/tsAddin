@@ -34,7 +34,7 @@ export type AgreementT = {
         invoices: InvoicesT;
         consignees: ConsigneesGroupT;
         vessels: VesselsGroupT;
-        bl: GroupedBlT;
+        bl: GroupedBlT<ExportRowT>;
     };
     priceTotal: number;
 };

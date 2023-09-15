@@ -7,6 +7,7 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
     const consigneeSp = selectSp.consignee(row.consignee) || selectSp.consignee(row.agent);
 
     return {
+        type: 'export',
         contract: contractSp,
         seller: selectSp.seller(row.seller),
         bankSeller: selectSp.bankProdavec(contractSp?.bankSeller),

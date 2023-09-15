@@ -1,14 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { BlGroupT, GroupedBlT } from '../../../../types/typesContract';
-import { ExportRowT } from '../../../../types/typesTables';
+import { AmountObjT } from '../../../../types/typesTables';
 import {
     addBlAmount,
     initBlAmount,
 } from '../../../../stores/tablesStore/utils/specialAmount';
 import { groupify } from '../../../utils/groupify';
+import { PackageT } from '../../../../types/typesSP';
 
-export const groupByBl = (rows: ExportRowT[]) => {
-    const blGrouped = rows.reduce<GroupedBlT>((total, row) => {
+type RowExtendT = { blNo: string; amount: AmountObjT; packSp?: PackageT };
+
+export const groupByBl = <RowT extends RowExtendT>(rows: RowT[]) => {
+    const blGrouped = rows.reduce<GroupedBlT<RowT>>((total, row) => {
         if (!row.blNo) return total;
 
         const initObj = {
@@ -16,7 +19,7 @@ export const groupByBl = (rows: ExportRowT[]) => {
             rows: [],
             total: initBlAmount(),
         };
-        const bl = groupify<BlGroupT>(total, initObj, row.blNo);
+        const bl = groupify<BlGroupT<RowT>>(total, initObj, row.blNo);
         bl.rows.push(row);
 
         addBlAmount(bl.total, row.amount, row?.packSp?.coefficient);

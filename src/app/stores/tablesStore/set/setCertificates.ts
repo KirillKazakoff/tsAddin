@@ -48,6 +48,7 @@ export const setCertificates = (table: any[][]) => {
                 exportRow.date = date;
 
                 const rowObj: CertificateRowT = {
+                    type: 'certificates',
                     exportRow,
                     blNo,
                     agreementNo: `${agreementNo}-R${rNo}`,
