@@ -17,11 +17,14 @@ export const addProductAmount = (
     addToAmount(productAmount.placesTotal, rowAmount.placesTotal.count);
 };
 
-export const initBlAmount = () => {
+export const initBlAmount = (measure: 'tn' | 'kg') => {
+    const min = measure === 'kg' ? 2 : 3;
+    const max = measure === 'kg' ? 2 : 4;
+
     return {
         places: initAmount(0, 0, 0),
-        placesTotal: initAmount(0, 3, 4),
-        placesGross: initAmount(0, 3, 4),
+        placesTotal: initAmount(0, min, max),
+        placesGross: initAmount(0, min, max),
     };
 };
 export type BlAmountT = ReturnType<typeof initBlAmount>;

@@ -22,6 +22,8 @@ export const pathObj = {
     portLetterFCA: `${baseUrl}templates/Port_Letter_FCA.xlsx`,
     invoiceKTIDischarge: `${baseUrl}templates/Invoice_KTI_Discharge.xlsx`,
     invoiceKTIStorage: `${baseUrl}templates/Invoice_KTI_Storage.xlsx`,
+    salesContract: `${baseUrl}templates/Sales_Purchase_Contract`,
+    salesContractLive: `${baseUrl}templates/Sales_Purchase_Contract_Live`,
     bg: {
         trk: `${baseUrl}assets/TRK.png`,
         msi: `${baseUrl}assets/MSI.png`,

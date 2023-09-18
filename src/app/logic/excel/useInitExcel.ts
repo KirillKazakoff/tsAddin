@@ -6,7 +6,7 @@ import {
 } from '../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import { addChangeHandler } from './addChangeHandler';
-import { initStoresOnFilename } from './initExcelStores';
+import { initStoresOnFileName } from './initExcelStores';
 
 export const useInitExcel = () => {
     const { statusType } = pageStatusStore.status;
@@ -15,7 +15,7 @@ export const useInitExcel = () => {
     const initExcel = async () => {
         try {
             await Excel.run(async (context) => {
-                await initStoresOnFilename(context);
+                await initStoresOnFileName(context);
                 await addChangeHandler(context);
 
                 excelSyncStore.setSync(true);

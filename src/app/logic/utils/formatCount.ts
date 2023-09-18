@@ -14,20 +14,6 @@ export function formatCount(
     return formatter.format(count);
 }
 
-// formatCurrency
-export function formatCurrency(
-    count: number,
-    language: 'eng' | 'ru',
-    fractionMin: number,
-    fractionMax: number,
-) {
-    const formattedCount = formatCount(count, fractionMin, fractionMax);
-    if (language === 'eng') {
-        return `USD ${formattedCount}`;
-    }
-    return `$${formattedCount}`;
-}
-
 type ConvertedIntT = {
     convertedFractional: string;
     convertedInteger: string;

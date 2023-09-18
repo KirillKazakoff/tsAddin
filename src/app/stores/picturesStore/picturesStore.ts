@@ -1,18 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
-export type PictureKey =
-    | 'Seal_KTI'
-    | 'Seal_TRK'
-    | 'Seal_MSI'
-    | 'Sign_KOTOVMN'
-    | 'Sign_KOTOVNM'
-    | 'Sign_KRUZINAMN'
-    | 'Sign_SOJI';
-
-type PicturesObjT = { [Key in PictureKey]: string };
-
 class PicturesStore {
-    pictures: PicturesObjT = {
+    pictures = {
         Seal_KTI: '',
         Seal_TRK: '',
         Seal_MSI: '',
@@ -21,6 +10,7 @@ class PicturesStore {
         Sign_KOTOVNM: '',
         Sign_SOJI: '',
         Sign_KRUZINAMN: '',
+        Sign_OCEANIC: '',
     };
 
     isPicturesFound = true;
@@ -38,4 +28,6 @@ class PicturesStore {
 }
 
 const picturesStore = new PicturesStore();
+export type PictureKey = keyof typeof picturesStore.pictures;
+
 export default picturesStore;

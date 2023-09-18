@@ -61,21 +61,21 @@ const initStores = async (context: Excel.RequestContext) => {
     });
 };
 
-export const initStoresOnFilename = async (context: Excel.RequestContext) => {
+export const initStoresOnFileName = async (context: Excel.RequestContext) => {
     context.workbook.load('name');
     await context.sync();
-    const filename = context.workbook.name.toLowerCase();
+    const fileName = context.workbook.name.toLowerCase();
 
     await initStores(context);
+    await initExcelImages(context);
 
-    if (filename.includes('письмо суточные')) {
+    if (fileName.includes('письмо суточные')) {
         excelSyncStore.setAppStatus('Offer');
     }
-    if (filename.includes('движение продукции')) {
-        await initExcelImages(context);
+    if (fileName.includes('движение')) {
         excelSyncStore.setAppStatus('Docs');
     }
-    if (filename.includes('продажи')) {
+    if (fileName.includes('продажи')) {
         excelSyncStore.setAppStatus('Sales');
     }
 };
