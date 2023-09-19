@@ -246,8 +246,8 @@ export type PortsRuT = {
 
 // Sales
 export type ProductionSalesT = {
-    codeName: string;
     name: string;
+    codeName: string;
     expirationDate: number;
 };
 

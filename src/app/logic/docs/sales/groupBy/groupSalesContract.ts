@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
+import _ from 'lodash';
 import tablesStore from '../../../../stores/tablesStore/tablesStore';
 import { SalesRowT } from '../../../../types/typesTables';
 import { groupify } from '../../../utils/groupify';
@@ -23,10 +25,11 @@ export const groupSalesContract = () => {
     }, {});
 
     // take last ten contracts
-    const contractsArr = Object.values(contracts).slice(-10);
+    const contractsArr = Object.values(contracts).slice(-3);
     contractsArr.forEach((contract) => {
         contract.recordsGroupedBy.bl = groupByBl<SalesRowT>(contract.rows);
     });
 
+    console.log(_.cloneDeep(contractsArr));
     return contractsArr;
 };

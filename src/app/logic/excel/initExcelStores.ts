@@ -19,7 +19,7 @@ const getExistedStores = (context: Excel.RequestContext) => {
             );
 
             if (!storeWS) {
-                console.warn(`В excel-книге нет Листа с названием ${key}`);
+                // console.warn(`В excel-книге нет Листа с названием ${key}`);
                 return total;
             }
             if (!table) {

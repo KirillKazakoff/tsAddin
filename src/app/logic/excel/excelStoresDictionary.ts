@@ -23,6 +23,7 @@ import { setInner } from '../../stores/tablesStore/set/setInner';
 import { setMates } from '../../stores/tablesStore/set/setMates';
 import { setNordmile } from '../../stores/tablesStore/set/setNordmile';
 import { setSales } from '../../stores/tablesStore/set/setSales';
+import { setProductionSales } from '../../stores/spsStore/set/setProductionSales';
 
 export const excelStoresDictionary = {
     'Инвойсы хранение': {
@@ -92,6 +93,10 @@ export const excelStoresDictionary = {
     'SPSortAssortiment': {
         table: 'SPSortAssortiment',
         setter: setSortsAssortiment,
+    },
+    'SPProductionSales': {
+        table: 'SPProductionSales',
+        setter: setProductionSales,
     },
     // table initialize
     'Коносаменты': {
