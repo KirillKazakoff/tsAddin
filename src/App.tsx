@@ -7,7 +7,7 @@ import { PageStatusRoute } from './app/routes/ErrorRoute/PageStatusRoute';
 import { ExportRoute } from './app/routes/ExportRoute/ExportRoute';
 import { InnerRoute } from './app/routes/InnerRoute/InnerRoute';
 import { RequestNordmileRoute } from './app/routes/RequestNordmileRoute';
-import { SalesRoute } from './app/routes/SalesRoute';
+import { SalesRoute } from './app/routes/SalesRoute/SalesRoute';
 
 export default function App() {
     return (

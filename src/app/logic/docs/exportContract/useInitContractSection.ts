@@ -7,9 +7,9 @@ import { useContractFormik } from './useContractFormik';
 export const useInitContractSection = () => {
     const formik = useContractFormik();
     const agreementObj = groupAgByNo();
-    const agreements = Object.values(agreementObj);
-    const currentAgreement = agreements.find(
-        (a) => a.record.id === exportContractStore.agreementId,
+    const docs = Object.values(agreementObj);
+    const currentDoc = docs.find(
+        (a) => a.record.id === exportContractStore.currentId,
     );
 
     const onLoad = async (agreement: AgreementT) => {
@@ -27,18 +27,16 @@ export const useInitContractSection = () => {
             formik.formRef.current.setFieldValue('declaration', '');
         }
     };
-    const onLoadHandler = async () => onLoad(currentAgreement);
+    const onLoadHandler = async () => onLoad(currentDoc);
 
-    const title = `Контракт №${currentAgreement?.record?.id}`;
+    const title = `Контракт №${currentDoc?.record?.id}`;
 
     const initObj = {
         onLoad: onLoadHandler,
-        agreements,
+        agreements: docs,
         title,
-        currentAgreement,
+        currentDoc,
     };
-    return {
-        initObj,
-        formik,
-    };
+
+    return { initObj, formik };
 };

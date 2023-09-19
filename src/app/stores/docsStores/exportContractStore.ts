@@ -15,7 +15,7 @@ type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 class ExportContractStore {
     fields = initFields();
     operation: OperationT = 'export';
-    agreementId = '';
+    currentId = '';
 
     constructor() {
         makeAutoObservable(this);
@@ -29,8 +29,8 @@ class ExportContractStore {
     setOperation(value: OperationT) {
         this.operation = value;
     }
-    setCurrentAgreementNo(agreementId: string) {
-        this.agreementId = agreementId;
+    setCurrentId(agreementId: string) {
+        this.currentId = agreementId;
     }
 
     get currentAgreementRecord() {
@@ -38,7 +38,7 @@ class ExportContractStore {
             ...tablesStore.exportStorageT,
             ...tablesStore.exportT,
             ...tablesStore.certificatesT.map((row) => row.exportRow),
-        ].find((row) => row.id === this.agreementId);
+        ].find((row) => row.id === this.currentId);
     }
     get currentTable() {
         if (this.operation === 'export') return tablesStore.exportT;
@@ -46,7 +46,7 @@ class ExportContractStore {
         return tablesStore.certificatesT.map((r) => r.exportRow);
     }
     get currentTerms() {
-        if (!this.agreementId) return '';
+        if (!this.currentId) return '';
         const terms = this.currentAgreementRecord.terms || 'EXW';
         return terms;
     }
