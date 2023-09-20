@@ -8,7 +8,7 @@ export const getSalesContractCells = (contract: SalesContractT) => {
     // prettier-ignore
     const cells = {
         common: <CellObjT[]>[
-            { cell: 'Контракт_номер', value: `(${r.contractNo})` },
+            { cell: 'Контракт_номер', value: `(${r.id})` },
             { cell: 'Контракт_дата', value: `This contract is made on ${getExcelDateStr(r.contractDate, 'en')} between:` },
             { cell: 'Контракт_продавец', value: r.seller.name },
             { cell: 'Контракт_продавец_адрес', value: r.seller.addres },
@@ -32,7 +32,7 @@ export const getSalesContractCells = (contract: SalesContractT) => {
         default: <CellObjT[]>[],
     };
 
-    if (contract.isLive) {
+    if (r.isLive) {
         return [...cells.live, ...cells.common];
     }
     return [...cells.common, ...cells.common];

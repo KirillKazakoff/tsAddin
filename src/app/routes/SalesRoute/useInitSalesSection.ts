@@ -6,9 +6,9 @@ import { useSalesFormik } from './useSalesFormik';
 
 export const useInitSalesSection = () => {
     const formik = useSalesFormik();
-    const contracts = groupSalesContract();
-    const currentDoc = contracts.find(
-        (c) => c.record.contractNo === salesContractStore.currentId,
+    const docs = groupSalesContract();
+    const currentDoc = docs.find(
+        (c) => c.record.id === salesContractStore.currentId,
     );
 
     const onLoad = async (doc: SalesContractT) => {
@@ -23,14 +23,17 @@ export const useInitSalesSection = () => {
     };
     const onLoadHandler = async () => onLoad(currentDoc);
 
-    const title = `Контракт №${currentDoc.record.contractNo}`;
+    const title = `Контракт №${currentDoc?.record?.id}`;
 
     const initObj = {
         onLoad: onLoadHandler,
-        contracts,
+        docs,
         title,
         currentDoc,
     };
 
-    return { initObj, formik };
+    return {
+        initObj,
+        formik,
+    };
 };

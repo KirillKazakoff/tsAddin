@@ -34,5 +34,5 @@ export const groupAgByNo = () => {
         agreements[key].productsGroupedBy.bl = groupByBl(agreement.rows);
     });
 
-    return agreements;
+    return Object.values(agreements);
 };

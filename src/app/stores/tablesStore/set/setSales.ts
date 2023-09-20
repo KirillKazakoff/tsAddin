@@ -11,7 +11,7 @@ export const setSales = (table: any[][]) => {
 
     const transformedTable = excluded.reduce<SalesRowT[]>((totalObj, row, index) => {
         const [
-            contractNo,
+            id,
             contractDate,
             seller,
             buyer,
@@ -34,7 +34,7 @@ export const setSales = (table: any[][]) => {
         try {
             const rowObj: SalesRowT = {
                 type: 'sales',
-                contractNo,
+                id,
                 contractDate,
                 seller: selectSp.agent(seller),
                 buyer: selectSp.consignee(buyer),
@@ -54,6 +54,7 @@ export const setSales = (table: any[][]) => {
                     priceTotal: initAmount(priceTotal, 2, 2),
                 },
                 certificateDate,
+                isLive: product.toLowerCase().includes('live'),
                 index: index.toString(),
             };
 

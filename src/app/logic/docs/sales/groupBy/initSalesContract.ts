@@ -1,7 +1,6 @@
 import { SalesRowT } from '../../../../types/typesTables';
 
 export const initSalesContract = (row: SalesRowT) => {
-    const isLive = row.product.codeName.toLowerCase().includes('live');
     const contract = {
         record: row,
         rows: <SalesRowT[]>[],
@@ -9,7 +8,6 @@ export const initSalesContract = (row: SalesRowT) => {
             bl: {},
         },
         priceTotal: 0,
-        isLive,
     };
     return contract;
 };

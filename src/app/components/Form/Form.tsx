@@ -2,7 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Form as FormikForm, useFormikContext } from 'formik';
 
-type Props = { children: React.ReactElement[]; className: string };
+type Props = {
+    children: React.ReactElement[] | React.ReactElement;
+    className: string;
+};
 
 export const Form = observer(({ children, className }: Props) => {
     const { isValid } = useFormikContext();

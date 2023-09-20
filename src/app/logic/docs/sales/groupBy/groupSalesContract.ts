@@ -16,7 +16,7 @@ export const groupSalesContract = () => {
         const contract = groupify<SalesContractT>(
             total,
             initSalesContract(row),
-            row.contractNo,
+            row.id,
         );
 
         contract.rows.push(row);
@@ -30,6 +30,5 @@ export const groupSalesContract = () => {
         contract.recordsGroupedBy.bl = groupByBl<SalesRowT>(contract.rows);
     });
 
-    console.log(_.cloneDeep(contractsArr));
     return contractsArr;
 };

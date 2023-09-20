@@ -19,19 +19,23 @@ function getErrorsDescription(errors: any) {
     return res;
 }
 
-type ErrorsT = { [key: string]: string };
+type FormKeyT<T> = keyof { [P in keyof T]: string };
+type ErrorsT<T> = { [P in FormKeyT<T>]: string } | Record<string, never>;
 
-export const getValidationError = (
-    values: { [key: string]: string | boolean },
-    mutateErrorsCb: (errors: ErrorsT, valuesTrimed: any) => void,
+export const getValidationError = <FormValuesT>(
+    values: FormValuesT,
+    mutateErrorsCb: (errors: ErrorsT<FormValuesT>, valuesTrimed: FormValuesT) => void,
 ) => {
-    let errors: ErrorsT = {};
+    let errors: ErrorsT<FormValuesT> = {};
 
-    const valuesTrimmed = Object.entries(values).reduce((total, [key, val]) => {
-        if (typeof val === 'boolean') return total;
-        total[key] = val.trim();
-        return total;
-    }, {});
+    const valuesTrimmed = Object.entries(values).reduce<FormValuesT>(
+        (total, [key, val]) => {
+            if (typeof val === 'boolean') return total;
+            total[key] = val.trim();
+            return total;
+        },
+        {} as FormValuesT,
+    );
 
     mutateErrorsCb(errors, valuesTrimmed);
     if (!pageStatusStore.isValidation) errors = {};

@@ -5,9 +5,9 @@ import { SalesContractT } from './groupBy/initSalesContract';
 import { initSalesContractTmp } from './initSalesContractTmp';
 
 export const createSalesContract = async (contract: SalesContractT) => {
-    const { contractNo } = contract.record;
+    const { id: contractNo, isLive } = contract.record;
 
-    const path = contract.isLive ? pathObj.salesContractLive : pathObj.salesContract;
+    const path = isLive ? pathObj.salesContractLive : pathObj.salesContract;
     const book = await readTmp(path);
 
     await initSalesContractTmp(book, contract);

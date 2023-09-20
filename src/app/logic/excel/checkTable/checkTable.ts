@@ -1,12 +1,17 @@
 import tablesStore, { TableKeyT } from '../../../stores/tablesStore/tablesStore';
 import {
     initTableStatus,
+    tableEmpty,
     tableError,
 } from '../../../stores/tablesStore/utils/tableStatus';
 import { CommonRowT } from '../../../types/typesTables';
 import { getNonObligatoryProps } from './getNonObligatoryProps';
 
 export const checkTable = (table: CommonRowT[], tableName: TableKeyT) => {
+    if (table.length === 0) {
+        tablesStore.setStatus(tableEmpty(tableName), tableName);
+    }
+
     const isError = table.some((row) => {
         const nonObligatoryProps = getNonObligatoryProps(row, tableName);
 

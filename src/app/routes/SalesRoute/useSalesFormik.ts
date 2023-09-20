@@ -10,16 +10,18 @@ import { useRevalidate } from '../../components/Form/useRevalidate';
 export const useSalesFormik = () => {
     const storedValues = mySessionStorage.getItem('salesContract');
     const initialFields = {
-        podpisant: '',
+        filling: '',
     };
     type FormValuesT = typeof initialFields;
 
     const validate = (formValues: FormValuesT) => {
         mySessionStorage.setItem('salesContract', formValues);
 
-        return getValidationError(formValues, (errors, values) => {
-            if (!values.podpisant) {
-                errors.podpisant = 'valueMissing';
+        return getValidationError<FormValuesT>(formValues, (errors, values) => {
+            if (salesContractStore.currentRecord.isLive) {
+                if (!values.filling) {
+                    errors.filling = 'valueMissing';
+                }
             }
         });
     };

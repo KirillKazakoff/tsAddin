@@ -18,3 +18,9 @@ export const tableError = (error: TableErrorT): TableStatusT => ({
     title: `В таблице ${error.tableName} ошибка`,
     desc: `Ошибка (${error.desc}) в строке ${error.row}, в столбце ${error.prop}`,
 });
+
+export const tableEmpty = (tableName: string): TableStatusT => ({
+    statusType: 'empty',
+    title: `Таблица ${tableName} пуста`,
+    desc: 'Заполните таблицу',
+});

@@ -1,15 +1,16 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { useInitSalesSection } from './useInitSalesSection';
+import { SectionErrorHOC } from '../../components/SectionErrorHOC';
+import tablesStore from '../../stores/tablesStore/tablesStore';
+import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
+import { SalesContractSection } from './SalesContractSection';
 
 export const SalesRoute = observer(() => {
-    const { formik, initObj } = useInitSalesSection();
+    if (excelSyncStore.isLoading) return null;
 
     return (
-        <div className='form-section'>
-            <div className='form-section__choose'>
-                <h2 className='mb0'>Выберите контракт:</h2>
-            </div>
-        </div>
+        <SectionErrorHOC status={tablesStore.status.sales} title='Продажи'>
+            <SalesContractSection />
+        </SectionErrorHOC>
     );
 });

@@ -6,8 +6,7 @@ import { useContractFormik } from './useContractFormik';
 
 export const useInitContractSection = () => {
     const formik = useContractFormik();
-    const agreementObj = groupAgByNo();
-    const docs = Object.values(agreementObj);
+    const docs = groupAgByNo();
     const currentDoc = docs.find(
         (a) => a.record.id === exportContractStore.currentId,
     );
@@ -33,7 +32,7 @@ export const useInitContractSection = () => {
 
     const initObj = {
         onLoad: onLoadHandler,
-        agreements: docs,
+        docs,
         title,
         currentDoc,
     };

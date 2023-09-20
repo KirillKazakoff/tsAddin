@@ -29,24 +29,13 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
             'invoiceNo',
         ],
         certificates: ['coNo', 'hcNo', 'iuuNo', 'date', 'placesRemain'],
-        sales: [],
+        sales: ['blNo'],
     };
 
     if (row.terms === 'FCA') {
         nonObligatoryProps.export.push('blNo', 'portFrom');
+        nonObligatoryProps.sales.push('blNo');
     }
 
     return nonObligatoryProps[tableName];
-    // if (tableName.includes('export')) return nonObligatoryProps.export;
-    // if (tableName.includes('mates')) return nonObligatoryProps.mates;
-    // if (tableName.includes('discharge')) {
-    //     return nonObligatoryProps.dischargeInvoices;
-    // }
-    // if (tableName.includes('storageInvoice')) {
-    //     return nonObligatoryProps.storageInvoices;
-    // }
-    // if (tableName.includes('certificates')) {
-    //     return nonObligatoryProps.certificates;
-    // }
-    // return nonObligatoryProps.inner;
 };

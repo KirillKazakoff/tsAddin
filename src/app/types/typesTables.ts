@@ -24,7 +24,7 @@ export type CommonRowT = {
 
 export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'CFR (контейнер)';
 export type TableStatusT = {
-    statusType: 'ok' | 'notFilledTable';
+    statusType: 'ok' | 'notFilledTable' | 'empty';
     title: string;
     desc: string;
 };
@@ -194,7 +194,7 @@ export interface NordmileRowT extends CommonRowT {
 }
 
 export interface SalesRowT extends CommonRowT {
-    contractNo: string;
+    id: string;
     contractDate: string;
     seller: AgentT;
     buyer: ConsigneeT;
@@ -214,6 +214,7 @@ export interface SalesRowT extends CommonRowT {
         priceTotal: AmountT;
     };
     certificateDate: string;
+    isLive: boolean;
     index: string;
 }
 
