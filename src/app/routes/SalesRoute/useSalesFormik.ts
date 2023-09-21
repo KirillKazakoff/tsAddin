@@ -4,7 +4,6 @@ import { FormikProps } from 'formik';
 import { getValidationError } from '../../components/Form/getValidationError';
 import { mySessionStorage } from '../../logic/utils/sessionStorage';
 import salesContractStore from '../../stores/docsStores/salesContractStore';
-import { OnSubmitT } from '../../types/typesUtils';
 import { useRevalidate } from '../../components/Form/useRevalidate';
 
 export const useSalesFormik = () => {
@@ -17,7 +16,7 @@ export const useSalesFormik = () => {
     const validate = (formValues: FormValuesT) => {
         mySessionStorage.setItem('salesContract', formValues);
 
-        return getValidationError<FormValuesT>(formValues, (errors, values) => {
+        return getValidationError(formValues, (errors, values) => {
             if (salesContractStore.currentRecord.isLive) {
                 if (!values.filling) {
                     errors.filling = 'valueMissing';
@@ -26,7 +25,7 @@ export const useSalesFormik = () => {
         });
     };
 
-    const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
+    const onSubmit = async (values: FormValuesT) => {
         salesContractStore.setFields(values);
     };
 

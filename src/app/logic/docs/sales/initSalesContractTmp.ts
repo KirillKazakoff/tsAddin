@@ -4,6 +4,7 @@ import { SalesContractT } from './groupBy/initSalesContract';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initSalesRowsLive } from './initSalesRowsLive';
 import { getSalesContractCells } from './getSalesContractCells';
+import { initSalesRowsDefault } from './initSalesRowsDefault';
 
 export const initSalesContractTmp = async (
     book: Workbook,
@@ -17,31 +18,28 @@ export const initSalesContractTmp = async (
     const cells = getSalesContractCells(contract);
     cells.forEach((cell) => utils.setCell(cell));
 
-    initSalesRowsLive({
-        rows: contract.rows,
-        isContract: true,
-        utils,
-    });
+    if (contract.record.isLive) {
+        initSalesRowsLive({
+            rows: contract.rows,
+            isContract: true,
+            utils,
+        });
+    } else {
+        initSalesRowsDefault(contract, utils);
+    }
 
     // initPictures
-    const rangeCellNames = [
-        ['Sign_seller_start', 'Sign_seller_end'],
-        ['Invoice_sign_seller_start', 'Invoice_sign_seller_end'],
-    ];
-
-    await Promise.all(
-        rangeCellNames.map(([start, end]) => initPicturesExcel(
-            [
-                {
-                    key: seller.code,
-                    rangeObj: {
-                        start,
-                        end,
-                    },
-                    ws,
+    await initPicturesExcel(
+        [
+            {
+                key: seller.code,
+                rangeObj: {
+                    start: 'Sign_seller_start',
+                    end: 'Sign_seller_end',
                 },
-            ],
-            true,
-        )),
+                ws,
+            },
+        ],
+        true,
     );
 };

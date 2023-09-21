@@ -1,3 +1,4 @@
+import { GroupedBlT } from '../../../../types/typesContract';
 import { SalesRowT } from '../../../../types/typesTables';
 
 export const initSalesContract = (row: SalesRowT) => {
@@ -5,7 +6,7 @@ export const initSalesContract = (row: SalesRowT) => {
         record: row,
         rows: <SalesRowT[]>[],
         recordsGroupedBy: {
-            bl: {},
+            bl: <GroupedBlT<SalesRowT>>{},
         },
         priceTotal: 0,
     };

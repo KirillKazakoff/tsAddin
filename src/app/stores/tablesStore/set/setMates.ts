@@ -41,7 +41,7 @@ export const setMates = (table: any[][]) => {
                 sort,
                 amount: {
                     places: initAmount(places, 0, 0),
-                    total: initAmount(placesTotal, 0, 2),
+                    placesTotal: initAmount(placesTotal, 0, 2),
                 },
                 index: index.toString(),
             };

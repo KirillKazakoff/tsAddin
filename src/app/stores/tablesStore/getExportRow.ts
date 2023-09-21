@@ -18,7 +18,9 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
         portTo: selectSp.portZarubezh(row.portTo),
         consignee: consigneeSp,
         product: selectSp.product(row.product),
-        packSp: selectSp.package(`${row.vessel}${row.product}${row.pack}`),
+        packSp: selectSp.package(
+            `${row.vessel}${row.product}${row.pack.toString().replace('.', ',')}`,
+        ),
         sortSp: selectSp.sortAssortiment(`${row.sort}${row.product}`),
         amount: {
             places: initAmount(row.places, 0, 0),

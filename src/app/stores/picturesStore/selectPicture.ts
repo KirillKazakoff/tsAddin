@@ -17,6 +17,8 @@ const switchPictureGet = (codeName: string): PictureKey | false => {
             return 'Sign_SOJI';
         case 'Крузина М.Н.':
             return 'Sign_KRUZINAMN';
+        case 'OCEANIC':
+            return 'Sign_OCEANIC';
 
         default:
             return false;
@@ -24,8 +26,6 @@ const switchPictureGet = (codeName: string): PictureKey | false => {
 };
 
 export const selectPicture = (codeName: string): PictureKey => {
-    // prettier-ignore
-
     const res = switchPictureGet(codeName);
     if (!res) throw new Error('Нет такой картинки');
 

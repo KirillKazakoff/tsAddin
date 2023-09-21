@@ -25,15 +25,16 @@ export const initBlAmount = (measure: 'tn' | 'kg') => {
         places: initAmount(0, 0, 0),
         placesTotal: initAmount(0, min, max),
         placesGross: initAmount(0, min, max),
+        priceTotal: initAmount(0, 2, 2),
     };
 };
-export type BlAmountT = ReturnType<typeof initBlAmount>;
 export const addBlAmount = (
-    blAmount: BlAmountT,
+    blAmount: AmountObjT,
     rowAmount: AmountObjT,
     coefficient: number | null = 1,
 ) => {
     addToAmount(blAmount.places, rowAmount.places.count);
     addToAmount(blAmount.placesTotal, rowAmount.placesTotal.count);
     addToAmount(blAmount.placesGross, rowAmount.placesTotal.count * coefficient);
+    addToAmount(blAmount.priceTotal, rowAmount?.priceTotal?.count);
 };

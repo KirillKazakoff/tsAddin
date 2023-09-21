@@ -14,36 +14,36 @@ export const initExportContractRowsR = (
     const groups = Object.values(blGrouped);
 
     groups.forEach((group, index) => {
-        const { record } = group;
-        const Qt = `\nИТОГО: ${group.total.placesTotal.str}`;
-        let amount = group.rows.reduce<string>((total, row) => {
-            total = `${total} ${row.amount.placesTotal.str}\n`;
-            return total;
-        }, '');
-        amount += Qt;
+        group.rows.forEach((r) => {
+            // const Qt = `\nИТОГО: ${group.total.placesTotal.str}`;
+            // let amount = group.rows.reduce<string>((total, row) => {
+            //     total = `${total} ${row.amount.placesTotal.str}\n`;
+            //     return total;
+            // }, '');
+            // amount += Qt;
+            const rowArr = [
+                '',
+                `${r.record.product.ru.name}\n${r.record.product.eng.name}`,
+                `${r.record.vessel.ru.name}\n${r.record.vessel.eng.name}`,
+                `${r.record.consignee.fullName}\n${r.record.consignee.addres}`,
+                // amount,
+            ];
 
-        const rowArr = [
-            '',
-            `${record.product.ru.name}\n${record.product.eng.name}`,
-            `${record.vessel.ru.name}\n${record.vessel.eng.name}`,
-            `${record.consignee.fullName}\n${record.consignee.addres}`,
-            amount,
-        ];
+            const rowIndex = +arrayCl.cellEng.row + index;
+            ws.insertRow(rowIndex, rowArr).commit();
 
-        const rowIndex = +arrayCl.cellEng.row + index;
-        ws.insertRow(rowIndex, rowArr).commit();
+            const row = ws.getRow(rowIndex);
+            const height = 30 + group.rows.length * 15;
 
-        const row = ws.getRow(rowIndex);
-        const height = 30 + group.rows.length * 15;
+            styleRowCells(row, {
+                height,
+                border: borderAll,
+                alignment: alignmentCenter,
+                font: { size: 9 },
+            });
 
-        styleRowCells(row, {
-            height,
-            border: borderAll,
-            alignment: alignmentCenter,
-            font: { size: 9 },
+            row.getCell(1).border = {};
         });
-
-        row.getCell(1).border = {};
     });
 
     utils.deleteRow(cellName);

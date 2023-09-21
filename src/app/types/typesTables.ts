@@ -38,9 +38,13 @@ export type AmountT = {
         max: number;
     };
 };
-export type AmountObjT = {
-    [key: string]: AmountT;
-};
+export type AmountObjT = Partial<{
+    placesTotal: AmountT;
+    places: AmountT;
+    price: AmountT;
+    priceTotal: AmountT;
+    placesGross: AmountT;
+}>;
 
 // Tables
 export interface MateRowT extends CommonRowT {

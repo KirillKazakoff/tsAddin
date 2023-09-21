@@ -29,7 +29,7 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
             'invoiceNo',
         ],
         certificates: ['coNo', 'hcNo', 'iuuNo', 'date', 'placesRemain'],
-        sales: ['blNo'],
+        sales: ['blNo', 'isLive'],
     };
 
     if (row.terms === 'FCA') {

@@ -1,15 +1,22 @@
 import type { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
-import type { BlAmountT } from '../stores/tablesStore/utils/specialAmount';
 import { ConsigneeT } from './typesSP';
 import {
     ExportRowT, AmountT, AmountObjT, CertificateRowT,
 } from './typesTables';
 
 // BlT
+export type BlProductGroupedT<RowT> = {
+    record: RowT;
+    total: AmountObjT;
+};
+
 export type BlGroupT<RowT> = {
     record: RowT;
-    rows: RowT[];
-    total: BlAmountT;
+    groupedBy: {
+        product: { [key: string]: BlProductGroupedT<RowT> };
+    };
+    rows: BlProductGroupedT<RowT>[];
+    total: AmountObjT;
 };
 
 export type GroupedBlT<RowT> = {

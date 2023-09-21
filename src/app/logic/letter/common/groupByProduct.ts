@@ -27,7 +27,7 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
             product.codeName,
         );
 
-        const newDetails = { sort, amount: amount.total };
+        const newDetails = { sort, amount: amount.placesTotal };
 
         if (productObj.details.length === 0) {
             productObj.details.push(newDetails);
