@@ -14,7 +14,7 @@ export const initExportContractRowsR = (
     const groups = Object.values(blGrouped);
 
     groups.forEach((group, index) => {
-        group.rows.forEach((r) => {
+        group.groupedProductsArr.forEach((r) => {
             // const Qt = `\nИТОГО: ${group.total.placesTotal.str}`;
             // let amount = group.rows.reduce<string>((total, row) => {
             //     total = `${total} ${row.amount.placesTotal.str}\n`;
@@ -33,7 +33,7 @@ export const initExportContractRowsR = (
             ws.insertRow(rowIndex, rowArr).commit();
 
             const row = ws.getRow(rowIndex);
-            const height = 30 + group.rows.length * 15;
+            const height = 30 + group.groupedProductsArr.length * 15;
 
             styleRowCells(row, {
                 height,

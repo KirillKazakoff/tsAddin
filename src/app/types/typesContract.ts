@@ -8,6 +8,7 @@ import {
 export type BlProductGroupedT<RowT> = {
     record: RowT;
     total: AmountObjT;
+    rows: RowT[];
 };
 
 export type BlGroupT<RowT> = {
@@ -15,7 +16,7 @@ export type BlGroupT<RowT> = {
     groupedBy: {
         product: { [key: string]: BlProductGroupedT<RowT> };
     };
-    rows: BlProductGroupedT<RowT>[];
+    groupedProductsArr: BlProductGroupedT<RowT>[];
     total: AmountObjT;
 };
 

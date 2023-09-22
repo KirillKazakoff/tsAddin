@@ -6,7 +6,7 @@ import { alignmentCenter, styleRowCells } from '../styleRowCells';
 export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT) => {
     const cellName = 'Bl_массив';
     const arrayCl = utils.getCell(cellName);
-    const { rows } = blGroup;
+    const { groupedProductsArr: rows } = blGroup;
 
     rows.forEach((r) => {
         const rowArr = [

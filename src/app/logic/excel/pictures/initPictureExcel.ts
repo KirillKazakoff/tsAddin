@@ -30,16 +30,16 @@ export const initPicturesExcel = async (
     settingsArr: PictureSettingsT[],
     isActive: boolean,
 ) => {
+    const { ws } = settingsArr[0];
+    const utils = initExcelUtils(ws);
+
+    settingsArr.forEach((settings) => {
+        utils.getCell(settings.rangeObj.start).value = '';
+        utils.getCell(settings.rangeObj.end).value = '';
+    });
+
     if (!isActive || !picturesStore.isPicturesFound) {
         // clear picture fields if dont need pictures
-        const { ws } = settingsArr[0];
-        const utils = initExcelUtils(ws);
-
-        settingsArr.forEach((settings) => {
-            utils.getCell(settings.rangeObj.start).value = '';
-            utils.getCell(settings.rangeObj.end).value = '';
-        });
-
         if (!picturesStore.isPicturesFound) {
             pageStatusStore.setPageStatus(noPictureFound());
         }

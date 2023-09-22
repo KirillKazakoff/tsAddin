@@ -30,32 +30,34 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
             blAmount = initBlAmount('tn');
         }
 
-        const initObj: BlGroupT<RowT> = {
+        const initBlGroup: BlGroupT<RowT> = {
             record: row,
             groupedBy: {
                 product: {},
             },
-            rows: [],
+            groupedProductsArr: [],
             total: blAmount,
         };
-        const bl = groupify<BlGroupT<RowT>>(total, initObj, row.blNo);
+        const bl = groupify<BlGroupT<RowT>>(total, initBlGroup, row.blNo);
 
-        const initProductGroup = {
+        const initProductGroup = <BlProductGroupedT<RowT>>{
             record: row,
             total: blAmount,
+            rows: [],
         };
         const productRow = groupify<BlProductGroupedT<RowT>>(
             bl.groupedBy.product,
             initProductGroup,
             row.product.codeName,
         );
+        productRow.rows.push(row);
 
         addBlAmount(productRow.total, row.amount, row?.packSp?.coefficient);
         return total;
     }, {});
 
     Object.values(blGrouped).forEach((group) => {
-        group.rows.push(...Object.values(group.groupedBy.product));
+        group.groupedProductsArr.push(...Object.values(group.groupedBy.product));
     });
 
     return blGrouped;
