@@ -10,6 +10,7 @@ export const initExcelImages = async (context: Excel.RequestContext) => {
         await context.sync();
     } catch (e) {
         picturesStore.setIsPicturesFound(false);
+        return;
     }
 
     // get items from worksheet and get base64string for pics

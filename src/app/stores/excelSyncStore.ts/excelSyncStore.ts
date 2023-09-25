@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
-export type AppStatusT = 'Offer' | 'Docs' | 'Sales' | 'Init';
+export type AppStatusT = 'Offer' | 'Docs' | 'Sales' | 'Init' | 'NoRoute';
 
 class ExcelSyncStore {
     isSync = true;

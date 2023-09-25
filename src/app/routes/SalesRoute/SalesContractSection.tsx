@@ -6,6 +6,7 @@ import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import salesContractStore from '../../stores/docsStores/salesContractStore';
 import { useInitSalesSection } from './useInitSalesSection';
 import { Form } from '../../components/Form/Form';
+import { SalesCrabFilling } from './SalesCrabFilling';
 
 export const SalesContractSection = observer(() => {
     const { formik, initObj } = useInitSalesSection();
@@ -26,6 +27,9 @@ export const SalesContractSection = observer(() => {
                     <Form className='docs__form'>
                         <h3>{initObj.title}</h3>
                         <div className='fields-wrapper'>
+                            {initObj.currentDoc.record.isLive ? (
+                                <SalesCrabFilling />
+                            ) : null}
                             <DocsDownloadBtn
                                 title='Загрузить контракт'
                                 onClick={initObj.onLoad}

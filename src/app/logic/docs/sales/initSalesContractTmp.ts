@@ -14,7 +14,7 @@ export const initSalesContractTmp = async (
     const ws = book.getWorksheet('Sales_Contract');
     const utils = initExcelUtils(ws);
 
-    // initCells
+    // init cells
     const cells = getSalesContractCells(contract);
     cells.forEach((cell) => utils.setCell(cell));
 
@@ -26,15 +26,16 @@ export const initSalesContractTmp = async (
         });
     } else {
         initSalesRowsDefault(contract, utils);
-        // merge contract tmp cells
-        const startRow = utils.getRow('Контракт_всего_цена', 0).number;
-        const endRow = utils.getRow('Документация_BL', 1).number;
-        for (let i = startRow; i < endRow; i += 1) {
-            utils.mergeCells({ startCol: 1, endCol: 5, row: i });
-        }
     }
 
-    // initPictures
+    // merge cells
+    const startRow = utils.getRow('Контракт_всего_цена', 1).number;
+    const endRow = utils.getRow('Документация_BL', 1).number;
+    for (let i = startRow; i < endRow; i += 1) {
+        utils.mergeCells({ startCol: 1, endCol: 5, row: i });
+    }
+
+    // init pictures
     await initPicturesExcel(
         [
             {

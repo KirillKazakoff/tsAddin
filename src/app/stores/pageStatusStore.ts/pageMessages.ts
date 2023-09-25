@@ -6,6 +6,7 @@ export type PageStatusTypeT =
     | 'picturesError'
     | 'unknownError'
     | 'ok'
+    | 'noRouteMatchFileName'
     | 'mismatchKonosamentId';
 
 export type PageStatusT = {
@@ -33,6 +34,11 @@ export const mismatchKonosamentId = (innerRowKnsId: string): PageStatusT => ({
     statusType: 'mismatchKonosamentId',
     title: 'Несоответствие номеров коносамента',
     desc: `Коносамент с номером ${innerRowKnsId} не был найден в таблице Коносаменты - номер из таблицы Внутренний Рынок должен совпадать с номером в таблице Коносаменты`,
+});
+export const noRouteMatchFileName = (fileName: string): PageStatusT => ({
+    statusType: 'noRouteMatchFileName',
+    title: `Данный тип файла не поддерживается - ${fileName}`,
+    desc: 'В названии файла должно быть либо "Движение продукции", либо "Sales" либо "Суточные Письмо"',
 });
 
 export const initPageStatus = (): PageStatusT => ({

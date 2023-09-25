@@ -1,3 +1,4 @@
+import salesContractStore from '../../../stores/docsStores/salesContractStore';
 import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { SalesRowT } from '../../../types/typesTables';
 import { alignmentCenter, styleRowCells } from '../styleRowCells';
@@ -12,12 +13,13 @@ export const initSalesRowsLive = (settings: SettingsT) => {
     const cellName = isContract
         ? 'Контракт_предмет_массив'
         : 'Инвойс_предмет_массив';
+    const fontSize = isContract ? 9 : 11;
     const arrayCl = utils.getCell(cellName);
 
     rows.forEach((r, i) => {
         const cols = {
             bl: r.blNo,
-            product: `${r.product.name}\nFilling percentage`,
+            product: `${r.product.name}\nFilling: ${salesContractStore.fields.filling}`,
             vessel: r.vessel,
             sort: r.sort,
             price: r.amount.price.str,
@@ -39,8 +41,11 @@ export const initSalesRowsLive = (settings: SettingsT) => {
         styleRowCells(row, {
             height: 40,
             alignment: alignmentCenter,
-            font: { size: 11 },
+            font: { size: fontSize, name: 'Batang' },
         });
+
+        row.getCell(1).border = { left: { style: 'thin' } };
+        row.getCell(row.actualCellCount).border = { right: { style: 'thin' } };
     });
 
     utils.deleteRow(cellName);

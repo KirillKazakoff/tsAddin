@@ -258,7 +258,6 @@ b {
 }
 
 .error-route {
-    margin-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -281,5 +280,9 @@ b {
 }
 
 .mt20 {
+    margin-top: 20px;
+}
+
+.btn-back {
     margin-top: 20px;
 }
