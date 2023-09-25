@@ -2,9 +2,10 @@ import { Workbook } from 'exceljs';
 import { initPicturesExcel } from '../../excel/pictures/initPictureExcel';
 import { SalesContractT } from './groupBy/initSalesContract';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
-import { initSalesRowsLive } from './initSalesRowsLive';
+import { initSalesTableRows } from './initSalesTableRows';
 import { getSalesContractCells } from './getSalesContractCells';
 import { initSalesRowsDefault } from './initSalesRowsDefault';
+import { initSalesInvoiceTmp } from './initSalesInvoiceTmp';
 
 export const initSalesContractTmp = async (
     book: Workbook,
@@ -19,7 +20,7 @@ export const initSalesContractTmp = async (
     cells.forEach((cell) => utils.setCell(cell));
 
     if (contract.record.isLive) {
-        initSalesRowsLive({
+        initSalesTableRows({
             rows: contract.rows,
             isContract: true,
             utils,
@@ -27,6 +28,8 @@ export const initSalesContractTmp = async (
     } else {
         initSalesRowsDefault(contract, utils);
     }
+
+    initSalesInvoiceTmp(book, contract);
 
     // merge cells
     const startRow = utils.getRow('Контракт_всего_цена', 1).number;

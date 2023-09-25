@@ -8,7 +8,7 @@ type SettingsT = {
     utils: CellUtilsT;
     isContract: boolean;
 };
-export const initSalesRowsLive = (settings: SettingsT) => {
+export const initSalesTableRows = (settings: SettingsT) => {
     const { rows, utils, isContract } = settings;
     const cellName = isContract
         ? 'Контракт_предмет_массив'
@@ -17,14 +17,17 @@ export const initSalesRowsLive = (settings: SettingsT) => {
     const arrayCl = utils.getCell(cellName);
 
     rows.forEach((r, i) => {
+        const filling = r.isLive
+            ? `\nFilling: ${salesContractStore.fields.filling}`
+            : '';
         const cols = {
             bl: r.blNo,
-            product: `${r.product.name}\nFilling: ${salesContractStore.fields.filling}`,
+            product: `${r.product.name}${filling}`,
             vessel: r.vessel,
             sort: r.sort,
-            price: r.amount.price.str,
+            price: `${r.amount.price.str} $`,
             placesTotal: r.amount.placesTotal.str,
-            priceTotal: r.amount.priceTotal.str,
+            priceTotal: `${r.amount.priceTotal.str} $`,
         };
 
         if (isContract) {
@@ -42,10 +45,17 @@ export const initSalesRowsLive = (settings: SettingsT) => {
             height: 40,
             alignment: alignmentCenter,
             font: { size: fontSize, name: 'Batang' },
+            border: { bottom: { style: 'thin' } },
         });
 
-        row.getCell(1).border = { left: { style: 'thin' } };
-        row.getCell(row.actualCellCount).border = { right: { style: 'thin' } };
+        row.getCell(1).border = {
+            bottom: { style: 'thin' },
+            left: { style: 'thin' },
+        };
+        row.getCell(row.actualCellCount).border = {
+            bottom: { style: 'thin' },
+            right: { style: 'thin' },
+        };
     });
 
     utils.deleteRow(cellName);

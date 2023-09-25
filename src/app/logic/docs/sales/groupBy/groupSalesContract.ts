@@ -10,6 +10,7 @@ import {
     SalesContractsT,
     initSalesContract,
 } from './initSalesContract';
+import { addToAmount } from '../../../../stores/tablesStore/utils/initAmount';
 
 export const groupSalesContract = () => {
     const contracts = tablesStore.sales.reduce<SalesContractsT>((total, row) => {
@@ -20,7 +21,9 @@ export const groupSalesContract = () => {
         );
 
         contract.rows.push(row);
-        contract.priceTotal += row.amount.priceTotal.count;
+        addToAmount(contract.amount.placesTotal, row.amount.placesTotal.count);
+        addToAmount(contract.amount.priceTotal, row.amount.priceTotal.count);
+
         return total;
     }, {});
 

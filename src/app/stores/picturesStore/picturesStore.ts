@@ -11,6 +11,7 @@ class PicturesStore {
         Sign_SOJI: '',
         Sign_KRUZINAMN: '',
         Sign_OCEANIC: '',
+        Sign_CHANGRUN: '',
     };
 
     isPicturesFound = true;

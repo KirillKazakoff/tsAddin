@@ -71,7 +71,7 @@ export const initStoresOnFileName = async (context: Excel.RequestContext) => {
     await initStores(context);
     await initExcelImages(context);
 
-    if (fileName.includes('письмо суточные')) {
+    if (fileName.includes('письмо заявки')) {
         excelSyncStore.setAppStatus('Offer');
     }
     if (fileName.includes('движение')) {
