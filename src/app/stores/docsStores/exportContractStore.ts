@@ -14,7 +14,7 @@ type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class ExportContractStore {
     fields = initFields();
-    operation: OperationT = 'export';
+    operation: OperationT = 'certificates';
     currentId = '';
 
     constructor() {
@@ -34,16 +34,12 @@ class ExportContractStore {
     }
 
     get currentAgreementRecord() {
-        return [
-            ...tablesStore.exportStorageT,
-            ...tablesStore.exportT,
-            ...tablesStore.certificatesT.map((row) => row.exportRow),
-        ].find((row) => row.id === this.currentId);
+        return this.currentTable.find((row) => row.id === this.currentId);
     }
     get currentTable() {
         if (this.operation === 'export') return tablesStore.exportT;
         if (this.operation === 'export_storage') return tablesStore.exportStorageT;
-        return tablesStore.certificatesT.map((r) => r.exportRow);
+        return tablesStore.certificatesT;
     }
     get currentTerms() {
         if (!this.currentId) return '';

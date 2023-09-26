@@ -39,11 +39,10 @@ export const setExportStorage = (table: any[][]) => {
                 datePusan,
                 dateClose,
             ] = row;
-
             // prettier-ignore
             try {
                 const rowInit: ExportInitRowT = {
-                    contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index, placesLeft, datePusan, dateClose,
+                    contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index, placesLeft, datePusan, dateClose, terms: 'EXW',
                 };
                 const rowObj = getExportRow(rowInit);
                 totalObj.push(rowObj);

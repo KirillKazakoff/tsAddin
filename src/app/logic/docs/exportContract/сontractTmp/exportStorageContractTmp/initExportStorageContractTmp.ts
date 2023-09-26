@@ -9,6 +9,7 @@ import {
     getExcelDateStr,
 } from '../../../../excel/utils/getExcelDate';
 import { initExportContractRowsR } from '../../contractR/initExportContractRowsR';
+import { matchCOHCLanguage } from '../../contractR/setCOHCStatus';
 import { initExportContractAddreses } from '../initExportContractAddreses';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
 
@@ -93,12 +94,15 @@ export const initExportStorageContractTmp: InitExportContractTmp = (
     }
     if (exportContractStore.operation === 'certificates') {
         initExportContractRowsR(agreement.productsGroupedBy.bl, utils);
-        // if (cohc)
-        utils.setCell({
-            cell: 'Обязательство_хранение',
-            eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue Certificate of Origin and Health Certificate for the following quantity:`,
-            ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить сертификат происхождения и сертификат здоровья на нижеследущие партии:`,
-        });
+
+        if (agreement.cohc) {
+            // prettier-ignore
+            utils.setCell({
+                cell: 'Обязательство_хранение',
+                eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.cohc, 'eng')} for the following quantity:`,
+                ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.cohc, 'ru')} на нижеследущие партии:`,
+            });
+        }
     }
 
     // mergeCells

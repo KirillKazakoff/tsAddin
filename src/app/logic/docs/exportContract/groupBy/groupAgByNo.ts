@@ -8,6 +8,7 @@ import { groupAgByVessel } from './groupAgByVessel';
 import { AgreementT, AgreementsT, initAgreement } from './initAgreement';
 import { groupify } from '../../../utils/groupify';
 import { groupByBl } from './groupByBl';
+import { setCOHCStatus } from '../contractR/setCOHCStatus';
 
 export const groupAgByNo = () => {
     const table = exportContractStore.currentTable;
@@ -32,6 +33,8 @@ export const groupAgByNo = () => {
         agreements[key] = groupAgByConsignee(agreement);
         agreements[key] = groupAgByVessel(agreement);
         agreements[key].productsGroupedBy.bl = groupByBl(agreement.rows);
+
+        agreements[key] = setCOHCStatus(agreement);
     });
 
     return Object.values(agreements);

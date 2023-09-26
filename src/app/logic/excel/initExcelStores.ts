@@ -67,19 +67,23 @@ export const initStoresOnFileName = async (context: Excel.RequestContext) => {
     context.workbook.load('name');
     await context.sync();
     const fileName = context.workbook.name.toLowerCase();
+    console.log(fileName);
 
     await initStores(context);
     await initExcelImages(context);
 
     if (fileName.includes('письмо заявки')) {
         excelSyncStore.setAppStatus('Offer');
+        return;
     }
     if (fileName.includes('движение')) {
         excelSyncStore.setAppStatus('Docs');
+        return;
     }
     if (fileName.includes('продажи')) {
         excelSyncStore.setAppStatus('Sales');
-    } else {
-        pageStatusStore.setPageStatus(noRouteMatchFileName(fileName));
+        return;
     }
+
+    pageStatusStore.setPageStatus(noRouteMatchFileName(fileName));
 };

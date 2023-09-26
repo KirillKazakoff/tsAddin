@@ -20,12 +20,13 @@ export const useContractFormik = () => {
         mySessionStorage.setItem('exportContract', formValues);
 
         return getValidationError(formValues, (errors, values) => {
-            const { currentTerms: terms } = exportContractStore;
+            const { currentAgreementRecord: r } = exportContractStore;
 
             if (!values.podpisant) {
                 errors.podpisant = 'valueMissing';
             }
-            const isMissingETD = (terms === 'FCA' || terms.includes('CFR')) && !values.departureDate;
+            const isMissingETD = (r.terms === 'FCA' || r.terms.includes('CFR'))
+                && !values.departureDate;
             if (isMissingETD) {
                 errors.departureDate = 'valueMissing';
             }
@@ -33,7 +34,7 @@ export const useContractFormik = () => {
                 errors.departureDate = 'formatMismatch';
             }
             // if export exw closed
-            const isEXWClosed = exportContractStore.currentAgreementRecord.terms === 'EXW';
+            const isEXWClosed = r.terms === 'EXW' && r.type === 'export';
             if (isEXWClosed) {
                 if (!values.declaration) {
                     errors.declaration = 'valueMissing';

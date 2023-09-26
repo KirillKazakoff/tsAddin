@@ -2,31 +2,30 @@
 import _ from 'lodash';
 import { checkTable } from '../../../logic/excel/checkTable/checkTable';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
-import { CertificateRowT } from '../../../types/typesTables';
 import { selectSp } from '../../spsStore/select';
 import tablesStore from '../tablesStore';
 import { initAmount } from '../utils/initAmount';
+import { ExportRowT } from '../../../types/typesTables';
 
 export const setCertificates = (table: any[][]) => {
     table.shift();
     const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<CertificateRowT[]>(
+    const transformedTable = excluded.reduce<ExportRowT[]>(
         (totalObj, row, index) => {
             const [
                 blNo,
+                srSuffix,
+                srNo,
                 agreementNo,
                 contractCode,
-                rNo,
                 seller,
                 product,
                 placesTotal,
-                placesRemain,
                 consignee,
                 coNo,
                 hcNo,
                 iuuNo,
-                country,
                 date,
             ] = row;
 
@@ -43,29 +42,18 @@ export const setCertificates = (table: any[][]) => {
                     price: initAmount(exportRow.amount.price.count, 2, 2),
                     priceTotal: initAmount(exportRow.amount.priceTotal.count, 3, 4),
                 };
-                exportRow.id = `${exportRow.id}-R${rNo}`;
-                exportRow.agreementNo = `${exportRow.agreementNo}-R${rNo}` as any;
+                exportRow.id = `${exportRow.id}-${srSuffix}${srNo}`;
+                exportRow.agreementNo = `${exportRow.agreementNo}-R${srNo}`;
                 exportRow.date = date;
+                exportRow.type = 'certificates';
 
-                const rowObj: CertificateRowT = {
-                    type: 'certificates',
-                    exportRow,
-                    blNo,
-                    agreementNo: `${agreementNo}-R${rNo}`,
-                    amount: {
-                        placesRemain,
-                        placesTotal,
-                    },
+                const rowObj: ExportRowT = {
+                    ...exportRow,
                     seller: selectSp.seller(seller),
-                    consignee: selectSp.consignee(consignee),
-                    country,
-                    coNo,
-                    contract: selectSp.contract(contractCode),
                     date,
                     hcNo,
+                    coNo,
                     iuuNo,
-                    product: selectSp.product(product),
-                    rNo,
                     index: index.toString(),
                 };
 

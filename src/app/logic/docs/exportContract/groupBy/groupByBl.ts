@@ -53,6 +53,7 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
         productRow.rows.push(row);
 
         addBlAmount(productRow.total, row.amount, row?.packSp?.coefficient);
+        addBlAmount(bl.total, row.amount, row?.packSp?.coefficient);
         return total;
     }, {});
 

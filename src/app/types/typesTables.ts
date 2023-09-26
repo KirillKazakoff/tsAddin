@@ -40,6 +40,7 @@ export type AmountT = {
 };
 export type AmountObjT = Partial<{
     placesTotal: AmountT;
+    placesRemain: AmountT;
     places: AmountT;
     price: AmountT;
     priceTotal: AmountT;
@@ -59,7 +60,6 @@ export interface MateRowT extends CommonRowT {
     pack: number;
     sort: string;
     operation: string;
-    index: string;
 }
 
 export interface ExportInitRowT {
@@ -77,23 +77,31 @@ export interface ExportInitRowT {
     placesTotal: number;
     price: number;
     priceTotal: number;
-    agreementNo: number;
+    agreementNo: string;
     invoice: string;
     date: string;
     blNo: string;
     blMode: string;
-    terms?: TermsT;
     sort: string;
     pack: number;
     msc: string;
     id: string;
-    index: number;
     placesLeft?: string;
     datePusan?: string;
     dateClose?: string;
+    index: number;
+    terms: TermsT;
 }
 
-export interface ExportRowT extends CommonRowT {
+type CertificateRowT = Partial<{
+    coNo: string;
+    hcNo: string;
+    iuuNo: string;
+    country: string;
+    date: string;
+}>;
+
+export interface ExportRowT extends CommonRowT, CertificateRowT {
     contract: ContractT;
     seller: SellerT;
     bankSeller?: BankProdavecT;
@@ -107,15 +115,13 @@ export interface ExportRowT extends CommonRowT {
     amount: AmountObjT;
     packSp: PackageT;
     sortSp: SortAssortimentT;
-    agreementNo: number;
+    agreementNo: string;
     invoice: string;
     date: string;
     blNo: string;
-    terms?: TermsT;
     sort: string;
     pack: number;
     msc: string;
-    index: string;
     id: string;
     placesLeft?: string;
     datePusan?: string;
@@ -137,7 +143,6 @@ export interface InnerRowT extends CommonRowT {
     bankSeller: string;
     deliveryDate: string;
     paymentDate: string;
-    index: string;
 }
 
 export interface InvoiceKTIRowT extends CommonRowT {
@@ -148,7 +153,6 @@ export interface InvoiceKTIRowT extends CommonRowT {
     product: ProductionT;
     seller: SellerT;
     dateInvoice: string;
-    index: string;
     amount: {
         price: number;
         priceTotal: number;
@@ -161,27 +165,6 @@ export interface InvoiceKTIRowT extends CommonRowT {
     dateDischarge?: string;
     dateAccountSent?: string;
     operation?: string;
-}
-
-export interface CertificateRowT extends CommonRowT {
-    exportRow: ExportRowT;
-    blNo: string;
-    rNo: string;
-    agreementNo: string;
-    contract: ContractT;
-    seller: SellerT;
-    amount: {
-        placesRemain: number;
-        placesTotal: number;
-    };
-    product: ProductionT;
-    consignee: ConsigneeT;
-    coNo: string;
-    hcNo: string;
-    iuuNo: string;
-    country: string;
-    date: string;
-    index: string;
 }
 
 export interface NordmileRowT extends CommonRowT {
@@ -206,20 +189,13 @@ export interface SalesRowT extends CommonRowT {
     transport: string;
     dateETA: string;
     port: string;
-    terms: TermsT;
     vessel: string;
     product: ProductionSalesT;
     sort: string;
     pack: number;
-    amount: {
-        places: AmountT;
-        placesTotal: AmountT;
-        price: AmountT;
-        priceTotal: AmountT;
-    };
+    amount: AmountObjT;
     certificateDate: string;
     isLive: boolean;
-    index: string;
 }
 
 // utilstype

@@ -15,25 +15,26 @@ export const initExportContractRowsR = (
 
     groups.forEach((group, index) => {
         group.groupedProductsArr.forEach((r) => {
-            // const Qt = `\nИТОГО: ${group.total.placesTotal.str}`;
-            // let amount = group.rows.reduce<string>((total, row) => {
-            //     total = `${total} ${row.amount.placesTotal.str}\n`;
-            //     return total;
-            // }, '');
-            // amount += Qt;
+            const Qt = `\nИТОГО: ${group.total.placesTotal.str}`;
+            let amount = r.rows.reduce<string>((total, row) => {
+                total = `${total} ${row.amount.placesTotal.str}\n`;
+                return total;
+            }, '');
+            amount += Qt;
+
             const rowArr = [
                 '',
                 `${r.record.product.ru.name}\n${r.record.product.eng.name}`,
                 `${r.record.vessel.ru.name}\n${r.record.vessel.eng.name}`,
                 `${r.record.consignee.fullName}\n${r.record.consignee.addres}`,
-                // amount,
+                amount,
             ];
 
             const rowIndex = +arrayCl.cellEng.row + index;
             ws.insertRow(rowIndex, rowArr).commit();
 
             const row = ws.getRow(rowIndex);
-            const height = 30 + group.groupedProductsArr.length * 15;
+            const height = 30 + r.rows.length * 15;
 
             styleRowCells(row, {
                 height,
