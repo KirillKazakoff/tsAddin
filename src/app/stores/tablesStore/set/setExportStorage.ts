@@ -45,6 +45,8 @@ export const setExportStorage = (table: any[][]) => {
                     contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index, placesLeft, datePusan, dateClose, terms: 'EXW',
                 };
                 const rowObj = getExportRow(rowInit);
+
+                rowObj.type = 'exportStorage';
                 totalObj.push(rowObj);
                 return totalObj;
             } catch (e) {

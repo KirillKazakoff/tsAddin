@@ -8,7 +8,6 @@ export const initExportStorageContractRows = (
     invoices: InvoicesT,
     utils: CellUtilsDoubleT,
 ) => {
-    const { ws } = utils;
     const cellName = 'Сертификаты_массив';
     const arrayCl = utils.getCell(cellName);
 
@@ -21,21 +20,26 @@ export const initExportStorageContractRows = (
     }, []);
 
     groups.forEach((group, index) => {
-        const { record } = group;
+        const { record: r } = group;
 
         const rowArr = [
             '',
-            `${record.product.ru.name}\n${record.product.eng.name}`,
-            `${record.vessel.ru.name}\n${record.vessel.eng.name}`,
-            `${record.consignee.fullName}\n${record.consignee.addres}`,
+            `${r.product.ru.name}\n${r.product.eng.name}`,
+            '',
+            `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
+            '',
+            '',
+            `${r.consignee.fullName}\n${r.consignee.addres}`,
+            '',
+            '',
             group.total.placesTotal.str,
         ];
 
         const rowIndex = +arrayCl.cellEng.row + index;
-        ws.insertRow(rowIndex, rowArr).commit();
+        utils.ws.insertRow(rowIndex, rowArr).commit();
 
         // styleRow
-        const row = ws.getRow(rowIndex);
+        const row = utils.ws.getRow(rowIndex);
         styleRowCells(row, {
             height: 45,
             border: borderAll,

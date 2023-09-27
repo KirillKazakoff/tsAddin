@@ -13,7 +13,7 @@ const switchPictureGet = (codeName: string): PictureKey | false => {
             return 'Sign_KOTOVMN';
         case 'Котов Н.М.':
             return 'Sign_KOTOVNM';
-        case 'KTI_sign':
+        case 'SE JI YOUNG':
             return 'Sign_SOJI';
         case 'Крузина М.Н.':
             return 'Sign_KRUZINAMN';
@@ -29,7 +29,7 @@ const switchPictureGet = (codeName: string): PictureKey | false => {
 
 export const selectPicture = (codeName: string): PictureKey => {
     const res = switchPictureGet(codeName);
-    if (!res) throw new Error('Нет такой картинки');
+    if (!res) throw new Error(`Отсутствует изображение ${codeName}`);
 
     return res;
 };

@@ -1,8 +1,8 @@
+/* eslint-disable max-len */
+import { Workbook } from 'exceljs';
 import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
-import {
-    CellObjDoubleT,
-    InitExportContractTmp,
-} from '../../../../../types/typesExcelUtils';
+import { CellObjDoubleT } from '../../../../../types/typesExcelUtils';
+import { initPicturesExcel } from '../../../../excel/pictures/initPictureExcel';
 import { initExcelUtilsDouble } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 import {
     getDeliveryDate,
@@ -12,13 +12,14 @@ import { initExportContractRowsR } from '../../contractR/initExportContractRowsR
 import { matchCOHCLanguage } from '../../contractR/setCOHCStatus';
 import { initExportContractAddreses } from '../initExportContractAddreses';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
+import { AgreementT } from '../../groupBy/initAgreement';
 
-export const initExportStorageContractTmp: InitExportContractTmp = (
-    book,
-    agreement,
+export const initExportStorageContractTmp = async (
+    book: Workbook,
+    agreement: AgreementT,
 ) => {
     const ws = book.getWorksheet('Export_Storage_Contract');
-    const utils = initExcelUtilsDouble(ws, 2);
+    const utils = initExcelUtilsDouble(ws, 5);
     const {
         date: dateAgreement,
         agreementNo,
@@ -94,27 +95,24 @@ export const initExportStorageContractTmp: InitExportContractTmp = (
     }
     if (exportContractStore.operation === 'certificates') {
         initExportContractRowsR(agreement.productsGroupedBy.bl, utils);
-
-        if (agreement.cohc) {
-            // prettier-ignore
-            utils.setCell({
-                cell: 'Обязательство_хранение',
-                eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.cohc, 'eng')} for the following quantity:`,
-                ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.cohc, 'ru')} на нижеследущие партии:`,
-            });
-        }
+        // prettier-ignore
+        utils.setCell({
+            cell: 'Обязательство_хранение',
+            eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.cohc, 'eng')} for the following quantity:`,
+            ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.cohc, 'ru')} на нижеследущие партии:`,
+        });
     }
 
     // mergeCells
     const startRow = utils.getRow('Доставка_транспорт', 0).number;
-    const endRow = utils.getRow('Адреса_подпись', 0).number;
+    const endRow = utils.getRow('Адреса_покупатель_адрес', 0).number;
 
     for (let i = startRow; i <= endRow; i += 1) {
-        utils.mergeCells({ row: i, startCol: 2, endCol: 3 });
-        utils.mergeCells({ row: i, startCol: 4, endCol: 5 });
+        utils.mergeCells({ row: i, startCol: 2, endCol: 6 });
+        utils.mergeCells({ row: i, startCol: 7, endCol: 10 });
     }
 
     // printAreaSettings
-    const lastRow = utils.getRow('Адреса_подпись', 1);
-    ws.pageSetup.printArea = `A1:F${lastRow.number}`;
+    const lastRow = utils.getRow('Адреса_подпись', 2);
+    ws.pageSetup.printArea = `A1:K${lastRow.number}`;
 };

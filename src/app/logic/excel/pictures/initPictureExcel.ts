@@ -19,6 +19,7 @@ export const initPictureExcel = async (settings: PictureSettingsT) => {
 
     const key = selectPicture(keyCode);
     const blob = blobFromBase64(picturesStore.pictures[key]);
+
     if (!blob) return;
 
     const range = getPictureRange(rangeObj, ws);
@@ -33,11 +34,6 @@ export const initPicturesExcel = async (
     const { ws } = settingsArr[0];
     const utils = initExcelUtils(ws);
 
-    settingsArr.forEach((settings) => {
-        utils.getCell(settings.rangeObj.start).value = '';
-        utils.getCell(settings.rangeObj.end).value = '';
-    });
-
     if (!isActive || !picturesStore.isPicturesFound) {
         // clear picture fields if dont need pictures
         if (!picturesStore.isPicturesFound) {
@@ -48,4 +44,9 @@ export const initPicturesExcel = async (
 
     const promises = settingsArr.map((settings) => initPictureExcel(settings));
     await Promise.all(promises);
+
+    settingsArr.forEach((settings) => {
+        utils.getCell(settings.rangeObj.start).value = '';
+        utils.getCell(settings.rangeObj.end).value = '';
+    });
 };

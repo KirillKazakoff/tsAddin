@@ -6,10 +6,10 @@ import {
 
 export const initExportContractAddreses: InitContractPartT = (utils, agreement) => {
     const { seller, bankSeller, agent } = agreement.record;
-    const { podpisant } = exportContractStore.fields;
+    const { fields, currentTerms } = exportContractStore;
     const { setCell } = utils;
 
-    const isStorage = !agreement.record.terms;
+    const isStorage = currentTerms === 'EXW';
 
     const cells: CellObjDoubleT[] = [
         {
@@ -89,10 +89,10 @@ export const initExportContractAddreses: InitContractPartT = (utils, agreement) 
         },
         {
             cell: 'Адреса_подпись',
-            eng: `${
-                isStorage ? 'Заказчик/Customer' : 'Продавец/Seller'
-            }  _______________________${podpisant.eng.name}`,
             ru: `${
+                isStorage ? 'Заказчик/Customer' : 'Продавец/Seller'
+            }  _______________________${fields.podpisant.eng.name}`,
+            eng: `${
                 isStorage ? 'Исполнитель/Contractor' : 'Покупатель/Buyer'
             } ________________________${agent.eng.signatory}`,
         },

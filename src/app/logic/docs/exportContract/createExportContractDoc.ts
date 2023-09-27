@@ -43,11 +43,12 @@ export const createExportContractDoc = async (agreement: AgreementT) => {
     await initInvoicesTmps(settings);
 
     if (operation === 'export_storage') {
-        initExportStorageContractTmp(book, agreement);
+        await initExportStorageContractTmp(book, agreement);
     } else {
         initExportContractTmp(book, agreement);
     }
 
     const fileName = `Доп №${agreementNo} (${id})`;
+
     await saveFile(book, fileName);
 };
