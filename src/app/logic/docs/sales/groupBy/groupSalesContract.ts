@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
-import _ from 'lodash';
 import tablesStore from '../../../../stores/tablesStore/tablesStore';
 import { SalesRowT } from '../../../../types/typesTables';
 import { groupify } from '../../../utils/groupify';

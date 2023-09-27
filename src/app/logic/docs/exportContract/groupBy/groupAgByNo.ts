@@ -8,7 +8,7 @@ import { groupAgByVessel } from './groupAgByVessel';
 import { AgreementT, AgreementsT, initAgreement } from './initAgreement';
 import { groupify } from '../../../utils/groupify';
 import { groupByBl } from './groupByBl';
-import { setCOHCStatus } from '../contractR/setCOHCStatus';
+import { setCOHCStatus } from './setCOHCStatus';
 
 export const groupAgByNo = () => {
     const table = exportContractStore.currentTable;

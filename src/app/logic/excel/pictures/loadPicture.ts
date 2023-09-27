@@ -18,7 +18,6 @@ export const loadPicture = async (settings: LoadPictureSettingsT) => {
             });
 
             ws.addImage(imgId, range);
-            console.log('loaded');
             resolve(true);
         };
         reader.readAsDataURL(blob);

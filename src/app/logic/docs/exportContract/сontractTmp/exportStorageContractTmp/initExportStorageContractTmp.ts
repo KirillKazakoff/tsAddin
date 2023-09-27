@@ -1,25 +1,24 @@
 /* eslint-disable max-len */
-import { Workbook } from 'exceljs';
 import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
-import { CellObjDoubleT } from '../../../../../types/typesExcelUtils';
-import { initPicturesExcel } from '../../../../excel/pictures/initPictureExcel';
-import { initExcelUtilsDouble } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
+import {
+    CellObjDoubleT,
+    CellUtilsDoubleT,
+} from '../../../../../types/typesExcelUtils';
 import {
     getDeliveryDate,
     getExcelDateStr,
 } from '../../../../excel/utils/getExcelDate';
-import { initExportContractRowsR } from '../../contractR/initExportContractRowsR';
-import { matchCOHCLanguage } from '../../contractR/setCOHCStatus';
+import { initExportContractRowsR } from './initExportContractRowsR';
+import { matchCOHCLanguage } from '../../groupBy/setCOHCStatus';
 import { initExportContractAddreses } from '../initExportContractAddreses';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
 import { AgreementT } from '../../groupBy/initAgreement';
+import { initPicturesExcel } from '../../../../excel/pictures/initPictureExcel';
 
 export const initExportStorageContractTmp = async (
-    book: Workbook,
+    utils: CellUtilsDoubleT,
     agreement: AgreementT,
 ) => {
-    const ws = book.getWorksheet('Export_Storage_Contract');
-    const utils = initExcelUtilsDouble(ws, 5);
     const {
         date: dateAgreement,
         agreementNo,
@@ -108,11 +107,33 @@ export const initExportStorageContractTmp = async (
     const endRow = utils.getRow('Адреса_покупатель_адрес', 0).number;
 
     for (let i = startRow; i <= endRow; i += 1) {
-        utils.mergeCells({ row: i, startCol: 2, endCol: 6 });
-        utils.mergeCells({ row: i, startCol: 7, endCol: 10 });
+        utils.mergeCells({ row: i, startCol: 2, endCol: 4 });
+        utils.mergeCells({ row: i, startCol: 5, endCol: 8 });
     }
 
-    // printAreaSettings
-    const lastRow = utils.getRow('Адреса_подпись', 2);
-    ws.pageSetup.printArea = `A1:K${lastRow.number}`;
+    await initPicturesExcel(
+        [
+            {
+                key: exportContractStore.fields.podpisant.codeName,
+                rangeObj: { start: 'Sign_seller_start', end: 'Seal_seller_end' },
+                ws: utils.ws,
+            },
+            {
+                key: agreement.record.seller.codeName,
+                rangeObj: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
+                ws: utils.ws,
+            },
+            {
+                key: agreement.record.agent.eng.signatory,
+                rangeObj: { start: 'Sign_agent_start', end: 'Sign_agent_end' },
+                ws: utils.ws,
+            },
+            {
+                key: agreement.record.agent.code,
+                rangeObj: { start: 'Seal_agent_start', end: 'Seal_agent_end' },
+                ws: utils.ws,
+            },
+        ],
+        agreement.record.type === 'certificates',
+    );
 };

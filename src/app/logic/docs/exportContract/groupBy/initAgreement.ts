@@ -5,7 +5,7 @@ import type {
     GroupedBlT,
 } from '../../../../types/typesContract';
 import { ExportRowT } from '../../../../types/typesTables';
-import type { COHCT } from '../contractR/setCOHCStatus';
+import type { COHCT } from './setCOHCStatus';
 
 export const initAgreement = (row: ExportRowT) => {
     const agreement = {

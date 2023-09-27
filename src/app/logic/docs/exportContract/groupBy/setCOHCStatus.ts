@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { AgreementT } from '../groupBy/initAgreement';
+import { AgreementT } from './initAgreement';
 
 export type COHCT = 'no' | 'cohc' | 'co' | 'hc';
 

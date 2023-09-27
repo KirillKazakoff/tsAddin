@@ -22,13 +22,12 @@ export const initExportStorageContractRows = (
     groups.forEach((group, index) => {
         const { record: r } = group;
 
+        // empty spaces since additional columns for pictures
         const rowArr = [
             '',
             `${r.product.ru.name}\n${r.product.eng.name}`,
             '',
             `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
-            '',
-            '',
             `${r.consignee.fullName}\n${r.consignee.addres}`,
             '',
             '',
@@ -37,6 +36,15 @@ export const initExportStorageContractRows = (
 
         const rowIndex = +arrayCl.cellEng.row + index;
         utils.ws.insertRow(rowIndex, rowArr).commit();
+
+        // merge
+        const mergeArrays = [
+            [2, 3],
+            [5, 7],
+        ];
+        mergeArrays.forEach(([startCol, endCol]) => {
+            utils.mergeCells({ startCol, endCol, row: rowIndex });
+        });
 
         // styleRow
         const row = utils.ws.getRow(rowIndex);

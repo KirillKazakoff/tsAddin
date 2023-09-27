@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
-import type { GroupedBlT } from '../../../../types/typesContract';
-import { CellUtilsDoubleT } from '../../../../types/typesExcelUtils';
-import { ExportRowT } from '../../../../types/typesTables';
-import { styleRowCells, borderAll, alignmentCenter } from '../../styleRowCells';
+import type { GroupedBlT } from '../../../../../types/typesContract';
+import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
+import { ExportRowT } from '../../../../../types/typesTables';
+import { styleRowCells, borderAll, alignmentCenter } from '../../../styleRowCells';
 
 export const initExportContractRowsR = (
     blGrouped: GroupedBlT<ExportRowT>,
@@ -27,8 +27,6 @@ export const initExportContractRowsR = (
                 `${r.record.product.ru.name}\n${r.record.product.eng.name}`,
                 '',
                 `${r.record.vessel.ru.name}\n${r.record.vessel.eng.name}`,
-                '',
-                '',
                 `${r.record.consignee.fullName}\n${r.record.consignee.addres}`,
                 '',
                 '',
@@ -41,8 +39,7 @@ export const initExportContractRowsR = (
             // merge
             const mergeArrays = [
                 [2, 3],
-                [4, 6],
-                [7, 9],
+                [5, 7],
             ];
             mergeArrays.forEach(([startCol, endCol]) => {
                 utils.mergeCells({ startCol, endCol, row: rowIndex });
