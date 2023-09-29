@@ -1,25 +1,19 @@
 /* eslint-disable no-param-reassign */
+import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
 import { InitContractPartT } from '../../../../../types/typesExcelUtils';
 import { styleRowCells } from '../../../styleRowCells';
 
 export const initExportContractDelivery: InitContractPartT = (utils, agreement) => {
-    const { getCell, setCell, ws } = utils;
+    const { getCell, ws } = utils;
     const { consignees: consigneeGroup } = agreement.productsGroupedBy;
-    const { terms, portTo } = agreement.record;
-
-    setCell({
-        cell: 'Доставка_условия',
-        eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
-        ru: `3.1 Поставка осуществляется на условиях ${terms} ${portTo.ru.name}`,
-    });
-    setCell({
-        cell: 'Доставка_порт',
-        eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country}`,
-        ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country}`,
-    });
-
     const cellName = 'Сертификаты_массив';
     const arrayCl = getCell(cellName).cellEng;
+
+    if (exportContractStore.currentTerms !== 'CFR') {
+        utils.deleteRow(cellName);
+        utils.deleteRow('Сертификаты_описание');
+        return;
+    }
 
     const groups = Object.values(consigneeGroup);
     groups.forEach((group, i) => {

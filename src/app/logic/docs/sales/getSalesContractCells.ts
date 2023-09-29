@@ -3,7 +3,7 @@ import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { SalesContractT } from './groupBy/initSalesContract';
 
 export const getSalesContractCells = (contract: SalesContractT) => {
-    const r = contract.record;
+    const { record: r } = contract;
 
     // prettier-ignore
     const cells = {

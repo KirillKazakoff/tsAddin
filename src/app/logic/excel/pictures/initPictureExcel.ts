@@ -34,8 +34,13 @@ export const initPicturesExcel = async (
     const { ws } = settingsArr[0];
     const utils = initExcelUtils(ws);
 
+    // clear picture fields '-'
+    settingsArr.forEach((settings) => {
+        utils.getCell(settings.rangeObj.start).value = '';
+        utils.getCell(settings.rangeObj.end).value = '';
+    });
+
     if (!isActive || !picturesStore.isPicturesFound) {
-        // clear picture fields if dont need pictures
         if (!picturesStore.isPicturesFound) {
             pageStatusStore.setPageStatus(noPictureFound());
         }
@@ -44,9 +49,4 @@ export const initPicturesExcel = async (
 
     const promises = settingsArr.map((settings) => initPictureExcel(settings));
     await Promise.all(promises);
-
-    settingsArr.forEach((settings) => {
-        utils.getCell(settings.rangeObj.start).value = '';
-        utils.getCell(settings.rangeObj.end).value = '';
-    });
 };

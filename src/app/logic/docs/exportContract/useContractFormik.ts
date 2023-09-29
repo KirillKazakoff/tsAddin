@@ -25,13 +25,14 @@ export const useContractFormik = () => {
             if (!values.podpisant) {
                 errors.podpisant = 'valueMissing';
             }
-            const isMissingETD = (r.terms === 'FCA' || r.terms.includes('CFR'))
-                && !values.departureDate;
-            if (isMissingETD) {
-                errors.departureDate = 'valueMissing';
-            }
-            if (!values.departureDate.match(/^$|^\d{2}\.\d{2}\.\d{4}$/)) {
-                errors.departureDate = 'formatMismatch';
+
+            if (r.terms !== 'EXW') {
+                if (!values.departureDate) {
+                    errors.departureDate = 'valueMissing';
+                }
+                if (!values.departureDate.match(/^$|^\d{2}\.\d{2}\.\d{4}$/)) {
+                    errors.departureDate = 'formatMismatch';
+                }
             }
             // if export exw closed
             const isEXWClosed = r.terms === 'EXW' && r.type === 'export';

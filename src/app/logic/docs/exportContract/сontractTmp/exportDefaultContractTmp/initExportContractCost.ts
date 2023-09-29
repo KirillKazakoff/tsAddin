@@ -1,10 +1,9 @@
 import { InitContractPartT } from '../../../../../types/typesExcelUtils';
 import { deleteRow } from '../../../../excel/utils/excelUtilsObj/deleteRow';
-import { formatCurrencyLong, formatCount } from '../../../../utils/formatCount';
 
 export const initExportContractCost: InitContractPartT = (utils, agreement) => {
     const { ws } = utils;
-    const { priceTotal, productsGroupedBy } = agreement;
+    const { productsGroupedBy } = agreement;
     const { cost: costs } = productsGroupedBy.vessels.all;
 
     // style rows from inherit row
@@ -28,23 +27,6 @@ export const initExportContractCost: InitContractPartT = (utils, agreement) => {
         return total;
     }, []);
     ws.insertRows(+costArrayCl.row, costRows, 'i');
-
-    const currency = {
-        eng: {
-            short: `USD ${formatCount(priceTotal, 2, 2)}`,
-            full: formatCurrencyLong(priceTotal, 'en'),
-        },
-        ru: {
-            short: `$${formatCount(priceTotal, 2, 2)}`,
-            full: formatCurrencyLong(priceTotal, 'ru'),
-        },
-    };
-
-    utils.setCell({
-        cell: 'Цена_всего',
-        eng: `2.2 Total amount of this Agreement is \n${currency.eng.short} (${currency.eng.full})`,
-        ru: `2.2 Общая сумма настоящего Дополнения составляет \n${currency.ru.short} (${currency.ru.full})`,
-    });
 
     inheritRow.height = prevHeight;
     inheritRow.commit();

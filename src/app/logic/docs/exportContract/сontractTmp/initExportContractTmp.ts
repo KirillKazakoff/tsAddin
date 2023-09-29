@@ -1,9 +1,10 @@
 import { Workbook } from 'exceljs';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { initExcelUtilsDouble } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { initExportDefaultContractTmp } from './exportContractTmp/initExportDefaultContractTmp';
+import { initExportDefaultContractTmp } from './exportDefaultContractTmp/initExportDefaultContractTmp';
 import { initExportStorageContractTmp } from './exportStorageContractTmp/initExportStorageContractTmp';
 import { AgreementT } from '../groupBy/initAgreement';
+import { getExportContractCells } from './getExportContractCells.ts';
 
 export const initExportContractTmp = async (
     book: Workbook,
@@ -11,8 +12,11 @@ export const initExportContractTmp = async (
 ) => {
     const ws = book.getWorksheet('Export_Contract');
     const { operation } = exportContractStore;
-    const cellOffset = operation === 'export_storage' ? 3 : 1;
+    const cellOffset = operation === 'export' ? 1 : 3;
     const utils = initExcelUtilsDouble(ws, cellOffset);
+
+    const cells = getExportContractCells(agreement);
+    cells.forEach((cell) => utils.setCell(cell));
 
     if (operation === 'export_storage' || operation === 'certificates') {
         await initExportStorageContractTmp(utils, agreement);
