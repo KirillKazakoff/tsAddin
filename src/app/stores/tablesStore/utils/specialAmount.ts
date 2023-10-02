@@ -29,13 +29,10 @@ export const initBlAmount = (rowType: TableKeyT) => {
         priceTotal: initAmount(0, 2, 2),
     };
 };
-export const addBlAmount = (
-    blAmount: AmountObjT,
-    rowAmount: AmountObjT,
-    coefficient: number | null = 1,
-) => {
+
+export const addBlAmount = (blAmount: AmountObjT, rowAmount: AmountObjT) => {
     addToAmount(blAmount.places, rowAmount.places.count);
     addToAmount(blAmount.placesTotal, rowAmount.placesTotal.count);
-    addToAmount(blAmount.placesGross, rowAmount.placesTotal.count * coefficient);
+    addToAmount(blAmount.placesGross, rowAmount.placesTotal.count);
     addToAmount(blAmount.priceTotal, rowAmount?.priceTotal?.count);
 };

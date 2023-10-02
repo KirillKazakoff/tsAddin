@@ -20,7 +20,7 @@ export const groupSamples = (rows: ExportRowT[]) => {
         const initTableObj = initAssortimentTable(row);
         const table = groupify<AssortimentTableT>(total, initTableObj, tableCode);
 
-        const isStorageRowInExport = table.record.terms && !row.terms;
+        const isStorageRowInExport = table.record.type === 'export' && row.type === 'exportStorage';
         if (isStorageRowInExport) return total;
 
         // groupBySort

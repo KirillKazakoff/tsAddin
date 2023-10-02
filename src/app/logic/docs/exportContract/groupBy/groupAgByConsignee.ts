@@ -1,8 +1,6 @@
 /* eslint-disable no-param-reassign */
-import {
-    addProductAmount,
-    initProductAmount,
-} from '../../../../stores/tablesStore/utils/specialAmount';
+import { addToAmountObj } from '../../../../stores/tablesStore/utils/initAmount';
+import { initProductAmount } from '../../../../stores/tablesStore/utils/specialAmount';
 import { ProductGroupsT } from '../../../../types/typesContract';
 import { groupify } from '../../../utils/groupify';
 import { AgreementT } from './initAgreement';
@@ -30,7 +28,7 @@ export const groupAgByConsignee = (agreement: AgreementT) => {
             };
         }
         const productGroup = consigneeGroup.productGroups[row.product.codeName];
-        addProductAmount(productGroup.total, row.amount);
+        addToAmountObj(productGroup.total, row.amount);
 
         consigneeGroup.rows.push(row);
     });

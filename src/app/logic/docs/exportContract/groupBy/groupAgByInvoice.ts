@@ -1,11 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { AgreementT } from './initAgreement';
-import {
-    addProductAmount,
-    initProductAmount,
-} from '../../../../stores/tablesStore/utils/specialAmount';
+import { initProductAmount } from '../../../../stores/tablesStore/utils/specialAmount';
 import { InvoiceT, ProductGroupT } from '../../../../types/typesContract';
 import { groupify } from '../../../utils/groupify';
+import { addToAmountObj } from '../../../../stores/tablesStore/utils/initAmount';
 
 export const groupAgByInvoice = (agreement: AgreementT) => {
     const { invoices } = agreement.productsGroupedBy;
@@ -40,8 +38,8 @@ export const groupAgByInvoice = (agreement: AgreementT) => {
         );
         productGroup.rows.push(row);
 
-        addProductAmount(invoice.amount, row.amount);
-        addProductAmount(productGroup.total, row.amount);
+        addToAmountObj(invoice.amount, row.amount);
+        addToAmountObj(productGroup.total, row.amount);
     });
 
     return agreement;

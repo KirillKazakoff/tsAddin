@@ -15,7 +15,7 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
 
         const table = groupify<AssortimentTableT>(total, initObj, row.blNo);
 
-        const isStorageRowInExport = table.record.terms && !row.terms;
+        const isStorageRowInExport = table.record.type === 'export' && row.type === 'exportStorage';
         if (isStorageRowInExport) return total;
 
         addToAmount(table.amount.places, row.amount.places.count);
@@ -30,6 +30,7 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
             if (prev < next) return 1;
             if (prev > next) return -1;
             if (prev === next) {
+                if (a.sort === 'M' && b.sort === 'L') return 1;
                 if (a.sort < b.sort) return 1;
             }
 

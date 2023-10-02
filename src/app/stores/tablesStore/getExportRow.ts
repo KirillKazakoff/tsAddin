@@ -5,6 +5,9 @@ import { initAmount } from './utils/initAmount';
 export const getExportRow = (row: ExportInitRowT): ExportRowT => {
     const contractSp = selectSp.contract(row.contract);
     const consigneeSp = selectSp.consignee(row.consignee) || selectSp.consignee(row.agent);
+    const packSp = selectSp.package(
+        `${row.vessel}${row.product}${row.pack.toString().replace('.', ',')}`,
+    );
 
     return {
         type: 'export',
@@ -18,15 +21,14 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
         portTo: selectSp.portZarubezh(row.portTo),
         consignee: consigneeSp,
         product: selectSp.product(row.product),
-        packSp: selectSp.package(
-            `${row.vessel}${row.product}${row.pack.toString().replace('.', ',')}`,
-        ),
+        packSp,
         sortSp: selectSp.sortAssortiment(`${row.sort}${row.product}`),
         amount: {
             places: initAmount(row.places, 0, 0),
             placesTotal: initAmount(row.placesTotal, 3, 4),
             price: initAmount(row.price, 2, 2),
             priceTotal: initAmount(row.priceTotal, 3, 4),
+            placesGross: initAmount(row.placesTotal * packSp.coefficient, 3, 4),
         },
         agreementNo: row.agreementNo,
         invoice: row.invoice,
