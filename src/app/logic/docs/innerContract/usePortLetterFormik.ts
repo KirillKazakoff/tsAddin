@@ -1,34 +1,24 @@
 /* eslint-disable no-param-reassign */
-import { useRef } from 'react';
-import { FormikProps } from 'formik';
-import { getValidationError } from '../../../components/Form/getValidationError';
-import { OnSubmitT } from '../../../types/typesUtils';
 import { TermsT } from '../../../types/typesTables';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
-import { mySessionStorage } from '../../utils/sessionStorage';
-import { useRevalidate } from '../../../components/Form/useRevalidate';
+import { useMyFormik } from '../../../components/Form/useMyFormik';
 
 export const usePortLetterFormik = () => {
-    const storedValues = mySessionStorage.getItem('portLetter');
-    const initialFields = storedValues || {
-        dateLetter: '',
-        portRu: '',
-        podpisant: '',
-        termsPort: <TermsT>'',
-        isPictures: true,
-        cargoToAuto: '',
-        cargoToStorage: '',
-        storageFrom: '',
-        storageTo: '',
-        personDischarge: '',
-    };
-
-    type FormValuesT = typeof initialFields;
-
-    const validate = (formValues: FormValuesT) => {
-        mySessionStorage.setItem('portLetter', formValues);
-
-        return getValidationError(formValues, (errors, values) => {
+    return useMyFormik({
+        store: portLetterStore,
+        initialFields: {
+            dateLetter: '',
+            portRu: '',
+            podpisant: '',
+            termsPort: <TermsT>'',
+            isPictures: true,
+            cargoToAuto: '',
+            cargoToStorage: '',
+            storageFrom: '',
+            storageTo: '',
+            personDischarge: '',
+        },
+        validateCb(errors, values) {
             if (!values.portRu) errors.portRu = 'valueMissing';
             if (!values.podpisant) errors.podpisant = 'valueMissing';
             if (!values.dateLetter) errors.dateLetter = 'valueMissing';
@@ -49,20 +39,6 @@ export const usePortLetterFormik = () => {
             } else {
                 delete errors.personDischarge;
             }
-        });
-    };
-
-    const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
-        portLetterStore.setFields(values);
-    };
-
-    const formRef = useRef<FormikProps<FormValuesT>>();
-    useRevalidate(formRef);
-
-    return {
-        onSubmit,
-        validate,
-        initialFields,
-        formRef,
-    };
+        },
+    });
 };

@@ -1,28 +1,18 @@
 /* eslint-disable no-param-reassign */
-import { FormikProps } from 'formik';
-import { useRef } from 'react';
-import { getValidationError } from '../../../components/Form/getValidationError';
 import requestContractStore from '../../../stores/docsStores/requestContractStore';
-import { OnSubmitT } from '../../../types/typesUtils';
-import { mySessionStorage } from '../../utils/sessionStorage';
-import { useRevalidate } from '../../../components/Form/useRevalidate';
+import { useMyFormik } from '../../../components/Form/useMyFormik';
 
 export const useRequestFormik = () => {
-    const storedValues = mySessionStorage.getItem('request');
-    const initialFields = {
-        isInvoiceOnly: false,
-        reiceNo: '',
-        terms: '',
-        portTamozhnya: '',
-        portRu: '',
-    };
-
-    type FormValuesT = typeof initialFields;
-
-    const validate = (formValues: FormValuesT) => {
-        mySessionStorage.setItem('request', formValues);
-
-        return getValidationError(formValues, (errors, values) => {
+    return useMyFormik({
+        store: requestContractStore,
+        initialFields: {
+            isInvoiceOnly: false,
+            reiceNo: '',
+            terms: '',
+            portTamozhnya: '',
+            portRu: '',
+        },
+        validateCb: (errors, values) => {
             if (!values.terms) {
                 errors.terms = 'valueMissing';
             }
@@ -32,20 +22,6 @@ export const useRequestFormik = () => {
             if (!values.portRu) {
                 errors.portRu = 'valueMissing';
             }
-        });
-    };
-
-    const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
-        requestContractStore.setFields(values);
-    };
-
-    const formRef = useRef<FormikProps<FormValuesT>>();
-    useRevalidate(formRef);
-
-    return {
-        onSubmit,
-        validate,
-        initialFields: storedValues || initialFields,
-        formRef,
-    };
+        },
+    });
 };

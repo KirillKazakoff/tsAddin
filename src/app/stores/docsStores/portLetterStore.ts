@@ -26,6 +26,7 @@ class PortLetterStore {
         makeAutoObservable(this);
     }
     fields = initFields();
+    name: 'portLetterStore';
 
     setFields(values: FormFieldsT) {
         this.fields.portRu = selectSp.portRu(values.portRu);

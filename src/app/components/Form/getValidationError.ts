@@ -20,7 +20,7 @@ function getErrorsDescription(errors: any) {
 }
 
 type FormKeyT<T> = keyof { [P in keyof T]: string };
-type ErrorsT<T> = { [P in FormKeyT<T>]: string } | Record<string, never>;
+export type ErrorsT<T> = { [P in FormKeyT<T>]: string } | Record<string, never>;
 
 export const getValidationError = <FormValuesT>(
     values: FormValuesT,

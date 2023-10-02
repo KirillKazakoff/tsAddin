@@ -8,6 +8,7 @@ const initFields = () => ({
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class SalesContractStore {
+    name = 'salesContractStore';
     fields = initFields();
     currentId = '';
 

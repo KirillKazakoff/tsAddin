@@ -1,25 +1,16 @@
 /* eslint-disable no-param-reassign */
-import { FormikProps } from 'formik';
-import { useRef } from 'react';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
-import { getValidationError } from '../../../components/Form/getValidationError';
-import { OnSubmitT } from '../../../types/typesUtils';
-import { mySessionStorage } from '../../utils/sessionStorage';
-import { useRevalidate } from '../../../components/Form/useRevalidate';
+import { useMyFormik } from '../../../components/Form/useMyFormik';
 
 export const useContractFormik = () => {
-    const storedValues = mySessionStorage.getItem('exportContract');
-    const initialFields = {
-        podpisant: '',
-        departureDate: '',
-        declaration: '',
-    };
-    type FormValuesT = typeof initialFields;
-
-    const validate = (formValues: FormValuesT) => {
-        mySessionStorage.setItem('exportContract', formValues);
-
-        return getValidationError(formValues, (errors, values) => {
+    return useMyFormik({
+        store: exportContractStore,
+        initialFields: {
+            podpisant: '',
+            departureDate: '',
+            declaration: '',
+        },
+        validateCb: (errors, values) => {
             const { currentAgreementRecord: r } = exportContractStore;
 
             if (!values.podpisant) {
@@ -44,20 +35,6 @@ export const useContractFormik = () => {
                     errors.declaration = 'formatMismatch';
                 }
             }
-        });
-    };
-
-    const onSubmit: OnSubmitT<FormValuesT> = async (values) => {
-        exportContractStore.setFields(values);
-    };
-
-    const formRef = useRef<FormikProps<FormValuesT>>();
-    useRevalidate(formRef);
-
-    return {
-        onSubmit,
-        validate,
-        initialFields: storedValues || initialFields,
-        formRef,
-    };
+        },
+    });
 };

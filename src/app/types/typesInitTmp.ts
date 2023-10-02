@@ -8,10 +8,3 @@ export type SalesContractTmpSettingsT = {
     contract: SalesContractT;
     utils: CellUtilsT;
 };
-
-// export namespace SalesContract {
-//     export type Params = {
-//         book: Workbook;
-//         contract: SalesContractT;
-//     };
-// }

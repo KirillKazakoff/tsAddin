@@ -17,6 +17,7 @@ export const initFields = () => ({
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class LetterStore {
+    name = 'letterStore';
     fields = initFields();
     transport = initTransport();
 

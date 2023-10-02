@@ -14,6 +14,7 @@ const initFields = () => ({
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class RequestContractStore {
+    name: 'requestContractStore';
     fields = initFields();
 
     constructor() {
