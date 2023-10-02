@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
-import { mismatchKonosamentId } from '../../../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../../../stores/pageStatusStore.ts/pageStatusStore';
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
@@ -15,7 +14,7 @@ export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT) => {
     rows.forEach(({ row: r, mateRow }, i) => {
         const date = mateRow?.date;
         if (!date) {
-            pageStatusStore.setPageStatus(mismatchKonosamentId(r.konosament));
+            pageStatusStore.setPageStatus('mismatchKonosamentId', r.konosament);
             return;
         }
         const cols = {

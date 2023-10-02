@@ -1,4 +1,3 @@
-import { unknownError } from '../../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 
 export const blobFromBase64 = (base64String: string) => {
@@ -11,7 +10,7 @@ export const blobFromBase64 = (base64String: string) => {
         );
         return new Blob([byteArray]);
     } catch (e) {
-        pageStatusStore.setPageStatus(unknownError(e.message));
+        pageStatusStore.setPageStatus('unknownError', e.message);
         return false;
     }
 };

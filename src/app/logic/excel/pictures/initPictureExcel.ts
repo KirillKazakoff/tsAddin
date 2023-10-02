@@ -1,5 +1,4 @@
 import { Worksheet } from 'exceljs';
-import { noPictureFound } from '../../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 import picturesStore from '../../../stores/picturesStore/picturesStore';
 import { selectPicture } from '../../../stores/picturesStore/selectPicture';
@@ -42,7 +41,7 @@ export const initPicturesExcel = async (
 
     if (!isActive || !picturesStore.isPicturesFound) {
         if (!picturesStore.isPicturesFound) {
-            pageStatusStore.setPageStatus(noPictureFound());
+            pageStatusStore.setPageStatus('picturesError');
         }
         return;
     }

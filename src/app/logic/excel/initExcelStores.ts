@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
-import { noRouteMatchFileName } from '../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import {
     ExcelStoresDictionaryT,
@@ -85,5 +84,5 @@ export const initStoresOnFileName = async (context: Excel.RequestContext) => {
         return;
     }
 
-    pageStatusStore.setPageStatus(noRouteMatchFileName(fileName));
+    pageStatusStore.setPageStatus('noRouteMatchFileName', fileName);
 };

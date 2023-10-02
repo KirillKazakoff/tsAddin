@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { PageStatusT, initPageStatus } from './pageMessages';
+import { PageStatusKeyT, getPageStatus, initPageStatus } from './getPageStatus';
 
 class PageStatusStore {
     status = initPageStatus();
@@ -9,12 +9,12 @@ class PageStatusStore {
         makeAutoObservable(this);
     }
 
-    setPageStatus(status: PageStatusT) {
-        this.status = status;
+    setPageStatus(key: PageStatusKeyT, message?: string) {
+        this.status = getPageStatus(key, message);
     }
 
     resetPageStatus() {
-        this.status = initPageStatus();
+        this.status = getPageStatus('ok');
     }
 
     setIsValidation(value: boolean) {

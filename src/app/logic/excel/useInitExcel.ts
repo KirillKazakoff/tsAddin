@@ -1,9 +1,5 @@
 import { useEffect } from 'react';
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
-import {
-    excelInEditingMode,
-    unknownError,
-} from '../../stores/pageStatusStore.ts/pageMessages';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import { addChangeHandler } from './addChangeHandler';
 import { initStoresOnFileName } from './initExcelStores';
@@ -24,11 +20,11 @@ export const useInitExcel = () => {
         } catch (e) {
             const message = e.message as string;
             if (message.includes('Excel is in cell-editing mode')) {
-                pageStatusStore.setPageStatus(excelInEditingMode());
+                pageStatusStore.setPageStatus('excelInEditingMode');
             } else {
                 // eslint-disable-next-line no-console
                 console.log(e);
-                pageStatusStore.setPageStatus(unknownError(message));
+                pageStatusStore.setPageStatus('unknownError', message);
             }
         }
     };
