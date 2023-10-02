@@ -21,28 +21,19 @@ type RowBlExtendT = {
 
 export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
     const blGrouped = rows.reduce<GroupedBlT<RowT>>((total, row) => {
-        if (!row.blNo) return total;
-        let blAmount: AmountObjT;
-
-        if (row.type === 'sales') {
-            blAmount = initBlAmount('kg');
-        } else {
-            blAmount = initBlAmount('tn');
-        }
-
         const initBlGroup: BlGroupT<RowT> = {
             record: row,
             groupedBy: {
                 product: {},
             },
             groupedProductsArr: [],
-            total: blAmount,
+            total: initBlAmount(row.type),
         };
         const bl = groupify<BlGroupT<RowT>>(total, initBlGroup, row.blNo);
 
         const initProductGroup = <BlProductGroupedT<RowT>>{
             record: row,
-            total: blAmount,
+            total: initBlAmount(row.type),
             rows: [],
         };
         const productRow = groupify<BlProductGroupedT<RowT>>(

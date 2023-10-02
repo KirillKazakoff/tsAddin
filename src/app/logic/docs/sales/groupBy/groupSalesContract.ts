@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 import tablesStore from '../../../../stores/tablesStore/tablesStore';
 import { SalesRowT } from '../../../../types/typesTables';

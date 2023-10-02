@@ -1,6 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 import { Workbook } from 'exceljs';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
 import { SalesContractT } from './groupBy/initSalesContract';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
@@ -40,6 +40,7 @@ export const initSalesInvoiceTmp = async (
     ];
 
     cells.forEach((cell) => utils.setCell(cell));
+
     const rows = Object.values(contract.recordsGroupedBy.bl).reduce<SalesRowT[]>(
         (total, blGroup) => {
             const allRows = blGroup.groupedProductsArr.map((prodGroup) => {
@@ -54,6 +55,7 @@ export const initSalesInvoiceTmp = async (
         },
         [],
     );
+
     initSalesTableRows({
         rows,
         isContract: false,

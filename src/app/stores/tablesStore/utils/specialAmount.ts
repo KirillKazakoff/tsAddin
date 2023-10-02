@@ -1,5 +1,6 @@
 import { addToAmount, initAmount } from './initAmount';
 import { AmountObjT } from '../../../types/typesTables';
+import { TableKeyT } from '../tablesStore';
 
 export const initProductAmount = () => {
     return {
@@ -17,9 +18,9 @@ export const addProductAmount = (
     addToAmount(productAmount.placesTotal, rowAmount.placesTotal.count);
 };
 
-export const initBlAmount = (measure: 'tn' | 'kg') => {
-    const min = measure === 'kg' ? 2 : 3;
-    const max = measure === 'kg' ? 2 : 4;
+export const initBlAmount = (rowType: TableKeyT) => {
+    const min = rowType === 'sales' ? 2 : 3;
+    const max = rowType === 'sales' ? 2 : 4;
 
     return {
         places: initAmount(0, 0, 0),

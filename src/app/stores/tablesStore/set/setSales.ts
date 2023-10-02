@@ -38,7 +38,7 @@ export const setSales = (table: any[][]) => {
                 contractDate,
                 seller: selectSp.agent(seller),
                 buyer: selectSp.consignee(buyer),
-                blNo,
+                blNo: blNo || '-',
                 transport,
                 dateETA,
                 port,

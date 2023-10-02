@@ -3,6 +3,7 @@ import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
 import { SalesContractT } from './groupBy/initSalesContract';
 import { initSalesContractTmp } from './initSalesContractTmp';
+import { initSalesInvoiceTmp } from './initSalesInvoiceTmp';
 
 export const createSalesContract = async (contract: SalesContractT) => {
     const { id: contractNo, isLive } = contract.record;
@@ -11,6 +12,7 @@ export const createSalesContract = async (contract: SalesContractT) => {
     const book = await readTmp(path);
 
     await initSalesContractTmp(book, contract);
+    await initSalesInvoiceTmp(book, contract);
 
     const fileName = `${contract.record.buyer.codeName} ${contractNo}`;
     await saveFile(book, fileName);

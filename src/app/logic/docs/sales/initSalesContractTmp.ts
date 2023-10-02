@@ -5,7 +5,6 @@ import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initSalesTableRows } from './initSalesTableRows';
 import { getSalesContractCells } from './getSalesContractCells';
 import { initSalesRowsDefault } from './initSalesRowsDefault';
-import { initSalesInvoiceTmp } from './initSalesInvoiceTmp';
 
 export const initSalesContractTmp = async (
     book: Workbook,
@@ -28,8 +27,6 @@ export const initSalesContractTmp = async (
     } else {
         initSalesRowsDefault(contract, utils);
     }
-
-    initSalesInvoiceTmp(book, contract);
 
     // merge cells
     const startRow = utils.getRow('Контракт_всего_цена', 1).number;
