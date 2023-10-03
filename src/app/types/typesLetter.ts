@@ -1,5 +1,5 @@
+import type { AmountT } from '../stores/tablesStore/utils/initAmount';
 import { ProductionT, VesselT } from './typesSP';
-import { AmountT } from './typesTables';
 
 // DictionaryTypes
 export type DictionaryT = {

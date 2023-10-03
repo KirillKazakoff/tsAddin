@@ -4,8 +4,8 @@ import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initInvoiceKTIRows } from './initInvoiceKTIRows';
-import { formats } from '../../utils/constants';
 import { InvoiceKTIT } from './groupInvoiceKTIByNo';
+import { formats } from '../../utils/formats';
 
 export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) => {
     const ws = book.getWorksheet('Invoice_KTI');
@@ -40,7 +40,7 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) 
         {
             cell: 'Инвойс_всего',
             value: invoice.priceTotal,
-            numFmt: formats.priceDollar,
+            numFmt: formats.common.priceDollar,
         },
     ];
 
@@ -65,7 +65,7 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) 
         {
             cell: 'Инвойс_всего_п',
             value: invoice.priceTotal,
-            numFmt: formats.priceDollar,
+            numFmt: formats.common.priceDollar,
         },
     ];
 

@@ -1,4 +1,5 @@
-import { ExportRowT, AmountT } from './typesTables';
+import type { AmountT } from '../stores/tablesStore/utils/initAmount';
+import type { ExportRowT } from './typesTables';
 
 export type AssortimentAmountT = {
     places: AmountT;

@@ -4,13 +4,18 @@ import {
     BlProductGroupedT,
     GroupedBlT,
 } from '../../../../types/typesContract';
-import { AmountObjT, CommonRowT } from '../../../../types/typesTables';
-import {
-    addBlAmount,
-    initBlAmount,
-} from '../../../../stores/tablesStore/utils/specialAmount';
+import { CommonRowT } from '../../../../types/typesTables';
 import { groupify } from '../../../utils/groupify';
-import { PackageT, ProductionSalesT, ProductionT } from '../../../../types/typesSP';
+import type {
+    PackageT,
+    ProductionSalesT,
+    ProductionT,
+} from '../../../../types/typesSP';
+import {
+    AmountObjT,
+    addToAmountObj,
+    initAmountObj,
+} from '../../../../stores/tablesStore/utils/initAmount';
 
 type RowBlExtendT = {
     blNo: string;
@@ -27,13 +32,13 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
                 product: {},
             },
             groupedProductsArr: [],
-            total: initBlAmount(row.type),
+            total: initAmountObj(row.type),
         };
         const bl = groupify<BlGroupT<RowT>>(total, initBlGroup, row.blNo);
 
         const initProductGroup = <BlProductGroupedT<RowT>>{
             record: row,
-            total: initBlAmount(row.type),
+            total: initAmountObj(row.type),
             rows: [],
         };
         const productRow = groupify<BlProductGroupedT<RowT>>(
@@ -43,8 +48,8 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
         );
         productRow.rows.push(row);
 
-        addBlAmount(productRow.total, row.amount);
-        addBlAmount(bl.total, row.amount);
+        addToAmountObj(productRow.total, row.amount);
+        addToAmountObj(bl.total, row.amount);
         return total;
     }, {});
 

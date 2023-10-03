@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { addToAmountObj } from '../../../../stores/tablesStore/utils/initAmount';
-import { initProductAmount } from '../../../../stores/tablesStore/utils/specialAmount';
+import {
+    addToAmountObj,
+    initAmountObj,
+} from '../../../../stores/tablesStore/utils/initAmount';
 import { ProductGroupsT } from '../../../../types/typesContract';
 import { groupify } from '../../../utils/groupify';
 import { AgreementT } from './initAgreement';
@@ -22,7 +24,7 @@ export const groupAgByConsignee = (agreement: AgreementT) => {
 
         if (!consigneeGroup.productGroups[row.product.codeName]) {
             consigneeGroup.productGroups[row.product.codeName] = {
-                total: initProductAmount(),
+                total: initAmountObj(row.type),
                 rows: [],
                 record: row,
             };

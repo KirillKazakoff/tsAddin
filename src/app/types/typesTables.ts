@@ -1,4 +1,5 @@
 import type { TableKeyT } from '../stores/tablesStore/tablesStore';
+import type { AmountObjT } from '../stores/tablesStore/utils/initAmount';
 import {
     AgentT,
     BankProdavecT,
@@ -28,24 +29,6 @@ export type TableStatusT = {
     title: string;
     desc: string;
 };
-
-// Amount
-export type AmountT = {
-    str: string;
-    count: number;
-    fraction: {
-        min: number;
-        max: number;
-    };
-};
-export type AmountObjT = Partial<{
-    placesTotal: AmountT;
-    placesRemain: AmountT;
-    places: AmountT;
-    price: AmountT;
-    priceTotal: AmountT;
-    placesGross: AmountT;
-}>;
 
 // Tables
 export interface MateRowT extends CommonRowT {

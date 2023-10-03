@@ -1,9 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { AgreementT } from './initAgreement';
-import { initProductAmount } from '../../../../stores/tablesStore/utils/specialAmount';
 import { InvoiceT, ProductGroupT } from '../../../../types/typesContract';
 import { groupify } from '../../../utils/groupify';
-import { addToAmountObj } from '../../../../stores/tablesStore/utils/initAmount';
+import {
+    addToAmountObj,
+    initAmountObj,
+} from '../../../../stores/tablesStore/utils/initAmount';
 
 export const groupAgByInvoice = (agreement: AgreementT) => {
     const { invoices } = agreement.productsGroupedBy;
@@ -20,7 +22,7 @@ export const groupAgByInvoice = (agreement: AgreementT) => {
             msc,
             agreement,
             consignee,
-            amount: initProductAmount(),
+            amount: initAmountObj(row.type),
             productGroups: {},
         };
         const invoice = groupify<InvoiceT>(invoices, initInvoice, invoiceNo);
@@ -29,7 +31,7 @@ export const groupAgByInvoice = (agreement: AgreementT) => {
         const initProductGroup = {
             rows: [],
             record: row,
-            total: initProductAmount(),
+            total: initAmountObj(row.type),
         };
         const productGroup = groupify<ProductGroupT>(
             invoice.productGroups,

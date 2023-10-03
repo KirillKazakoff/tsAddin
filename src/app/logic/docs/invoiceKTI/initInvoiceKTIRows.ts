@@ -1,6 +1,7 @@
 import { CellUtilsT } from '../../../types/typesExcelUtils';
-import { formats } from '../../utils/constants';
+
 import { formatCount } from '../../utils/formatCount';
+import { setFormats } from '../../utils/formats';
 import { styleRowCells } from '../styleRowCells';
 import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 
@@ -74,8 +75,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
                 };
             }
             // format
-            rowObj.price.numFmt = formats.priceDollar;
-            rowObj.priceTotal.numFmt = formats.priceDollar;
+            setFormats(rowObj, 'invoiceKTI');
         });
 
         utils.deleteRow(cellName);

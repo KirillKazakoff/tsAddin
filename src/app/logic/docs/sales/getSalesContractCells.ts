@@ -20,8 +20,10 @@ export const getSalesContractCells = (contract: SalesContractT) => {
             { cell: 'Контракт_адреса_банк', value: `BENEFICIARY BANK: ${r.seller.beneficiaryBank}` },
             { cell: 'Контракт_адреса_банк_адрес', value: `ADDRESS: ${r.seller.bankAdress}` },
             { cell: 'Контракт_адреса_банк_свифт', value: `SWIFT: ${r.seller.swift}` },
-            { cell: 'Контракт_продавец_печать_подвал', value: r.seller.name },
-            { cell: 'Контракт_покупатель_печать_подвал', value: r.buyer.fullName },
+            { cell: 'Контракт_продавец_печать_подвал_1', value: r.seller.name },
+            { cell: 'Контракт_покупатель_печать_подвал_1', value: r.buyer.fullName },
+            { cell: 'Контракт_продавец_печать_подвал_2', value: r.seller.name },
+            { cell: 'Контракт_покупатель_печать_подвал_2', value: r.buyer.fullName },
             { cell: 'Контракт_доставка', value: `Supply of products is carried out on ${r.terms}` },
         ],
         live: <CellObjT[]>[
@@ -30,11 +32,13 @@ export const getSalesContractCells = (contract: SalesContractT) => {
             { cell: 'Контракт_всего_места', value: `${contract.amount.placesTotal.str} kg` },
             { cell: 'Контракт_всего_цена', value: `${contract.amount.priceTotal.str} $` },
         ],
-        default: <CellObjT[]>[],
+        default: <CellObjT[]>[
+            { cell: 'Контракт_всего_цена', value: `Total amount of this Contract is: ${contract.amount.priceTotal.str} $` },
+        ],
     };
 
     if (r.isLive) {
         return [...cells.live, ...cells.common];
     }
-    return [...cells.common, ...cells.common];
+    return [...cells.common, ...cells.default];
 };

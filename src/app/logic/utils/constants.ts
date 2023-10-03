@@ -4,10 +4,6 @@ export const p = {
     ITEM: '*  ',
 };
 
-export const formats = {
-    priceDollar: '_("$"* #,##0.00_);_("$"* (#,##0.00);_("$"* "-"??_);_(@_)',
-};
-
 const mode = process.env.NODE_ENV;
 const baseUrl = mode === 'production' ? 'https://kirillkazakoff.github.io/tsAddin/' : './';
 

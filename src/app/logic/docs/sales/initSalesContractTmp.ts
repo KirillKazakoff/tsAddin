@@ -29,24 +29,33 @@ export const initSalesContractTmp = async (
     }
 
     // merge cells
-    const startRow = utils.getRow('Контракт_всего_цена', 1).number;
+    const startRow = utils.getRow('Контракт_оплата', -1).number;
     const endRow = utils.getRow('Документация_BL', 1).number;
     for (let i = startRow; i < endRow; i += 1) {
         utils.mergeCells({ startCol: 1, endCol: 5, row: i });
     }
 
-    // init pictures
     await initPicturesExcel(
         [
             {
                 key: seller.code,
                 rangeObj: {
-                    start: 'Sign_seller_start',
-                    end: 'Sign_seller_end',
+                    start: 'Sign_seller_start_1',
+                    end: 'Sign_seller_end_1',
+                },
+                ws,
+            },
+            {
+                key: seller.code,
+                rangeObj: {
+                    start: 'Sign_seller_start_2',
+                    end: 'Sign_seller_end_2',
                 },
                 ws,
             },
         ],
         true,
     );
+
+    utils.getRow('Контракт_продавец_печать_подвал_1', 0).addPageBreak();
 };
