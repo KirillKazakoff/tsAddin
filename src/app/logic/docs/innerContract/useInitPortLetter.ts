@@ -1,32 +1,18 @@
+import { useInitSection } from '../../../components/Form/useInitSection';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { createPortLetter } from './createPortLetter';
-import { ContractT, groupByContractNo } from './groupByContractNo';
+import { groupByContractNo } from './groupByContractNo';
 import { usePortLetterFormik } from './usePortLetterFormik';
 
 export const useInitPortLetter = () => {
     const formik = usePortLetterFormik();
-    const { fields } = portLetterStore;
 
-    const contracts = Object.values(groupByContractNo());
-
-    const onLoad = async (contract: ContractT) => {
-        if (!formik.formRef.current.isValid) {
-            throw new Error('invalid input');
-        }
-
-        await formik.onSubmit(formik.formRef.current.values);
-        await createPortLetter(contract);
-    };
-
-    const onLoadAll = async () => {
-        await Promise.all(contracts.map((contract) => onLoad(contract)));
-    };
-
-    const initObj = {
-        contracts,
-        onLoad,
-        onLoadAll,
-        fields,
-    };
-    return { initObj, formik };
+    return useInitSection({
+        store: portLetterStore as any,
+        docs: Object.values(groupByContractNo()),
+        getSettings: () => ({
+            formik,
+            loadCb: createPortLetter,
+        }),
+    });
 };

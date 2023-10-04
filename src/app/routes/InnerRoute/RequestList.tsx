@@ -6,7 +6,7 @@ type Props = { contracts: ContractT[]; onLoad: any };
 
 export default function RequestList({ contracts, onLoad }: Props) {
     const contractList = contracts.map((contract) => {
-        const { contractNo } = contract.record;
+        const { id: contractNo } = contract.record;
         const onClick = async () => onLoad(contract);
 
         return (

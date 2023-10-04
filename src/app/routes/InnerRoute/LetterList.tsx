@@ -6,7 +6,7 @@ type Props = { contracts: ContractT[]; onLoad: any };
 
 export default function LetterList({ contracts, onLoad }: Props) {
     const letterList = contracts.map((contract) => {
-        const { buyer, contractNo } = contract.record;
+        const { buyer, id: contractNo } = contract.record;
         const onClick = () => onLoad(contract);
 
         return (

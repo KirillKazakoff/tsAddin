@@ -33,7 +33,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
 
     // prettier-ignore
     let cells: CellObjT[] = [
-        { cell: 'Заявка', value: `Прошу разработать договор поставки № ${record.contractNo} от ${date.contract}` },
+        { cell: 'Заявка', value: `Прошу разработать договор поставки № ${record.id} от ${date.contract}` },
         { cell: 'Заявка_дата', value: date.contract },
         { cell: 'Заявка_стороны', value: `между ${record.seller.ru.name} (ПОСТАВЩИК) и ${record.buyer.name}` },
         { cell: 'Сумма', value: `Сумма по договору : ${priceTotal.str} Р` },

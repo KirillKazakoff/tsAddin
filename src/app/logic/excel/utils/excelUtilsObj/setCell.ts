@@ -29,6 +29,7 @@ export const setCell = (ws: Worksheet, setObj: CellObjT) => {
         if (numFmt) cellObj.numFmt = numFmt;
         return cellObj;
     } catch (e) {
+        // eslint-disable-next-line no-console
         console.error(`ошибка в клетке ${cell}`);
         return null;
     }

@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import { Cell } from 'exceljs';
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { NordmileRowT } from '../../../../types/typesTables';
 import { alignmentCenter, borderAll, styleRowCells } from '../../styleRowCells';

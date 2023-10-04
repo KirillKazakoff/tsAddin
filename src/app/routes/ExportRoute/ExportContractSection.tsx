@@ -12,6 +12,7 @@ import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const ExportContractSection = observer(() => {
     const { formik, initObj } = useInitContractSection();
+
     return (
         <div className='export-section'>
             <div className='export-section__choose'>

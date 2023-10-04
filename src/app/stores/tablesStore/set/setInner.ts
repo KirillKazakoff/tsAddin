@@ -14,7 +14,7 @@ export const setInner = (table: any[][]) => {
         const [
             client,
             seller,
-            contractNo,
+            id,
             contractDate,
             transport,
             vessel,
@@ -35,7 +35,7 @@ export const setInner = (table: any[][]) => {
                 type: 'inner',
                 buyer: selectSp.clientRu(client),
                 seller: selectSp.seller(seller),
-                contractNo,
+                id,
                 contractDate,
                 vessel: selectSp.vessel(vessel),
                 product: selectSp.product(product),

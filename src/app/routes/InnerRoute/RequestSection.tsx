@@ -37,7 +37,7 @@ const SectionComponent = observer(() => {
                 <h3 className='title request-docs-title'>
                     Загрузить заявки на договора:
                 </h3>
-                <RequestList contracts={initObj.contracts} onLoad={initObj.onLoad} />
+                <RequestList contracts={initObj.docs} onLoad={initObj.onLoad} />
                 <DocsDownloadBtn
                     onClick={initObj.onLoadAll}
                     title='Загрузить все заявки'

@@ -7,13 +7,13 @@ import { LetterMainFields } from './LetterMainFields';
 import { Form } from '../../components/Form/Form';
 
 export const LetterRoute = observer(() => {
-    const { onSubmit, formik } = useInitLetter();
+    const { initObj, formik } = useInitLetter();
 
     return (
         <Formik
             initialValues={formik.initialFields}
             validate={formik.validate}
-            onSubmit={onSubmit}
+            onSubmit={initObj.onLoad as any}
             innerRef={formik.formRef}
             validateOnMount
         >

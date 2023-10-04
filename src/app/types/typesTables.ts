@@ -114,7 +114,7 @@ export interface ExportRowT extends CommonRowT, CertificateRowT {
 export interface InnerRowT extends CommonRowT {
     buyer: ClientRuT;
     seller: SellerT;
-    contractNo: number;
+    id: string;
     contractDate: string;
     transport: TransportT;
     vessel: VesselT;

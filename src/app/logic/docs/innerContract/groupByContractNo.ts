@@ -25,7 +25,7 @@ export const groupByContractNo = () => {
         const contract = groupify<ContractT>(
             total,
             initContract(row),
-            row.contractNo,
+            row.id,
         );
         const mateRow = tablesStore.matesT.find(
             (r) => r.konosament === row.konosament,
