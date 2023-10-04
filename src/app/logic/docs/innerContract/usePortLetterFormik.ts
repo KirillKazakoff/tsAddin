@@ -24,7 +24,7 @@ export const usePortLetterFormik = () => {
             if (!values.dateLetter) errors.dateLetter = 'valueMissing';
             if (!values.termsPort) errors.termsPort = 'valueMissing';
 
-            if (!values.termsPort.includes('CFR')) {
+            if (!values.termsPort || !values.termsPort.includes('CFR')) {
                 if (!values.storageFrom) errors.storageFrom = 'valueMissing';
                 if (!values.storageTo) errors.storageTo = 'valueMissing';
             } else {

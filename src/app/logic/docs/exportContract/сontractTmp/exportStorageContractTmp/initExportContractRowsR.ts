@@ -22,19 +22,19 @@ export const initExportContractRowsR = (
             amount += Qt;
 
             // empty spaces since additional columns for pictures
-            const rowArr = [
-                '',
-                `${r.record.product.ru.name}\n${r.record.product.eng.name}`,
-                '',
-                `${r.record.vessel.ru.name}\n${r.record.vessel.eng.name}`,
-                `${r.record.consignee.fullName}\n${r.record.consignee.addres}`,
-                '',
-                '',
+            const fields = {
+                empty: '',
+                product: `${r.record.product.ru.name}\n${r.record.product.eng.name}`,
+                empty1: '',
+                vessel: `${r.record.vessel.ru.name}\n${r.record.vessel.eng.name}`,
+                consignee: `${r.record.vessel.ru.name}\n${r.record.vessel.eng.name}`,
+                empty2: '',
+                empty3: '',
                 amount,
-            ];
+            };
 
             const rowIndex = +arrayCl.cellEng.row + index;
-            utils.ws.insertRow(rowIndex, rowArr).commit();
+            const row = utils.ws.insertRow(rowIndex, fields);
 
             // merge
             const mergeArrays = [
@@ -46,7 +46,6 @@ export const initExportContractRowsR = (
             });
 
             // style
-            const row = utils.ws.getRow(rowIndex);
             const height = 40 + r.rows.length * 10;
 
             styleRowCells(row, {

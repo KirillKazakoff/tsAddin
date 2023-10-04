@@ -1,6 +1,7 @@
 import salesContractStore from '../../../stores/docsStores/salesContractStore';
 import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { SalesRowT } from '../../../types/typesTables';
+import { setFormats } from '../../utils/formats';
 import { alignmentCenter, styleRowCells } from '../styleRowCells';
 
 type SettingsT = {
@@ -20,26 +21,24 @@ export const initSalesTableRows = (settings: SettingsT) => {
         const filling = r.isLive
             ? `\nFilling: ${salesContractStore.fields.filling}`
             : '';
-        const cols = {
+        const fields = {
             bl: r.blNo,
             product: `${r.product.name}${filling}`,
             vessel: r.vessel,
             sort: r.sort,
-            price: `${r.amount.price.str} $`,
-            placesTotal: r.amount.placesTotal.str,
-            priceTotal: `${r.amount.priceTotal.str} $`,
+            price: r.amount.price.count,
+            placesTotal: r.amount.placesTotal.count,
+            priceTotal: r.amount.priceTotal.count,
         };
 
         if (isContract) {
-            delete cols.bl;
-            delete cols.vessel;
+            delete fields.bl;
+            delete fields.vessel;
         }
 
-        const rowArr = Object.values(cols);
         const rowIndex = +arrayCl.row + i;
-        utils.ws.insertRow(rowIndex, rowArr).commit();
-
-        const row = utils.ws.getRow(rowIndex);
+        const row = utils.ws.insertRow(rowIndex, Object.values(fields));
+        setFormats(row, fields, 'sales');
 
         styleRowCells(row, {
             height: 40,

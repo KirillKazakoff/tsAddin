@@ -12,7 +12,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
 
         invoice.rows.forEach((r, i) => {
             const placesTotal = formatCount(r.row.amount.placesTotal, 3, 4);
-            const cols = {
+            const fields = {
                 emptyFirst: '',
                 description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${placesTotal} mt`,
                 emptyMergeFirst: '',
@@ -25,13 +25,13 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
             };
 
             if (language === 'ru') {
-                cols.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${placesTotal} тн`;
+                fields.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${placesTotal} тн`;
             }
             if (invoice.type === 'discharge') {
-                delete cols.days;
+                delete fields.days;
             }
 
-            const rowArr = Object.values(cols);
+            const rowArr = Object.values(fields);
             const rowIndex = +arrayCl.row + i;
             utils.ws.insertRow(rowIndex, rowArr).commit();
             utils.mergeCells({ startCol: 2, endCol: 6, row: rowIndex });
@@ -75,7 +75,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
                 };
             }
             // format
-            setFormats(rowObj, 'invoiceKTI');
+            setFormats(row, fields, 'invoiceKTI');
         });
 
         utils.deleteRow(cellName);

@@ -1,5 +1,6 @@
 import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
+import { setFormats } from '../../utils/formats';
 import { alignmentCenter, styleRowCells } from '../styleRowCells';
 import { SalesContractT } from './groupBy/initSalesContract';
 
@@ -47,16 +48,16 @@ export const initSalesRowsDefault = (
             groupProd.rows.forEach((row) => {
                 const fields = {
                     sort: row.sort,
-                    places: row.amount.places.str,
-                    placesTotal: row.amount.placesTotal.str,
-                    price: `${row.amount.price.str} $`,
-                    amount: `${row.amount.priceTotal.str} $`,
+                    places: row.amount.places.count,
+                    placesTotal: row.amount.placesTotal.count,
+                    price: row.amount.price.count,
+                    priceTotal: row.amount.priceTotal.count,
                 };
 
                 const rowArr = Object.values(fields);
-                utils.ws.insertRow(insertIndex, rowArr).commit();
+                const rowTable = utils.ws.insertRow(insertIndex, rowArr);
+                setFormats(rowTable, fields, 'sales');
 
-                const rowTable = utils.ws.getRow(insertIndex);
                 styleRowCells(rowTable, {
                     alignment: alignmentCenter,
                     font: { name: 'Batang', size: 9 },
@@ -68,13 +69,15 @@ export const initSalesRowsDefault = (
 
         const totalFields = {
             title: 'TOTAL',
-            places: group.total.places.str,
-            placesTotal: group.total.placesTotal.str,
+            places: group.total.places.count,
+            placesTotal: group.total.placesTotal.count,
             price: '-',
-            priceTotal: `${group.total.priceTotal.str} $`,
+            priceTotal: group.total.priceTotal.count,
         };
 
         const totalRow = utils.ws.insertRow(insertIndex, Object.values(totalFields));
+        setFormats(totalRow, totalFields, 'sales');
+
         styleRowCells(totalRow, {
             alignment: alignmentCenter,
             font: { name: 'Batang', size: 9, bold: true },

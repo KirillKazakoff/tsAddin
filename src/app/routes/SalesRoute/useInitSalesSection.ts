@@ -12,6 +12,7 @@ export const useInitSalesSection = () => {
     );
 
     const onLoad = async (doc: SalesContractT) => {
+        await formik.formRef.current.validateForm(formik.formRef.current.values);
         const { isValid, values } = formik.formRef.current;
         if (!isValid) {
             console.warn(formik.formRef.current);
@@ -32,8 +33,5 @@ export const useInitSalesSection = () => {
         currentDoc,
     };
 
-    return {
-        initObj,
-        formik,
-    };
+    return { initObj, formik };
 };

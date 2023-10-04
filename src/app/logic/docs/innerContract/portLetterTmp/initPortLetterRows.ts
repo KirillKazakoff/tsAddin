@@ -3,6 +3,7 @@ import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import pageStatusStore from '../../../../stores/pageStatusStore.ts/pageStatusStore';
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
+import { setFormats } from '../../../utils/formats';
 import { alignmentCenter, borderAll, styleRowCells } from '../../styleRowCells';
 import { ContractRowT } from '../groupByContractNo';
 
@@ -17,7 +18,7 @@ export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT) => {
             pageStatusStore.setPageStatus('mismatchKonosamentId', r.konosament);
             return;
         }
-        const cols = {
+        const fields = {
             konosament: `${r.konosament} от ${getExcelDateNumeric(
                 mateRow.date,
                 'ru',
@@ -25,22 +26,20 @@ export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT) => {
             product: `${r.product.ru.name} ${r.sort}`,
             vessel: r.vessel.ru.name,
             pack: `1/${r.pack}`,
-            places: r.amount.places.str,
-            placesTotal: r.amount.placesTotal.str,
+            places: r.amount.places.count,
+            placesTotal: r.amount.placesTotal.count,
         };
 
         if (portLetterStore.fields.termsPort === 'FCA') {
-            delete cols.places;
-            delete cols.pack;
+            delete fields.places;
+            delete fields.pack;
         }
 
-        const rowArr = Object.values(cols);
-
         const rowIndex = +arrayCl.row + i;
-        ws.insertRow(rowIndex, rowArr).commit();
+        const row = ws.insertRow(rowIndex, Object.values(fields));
+        setFormats(row, fields, 'inner');
 
         // styleRow
-        const row = ws.getRow(rowIndex);
         styleRowCells(row, {
             border: borderAll,
             alignment: alignmentCenter,

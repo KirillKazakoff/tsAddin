@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
+import { setFormats } from '../../../../utils/formats';
 import { alignmentCenter, borderAll, styleRowCells } from '../../../styleRowCells';
 
 export const initExportStorageContractRows = (
@@ -23,19 +24,19 @@ export const initExportStorageContractRows = (
         const { record: r } = group;
 
         // empty spaces since additional columns for pictures
-        const rowArr = [
-            '',
-            `${r.product.ru.name}\n${r.product.eng.name}`,
-            '',
-            `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
-            `${r.consignee.fullName}\n${r.consignee.addres}`,
-            '',
-            '',
-            group.total.placesTotal.str,
-        ];
+        const fields = {
+            empty1: '',
+            product: `${r.product.ru.name}\n${r.product.eng.name}`,
+            empty3: '',
+            vessel: `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
+            consignee: `${r.consignee.fullName}\n${r.consignee.addres}`,
+            empty6: '',
+            empty7: '',
+            placesTotal: group.total.placesTotal.count,
+        };
 
         const rowIndex = +arrayCl.cellEng.row + index;
-        utils.ws.insertRow(rowIndex, rowArr).commit();
+        const row = utils.ws.insertRow(rowIndex, Object.values(fields));
 
         // merge
         const mergeArrays = [
@@ -47,7 +48,7 @@ export const initExportStorageContractRows = (
         });
 
         // styleRow
-        const row = utils.ws.getRow(rowIndex);
+        setFormats(row, fields, 'exportEng');
         styleRowCells(row, {
             height: 45,
             border: borderAll,

@@ -33,6 +33,8 @@ export default function DischargeTerms() {
     const { termsPort } = context.values;
 
     let Output = null;
+    if (!termsPort) return null;
+
     if (termsPort === 'FCA') Output = TemplateFCA;
     if (termsPort === 'EXW') Output = TemplateEXW;
     if (termsPort.includes('CFR')) Output = TemplateCFR;

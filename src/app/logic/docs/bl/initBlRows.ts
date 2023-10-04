@@ -10,31 +10,22 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT) => 
     const { groupedProductsArr: rows } = blGroup;
 
     rows.forEach((r) => {
-        const rowArr = [
-            // firstEmptyCol
-            '',
-            r.record.blNo,
-            r.record.product.eng.name,
-            '-',
-            r.record.pack,
-            r.total.places.count,
-            r.total.placesTotal.count,
-            r.total.placesGross.count,
-        ];
-
-        const rowIndex = +arrayCl.row + 1;
-        utils.ws.insertRow(rowIndex, rowArr).commit();
-
-        // styleRow
-        const row = utils.ws.getRow(rowIndex);
-        const rowObj = {
-            places: row.getCell(6),
-            placesTotal: row.getCell(7),
-            placesGross: row.getCell(8),
+        const fields = {
+            emptyFirst: '',
+            bl: r.record.blNo,
+            product: r.record.product.eng.name,
+            sort: '-',
+            pack: `1/${r.record.pack} KG`,
+            places: r.total.places.count,
+            placesTotal: r.total.placesTotal.count,
+            placesGross: r.total.placesGross.count,
         };
 
-        setFormats(rowObj, 'bl');
+        const rowIndex = +arrayCl.row + 1;
+        const row = utils.ws.insertRow(rowIndex, Object.values(fields));
 
+        // styleRow
+        setFormats(row, fields, 'exportEng');
         styleRowCells(row, {
             alignment: alignmentCenter,
             height: 40,
