@@ -1,9 +1,12 @@
 /* eslint-disable no-param-reassign */
-import letterStore from '../../stores/letterStore/letterStore';
+import { useInitSection } from '../../components/Form/useInitSection';
 import { useMyFormik } from '../../components/Form/useMyFormik';
+import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
+import letterStore from '../../stores/letterStore/letterStore';
+import { getHref } from './getHref';
 
-export const useLetterFormik = () => {
-    return useMyFormik({
+export const useInitLetterSection = () => {
+    const formik = useMyFormik({
         store: letterStore,
         initialFields: {
             port: '',
@@ -28,5 +31,18 @@ export const useLetterFormik = () => {
                 delete errors.ground;
             }
         },
+    });
+
+    return useInitSection({
+        store: letterStore as any,
+        getSettings: () => ({
+            formik,
+            loadCb: async () => {
+                const href = getHref();
+                document.location.href = href;
+                // refresh stores
+                excelSyncStore.setSync(false);
+            },
+        }),
     });
 };

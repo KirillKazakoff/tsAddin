@@ -1,11 +1,32 @@
+/* eslint-disable no-param-reassign */
 import { useInitSection } from '../../../components/Form/useInitSection';
+import { useMyFormik } from '../../../components/Form/useMyFormik';
 import requestContractStore from '../../../stores/docsStores/requestContractStore';
 import { createRequestContract } from './createRequestContract';
 import { groupByContractNo } from './groupByContractNo';
-import { useRequestFormik } from './useRequestFormik';
 
 export const useInitRequestSection = () => {
-    const formik = useRequestFormik();
+    const formik = useMyFormik({
+        store: requestContractStore,
+        initialFields: {
+            isInvoiceOnly: false,
+            reiceNo: '',
+            terms: '',
+            portTamozhnya: '',
+            portRu: '',
+        },
+        validateCb: (errors, values) => {
+            if (!values.terms) {
+                errors.terms = 'valueMissing';
+            }
+            if (!values.portTamozhnya) {
+                errors.portTamozhnya = 'valueMissing';
+            }
+            if (!values.portRu) {
+                errors.portRu = 'valueMissing';
+            }
+        },
+    });
 
     return useInitSection({
         store: requestContractStore as any,
