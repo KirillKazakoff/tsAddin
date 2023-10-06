@@ -1,20 +1,24 @@
 /* eslint-disable no-param-reassign */
 import {
-    Alignment, Borders, Font, Row,
+    Alignment, Borders, Cell, Font, Row,
 } from 'exceljs';
 
-type RowStyleSettingsT = {
+export type RowStyleSettingsT = {
     height?: number;
     border?: Partial<Borders>;
     alignment?: Partial<Alignment>;
     font?: Partial<Font>;
 };
 
+export const styleCell = (cell: Cell, settings: RowStyleSettingsT) => {
+    cell.border = settings.border;
+    cell.alignment = settings.alignment;
+    cell.font = settings.font;
+};
+
 export const styleRowCells = (row: Row, settings: RowStyleSettingsT) => {
     row.eachCell((cell) => {
-        cell.border = settings.border;
-        cell.alignment = settings.alignment;
-        cell.font = settings.font;
+        styleCell(cell, settings);
     });
 
     if (settings.height) {

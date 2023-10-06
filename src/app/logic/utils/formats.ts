@@ -62,7 +62,7 @@ export const formatsDocs = {
     },
 };
 
-type DocTypeT = keyof typeof formatsDocs;
+export type DocTypeT = keyof typeof formatsDocs;
 
 export const setFormats = (
     row: Row,
@@ -71,6 +71,7 @@ export const setFormats = (
 ) => {
     const cellObj: { [key: string]: Cell } = {};
     const keys = Object.keys(fields);
+
     row.eachCell((cell, index) => {
         cellObj[keys[index - 1]] = cell;
     });
@@ -80,20 +81,9 @@ export const setFormats = (
     Object.keys(cellObj).forEach((k) => {
         const key = k as keyof FormatsDocT;
         const cell = cellObj[key];
+
         if (!cell) return;
+
         cellObj[key].numFmt = formatsDoc[key];
     });
 };
-
-// invoiceExportEng: {
-//     places: formats.eng.places,
-//     placesTotal: formats.eng.placesTotalTn,
-//     price: formats.common.priceDollarUSD,
-//     priceTotal: formats.common.priceDollarUSD,
-// },
-// invoiceExportRu: {
-//     places: formats.ru.places,
-//     placesTotal: formats.ru.placesTotalTn,
-//     price: formats.common.priceDollar,
-//     priceTotal: formats.common.priceDollar,
-// },

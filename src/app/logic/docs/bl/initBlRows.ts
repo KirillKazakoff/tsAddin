@@ -1,42 +1,41 @@
 import { BlGroupT } from '../../../types/typesContract';
 import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { ExportRowT } from '../../../types/typesTables';
-import { setFormats } from '../../utils/formats';
-import { alignmentCenter, styleRowCells } from '../styleRowCells';
+import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
+import { alignmentCenter } from '../styleRowCells';
 
 export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT) => {
-    const cellName = 'Bl_массив';
-    const arrayCl = utils.getCell(cellName);
     const { groupedProductsArr: rows } = blGroup;
+    const { insertRows } = initRowMaker(utils.ws, 'Bl_массив');
 
-    rows.forEach((r) => {
-        const fields = {
-            emptyFirst: '',
-            bl: r.record.blNo,
-            product: r.record.product.eng.name,
-            sort: '-',
-            pack: `1/${r.record.pack} KG`,
-            places: r.total.places.count,
-            placesTotal: r.total.placesTotal.count,
-            placesGross: r.total.placesGross.count,
-        };
-
-        const rowIndex = +arrayCl.row + 1;
-        const row = utils.ws.insertRow(rowIndex, Object.values(fields));
-
-        // styleRow
-        setFormats(row, fields, 'exportEng');
-        styleRowCells(row, {
-            alignment: alignmentCenter,
-            height: 40,
-        });
-        row.getCell(2).border = {
-            left: { style: 'thin' },
-        };
-        row.getCell(row.actualCellCount).border = {
-            right: { style: 'thin' },
-        };
+    insertRows({
+        records: rows,
+        rowSettings: ({ record: r, total }) => {
+            const fields = {
+                emptyFirst: '',
+                bl: r.blNo,
+                product: r.product.eng.name,
+                sort: '-',
+                pack: `1/${r.pack} KG`,
+                places: total.places.count,
+                placesTotal: total.placesTotal.count,
+                placesGross: total.placesGross.count,
+            };
+            // prettier-ignore
+            return {
+                fields,
+                docType: 'exportEng',
+                style: {
+                    common: {
+                        alignment: alignmentCenter,
+                        height: 40,
+                    },
+                    special: [
+                        { index: 2, style: { border: { left: { style: 'thin' } } } },
+                        { index: 'last', style: { border: { left: { style: 'thin' } } } },
+                    ],
+                },
+            };
+        },
     });
-
-    utils.deleteRow(cellName);
 };

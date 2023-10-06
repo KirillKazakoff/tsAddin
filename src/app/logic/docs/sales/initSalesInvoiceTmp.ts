@@ -27,7 +27,7 @@ export const initSalesInvoiceTmp = async (
         { cell: 'Инвойс_номер', value: `INVOICE NO: ${r.id}` },
         { cell: 'Инвойс_покупатель', value: r.buyer.fullName },
         { cell: 'Инвойс_продавец', value: r.seller.name },
-        { cell: 'Инвойс_условия_доставки', value: r.terms },
+        { cell: 'Инвойс_условия_доставки', value: `${r.terms} ${r.port}`.toUpperCase() },
         { cell: 'Инвойс_всего_места', value: `TOTAL: ${contract.amount.placesTotal.str} kg` },
         { cell: 'Инвойс_всего_цена', value: `${contract.amount.priceTotal.str} $` },
         { cell: 'Инвойс_адреса_продавец', value: r.seller.name },

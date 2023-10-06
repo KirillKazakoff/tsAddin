@@ -24,7 +24,7 @@ export const getSalesContractCells = (contract: SalesContractT) => {
             { cell: 'Контракт_покупатель_печать_подвал_1', value: r.buyer.fullName },
             { cell: 'Контракт_продавец_печать_подвал_2', value: r.seller.name },
             { cell: 'Контракт_покупатель_печать_подвал_2', value: r.buyer.fullName },
-            { cell: 'Контракт_доставка', value: `Supply of products is carried out on ${r.terms}` },
+            { cell: 'Контракт_доставка', value: `Supply of products is carried out on ${r.terms} ${r.port}` },
         ],
         live: <CellObjT[]>[
             { cell: 'Контракт_предмет', value: `1.1. The Seller agrees to sell and the Buyer agrees to purchase goods produced by ${r.vessel} with following in table assortment: ` },

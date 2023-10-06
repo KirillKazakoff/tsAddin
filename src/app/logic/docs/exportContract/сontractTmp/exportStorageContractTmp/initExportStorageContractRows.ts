@@ -1,16 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
-import { setFormats } from '../../../../utils/formats';
-import { alignmentCenter, borderAll, styleRowCells } from '../../../styleRowCells';
+import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
+import { alignmentCenter, borderAll } from '../../../styleRowCells';
 
 export const initExportStorageContractRows = (
-    // invoices
     invoices: InvoicesT,
     utils: CellUtilsDoubleT,
 ) => {
-    const cellName = 'Сертификаты_массив';
-    const arrayCl = utils.getCell(cellName);
+    const { insertRows } = initRowMaker(utils.ws, 'Сертификаты_массив');
 
     // Get product groups
     const invoicesArr = Object.values(invoices);
@@ -20,44 +18,37 @@ export const initExportStorageContractRows = (
         return total;
     }, []);
 
-    groups.forEach((group, index) => {
-        const { record: r } = group;
+    insertRows({
+        records: groups,
+        deleteStartAmount: 1,
+        rowSettings: ({ record: r, total }) => {
+            // empty spaces since additional columns for pictures
+            const fields = {
+                empty1: '',
+                product: `${r.product.ru.name}\n${r.product.eng.name}`,
+                empty3: '',
+                vessel: `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
+                consignee: `${r.consignee.fullName}\n${r.consignee.addres}`,
+                empty6: '',
+                empty7: '',
+                placesTotal: total.placesTotal.count,
+            };
 
-        // empty spaces since additional columns for pictures
-        const fields = {
-            empty1: '',
-            product: `${r.product.ru.name}\n${r.product.eng.name}`,
-            empty3: '',
-            vessel: `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
-            consignee: `${r.consignee.fullName}\n${r.consignee.addres}`,
-            empty6: '',
-            empty7: '',
-            placesTotal: group.total.placesTotal.count,
-        };
-
-        const rowIndex = +arrayCl.cellEng.row + index;
-        const row = utils.ws.insertRow(rowIndex, Object.values(fields));
-
-        // merge
-        const mergeArrays = [
-            [2, 3],
-            [5, 7],
-        ];
-        mergeArrays.forEach(([startCol, endCol]) => {
-            utils.mergeCells({ startCol, endCol, row: rowIndex });
-        });
-
-        // styleRow
-        setFormats(row, fields, 'exportEng');
-        styleRowCells(row, {
-            height: 45,
-            border: borderAll,
-            alignment: alignmentCenter,
-            font: { size: 9 },
-        });
-
-        row.getCell(1).border = {};
+            // prettier-ignore
+            return {
+                fields,
+                docType: 'exportEng',
+                merge: [{ start: 2, end: 3 }, { start: 5, end: 7 }],
+                style: {
+                    common: {
+                        height: 45,
+                        border: borderAll,
+                        alignment: alignmentCenter,
+                        font: { size: 9 },
+                    },
+                    special: [{ index: 1, style: { border: {} } }],
+                },
+            };
+        },
     });
-
-    utils.deleteRow(cellName);
 };
