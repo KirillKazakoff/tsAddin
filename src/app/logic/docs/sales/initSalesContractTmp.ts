@@ -39,7 +39,7 @@ export const initSalesContractTmp = async (
         [
             {
                 key: seller.code,
-                rangeObj: {
+                range: {
                     start: 'Sign_seller_start_1',
                     end: 'Sign_seller_end_1',
                 },
@@ -47,7 +47,7 @@ export const initSalesContractTmp = async (
             },
             {
                 key: seller.code,
-                rangeObj: {
+                range: {
                     start: 'Sign_seller_start_2',
                     end: 'Sign_seller_end_2',
                 },

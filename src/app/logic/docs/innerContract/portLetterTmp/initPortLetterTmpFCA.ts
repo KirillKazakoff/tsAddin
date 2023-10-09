@@ -18,7 +18,6 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: ContractT) => {
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
-
         {
             cell: 'Письмо_описание_шапка',
             value: `Просим Вас рыбопродукцию, которая прибудет на ${record.vessel.codeName} ${date.delivery} (ориентировочно в 08:00 с уточнением) в адрес ${record.seller.ru.name}`,

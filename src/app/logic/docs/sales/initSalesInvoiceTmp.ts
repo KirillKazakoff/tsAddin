@@ -74,7 +74,7 @@ export const initSalesInvoiceTmp = async (
         [
             {
                 key: r.seller.code,
-                rangeObj: {
+                range: {
                     start: 'Invoice_sign_seller_start',
                     end: 'Invoice_sign_seller_end',
                 },

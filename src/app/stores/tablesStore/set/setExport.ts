@@ -48,12 +48,14 @@ export const setExport = (table: any[][]) => {
                 totalObj.push(rowObj);
                 return totalObj;
             } catch (e) {
+                console.log(e);
                 return totalObj;
             }
         },
         [],
     );
 
+    console.log(transformedTable);
     checkTable(transformedTable, 'export');
     tablesStore.setTable.export(transformedTable);
 };

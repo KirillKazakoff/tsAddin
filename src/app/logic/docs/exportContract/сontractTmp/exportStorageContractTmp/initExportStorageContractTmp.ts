@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
-import { initExportContractRowsR } from './initExportContractRowsR';
+import { initExportStorageContractRowsR } from './initExportStorageContractRowsR';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
 import { AgreementT } from '../../groupBy/initAgreement';
 import { initPicturesExcel } from '../../../../excel/pictures/initPictureExcel';
@@ -14,7 +14,7 @@ export const initExportStorageContractTmp = async (
         initExportStorageContractRows(agreement.productsGroupedBy.invoices, utils);
     }
     if (exportContractStore.operation === 'certificates') {
-        initExportContractRowsR(agreement.productsGroupedBy.bl, utils);
+        initExportStorageContractRowsR(agreement.productsGroupedBy.bl, utils);
     }
 
     // mergeCells
@@ -31,22 +31,22 @@ export const initExportStorageContractTmp = async (
         [
             {
                 key: exportContractStore.fields.podpisant.codeName,
-                rangeObj: { start: 'Sign_seller_start', end: 'Seal_seller_end' },
+                range: { start: 'Sign_seller_start', end: 'Seal_seller_end' },
                 ws: utils.ws,
             },
             {
                 key: agreement.record.seller.codeName,
-                rangeObj: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
+                range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
                 ws: utils.ws,
             },
             {
                 key: agreement.record.agent.eng.signatory,
-                rangeObj: { start: 'Sign_agent_start', end: 'Sign_agent_end' },
+                range: { start: 'Sign_agent_start', end: 'Sign_agent_end' },
                 ws: utils.ws,
             },
             {
                 key: agreement.record.agent.code,
-                rangeObj: { start: 'Seal_agent_start', end: 'Seal_agent_end' },
+                range: { start: 'Seal_agent_start', end: 'Seal_agent_end' },
                 ws: utils.ws,
             },
         ],

@@ -27,7 +27,7 @@ export const groupInvoiceKTIByNo = () => {
     const invoicesKTI = rowsArray.reduce<InvoicesKTIT>((total, row) => {
         const initObj = initInvoice(blGrouped, row);
         if (!row.invoiceNo) return total;
-        const invoice = groupify<InvoiceKTIT>(total, initObj, row.invoiceNo);
+        const invoice = groupify(total, initObj, row.invoiceNo);
 
         invoice.rows.push({ row, exportRow: blGrouped[row.blNo].record });
         invoice.priceTotal += row.amount.priceTotal;

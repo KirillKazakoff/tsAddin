@@ -8,6 +8,9 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
     const packSp = selectSp.package(
         `${row.vessel}${row.product}${row.pack.toString().replace('.', ',')}`,
     );
+    const placesGross = packSp.coefficient
+        ? row.placesTotal * packSp.coefficient
+        : 1;
 
     return {
         type: 'export',
@@ -28,7 +31,7 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
             placesTotal: initAmount(row.placesTotal, 3, 4),
             price: initAmount(row.price, 2, 2),
             priceTotal: initAmount(row.priceTotal, 3, 4),
-            placesGross: initAmount(row.placesTotal * packSp.coefficient, 3, 4),
+            placesGross: initAmount(placesGross, 3, 4),
         },
         agreementNo: row.agreementNo,
         invoice: row.invoice,

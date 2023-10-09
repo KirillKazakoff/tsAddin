@@ -36,7 +36,7 @@ export const createPortLetter = async (contract: ContractT) => {
         [
             {
                 key: podpisant.codeName,
-                rangeObj: {
+                range: {
                     start: 'Sign_seller_start',
                     end: `${
                         portLetterStore.fields.termsPort === 'FCA'
@@ -48,7 +48,7 @@ export const createPortLetter = async (contract: ContractT) => {
             },
             {
                 key: seller.codeName,
-                rangeObj: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
+                range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
                 ws,
             },
         ],

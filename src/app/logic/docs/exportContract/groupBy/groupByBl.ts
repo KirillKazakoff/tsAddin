@@ -34,14 +34,14 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
             groupedProductsArr: [],
             total: initAmountObj(row.type),
         };
-        const bl = groupify<BlGroupT<RowT>>(total, initBlGroup, row.blNo);
+        const bl = groupify(total, initBlGroup, row.blNo);
 
         const initProductGroup = <BlProductGroupedT<RowT>>{
             record: row,
             total: initAmountObj(row.type),
             rows: [],
         };
-        const productRow = groupify<BlProductGroupedT<RowT>>(
+        const productRow = groupify(
             bl.groupedBy.product,
             initProductGroup,
             row.product.codeName,

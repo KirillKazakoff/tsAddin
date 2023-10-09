@@ -9,7 +9,7 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
     ['eng', 'ru'].forEach((language) => {
         // prettier-ignore
         const cellName = language === 'eng' ? 'Инвойс_Bl_массив' : 'Инвойс_Bl_массив_п';
-        const docType = language === 'ru' ? 'exportEng' : 'exportRu';
+        const docType = language === 'eng' ? 'exportEng' : 'exportRu';
         const { insertRows } = initRowMaker(utils.ws, cellName);
 
         insertRows({
@@ -24,7 +24,7 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
                     bl: r.blNo || '-',
                     vessel: r.vessel.eng.name,
                     desc: r.product.eng.name,
-                    pack: `1/${r.pack} KG`,
+                    pack: `1/${r.pack} kg`,
                     places: places.count,
                     placesTotal: placesTotal.count,
                     price: price.count,
@@ -34,7 +34,7 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
                 if (language === 'ru') {
                     fields.desc = r.product.ru.name;
                     fields.vessel = r.vessel.ru.name;
-                    fields.pack = `1/${r.pack} КГ`;
+                    fields.pack = `1/${r.pack} кг`;
                 }
 
                 if (invoice.agreement.record.terms === 'FCA') {

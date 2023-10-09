@@ -21,7 +21,7 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
     return groupVessel.reduce<ProductionInfoT>((productionTypes, tableRow) => {
         const { product, sort, amount } = tableRow;
 
-        const productObj = groupify<ProductT>(
+        const productObj = groupify(
             productionTypes,
             initProduct(tableRow),
             product.codeName,

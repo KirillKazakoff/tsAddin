@@ -10,7 +10,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     const ws = book.getWorksheet('Request_Contract');
     const utils = initExcelUtils(ws);
 
-    const { record, priceTotal, requests } = contract;
+    const { record, priceTotal, requestsArr: requests } = contract;
     const {
         portRu, portTamozhnya, terms, reiceNo, isInvoiceOnly,
     } = requestContractStore.fields;

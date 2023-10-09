@@ -1,8 +1,5 @@
 import { addToAmount } from '../../../../stores/tablesStore/utils/initAmount';
-import {
-    AssortimentTablesT,
-    AssortimentTableT,
-} from '../../../../types/typesAssortiment';
+import { AssortimentTablesT } from '../../../../types/typesAssortiment';
 import { ExportRowT } from '../../../../types/typesTables';
 import { groupify } from '../../../utils/groupify';
 import { initAssortimentObj, initAssortimentTable } from '../initAssortimentTable';
@@ -13,7 +10,7 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
         if (!isProductForAssortiment(row.product)) return total;
         const initObj = initAssortimentTable(row);
 
-        const table = groupify<AssortimentTableT>(total, initObj, row.blNo);
+        const table = groupify(total, initObj, row.blNo);
 
         const isStorageRowInExport = table.record.type === 'export' && row.type === 'exportStorage';
         if (isStorageRowInExport) return total;

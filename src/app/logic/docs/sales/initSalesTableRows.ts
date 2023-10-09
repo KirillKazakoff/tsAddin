@@ -18,6 +18,8 @@ export const initSalesTableRows = (settings: SettingsT) => {
 
     const fontSize = isContract ? 9 : 11;
 
+    console.log(rows);
+
     insertRows({
         records: rows,
         deleteStartAmount: 1,

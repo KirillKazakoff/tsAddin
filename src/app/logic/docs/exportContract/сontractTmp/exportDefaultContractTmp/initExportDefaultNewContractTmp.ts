@@ -1,14 +1,12 @@
-/* eslint-disable no-param-reassign */
 import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
-import { alignmentCenter, borderAll } from '../../../styleRowCells';
 
-export const initExportStorageContractRows = (
+export const initExportDefaultContractRows = (
     invoices: InvoicesT,
     utils: CellUtilsDoubleT,
 ) => {
-    const { insertRows } = initRowMaker(utils.ws, 'Сертификаты_массив');
+    const { insertRows } = initRowMaker(utils.ws, 'Предмет_массив');
 
     // Get product groups
     const invoicesArr = Object.values(invoices);
@@ -21,20 +19,19 @@ export const initExportStorageContractRows = (
     insertRows({
         records: groups,
         deleteStartAmount: 1,
-        rowSettings: ({ record: r, total }, i) => {
-            // empty spaces since additional columns for pictures
+        rowSettings: ({ record: r, total }) => {
             const fields = {
                 empty1: '',
                 product: `${r.product.ru.name}\n${r.product.eng.name}`,
                 empty3: '',
                 vessel: `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
+                empty5: '',
                 consignee: `${r.consignee.fullName}\n${r.consignee.addres}`,
-                empty6: '',
                 empty7: '',
+                price: r.amount.price.count,
                 placesTotal: total.placesTotal.count,
             };
 
-            console.log(i);
             // prettier-ignore
             return {
                 fields,
@@ -42,14 +39,15 @@ export const initExportStorageContractRows = (
                 merge: [{ start: 2, end: 3 }, { start: 5, end: 7 }],
                 style: {
                     common: {
-                        height: 45,
-                        border: borderAll,
-                        alignment: alignmentCenter,
-                        font: { size: 9 },
+                        height: 55,
+                        border: { bottom: { style: 'thin' } },
+                        alignment: { horizontal: 'center', vertical: 'middle' },
+                        font: { size: 10 },
                     },
-                    special: [{ index: 1, style: { border: {} } }],
                 },
             };
         },
     });
 };
+
+export const initExportDefaultNewContractTmp = () => {};

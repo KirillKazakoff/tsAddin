@@ -4,11 +4,13 @@ import { initExportContractCost } from './initExportContractCost';
 import { initExportContractSubject } from './initExportContractSubject';
 import { AgreementT } from '../../groupBy/initAgreement';
 import { initExportContractDelivery } from './initExportContractDelivery';
+import { initExportDefaultContractRows } from './initExportDefaultNewContractTmp';
 
 export const initExportDefaultContractTmp = async (
     utils: CellUtilsDoubleT,
     agreement: AgreementT,
 ) => {
+    // initExportDefaultContractRows(agreement.productsGroupedBy.invoices, utils);
     initExportContractSubject(utils, agreement);
     initExportContractCost(utils, agreement);
     initExportContractDelivery(utils, agreement);

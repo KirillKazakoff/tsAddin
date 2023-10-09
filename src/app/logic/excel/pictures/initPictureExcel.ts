@@ -10,11 +10,11 @@ import { loadPicture } from './loadPicture';
 export type PictureSettingsT = {
     key: string;
     ws: Worksheet;
-    rangeObj: { start: string; end: string };
+    range: { start: string; end: string };
 };
 
 export const initPictureExcel = async (settings: PictureSettingsT) => {
-    const { key: keyCode, ws, rangeObj } = settings;
+    const { key: keyCode, ws, range: rangeObj } = settings;
 
     const key = selectPicture(keyCode);
     const blob = blobFromBase64(picturesStore.pictures[key]);
@@ -35,8 +35,8 @@ export const initPicturesExcel = async (
 
     // clear picture fields '-'
     settingsArr.forEach((settings) => {
-        utils.getCell(settings.rangeObj.start).value = '';
-        utils.getCell(settings.rangeObj.end).value = '';
+        utils.getCell(settings.range.start).value = '';
+        utils.getCell(settings.range.end).value = '';
     });
 
     if (!isActive || !picturesStore.isPicturesFound) {

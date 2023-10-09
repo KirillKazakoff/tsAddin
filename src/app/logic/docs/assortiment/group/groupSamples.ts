@@ -2,7 +2,6 @@
 import { addToAmount } from '../../../../stores/tablesStore/utils/initAmount';
 import {
     AssortimentT,
-    AssortimentTableT,
     AssortimentTablesT,
     SamplesT,
 } from '../../../../types/typesAssortiment';
@@ -18,7 +17,7 @@ export const groupSamples = (rows: ExportRowT[]) => {
 
         const tableCode = `${row.consignee.codeName}${row.vessel.codeName}${row.product.codeName}`;
         const initTableObj = initAssortimentTable(row);
-        const table = groupify<AssortimentTableT>(total, initTableObj, tableCode);
+        const table = groupify(total, initTableObj, tableCode);
 
         const isStorageRowInExport = table.record.type === 'export' && row.type === 'exportStorage';
         if (isStorageRowInExport) return total;
@@ -62,7 +61,7 @@ export const groupSamples = (rows: ExportRowT[]) => {
             tables: {},
         };
 
-        const assortiment = groupify<AssortimentT>(
+        const assortiment = groupify(
             total,
             initAssortimentObj,
             table.record.consignee.codeName,

@@ -24,7 +24,7 @@ export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT) => {
                 konosament: `${r.konosament} от ${getExcelDateNumeric(mateRow.date, 'ru')}`,
                 product: `${r.product.ru.name} ${r.sort}`,
                 vessel: r.vessel.ru.name,
-                pack: `1/${r.pack}`,
+                pack: `1/${r.pack} кг`,
                 places: r.amount.places.count,
                 placesTotal: r.amount.placesTotal.count,
             };

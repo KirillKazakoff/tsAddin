@@ -10,13 +10,14 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT) => 
 
     insertRows({
         records: rows,
+        deleteStartAmount: 1,
         rowSettings: ({ record: r, total }) => {
             const fields = {
                 emptyFirst: '',
                 bl: r.blNo,
                 product: r.product.eng.name,
                 sort: '-',
-                pack: `1/${r.pack} KG`,
+                pack: `1/${r.pack} kg`,
                 places: total.places.count,
                 placesTotal: total.placesTotal.count,
                 placesGross: total.placesGross.count,
@@ -32,7 +33,7 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT) => 
                     },
                     special: [
                         { index: 2, style: { border: { left: { style: 'thin' } } } },
-                        { index: 'last', style: { border: { left: { style: 'thin' } } } },
+                        { index: 'last', style: { border: { right: { style: 'thin' } } } },
                     ],
                 },
             };

@@ -12,7 +12,8 @@ const initContract = (row: InnerRowT) => {
         record: row,
         rows: <{ row: InnerRowT; mateRow: MateRowT }[]>[],
         priceTotal: initAmount(0, 2, 2),
-        requests: <RequestT[]>[],
+        requests: <{ [key: string]: RequestT }>{},
+        requestsArr: <RequestT[]>[],
     };
 };
 
@@ -22,11 +23,8 @@ export type ContractRowT = ContractT['rows'][number];
 
 export const groupByContractNo = () => {
     const contracts = tablesStore.innerT.reduce<ContractsT>((total, row) => {
-        const contract = groupify<ContractT>(
-            total,
-            initContract(row),
-            row.id,
-        );
+        const contract = groupify(total, initContract(row), row.id);
+
         const mateRow = tablesStore.matesT.find(
             (r) => r.konosament === row.konosament,
         );

@@ -22,15 +22,9 @@ export const setCell = (ws: Worksheet, setObj: CellObjT) => {
         cell, value, offsetRow, numFmt,
     } = setObj;
 
-    try {
-        const cellObj = getCellByName(ws, cell, offsetRow);
-        cellObj.value = value;
+    const cellObj = getCellByName(ws, cell, offsetRow);
+    cellObj.value = value;
 
-        if (numFmt) cellObj.numFmt = numFmt;
-        return cellObj;
-    } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(`ошибка в клетке ${cell}`);
-        return null;
-    }
+    if (numFmt) cellObj.numFmt = numFmt;
+    return cellObj;
 };

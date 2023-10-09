@@ -38,7 +38,7 @@ export const initRowMaker = (ws: Worksheet, cellName: string) => {
                 mergeCells(ws, {
                     startCol: start,
                     endCol: end,
-                    row: insertIndex,
+                    row: row.number,
                 });
             });
         }
@@ -64,7 +64,7 @@ export const initRowMaker = (ws: Worksheet, cellName: string) => {
 
     const insertRows = <RecordT>(settingsTmp: SettingsRowsT<RecordT>) => {
         settingsTmp.records.forEach((record) => {
-            const settings = settingsTmp.rowSettings(record, insertIndex);
+            const settings = settingsTmp.rowSettings(record, insertIndex + 1);
             if (!settings) return;
 
             insertRow(settings);

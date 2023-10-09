@@ -17,7 +17,7 @@ export type RequestT = ReturnType<typeof initRequest>;
 
 export const groupContractByNameSort = (contract: ContractT) => {
     contract.rows.forEach(({ row }) => {
-        const request = groupify<RequestT>(
+        const request = groupify(
             contract.requests,
             initRequest(row),
             `${row.product.codeName}${row.sort}${row.amount.price.count}`,
@@ -27,6 +27,6 @@ export const groupContractByNameSort = (contract: ContractT) => {
         addToAmount(request.priceTotal, row.amount.priceTotal.count);
     });
 
-    contract.requests = Object.values(contract.requests);
+    contract.requestsArr = Object.values(contract.requests);
     return contract;
 };

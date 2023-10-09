@@ -5,7 +5,7 @@ import { setMSC } from '../../../../stores/tablesStore/utils/setMSC';
 import { groupAgByConsignee } from './groupAgByConsignee';
 import { groupAgByInvoice } from './groupAgByInvoice';
 import { groupAgByVessel } from './groupAgByVessel';
-import { AgreementT, AgreementsT, initAgreement } from './initAgreement';
+import { AgreementsT, initAgreement } from './initAgreement';
 import { groupify } from '../../../utils/groupify';
 import { groupByBl } from './groupByBl';
 import { setCOHCStatus } from './setCOHCStatus';
@@ -15,11 +15,7 @@ export const groupAgByNo = () => {
 
     const agreements = table.reduce<AgreementsT>((total, row) => {
         const clonedRow = _.cloneDeep(row);
-        const agreement = groupify<AgreementT>(
-            total,
-            initAgreement(clonedRow),
-            row.id,
-        );
+        const agreement = groupify(total, initAgreement(clonedRow), row.id);
 
         if (row.msc) setMSC(clonedRow);
 

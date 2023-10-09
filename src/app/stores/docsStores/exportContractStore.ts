@@ -15,7 +15,7 @@ type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 class ExportContractStore {
     name = 'exportContractStore';
     fields = initFields();
-    operation: OperationT = 'export_storage';
+    operation: OperationT = 'export';
     currentId = '';
 
     constructor() {

@@ -7,17 +7,22 @@ export const getCellByName = (
 ): Cell => {
     let match: ExcelJS.Cell;
 
-    worksheet.eachRow((row) => row.eachCell((cell) => {
-        if (cell.name === name) {
-            match = cell;
-        }
-    }));
+    try {
+        worksheet.eachRow((row) => row.eachCell((cell) => {
+            if (cell.name === name) {
+                match = cell;
+            }
+        }));
 
-    if (offsetRow) {
-        const cellMatched = match as Cell;
-        return worksheet.getCell(cellMatched.row + offsetRow, cellMatched.col);
+        if (offsetRow) {
+            const cellMatched = match as Cell;
+            return worksheet.getCell(cellMatched.row + offsetRow, cellMatched.col);
+        }
+        return match;
+    } catch (e) {
+        console.error(`ошибка в клетке ${name}`);
+        return null;
     }
-    return match;
 };
 
 export const getCellsObj = (
@@ -26,11 +31,16 @@ export const getCellsObj = (
     cellName: string,
     offsetRow?: number,
 ) => {
-    const cellEng = getCellByName(ws, cellName, offsetRow);
-    const cellRus = ws.getCell(cellEng.row, +cellEng.col + offsetCol);
+    try {
+        const cellEng = getCellByName(ws, cellName, offsetRow);
+        const cellRus = ws.getCell(cellEng.row, +cellEng.col + offsetCol);
 
-    return {
-        cellEng,
-        cellRus,
-    };
+        return {
+            cellEng,
+            cellRus,
+        };
+    } catch (e) {
+        console.error(`ошибка в клетке ${cellName}`);
+        return null;
+    }
 };

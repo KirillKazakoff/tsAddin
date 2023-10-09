@@ -4,6 +4,7 @@ import { Cell, Row } from 'exceljs';
 // prettier-ignore
 export const formats = {
     common: {
+        basePlacesTotalTn: '#,##0.0000_)',
         priceDollar: '#,##0.00_) "$"',
         priceRub: '#,##0.00_) "Р"',
         priceDollarUSD: '#,##0.00_) "USD"',
@@ -12,12 +13,12 @@ export const formats = {
     ru: {
         places: '# ### "шт"',
         placesTotalKg: '#,##0.00_) "кг"',
-        placesTotalTn: '#,##0.00_) "тн"',
+        placesTotalTn: '#,##0.0000_) "тн"',
     },
     eng: {
         places: '# ### "PCS"',
         placesTotalKg: '#,##0.00_) "kg"',
-        placesTotalTn: '#,##0.00_) "tn"',
+        placesTotalTn: '#,##0.0000_) "tn"',
     },
 };
 
@@ -59,6 +60,10 @@ export const formatsDocs = {
         placesTotal: formats.eng.placesTotalKg,
         price: formats.common.priceDollar,
         priceTotal: formats.common.priceDollar,
+    },
+    exportContract: {
+        price: formats.common.priceDollar,
+        placesTotal: formats.common.basePlacesTotalTn,
     },
 };
 

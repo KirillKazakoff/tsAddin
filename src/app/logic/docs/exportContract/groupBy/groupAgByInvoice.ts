@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { AgreementT } from './initAgreement';
-import { InvoiceT, ProductGroupT } from '../../../../types/typesContract';
+import { InvoiceT } from '../../../../types/typesContract';
 import { groupify } from '../../../utils/groupify';
 import {
     addToAmountObj,
@@ -25,7 +25,7 @@ export const groupAgByInvoice = (agreement: AgreementT) => {
             amount: initAmountObj(row.type),
             productGroups: {},
         };
-        const invoice = groupify<InvoiceT>(invoices, initInvoice, invoiceNo);
+        const invoice = groupify(invoices, initInvoice, invoiceNo);
         invoice.rows.push(row);
 
         const initProductGroup = {
@@ -33,7 +33,7 @@ export const groupAgByInvoice = (agreement: AgreementT) => {
             record: row,
             total: initAmountObj(row.type),
         };
-        const productGroup = groupify<ProductGroupT>(
+        const productGroup = groupify(
             invoice.productGroups,
             initProductGroup,
             row.product.codeName,

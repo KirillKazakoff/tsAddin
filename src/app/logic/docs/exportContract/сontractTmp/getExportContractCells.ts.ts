@@ -44,7 +44,7 @@ export const getExportContractCells = (agreement: AgreementT) => {
             // Header
             {
                 cell: 'Соглашение',
-                eng: `AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}}`,
+                eng: `AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
                 ru: `Дополнительное соглашение № ${agreementNo} от ${date.agreement('ru')}`,
             },
             {
@@ -177,8 +177,8 @@ export const getExportContractCells = (agreement: AgreementT) => {
             },
             {
                 cell: 'Адреса_подпись',
-                ru: `Продавец/Seller  _______________________${podpisant.eng.name}`,
                 eng: `Покупатель/Buyer ________________________${agent.eng.signatory}`,
+                ru: `Продавец/Seller  _______________________${podpisant.eng.name}`,
             },
         ],
         exportCFR: <CellObjT[]>[
