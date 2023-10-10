@@ -3,7 +3,7 @@ import type { GroupedBlT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { ExportRowT } from '../../../../../types/typesTables';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
-import { borderAll, alignmentCenter } from '../../../styleRowCells';
+import { borderAll, alignmentCenter } from '../../../../excel/utils/styleRowCells';
 
 export const initExportStorageContractRowsR = (
     blGrouped: GroupedBlT<ExportRowT>,

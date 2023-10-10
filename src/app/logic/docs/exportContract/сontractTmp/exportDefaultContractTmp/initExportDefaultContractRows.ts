@@ -25,8 +25,8 @@ export const initExportDefaultContractRows = (
                 product: `${r.product.ru.name}\n${r.product.eng.name}`,
                 empty3: '',
                 vessel: `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
-                empty5: '',
                 consignee: `${r.consignee.fullName}\n${r.consignee.addres}`,
+                empty6: '',
                 empty7: '',
                 price: r.amount.price.count,
                 placesTotal: total.placesTotal.count,
@@ -40,8 +40,8 @@ export const initExportDefaultContractRows = (
                 style: {
                     common: {
                         height: 55,
-                        border: { bottom: { style: 'thin' } },
-                        alignment: { horizontal: 'center', vertical: 'middle' },
+                        border: 'outside',
+                        alignment: 'center',
                         font: { size: 10 },
                     },
                 },
@@ -49,5 +49,3 @@ export const initExportDefaultContractRows = (
         },
     });
 };
-
-export const initExportDefaultNewContractTmp = () => {};

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../excel/utils/excelUtilsObj/initRows';
-import { alignmentCenter, borderAll } from '../../styleRowCells';
+import { alignmentCenter, borderAll } from '../../../excel/utils/styleRowCells';
 import { RequestT } from '../groupContractByNameSort';
 
 export const initRequestRows = (requests: RequestT[], utils: CellUtilsT) => {

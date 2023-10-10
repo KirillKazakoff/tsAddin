@@ -4,7 +4,6 @@ import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { initExportStorageContractRowsR } from './initExportStorageContractRowsR';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
 import { AgreementT } from '../../groupBy/initAgreement';
-import { initPicturesExcel } from '../../../../excel/pictures/initPictureExcel';
 
 export const initExportStorageContractTmp = async (
     utils: CellUtilsDoubleT,
@@ -25,31 +24,4 @@ export const initExportStorageContractTmp = async (
         utils.mergeCells({ row: i, startCol: 2, endCol: 4 });
         utils.mergeCells({ row: i, startCol: 5, endCol: 8 });
     }
-
-    // initPictures
-    await initPicturesExcel(
-        [
-            {
-                key: exportContractStore.fields.podpisant.codeName,
-                range: { start: 'Sign_seller_start', end: 'Seal_seller_end' },
-                ws: utils.ws,
-            },
-            {
-                key: agreement.record.seller.codeName,
-                range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
-                ws: utils.ws,
-            },
-            {
-                key: agreement.record.agent.eng.signatory,
-                range: { start: 'Sign_agent_start', end: 'Sign_agent_end' },
-                ws: utils.ws,
-            },
-            {
-                key: agreement.record.agent.code,
-                range: { start: 'Seal_agent_start', end: 'Seal_agent_end' },
-                ws: utils.ws,
-            },
-        ],
-        agreement.record.type === 'certificates',
-    );
 };

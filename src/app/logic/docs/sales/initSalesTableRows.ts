@@ -2,7 +2,7 @@ import salesContractStore from '../../../stores/docsStores/salesContractStore';
 import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { SalesRowT } from '../../../types/typesTables';
 import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
-import { alignmentCenter } from '../styleRowCells';
+import { alignmentCenter } from '../../excel/utils/styleRowCells';
 
 type SettingsT = {
     rows: SalesRowT[];
@@ -17,8 +17,6 @@ export const initSalesTableRows = (settings: SettingsT) => {
     const { insertRows } = initRowMaker(utils.ws, cellName);
 
     const fontSize = isContract ? 9 : 11;
-
-    console.log(rows);
 
     insertRows({
         records: rows,

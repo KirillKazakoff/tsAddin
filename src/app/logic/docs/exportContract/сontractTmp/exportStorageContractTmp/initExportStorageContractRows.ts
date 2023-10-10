@@ -2,7 +2,6 @@
 import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
-import { alignmentCenter, borderAll } from '../../../styleRowCells';
 
 export const initExportStorageContractRows = (
     invoices: InvoicesT,
@@ -33,8 +32,6 @@ export const initExportStorageContractRows = (
                 empty7: '',
                 placesTotal: total.placesTotal.count,
             };
-
-            console.log(i);
             // prettier-ignore
             return {
                 fields,
@@ -43,8 +40,8 @@ export const initExportStorageContractRows = (
                 style: {
                     common: {
                         height: 45,
-                        border: borderAll,
-                        alignment: alignmentCenter,
+                        border: 'all',
+                        alignment: 'center',
                         font: { size: 9 },
                     },
                     special: [{ index: 1, style: { border: {} } }],

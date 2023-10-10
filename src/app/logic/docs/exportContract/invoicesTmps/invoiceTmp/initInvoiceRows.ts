@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
-import { alignmentCenter, fontDefault } from '../../../styleRowCells';
+import { alignmentCenter, fontDefault } from '../../../../excel/utils/styleRowCells';
 
 export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
     const { productGroups } = invoice;

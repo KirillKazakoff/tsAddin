@@ -2,7 +2,7 @@ import { BlGroupT } from '../../../types/typesContract';
 import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { ExportRowT } from '../../../types/typesTables';
 import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
-import { alignmentCenter } from '../styleRowCells';
+import { alignmentCenter } from '../../excel/utils/styleRowCells';
 
 export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT) => {
     const { groupedProductsArr: rows } = blGroup;

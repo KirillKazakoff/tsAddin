@@ -2,7 +2,7 @@ import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { SalesRowT } from '../../../types/typesTables';
 import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
-import { alignmentCenter } from '../styleRowCells';
+import { alignmentCenter } from '../../excel/utils/styleRowCells';
 import { SalesContractT } from './groupBy/initSalesContract';
 
 export const initSalesRowsDefault = (

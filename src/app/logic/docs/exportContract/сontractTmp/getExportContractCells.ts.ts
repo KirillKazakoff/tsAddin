@@ -177,8 +177,8 @@ export const getExportContractCells = (agreement: AgreementT) => {
             },
             {
                 cell: 'Адреса_подпись',
-                eng: `Покупатель/Buyer ________________________${agent.eng.signatory}`,
-                ru: `Продавец/Seller  _______________________${podpisant.eng.name}`,
+                eng: `Продавец/Seller  _______________________${podpisant.eng.name}`,
+                ru: `Покупатель/Buyer ________________________${agent.eng.signatory}`,
             },
         ],
         exportCFR: <CellObjT[]>[

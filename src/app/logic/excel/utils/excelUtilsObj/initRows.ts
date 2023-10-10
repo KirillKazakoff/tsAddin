@@ -1,12 +1,9 @@
 import { Cell, Worksheet } from 'exceljs';
 import { DocTypeT, setFormats } from '../../../utils/formats';
 import { getCellByName } from './getCell';
-import {
-    RowStyleSettingsT,
-    styleCell,
-    styleRowCells,
-} from '../../../docs/styleRowCells';
 import { mergeCells } from './mergeCells';
+import { mergeStyles } from '../mergeStyles';
+import { RowStyleSettingsT, styleRowCells, styleCell } from '../styleRowCells';
 
 type FieldsT = { [key: string]: string | number };
 type SettingsRowT = {
@@ -26,6 +23,7 @@ type SettingsRowsT<RecordT> = {
 
 export const initRowMaker = (ws: Worksheet, cellName: string) => {
     const arrayCl = getCellByName(ws, cellName);
+    const firstCellCount = ws.getColumn(arrayCl.col).number;
     let insertIndex = +arrayCl.row;
 
     const insertRow = (settings: SettingsRowT) => {
@@ -44,14 +42,18 @@ export const initRowMaker = (ws: Worksheet, cellName: string) => {
         }
 
         if (settings.style) {
-            styleRowCells(row, settings.style.common);
+            styleRowCells(row, settings.style.common, firstCellCount);
 
             if (settings.style.special) {
                 settings.style.special.forEach((cell) => {
                     const cellIndex = cell.index === 'last' ? row.cellCount : cell.index;
 
                     const cellObj = row.getCell(cellIndex);
-                    const mergedStyle = { ...settings.style.common, ...cell.style };
+                    // const mergedStyle = { ...settings.style.common, ...cell.style };
+                    const mergedStyle = mergeStyles(
+                        settings.style.common,
+                        cell.style,
+                    );
                     styleCell(cellObj, mergedStyle);
                 });
             }

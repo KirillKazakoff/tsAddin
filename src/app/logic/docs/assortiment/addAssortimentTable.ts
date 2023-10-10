@@ -1,5 +1,4 @@
 import { Style, Worksheet } from 'exceljs';
-import { styleRowCells, borderAll } from '../styleRowCells';
 import { AssortimentTableT } from '../../../types/typesAssortiment';
 import { calcFreezing } from './calcFreezing';
 import {
@@ -7,6 +6,7 @@ import {
     createFormula,
     getAddress,
 } from '../../excel/utils/createFormula';
+import { borderAll, styleRowCells } from '../../excel/utils/styleRowCells';
 
 /* eslint-disable no-param-reassign */
 export const addAssortimentTable = (

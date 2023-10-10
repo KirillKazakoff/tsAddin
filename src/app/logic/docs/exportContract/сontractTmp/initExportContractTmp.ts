@@ -5,6 +5,7 @@ import { initExportDefaultContractTmp } from './exportDefaultContractTmp/initExp
 import { initExportStorageContractTmp } from './exportStorageContractTmp/initExportStorageContractTmp';
 import { AgreementT } from '../groupBy/initAgreement';
 import { getExportContractCells } from './getExportContractCells.ts';
+import { initPicturesExcel } from '../../../excel/pictures/initPictureExcel';
 
 export const initExportContractTmp = async (
     book: Workbook,
@@ -12,7 +13,7 @@ export const initExportContractTmp = async (
 ) => {
     const ws = book.getWorksheet('Export_Contract');
     const { operation } = exportContractStore;
-    const cellOffset = operation === 'export' ? 1 : 3;
+    const cellOffset = operation === 'export' ? 4 : 3;
     const utils = initExcelUtilsDouble(ws, cellOffset);
 
     const cells = getExportContractCells(agreement);
@@ -23,6 +24,33 @@ export const initExportContractTmp = async (
     } else {
         initExportDefaultContractTmp(utils, agreement);
     }
+
+    // initPictures
+    await initPicturesExcel(
+        [
+            {
+                key: exportContractStore.fields.podpisant.codeName,
+                range: { start: 'Sign_seller_start', end: 'Seal_seller_end' },
+                ws: utils.ws,
+            },
+            {
+                key: agreement.record.seller.codeName,
+                range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
+                ws: utils.ws,
+            },
+            {
+                key: agreement.record.agent.eng.signatory,
+                range: { start: 'Sign_agent_start', end: 'Sign_agent_end' },
+                ws: utils.ws,
+            },
+            {
+                key: agreement.record.agent.code,
+                range: { start: 'Seal_agent_start', end: 'Seal_agent_end' },
+                ws: utils.ws,
+            },
+        ],
+        operation === 'certificates',
+    );
 
     // printAreaSettings
     const { cellCount, number } = utils.getRow('Адреса_подпись', 0);
