@@ -6,7 +6,7 @@ import { mergeStyles } from './mergeStyles';
 
 export type RowStyleSettingsT = {
     height?: number;
-    border?: Partial<Borders> | 'all' | 'outside';
+    border?: Partial<Borders> | 'all' | 'outside' | 'edges';
     alignment?: Partial<Alignment> | 'center';
     font?: Partial<Font>;
 };
@@ -17,7 +17,6 @@ export const borderAll: Partial<Borders> = {
     left: { style: 'thin' },
     right: { style: 'thin' },
 };
-
 export const alignmentCenter: Partial<Alignment> = {
     horizontal: 'center',
     wrapText: true,
@@ -38,16 +37,22 @@ export const styleRowCells = (
     const cellSettings: Cell['style'] = {
         border: {},
         alignment: {},
-        font: {},
+        font: settings.font,
     };
-    if (settings.border === 'outside') {
+    if (settings.border === 'edges') {
+        cellSettings.border = {};
+    } else if (settings.border === 'outside') {
         cellSettings.border = { bottom: { style: 'thin' } };
-    }
-    if (settings.border === 'all') {
+    } else if (settings.border === 'all') {
         cellSettings.border = borderAll;
+    } else {
+        cellSettings.border = settings.border;
     }
+
     if (settings.alignment === 'center') {
         cellSettings.alignment = alignmentCenter;
+    } else {
+        cellSettings.alignment = settings.alignment;
     }
 
     row.eachCell((cell) => {
@@ -58,7 +63,7 @@ export const styleRowCells = (
         row.getCell(1).border = {};
     }
 
-    if (settings.border === 'outside') {
+    if (settings.border === 'outside' || settings.border === 'edges') {
         row.getCell(firstCellCount).style = mergeStyles(cellSettings, {
             border: { left: { style: 'thin' } },
         });

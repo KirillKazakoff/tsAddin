@@ -2,7 +2,6 @@ import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { SalesRowT } from '../../../types/typesTables';
 import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
-import { alignmentCenter } from '../../excel/utils/styleRowCells';
 import { SalesContractT } from './groupBy/initSalesContract';
 
 export const initSalesRowsDefault = (
@@ -67,7 +66,7 @@ export const initSalesRowsDefault = (
                 docType: 'sales',
                 style: {
                     common: {
-                        alignment: alignmentCenter,
+                        alignment: 'center',
                         font: { name: 'Batang', size: 9 },
                     },
                 },
@@ -86,7 +85,7 @@ export const initSalesRowsDefault = (
             docType: 'sales',
             style: {
                 common: {
-                    alignment: alignmentCenter,
+                    alignment: 'center',
                     font: { name: 'Batang', size: 9, bold: true },
                 },
             },

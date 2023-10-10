@@ -3,7 +3,6 @@ import type { GroupedBlT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { ExportRowT } from '../../../../../types/typesTables';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
-import { borderAll, alignmentCenter } from '../../../../excel/utils/styleRowCells';
 
 export const initExportStorageContractRowsR = (
     blGrouped: GroupedBlT<ExportRowT>,
@@ -34,8 +33,6 @@ export const initExportStorageContractRowsR = (
                 amount,
             };
 
-            const height = 40 + r.rows.length * 10;
-
             insertRow({
                 fields,
                 merge: [
@@ -44,12 +41,11 @@ export const initExportStorageContractRowsR = (
                 ],
                 style: {
                     common: {
-                        height,
-                        border: borderAll,
-                        alignment: alignmentCenter,
+                        height: 40 + r.rows.length * 10,
+                        border: 'all',
+                        alignment: 'center',
                         font: { size: 9 },
                     },
-                    special: [{ index: 1, style: { border: {} } }],
                 },
             });
         });

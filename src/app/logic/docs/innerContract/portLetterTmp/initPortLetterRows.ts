@@ -4,7 +4,6 @@ import pageStatusStore from '../../../../stores/pageStatusStore.ts/pageStatusSto
 import { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../excel/utils/excelUtilsObj/initRows';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
-import { borderAll, alignmentCenter } from '../../../excel/utils/styleRowCells';
 import { ContractRowT } from '../groupByContractNo';
 
 export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT) => {
@@ -39,8 +38,8 @@ export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT) => {
                 docType: 'inner',
                 style: {
                     common: {
-                        border: borderAll,
-                        alignment: alignmentCenter,
+                        border: 'all',
+                        alignment: 'center',
                         height: 35,
                     },
                 },

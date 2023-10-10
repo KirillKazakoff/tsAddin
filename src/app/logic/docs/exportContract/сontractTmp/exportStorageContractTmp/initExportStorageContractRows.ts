@@ -20,7 +20,7 @@ export const initExportStorageContractRows = (
     insertRows({
         records: groups,
         deleteStartAmount: 1,
-        rowSettings: ({ record: r, total }, i) => {
+        rowSettings: ({ record: r, total }) => {
             // empty spaces since additional columns for pictures
             const fields = {
                 empty1: '',
@@ -44,7 +44,6 @@ export const initExportStorageContractRows = (
                         alignment: 'center',
                         font: { size: 9 },
                     },
-                    special: [{ index: 1, style: { border: {} } }],
                 },
             };
         },
