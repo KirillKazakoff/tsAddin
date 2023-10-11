@@ -75,6 +75,8 @@ export const styleRowCells = (
     if (settings.height) {
         row.height = settings.height;
     }
+
+    return cellSettings;
 };
 
 export const fontDefault: Partial<Font> = {

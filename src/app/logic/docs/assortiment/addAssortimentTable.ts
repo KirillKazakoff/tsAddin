@@ -1,18 +1,15 @@
-/* eslint-disable max-len */
-import { Worksheet } from 'exceljs';
 import { AssortimentTableT } from '../../../types/typesAssortiment';
 import { calcFreezing } from './calcFreezing';
 import { AddressT, getAddress } from '../../excel/utils/createFormula';
-import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
+import { RowMakerT } from '../../excel/utils/excelUtilsObj/initRows';
 
 /* eslint-disable no-param-reassign */
 export const addAssortimentTable = (
     table: AssortimentTableT,
-    ws: Worksheet,
-    rowIndex: number,
+    { insertRow, insertRows }: RowMakerT,
+    tableIndex: number,
     isSample: boolean,
 ) => {
-    const { insertRows, insertRow } = initRowMaker(ws);
     const {
         product, vessel, pack, blNo, seller,
     } = table.record;
@@ -22,7 +19,7 @@ export const addAssortimentTable = (
     const freezing = calcFreezing(product.codeName, vessel.codeName);
     const rows = {
         product: [
-            `${rowIndex + 1}. ${freezing} ${
+            `${tableIndex + 1}. ${freezing} ${
                 product.eng.name
             } producing by ${vessel.eng.name.toUpperCase()}`,
         ],
@@ -91,7 +88,7 @@ export const addAssortimentTable = (
                         places: { style: { alignment: { horizontal: 'right' } } },
                         placesTotal: { style: { alignment: { horizontal: 'right' } } },
                         weight: { style: { alignment: { horizontal: 'center' } } },
-                        sample: {
+                        samples: {
                             style: {
                                 alignment: { horizontal: 'center' },
                                 font: { color: { argb: 'FF0000' } },
@@ -99,7 +96,7 @@ export const addAssortimentTable = (
                         },
                         percentage: {
                             style: { alignment: { horizontal: 'right' } },
-                            formulaCb: (address) => {
+                            formulaCb: (address: AddressT) => {
                                 const colTotal = getAddress(rowObj.getCell(3)).col;
                                 return `${colTotal}${address.row} / ${colTotal}${
                                     +address.row + table.rows.length - cycleIndex
@@ -137,7 +134,13 @@ export const addAssortimentTable = (
             special: {
                 places: { formulaCb: sumCb },
                 placesTotal: { formulaCb: sumCb },
-                samples: { formulaCb: sumCb },
+                samples: {
+                    formulaCb: sumCb,
+                    style: {
+                        alignment: { horizontal: 'center' },
+                        font: { color: { argb: 'FF0000' } },
+                    },
+                },
             },
         },
     });

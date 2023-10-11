@@ -46,10 +46,6 @@ export const initInvoiceRowsFCA: InitInvoicePartT = (utils, invoice) => {
                             alignment: alignmentCenter,
                             font: fontDefault,
                         },
-                        special: [
-                            { index: 2, style: { border: { left: { style: 'thin' } } } },
-                            { index: 'last', style: { border: { right: { style: 'thin' } } } },
-                        ],
                     },
                 };
             },

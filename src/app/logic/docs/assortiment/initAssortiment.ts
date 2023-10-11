@@ -3,8 +3,11 @@ import { Worksheet } from 'exceljs';
 import { addAssortimentTable } from './addAssortimentTable';
 import { AssortimentT } from '../../../types/typesAssortiment';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
+import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
 
 export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) => {
+    const rowMaker = initRowMaker(ws);
+
     // column width setup
     const columns = [1, 2, 3, 4, 5, 6].map((index) => ws.getColumn(index));
     columns[0].width = 15;
@@ -16,19 +19,25 @@ export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) 
 
     // header style and add
     const { transport, portTo } = assortiment.record;
-    const rows = ws.addRows([
-        [`Transport vessel ${transport.eng.name.toUpperCase()}`],
-        [`ETA ${portTo.eng.name} ${exportContractStore.fields.departureDate}`],
-        [''],
-    ]);
-
-    rows[0].getCell(1).style = {
-        font: {
-            bold: true,
-            size: 14,
-            underline: 'single',
-        },
+    const rows = {
+        transport: [`Transport vessel ${transport.eng.name.toUpperCase()}`],
+        eta: [`ETA ${portTo.eng.name} ${exportContractStore.fields.departureDate}`],
+        empty: [''],
     };
+
+    rowMaker.insertRow({
+        fields: rows.transport,
+        style: {
+            common: {
+                font: {
+                    bold: true,
+                    size: 14,
+                    underline: 'single',
+                },
+            },
+        },
+    });
+    rowMaker.insertRows({ records: [rows.eta, rows.empty] });
 
     // sort by seller and add tables
     const tables = Object.values(assortiment.tables)
@@ -42,6 +51,6 @@ export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) 
         });
 
     tables.forEach((table, i) => {
-        addAssortimentTable(table, ws, i, assortiment.isSample);
+        addAssortimentTable(table, rowMaker, i, assortiment.isSample);
     });
 };
