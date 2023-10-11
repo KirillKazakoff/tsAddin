@@ -33,6 +33,7 @@ export const createPortLetter = async (contract: ContractT) => {
         rangeObj: { start: 'Banner_start', end: 'Banner_end' },
     });
     await initPicturesExcel(
+        ws,
         [
             {
                 key: podpisant.codeName,
@@ -44,12 +45,10 @@ export const createPortLetter = async (contract: ContractT) => {
                             : 'Sign_seller_end'
                     }`,
                 },
-                ws,
             },
             {
                 key: seller.codeName,
                 range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
-                ws,
             },
         ],
         isPictures,

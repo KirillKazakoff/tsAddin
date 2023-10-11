@@ -28,7 +28,7 @@ export const setBanksProdavec = (spRange: any[][]) => {
                 name: codeName,
                 inForward: inForwardRu,
             },
-            adress,
+            address: adress,
             swift,
             intermediary,
             intermediaryAddres,

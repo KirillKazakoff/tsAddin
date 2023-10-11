@@ -15,12 +15,12 @@ type SettingsRowT<FieldsT> = {
     merge?: { start: number; end: number }[];
     style?: {
         common: RowStyleSettingsT;
-        special?: Partial<{
-            [P in keyof FieldsT]: {
+        special?: {
+            [P in keyof FieldsT]?: {
                 style?: Cell['style'];
                 formulaCb?: (address: { col: string; row: string }) => string;
             };
-        }>;
+        };
     };
 };
 type SettingsRowsT<RecordT, FieldsT> = {

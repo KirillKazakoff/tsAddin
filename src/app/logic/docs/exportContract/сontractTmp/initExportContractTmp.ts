@@ -27,26 +27,23 @@ export const initExportContractTmp = async (
 
     // initPictures
     await initPicturesExcel(
+        utils.ws,
         [
             {
                 key: exportContractStore.fields.podpisant.codeName,
                 range: { start: 'Sign_seller_start', end: 'Seal_seller_end' },
-                ws: utils.ws,
             },
             {
                 key: agreement.record.seller.codeName,
                 range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
-                ws: utils.ws,
             },
             {
                 key: agreement.record.agent.eng.signatory,
                 range: { start: 'Sign_agent_start', end: 'Sign_agent_end' },
-                ws: utils.ws,
             },
             {
                 key: agreement.record.agent.code,
                 range: { start: 'Seal_agent_start', end: 'Seal_agent_end' },
-                ws: utils.ws,
             },
         ],
         operation === 'certificates',

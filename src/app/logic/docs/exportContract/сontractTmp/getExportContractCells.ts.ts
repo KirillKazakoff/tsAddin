@@ -53,16 +53,6 @@ export const getExportContractCells = (agreement: AgreementT) => {
                 ru: `Магадан от ${date.contract('ru')}`,
             },
             {
-                cell: 'Продавец',
-                eng: seller.eng.name,
-                ru: seller.ru.name,
-            },
-            {
-                cell: 'Продавец_адрес',
-                eng: seller.eng.addres,
-                ru: seller.ru.addres,
-            },
-            {
                 cell: 'Продавец_подписант',
                 eng: `${podpisant.eng.name} and`,
                 ru: `${podpisant.declination} и`,
@@ -73,14 +63,9 @@ export const getExportContractCells = (agreement: AgreementT) => {
                 ru: `${podpisant.ru.comment}`,
             },
             {
-                cell: 'Покупатель',
-                eng: agent.name,
-                ru: agent.name,
-            },
-            {
                 cell: 'Покупатель_адрес',
-                eng: agent.addres,
-                ru: agent.addres,
+                eng: agent.address,
+                ru: agent.address,
             },
             {
                 cell: 'Покупатель_представитель',
@@ -90,13 +75,13 @@ export const getExportContractCells = (agreement: AgreementT) => {
             // Addresses
             {
                 cell: 'Адреса_продавец',
-                eng: seller.eng.name,
-                ru: seller.ru.name,
+                eng: `Buyer: ${seller.eng.name}`,
+                ru: `Продавец: ${seller.ru.name}`,
             },
             {
                 cell: 'Адреса_продавец_адрес',
-                eng: seller.eng.addres,
-                ru: seller.ru.addres,
+                eng: seller.eng.address,
+                ru: seller.ru.address,
             },
             {
                 cell: 'Адреса_банк_получателя',
@@ -105,8 +90,8 @@ export const getExportContractCells = (agreement: AgreementT) => {
             },
             {
                 cell: 'Адреса_банк_получателя_адрес',
-                eng: bankSeller.adress,
-                ru: bankSeller.adress,
+                eng: bankSeller.address,
+                ru: bankSeller.address,
             },
             {
                 cell: 'Адреса_банк_получателя_свифт',
@@ -125,13 +110,13 @@ export const getExportContractCells = (agreement: AgreementT) => {
             },
             {
                 cell: 'Адреса_покупатель',
-                eng: agent.name,
-                ru: agent.name,
+                eng: `Byuer: ${agent.name}`,
+                ru: `Покупатель: ${agent.name}`,
             },
             {
                 cell: 'Адреса_покупатель_адрес',
-                eng: agent.addres,
-                ru: agent.addres,
+                eng: agent.address,
+                ru: agent.address,
             },
             {
                 cell: 'Адреса_покупатель_банк',
@@ -145,8 +130,8 @@ export const getExportContractCells = (agreement: AgreementT) => {
             },
             {
                 cell: 'Адреса_покупатель_банк_адрес',
-                eng: agent.bankAdress,
-                ru: agent.bankAdress,
+                eng: agent.bankAddress,
+                ru: agent.bankAddress,
             },
             {
                 cell: 'Адреса_покупатель_банк_свифт',
@@ -172,13 +157,28 @@ export const getExportContractCells = (agreement: AgreementT) => {
             },
             {
                 cell: 'Цена_всего',
-                eng: `2.2 Total amount of this Agreement is \n${currency.eng.short} (${currency.eng.full})`,
-                ru: `2.2 Общая сумма настоящего Дополнения составляет \n${currency.ru.short} (${currency.ru.full})`,
+                eng: `${currency.eng.short} (${currency.eng.full})`,
+                ru: `${currency.ru.short} (${currency.ru.full})`,
             },
             {
                 cell: 'Адреса_подпись',
                 eng: `Продавец/Seller  _______________________${podpisant.eng.name}`,
                 ru: `Покупатель/Buyer ________________________${agent.eng.signatory}`,
+            },
+            {
+                cell: 'Покупатель',
+                eng: agent.name,
+                ru: agent.name,
+            },
+            {
+                cell: 'Продавец',
+                eng: seller.eng.name,
+                ru: seller.ru.name,
+            },
+            {
+                cell: 'Продавец_адрес',
+                eng: seller.eng.address,
+                ru: seller.ru.address,
             },
         ],
         exportCFR: <CellObjT[]>[
@@ -229,6 +229,16 @@ export const getExportContractCells = (agreement: AgreementT) => {
                 ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
             },
             {
+                cell: 'Покупатель',
+                eng: `Customer ${agent.name}`,
+                ru: `Заказчик ${agent.name}`,
+            },
+            {
+                cell: 'Продавец',
+                eng: `Contractor ${seller.eng.name}`,
+                ru: `Исполнитель ${seller.ru.name}`,
+            },
+            {
                 cell: 'Обязательство_хранение',
                 eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country}, the batch of:`,
                 ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country}, переданную Заказчиком партию:`,
@@ -255,8 +265,8 @@ export const getExportContractCells = (agreement: AgreementT) => {
             },
             {
                 cell: 'Адреса_подпись',
-                ru: `Заказчик/Customer  _______________________${podpisant.eng.name}`,
                 eng: `Исполнитель/Contractor  ________________________${agent.eng.signatory}`,
+                ru: `Заказчик/Customer  _______________________${podpisant.eng.name}`,
             },
         ],
         certificates: <CellObjT[]>[

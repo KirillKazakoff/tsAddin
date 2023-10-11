@@ -80,11 +80,11 @@ export type SellerT = {
     codeName: string;
     eng: {
         name: string;
-        addres: string;
+        address: string;
     };
     ru: {
         name: string;
-        addres: string;
+        address: string;
     };
     inn: string;
 };
@@ -185,10 +185,10 @@ export type AgentT = {
     name: string;
     beneficiaryBank: string;
     branch: string;
-    bankAdress: string;
+    bankAddress: string;
     acNo: string;
     swift: string;
-    addres: string;
+    address: string;
 };
 
 export type AgentsT = {
@@ -206,7 +206,7 @@ export type BankProdavecT = {
         name: string;
         inForward: string;
     };
-    adress: string;
+    address: string;
     swift: string;
     intermediary: string;
     intermediaryAddres: string;

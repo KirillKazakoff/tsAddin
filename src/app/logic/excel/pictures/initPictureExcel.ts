@@ -9,12 +9,14 @@ import { loadPicture } from './loadPicture';
 
 export type PictureSettingsT = {
     key: string;
-    ws: Worksheet;
     range: { start: string; end: string };
 };
 
-export const initPictureExcel = async (settings: PictureSettingsT) => {
-    const { key: keyCode, ws, range: rangeObj } = settings;
+export const initPictureExcel = async (
+    ws: Worksheet,
+    settings: PictureSettingsT,
+) => {
+    const { key: keyCode, range: rangeObj } = settings;
 
     const key = selectPicture(keyCode);
     const blob = blobFromBase64(picturesStore.pictures[key]);
@@ -27,10 +29,10 @@ export const initPictureExcel = async (settings: PictureSettingsT) => {
 };
 
 export const initPicturesExcel = async (
+    ws: Worksheet,
     settingsArr: PictureSettingsT[],
     isActive: boolean,
 ) => {
-    const { ws } = settingsArr[0];
     const utils = initExcelUtils(ws);
 
     // clear picture fields '-'
@@ -46,6 +48,6 @@ export const initPicturesExcel = async (
         return;
     }
 
-    const promises = settingsArr.map((settings) => initPictureExcel(settings));
+    const promises = settingsArr.map((settings) => initPictureExcel(ws, settings));
     await Promise.all(promises);
 };

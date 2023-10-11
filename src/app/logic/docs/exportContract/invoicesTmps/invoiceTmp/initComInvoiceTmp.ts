@@ -35,7 +35,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     // prettier-ignore
     const cellsEng = [
         { cell: 'Инвойс_продавец', value: seller.eng.name },
-        { cell: 'Инвойс_продавец_адрес', value: seller.eng.addres },
+        { cell: 'Инвойс_продавец_адрес', value: seller.eng.address },
         { cell: 'Инвойс', value: `${invoiceNo} from ${date.invoice('eng')}` },
         { cell: 'МСЦ', value: msc ? 'MSC certified' : 'Non-MSC product' },
         { cell: 'МСЦ_сертификат', value: msc ? 'MSC-C-52870' : '' },
@@ -43,7 +43,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_получатель', value: consignee.fullName },
         { cell: 'Инвойс_получатель_адрес', value: consignee.addres },
         { cell: 'Инвойс_покупатель', value: agent.name },
-        { cell: 'Инвойс_покупатель_адрес', value: agent.addres },
+        { cell: 'Инвойс_покупатель_адрес', value: agent.address },
 
         { cell: 'Инвойс_декларация', value: '' },
         { cell: 'Инвойс_дата', value: exportContractStore.fields.departureDate },
@@ -61,7 +61,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_подвал_сумма', value: `${priceTotal.str} USD` },
 
         { cell: 'Инвойс_банк_получателя', value: `Beneficiary Bank: ${bankSeller.eng.name}` },
-        { cell: 'Инвойс_банк_получателя_адрес', value: bankSeller.adress },
+        { cell: 'Инвойс_банк_получателя_адрес', value: bankSeller.address },
         { cell: 'Инвойс_банк_получателя_свифт', value: `SWIFT: ${bankSeller.swift}` },
 
         { cell: 'Инвойс_получатель_в_пользу', value: `in forward to ${seller.eng.name}` },
@@ -73,7 +73,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     // prettier-ignore
     const cellsRu = [
         { cell: 'Инвойс_продавец_п', value: seller.ru.name },
-        { cell: 'Инвойс_продавец_адрес_п', value: seller.ru.addres },
+        { cell: 'Инвойс_продавец_адрес_п', value: seller.ru.address },
         { cell: 'Инвойс_п', value: `${invoiceNo} от ${date.invoice('ru')}` },
         { cell: 'МСЦ_п', value: msc ? 'MSC certified' : 'Non-MSC product' },
         { cell: 'МСЦ_сертификат_п', value: msc ? 'MSC-C-52870' : '' },
@@ -81,7 +81,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_получатель_п', value: consignee.fullName },
         { cell: 'Инвойс_получатель_адрес_п', value: consignee.addres },
         { cell: 'Инвойс_покупатель_п', value: agent.name },
-        { cell: 'Инвойс_покупатель_адрес_п', value: agent.addres },
+        { cell: 'Инвойс_покупатель_адрес_п', value: agent.address },
 
         { cell: 'Инвойс_декларация_п', value: '' },
         { cell: 'Инвойс_дата_п', value: exportContractStore.fields.departureDate },
@@ -99,7 +99,7 @@ export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_подвал_сумма_п', value: `${priceTotal.str} $` },
 
         { cell: 'Инвойс_банк_получателя_п', value: `Beneficiary Bank: ${bankSeller.eng.name}` },
-        { cell: 'Инвойс_банк_получателя_адрес_п', value: bankSeller.adress },
+        { cell: 'Инвойс_банк_получателя_адрес_п', value: bankSeller.address },
         { cell: 'Инвойс_банк_получателя_свифт_п', value: `SWIFT: ${bankSeller.swift}` },
 
         { cell: 'Инвойс_получатель_в_пользу_п', value: `в пользу ${seller.ru.name}` },

@@ -36,6 +36,7 @@ export const initSalesContractTmp = async (
     }
 
     await initPicturesExcel(
+        ws,
         [
             {
                 key: seller.code,
@@ -43,7 +44,6 @@ export const initSalesContractTmp = async (
                     start: 'Sign_seller_start_1',
                     end: 'Sign_seller_end_1',
                 },
-                ws,
             },
             {
                 key: seller.code,
@@ -51,7 +51,6 @@ export const initSalesContractTmp = async (
                     start: 'Sign_seller_start_2',
                     end: 'Sign_seller_end_2',
                 },
-                ws,
             },
         ],
         true,
