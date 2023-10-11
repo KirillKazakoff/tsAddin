@@ -1,12 +1,9 @@
-import { Style, Worksheet } from 'exceljs';
+/* eslint-disable max-len */
+import { Worksheet } from 'exceljs';
 import { AssortimentTableT } from '../../../types/typesAssortiment';
 import { calcFreezing } from './calcFreezing';
-import {
-    AddressT,
-    createFormula,
-    getAddress,
-} from '../../excel/utils/createFormula';
-import { borderAll, styleRowCells } from '../../excel/utils/styleRowCells';
+import { AddressT, getAddress } from '../../excel/utils/createFormula';
+import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
 
 /* eslint-disable no-param-reassign */
 export const addAssortimentTable = (
@@ -15,19 +12,13 @@ export const addAssortimentTable = (
     rowIndex: number,
     isSample: boolean,
 ) => {
+    const { insertRows, insertRow } = initRowMaker(ws);
     const {
         product, vessel, pack, blNo, seller,
     } = table.record;
     const { places, placesTotal } = table.amount;
 
-    const sampleClStyle: Partial<Style> = {
-        alignment: { horizontal: 'center' },
-        font: { color: { argb: 'FF0000' } },
-        border: borderAll,
-    };
-
     // headerInsert
-    // prettier-ignore
     const freezing = calcFreezing(product.codeName, vessel.codeName);
     const rows = {
         product: [
@@ -44,79 +35,83 @@ export const addAssortimentTable = (
         rows.pack = [`package - laminated bag 1/${pack} kg`];
     }
 
-    ws.addRows([rows.product, rows.pack]);
+    insertRows({ records: [rows.product, rows.pack] });
 
     if (!isSample) {
-        const infoRow = ws.addRow(rows.info);
-        styleRowCells(infoRow, {
-            font: { bold: true },
-            alignment: { horizontal: 'center' },
+        insertRow({
+            fields: rows.info,
+            style: {
+                common: {
+                    font: { bold: true },
+                    alignment: { horizontal: 'center' },
+                },
+            },
         });
-
         rows.titles.pop();
     }
 
     // Add percentage column in the end
     rows.titles.push('Percentage');
 
-    const titlesRow = ws.addRow(rows.titles);
-    styleRowCells(titlesRow, {
-        font: { bold: true },
-        alignment: { horizontal: 'center', vertical: 'middle' },
-        border: borderAll,
+    insertRow({
+        fields: rows.titles,
+        style: {
+            common: {
+                font: { bold: true },
+                alignment: 'center',
+                border: 'all',
+            },
+        },
     });
 
     // tableInsert
-    table.rows.forEach((row, i) => {
-        const fields = {
-            sort: row.sort,
-            weight: row?.sortSp?.weight,
-            places: row.amount.places.count,
-            placesTotal: row.amount.placesTotal.count * 1000,
-            samples: table.samples.rows[i],
-            percentage: (row.amount.placesTotal.count * 1000) / placesTotal.count,
-        };
-        if (!isSample) delete fields.samples;
-        const rowTable = ws.addRow(Object.values(fields));
-
-        styleRowCells(rowTable, {
-            border: borderAll,
-        });
-        const rowObj = {
-            grades: rowTable.getCell(1),
-            places: rowTable.getCell(3),
-            placesTotal: rowTable.getCell(4),
-            sample: rowTable.getCell(5),
-            percentage: isSample ? rowTable.getCell(6) : rowTable.getCell(5),
-        };
-        [rowObj.places, rowObj.placesTotal].forEach((cell) => {
-            cell.style.alignment = {
-                horizontal: 'right',
+    insertRows({
+        records: table.rows,
+        rowSettings: (r, insertIndex, cycleIndex, rowObj) => {
+            const fields = {
+                sort: r.sort,
+                weight: r?.sortSp?.weight,
+                places: r.amount.places.count,
+                placesTotal: r.amount.placesTotal.count * 1000,
+                samples: table.samples.rows[cycleIndex],
+                percentage: (r.amount.placesTotal.count * 1000) / placesTotal.count,
             };
-        });
-        rowObj.percentage.style = {
-            border: borderAll,
-            alignment: { horizontal: 'center' },
-        };
-        if (isSample) rowObj.sample.style = sampleClStyle;
 
-        rowObj.places.numFmt = '# ###';
-        rowObj.placesTotal.numFmt = '# ###.00';
-        rowObj.percentage.numFmt = '0.00%';
+            if (!isSample) delete fields.samples;
 
-        rowObj.percentage.value = createFormula({
-            cell: rowObj.percentage,
-            result: fields.percentage,
-            formulaCb: (address) => {
-                const colTotal = getAddress(rowObj.placesTotal).col;
-                return `${colTotal}${address.row} / ${colTotal}${
-                    +address.row + table.rows.length - i
-                }`;
-            },
-        });
+            // prettier-ignore
+
+            return {
+                fields,
+                docType: 'assortiment',
+                style: {
+                    common: { border: 'all' },
+                    special: {
+                        sort: { style: { alignment: { horizontal: 'right' } } },
+                        places: { style: { alignment: { horizontal: 'right' } } },
+                        placesTotal: { style: { alignment: { horizontal: 'right' } } },
+                        weight: { style: { alignment: { horizontal: 'center' } } },
+                        sample: {
+                            style: {
+                                alignment: { horizontal: 'center' },
+                                font: { color: { argb: 'FF0000' } },
+                            },
+                        },
+                        percentage: {
+                            style: { alignment: { horizontal: 'right' } },
+                            formulaCb: (address) => {
+                                const colTotal = getAddress(rowObj.getCell(3)).col;
+                                return `${colTotal}${address.row} / ${colTotal}${
+                                    +address.row + table.rows.length - cycleIndex
+                                }`;
+                            },
+                        },
+                    },
+                },
+            };
+        },
     });
 
-    // addTotalRow
     const totalFields = {
         empty: '',
         title: 'Total:',
@@ -125,45 +120,27 @@ export const addAssortimentTable = (
         samples: table.samples.total,
     };
     if (!isSample) delete totalFields.samples;
-    const totalRow = ws.addRow(Object.values(totalFields));
 
-    const rowObj = {
-        places: totalRow.getCell(3),
-        placesTotal: totalRow.getCell(4),
-        samples: totalRow.getCell(5),
-    };
-
-    // initializeFormulas
     const sumCb = (address: AddressT) => `SUM(${address.col}${+address.row - 1}:${address.col}${
         +address.row - table.rows.length
     })`;
-    rowObj.places.value = createFormula({
-        cell: rowObj.places,
-        formulaCb: sumCb,
-        result: totalFields.places,
-    });
-    rowObj.placesTotal.value = createFormula({
-        cell: rowObj.placesTotal,
-        formulaCb: sumCb,
-        result: totalFields.placesTotal,
-    });
-    if (isSample) {
-        rowObj.samples.value = createFormula({
-            cell: rowObj.samples,
-            formulaCb: sumCb,
-            result: totalFields.samples,
-        });
-    }
 
-    styleRowCells(totalRow, {
-        border: borderAll,
-        alignment: { horizontal: 'right' },
-        font: { bold: true },
+    insertRow({
+        fields: totalFields,
+        docType: 'assortiment',
+        style: {
+            common: {
+                alignment: { horizontal: 'right' },
+                border: 'all',
+                font: { bold: true },
+            },
+            special: {
+                places: { formulaCb: sumCb },
+                placesTotal: { formulaCb: sumCb },
+                samples: { formulaCb: sumCb },
+            },
+        },
     });
-    rowObj.placesTotal.numFmt = '# ###.00';
-    rowObj.places.numFmt = '# ###';
 
-    if (isSample) rowObj.samples.style = sampleClStyle;
-    // creating empty space for next tables
-    ws.addRows([[''], ['']]);
+    insertRows({ records: [[''], ['']] });
 };
