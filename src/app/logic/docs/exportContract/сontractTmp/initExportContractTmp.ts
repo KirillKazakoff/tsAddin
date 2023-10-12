@@ -46,7 +46,7 @@ export const initExportContractTmp = async (
                 range: { start: 'Seal_agent_start', end: 'Seal_agent_end' },
             },
         ],
-        operation === 'certificates',
+        true, // operation === 'certificates',
     );
 
     // printAreaSettings

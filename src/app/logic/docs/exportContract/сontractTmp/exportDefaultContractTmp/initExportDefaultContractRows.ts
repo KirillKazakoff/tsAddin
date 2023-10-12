@@ -44,6 +44,9 @@ export const initExportDefaultContractRows = (
                         alignment: 'center',
                         font: { size: 10 },
                     },
+                    special: {
+                        consignee: { style: { alignment: { horizontal: 'left', indent: 2 } } },
+                    },
                 },
             };
         },

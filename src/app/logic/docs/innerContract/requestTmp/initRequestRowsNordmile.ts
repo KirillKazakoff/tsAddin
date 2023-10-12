@@ -14,7 +14,7 @@ export const initRequestRowsNordmile = (rows: NordmileRowT[], utils: CellUtilsT)
             const fields = {
                 vessel: r.producer,
                 product: r.product,
-                pack: r.pack.pack,
+                pack: r.pack,
                 placesTotal: r.amount.placesTotal.count,
                 price: r.amount.price.count,
                 priceTotal: r.amount.priceTotal.count,

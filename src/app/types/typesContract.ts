@@ -54,37 +54,3 @@ export type InvoiceT = {
 export type InvoicesT = {
     [key: string]: InvoiceT;
 };
-
-export type ConsigneesGroupT = {
-    [key: string]: {
-        rows: ExportRowT[];
-        consignee: ConsigneeT;
-        productGroups: ProductGroupsT;
-    };
-};
-
-export type SubjectT = {
-    record: ExportRowT;
-    total: AmountT;
-};
-
-export type CostT = {
-    record: ExportRowT;
-    prices: AmountT[];
-};
-
-// VesselGroupT
-export type VesselGroupT = {
-    subject: { [key: string]: SubjectT };
-    cost: { [key: string]: CostT };
-};
-
-export type VesselsGroupT = {
-    all: {
-        subject: SubjectT[];
-        cost: CostT[];
-    };
-    byVesselGroup: {
-        [key: string]: VesselGroupT;
-    };
-};

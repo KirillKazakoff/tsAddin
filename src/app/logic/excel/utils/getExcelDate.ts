@@ -1,3 +1,5 @@
+import { TermsT } from '../../../types/typesTables';
+
 const getExcelDate = (excelSerial: string) => {
     return new Date(Date.UTC(0, 0, +excelSerial - 1));
 };
@@ -18,10 +20,19 @@ export const getExcelDateNumeric = (excelSerial: string, locale: string) => {
     });
 };
 
-export const getDeliveryDate = (excelSerial: string, locale: string) => {
+export const getDeliveryDate = (
+    excelSerial: string,
+    locale: string,
+    time: 'month' | 'day',
+) => {
     const date = getExcelDate(excelSerial);
 
-    date.setMonth(date.getMonth() + 1);
+    if (time === 'month') {
+        date.setMonth(date.getMonth() + 1);
+    }
+    if (time === 'day') {
+        date.setDate(date.getDate() + 1);
+    }
 
     const res = date.toLocaleString(locale, {
         day: 'numeric',
