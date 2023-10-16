@@ -1,60 +1,53 @@
 /* eslint-disable no-param-reassign */
-import {
-    BlGroupT,
-    BlProductGroupedT,
-    GroupedBlT,
-} from '../../../../types/typesContract';
 import { CommonRowT } from '../../../../types/typesTables';
 import { groupify } from '../../../utils/groupify';
-import type {
-    PackageT,
-    ProductionSalesT,
-    ProductionT,
-} from '../../../../types/typesSP';
+import type { ProductionSalesT, ProductionT } from '../../../../types/typesSP';
 import {
     AmountObjT,
     addToAmountObj,
-    initAmountObj,
 } from '../../../../stores/tablesStore/utils/initAmount';
+import { BlGroupsT, initBlGroup, initProductGroup } from './initBlGroup';
 
 type RowBlExtendT = {
     blNo: string;
     amount: AmountObjT;
-    packSp?: PackageT;
+    pack: number;
     product: ProductionT | ProductionSalesT;
+    sort: string;
 } & CommonRowT;
 
 export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
-    const blGrouped = rows.reduce<GroupedBlT<RowT>>((total, row) => {
-        const initBlGroup: BlGroupT<RowT> = {
-            record: row,
-            groupedBy: {
-                product: {},
-            },
-            groupedProductsArr: [],
-            total: initAmountObj(row.type),
-        };
-        const bl = groupify(total, initBlGroup, row.blNo);
+    const blGrouped = rows.reduce<BlGroupsT<RowT>>((total, row) => {
+        const bl = groupify(total, initBlGroup(row), row.blNo);
 
-        const initProductGroup = <BlProductGroupedT<RowT>>{
-            record: row,
-            total: initAmountObj(row.type),
-            rows: [],
-        };
-        const productRow = groupify(
+        const productGroup = groupify(
             bl.groupedBy.product,
-            initProductGroup,
-            row.product.codeName,
+            initProductGroup(row),
+            `${row.product.codeName}${row?.pack}`,
         );
-        productRow.rows.push(row);
+        productGroup.rows.push(row);
 
-        addToAmountObj(productRow.total, row.amount);
+        const productSortGroup = groupify(
+            bl.groupedBy.productSort,
+            initProductGroup(row),
+            `${row.product.codeName}${row.sort}`,
+        );
+
+        productSortGroup.rows.push(row);
+
+        addToAmountObj(productSortGroup.total, row.amount);
+        addToAmountObj(productGroup.total, row.amount);
         addToAmountObj(bl.total, row.amount);
         return total;
     }, {});
 
     Object.values(blGrouped).forEach((group) => {
         group.groupedProductsArr.push(...Object.values(group.groupedBy.product));
+    });
+    Object.values(blGrouped).forEach((group) => {
+        group.groupedProductsSortArr.push(
+            ...Object.values(group.groupedBy.productSort),
+        );
     });
 
     return blGrouped;

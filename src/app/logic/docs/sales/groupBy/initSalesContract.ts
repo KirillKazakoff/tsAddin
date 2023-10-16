@@ -1,13 +1,13 @@
 import { initAmount } from '../../../../stores/tablesStore/utils/initAmount';
-import { GroupedBlT } from '../../../../types/typesContract';
 import { SalesRowT } from '../../../../types/typesTables';
+import { BlGroupsT } from '../../exportContract/groupBy/initBlGroup';
 
 export const initSalesContract = (row: SalesRowT) => {
     const contract = {
         record: row,
         rows: <SalesRowT[]>[],
         recordsGroupedBy: {
-            bl: <GroupedBlT<SalesRowT>>{},
+            bl: <BlGroupsT<SalesRowT>>{},
         },
         amount: {
             priceTotal: initAmount(0, 2, 2),

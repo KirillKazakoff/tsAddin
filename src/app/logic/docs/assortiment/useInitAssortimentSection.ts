@@ -3,9 +3,9 @@ import _ from 'lodash';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import { createAssortiment } from './createAssortiment';
 import { groupAssortiment } from './group/groupAssortiment';
-import { AssortimentT } from '../../../types/typesAssortiment';
 import { groupSamples } from './group/groupSamples';
 import { createSample } from './createSample';
+import { AssortimentT } from './initAssortimentTable';
 
 export const useInitAssortimentSection = () => {
     const { exportStorageT, exportT } = tablesStore;

@@ -1,10 +1,10 @@
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { GroupedBlT } from '../../../types/typesContract';
 import { ExportRowT, InvoiceKTIRowT } from '../../../types/typesTables';
 import { groupify } from '../../utils/groupify';
 import { groupByBl } from '../exportContract/groupBy/groupByBl';
+import { BlGroupsT } from '../exportContract/groupBy/initBlGroup';
 
-const initInvoice = (blGrouped: GroupedBlT<ExportRowT>, row: InvoiceKTIRowT) => {
+const initInvoice = (blGrouped: BlGroupsT<ExportRowT>, row: InvoiceKTIRowT) => {
     return {
         type: row.dateDischarge ? 'discharge' : 'storage',
         priceTotal: 0,

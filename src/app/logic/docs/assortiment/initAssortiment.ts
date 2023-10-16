@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { Worksheet } from 'exceljs';
 import { addAssortimentTable } from './addAssortimentTable';
-import { AssortimentT } from '../../../types/typesAssortiment';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
+import { AssortimentT } from './initAssortimentTable';
 
 export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) => {
     // column width setup

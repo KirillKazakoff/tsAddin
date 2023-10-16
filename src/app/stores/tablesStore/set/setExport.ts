@@ -55,7 +55,6 @@ export const setExport = (table: any[][]) => {
         [],
     );
 
-    console.log(transformedTable);
     checkTable(transformedTable, 'export');
     tablesStore.setTable.export(transformedTable);
 };

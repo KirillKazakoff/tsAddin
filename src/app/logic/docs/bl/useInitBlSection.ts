@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
-import { BlGroupT } from '../../../types/typesContract';
 import { ExportRowT } from '../../../types/typesTables';
 import { groupByBl } from '../exportContract/groupBy/groupByBl';
+import { BlGroupT } from '../exportContract/groupBy/initBlGroup';
 import { createBL } from './createBl';
 
 export const useInitBlSection = () => {

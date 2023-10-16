@@ -1,9 +1,16 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-param-reassign */
+import _ from 'lodash';
 import { addToAmount } from '../../../../stores/tablesStore/utils/initAmount';
-import { AssortimentTablesT } from '../../../../types/typesAssortiment';
 import { ExportRowT } from '../../../../types/typesTables';
 import { groupify } from '../../../utils/groupify';
-import { initAssortimentObj, initAssortimentTable } from '../initAssortimentTable';
+import {
+    AssortimentTablesT,
+    initAssortimentObj,
+    initAssortimentTable,
+} from '../initAssortimentTable';
 import { isProductForAssortiment } from './isProductForAssortiment';
+import { groupByBl } from '../../exportContract/groupBy/groupByBl';
 
 export const groupAssortiment = (rows: ExportRowT[]) => {
     const tables = rows.reduce<AssortimentTablesT>((total, row) => {
@@ -36,6 +43,25 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
 
         return total;
     }, {});
+
+    // groupProductByBL
+    Object.values(tables).forEach((table) => {
+        table.groupedByBlRows = groupByBl(table.rows);
+
+        table.rows = Object.values(table.groupedByBlRows).reduce<ExportRowT[]>(
+            (total, bl) => {
+                const clone = _.cloneDeep(bl);
+
+                clone.groupedProductsSortArr.forEach((group) => {
+                    const row = group.record;
+                    row.amount = group.total;
+                    total.push(row);
+                });
+                return total;
+            },
+            [],
+        );
+    });
 
     const assortiment = initAssortimentObj(tables, false);
     return assortiment;

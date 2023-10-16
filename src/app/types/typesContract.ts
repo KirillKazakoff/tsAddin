@@ -4,24 +4,24 @@ import { ConsigneeT } from './typesSP';
 import { ExportRowT } from './typesTables';
 
 // BlT
-export type BlProductGroupedT<RowT> = {
-    record: RowT;
-    total: AmountObjT;
-    rows: RowT[];
-};
+// export type BlProductGroupedT<RowT> = {
+//     record: RowT;
+//     total: AmountObjT;
+//     rows: RowT[];
+// };
 
-export type BlGroupT<RowT> = {
-    record: RowT;
-    groupedBy: {
-        product: { [key: string]: BlProductGroupedT<RowT> };
-    };
-    groupedProductsArr: BlProductGroupedT<RowT>[];
-    total: AmountObjT;
-};
+// export type BlGroupT<RowT> = {
+//     record: RowT;
+//     groupedBy: {
+//         product: { [key: string]: BlProductGroupedT<RowT> };
+//     };
+//     groupedProductsArr: BlProductGroupedT<RowT>[];
+//     total: AmountObjT;
+// };
 
-export type GroupedBlT<RowT> = {
-    [key: string]: BlGroupT<RowT>;
-};
+// export type GroupedBlT<RowT> = {
+//     [key: string]: BlGroupT<RowT>;
+// };
 
 // InvoiceT
 export type InvoiceAmountT = {

@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
-import type { GroupedBlT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
-import { ExportRowT } from '../../../../../types/typesTables';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
 import { borderAll, alignmentCenter } from '../../../styleRowCells';
+import type { BlGroupsT } from '../../groupBy/initBlGroup';
+import type { ExportRowT } from '../../../../../types/typesTables';
 
 export const initExportStorageContractRowsR = (
-    blGrouped: GroupedBlT<ExportRowT>,
+    blGrouped: BlGroupsT<ExportRowT>,
     utils: CellUtilsDoubleT,
 ) => {
     const { insertRow, deleteStartRows } = initRowMaker(

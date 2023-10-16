@@ -1,12 +1,12 @@
 import { Style, Worksheet } from 'exceljs';
 import { styleRowCells, borderAll } from '../styleRowCells';
-import { AssortimentTableT } from '../../../types/typesAssortiment';
 import { calcFreezing } from './calcFreezing';
 import {
     AddressT,
     createFormula,
     getAddress,
 } from '../../excel/utils/createFormula';
+import { AssortimentTableT } from './initAssortimentTable';
 
 /* eslint-disable no-param-reassign */
 export const addAssortimentTable = (
@@ -66,7 +66,6 @@ export const addAssortimentTable = (
         border: borderAll,
     });
 
-    // tableInsert
     table.rows.forEach((row, i) => {
         const fields = {
             sort: row.sort,

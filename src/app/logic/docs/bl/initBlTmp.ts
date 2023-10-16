@@ -3,8 +3,8 @@ import { CellObjT } from '../../../types/typesExcelUtils';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initBlRows } from './initBlRows';
-import { BlGroupT } from '../../../types/typesContract';
 import { ExportRowT } from '../../../types/typesTables';
+import { BlGroupT } from '../exportContract/groupBy/initBlGroup';
 
 export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>) => {
     const ws = book.getWorksheet('BL');

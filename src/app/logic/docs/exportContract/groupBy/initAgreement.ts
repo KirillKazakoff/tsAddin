@@ -2,9 +2,9 @@ import type {
     InvoicesT,
     VesselsGroupT,
     ConsigneesGroupT,
-    GroupedBlT,
 } from '../../../../types/typesContract';
 import { ExportRowT } from '../../../../types/typesTables';
+import { BlGroupsT } from './initBlGroup';
 import type { COHCT } from './setCOHCStatus';
 
 export const initAgreement = (row: ExportRowT) => {
@@ -21,7 +21,7 @@ export const initAgreement = (row: ExportRowT) => {
                 },
                 byVesselGroup: {},
             },
-            bl: <GroupedBlT<ExportRowT>>{},
+            bl: <BlGroupsT<ExportRowT>>{},
         },
         priceTotal: 0,
         cohc: <COHCT>'no',
