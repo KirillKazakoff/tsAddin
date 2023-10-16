@@ -12,7 +12,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
 
     const { record, priceTotal, requestsArr: requests } = contract;
     const {
-        portRu, portTamozhnya, terms, reiceNo, isInvoiceOnly,
+        portTamozhnya, terms, reiceNo, isInvoiceOnly,
     } = requestContractStore.fields;
 
     const isVld = portTamozhnya.codeName === 'Владивосток';
@@ -37,7 +37,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
         { cell: 'Заявка_дата', value: date.contract },
         { cell: 'Заявка_стороны', value: `между ${record.seller.ru.name} (ПОСТАВЩИК) и ${record.buyer.name}` },
         { cell: 'Сумма', value: `Сумма по договору : ${priceTotal.str} Р` },
-        { cell: 'Доставка_условия', value: `На условиях ${terms} ${portTamozhnya.ru.name} ${portRu.name}` },
+        { cell: 'Доставка_условия', value: `На условиях ${terms} ${portTamozhnya.ru.name}` },
         { cell: 'Оплата_дата', value: `Порядок расчетов: 100% до ${date.payment} путем перечисления на р/с Продавца по счету` },
         { cell: 'Банковские_реквизиты', value: `Указать банковские реквизиты ${record.seller.ru.name} в ${record.bankSeller}____________` },
         { cell: 'Прибытие', value: ` * Поставка товара транспортом ${record.transport.ru.name} ${reiceNo ? `(рейс №${reiceNo})` : ''} ориентировочно ${date.delivery} (Зафрахтован Продавцом).` },

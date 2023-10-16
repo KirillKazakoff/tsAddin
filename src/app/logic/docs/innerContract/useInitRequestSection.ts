@@ -13,7 +13,6 @@ export const useInitRequestSection = () => {
             reiceNo: '',
             terms: '',
             portTamozhnya: '',
-            portRu: '',
         },
         validateCb: (errors, values) => {
             if (!values.terms) {
@@ -21,9 +20,6 @@ export const useInitRequestSection = () => {
             }
             if (!values.portTamozhnya) {
                 errors.portTamozhnya = 'valueMissing';
-            }
-            if (!values.portRu) {
-                errors.portRu = 'valueMissing';
             }
         },
     });

@@ -31,7 +31,6 @@ const SectionComponent = observer(() => {
                     <ReiceNo />
                     <SelectTerms />
                     <SelectPortTamozhnya />
-                    <SelectPortRu />
                 </div>
 
                 <h3 className='title request-docs-title'>
