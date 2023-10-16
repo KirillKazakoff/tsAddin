@@ -9,6 +9,7 @@ import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initPicturesExcel } from '../../excel/pictures/initPictureExcel';
 import { initSalesTableRows } from './initSalesTableRows';
 import { SalesRowT } from '../../../types/typesTables';
+import { mergeFromTo } from '../../excel/utils/excelUtilsObj/mergeCells';
 
 export const initSalesInvoiceTmp = async (
     book: Workbook,
@@ -62,12 +63,13 @@ export const initSalesInvoiceTmp = async (
         utils,
     });
 
-    // merge cells
-    const startRow = utils.getRow('Инвойс_адреса_продавец', 0).number;
-    const endRow = utils.getRow('Инвойс_адреса_банк_свифт', 1).number;
-    for (let i = startRow; i < endRow; i += 1) {
-        utils.mergeCells({ startCol: 1, endCol: 3, row: i });
-    }
+    mergeFromTo(utils.ws, {
+        row: {
+            from: { name: 'Инвойс_адреса_продавец' },
+            to: { name: 'Инвойс_адреса_банк_свифт' },
+        },
+        cols: [[1, 3]],
+    });
 
     // init pictures
     await initPicturesExcel(

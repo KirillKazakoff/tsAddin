@@ -1,4 +1,5 @@
 import { Worksheet } from 'exceljs';
+import { getRow } from './getRow';
 
 export type MergeSettingsT = {
     row: number;
@@ -25,4 +26,31 @@ export const mergeTotal = (settings: {
             endCol,
         });
     }));
+};
+
+export const mergeFromTo = (
+    ws: Worksheet,
+    settings: {
+        row: {
+            from: {
+                name: string;
+                offset?: number;
+            };
+            to: {
+                name: string;
+                offset?: number;
+            };
+        };
+        cols: number[][];
+    },
+) => {
+    const { row, cols: merge } = settings;
+    const startRow = getRow(ws, row.from.name, row.from.offset || 0).number;
+    const endRow = getRow(ws, row.to.name, row.to.offset || 0).number;
+
+    for (let i = startRow; i <= endRow; i += 1) {
+        merge.forEach(([start, end]) => {
+            mergeCells(ws, { row: i, startCol: start, endCol: end });
+        });
+    }
 };

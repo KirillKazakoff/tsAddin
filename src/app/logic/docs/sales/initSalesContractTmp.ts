@@ -5,6 +5,7 @@ import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initSalesTableRows } from './initSalesTableRows';
 import { getSalesContractCells } from './getSalesContractCells';
 import { initSalesRowsDefault } from './initSalesRowsDefault';
+import { mergeFromTo } from '../../excel/utils/excelUtilsObj/mergeCells';
 
 export const initSalesContractTmp = async (
     book: Workbook,
@@ -29,11 +30,13 @@ export const initSalesContractTmp = async (
     }
 
     // merge cells
-    const startRow = utils.getRow('Контракт_оплата', -1).number;
-    const endRow = utils.getRow('Документация_BL', 1).number;
-    for (let i = startRow; i < endRow; i += 1) {
-        utils.mergeCells({ startCol: 1, endCol: 5, row: i });
-    }
+    mergeFromTo(utils.ws, {
+        row: {
+            from: { name: 'Контракт_оплата', offset: -1 },
+            to: { name: 'Документация_BL', offset: 1 },
+        },
+        cols: [[1, 5]],
+    });
 
     await initPicturesExcel(
         ws,
