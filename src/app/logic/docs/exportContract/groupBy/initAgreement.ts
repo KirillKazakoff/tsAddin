@@ -1,10 +1,10 @@
 import type {
-    InvoicesT,
     VesselsGroupT,
     ConsigneesGroupT,
 } from '../../../../types/typesContract';
-import { ExportRowT } from '../../../../types/typesTables';
-import { BlGroupsT } from './initBlGroup';
+import type { ExportRowT } from '../../../../types/typesTables';
+import type { BlGroupsT } from './initBlGroup';
+import type { InvoicesT } from './initInvoice';
 import type { COHCT } from './setCOHCStatus';
 
 export const initAgreement = (row: ExportRowT) => {

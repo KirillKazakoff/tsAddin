@@ -157,7 +157,7 @@ export interface NordmileRowT extends CommonRowT {
     buyer: string;
     producer: string;
     product: string;
-    pack: PackageT;
+    pack: string;
     amount: AmountObjT;
     bankSeller: string;
     paymentDate: string;

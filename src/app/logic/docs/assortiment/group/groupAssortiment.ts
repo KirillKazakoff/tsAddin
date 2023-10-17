@@ -17,7 +17,7 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
         if (!isProductForAssortiment(row.product)) return total;
         const initObj = initAssortimentTable(row);
 
-        const table = groupify(total, initObj, row.blNo);
+        const table = groupify(total, initObj, `${row.blNo}${row.pack}`);
 
         const isStorageRowInExport = table.record.type === 'export' && row.type === 'exportStorage';
         if (isStorageRowInExport) return total;

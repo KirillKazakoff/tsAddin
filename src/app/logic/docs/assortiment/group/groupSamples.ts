@@ -15,7 +15,7 @@ export const groupSamples = (rows: ExportRowT[]) => {
     const tables = rows.reduce<AssortimentTablesT>((total, row) => {
         if (!isProductForAssortiment(row.product)) return total;
 
-        const tableCode = `${row.consignee.codeName}${row.vessel.codeName}${row.product.codeName}`;
+        const tableCode = `${row.consignee.codeName}${row.vessel.codeName}${row.product.codeName}${row.pack}`;
         const initTableObj = initAssortimentTable(row);
         const table = groupify(total, initTableObj, tableCode);
 
@@ -42,6 +42,7 @@ export const groupSamples = (rows: ExportRowT[]) => {
 
     // setSamplesCount
     const tablesArr = Object.values(tables);
+
     tablesArr.forEach((table) => {
         table.rows.forEach((row) => {
             const rowSamples = calcSamples(
@@ -55,21 +56,20 @@ export const groupSamples = (rows: ExportRowT[]) => {
 
     // groupByConsignee
     const samples = tablesArr.reduce<SamplesT>((total, table) => {
+        const r = table.record;
         const initAssortimentObj: AssortimentT = {
             isSample: true,
-            record: table.record,
+            record: r,
             tables: {},
         };
 
         const assortiment = groupify(
             total,
             initAssortimentObj,
-            table.record.consignee.codeName,
+            r.consignee.codeName,
         );
 
-        assortiment.tables[
-            `${table.record.vessel.codeName}${table.record.product.codeName}`
-        ] = table;
+        assortiment.tables[`${r.vessel.codeName}${r.product.codeName}${r.pack}`] = table;
         return total;
     }, {});
 

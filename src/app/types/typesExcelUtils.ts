@@ -4,7 +4,10 @@ import {
 import { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
 import { MergeSettingsT } from '../logic/excel/utils/excelUtilsObj/mergeCells';
 import { LanguageT } from './typesLetter';
-import { InvoicesT, InvoiceT } from './typesContract';
+import {
+    InvoiceT,
+    InvoicesT,
+} from '../logic/docs/exportContract/groupBy/initInvoice';
 
 export type GetRowBoundT = (cellName: string, offsetRow: number) => Row;
 export type DeleteRowBoundT = (cellName: string, offsetRow?: number) => void;

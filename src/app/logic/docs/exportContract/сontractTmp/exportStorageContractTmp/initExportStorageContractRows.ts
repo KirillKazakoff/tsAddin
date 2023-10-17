@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
-import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
+import { ProductGroupT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
 import { alignmentCenter, borderAll } from '../../../styleRowCells';
+import { InvoicesT } from '../../groupBy/initInvoice';
 
 export const initExportStorageContractRows = (
     invoices: InvoicesT,
@@ -34,7 +35,6 @@ export const initExportStorageContractRows = (
                 placesTotal: total.placesTotal.count,
             };
 
-            console.log(i);
             // prettier-ignore
             return {
                 fields,

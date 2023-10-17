@@ -4,7 +4,7 @@ import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
 import { alignmentCenter, fontDefault } from '../../../styleRowCells';
 
 export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
-    const { productGroups } = invoice;
+    const { productSortGroups } = invoice;
 
     ['eng', 'ru'].forEach((language) => {
         // prettier-ignore
@@ -13,7 +13,7 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
         const { insertRows } = initRowMaker(utils.ws, cellName);
 
         insertRows({
-            records: Object.values(productGroups),
+            records: Object.values(productSortGroups),
             rowSettings: (group) => {
                 const r = group.record;
                 const { places, placesTotal, priceTotal } = group.total;

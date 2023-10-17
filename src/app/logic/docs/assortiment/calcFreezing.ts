@@ -6,11 +6,3 @@ export const calcFreezing = (product: string, vessel: string) => {
     if (vessel.includes('Вестерн')) return 'Brine';
     return 'Air';
 };
-
-// calc vm freeze type
-
-// const vm = {
-//     both: ['Атка'],
-//     brine: ['Вестерн'],
-//     air: ['Харбиз'],
-// };

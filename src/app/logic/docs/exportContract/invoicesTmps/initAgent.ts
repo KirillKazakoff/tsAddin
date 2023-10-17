@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import _ from 'lodash';
-import { InvoiceT } from '../../../../types/typesContract';
+import { InvoiceT } from '../groupBy/initInvoice';
 
 export const initAgent = (invoice: InvoiceT) => {
     const agent = _.cloneDeep(invoice.agreement.record.agent);

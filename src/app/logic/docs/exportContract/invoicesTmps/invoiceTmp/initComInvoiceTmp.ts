@@ -1,11 +1,11 @@
 import { Worksheet } from 'exceljs';
 import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
-import { InvoiceT } from '../../../../../types/typesContract';
 import { initExcelUtils } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
 import { initComInvoiceTerms } from './initComInvoiceTerms';
 import { initInvoiceRows } from './initInvoiceRows';
 import { initAgent } from '../initAgent';
+import { InvoiceT } from '../../groupBy/initInvoice';
 
 export const initComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     const utils = initExcelUtils(ws);

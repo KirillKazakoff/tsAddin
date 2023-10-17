@@ -1,6 +1,6 @@
 import { Worksheet } from 'exceljs';
-import { InvoiceT } from '../../../../../types/typesContract';
 import { clearRows } from '../../../../excel/utils/clearRows';
+import { InvoiceT } from '../../groupBy/initInvoice';
 
 export const clearInvoiceBlRows = (
     wsOriginal: Worksheet,

@@ -1,6 +1,7 @@
-import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
+import { ProductGroupT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
+import { InvoicesT } from '../../groupBy/initInvoice';
 
 export const initExportDefaultContractRows = (
     invoices: InvoicesT,

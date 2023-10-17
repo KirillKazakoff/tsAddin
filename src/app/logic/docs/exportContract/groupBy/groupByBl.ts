@@ -14,6 +14,7 @@ type RowBlExtendT = {
     pack: number;
     product: ProductionT | ProductionSalesT;
     sort: string;
+    // vessel?: VesselT;
 } & CommonRowT;
 
 export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
@@ -23,7 +24,7 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
         const productGroup = groupify(
             bl.groupedBy.product,
             initProductGroup(row),
-            `${row.product.codeName}${row?.pack}`,
+            `${row.product.codeName}${row.pack}`,
         );
         productGroup.rows.push(row);
 
@@ -50,5 +51,6 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
         );
     });
 
+    // console.log(blGrouped);
     return blGrouped;
 };

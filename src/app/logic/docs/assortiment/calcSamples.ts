@@ -1,6 +1,6 @@
 export const calcSamples = (weight: number, pack: number) => {
     const getFloatSamples = () => {
-        if (pack === 5) {
+        if (pack === 5 || pack === 10) {
             if (weight < 1000) {
                 return weight / 1000;
             }
