@@ -5,16 +5,22 @@ import { SelectTerms } from '../../components/Select/SelectTerms';
 import InputText from '../../components/Form/InputText';
 
 export const LetterExportFields = observer(() => {
-    const context = useFormikContext<{ port: string; isExport: boolean }>();
+    const context = useFormikContext<{
+        port: string;
+        isExport: boolean;
+        terms: string;
+    }>();
     if (!context.values.isExport) return null;
 
     return (
         <div className='fields-wrapper mt20'>
-            <InputText
-                title='ETA экспорт'
-                placeholder={'Дата прибытия'}
-                name={'arrivalForeign'}
-            />
+            {context.values.terms !== 'EXW' ? (
+                <InputText
+                    title='ETA экспорт'
+                    placeholder={'Дата прибытия'}
+                    name={'arrivalForeign'}
+                />
+            ) : null}
             <SelectTerms />
             <InputText
                 title='Фишинг земля'

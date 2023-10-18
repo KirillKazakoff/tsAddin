@@ -19,6 +19,7 @@ import {
     SortsAssortimentT,
     TransportsT,
     ProductionsSalesT,
+    ConfidentialPhonesT,
 } from '../../types/typesSP';
 
 class SpsStore {
@@ -38,6 +39,7 @@ class SpsStore {
     portsRu: PortsRuT = {};
     sortsAssortiment: SortsAssortimentT = {};
     productionSales: ProductionsSalesT = {};
+    confidentialPhones: ConfidentialPhonesT = {};
 
     constructor() {
         makeAutoObservable(this);
@@ -60,6 +62,7 @@ class SpsStore {
         portsRu: (portsRu: PortsRuT) => (this.portsRu = portsRu),
         sortsAssortiment: (sorts: SortsAssortimentT) => (this.sortsAssortiment = sorts),
         productionSales: (prod: ProductionsSalesT) => (this.productionSales = prod),
+        confidentialPhones: (phones: ConfidentialPhonesT) => (this.confidentialPhones = phones),
     };
 }
 

@@ -7,12 +7,24 @@ import InputText from '../../components/Form/InputText';
 import CheckBox from '../../components/CheckBox';
 
 export const LetterMainFields = observer(() => {
-    const context = useFormikContext<{ port: string; isExport: boolean }>();
+    const context = useFormikContext<{
+        port: string;
+        isExport: boolean;
+        terms: string;
+    }>();
     const SelectPort = context.values.isExport ? SelectPortZarubezh : SelectPortRu;
 
     useEffect(() => {
         context.setFieldValue('port', '');
     }, [context.values.isExport]);
+
+    if (context.values.terms === 'EXW') {
+        return (
+            <div className='fields-wrapper'>
+                <SelectPort name='port' />
+            </div>
+        );
+    }
 
     return (
         <div className='fields-wrapper'>

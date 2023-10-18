@@ -1,4 +1,5 @@
-import type { AmountObjT, AmountT } from '../stores/tablesStore/utils/initAmount';
+import { InvoiceProductGroupsT } from '../logic/docs/exportContract/groupBy/initInvoice';
+import type { AmountT } from '../stores/tablesStore/utils/initAmount';
 import { ConsigneeT } from './typesSP';
 import { ExportRowT } from './typesTables';
 
@@ -9,21 +10,11 @@ export type InvoiceAmountT = {
     priceTotal: AmountT;
 };
 
-export type ProductGroupT = {
-    rows: ExportRowT[];
-    record: ExportRowT;
-    total: AmountObjT;
-};
-
-export type ProductGroupsT = {
-    [key: string]: ProductGroupT;
-};
-
 export type ConsigneesGroupT = {
     [key: string]: {
         rows: ExportRowT[];
         consignee: ConsigneeT;
-        productGroups: ProductGroupsT;
+        productGroups: InvoiceProductGroupsT;
     };
 };
 

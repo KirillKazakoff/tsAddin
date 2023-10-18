@@ -1,9 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { ProductGroupT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
 import { alignmentCenter, borderAll } from '../../../styleRowCells';
-import { InvoicesT } from '../../groupBy/initInvoice';
+import { InvoiceProductGroupT, InvoicesT } from '../../groupBy/initInvoice';
 
 export const initExportStorageContractRows = (
     invoices: InvoicesT,
@@ -13,7 +12,7 @@ export const initExportStorageContractRows = (
 
     // Get product groups
     const invoicesArr = Object.values(invoices);
-    const groups = invoicesArr.reduce<ProductGroupT[]>((total, invoice) => {
+    const groups = invoicesArr.reduce<InvoiceProductGroupT[]>((total, invoice) => {
         const invoiceGroups = Object.values(invoice.productGroups);
         total.push(...invoiceGroups);
         return total;

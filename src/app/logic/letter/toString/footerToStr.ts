@@ -39,7 +39,8 @@ export const footerToStrEng = () => {
     const paymentInfoStr = '- payment 100% during 10 banking days after sign a contract';
     const paymentStr = payment
         ? `\nIf you get interested, please advise us your price offer, we are going to sell this lot at ${payment}`
-        : '';
+        : 'If you get interested, please advise us your price offer';
 
-    return `\n${weightInformStr}\n\n${arrivalStr}${termsStr}\n${paymentInfoStr}\n${paymentStr}`;
+    const addresses = 'Best regards,\nNatalya Kazakova (+7-914-851-60-95)\nStanislav Mesoedov (+7-914-856-26-09)';
+    return `\n${weightInformStr}\n\n${arrivalStr}${termsStr}\n${paymentInfoStr}\n${paymentStr}\n${addresses}`;
 };

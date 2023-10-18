@@ -3,9 +3,9 @@ import {
     addToAmountObj,
     initAmountObj,
 } from '../../../../stores/tablesStore/utils/initAmount';
-import { ProductGroupsT } from '../../../../types/typesContract';
 import { groupify } from '../../../utils/groupify';
 import { AgreementT } from './initAgreement';
+import { InvoiceProductGroupsT } from './initInvoice';
 
 export const groupAgByConsignee = (agreement: AgreementT) => {
     const { consignees } = agreement.productsGroupedBy;
@@ -14,7 +14,7 @@ export const groupAgByConsignee = (agreement: AgreementT) => {
         const initObj = {
             rows: [],
             consignee: row.consignee,
-            productGroups: <ProductGroupsT>{},
+            productGroups: <InvoiceProductGroupsT>{},
         };
         const consigneeGroup = groupify<typeof initObj>(
             consignees,

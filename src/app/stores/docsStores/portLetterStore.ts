@@ -12,6 +12,7 @@ const initFields = () => ({
     podpisant: initPodpisant(),
     dateLetter: '',
     isPictures: true,
+    isControlPhone: false,
     termsPort: <TermsT>'',
     cargoToStorage: '',
     cargoToAuto: '',
@@ -39,6 +40,7 @@ class PortLetterStore {
         this.fields.isPictures = values.isPictures;
         this.fields.personDischarge = values.personDischarge;
         this.fields.termsPort = values.termsPort as TermsT;
+        this.fields.isControlPhone = values.isControlPhone;
     }
 }
 

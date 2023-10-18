@@ -5,8 +5,10 @@ import { CellObjT } from '../../../../types/typesExcelUtils';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { ContractT } from '../groupByContractNo';
 import { initPortLetterRows } from './initPortLetterRows';
+import spsStore from '../../../../stores/spsStore/spsStore';
 
 export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
+    const phones = spsStore.confidentialPhones;
     const ws = book.getWorksheet('Port_Letter');
     const utils = initExcelUtils(ws);
 
@@ -59,6 +61,19 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
             cell: 'Хранение',
             value: !fields.termsPort.includes('CFR')
                 ? `Хранение стороной продавца осуществляется до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`
+                : '',
+        },
+        {
+            cell: 'Телефон_представитель',
+            value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
+        },
+        { cell: 'Имя_представитель', value: phones?.['ДМА']?.fullName },
+        {
+            cell: 'Контрольный_звонок',
+            value: fields.isControlPhone
+                ? `Передача продукции по контрольному звонку: т. ${
+                    (phones?.['КНФ']?.phone, phones?.['МСФ']?.phone)
+                }`
                 : '',
         },
         { cell: 'Подписант_комментарий', value: fields.podpisant.ru.comment },

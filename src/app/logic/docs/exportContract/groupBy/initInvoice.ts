@@ -11,8 +11,8 @@ const initProductGroup = (row: ExportRowT) => {
     };
 };
 
-type ProductGroupT = ReturnType<typeof initProductGroup>;
-export type ProductGroupsT = { [key: string]: ProductGroupT };
+export type InvoiceProductGroupT = ReturnType<typeof initProductGroup>;
+export type InvoiceProductGroupsT = { [key: string]: InvoiceProductGroupT };
 
 const initMain = (agreement: AgreementT, row: ExportRowT) => {
     const {
@@ -27,8 +27,8 @@ const initMain = (agreement: AgreementT, row: ExportRowT) => {
         invoiceNo,
         consignee,
         amount: initAmountObj(row.type),
-        productGroups: <ProductGroupsT>{},
-        productSortGroups: <ProductGroupsT>{},
+        productGroups: <InvoiceProductGroupsT>{},
+        productSortGroups: <InvoiceProductGroupsT>{},
     };
 };
 

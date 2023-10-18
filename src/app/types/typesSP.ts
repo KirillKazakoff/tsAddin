@@ -254,3 +254,14 @@ export type ProductionSalesT = {
 export type ProductionsSalesT = {
     [key: string]: ProductionSalesT;
 };
+
+export type ConfidentialPhoneT = {
+    codeName: string;
+    fullName: string;
+    name: string;
+    phone: string;
+};
+
+export type ConfidentialPhonesT = {
+    [key: string]: ConfidentialPhoneT;
+};

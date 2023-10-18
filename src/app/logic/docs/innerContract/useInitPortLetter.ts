@@ -20,6 +20,7 @@ export const useInitPortLetter = () => {
             storageFrom: '',
             storageTo: '',
             personDischarge: '',
+            isControlPhone: false,
         },
         validateCb(errors, values) {
             if (!values.portRu) errors.portRu = 'valueMissing';

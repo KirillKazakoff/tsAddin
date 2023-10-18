@@ -38,6 +38,7 @@ const SectionComponent = observer(() => {
                     <SelectTerms name='termsPort' />
                     <DischargeTerms />
                     <CheckBox title={'Включить картинки:'} name='isPictures' />
+                    <CheckBox title={'Контрольный звонок'} name='isControlPhone' />
                 </div>
 
                 <h3 className='title port-letter-title'>Загрузить письма в порт</h3>

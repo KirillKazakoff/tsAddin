@@ -109,9 +109,9 @@ b {
     margin-top: 30px;
 }
 
-.letter__fields-wrapper {
+/* .letter__fields-wrapper {
     min-height: 300px;
-}
+} */
 
 /* .nav */
 .nav {
@@ -284,5 +284,9 @@ b {
 }
 
 .btn-back {
+    margin-top: 20px;
+}
+
+.letter__btn {
     margin-top: 20px;
 }
