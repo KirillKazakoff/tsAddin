@@ -4,21 +4,21 @@ import { Cell, Row } from 'exceljs';
 // prettier-ignore
 export const formats = {
     common: {
-        basePlacesTotalTn: '#,##0.0000_)',
+        basePlacesTotalTn: '#,##0.000#_)',
         priceDollar: '#,##0.00_) "$"',
         priceRub: '#,##0.00_) "Р"',
         priceDollarUSD: '#,##0.00_) "USD"',
-        // priceRub: '_("Р"* #,##0.00_);_("Р"* (#,##0.00);_("Р"* "-"??_);_(@_)',
+        percentage: '0.00%',
     },
     ru: {
         places: '# ### "шт"',
         placesTotalKg: '#,##0.00_) "кг"',
-        placesTotalTn: '#,##0.0000_) "тн"',
+        placesTotalTn: '#,##0.000#_) "тн"',
     },
     eng: {
         places: '# ### "PCS"',
         placesTotalKg: '#,##0.00_) "kg"',
-        placesTotalTn: '#,##0.0000_) "tn"',
+        placesTotalTn: '#,##0.000#_) "tn"',
     },
 };
 
@@ -32,6 +32,10 @@ type FormatsDocT = Partial<{
 }>;
 
 export const formatsDocs = {
+    exportContract: {
+        price: formats.common.priceDollar,
+        placesTotal: formats.common.basePlacesTotalTn,
+    },
     exportEng: {
         placesTotal: formats.eng.placesTotalTn,
         placesGross: formats.eng.placesTotalTn,
@@ -61,9 +65,10 @@ export const formatsDocs = {
         price: formats.common.priceDollar,
         priceTotal: formats.common.priceDollar,
     },
-    exportContract: {
-        price: formats.common.priceDollar,
-        placesTotal: formats.common.basePlacesTotalTn,
+    assortiment: {
+        places: formats.eng.places,
+        placesTotal: formats.eng.placesTotalKg,
+        percentage: formats.common.percentage,
     },
 };
 

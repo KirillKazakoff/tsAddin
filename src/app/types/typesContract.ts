@@ -1,5 +1,5 @@
-import { InvoiceProductGroupsT } from '../logic/docs/exportContract/groupBy/initInvoice';
-import type { AmountT } from '../stores/tablesStore/utils/initAmount';
+import { AgreementT } from '../logic/docs/exportContract/groupBy/initAgreement';
+import type { AmountObjT, AmountT } from '../stores/tablesStore/utils/initAmount';
 import { ConsigneeT } from './typesSP';
 import { ExportRowT } from './typesTables';
 
@@ -10,36 +10,27 @@ export type InvoiceAmountT = {
     priceTotal: AmountT;
 };
 
-export type ConsigneesGroupT = {
-    [key: string]: {
-        rows: ExportRowT[];
-        consignee: ConsigneeT;
-        productGroups: InvoiceProductGroupsT;
-    };
-};
-
-export type SubjectT = {
+export type ProductGroupT = {
+    rows: ExportRowT[];
     record: ExportRowT;
-    total: AmountT;
+    total: AmountObjT;
 };
 
-export type CostT = {
-    record: ExportRowT;
-    prices: AmountT[];
+export type ProductGroupsT = {
+    [key: string]: ProductGroupT;
 };
 
-// VesselGroupT
-export type VesselGroupT = {
-    subject: { [key: string]: SubjectT };
-    cost: { [key: string]: CostT };
+export type InvoiceT = {
+    agreement: AgreementT;
+    rows: ExportRowT[];
+    invoiceDate: string;
+    invoiceNo: string;
+    msc: string;
+    consignee: ConsigneeT;
+    amount: AmountObjT;
+    productGroups: ProductGroupsT;
 };
 
-export type VesselsGroupT = {
-    all: {
-        subject: SubjectT[];
-        cost: CostT[];
-    };
-    byVesselGroup: {
-        [key: string]: VesselGroupT;
-    };
+export type InvoicesT = {
+    [key: string]: InvoiceT;
 };

@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
-import { alignmentCenter, fontDefault } from '../../../styleRowCells';
 
 export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
     const { productSortGroups } = invoice;
@@ -50,13 +49,10 @@ export const initInvoiceRows: InitInvoicePartT = (utils, invoice) => {
                     style: {
                         common: {
                             height: 45,
-                            alignment: alignmentCenter,
-                            font: fontDefault,
+                            alignment: 'center',
+                            border: 'edges',
+                            font: { size: 10 },
                         },
-                        special: [
-                            { index: 2, style: { border: { left: { style: 'thin' } } } },
-                            { index: 'last', style: { border: { right: { style: 'thin' } } } },
-                        ],
                     },
                 };
             },

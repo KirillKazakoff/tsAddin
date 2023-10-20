@@ -1,29 +1,27 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
-import { initExportContractCost } from './initExportContractCost';
-import { initExportContractSubject } from './initExportContractSubject';
+import { mergeFromTo } from '../../../../excel/utils/excelUtilsObj/mergeCells';
 import { AgreementT } from '../../groupBy/initAgreement';
-import { initExportContractDelivery } from './initExportContractDelivery';
-import { initExportDefaultContractRows } from './initExportDefaultNewContractTmp';
+import { initExportDefaultContractRowsFCA } from './initExportDefaultContractFCARows';
+import { initExportDefaultContractRows } from './initExportDefaultContractRows';
 
 export const initExportDefaultContractTmp = async (
     utils: CellUtilsDoubleT,
     agreement: AgreementT,
 ) => {
-    // initExportDefaultContractRows(agreement.productsGroupedBy.invoices, utils);
-    initExportContractSubject(utils, agreement);
-    initExportContractCost(utils, agreement);
-    initExportContractDelivery(utils, agreement);
-
-    // printAreaSettings
-    const lastRow = utils.getRow('Адреса_подпись', 0);
-    utils.ws.pageSetup.printArea = `A1:B${lastRow.number}`;
-
-    if (agreement.productsGroupedBy.vessels.all.subject.length === 1) {
-        utils.ws.pageSetup.fitToHeight = 1;
-        utils.ws.pageSetup.fitToWidth = 1;
-        utils.ws.pageSetup.fitToPage = true;
+    const { invoices } = agreement.productsGroupedBy;
+    if (agreement.record.terms === 'FCA') {
+        initExportDefaultContractRowsFCA(invoices, utils);
     } else {
-        utils.getRow('Доставка_заголовок', -1).addPageBreak();
+        initExportDefaultContractRows(invoices, utils);
     }
+
+    // prettier-ignore
+    mergeFromTo(utils.ws, {
+        row: {
+            from: { name: 'Цена_всего' },
+            to: { name: 'Адреса_покупатель_адрес' },
+        },
+        cols: [[2, 5], [6, 9]],
+    });
 };

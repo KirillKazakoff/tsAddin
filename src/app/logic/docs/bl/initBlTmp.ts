@@ -14,9 +14,9 @@ export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>)
     // prettier-ignore
     const cells: CellObjT[] = [
         { cell: 'Продавец', value: record.seller.eng.name },
-        { cell: 'Продавец_адрес', value: record.seller.eng.addres },
+        { cell: 'Продавец_адрес', value: record.seller.eng.address },
         { cell: 'Получатель', value: record.consignee?.fullName || record.agent.name },
-        { cell: 'Получатель_адрес', value: record.consignee?.addres || record.agent.addres },
+        { cell: 'Получатель_адрес', value: record.consignee?.addres || record.agent.address },
         { cell: 'Дата', value: getExcelDateStr(record.date, 'eng') },
         { cell: 'Судно', value: record.vessel.eng.name },
         { cell: 'Транспорт', value: record.transport.eng.name },

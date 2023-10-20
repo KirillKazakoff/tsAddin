@@ -26,7 +26,7 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     // prettier-ignore
     const cellsEng = [
         { cell: 'Инвойс_продавец', value: seller.eng.name },
-        { cell: 'Инвойс_продавец_адрес', value: seller.eng.addres },
+        { cell: 'Инвойс_продавец_адрес', value: seller.eng.address },
         { cell: 'Инвойс', value: `${invoiceNo} from ${date.invoice('eng')}` },
         { cell: 'МСЦ', value: msc ? 'MSC certified' : 'Non-MSC certified' },
         { cell: 'МСЦ_сертификат', value: msc ? 'MSC-C-52870' : '' },
@@ -34,7 +34,7 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_получатель', value: consignee.fullName },
         { cell: 'Инвойс_получатель_адрес', value: consignee.addres },
         { cell: 'Инвойс_покупатель', value: agent.name },
-        { cell: 'Инвойс_покупатель_адрес', value: agent.addres },
+        { cell: 'Инвойс_покупатель_адрес', value: agent.address },
 
         { cell: 'Инвойс_транспорт', value: transport.eng.name },
         { cell: 'Инвойс_куда', value: `${portTo.eng.name}, ${portTo.eng.country}` },
@@ -55,7 +55,7 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
     // prettier-ignore
     const cellsRu = [
         { cell: 'Инвойс_продавец_п', value: seller.ru.name },
-        { cell: 'Инвойс_продавец_адрес_п', value: seller.ru.addres },
+        { cell: 'Инвойс_продавец_адрес_п', value: seller.ru.address },
         { cell: 'Инвойс_п', value: `${invoiceNo} от ${date.invoice('ru')}` },
         { cell: 'МСЦ_п', value: msc ? 'MSC certified' : 'Non-MSC certified' },
         { cell: 'МСЦ_сертификат_п', value: msc ? 'MSC-C-52870' : '' },
@@ -63,7 +63,7 @@ export const initNonComInvoiceTmp = (ws: Worksheet, invoice: InvoiceT) => {
         { cell: 'Инвойс_получатель_п', value: consignee?.fullName },
         { cell: 'Инвойс_получатель_адрес_п', value: consignee?.addres },
         { cell: 'Инвойс_покупатель_п', value: agent.name },
-        { cell: 'Инвойс_покупатель_адрес_п', value: agent.addres },
+        { cell: 'Инвойс_покупатель_адрес_п', value: agent.address },
 
         { cell: 'Инвойс_транспорт_п', value: transport.ru.name },
         { cell: 'Инвойс_куда_п', value: `${portTo.ru.name}, ${portTo.ru.country}` },

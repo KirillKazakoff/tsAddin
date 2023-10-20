@@ -50,8 +50,6 @@ export const initAmountObj = (rowType: TableKeyT) => {
     };
 };
 
-// export const setAmountObj = (row: CommonRowT)
-
 export const addToAmount = (amount: AmountT, count: number) => {
     amount.count += count;
     amount.str = formatCount(amount.count, amount.fraction.min, amount.fraction.max);

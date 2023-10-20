@@ -1,6 +1,6 @@
 import { InitInvoicePartT } from '../../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
-import { alignmentCenter, fontDefault } from '../../../styleRowCells';
+import { alignmentCenter, fontDefault } from '../../../../excel/utils/styleRowCells';
 
 export const initInvoiceRowsFCA: InitInvoicePartT = (utils, invoice) => {
     // initRows
@@ -46,10 +46,6 @@ export const initInvoiceRowsFCA: InitInvoicePartT = (utils, invoice) => {
                             alignment: alignmentCenter,
                             font: fontDefault,
                         },
-                        special: [
-                            { index: 2, style: { border: { left: { style: 'thin' } } } },
-                            { index: 'last', style: { border: { right: { style: 'thin' } } } },
-                        ],
                     },
                 };
             },

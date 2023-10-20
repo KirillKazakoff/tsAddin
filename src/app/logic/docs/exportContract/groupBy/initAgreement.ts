@@ -1,7 +1,3 @@
-import type {
-    VesselsGroupT,
-    ConsigneesGroupT,
-} from '../../../../types/typesContract';
 import type { ExportRowT } from '../../../../types/typesTables';
 import type { BlGroupsT } from './initBlGroup';
 import type { InvoicesT } from './initInvoice';
@@ -13,14 +9,6 @@ export const initAgreement = (row: ExportRowT) => {
         rows: <ExportRowT[]>[],
         productsGroupedBy: {
             invoices: <InvoicesT>{},
-            consignees: <ConsigneesGroupT>{},
-            vessels: <VesselsGroupT>{
-                all: {
-                    subject: [],
-                    cost: [],
-                },
-                byVesselGroup: {},
-            },
             bl: <BlGroupsT<ExportRowT>>{},
         },
         priceTotal: 0,

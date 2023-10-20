@@ -20,7 +20,6 @@ export const getCellByName = (
         }
         return match;
     } catch (e) {
-        console.error(`ошибка в клетке ${name}`);
         return null;
     }
 };

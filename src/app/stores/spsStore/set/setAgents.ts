@@ -29,10 +29,10 @@ export const setAgents = (spRange: any[][]) => {
             name: name.toUpperCase(),
             beneficiaryBank,
             branch,
-            bankAdress,
+            bankAddress: bankAdress,
             acNo,
             swift,
-            addres: adress,
+            address: adress,
         };
         return total;
     }, {});

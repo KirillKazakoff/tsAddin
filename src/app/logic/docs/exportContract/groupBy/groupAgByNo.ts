@@ -2,9 +2,7 @@
 import _ from 'lodash';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { setMSC } from '../../../../stores/tablesStore/utils/setMSC';
-import { groupAgByConsignee } from './groupAgByConsignee';
 import { groupAgByInvoice } from './groupAgByInvoice';
-import { groupAgByVessel } from './groupAgByVessel';
 import { AgreementsT, initAgreement } from './initAgreement';
 import { groupify } from '../../../utils/groupify';
 import { groupByBl } from './groupByBl';
@@ -26,10 +24,7 @@ export const groupAgByNo = () => {
 
     Object.entries(agreements).forEach(([key, agreement]) => {
         agreements[key] = groupAgByInvoice(agreement);
-        agreements[key] = groupAgByConsignee(agreement);
-        agreements[key] = groupAgByVessel(agreement);
         agreements[key].productsGroupedBy.bl = groupByBl(agreement.rows);
-
         agreements[key] = setCOHCStatus(agreement);
     });
 

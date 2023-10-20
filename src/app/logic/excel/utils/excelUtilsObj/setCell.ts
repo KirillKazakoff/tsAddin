@@ -21,10 +21,16 @@ export const setCell = (ws: Worksheet, setObj: CellObjT) => {
     const {
         cell, value, offsetRow, numFmt,
     } = setObj;
+    try {
+        console.log(ws);
+        const cellObj = getCellByName(ws, cell, offsetRow);
+        console.log(cellObj);
+        cellObj.value = value;
 
-    const cellObj = getCellByName(ws, cell, offsetRow);
-    cellObj.value = value;
-
-    if (numFmt) cellObj.numFmt = numFmt;
-    return cellObj;
+        if (numFmt) cellObj.numFmt = numFmt;
+        return cellObj;
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
 };
