@@ -5,11 +5,15 @@ export type MergeSettingsT = {
     row: number;
     startCol: number;
     endCol: number;
+    endRow?: number;
 };
 
 export const mergeCells = (ws: Worksheet, settings: MergeSettingsT) => {
-    ws.unMergeCells(settings.row, settings.startCol, settings.row, settings.endCol);
-    ws.mergeCells(settings.row, settings.startCol, settings.row, settings.endCol);
+    const { row, startCol, endCol } = settings;
+
+    const endRow = settings.endRow ? settings.endRow : row;
+    ws.unMergeCells(row, startCol, endRow, endCol);
+    ws.mergeCells(row, startCol, endRow, endCol);
 };
 
 export const mergeTotal = (settings: {

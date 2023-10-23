@@ -1,15 +1,16 @@
+/* eslint-disable no-console */
 import ExcelJS, { Cell, Worksheet } from 'exceljs';
 
 export const getCellByName = (
     worksheet: Worksheet,
-    name: string,
+    cellName: string,
     offsetRow?: number,
 ): Cell => {
     let match: ExcelJS.Cell;
 
     try {
         worksheet.eachRow((row) => row.eachCell((cell) => {
-            if (cell.name === name) {
+            if (cell.name === cellName) {
                 match = cell;
             }
         }));
@@ -20,6 +21,7 @@ export const getCellByName = (
         }
         return match;
     } catch (e) {
+        console.error(`ошибка в клетке ${cellName}`);
         return null;
     }
 };

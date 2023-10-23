@@ -19,7 +19,7 @@ export type CellDouble = {
     cellRus: Cell;
 };
 
-export type GetCellDoubleBoundT = (name: string) => CellDouble;
+export type GetCellDoubleBoundT = (name: string, offset?: number) => CellDouble;
 
 export type CellObjDoubleT = {
     cell: string;
@@ -42,7 +42,7 @@ export type CellUtilsDoubleT = {
 };
 
 // Utils solo
-export type GetCellBoundT = (name: string) => Cell;
+export type GetCellBoundT = (name: string, offset?: number) => Cell;
 export type CellObjT = {
     cell: string;
     value: string | number;

@@ -3,8 +3,12 @@ import { Cell, Row } from 'exceljs';
 
 // prettier-ignore
 export const formats = {
+    unique: {
+        placesSlash: '# ### "/"',
+    },
     common: {
         basePlacesTotalTn: '#,##0.000#_)',
+        basePlaces: '# ###',
         priceDollar: '#,##0.00_) "$"',
         priceRub: '#,##0.00_) "Р"',
         priceDollarUSD: '#,##0.00_) "USD"',
@@ -32,6 +36,12 @@ type FormatsDocT = Partial<{
 }>;
 
 export const formatsDocs = {
+    exportInvoice: {
+        price: formats.common.priceDollar,
+        priceTotal: formats.common.priceDollar,
+        places: formats.unique.placesSlash,
+        placesTotal: formats.common.basePlacesTotalTn,
+    },
     exportContract: {
         price: formats.common.priceDollar,
         placesTotal: formats.common.basePlacesTotalTn,
