@@ -5,6 +5,7 @@ import {
 import { mergeStyles } from './mergeStyles';
 
 export type RowStyleSettingsT = {
+    borderType?: 'all' | 'outside' | 'edges';
     height?: number;
     border?: Partial<Borders> | 'all' | 'outside' | 'edges';
     alignment?: Partial<Alignment> | 'center';

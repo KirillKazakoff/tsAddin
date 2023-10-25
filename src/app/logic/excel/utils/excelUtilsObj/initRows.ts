@@ -34,18 +34,22 @@ type SettingsRowsT<RecordT, FieldsT> = {
     ) => SettingsRowT<FieldsT>;
 };
 
-export const initRowMaker = (ws: Worksheet, cellName?: string) => {
-    let insertIndex = 1;
-    let firstCellCount = 1;
+export const initRowMaker = (
+    ws: Worksheet,
+    cellName?: string,
+    index?: number,
+    first?: number,
+) => {
+    let insertIndex = index || 1;
+    let firstCellCount = first || 1;
+
     if (cellName) {
         const arrayCl = getCellByName(ws, cellName);
         firstCellCount = ws.getColumn(arrayCl.col).number;
         insertIndex = +arrayCl.row;
     }
 
-    const insertRow = <FieldsT extends FieldsGenT>(
-        settings: SettingsRowT<FieldsT>,
-    ) => {
+    const insertRow = <FieldsT extends FieldsGenT>(settings: SettingsRowT<FieldsT>) => {
         const rowArr = Object.values(settings.fields);
         const row = ws.insertRow(insertIndex, rowArr);
         insertIndex += 1;
@@ -61,11 +65,7 @@ export const initRowMaker = (ws: Worksheet, cellName?: string) => {
         }
 
         if (settings.style) {
-            const commonStyle = styleRowCells(
-                row,
-                settings.style.common,
-                firstCellCount,
-            );
+            const commonStyle = styleRowCells(row, settings.style.common, firstCellCount);
 
             if (settings.style.special) {
                 Object.keys(settings.fields).forEach((fieldKey, cellIndex) => {

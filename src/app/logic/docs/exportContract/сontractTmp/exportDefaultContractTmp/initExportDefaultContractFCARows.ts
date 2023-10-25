@@ -1,6 +1,6 @@
-import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
 import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
+import { InvoiceProductGroupT, InvoicesT } from '../../groupBy/initInvoice';
 
 export const initExportDefaultContractRowsFCA = (
     invoices: InvoicesT,
@@ -10,7 +10,7 @@ export const initExportDefaultContractRowsFCA = (
 
     // Get product groups
     const invoicesArr = Object.values(invoices);
-    const groups = invoicesArr.reduce<ProductGroupT[]>((total, invoice) => {
+    const groups = invoicesArr.reduce<InvoiceProductGroupT[]>((total, invoice) => {
         const invoiceGroups = Object.values(invoice.productGroups);
         total.push(...invoiceGroups);
         return total;

@@ -1,7 +1,10 @@
-import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
-import { CellObjDoubleT as CellObjT } from '../../../../../types/typesExcelUtils';
-import { getExcelDateStr } from '../../../../excel/utils/getExcelDate';
-import { InvoiceT } from '../../groupBy/initInvoice';
+import exportContractStore from '../../../../stores/docsStores/exportContractStore';
+import {
+    CellObjDoubleT,
+    CellObjT as CellObjSingleT,
+} from '../../../../types/typesExcelUtils';
+import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
+import { InvoiceT } from '../groupBy/initInvoice';
 
 export const getExportInvoiceCells = (invoice: InvoiceT) => {
     const {
@@ -15,6 +18,7 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
         date: agreementDate,
         vessel,
         terms,
+        bankSeller,
     } = invoice.agreement.record;
     const {
         invoiceDate, invoiceNo, msc, consignee,
@@ -26,13 +30,8 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
     };
 
     // prettier-ignore
-    const cells = {
-        common: <CellObjT[]>[
-            {
-                cell: 'Инвойс',
-                eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
-                ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
-            },
+    const doubleObj = {
+        common: <CellObjDoubleT[]>[
             {
                 cell: 'Инвойс_контракт',
                 eng: `to the Contract of sale № ${contract.contractNo}`,
@@ -49,14 +48,29 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
                 ru: `${seller.ru.name}`,
             },
             {
+                cell: 'Инвойс_продавец_адрес',
+                eng: `${seller.eng.address}`,
+                ru: `${seller.ru.address}`,
+            },
+            {
                 cell: 'Инвойс_покупатель',
                 eng: `${agent.name}`,
                 ru: `${agent.name}`,
             },
             {
                 cell: 'Инвойс_покупатель_адрес',
+                eng: `${agent.address}`,
+                ru: `${agent.address}`,
+            },
+            {
+                cell: 'Инвойс_получатель',
                 eng: `${consignee.fullName}`,
                 ru: `${consignee.fullName}`,
+            },
+            {
+                cell: 'Инвойс_получатель_адрес',
+                eng: `${consignee.addres}`,
+                ru: `${consignee.addres}`,
             },
             {
                 cell: 'Инвойс_транспорт',
@@ -84,17 +98,17 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
                 ru: msc ? 'MSC-C-52870' : 'Non-MSC product',
             },
             {
-                cell: 'Инвойс_подписант',
-                eng: `Signed by ${exportContractStore.fields.podpisant.eng.name}`,
-                ru: `Подписано ${exportContractStore.fields.podpisant.ru.name}`,
-            },
-            {
                 cell: 'Инвойс_условия',
                 eng: `${terms}, ${portTo.eng.name}`,
                 ru: `${terms}, ${portTo.ru.name}`,
             },
         ],
-        exportDefault: <CellObjT[]>[
+        exportDefault: <CellObjDoubleT[]>[
+            {
+                cell: 'Инвойс',
+                eng: `Commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                ru: `Коммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+            },
             {
                 cell: 'Инвойс_соглашение',
                 eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
@@ -106,14 +120,19 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
                 ru: exportContractStore.fields.declaration,
             },
         ],
-        exportFCA: <CellObjT[]>[
+        exportFCA: <CellObjDoubleT[]>[
             {
                 cell: 'Инвойс_откуда',
                 eng: '',
                 ru: '',
             },
         ],
-        exportStorage: <CellObjT[]>[
+        exportStorage: <CellObjDoubleT[]>[
+            {
+                cell: 'Инвойс',
+                eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+            },
             {
                 cell: 'Инвойс_соглашение',
                 eng: `to the Storage Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
@@ -122,18 +141,51 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
         ],
     };
 
-    const resArr = [...cells.common];
+    const singleObj = {
+        common: <CellObjSingleT[]>[
+            {
+                cell: 'Инвойс_подписант',
+                value: `Signed by ${exportContractStore.fields.podpisant.eng.name} / Подписано ${exportContractStore.fields.podpisant.ru.name}`,
+            },
+        ],
+        exportDefault: <CellObjSingleT[]>[
+            {
+                cell: 'Инвойс_банк_получателя',
+                value: `Beneficiary Bank: ${bankSeller.eng.name}`,
+            },
+            {
+                cell: 'Инвойс_банк_получателя_адрес',
+                value: `Bank address: ${bankSeller.address}`,
+            },
+            {
+                cell: 'Инвойс_банк_получателя_свифт',
+                value: `SWIFT: ${bankSeller.swift}`,
+            },
+            {
+                cell: 'Инвойс_получатель_в_пользу',
+                value: `in forward to ${seller.eng.name}`,
+            },
+            {
+                cell: 'Инвойс_получатель_счет',
+                value: `A/C: ${bankSeller.accountNo}`,
+            },
+        ],
+    };
+
+    const singleCells = [...singleObj.common];
+    const doubleCells = [...doubleObj.common];
 
     if (invoice.record.type === 'export') {
-        resArr.push(...cells.exportDefault);
+        singleCells.push(...singleObj.exportDefault);
+        doubleCells.push(...doubleObj.exportDefault);
 
         if (terms === 'FCA') {
-            resArr.push(...cells.exportFCA);
+            doubleCells.push(...doubleObj.exportFCA);
         }
     }
     if (invoice.record.type === 'exportStorage') {
-        resArr.push(...cells.exportStorage);
+        doubleCells.push(...doubleObj.exportStorage);
     }
 
-    return resArr;
+    return { double: doubleCells, single: singleCells };
 };

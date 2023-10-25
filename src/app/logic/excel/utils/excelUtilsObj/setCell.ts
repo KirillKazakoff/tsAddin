@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Worksheet } from 'exceljs';
 import { CellObjDoubleT, CellObjT } from '../../../../types/typesExcelUtils';
 import { getCellByName, getCellsObj } from './getCell';
@@ -22,9 +23,7 @@ export const setCell = (ws: Worksheet, setObj: CellObjT) => {
         cell, value, offsetRow, numFmt,
     } = setObj;
     try {
-        console.log(ws);
         const cellObj = getCellByName(ws, cell, offsetRow);
-        console.log(cellObj);
         cellObj.value = value;
 
         if (numFmt) cellObj.numFmt = numFmt;

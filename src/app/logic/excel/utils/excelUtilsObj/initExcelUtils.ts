@@ -20,7 +20,7 @@ export const initExcelUtilsDouble = (ws: Worksheet, offset: number) => {
 export const initExcelUtils = (ws: Worksheet) => {
     return {
         ws,
-        getRow: getRow.bind(this, ws),
+        getRow: getRow(ws),
         deleteRow: deleteRow.bind(this, ws),
         mergeCells: mergeCells.bind(this, ws),
         getCell: getCellByName.bind(this, ws),

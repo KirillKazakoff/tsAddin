@@ -8,7 +8,7 @@ export type MergeSettingsT = {
     endRow?: number;
 };
 
-export const mergeCells = (ws: Worksheet, settings: MergeSettingsT) => {
+export const mergeCells = (ws: Worksheet) => (settings: MergeSettingsT) => {
     const { row, startCol, endCol } = settings;
 
     const endRow = settings.endRow ? settings.endRow : row;
@@ -16,23 +16,7 @@ export const mergeCells = (ws: Worksheet, settings: MergeSettingsT) => {
     ws.mergeCells(row, startCol, endRow, endCol);
 };
 
-export const mergeTotal = (settings: {
-    rows: number[];
-    ranges: number[][];
-    ws: Worksheet;
-}) => {
-    const { rows, ranges: cols, ws } = settings;
-
-    rows.forEach((mergeRow) => cols.forEach(([startCol, endCol]) => {
-        mergeCells(ws, {
-            row: mergeRow,
-            startCol,
-            endCol,
-        });
-    }));
-};
-
-export const mergeFromTo = (
+export const mergeFromTo = (ws: Worksheet) (
     ws: Worksheet,
     settings: {
         row: {
