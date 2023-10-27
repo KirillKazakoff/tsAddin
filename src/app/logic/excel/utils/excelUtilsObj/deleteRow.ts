@@ -1,8 +1,7 @@
 import { Worksheet } from 'exceljs';
-import { getCellByName } from './getCell';
+import { getCell } from './getCell';
 
-export const deleteRow = (ws: Worksheet, cellName: string, offsetRow?: number) => {
-    const cell = getCellByName(ws, cellName, offsetRow);
-
+export const deleteRow = (ws: Worksheet) => (cellName: string, offsetRow?: number) => {
+    const cell = getCell(ws)(cellName, offsetRow);
     ws.spliceRows(+cell.row, 1);
 };

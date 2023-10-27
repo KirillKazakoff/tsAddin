@@ -1,17 +1,15 @@
 /* eslint-disable no-param-reassign */
-import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { ExportRowT } from '../../../../../types/typesTables';
-import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { BlGroupsT } from '../../groupBy/initBlGroup';
 
 export const initExportStorageContractRowsR = (
     blGrouped: BlGroupsT<ExportRowT>,
-    utils: CellUtilsDoubleT,
+    utils: CellUtilsT<number>,
 ) => {
-    const { insertRow, deleteStartRows } = initRowMaker(
-        utils.ws,
-        'Сертификаты_массив',
-    );
+    const { insertRow, deleteStartRows } = utils.initRowMaker({
+        cellName: 'Сертификаты_массив',
+    });
 
     Object.values(blGrouped).forEach((group) => {
         group.groupedProductsArr.forEach((r) => {

@@ -1,11 +1,10 @@
 /* eslint-disable no-param-reassign */
-import { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { NordmileRowT } from '../../../../types/typesTables';
-import { initRowMaker } from '../../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { alignmentCenter, borderAll } from '../../../excel/utils/styleRowCells';
 
-export const initRequestRowsNordmile = (rows: NordmileRowT[], utils: CellUtilsT) => {
-    const { insertRows } = initRowMaker(utils.ws, 'Заявка_массив');
+export const initRequestRowsNordmile = (rows: NordmileRowT[], utils: CellUtilsT<0>) => {
+    const { insertRows } = utils.initRowMaker({ cellName: 'Заявка_массив' });
 
     insertRows({
         records: rows,

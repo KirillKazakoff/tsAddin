@@ -1,19 +1,14 @@
 import { Workbook } from 'exceljs';
-import { initPicturesExcel } from '../../excel/pictures/initPictureExcel';
 import { SalesContractT } from './groupBy/initSalesContract';
-import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initSalesTableRows } from './initSalesTableRows';
 import { getSalesContractCells } from './getSalesContractCells';
 import { initSalesRowsDefault } from './initSalesRowsDefault';
-import { mergeFromTo } from '../../excel/utils/excelUtilsObj/mergeCells';
+import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 
-export const initSalesContractTmp = async (
-    book: Workbook,
-    contract: SalesContractT,
-) => {
+export const initSalesContractTmp = async (book: Workbook, contract: SalesContractT) => {
     const { seller } = contract.record;
     const ws = book.getWorksheet('Sales_Contract');
-    const utils = initExcelUtils(ws);
+    const utils = initExcelUtils(ws, 0);
 
     // init cells
     const cells = getSalesContractCells(contract);
@@ -30,7 +25,7 @@ export const initSalesContractTmp = async (
     }
 
     // merge cells
-    mergeFromTo(utils.ws, {
+    utils.mergeFromTo({
         row: {
             from: { name: 'Контракт_оплата', offset: -1 },
             to: { name: 'Документация_BL', offset: 1 },
@@ -38,8 +33,7 @@ export const initSalesContractTmp = async (
         cols: [[1, 5]],
     });
 
-    await initPicturesExcel(
-        ws,
+    await utils.initPictures(
         [
             {
                 key: seller.code,

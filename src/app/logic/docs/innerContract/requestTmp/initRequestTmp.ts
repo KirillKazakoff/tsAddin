@@ -8,7 +8,7 @@ import { initRequestRows } from './initRequestRows';
 
 export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     const ws = book.getWorksheet('Request_Contract');
-    const utils = initExcelUtils(ws);
+    const utils = initExcelUtils(ws, 0);
 
     const { record, priceTotal, requestsArr: requests } = contract;
     const {

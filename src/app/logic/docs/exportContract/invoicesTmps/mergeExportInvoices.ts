@@ -1,9 +1,9 @@
 import { Cell, Workbook } from 'exceljs';
-import { mergeCells } from '../../../excel/utils/excelUtilsObj/mergeCells';
 import { InvoiceT } from '../groupBy/initInvoice';
 import { initExportInvoiceRows } from './initExportInvoiceRows';
+import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 
-export const mergeCoppiedInvoice = async (book: Workbook, invoice: InvoiceT) => {
+export const mergeExportInvoice = async (book: Workbook, invoice: InvoiceT) => {
     const xls64 = await book.xlsx.writeBuffer();
     await book.xlsx.load(xls64);
     const ws = book.getWorksheet(`invoice ${invoice.invoiceNo}`);
@@ -93,8 +93,10 @@ export const mergeCoppiedInvoice = async (book: Workbook, invoice: InvoiceT) => 
         });
     });
 
+    const utils = initExcelUtils(ws, 0);
+
     mergeArray.forEach((cell) => {
-        mergeCells(ws, {
+        utils.mergeCells({
             row: cell.row.start,
             endRow: cell.row.end,
             startCol: cell.col.start,
@@ -102,5 +104,5 @@ export const mergeCoppiedInvoice = async (book: Workbook, invoice: InvoiceT) => 
         });
     });
 
-    initExportInvoiceRows(ws, invoice, arrayCl);
+    initExportInvoiceRows(invoice, arrayCl, utils);
 };

@@ -1,12 +1,11 @@
-import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
-import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { InvoiceProductGroupT, InvoicesT } from '../../groupBy/initInvoice';
 
 export const initExportDefaultContractRows = (
     invoices: InvoicesT,
-    utils: CellUtilsDoubleT,
+    utils: CellUtilsT<number>,
 ) => {
-    const { insertRows } = initRowMaker(utils.ws, 'Предмет_массив');
+    const { insertRows } = utils.initRowMaker({ cellName: 'Предмет_массив' });
 
     // Get product groups
     const invoicesArr = Object.values(invoices);

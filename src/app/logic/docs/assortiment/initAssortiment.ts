@@ -6,7 +6,7 @@ import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
 import { AssortimentT } from './initAssortimentTable';
 
 export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) => {
-    const rowMaker = initRowMaker(ws);
+    const rowMaker = initRowMaker(ws)();
 
     // column width setup
     const columns = [1, 2, 3, 4, 5, 6].map((index) => ws.getColumn(index));

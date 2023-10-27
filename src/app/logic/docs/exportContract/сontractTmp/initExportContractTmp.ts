@@ -1,20 +1,16 @@
 import { Workbook } from 'exceljs';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import { initExcelUtilsDouble } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initExportDefaultContractTmp } from './exportDefaultContractTmp/initExportDefaultContractTmp';
 import { initExportStorageContractTmp } from './exportStorageContractTmp/initExportStorageContractTmp';
 import { AgreementT } from '../groupBy/initAgreement';
 import { getExportContractCells } from './getExportContractCells.ts';
-import { initPicturesExcel } from '../../../excel/pictures/initPictureExcel';
+import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 
-export const initExportContractTmp = async (
-    book: Workbook,
-    agreement: AgreementT,
-) => {
+export const initExportContractTmp = async (book: Workbook, agreement: AgreementT) => {
     const ws = book.getWorksheet('Export_Contract');
     const { operation } = exportContractStore;
-    const cellOffset = operation === 'export' ? 4 : 3;
-    const utils = initExcelUtilsDouble(ws, cellOffset);
+    const offsetCol = operation === 'export' ? 4 : 3;
+    const utils = initExcelUtils(ws, offsetCol);
 
     const cells = getExportContractCells(agreement);
     cells.forEach((cell) => utils.setCell(cell));
@@ -26,8 +22,7 @@ export const initExportContractTmp = async (
     }
 
     // initPictures
-    await initPicturesExcel(
-        utils.ws,
+    utils.initPictures(
         [
             {
                 key: exportContractStore.fields.podpisant.codeName,

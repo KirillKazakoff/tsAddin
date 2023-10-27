@@ -1,6 +1,6 @@
 import { Cell, Row, Worksheet } from 'exceljs';
 import { DocTypeT, setFormats } from '../../../utils/formats';
-import { getCellByName } from './getCell';
+import { getCell } from './getCell';
 import { mergeCells } from './mergeCells';
 import { mergeStyles } from '../mergeStyles';
 import { RowStyleSettingsT, styleRowCells, styleCell } from '../styleRowCells';
@@ -34,17 +34,20 @@ type SettingsRowsT<RecordT, FieldsT> = {
     ) => SettingsRowT<FieldsT>;
 };
 
-export const initRowMaker = (
-    ws: Worksheet,
-    cellName?: string,
-    index?: number,
-    first?: number,
-) => {
-    let insertIndex = index || 1;
-    let firstCellCount = first || 1;
+type RowMakerSettingsT = {
+    cellName?: string;
+    rowIndex?: number;
+    firstCol?: number;
+};
+
+// eslint-disable-next-line max-len
+export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
+    const { cellName, rowIndex, firstCol } = setup;
+    let insertIndex = rowIndex || 1;
+    let firstCellCount = firstCol || 1;
 
     if (cellName) {
-        const arrayCl = getCellByName(ws, cellName);
+        const arrayCl = getCell(ws)(cellName);
         firstCellCount = ws.getColumn(arrayCl.col).number;
         insertIndex = +arrayCl.row;
     }
@@ -56,7 +59,7 @@ export const initRowMaker = (
 
         if (settings.merge) {
             settings.merge.forEach(({ start, end }) => {
-                mergeCells(ws, {
+                mergeCells(ws)({
                     startCol: start,
                     endCol: end,
                     row: row.number,
@@ -129,4 +132,4 @@ export const initRowMaker = (
     };
 };
 
-export type RowMakerT = ReturnType<typeof initRowMaker>;
+export type RowMakerT = ReturnType<ReturnType<typeof initRowMaker>>;

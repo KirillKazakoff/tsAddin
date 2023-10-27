@@ -1,15 +1,15 @@
-import { Worksheet } from 'exceljs';
-import { initRowMaker } from '../../../excel/utils/excelUtilsObj/initRows';
 import { InvoiceT } from '../groupBy/initInvoice';
+import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 
 export const initExportInvoiceRows = (
-    ws: Worksheet,
     invoice: InvoiceT,
     arrayCl: { row: number; col: number },
+    utils: CellUtilsT<0>,
 ) => {
-    const { insertRows, insertRow } = initRowMaker(ws, '', arrayCl.row, arrayCl.col);
-
-    console.log(invoice.amount.placesTotal);
+    const { insertRows, insertRow } = utils.initRowMaker({
+        rowIndex: arrayCl.row,
+        firstCol: arrayCl.col,
+    });
 
     insertRows({
         deleteStartAmount: 2,

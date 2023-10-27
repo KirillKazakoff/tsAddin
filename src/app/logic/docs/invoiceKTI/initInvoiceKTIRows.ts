@@ -1,12 +1,11 @@
-import { CellUtilsT } from '../../../types/typesExcelUtils';
-import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { formatCount } from '../../utils/formatCount';
 import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 
-export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
+export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<0>) => {
     ['eng', 'ru'].forEach((language) => {
         const cellName = language === 'eng' ? 'Инвойс_массив' : 'Инвойс_массив_п';
-        const { insertRows } = initRowMaker(utils.ws, cellName);
+        const { insertRows } = utils.initRowMaker({ cellName });
 
         insertRows({
             records: invoice.rows,

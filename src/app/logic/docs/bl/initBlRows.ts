@@ -1,11 +1,10 @@
-import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { ExportRowT } from '../../../types/typesTables';
-import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { BlGroupT } from '../exportContract/groupBy/initBlGroup';
 
-export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT) => {
+export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<0>) => {
     const { groupedProductsArr: rows } = blGroup;
-    const { insertRows } = initRowMaker(utils.ws, 'Bl_массив');
+    const { insertRows } = utils.initRowMaker({ cellName: 'Bl_массив' });
 
     insertRows({
         records: rows,

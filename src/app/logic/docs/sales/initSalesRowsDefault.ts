@@ -1,18 +1,13 @@
-import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { SalesRowT } from '../../../types/typesTables';
-import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { SalesContractT } from './groupBy/initSalesContract';
 
-export const initSalesRowsDefault = (
-    contract: SalesContractT,
-    utils: CellUtilsT,
-) => {
+export const initSalesRowsDefault = (contract: SalesContractT, utils: CellUtilsT<0>) => {
     const { bl } = contract.recordsGroupedBy;
-    const { insertRow, insertRows, deleteStartRows } = initRowMaker(
-        utils.ws,
-        'Контракт_предмет_массив',
-    );
+    const { insertRow, insertRows, deleteStartRows } = utils.initRowMaker({
+        cellName: 'Контракт_предмет_массив',
+    });
 
     // prettier-ignore
     Object.values(bl).forEach((group) => {

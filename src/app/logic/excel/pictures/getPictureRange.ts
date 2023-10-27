@@ -1,5 +1,5 @@
 import { Worksheet } from 'exceljs';
-import { initExcelUtils } from '../utils/excelUtilsObj/initExcelUtils';
+import { getCell } from '../utils/excelUtilsObj/getCell';
 
 export type PictureRangeObjT = {
     start: string;
@@ -7,10 +7,8 @@ export type PictureRangeObjT = {
 };
 
 export const getPictureRange = (range: PictureRangeObjT, ws: Worksheet) => {
-    const utils = initExcelUtils(ws);
-
-    const startCl = utils.getCell(range.start);
-    const endCl = utils.getCell(range.end);
+    const startCl = getCell(ws)(range.start);
+    const endCl = getCell(ws)(range.end);
 
     return `${startCl.$col$row}:${endCl.$col$row}`;
 };

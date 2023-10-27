@@ -1,15 +1,12 @@
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-extraneous-dependencies */
-import _ from 'lodash';
+/* eslint-disable no-restricted-syntax */
 import { Workbook } from 'exceljs';
+import _ from 'lodash';
 import { getExportInvoiceCells } from './getExportInvoiceCells';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import {
-    initExcelUtils,
-    initExcelUtilsDouble,
-} from '../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { InvoicesT } from '../groupBy/initInvoice';
-import { mergeCoppiedInvoice } from './mergeCoppiedInvoices';
+import { mergeExportInvoice } from './mergeExportInvoices';
 
 export const initExportInvoicesTmps = async (book: Workbook, invoices: InvoicesT) => {
     const sheetName = 'Invoice';
@@ -21,8 +18,8 @@ export const initExportInvoicesTmps = async (book: Workbook, invoices: InvoicesT
         return;
     }
 
-    const utilsDouble = initExcelUtilsDouble(wsOriginal, 6);
-    const utilsSingle = initExcelUtils(wsOriginal);
+    const utilsDouble = initExcelUtils(wsOriginal, 6);
+    const utilsSingle = initExcelUtils(wsOriginal, 0);
 
     for await (const key of Object.keys(invoices)) {
         const invoice = invoices[key];
@@ -42,7 +39,7 @@ export const initExportInvoicesTmps = async (book: Workbook, invoices: InvoicesT
         wsCopyTo.model = _.cloneDeep(wsOriginal.model);
         wsCopyTo.name = `invoice ${key}`;
 
-        await mergeCoppiedInvoice(book, invoice);
+        await mergeExportInvoice(book, invoice);
     }
 
     book.removeWorksheet(sheetName);

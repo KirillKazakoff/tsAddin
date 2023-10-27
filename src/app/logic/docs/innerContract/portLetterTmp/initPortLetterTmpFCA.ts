@@ -8,7 +8,7 @@ import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
 
 export const initPortLetterTmpFCA = (book: Workbook, contract: ContractT) => {
     const ws = book.getWorksheet('Port_Letter');
-    const utils = initExcelUtils(ws);
+    const utils = initExcelUtils(ws, 0);
 
     const { record, rows } = contract;
     const { fields } = portLetterStore;

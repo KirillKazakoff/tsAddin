@@ -9,7 +9,7 @@ import { formats } from '../../utils/formats';
 
 export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIT) => {
     const ws = book.getWorksheet('Invoice_KTI');
-    const utils = initExcelUtils(ws);
+    const utils = initExcelUtils(ws, 0);
     const { record, exportRecord } = invoice;
 
     const date = {
