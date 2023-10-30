@@ -9,15 +9,9 @@ export const useInitSalesSection = () => {
     const formik = useMyFormik({
         store: salesContractStore,
         initialFields: {
-            filling: '',
+            isSortGroup: true,
         },
-        validateCb: (errors, values) => {
-            if (salesContractStore.currentRecord.isLive) {
-                if (!values.filling) {
-                    errors.filling = 'valueMissing';
-                }
-            }
-        },
+        validateCb: () => {},
     });
 
     return useInitSection({

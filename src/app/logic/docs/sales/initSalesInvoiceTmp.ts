@@ -1,13 +1,12 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 import { Workbook } from 'exceljs';
-import _ from 'lodash';
 import { SalesContractT } from './groupBy/initSalesContract';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initSalesTableRows } from './initSalesTableRows';
-import { SalesRowT } from '../../../types/typesTables';
+import { setPrintArea } from '../../excel/utils/excelUtilsObj/setPrintArea';
+import salesContractStore from '../../../stores/docsStores/salesContractStore';
 
 export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesContractT) => {
     const r = contract.record;
@@ -37,23 +36,10 @@ export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesContrac
 
     cells.forEach((cell) => utils.setCell(cell));
 
-    const rows = Object.values(contract.recordsGroupedBy.bl).reduce<SalesRowT[]>(
-        (total, blGroup) => {
-            const allRows = blGroup.groupedProductsArr.map((prodGroup) => {
-                const cloneGroup = _.cloneDeep(prodGroup);
-                cloneGroup.record.amount.placesTotal = cloneGroup.total.placesTotal;
-                cloneGroup.record.amount.priceTotal = cloneGroup.total.priceTotal;
-                cloneGroup.record.sort = '-';
-                return cloneGroup.record;
-            });
-            total.push(...allRows);
-            return total;
-        },
-        [],
-    );
-
     initSalesTableRows({
-        rows,
+        rows: salesContractStore.fields.isSortGroup
+            ? contract.groupedBy.blProduct
+            : contract.rows,
         isContract: false,
         utils,
     });
@@ -79,4 +65,6 @@ export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesContrac
         ],
         true,
     );
+
+    setPrintArea({ endCell: 'Инвойс_продавец_печать_подвал', utils });
 };

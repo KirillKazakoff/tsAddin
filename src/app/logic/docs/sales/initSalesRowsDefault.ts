@@ -4,7 +4,7 @@ import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { SalesContractT } from './groupBy/initSalesContract';
 
 export const initSalesRowsDefault = (contract: SalesContractT, utils: CellUtilsT<''>) => {
-    const { bl } = contract.recordsGroupedBy;
+    const { bl } = contract.groupedBy;
     const { insertRow, insertRows, deleteStartRows } = utils.initRowMaker({
         cellName: 'Контракт_предмет_массив',
     });

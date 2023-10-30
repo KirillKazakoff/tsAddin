@@ -61,8 +61,4 @@ export const messages: MessagesT = {
         valueMissing: 'Введите дату отбытия Владивосток',
         formatMismatch: 'Неправильный формат даты (2 цифры. 2 цифры. 4 цифры)',
     },
-
-    filling: {
-        valueMissing: 'Введите процент заполнения',
-    },
 };

@@ -1,3 +1,5 @@
+import { Dictionary } from './typesUtils';
+
 // Transport
 export type TransportT = {
     codeName: string;
@@ -10,9 +12,7 @@ export type TransportT = {
     id: string;
 };
 
-export type TransportsT = {
-    [key: string]: TransportT;
-};
+export type TransportsT = Dictionary<TransportT>;
 
 // Vessels
 export type VesselT = {
@@ -26,9 +26,7 @@ export type VesselT = {
     id: string;
 };
 
-export type VesselsT = {
-    [key: string]: VesselT;
-};
+export type VesselsT = Dictionary<VesselT>;
 
 // Production
 export type ProductionT = {
@@ -46,9 +44,7 @@ export type ProductionT = {
     expirationDate: string;
 };
 
-export type ProductionsT = {
-    [key: string]: ProductionT;
-};
+export type ProductionsT = Dictionary<ProductionT>;
 
 // Package
 export type PackageT = {
@@ -59,9 +55,7 @@ export type PackageT = {
     coefficient: number;
 };
 
-export type PackagesT = {
-    [key: string]: PackageT;
-};
+export type PackagesT = Dictionary<PackageT>;
 
 // SortAssortiment
 export type SortAssortimentT = {
@@ -71,9 +65,7 @@ export type SortAssortimentT = {
     weight: string;
 };
 
-export type SortsAssortimentT = {
-    [key: string]: SortAssortimentT;
-};
+export type SortsAssortimentT = Dictionary<SortAssortimentT>;
 
 // Sellers
 export type SellerT = {
@@ -89,9 +81,7 @@ export type SellerT = {
     inn: string;
 };
 
-export type SellersT = {
-    [key: string]: SellerT;
-};
+export type SellersT = Dictionary<SellerT>;
 
 // Consignee
 export type ConsigneeT = {
@@ -100,9 +90,7 @@ export type ConsigneeT = {
     addres: string;
 };
 
-export type ConsigneesT = {
-    [key: string]: ConsigneeT;
-};
+export type ConsigneesT = Dictionary<ConsigneeT>;
 
 // PortZarubezh
 export type PortZarubezhT = {
@@ -119,9 +107,7 @@ export type PortZarubezhT = {
     };
 };
 
-export type PortsZarubezhT = {
-    [key: string]: PortZarubezhT;
-};
+export type PortsZarubezhT = Dictionary<PortZarubezhT>;
 
 // PortTamozhnyaT
 export type PortTamozhnyaT = {
@@ -134,9 +120,7 @@ export type PortTamozhnyaT = {
     };
 };
 
-export type PortsTamozhnyaT = {
-    [key: string]: PortTamozhnyaT;
-};
+export type PortsTamozhnyaT = Dictionary<PortTamozhnyaT>;
 
 // ContractsT
 export type ContractT = {
@@ -151,9 +135,7 @@ export type ContractT = {
     status: string;
 };
 
-export type ContractsT = {
-    [key: string]: ContractT;
-};
+export type ContractsT = Dictionary<ContractT>;
 
 // PodpisantsT
 export type PodpisantT = {
@@ -169,9 +151,7 @@ export type PodpisantT = {
     declination: string;
 };
 
-export type PodpisantsT = {
-    [key: string]: PodpisantT;
-};
+export type PodpisantsT = Dictionary<PodpisantT>;
 
 // AgentsT
 export type AgentT = {
@@ -191,9 +171,7 @@ export type AgentT = {
     address: string;
 };
 
-export type AgentsT = {
-    [key: string]: AgentT;
-};
+export type AgentsT = Dictionary<AgentT>;
 
 // BanksProdavec
 export type BankProdavecT = {
@@ -213,10 +191,7 @@ export type BankProdavecT = {
     intermediarySwift: string;
     accountNo: string;
 };
-
-export type BanksProdavecT = {
-    [key: string]: BankProdavecT;
-};
+export type BanksProdavecT = Dictionary<BankProdavecT>;
 
 // ClientsSellRu
 export type ClientRuT = {
@@ -227,9 +202,7 @@ export type ClientRuT = {
     mail: string;
 };
 
-export type ClientsRuT = {
-    [key: string]: ClientRuT;
-};
+export type ClientsRuT = Dictionary<ClientRuT>;
 
 // PortsRu
 export type PortRuT = {
@@ -240,9 +213,7 @@ export type PortRuT = {
     mail: string;
 };
 
-export type PortsRuT = {
-    [key: string]: PortRuT;
-};
+export type PortsRuT = Dictionary<PortRuT>;
 
 // Sales
 export type ProductionSalesT = {
@@ -251,9 +222,7 @@ export type ProductionSalesT = {
     expirationDate: number;
 };
 
-export type ProductionsSalesT = {
-    [key: string]: ProductionSalesT;
-};
+export type ProductionsSalesT = Dictionary<ProductionSalesT>;
 
 export type ConfidentialPhoneT = {
     codeName: string;
@@ -262,6 +231,4 @@ export type ConfidentialPhoneT = {
     phone: string;
 };
 
-export type ConfidentialPhonesT = {
-    [key: string]: ConfidentialPhoneT;
-};
+export type ConfidentialPhonesT = Dictionary<ConfidentialPhoneT>;

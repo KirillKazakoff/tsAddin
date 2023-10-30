@@ -6,8 +6,9 @@ export const initSalesContract = (row: SalesRowT) => {
     const contract = {
         record: row,
         rows: <SalesRowT[]>[],
-        recordsGroupedBy: {
+        groupedBy: {
             bl: <BlGroupsT<SalesRowT>>{},
+            blProduct: <SalesRowT[]>[],
         },
         amount: {
             priceTotal: initAmount(0, 2, 2),

@@ -1,4 +1,3 @@
-import salesContractStore from '../../../stores/docsStores/salesContractStore';
 import { SalesRowT } from '../../../types/typesTables';
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 
@@ -18,12 +17,9 @@ export const initSalesTableRows = (settings: SettingsT) => {
         records: rows,
         deleteStartAmount: 1,
         rowSettings: (r) => {
-            const filling = r.isLive
-                ? `\nFilling: ${salesContractStore.fields.filling}`
-                : '';
             const fields = {
                 bl: r.blNo,
-                product: `${r.product.name}${filling}`,
+                product: `${r.product.name}`,
                 vessel: r.vessel,
                 sort: r.sort,
                 price: r.amount.price.count,

@@ -5,10 +5,11 @@ import { initExportStorageContractTmp } from './exportStorageContractTmp/initExp
 import { AgreementT } from '../groupBy/initAgreement';
 import { getExportContractCells } from './getExportContractCells.ts';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { setPrintArea } from '../../../excel/utils/excelUtilsObj/setPrintArea';
 
 export const initExportContractTmp = async (book: Workbook, agreement: AgreementT) => {
     const ws = book.getWorksheet('Export_Contract');
-    const { operation, currentTerms } = exportContractStore;
+    const { operation } = exportContractStore;
     const offsetCol = 'MID_Contract';
     const utils = initExcelUtils(ws, offsetCol);
 
@@ -44,8 +45,5 @@ export const initExportContractTmp = async (book: Workbook, agreement: Agreement
         operation === 'certificates',
     );
 
-    // printAreaSettings
-    const { cellCount, number } = utils.getRow('Адреса_подпись', 0);
-    const column = ws.getColumn(cellCount).letter;
-    ws.pageSetup.printArea = `A1:${column}${number + 2}`;
+    setPrintArea({ endCell: 'Адреса_подпись', utils });
 };

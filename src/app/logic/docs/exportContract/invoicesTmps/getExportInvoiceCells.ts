@@ -1,7 +1,7 @@
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import {
-    CellObjDoubleT,
-    CellObjT as CellObjSingleT,
+    CellObjDoubleT as CellDoubleT,
+    CellObjT as CellSingleT,
 } from '../../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 import { InvoiceT } from '../groupBy/initInvoice';
@@ -31,7 +31,7 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
 
     // prettier-ignore
     const doubleObj = {
-        common: <CellObjDoubleT[]>[
+        common: <CellDoubleT[]>[
             {
                 cell: 'Инвойс_контракт',
                 eng: `to the Contract of sale № ${contract.contractNo}`,
@@ -103,7 +103,7 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
                 ru: `${terms}, ${portTo.ru.name}`,
             },
         ],
-        exportDefault: <CellObjDoubleT[]>[
+        exportDefault: <CellDoubleT[]>[
             {
                 cell: 'Инвойс',
                 eng: `Commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
@@ -118,22 +118,17 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
                 cell: 'Инвойс_декларация',
                 eng: exportContractStore.fields.declaration,
                 ru: exportContractStore.fields.declaration,
+                isEmptyTitle: exportContractStore.currentTerms === 'CFR',
             },
         ],
-        exportFCA: <CellObjDoubleT[]>[
+        exportFCA: <CellDoubleT[]>[
             {
                 cell: 'Инвойс_откуда',
                 eng: '-',
                 ru: '-',
             },
-            {
-                cell: 'Инвойс_декларация',
-                eng: '',
-                ru: '',
-                isEmptyTitle: true,
-            },
         ],
-        exportStorage: <CellObjDoubleT[]>[
+        exportStorage: <CellDoubleT[]>[
             {
                 cell: 'Инвойс',
                 eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
@@ -148,13 +143,13 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
     };
 
     const singleObj = {
-        common: <CellObjSingleT[]>[
+        common: <CellSingleT[]>[
             {
                 cell: 'Инвойс_подписант',
                 value: `Signed by ${exportContractStore.fields.podpisant.eng.name} / Подписано ${exportContractStore.fields.podpisant.ru.name}`,
             },
         ],
-        exportDefault: <CellObjSingleT[]>[
+        exportDefault: <CellSingleT[]>[
             {
                 cell: 'Инвойс_банк_получателя',
                 value: `Beneficiary Bank: ${bankSeller.eng.name}`,

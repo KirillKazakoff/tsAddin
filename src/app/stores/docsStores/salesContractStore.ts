@@ -3,7 +3,7 @@ import { FormValuesT } from '../../types/typesUtils';
 import tablesStore from '../tablesStore/tablesStore';
 
 const initFields = () => ({
-    filling: '',
+    isSortGroup: true,
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
@@ -17,7 +17,7 @@ class SalesContractStore {
     }
 
     setFields(values: FormFieldsT) {
-        this.fields.filling = values.filling;
+        this.fields.isSortGroup = values.isSortGroup;
     }
     setCurrentId(contractNo: string) {
         this.currentId = contractNo;
