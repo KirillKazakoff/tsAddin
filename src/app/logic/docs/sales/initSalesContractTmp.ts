@@ -8,7 +8,7 @@ import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 export const initSalesContractTmp = async (book: Workbook, contract: SalesContractT) => {
     const { seller } = contract.record;
     const ws = book.getWorksheet('Sales_Contract');
-    const utils = initExcelUtils(ws, 0);
+    const utils = initExcelUtils(ws, '');
 
     // init cells
     const cells = getSalesContractCells(contract);

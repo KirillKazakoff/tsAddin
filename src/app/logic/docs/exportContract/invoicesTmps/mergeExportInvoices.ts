@@ -2,6 +2,7 @@ import { Cell, Workbook } from 'exceljs';
 import { InvoiceT } from '../groupBy/initInvoice';
 import { initExportInvoiceRows } from './initExportInvoiceRows';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { initExportInvoiceRowsFCA } from './initExportInvoiceRowsFCA';
 
 export const mergeExportInvoice = async (book: Workbook, invoice: InvoiceT) => {
     const xls64 = await book.xlsx.writeBuffer();
@@ -69,6 +70,20 @@ export const mergeExportInvoice = async (book: Workbook, invoice: InvoiceT) => {
                 mergeArray.push(merge);
             },
 
+            // setMergeTableTitles: () => {
+            //     merge.col.start = +cell.col;
+            //     merge.row.start = +cell.row;
+            //     merge.row.end = +cell.row;
+
+            //     const row = ws.getRow(+cell.row);
+            //     for (let i = +cell.col; i < row.cellCount; i += 1) {
+            //         const nextCell = row.getCell(i);
+            //         if (!nextCell.value) continue;
+
+            //         merge.col.end = +nextCell.col;
+            //         break;
+            //     }
+            // },
             setBlNo: () => {
                 arrayCl.row = +cell.row + 1;
                 arrayCl.col = +cell.col;
@@ -93,7 +108,7 @@ export const mergeExportInvoice = async (book: Workbook, invoice: InvoiceT) => {
         });
     });
 
-    const utils = initExcelUtils(ws, 0);
+    const utils = initExcelUtils(ws, '');
 
     mergeArray.forEach((cell) => {
         utils.mergeCells({
@@ -104,5 +119,9 @@ export const mergeExportInvoice = async (book: Workbook, invoice: InvoiceT) => {
         });
     });
 
-    initExportInvoiceRows(invoice, arrayCl, utils);
+    if (invoice.record.terms !== 'FCA') {
+        initExportInvoiceRows(invoice, arrayCl, utils);
+    } else {
+        initExportInvoiceRowsFCA(invoice, arrayCl, utils);
+    }
 };

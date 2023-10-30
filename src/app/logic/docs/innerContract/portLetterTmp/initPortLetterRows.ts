@@ -5,7 +5,7 @@ import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
 import { ContractRowT } from '../groupByContractNo';
 
-export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT<0>) => {
+export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Письмо_массив' });
 
     insertRows({

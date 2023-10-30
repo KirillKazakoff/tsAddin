@@ -3,7 +3,7 @@ import { InvoiceProductGroupT, InvoicesT } from '../../groupBy/initInvoice';
 
 export const initExportDefaultContractRowsFCA = (
     invoices: InvoicesT,
-    utils: CellUtilsT<number>,
+    utils: CellUtilsT<string>,
 ) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Предмет_массив' });
 

@@ -1,7 +1,7 @@
 import { InvoiceT } from '../groupBy/initInvoice';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 
-export const initExportInvoiceRows = (
+export const initExportInvoiceRowsFCA = (
     invoice: InvoiceT,
     arrayCl: { row: number; col: number },
     utils: CellUtilsT<''>,
@@ -17,17 +17,17 @@ export const initExportInvoiceRows = (
         rowSettings: ({ record: r, total }) => {
             const fields = {
                 empty1: '',
-                bl: r.blNo,
+                bl: '-',
                 product: `${r.product.ru.name}\n${r.product.eng.name}`,
                 empty4: '',
                 empty5: '',
                 empty6: '',
                 empty7: '',
-                pack: `1/${r.pack} kg`,
-                places: total.places.count,
+                pack: '-',
                 placesTotal: total.placesTotal.count,
-                price: r.amount.price.count,
                 empty10: '',
+                price: r.amount.price.count,
+                empty12: '',
                 priceTotal: r.amount.priceTotal.count,
             };
 
@@ -35,17 +35,13 @@ export const initExportInvoiceRows = (
             return {
                 fields,
                 docType: 'exportInvoice',
-                merge: [{ start: 3, end: 7 }, { start: 11, end: 12 }],
+                merge: [{ start: 3, end: 7 }, { start: 9, end: 10 }, { start: 11, end: 12 }],
                 style: {
                     common: {
                         height: 50,
                         alignment: 'center',
                         border: 'edges',
                         font: { size: 10 },
-                    },
-                    special: {
-                        places: { style: { alignment: { horizontal: 'right' } } },
-                        placesTotal: { style: { alignment: { horizontal: 'left' } } },
                     },
                 },
             };
@@ -63,13 +59,13 @@ export const initExportInvoiceRows = (
             empty6: '',
             empty7: '',
             totalHeader: 'TOTAL / ВСЕГО',
-            places: invoice.amount.places.count,
             placesTotal: invoice.amount.placesTotal.count,
+            empty10: '',
             price: '-',
-            empty11: '',
+            empty12: '',
             priceTotal: invoice.amount.priceTotal.count,
         },
-        merge: [{ start: 11, end: 12 }],
+        merge: [{ start: 9, end: 10 }, { start: 11, end: 12 }],
         docType: 'exportInvoice',
         style: {
             common: {
@@ -80,9 +76,6 @@ export const initExportInvoiceRows = (
             },
             special: {
                 totalHeader: { style: { alignment: { horizontal: 'right' } } },
-                places: { style: { alignment: { horizontal: 'right' } } },
-                placesTotal: { style: { alignment: { horizontal: 'left' } } },
-
                 empty1: { style: { border: { right: { style: 'thin' }, top: {} } } },
                 priceTotal: { style: { border: { right: { style: 'thin' } } } },
             },

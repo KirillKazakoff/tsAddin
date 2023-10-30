@@ -12,7 +12,7 @@ import { SalesRowT } from '../../../types/typesTables';
 export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesContractT) => {
     const r = contract.record;
     const ws = book.getWorksheet('Invoice');
-    const utils = initExcelUtils(ws, 0);
+    const utils = initExcelUtils(ws, '');
 
     // init cells
     // prettier-ignore

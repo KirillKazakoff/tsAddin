@@ -2,7 +2,7 @@
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { RequestT } from '../groupContractByNameSort';
 
-export const initRequestRows = (requests: RequestT[], utils: CellUtilsT<0>) => {
+export const initRequestRows = (requests: RequestT[], utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Заявка_массив' });
 
     insertRows({

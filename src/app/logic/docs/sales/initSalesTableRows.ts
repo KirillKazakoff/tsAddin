@@ -4,7 +4,7 @@ import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 
 type SettingsT = {
     rows: SalesRowT[];
-    utils: CellUtilsT<0>;
+    utils: CellUtilsT<''>;
     isContract: boolean;
 };
 export const initSalesTableRows = (settings: SettingsT) => {

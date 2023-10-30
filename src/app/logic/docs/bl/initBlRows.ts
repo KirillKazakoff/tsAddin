@@ -2,7 +2,7 @@ import { ExportRowT } from '../../../types/typesTables';
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { BlGroupT } from '../exportContract/groupBy/initBlGroup';
 
-export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<0>) => {
+export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>) => {
     const { groupedProductsArr: rows } = blGroup;
     const { insertRows } = utils.initRowMaker({ cellName: 'Bl_массив' });
 

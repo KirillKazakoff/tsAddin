@@ -2,7 +2,7 @@ import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { formatCount } from '../../utils/formatCount';
 import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 
-export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<0>) => {
+export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) => {
     ['eng', 'ru'].forEach((language) => {
         const cellName = language === 'eng' ? 'Инвойс_массив' : 'Инвойс_массив_п';
         const { insertRows } = utils.initRowMaker({ cellName });

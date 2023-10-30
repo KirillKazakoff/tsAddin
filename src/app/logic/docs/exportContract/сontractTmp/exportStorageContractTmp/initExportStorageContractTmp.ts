@@ -6,7 +6,7 @@ import { AgreementT } from '../../groupBy/initAgreement';
 import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 
 export const initExportStorageContractTmp = async (
-    utils: CellUtilsT<number>,
+    utils: CellUtilsT<string>,
     agreement: AgreementT,
 ) => {
     if (exportContractStore.operation === 'export_storage') {

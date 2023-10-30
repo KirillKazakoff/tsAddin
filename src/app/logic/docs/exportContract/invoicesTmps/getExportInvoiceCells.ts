@@ -123,8 +123,14 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
         exportFCA: <CellObjDoubleT[]>[
             {
                 cell: 'Инвойс_откуда',
+                eng: '-',
+                ru: '-',
+            },
+            {
+                cell: 'Инвойс_декларация',
                 eng: '',
                 ru: '',
+                isEmptyTitle: true,
             },
         ],
         exportStorage: <CellObjDoubleT[]>[

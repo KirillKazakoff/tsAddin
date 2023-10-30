@@ -3,7 +3,7 @@ import { NordmileRowT } from '../../../../types/typesTables';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { alignmentCenter, borderAll } from '../../../excel/utils/styleRowCells';
 
-export const initRequestRowsNordmile = (rows: NordmileRowT[], utils: CellUtilsT<0>) => {
+export const initRequestRowsNordmile = (rows: NordmileRowT[], utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Заявка_массив' });
 
     insertRows({

@@ -4,7 +4,7 @@ import { InvoiceProductGroupT, InvoicesT } from '../../groupBy/initInvoice';
 
 export const initExportStorageContractRows = (
     invoices: InvoicesT,
-    utils: CellUtilsT<number>,
+    utils: CellUtilsT<string>,
 ) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Сертификаты_массив' });
 

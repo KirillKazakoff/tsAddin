@@ -19,7 +19,7 @@ export const createPortLetter = async (contract: ContractT) => {
         : pathObj.portLetter;
     const book = await readTmp(path);
     const ws = book.getWorksheet('Port_Letter');
-    const utils = initExcelUtils(ws, 0);
+    const utils = initExcelUtils(ws, '');
 
     // save order (tmp first then pictures)
     if (portLetterStore.fields.termsPort === 'FCA') {

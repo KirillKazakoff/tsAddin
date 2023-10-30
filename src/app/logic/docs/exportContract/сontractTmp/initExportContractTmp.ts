@@ -8,8 +8,8 @@ import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtil
 
 export const initExportContractTmp = async (book: Workbook, agreement: AgreementT) => {
     const ws = book.getWorksheet('Export_Contract');
-    const { operation } = exportContractStore;
-    const offsetCol = operation === 'export' ? 4 : 3;
+    const { operation, currentTerms } = exportContractStore;
+    const offsetCol = 'MID_Contract';
     const utils = initExcelUtils(ws, offsetCol);
 
     const cells = getExportContractCells(agreement);

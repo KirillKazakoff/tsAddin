@@ -5,7 +5,7 @@ import { initExportDefaultContractRowsFCA } from './initExportDefaultContractFCA
 import { initExportDefaultContractRows } from './initExportDefaultContractRows';
 
 export const initExportDefaultContractTmp = async (
-    utils: CellUtilsT<number>,
+    utils: CellUtilsT<string>,
     agreement: AgreementT,
 ) => {
     const { invoices } = agreement.productsGroupedBy;

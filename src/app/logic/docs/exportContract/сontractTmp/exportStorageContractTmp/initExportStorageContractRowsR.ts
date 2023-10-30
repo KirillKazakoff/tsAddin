@@ -5,7 +5,7 @@ import { BlGroupsT } from '../../groupBy/initBlGroup';
 
 export const initExportStorageContractRowsR = (
     blGrouped: BlGroupsT<ExportRowT>,
-    utils: CellUtilsT<number>,
+    utils: CellUtilsT<string>,
 ) => {
     const { insertRow, deleteStartRows } = utils.initRowMaker({
         cellName: 'Сертификаты_массив',

@@ -18,8 +18,8 @@ export const initExportInvoicesTmps = async (book: Workbook, invoices: InvoicesT
         return;
     }
 
-    const utilsDouble = initExcelUtils(wsOriginal, 6);
-    const utilsSingle = initExcelUtils(wsOriginal, 0);
+    const utilsDouble = initExcelUtils(wsOriginal, 'MID_Invoice');
+    const utilsSingle = initExcelUtils(wsOriginal, '');
 
     for await (const key of Object.keys(invoices)) {
         const invoice = invoices[key];
