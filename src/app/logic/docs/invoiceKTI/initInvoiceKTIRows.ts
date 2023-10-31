@@ -15,10 +15,10 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) 
                 const fields = {
                     empty1: '',
                     description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${placesTotal} mt`,
-                    empty3: '',
-                    empty4: '',
-                    empty5: '',
-                    empty6: '',
+                    m1: '',
+                    m2: '',
+                    m3: '',
+                    m4: '',
                     days: `${r.row.amount?.days}`,
                     price: r.row.amount.price,
                     priceTotal: r.row.amount.priceTotal,
@@ -70,7 +70,6 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) 
                 return {
                     fields,
                     docType: 'invoiceKTI',
-                    merge: [{ start: 2, end: 6 }],
                     style: {
                         common: {
                             height: invoice.type === 'discharge' ? 45 : 60,

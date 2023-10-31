@@ -19,15 +19,15 @@ export const initExportInvoiceRowsFCA = (
                 empty1: '',
                 bl: '-',
                 product: `${r.product.ru.name}\n${r.product.eng.name}`,
-                empty4: '',
-                empty5: '',
-                empty6: '',
-                empty7: '',
+                m1: '',
+                m2: '',
+                m3: '',
+                m4: '',
                 pack: '-',
                 placesTotal: total.placesTotal.count,
-                empty10: '',
+                m5: '',
                 price: r.amount.price.count,
-                empty12: '',
+                m6: '',
                 priceTotal: r.amount.priceTotal.count,
             };
 
@@ -35,7 +35,6 @@ export const initExportInvoiceRowsFCA = (
             return {
                 fields,
                 docType: 'exportInvoice',
-                merge: [{ start: 3, end: 7 }, { start: 9, end: 10 }, { start: 11, end: 12 }],
                 style: {
                     common: {
                         height: 50,
@@ -60,12 +59,11 @@ export const initExportInvoiceRowsFCA = (
             empty7: '',
             totalHeader: 'TOTAL / ВСЕГО',
             placesTotal: invoice.amount.placesTotal.count,
-            empty10: '',
+            m1: '',
             price: '-',
-            empty12: '',
+            m2: '',
             priceTotal: invoice.amount.priceTotal.count,
         },
-        merge: [{ start: 9, end: 10 }, { start: 11, end: 12 }],
         docType: 'exportInvoice',
         style: {
             common: {

@@ -3,7 +3,7 @@ import { PageStatusKeyT, getPageStatus, initPageStatus } from './getPageStatus';
 
 class PageStatusStore {
     status = initPageStatus();
-    isValidation = true;
+    isValidation = false;
 
     constructor() {
         makeAutoObservable(this);

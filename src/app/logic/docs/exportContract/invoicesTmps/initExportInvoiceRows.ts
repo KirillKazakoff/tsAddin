@@ -19,15 +19,15 @@ export const initExportInvoiceRows = (
                 empty1: '',
                 bl: r.blNo,
                 product: `${r.product.ru.name}\n${r.product.eng.name}`,
-                empty4: '',
-                empty5: '',
-                empty6: '',
-                empty7: '',
+                m1: '',
+                m2: '',
+                m3: '',
+                m4: '',
                 pack: `1/${r.pack} kg`,
                 places: total.places.count,
                 placesTotal: total.placesTotal.count,
                 price: r.amount.price.count,
-                empty10: '',
+                m5: '',
                 priceTotal: r.amount.priceTotal.count,
             };
 
@@ -35,7 +35,6 @@ export const initExportInvoiceRows = (
             return {
                 fields,
                 docType: 'exportInvoice',
-                merge: [{ start: 3, end: 7 }, { start: 11, end: 12 }],
                 style: {
                     common: {
                         height: 50,
@@ -66,10 +65,9 @@ export const initExportInvoiceRows = (
             places: invoice.amount.places.count,
             placesTotal: invoice.amount.placesTotal.count,
             price: '-',
-            empty11: '',
+            m1: '',
             priceTotal: invoice.amount.priceTotal.count,
         },
-        merge: [{ start: 11, end: 12 }],
         docType: 'exportInvoice',
         style: {
             common: {
@@ -82,7 +80,6 @@ export const initExportInvoiceRows = (
                 totalHeader: { style: { alignment: { horizontal: 'right' } } },
                 places: { style: { alignment: { horizontal: 'right' } } },
                 placesTotal: { style: { alignment: { horizontal: 'left' } } },
-
                 empty1: { style: { border: { right: { style: 'thin' }, top: {} } } },
                 priceTotal: { style: { border: { right: { style: 'thin' } } } },
             },

@@ -1,18 +1,17 @@
 import { Cell, Row, Worksheet } from 'exceljs';
 import { DocTypeT, setFormats } from '../../../utils/formats';
 import { getCell } from './getCell';
-import { mergeCells } from './mergeCells';
+import { mergeRowCells } from './mergeCells';
 import { mergeStyles } from '../mergeStyles';
 import { RowStyleSettingsT, styleRowCells, styleCell } from '../styleRowCells';
 import { createFormula } from '../createFormula';
 
 type FieldsObjT = { [key: string]: string | number };
-type FieldsGenT = FieldsObjT | string[] | number[];
+export type FieldsGenT = FieldsObjT | string[] | number[];
 
 type SettingsRowT<FieldsT> = {
     fields: FieldsT;
     docType?: DocTypeT;
-    merge?: { start: number; end: number }[];
     style?: {
         common: RowStyleSettingsT;
         special?: {
@@ -57,15 +56,7 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
         const row = ws.insertRow(insertIndex, rowArr);
         insertIndex += 1;
 
-        if (settings.merge) {
-            settings.merge.forEach(({ start, end }) => {
-                mergeCells(ws)({
-                    startCol: start,
-                    endCol: end,
-                    row: row.number,
-                });
-            });
-        }
+        mergeRowCells(ws, settings.fields, row.number);
 
         if (settings.style) {
             const commonStyle = styleRowCells(row, settings.style.common, firstCellCount);

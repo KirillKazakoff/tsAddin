@@ -1,5 +1,6 @@
 import { Worksheet } from 'exceljs';
 import { getRow } from './getRow';
+import type { FieldsGenT } from './initRows';
 
 export type MergeSettingsT = {
     row: number;
@@ -7,6 +8,8 @@ export type MergeSettingsT = {
     endCol: number;
     endRow?: number;
 };
+
+type MergeT = { start: number; end: number };
 
 export const mergeCells = (ws: Worksheet) => (settings: MergeSettingsT) => {
     const { row, startCol, endCol } = settings;
@@ -38,4 +41,36 @@ export const mergeFromTo = (ws: Worksheet) => (settings: {
             mergeCells(ws)({ row: i, startCol: start, endCol: end });
         });
     }
+};
+
+export const mergeRowCells = (ws: Worksheet, fields: FieldsGenT, row: number) => {
+    const merge: MergeT[] = [];
+    const keysArr = Object.keys(fields);
+    const isMerge = (key: string) => key.length === 2 && key[0] === 'm';
+
+    keysArr.forEach((key, i) => {
+        if (key.includes('empty')) return;
+
+        if (isMerge(key)) {
+            // check if such merge already included
+            if (merge.some((range) => range.end >= i)) return;
+
+            const mergeRange: MergeT = { start: i, end: i + 1 };
+
+            let k = i;
+            while (isMerge(keysArr[k])) {
+                mergeRange.end = k + 1;
+                k += 1;
+            }
+            merge.push(mergeRange);
+        }
+    });
+
+    merge.forEach(({ start, end }) => {
+        mergeCells(ws)({
+            startCol: start,
+            endCol: end,
+            row,
+        });
+    });
 };

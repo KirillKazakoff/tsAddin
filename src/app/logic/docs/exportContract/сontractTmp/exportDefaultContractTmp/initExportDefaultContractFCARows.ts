@@ -22,11 +22,11 @@ export const initExportDefaultContractRowsFCA = (
             const fields = {
                 empty1: '',
                 product: `${r.product.ru.name}\n${r.product.eng.name}`,
-                empty3: '',
-                empty4: '',
-                empty5: '',
+                m1: '',
+                m2: '',
+                m3: '',
                 vessel: `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
-                empty7: '',
+                m4: '',
                 price: r.amount.price.count,
                 placesTotal: total.placesTotal.count,
             };
@@ -35,7 +35,6 @@ export const initExportDefaultContractRowsFCA = (
             return {
                 fields,
                 docType: 'exportContract',
-                merge: [{ start: 2, end: 5 }, { start: 6, end: 7 }],
                 style: {
                     common: {
                         height: 55,

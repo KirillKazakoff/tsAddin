@@ -23,7 +23,6 @@ export const initSalesRowsDefault = (contract: SalesContractT, utils: CellUtilsT
             records: [header.subject, header.vessel, header.bl],
             rowSettings: (record) => ({
                 fields: record,
-                merge: [{ start: 1, end: 5 }],
                 style: {
                     common: {
                         alignment: { horizontal: 'left' },
