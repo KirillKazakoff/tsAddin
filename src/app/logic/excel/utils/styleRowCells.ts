@@ -3,6 +3,8 @@ import {
     Alignment, Borders, Cell, Font, Row,
 } from 'exceljs';
 import { mergeStyles } from './mergeStyles';
+import { createFormula } from './createFormula';
+import type { SettingsRowT } from './excelUtilsObj/initRows';
 
 export type RowStyleSettingsT = {
     borderType?: 'all' | 'outside' | 'edges';
@@ -30,7 +32,7 @@ export const styleCell = (cell: Cell, settings: Cell['style']) => {
     cell.font = settings.font;
 };
 
-export const styleRowCells = (
+export const styleRowCommon = (
     row: Row,
     settings: RowStyleSettingsT,
     firstCellCount?: number,
@@ -83,4 +85,34 @@ export const styleRowCells = (
 export const fontDefault: Partial<Font> = {
     size: 10,
     bold: false,
+};
+
+export const styleRow = <FieldsT>(
+    settings: SettingsRowT<FieldsT>,
+    row: Row,
+    firstCellCount: number,
+) => {
+    if (settings.style) {
+        const commonStyle = styleRowCommon(row, settings.style.common, firstCellCount);
+
+        if (settings.style.special) {
+            Object.keys(settings.fields).forEach((fieldKey, cellIndex) => {
+                const cell = settings.style.special[fieldKey as keyof FieldsT];
+                if (!cell) return;
+
+                const cellObj = row.getCell(1 + cellIndex);
+
+                const mergedStyle = mergeStyles(commonStyle, cell.style);
+                if (cell.formulaCb) {
+                    cellObj.value = createFormula({
+                        cell: cellObj,
+                        formulaCb: cell.formulaCb,
+                        result: settings.fields[fieldKey],
+                    });
+                }
+
+                styleCell(cellObj, mergedStyle);
+            });
+        }
+    }
 };

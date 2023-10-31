@@ -2,14 +2,12 @@ import { Cell, Row, Worksheet } from 'exceljs';
 import { DocTypeT, setFormats } from '../../../utils/formats';
 import { getCell } from './getCell';
 import { mergeRowCells } from './mergeCells';
-import { mergeStyles } from '../mergeStyles';
-import { RowStyleSettingsT, styleRowCells, styleCell } from '../styleRowCells';
-import { createFormula } from '../createFormula';
+import { RowStyleSettingsT, styleRow } from '../styleRowCells';
 
 type FieldsObjT = { [key: string]: string | number };
 export type FieldsGenT = FieldsObjT | string[] | number[];
 
-type SettingsRowT<FieldsT> = {
+export type SettingsRowT<FieldsT> = {
     fields: FieldsT;
     docType?: DocTypeT;
     style?: {
@@ -22,6 +20,7 @@ type SettingsRowT<FieldsT> = {
         };
     };
 };
+
 type SettingsRowsT<RecordT, FieldsT> = {
     records: RecordT[];
     deleteStartAmount?: number;
@@ -57,34 +56,8 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
         insertIndex += 1;
 
         mergeRowCells(ws, settings.fields, row.number);
-
-        if (settings.style) {
-            const commonStyle = styleRowCells(row, settings.style.common, firstCellCount);
-
-            if (settings.style.special) {
-                Object.keys(settings.fields).forEach((fieldKey, cellIndex) => {
-                    const cell = settings.style.special[fieldKey as keyof FieldsT];
-                    if (!cell) return;
-
-                    const cellObj = row.getCell(1 + cellIndex);
-
-                    const mergedStyle = mergeStyles(commonStyle, cell.style);
-                    if (cell.formulaCb) {
-                        cellObj.value = createFormula({
-                            cell: cellObj,
-                            formulaCb: cell.formulaCb,
-                            result: settings.fields[fieldKey],
-                        });
-                    }
-
-                    styleCell(cellObj, mergedStyle);
-                });
-            }
-        }
-
-        if (settings.docType) {
-            setFormats(row, settings.fields as FieldsObjT, settings.docType);
-        }
+        styleRow(settings, row, firstCellCount);
+        setFormats(row, settings.fields as FieldsObjT, settings.docType);
     };
 
     const insertRows = <RecordT, FieldsT extends FieldsGenT>(

@@ -91,6 +91,8 @@ export const setFormats = (
     fields: { [key: string]: string | number },
     docType: DocTypeT,
 ) => {
+    if (!docType) return;
+
     const cellObj: { [key: string]: Cell } = {};
     const keys = Object.keys(fields);
 
