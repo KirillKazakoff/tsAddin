@@ -10,7 +10,8 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     const ws = book.getWorksheet('Request_Contract');
     const utils = initExcelUtils(ws);
 
-    const { record, priceTotal, requestsArr: requests } = contract;
+    const { record, priceTotal } = contract;
+    const rows = contract.rows.map((row) => row.row);
     const {
         portTamozhnya, terms, reiceNo, isInvoiceOnly,
     } = requestContractStore.fields;
@@ -64,7 +65,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
         ];
     }
 
-    initRequestRows(requests, utils);
+    initRequestRows(rows, utils);
 
     cells.forEach((cell) => {
         utils.setCell(cell);

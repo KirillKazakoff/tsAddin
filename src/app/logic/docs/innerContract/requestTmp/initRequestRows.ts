@@ -1,23 +1,23 @@
 /* eslint-disable no-param-reassign */
-import { CellUtilsT } from '../../../../types/typesExcelUtils';
+import type { CellUtilsT } from '../../../../types/typesExcelUtils';
+import { InnerRowT } from '../../../../types/typesTables';
 import { initRowMaker } from '../../../excel/utils/excelUtilsObj/initRows';
-import { RequestT } from '../groupContractByNameSort';
 
-export const initRequestRows = (requests: RequestT[], utils: CellUtilsT) => {
+export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
     const { insertRows } = initRowMaker(utils.ws, 'Заявка_массив');
 
     insertRows({
-        records: requests,
+        records: rows,
         deleteStartAmount: 1,
-        rowSettings: ({ record, amountTotal }) => {
+        rowSettings: (r) => {
             const fields = {
-                vessel: record.vessel.ru.name,
-                product: record.product.ru.name,
-                sort: record.sort,
-                pack: record.product.ru.pack,
-                placesTotal: amountTotal.count,
-                price: record.amount.price.count,
-                priceTotal: record.amount.priceTotal.count,
+                vessel: r.vessel.ru.name,
+                product: r.product.ru.name,
+                sort: r.sort,
+                pack: r.product.ru.pack,
+                placesTotal: r.amount.places.count,
+                price: r.amount.price.count,
+                priceTotal: r.amount.priceTotal.count,
             };
 
             return {

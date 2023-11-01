@@ -5,15 +5,12 @@ import {
 } from '../../../stores/tablesStore/utils/initAmount';
 import { InnerRowT, MateRowT } from '../../../types/typesTables';
 import { groupify } from '../../utils/groupify';
-import { RequestT, groupContractByNameSort } from './groupContractByNameSort';
 
 const initContract = (row: InnerRowT) => {
     return {
         record: row,
         rows: <{ row: InnerRowT; mateRow: MateRowT }[]>[],
         priceTotal: initAmount(0, 2, 2),
-        requests: <{ [key: string]: RequestT }>{},
-        requestsArr: <RequestT[]>[],
     };
 };
 
@@ -34,10 +31,6 @@ export const groupByContractNo = () => {
         addToAmount(contract.priceTotal, row.amount.priceTotal.count);
         return total;
     }, {});
-
-    Object.entries(contracts).forEach(([key, contract]) => {
-        contracts[key] = groupContractByNameSort(contract);
-    });
 
     return contracts;
 };

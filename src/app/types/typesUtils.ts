@@ -13,11 +13,3 @@ export type OnSubmitT<T> = (values: T, actions?: FormikHelpers<T>) => Promise<vo
 export type FormValuesT<T> = {
     [P in keyof T]: T[P] extends boolean ? boolean : string;
 };
-
-// type KeysTables = Array<keyof TablesStore>;
-// type KeysObj = {[P in keyof typeof keysArray]: true}
-// const propArr = Object.keys(tablesStore) as KeysTables;
-// propArr
-
-// const keysArray = ['mates', 'gates'] as const;
-// type K1 = typeof keysArray[number]
