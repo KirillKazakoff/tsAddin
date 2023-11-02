@@ -11,6 +11,7 @@ import { mergeExportInvoice } from './mergeExportInvoices';
 export const initExportInvoicesTmps = async (book: Workbook, invoices: InvoicesT) => {
     const sheetName = 'Invoice';
     const wsOriginal = book.getWorksheet(sheetName);
+    book.removeWorksheet(sheetName);
 
     // no invoices if certificate contract
     if (exportContractStore.operation === 'certificates') {
@@ -35,12 +36,10 @@ export const initExportInvoicesTmps = async (book: Workbook, invoices: InvoicesT
         }
         // finish initInvoice
 
-        const wsCopyTo = book.addWorksheet();
+        const wsCopyTo = book.addWorksheet(`invoice ${key}`);
         wsCopyTo.model = _.cloneDeep(wsOriginal.model);
         wsCopyTo.name = `invoice ${key}`;
 
         await mergeExportInvoice(book, invoice);
     }
-
-    book.removeWorksheet(sheetName);
 };
