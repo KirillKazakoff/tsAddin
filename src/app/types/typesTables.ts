@@ -17,13 +17,14 @@ import {
     VesselT,
 } from './typesSP';
 
+export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'CFR (контейнер)';
+
 export type CommonRowT = {
     index: string;
-    terms?: string;
+    terms?: TermsT;
     type: TableKeyT;
 };
 
-export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'CFR (контейнер)';
 export type TableStatusT = {
     statusType: 'ok' | 'notFilledTable' | 'empty';
     title: string;

@@ -1,6 +1,6 @@
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
-import { initPicturesExcel } from '../../excel/pictures/initPictureExcel';
 import { initPictureGit } from '../../excel/pictures/initPictureGit';
+import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
@@ -19,6 +19,7 @@ export const createPortLetter = async (contract: ContractT) => {
         : pathObj.portLetter;
     const book = await readTmp(path);
     const ws = book.getWorksheet('Port_Letter');
+    const utils = initExcelUtils(ws, '');
 
     // save order (tmp first then pictures)
     if (portLetterStore.fields.termsPort === 'FCA') {
@@ -32,8 +33,7 @@ export const createPortLetter = async (contract: ContractT) => {
         ws,
         rangeObj: { start: 'Banner_start', end: 'Banner_end' },
     });
-    await initPicturesExcel(
-        ws,
+    await utils.initPictures(
         [
             {
                 key: podpisant.codeName,

@@ -8,9 +8,7 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
     const packSp = selectSp.package(
         `${row.vessel}${row.product}${row.pack.toString().replace('.', ',')}`,
     );
-    const placesGross = packSp?.coefficient
-        ? row.placesTotal * packSp.coefficient
-        : 1;
+    const placesGross = packSp?.coefficient ? row.placesTotal * packSp.coefficient : 1;
 
     return {
         type: 'export',

@@ -1,16 +1,15 @@
-import { InvoicesT, ProductGroupT } from '../../../../../types/typesContract';
-import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
-import { initRowMaker } from '../../../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { InvoiceProductGroupT, InvoicesT } from '../../groupBy/initInvoice';
 
 export const initExportDefaultContractRowsFCA = (
     invoices: InvoicesT,
-    utils: CellUtilsDoubleT,
+    utils: CellUtilsT<string>,
 ) => {
-    const { insertRows } = initRowMaker(utils.ws, 'Предмет_массив');
+    const { insertRows } = utils.initRowMaker({ cellName: 'Предмет_массив' });
 
     // Get product groups
     const invoicesArr = Object.values(invoices);
-    const groups = invoicesArr.reduce<ProductGroupT[]>((total, invoice) => {
+    const groups = invoicesArr.reduce<InvoiceProductGroupT[]>((total, invoice) => {
         const invoiceGroups = Object.values(invoice.productGroups);
         total.push(...invoiceGroups);
         return total;
@@ -23,11 +22,11 @@ export const initExportDefaultContractRowsFCA = (
             const fields = {
                 empty1: '',
                 product: `${r.product.ru.name}\n${r.product.eng.name}`,
-                empty3: '',
-                empty4: '',
-                empty5: '',
+                m1: '',
+                m2: '',
+                m3: '',
                 vessel: `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
-                empty7: '',
+                m4: '',
                 price: r.amount.price.count,
                 placesTotal: total.placesTotal.count,
             };
@@ -36,7 +35,6 @@ export const initExportDefaultContractRowsFCA = (
             return {
                 fields,
                 docType: 'exportContract',
-                merge: [{ start: 2, end: 5 }, { start: 6, end: 7 }],
                 style: {
                     common: {
                         height: 55,

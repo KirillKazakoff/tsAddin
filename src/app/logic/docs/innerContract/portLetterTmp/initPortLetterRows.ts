@@ -1,13 +1,12 @@
 /* eslint-disable no-param-reassign */
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import pageStatusStore from '../../../../stores/pageStatusStore.ts/pageStatusStore';
-import { CellUtilsT } from '../../../../types/typesExcelUtils';
-import { initRowMaker } from '../../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
 import { ContractRowT } from '../groupByContractNo';
 
-export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT) => {
-    const { insertRows } = initRowMaker(utils.ws, 'Письмо_массив');
+export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT<''>) => {
+    const { insertRows } = utils.initRowMaker({ cellName: 'Письмо_массив' });
 
     insertRows({
         records: rows,

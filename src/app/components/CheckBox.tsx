@@ -22,10 +22,8 @@ const CheckBoxComponent = ({
 }) => {
     return (
         <input
-            {...field}
-            type='checkbox'
-            className='input-checkbox'
-            checked={checked}
+            {...field} type='checkbox'
+            className='input-checkbox' checked={checked}
         />
     );
 };
@@ -36,9 +34,7 @@ export default function CheckBox(props: Props) {
     const invalidCls = meta.error && meta.touched ? 'form__control--invalid' : '';
 
     return (
-        <div
-            className={`form__control select-wrapper ${invalidCls} ${props.wrapperCls}`}
-        >
+        <div className={`form__control select-wrapper ${invalidCls} ${props.wrapperCls}`}>
             <span className='input-title'>{props.title}</span>
             <Field
                 type='checkbox'

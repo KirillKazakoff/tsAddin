@@ -8,7 +8,7 @@ import { BlGroupT } from '../exportContract/groupBy/initBlGroup';
 
 export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>) => {
     const ws = book.getWorksheet('BL');
-    const utils = initExcelUtils(ws);
+    const utils = initExcelUtils(ws, '');
     const { record } = blGroup;
 
     // prettier-ignore

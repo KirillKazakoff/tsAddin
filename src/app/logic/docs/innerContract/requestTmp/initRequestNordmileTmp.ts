@@ -8,7 +8,7 @@ import { initRequestRowsNordmile } from './initRequestRowsNordmile';
 export const initRequestNordmileTmp = (book: Workbook, row: NordmileRowT) => {
     const ws = book.getWorksheet('Request_Contract');
 
-    const utils = initExcelUtils(ws);
+    const utils = initExcelUtils(ws, '');
     const { priceTotal } = row.amount;
 
     // prettier-ignore

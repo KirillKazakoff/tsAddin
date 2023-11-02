@@ -1,21 +1,19 @@
+/* eslint-disable max-len */
 import { Worksheet } from 'exceljs';
 import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 import picturesStore from '../../../stores/picturesStore/picturesStore';
 import { selectPicture } from '../../../stores/picturesStore/selectPicture';
-import { initExcelUtils } from '../utils/excelUtilsObj/initExcelUtils';
 import { blobFromBase64 } from './blobFromBase64';
 import { getPictureRange } from './getPictureRange';
 import { loadPicture } from './loadPicture';
+import { getCell } from '../utils/excelUtilsObj/getCell';
 
 export type PictureSettingsT = {
     key: string;
     range: { start: string; end: string };
 };
 
-export const initPictureExcel = async (
-    ws: Worksheet,
-    settings: PictureSettingsT,
-) => {
+export const initPictureExcel = async (ws: Worksheet, settings: PictureSettingsT) => {
     const { key: keyCode, range: rangeObj } = settings;
 
     const key = selectPicture(keyCode);
@@ -28,17 +26,11 @@ export const initPictureExcel = async (
     await loadPicture({ ws, blob, range });
 };
 
-export const initPicturesExcel = async (
-    ws: Worksheet,
-    settingsArr: PictureSettingsT[],
-    isActive: boolean,
-) => {
-    const utils = initExcelUtils(ws);
-
+export const initPicturesExcel = (ws: Worksheet) => async (settings: PictureSettingsT[], isActive: boolean) => {
     // clear picture fields '-'
-    settingsArr.forEach((settings) => {
-        utils.getCell(settings.range.start).value = '';
-        utils.getCell(settings.range.end).value = '';
+    settings.forEach((setup) => {
+        getCell(ws)(setup.range.start).value = '';
+        getCell(ws)(setup.range.end).value = '';
     });
 
     if (!isActive || !picturesStore.isPicturesFound) {
@@ -48,6 +40,6 @@ export const initPicturesExcel = async (
         return;
     }
 
-    const promises = settingsArr.map((settings) => initPictureExcel(ws, settings));
+    const promises = settings.map((setup) => initPictureExcel(ws, setup));
     await Promise.all(promises);
 };

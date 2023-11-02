@@ -14,11 +14,12 @@ type RowBlExtendT = {
     pack: number;
     product: ProductionT | ProductionSalesT;
     sort: string;
-    // vessel?: VesselT;
 } & CommonRowT;
 
 export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
     const blGrouped = rows.reduce<BlGroupsT<RowT>>((total, row) => {
+        if (!row.blNo || row.blNo === '-') return total;
+
         const bl = groupify(total, initBlGroup(row), row.blNo);
 
         const productGroup = groupify(
@@ -46,9 +47,7 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
         group.groupedProductsArr.push(...Object.values(group.groupedBy.product));
     });
     Object.values(blGrouped).forEach((group) => {
-        group.groupedProductsSortArr.push(
-            ...Object.values(group.groupedBy.productSort),
-        );
+        group.groupedProductsSortArr.push(...Object.values(group.groupedBy.productSort));
     });
 
     // console.log(blGrouped);

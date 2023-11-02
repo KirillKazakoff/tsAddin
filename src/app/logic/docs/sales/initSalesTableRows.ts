@@ -1,19 +1,15 @@
-import salesContractStore from '../../../stores/docsStores/salesContractStore';
-import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { SalesRowT } from '../../../types/typesTables';
-import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 
 type SettingsT = {
     rows: SalesRowT[];
-    utils: CellUtilsT;
+    utils: CellUtilsT<''>;
     isContract: boolean;
 };
 export const initSalesTableRows = (settings: SettingsT) => {
     const { rows, utils, isContract } = settings;
-    const cellName = isContract
-        ? 'Контракт_предмет_массив'
-        : 'Инвойс_предмет_массив';
-    const { insertRows } = initRowMaker(utils.ws, cellName);
+    const cellName = isContract ? 'Контракт_предмет_массив' : 'Инвойс_предмет_массив';
+    const { insertRows } = utils.initRowMaker({ cellName });
 
     const fontSize = isContract ? 9 : 11;
 
@@ -21,12 +17,9 @@ export const initSalesTableRows = (settings: SettingsT) => {
         records: rows,
         deleteStartAmount: 1,
         rowSettings: (r) => {
-            const filling = r.isLive
-                ? `\nFilling: ${salesContractStore.fields.filling}`
-                : '';
             const fields = {
                 bl: r.blNo,
-                product: `${r.product.name}${filling}`,
+                product: `${r.product.name}`,
                 vessel: r.vessel,
                 sort: r.sort,
                 price: r.amount.price.count,

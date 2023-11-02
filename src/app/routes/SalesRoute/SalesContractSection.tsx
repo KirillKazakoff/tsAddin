@@ -6,7 +6,7 @@ import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import salesContractStore from '../../stores/docsStores/salesContractStore';
 import { useInitSalesSection } from './useInitSalesSection';
 import { Form } from '../../components/Form/Form';
-import { SalesCrabFilling } from './SalesCrabFilling';
+import CheckBox from '../../components/CheckBox';
 
 export const SalesContractSection = observer(() => {
     const { formik, initObj } = useInitSalesSection();
@@ -27,9 +27,7 @@ export const SalesContractSection = observer(() => {
                     <Form className='docs__form'>
                         <h3>{initObj.title}</h3>
                         <div className='fields-wrapper'>
-                            {initObj.currentDoc.record.isLive ? (
-                                <SalesCrabFilling />
-                            ) : null}
+                            <CheckBox title='Группировка по сортам' name='isSortGroup' />
                             <DocsDownloadBtn
                                 title='Загрузить контракт'
                                 onClick={initObj.onLoad}

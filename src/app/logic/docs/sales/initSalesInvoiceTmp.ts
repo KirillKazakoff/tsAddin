@@ -1,23 +1,17 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 import { Workbook } from 'exceljs';
-import _ from 'lodash';
 import { SalesContractT } from './groupBy/initSalesContract';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
-import { initPicturesExcel } from '../../excel/pictures/initPictureExcel';
 import { initSalesTableRows } from './initSalesTableRows';
-import { SalesRowT } from '../../../types/typesTables';
-import { mergeFromTo } from '../../excel/utils/excelUtilsObj/mergeCells';
+import { setPrintArea } from '../../excel/utils/excelUtilsObj/setPrintArea';
+import salesContractStore from '../../../stores/docsStores/salesContractStore';
 
-export const initSalesInvoiceTmp = async (
-    book: Workbook,
-    contract: SalesContractT,
-) => {
+export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesContractT) => {
     const r = contract.record;
     const ws = book.getWorksheet('Invoice');
-    const utils = initExcelUtils(ws);
+    const utils = initExcelUtils(ws, '');
 
     // init cells
     // prettier-ignore
@@ -42,28 +36,15 @@ export const initSalesInvoiceTmp = async (
 
     cells.forEach((cell) => utils.setCell(cell));
 
-    const rows = Object.values(contract.recordsGroupedBy.bl).reduce<SalesRowT[]>(
-        (total, blGroup) => {
-            const allRows = blGroup.groupedProductsArr.map((prodGroup) => {
-                const cloneGroup = _.cloneDeep(prodGroup);
-                cloneGroup.record.amount.placesTotal = cloneGroup.total.placesTotal;
-                cloneGroup.record.amount.priceTotal = cloneGroup.total.priceTotal;
-                cloneGroup.record.sort = '-';
-                return cloneGroup.record;
-            });
-            total.push(...allRows);
-            return total;
-        },
-        [],
-    );
-
     initSalesTableRows({
-        rows,
+        rows: salesContractStore.fields.isSortGroup
+            ? contract.groupedBy.blProduct
+            : contract.rows,
         isContract: false,
         utils,
     });
 
-    mergeFromTo(utils.ws, {
+    utils.mergeFromTo({
         row: {
             from: { name: 'Инвойс_адреса_продавец' },
             to: { name: 'Инвойс_адреса_банк_свифт' },
@@ -72,8 +53,7 @@ export const initSalesInvoiceTmp = async (
     });
 
     // init pictures
-    await initPicturesExcel(
-        ws,
+    await utils.initPictures(
         [
             {
                 key: r.seller.code,
@@ -85,4 +65,6 @@ export const initSalesInvoiceTmp = async (
         ],
         true,
     );
+
+    setPrintArea({ endCell: 'Инвойс_продавец_печать_подвал', utils });
 };

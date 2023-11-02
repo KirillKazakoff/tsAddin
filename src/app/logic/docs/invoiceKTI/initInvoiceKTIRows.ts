@@ -1,12 +1,11 @@
-import { CellUtilsT } from '../../../types/typesExcelUtils';
-import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { formatCount } from '../../utils/formatCount';
 import { InvoiceKTIT } from './groupInvoiceKTIByNo';
 
-export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
+export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) => {
     ['eng', 'ru'].forEach((language) => {
         const cellName = language === 'eng' ? 'Инвойс_массив' : 'Инвойс_массив_п';
-        const { insertRows } = initRowMaker(utils.ws, cellName);
+        const { insertRows } = utils.initRowMaker({ cellName });
 
         insertRows({
             records: invoice.rows,
@@ -16,10 +15,10 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
                 const fields = {
                     empty1: '',
                     description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${placesTotal} mt`,
-                    empty3: '',
-                    empty4: '',
-                    empty5: '',
-                    empty6: '',
+                    m1: '',
+                    m2: '',
+                    m3: '',
+                    m4: '',
                     days: `${r.row.amount?.days}`,
                     price: r.row.amount.price,
                     priceTotal: r.row.amount.priceTotal,
@@ -71,7 +70,6 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT) => {
                 return {
                     fields,
                     docType: 'invoiceKTI',
-                    merge: [{ start: 2, end: 6 }],
                     style: {
                         common: {
                             height: invoice.type === 'discharge' ? 45 : 60,

@@ -1,13 +1,12 @@
 /* eslint-disable max-len */
 import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
-import { CellUtilsDoubleT } from '../../../../../types/typesExcelUtils';
 import { initExportStorageContractRowsR } from './initExportStorageContractRowsR';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
 import { AgreementT } from '../../groupBy/initAgreement';
-import { mergeFromTo } from '../../../../excel/utils/excelUtilsObj/mergeCells';
+import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 
 export const initExportStorageContractTmp = async (
-    utils: CellUtilsDoubleT,
+    utils: CellUtilsT<string>,
     agreement: AgreementT,
 ) => {
     if (exportContractStore.operation === 'export_storage') {
@@ -18,7 +17,7 @@ export const initExportStorageContractTmp = async (
     }
 
     // prettier-ignore
-    mergeFromTo(utils.ws, {
+    utils.mergeFromTo({
         row: {
             from: { name: 'Доставка_транспорт' },
             to: { name: 'Адреса_покупатель_адрес' },

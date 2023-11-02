@@ -1,18 +1,13 @@
-import { CellUtilsT } from '../../../types/typesExcelUtils';
 import { SalesRowT } from '../../../types/typesTables';
-import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { SalesContractT } from './groupBy/initSalesContract';
 
-export const initSalesRowsDefault = (
-    contract: SalesContractT,
-    utils: CellUtilsT,
-) => {
-    const { bl } = contract.recordsGroupedBy;
-    const { insertRow, insertRows, deleteStartRows } = initRowMaker(
-        utils.ws,
-        'Контракт_предмет_массив',
-    );
+export const initSalesRowsDefault = (contract: SalesContractT, utils: CellUtilsT<''>) => {
+    const { bl } = contract.groupedBy;
+    const { insertRow, insertRows, deleteStartRows } = utils.initRowMaker({
+        cellName: 'Контракт_предмет_массив',
+    });
 
     // prettier-ignore
     Object.values(bl).forEach((group) => {
@@ -28,7 +23,6 @@ export const initSalesRowsDefault = (
             records: [header.subject, header.vessel, header.bl],
             rowSettings: (record) => ({
                 fields: record,
-                merge: [{ start: 1, end: 5 }],
                 style: {
                     common: {
                         alignment: { horizontal: 'left' },

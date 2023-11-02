@@ -1,10 +1,9 @@
 /* eslint-disable no-param-reassign */
-import type { CellUtilsT } from '../../../../types/typesExcelUtils';
 import { InnerRowT } from '../../../../types/typesTables';
-import { initRowMaker } from '../../../excel/utils/excelUtilsObj/initRows';
+import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 
-export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT) => {
-    const { insertRows } = initRowMaker(utils.ws, 'Заявка_массив');
+export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT<''>) => {
+    const { insertRows } = utils.initRowMaker({ cellName: 'Заявка_массив' });
 
     insertRows({
         records: rows,

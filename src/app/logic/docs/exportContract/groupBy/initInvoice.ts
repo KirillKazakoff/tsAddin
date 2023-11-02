@@ -20,8 +20,10 @@ const initMain = (agreement: AgreementT, row: ExportRowT) => {
     } = row;
 
     return {
+        record: row,
         rows: <ExportRowT[]>[],
         agreement,
+        recType: row.type,
         invoiceDate,
         msc,
         invoiceNo,

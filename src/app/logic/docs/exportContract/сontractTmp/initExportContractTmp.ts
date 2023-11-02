@@ -1,20 +1,17 @@
 import { Workbook } from 'exceljs';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import { initExcelUtilsDouble } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initExportDefaultContractTmp } from './exportDefaultContractTmp/initExportDefaultContractTmp';
 import { initExportStorageContractTmp } from './exportStorageContractTmp/initExportStorageContractTmp';
 import { AgreementT } from '../groupBy/initAgreement';
 import { getExportContractCells } from './getExportContractCells.ts';
-import { initPicturesExcel } from '../../../excel/pictures/initPictureExcel';
+import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { setPrintArea } from '../../../excel/utils/excelUtilsObj/setPrintArea';
 
-export const initExportContractTmp = async (
-    book: Workbook,
-    agreement: AgreementT,
-) => {
+export const initExportContractTmp = async (book: Workbook, agreement: AgreementT) => {
     const ws = book.getWorksheet('Export_Contract');
     const { operation } = exportContractStore;
-    const cellOffset = operation === 'export' ? 4 : 3;
-    const utils = initExcelUtilsDouble(ws, cellOffset);
+    const offsetCol = 'MID_Contract';
+    const utils = initExcelUtils(ws, offsetCol);
 
     const cells = getExportContractCells(agreement);
     cells.forEach((cell) => utils.setCell(cell));
@@ -26,8 +23,7 @@ export const initExportContractTmp = async (
     }
 
     // initPictures
-    await initPicturesExcel(
-        utils.ws,
+    utils.initPictures(
         [
             {
                 key: exportContractStore.fields.podpisant.codeName,
@@ -49,8 +45,5 @@ export const initExportContractTmp = async (
         operation === 'certificates',
     );
 
-    // printAreaSettings
-    const { cellCount, number } = utils.getRow('Адреса_подпись', 0);
-    const column = ws.getColumn(cellCount).letter;
-    ws.pageSetup.printArea = `A1:${column}${number + 2}`;
+    setPrintArea({ endCell: 'Адреса_подпись', utils });
 };

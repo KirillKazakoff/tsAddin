@@ -1,12 +1,9 @@
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
-import { InvoicesTmpsSettingsT } from '../../../types/typesExcelUtils';
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
 import { AgreementT } from './groupBy/initAgreement';
-import { initInvoicesTmps } from './invoicesTmps/initInvoicesTmps';
-import { initComInvoiceTmp } from './invoicesTmps/invoiceTmp/initComInvoiceTmp';
-import { initNonComInvoiceTmp } from './invoicesTmps/invoiceTmp/initNonComInvoiceTmp';
+import { initExportInvoicesTmps } from './invoicesTmps/initExportInvoicesTmps';
 import { initExportContractTmp } from './сontractTmp/initExportContractTmp';
 
 export const createExportContractDoc = async (agreement: AgreementT) => {
@@ -14,27 +11,13 @@ export const createExportContractDoc = async (agreement: AgreementT) => {
     const { operation } = exportContractStore;
     const { agreementNo, id } = agreement.record;
 
-    let path = operation === 'export'
-        ? pathObj.exportContract
-        : pathObj.exportStorageContract;
+    let path = operation === 'export' ? pathObj.exportContract : pathObj.exportStorageContract;
     if (agreement.record.terms === 'FCA') path = pathObj.exportContractFCA;
 
     const book = await readTmp(path);
 
-    const settings: InvoicesTmpsSettingsT = {
-        book,
-        sheetName: 'Com_Invoice',
-        initInvoiceTmpCb: initComInvoiceTmp,
-        invoices,
-    };
-
-    if (operation === 'export_storage') {
-        settings.sheetName = 'Noncom_Invoice';
-        settings.initInvoiceTmpCb = initNonComInvoiceTmp;
-    }
-
     // save call order (init invoices then contract)
-    await initInvoicesTmps(settings);
+    await initExportInvoicesTmps(book, invoices);
     await initExportContractTmp(book, agreement);
     const fileName = `Доп №${agreementNo} (${id})`;
 

@@ -10,7 +10,7 @@ import spsStore from '../../../../stores/spsStore/spsStore';
 export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
     const phones = spsStore.confidentialPhones;
     const ws = book.getWorksheet('Port_Letter');
-    const utils = initExcelUtils(ws);
+    const utils = initExcelUtils(ws, '');
 
     const { record, rows } = contract;
     const { fields } = portLetterStore;
@@ -71,9 +71,7 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
         {
             cell: 'Контрольный_звонок',
             value: fields.isControlPhone
-                ? `Передача продукции по контрольному звонку: т. ${
-                    (phones?.['КНФ']?.phone, phones?.['МСФ']?.phone)
-                }`
+                ? `Передача продукции по контрольному звонку: т. ${phones?.['КНФ']?.phone}, ${phones?.['МСФ']?.phone}`
                 : '',
         },
         {

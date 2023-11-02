@@ -1,56 +1,76 @@
 import { Worksheet } from 'exceljs';
 import { getRow } from './getRow';
+import type { FieldsGenT } from './initRows';
 
 export type MergeSettingsT = {
     row: number;
     startCol: number;
     endCol: number;
+    endRow?: number;
 };
 
-export const mergeCells = (ws: Worksheet, settings: MergeSettingsT) => {
-    ws.unMergeCells(settings.row, settings.startCol, settings.row, settings.endCol);
-    ws.mergeCells(settings.row, settings.startCol, settings.row, settings.endCol);
+type MergeT = { start: number; end: number };
+
+export const mergeCells = (ws: Worksheet) => (settings: MergeSettingsT) => {
+    const { row, startCol, endCol } = settings;
+
+    const endRow = settings.endRow ? settings.endRow : row;
+    ws.unMergeCells(row, startCol, endRow, endCol);
+    ws.mergeCells(row, startCol, endRow, endCol);
 };
 
-export const mergeTotal = (settings: {
-    rows: number[];
-    ranges: number[][];
-    ws: Worksheet;
-}) => {
-    const { rows, ranges: cols, ws } = settings;
-
-    rows.forEach((mergeRow) => cols.forEach(([startCol, endCol]) => {
-        mergeCells(ws, {
-            row: mergeRow,
-            startCol,
-            endCol,
-        });
-    }));
-};
-
-export const mergeFromTo = (
-    ws: Worksheet,
-    settings: {
-        row: {
-            from: {
-                name: string;
-                offset?: number;
-            };
-            to: {
-                name: string;
-                offset?: number;
-            };
+export const mergeFromTo = (ws: Worksheet) => (settings: {
+    row: {
+        from: {
+            name: string;
+            offset?: number;
         };
-        cols: number[][];
-    },
-) => {
+        to: {
+            name: string;
+            offset?: number;
+        };
+    };
+    cols: number[][];
+}) => {
     const { row, cols: merge } = settings;
-    const startRow = getRow(ws, row.from.name, row.from.offset || 0).number;
-    const endRow = getRow(ws, row.to.name, row.to.offset || 0).number;
+    const startRow = getRow(ws)(row.from.name, row.from.offset || 0).number;
+    const endRow = getRow(ws)(row.to.name, row.to.offset || 0).number;
 
     for (let i = startRow; i <= endRow; i += 1) {
         merge.forEach(([start, end]) => {
-            mergeCells(ws, { row: i, startCol: start, endCol: end });
+            mergeCells(ws)({ row: i, startCol: start, endCol: end });
         });
     }
+};
+
+export const mergeRowCells = (ws: Worksheet, fields: FieldsGenT, row: number) => {
+    const merge: MergeT[] = [];
+    const keysArr = Object.keys(fields);
+    const isMerge = (key: string) => key.length === 2 && key[0] === 'm';
+
+    keysArr.forEach((key, i) => {
+        if (key.includes('empty')) return;
+
+        if (isMerge(key)) {
+            // check if such merge already included
+            if (merge.some((range) => range.end >= i)) return;
+
+            const mergeRange: MergeT = { start: i, end: i + 1 };
+
+            let k = i;
+            while (isMerge(keysArr[k])) {
+                mergeRange.end = k + 1;
+                k += 1;
+            }
+            merge.push(mergeRange);
+        }
+    });
+
+    merge.forEach(({ start, end }) => {
+        mergeCells(ws)({
+            startCol: start,
+            endCol: end,
+            row,
+        });
+    });
 };

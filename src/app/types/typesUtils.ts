@@ -13,3 +13,5 @@ export type OnSubmitT<T> = (values: T, actions?: FormikHelpers<T>) => Promise<vo
 export type FormValuesT<T> = {
     [P in keyof T]: T[P] extends boolean ? boolean : string;
 };
+
+export type Dictionary<T> = { [key: string]: T };

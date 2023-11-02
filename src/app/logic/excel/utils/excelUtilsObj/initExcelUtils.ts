@@ -1,29 +1,43 @@
 import { Worksheet } from 'exceljs';
-import { CellUtilsT, CellUtilsDoubleT } from '../../../../types/typesExcelUtils';
 import { getRow } from './getRow';
-import { getCellByName, getCellsObj } from './getCell';
+import { getCell, getCellDouble } from './getCell';
 import { setCell, setCellDouble } from './setCell';
 import { deleteRow } from './deleteRow';
-import { mergeCells } from './mergeCells';
+import { mergeCells, mergeFromTo } from './mergeCells';
+import { initPicturesExcel } from '../../pictures/initPictureExcel';
+import { initRowMaker } from './initRows';
 
-export const initExcelUtilsDouble = (ws: Worksheet, offset: number) => {
-    return {
-        ws,
-        getRow: getRow.bind(this, ws),
-        deleteRow: deleteRow.bind(this, ws),
-        mergeCells: mergeCells.bind(this, ws),
-        getCell: getCellsObj.bind(this, ws, offset),
-        setCell: setCellDouble.bind(this, ws, offset),
-    } as CellUtilsDoubleT;
+type ResT<
+    T1,
+    T2 extends (ws: Worksheet) => unknown,
+    T3 extends (ws: Worksheet, offsetCol: string) => unknown,
+> = T1 extends '' ? ReturnType<T2> : T1 extends string ? ReturnType<T3> : never;
+
+const getUtilsCb: <
+    T1 extends '' | string,
+    T2 extends (ws: Worksheet) => unknown,
+    T3 extends (ws: Worksheet, offsetCol: string) => unknown,
+>(
+    ws: Worksheet,
+    cbSingle: T2,
+    cbDouble: T3,
+    offsetCol?: T1
+) => ResT<T1, T2, T3> = (ws, cbSingle, cbDouble, offsetCol) => {
+    const cb = offsetCol === '' ? cbSingle(ws) : cbDouble(ws, offsetCol);
+    return cb as any;
 };
 
-export const initExcelUtils = (ws: Worksheet) => {
+export const initExcelUtils = <T extends string>(ws: Worksheet, offsetCell: T) => {
     return {
         ws,
-        getRow: getRow.bind(this, ws),
-        deleteRow: deleteRow.bind(this, ws),
-        mergeCells: mergeCells.bind(this, ws),
-        getCell: getCellByName.bind(this, ws),
-        setCell: setCell.bind(this, ws),
-    } as CellUtilsT;
+        getRow: getRow(ws),
+        mergeCells: mergeCells(ws),
+        mergeFromTo: mergeFromTo(ws),
+        deleteRow: deleteRow(ws),
+        getCell: getUtilsCb(ws, getCell, getCellDouble, offsetCell),
+        setCell: getUtilsCb(ws, setCell, setCellDouble, offsetCell),
+        initPictures: initPicturesExcel(ws),
+        initRowMaker: initRowMaker(ws),
+    };
 };
+export type CellUtilsT<T extends string> = ReturnType<typeof initExcelUtils<T>>;

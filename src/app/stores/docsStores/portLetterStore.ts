@@ -23,11 +23,12 @@ const initFields = () => ({
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class PortLetterStore {
+    fields = initFields();
+    name: 'portLetterStore';
+
     constructor() {
         makeAutoObservable(this);
     }
-    fields = initFields();
-    name: 'portLetterStore';
 
     setFields(values: FormFieldsT) {
         this.fields.portRu = selectSp.portRu(values.portRu);
