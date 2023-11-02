@@ -165,6 +165,7 @@ export type PodpisantT = {
     ru: {
         name: string;
         comment: string;
+        position: string;
     };
     declination: string;
 };

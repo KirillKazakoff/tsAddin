@@ -46,6 +46,7 @@ export const initPodpisant = (): PodpisantT => ({
     ru: {
         name: '',
         comment: '',
+        position: '',
     },
     eng: {
         name: '',

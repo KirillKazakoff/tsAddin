@@ -76,7 +76,10 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
                 }`
                 : '',
         },
-        { cell: 'Подписант_комментарий', value: fields.podpisant.ru.comment },
+        {
+            cell: 'Подписант_комментарий',
+            value: `${fields.podpisant.ru.position}`,
+        },
         { cell: 'Подписант', value: fields.podpisant.ru.name },
         { cell: 'Письмо_дата', value: fields.dateLetter },
     ];

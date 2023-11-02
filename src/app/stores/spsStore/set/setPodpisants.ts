@@ -5,7 +5,7 @@ import spsStore from '../spsStore';
 export const setPodpisants = (spRange: any[][]) => {
     spRange.shift();
     const transformed = spRange.reduce<PodpisantsT>((total, row) => {
-        const [codeName, declination, nameEng, commentRu, commentEng] = row;
+        const [codeName, declination, nameEng, commentRu, commentEng, position] = row;
 
         total[codeName] = {
             codeName,
@@ -16,6 +16,7 @@ export const setPodpisants = (spRange: any[][]) => {
             ru: {
                 name: codeName,
                 comment: commentRu,
+                position,
             },
             declination,
         };
