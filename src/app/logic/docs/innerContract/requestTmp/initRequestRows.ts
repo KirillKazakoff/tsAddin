@@ -14,7 +14,7 @@ export const initRequestRows = (rows: InnerRowT[], utils: CellUtilsT<''>) => {
                 product: r.product.ru.name,
                 sort: r.sort,
                 pack: r.product.ru.pack,
-                placesTotal: r.amount.places.count,
+                placesTotal: r.amount.placesTotal.count,
                 price: r.amount.price.count,
                 priceTotal: r.amount.priceTotal.count,
             };

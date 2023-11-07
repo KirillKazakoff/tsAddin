@@ -2,7 +2,6 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
 import { useInitRequestSection } from '../../logic/docs/innerContract/useInitRequestSection';
-import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
 import { SelectTerms } from '../../components/Select/SelectTerms';
 import RequestList from './RequestList';
@@ -48,10 +47,7 @@ const SectionComponent = observer(() => {
 
 export const RequestSection = observer(() => {
     return (
-        <SectionErrorHOC
-            status={tablesStore.status.inner}
-            title='Заявки на договора:'
-        >
+        <SectionErrorHOC status={tablesStore.status.inner} title='Заявки на договора:'>
             <SectionComponent />
         </SectionErrorHOC>
     );
