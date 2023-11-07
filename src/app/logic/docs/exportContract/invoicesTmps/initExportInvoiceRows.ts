@@ -28,7 +28,7 @@ export const initExportInvoiceRows = (
                 placesTotal: total.placesTotal.count,
                 price: r.amount.price.count,
                 m5: '',
-                priceTotal: r.amount.priceTotal.count,
+                priceTotal: total.priceTotal.count,
             };
 
             // prettier-ignore

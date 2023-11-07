@@ -40,12 +40,11 @@ type RowMakerSettingsT = {
 
 // eslint-disable-next-line max-len
 export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
-    const { cellName, rowIndex, firstCol } = setup;
-    let insertIndex = rowIndex || 1;
-    let firstCellCount = firstCol || 1;
+    let insertIndex = setup?.rowIndex || 1;
+    let firstCellCount = setup?.firstCol || 1;
 
-    if (cellName) {
-        const arrayCl = getCell(ws)(cellName);
+    if (setup?.cellName) {
+        const arrayCl = getCell(ws)(setup?.cellName);
         firstCellCount = ws.getColumn(arrayCl.col).number;
         insertIndex = +arrayCl.row;
     }

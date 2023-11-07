@@ -25,8 +25,8 @@ export const initExportInvoicesTmps = async (book: Workbook, invoices: InvoicesT
     for await (const key of Object.keys(invoices)) {
         const invoice = invoices[key];
         // initInvoice
-
         const cells = getExportInvoiceCells(invoice);
+
         cells.double.forEach((cell) => utilsDouble.setCell(cell));
         cells.single.forEach((cell) => utilsSingle.setCell(cell));
 

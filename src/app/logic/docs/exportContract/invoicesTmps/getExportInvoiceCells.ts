@@ -13,15 +13,13 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
         portFrom,
         portTo,
         agreementNo,
-        agent,
         contract,
         date: agreementDate,
-        vessel,
         terms,
         bankSeller,
     } = invoice.agreement.record;
     const {
-        invoiceDate, invoiceNo, msc, consignee,
+        invoiceDate, invoiceNo, msc, consignee, record,
     } = invoice;
     const date = {
         agreement: (locale: string) => getExcelDateStr(agreementDate, locale),
@@ -54,13 +52,13 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
             },
             {
                 cell: 'Инвойс_покупатель',
-                eng: `${agent.name}`,
-                ru: `${agent.name}`,
+                eng: `${record.agent.name}`,
+                ru: `${record.agent.name}`,
             },
             {
                 cell: 'Инвойс_покупатель_адрес',
-                eng: `${agent.address}`,
-                ru: `${agent.address}`,
+                eng: `${record.agent.address}`,
+                ru: `${record.agent.address}`,
             },
             {
                 cell: 'Инвойс_получатель',
@@ -89,8 +87,8 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
             },
             {
                 cell: 'Инвойс_изготовитель',
-                eng: `${vessel.eng.name}`,
-                ru: `${vessel.ru.name}`,
+                eng: `${record.vessel.eng.name}`,
+                ru: `${record.vessel.ru.name}`,
             },
             {
                 cell: 'Инвойс_МСЦ',

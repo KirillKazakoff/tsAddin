@@ -21,8 +21,14 @@ export const initBlGroup = <RowT extends CommonRowT>(row: RowT) => {
             product: <{ [key: string]: ProductGroupT<RowT> }>{},
             productSort: <{ [key: string]: ProductGroupT<RowT> }>{},
         },
+        separatedBy: {
+            pack: <{ [key: string]: ProductGroupT<RowT> }>{},
+        },
+
         groupedProductsArr: <ProductGroupT<RowT>[]>[],
         groupedProductsSortArr: <ProductGroupT<RowT>[]>[],
+        separatedByPack: <ProductGroupT<RowT>[]>[],
+
         total: initAmountObj(row.type),
     };
 };

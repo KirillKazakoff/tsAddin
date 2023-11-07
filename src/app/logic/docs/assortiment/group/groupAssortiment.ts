@@ -64,5 +64,6 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
     });
 
     const assortiment = initAssortimentObj(tables, false);
+    console.log(assortiment);
     return assortiment;
 };

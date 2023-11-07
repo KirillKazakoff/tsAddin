@@ -34,7 +34,6 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
             initProductGroup(row),
             `${row.product.codeName}${row.sort}`,
         );
-
         productSortGroup.rows.push(row);
 
         addToAmountObj(productSortGroup.total, row.amount);
@@ -46,10 +45,10 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
     Object.values(blGrouped).forEach((group) => {
         group.groupedProductsArr.push(...Object.values(group.groupedBy.product));
     });
+
     Object.values(blGrouped).forEach((group) => {
         group.groupedProductsSortArr.push(...Object.values(group.groupedBy.productSort));
     });
 
-    // console.log(blGrouped);
     return blGrouped;
 };
