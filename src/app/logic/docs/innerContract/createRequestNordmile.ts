@@ -8,5 +8,5 @@ export const createRequestNordmile = async (row: NordmileRowT) => {
     const book = await readTmp(pathObj.requestContractNordmileRu);
 
     initRequestNordmileTmp(book, row);
-    await saveFile(book, `Заявка ${row.buyer}`);
+    await saveFile(book, `Заявка ${row.buyer} ${row.contractNo}`);
 };
