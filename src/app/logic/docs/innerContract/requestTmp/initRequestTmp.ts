@@ -11,7 +11,6 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
     const utils = initExcelUtils(ws, '');
 
     const { record, priceTotal } = contract;
-    const rows = contract.rows.map((row) => row.row);
     const {
         portTamozhnya, terms, reiceNo, isInvoiceOnly,
     } = requestContractStore.fields;
@@ -41,7 +40,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
         { cell: 'Доставка_условия', value: `На условиях ${terms} ${portTamozhnya.ru.name}` },
         { cell: 'Оплата_дата', value: `Порядок расчетов: 100% до ${date.payment} путем перечисления на р/с Продавца по счету` },
         { cell: 'Банковские_реквизиты', value: `Указать банковские реквизиты ${record.seller.ru.name} в ${record.bankSeller}____________` },
-        { cell: 'Прибытие', value: ` * Поставка товара транспортом ${record.transport.ru.name} ${reiceNo ? `(рейс №${reiceNo})` : ''} ориентировочно ${date.delivery} (Зафрахтован Продавцом).` },
+        { cell: 'Прибытие', value: terms === 'EXW' ? `Товар передается в порту г. ${portTamozhnya.ru.name}` : ` * Поставка товара транспортом ${record.transport.ru.name} ${reiceNo ? `(рейс №${reiceNo})` : ''} ориентировочно ${date.delivery} (Зафрахтован Продавцом).` },
         { cell: 'Приемка1', value: dischargeStr1 },
         { cell: 'Приемка2', value: dischargeStr2 },
         { cell: 'ВСД', value: isCfrVld ? '* Ветеринарно-сопроводительные документы (ВСД) оформляются Продавцом до порта назначения.' : '' },
@@ -65,7 +64,7 @@ export const initRequestTmp = (book: Workbook, contract: ContractT) => {
         ];
     }
 
-    initRequestRows(rows, utils);
+    initRequestRows(contract.requestGroupArr, utils);
 
     cells.forEach((cell) => {
         utils.setCell(cell);
