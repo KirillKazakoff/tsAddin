@@ -24,7 +24,6 @@ type FormulaObjT = {
 };
 
 export const createFormula = ({ cell, result, formulaCb }: FormulaObjT) => {
-    // console.log(cell.row);
     const formula = formulaCb(getAddress(cell));
 
     return {

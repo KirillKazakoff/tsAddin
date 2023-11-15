@@ -119,13 +119,6 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
                 isEmptyTitle: exportContractStore.currentTerms === 'CFR',
             },
         ],
-        exportFCA: <CellDoubleT[]>[
-            {
-                cell: 'Инвойс_откуда',
-                eng: '-',
-                ru: '-',
-            },
-        ],
         exportStorage: <CellDoubleT[]>[
             {
                 cell: 'Инвойс',
@@ -144,7 +137,7 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
         common: <CellSingleT[]>[
             {
                 cell: 'Инвойс_подписант',
-                value: `Signed by ${exportContractStore.fields.podpisant.eng.name} / Подписано ${exportContractStore.fields.podpisant.ru.name}`,
+                value: `Signed by ${exportContractStore.fields.podpisant.eng.name} / ${exportContractStore.fields.podpisant.ru.name}`,
             },
         ],
         exportDefault: <CellSingleT[]>[
@@ -171,19 +164,24 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
         ],
     };
 
+    const fcaSplice = ['Инвойс_откуда', 'Инвойс_декларация'];
+
     const singleCells = [...singleObj.common];
     const doubleCells = [...doubleObj.common];
 
     if (invoice.record.type === 'export') {
         singleCells.push(...singleObj.exportDefault);
         doubleCells.push(...doubleObj.exportDefault);
-
-        if (terms === 'FCA') {
-            doubleCells.push(...doubleObj.exportFCA);
-        }
     }
     if (invoice.record.type === 'exportStorage') {
         doubleCells.push(...doubleObj.exportStorage);
+    }
+    if (invoice.record.terms === 'FCA') {
+        // splice non-FCA cells
+        fcaSplice.forEach((cellName) => {
+            const index = doubleCells.findIndex((settings) => settings.cell === cellName);
+            doubleCells.splice(index, 1);
+        });
     }
 
     return { double: doubleCells, single: singleCells };

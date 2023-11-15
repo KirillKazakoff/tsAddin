@@ -158,7 +158,7 @@ export const getExportContractCells = (agreement: AgreementT) => {
             {
                 cell: 'Соглашение',
                 eng: `AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
-                ru: `Соглашение № ${agreementNo} от ${date.agreement('ru')}`,
+                ru: `Дополнительное соглашение № ${agreementNo} от ${date.agreement('ru')}`,
             },
             {
                 cell: 'Контракт',

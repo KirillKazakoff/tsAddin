@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { Cell, Workbook } from 'exceljs';
 import { InvoiceT } from '../groupBy/initInvoice';
 import { initExportInvoiceRows } from './initExportInvoiceRows';
@@ -37,6 +38,7 @@ export const mergeExportInvoice = async (book: Workbook, invoice: InvoiceT) => {
         ],
         setNonComPrice: ['данная цена указана', 'this price given'],
         setBlNo: ['bl no'],
+        // removeWithTitles: [],
     };
 
     const mergeArray = [];
@@ -69,20 +71,10 @@ export const mergeExportInvoice = async (book: Workbook, invoice: InvoiceT) => {
 
                 mergeArray.push(merge);
             },
-
-            // setMergeTableTitles: () => {
-            //     merge.col.start = +cell.col;
-            //     merge.row.start = +cell.row;
-            //     merge.row.end = +cell.row;
-
-            //     const row = ws.getRow(+cell.row);
-            //     for (let i = +cell.col; i < row.cellCount; i += 1) {
-            //         const nextCell = row.getCell(i);
-            //         if (!nextCell.value) continue;
-
-            //         merge.col.end = +nextCell.col;
-            //         break;
-            //     }
+            // removeWithTitles: () => {
+            //     const rowTitle = ws.getCell(+cell.row - 1, +cell.col);
+            //     cell.value = '';
+            //     rowTitle.value = '';
             // },
             setBlNo: () => {
                 arrayCl.row = +cell.row + 1;
