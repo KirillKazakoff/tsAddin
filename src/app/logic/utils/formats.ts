@@ -40,6 +40,7 @@ export const formatsDocs = {
         price: formats.common.priceDollar,
         m6: formats.common.priceDollar,
         placesTotal: formats.common.basePlacesTotalTn,
+        m1: formats.common.basePlacesTotalTn,
         m5: formats.common.basePlacesTotalTn,
         priceTotal: formats.common.priceDollar,
         places: formats.unique.placesSlash,
