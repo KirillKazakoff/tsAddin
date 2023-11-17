@@ -12,6 +12,7 @@ export const useInitContractSection = () => {
             podpisant: '',
             departureDate: '',
             declaration: '',
+            isPictures: false,
         },
         validateCb: (errors, values) => {
             const { currentAgreementRecord: r } = exportContractStore;

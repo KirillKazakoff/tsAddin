@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
+import CheckBox from '../../components/CheckBox';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { ExportDepartureDate } from './ExportDepartureDate';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
@@ -33,6 +34,7 @@ export const ExportContractSection = observer(() => {
                             <SelectPodpisant />
                             <ExportDepartureDate />
                             <ExportDeclarationEXW />
+                            <CheckBox title='Включить картинки' name='isPictures' />
                             <DocsDownloadBtn
                                 title='Загрузить контракт'
                                 onClick={initObj.onLoad}

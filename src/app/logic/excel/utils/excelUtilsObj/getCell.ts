@@ -2,7 +2,6 @@
 import { Cell, Worksheet } from 'exceljs';
 
 export const getCell = (ws: Worksheet) => (cellName: string, offsetRow?: number): Cell => {
-    console.log(cellName);
     let match: Cell;
 
     try {
@@ -18,7 +17,6 @@ export const getCell = (ws: Worksheet) => (cellName: string, offsetRow?: number)
         }
 
         if (!match) throw new Error();
-        console.log(cellName);
         return match;
     } catch (e) {
         console.error(`ошибка в клетке ${cellName}`);

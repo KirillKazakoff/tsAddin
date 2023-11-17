@@ -9,7 +9,7 @@ import { setPrintArea } from '../../../excel/utils/excelUtilsObj/setPrintArea';
 
 export const initExportContractTmp = async (book: Workbook, agreement: AgreementT) => {
     const ws = book.getWorksheet('Export_Contract');
-    const { operation } = exportContractStore;
+    const { operation, fields } = exportContractStore;
     const offsetCol = 'MID_Contract';
     const utils = initExcelUtils(ws, offsetCol);
 
@@ -23,7 +23,7 @@ export const initExportContractTmp = async (book: Workbook, agreement: Agreement
     }
 
     // initPictures
-    utils.initPictures(
+    await utils.initPictures(
         [
             {
                 key: exportContractStore.fields.podpisant.codeName,
@@ -42,7 +42,7 @@ export const initExportContractTmp = async (book: Workbook, agreement: Agreement
                 range: { start: 'Seal_agent_start', end: 'Seal_agent_end' },
             },
         ],
-        operation === 'certificates',
+        fields.isPictures,
     );
 
     setPrintArea({ endCell: 'Адреса_подпись', utils });
