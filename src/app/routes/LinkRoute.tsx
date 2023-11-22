@@ -5,6 +5,7 @@ import excelSyncStore from '../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../stores/pageStatusStore.ts/pageStatusStore';
 import { useInitExcel } from '../logic/excel/useInitExcel';
 import { CheckBoxValidation } from '../components/CheckBoxValidation';
+import { Popup } from '../components/Popup';
 
 export const LinkRoute = observer(() => {
     const { statusType } = pageStatusStore.status;
@@ -62,6 +63,7 @@ export const LinkRoute = observer(() => {
 
             <Outlet />
             <CheckBoxValidation />
+            <Popup />
         </div>
     );
 });

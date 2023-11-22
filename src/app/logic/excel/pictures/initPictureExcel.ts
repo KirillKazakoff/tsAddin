@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 import { Worksheet } from 'exceljs';
-import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 import picturesStore from '../../../stores/picturesStore/picturesStore';
 import { selectPicture } from '../../../stores/picturesStore/selectPicture';
 import { blobFromBase64 } from './blobFromBase64';
 import { getPictureRange } from './getPictureRange';
 import { loadPicture } from './loadPicture';
 import { getCell } from '../utils/excelUtilsObj/getCell';
+import popupStore from '../../../stores/popupStore.ts/popupStore';
 
 export type PictureSettingsT = {
     key: string;
@@ -17,6 +17,14 @@ export const initPictureExcel = async (ws: Worksheet, settings: PictureSettingsT
     const { key: keyCode, range: rangeObj } = settings;
 
     const key = selectPicture(keyCode);
+    if (!key) {
+        popupStore.setStatus({
+            title: 'Отсутствует изображение:',
+            desc: `${keyCode} изображение отсутствует в справочнике`,
+        });
+        return;
+    }
+
     const blob = blobFromBase64(picturesStore.pictures[key]);
 
     if (!blob) return;
@@ -34,9 +42,9 @@ export const initPicturesExcel = (ws: Worksheet) => async (settings: PictureSett
     });
 
     if (!isActive || !picturesStore.isPicturesFound) {
-        if (!picturesStore.isPicturesFound) {
-            pageStatusStore.setPageStatus('picturesError');
-        }
+        // if (!picturesStore.isPicturesFound) {
+        //     pageStatusStore.setPageStatus('picturesError');
+        // }
         return;
     }
 

@@ -1,6 +1,6 @@
 import { PictureKey } from './picturesStore';
 
-const switchPictureGet = (codeName: string): PictureKey | false => {
+const switchPictureGet = (codeName: string): PictureKey => {
     switch (codeName) {
         case 'ТРК':
             return 'Seal_TRK';
@@ -23,13 +23,16 @@ const switchPictureGet = (codeName: string): PictureKey | false => {
             return 'Sign_CHANGRUN';
 
         default:
-            return false;
+            return '';
     }
 };
 
 export const selectPicture = (codeName: string): PictureKey => {
     const res = switchPictureGet(codeName);
-    if (!res) throw new Error(`Отсутствует изображение ${codeName}`);
+
+    if (!res) {
+        // popup
+    }
 
     return res;
 };

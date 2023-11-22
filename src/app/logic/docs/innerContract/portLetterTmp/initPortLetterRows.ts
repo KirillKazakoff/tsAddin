@@ -17,13 +17,15 @@ export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT<''>) 
                 pageStatusStore.setPageStatus('mismatchKonosamentId', r.konosament);
                 return null;
             }
+
+            const noPack = +r.pack === 1;
             // prettier-ignore
             const fields = {
                 konosament: `${r.konosament} от ${getExcelDateNumeric(mateRow.date, 'ru')}`,
                 product: `${r.product.ru.name} ${r.sort}`,
                 vessel: r.vessel.ru.name,
-                pack: `1/${r.pack} кг`,
-                places: r.amount.places.count,
+                pack: noPack ? '-' : `1/${r.pack} кг `,
+                places: noPack ? '-' : r.amount.places.count,
                 placesTotal: r.amount.placesTotal.count,
             };
 

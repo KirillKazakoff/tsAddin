@@ -29,6 +29,6 @@ class PicturesStore {
 }
 
 const picturesStore = new PicturesStore();
-export type PictureKey = keyof typeof picturesStore.pictures;
+export type PictureKey = keyof typeof picturesStore.pictures | '';
 
 export default picturesStore;

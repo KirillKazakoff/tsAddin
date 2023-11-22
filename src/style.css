@@ -51,8 +51,10 @@ b {
 }
 
 .main-route {
+    position: relative;
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
     padding: 10px;
     min-height: 100vh;
 }
@@ -287,4 +289,47 @@ b {
 
 .letter__btn {
     margin-top: 20px;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+
+    opacity: 0.7;
+    background-color: #000000;
+    text-align: center;
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    border-radius: 10px;
+    padding: 5px;
+
+    min-width: 250px;
+    min-height: 120px;
+}
+
+.popup-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.x-mark {
+    border: none;
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    text-align: end;
+    padding-right: 5px;
+    margin-top: -5px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.x-mark:hover {
+    color: red;
 }
