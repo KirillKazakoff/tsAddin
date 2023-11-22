@@ -3,16 +3,17 @@ import { Workbook } from 'exceljs';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { CellObjT } from '../../../../types/typesExcelUtils';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { ContractT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupByContractNo';
 import { initPortLetterRows } from './initPortLetterRows';
 import spsStore from '../../../../stores/spsStore/spsStore';
 
-export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
+export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     const phones = spsStore.confidentialPhones;
     const ws = book.getWorksheet('Port_Letter');
     const utils = initExcelUtils(ws, '');
 
-    const { record, rows } = contract;
+    // prettier-ignore
+    const { record: { row }, rows } = contract;
     const { fields } = portLetterStore;
 
     const cells: CellObjT[] = [
@@ -23,19 +24,19 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
             cell: 'Письмо_описание_шапка',
             value: `Просим вас рыбопродукцию, ${
                 fields.termsPort.includes('CFR')
-                    ? `которая прибудет в п. Владивосток на ${record.transport.ru.name} в адрес ${record.seller.ru.name} по следующим коносаментам:`
-                    : `находящуюся на хранении ${record.seller.ru.name}`
+                    ? `которая прибудет в п. Владивосток на ${row.transport.ru.name} в адрес ${row.seller.ru.name} по следующим коносаментам:`
+                    : `находящуюся на хранении ${row.seller.ru.name}`
             }`,
         },
         {
             cell: 'Письмо_описание_подвал',
             value: `передать с ${
                 fields.termsPort.includes('CFR') ? 'борта судна' : 'нашего хранения'
-            } компании ${record.buyer.name} ИНН ${record.buyer.inn}`,
+            } компании ${row.buyer.name} ИНН ${row.buyer.inn}`,
         },
         {
             cell: 'Покупатель_телефон',
-            value: `( контактный телефон ${record.buyer.phone} )`,
+            value: `( контактный телефон ${row.buyer.phone} )`,
         },
         {
             cell: 'Грузовые_борт_склад',
@@ -43,8 +44,8 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
                 ? ''
                 : `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
                     fields.cargoToStorage === 'Покупатель'
-                        ? record.buyer.name
-                        : record.seller.ru.name
+                        ? row.buyer.name
+                        : row.seller.ru.name
                 }`,
         },
         {
@@ -53,8 +54,8 @@ export const initPortLetterTmp = (book: Workbook, contract: ContractT) => {
                 ? ''
                 : `Оплата грузовых работ (склад-авто) будет производиться за счет ${
                     fields.cargoToAuto === 'Покупатель'
-                        ? record.buyer.name
-                        : record.seller.ru.name
+                        ? row.buyer.name
+                        : row.seller.ru.name
                 }`,
         },
         {

@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
-export function groupify<ReturnT>(
-    total: { [key: string]: ReturnT },
-    initObj: ReturnT,
+export function groupify<GroupT>(
+    total: { [key: string]: GroupT },
+    initObj: GroupT,
     code: string | number,
-): ReturnT {
+): GroupT {
     let group = total[code];
 
     if (!group) {

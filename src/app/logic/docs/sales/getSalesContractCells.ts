@@ -1,8 +1,8 @@
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
-import { SalesContractT } from './groupBy/initSalesContract';
+import { SalesGroupT } from './groupBy/groupSalesContract';
 
-export const getSalesContractCells = (contract: SalesContractT) => {
+export const getSalesContractCells = (contract: SalesGroupT) => {
     const { record: r } = contract;
 
     // prettier-ignore
@@ -29,11 +29,11 @@ export const getSalesContractCells = (contract: SalesContractT) => {
         live: <CellObjT[]>[
             { cell: 'Контракт_предмет', value: `1.1. The Seller agrees to sell and the Buyer agrees to purchase goods produced by ${r.vessel} with following in table assortment: ` },
             { cell: 'Контракт_ЕТА', value: `ETA ${r.port} ${getExcelDateStr(r.dateETA, 'en')}` },
-            { cell: 'Контракт_всего_места', value: `${contract.amount.placesTotal.str} kg` },
-            { cell: 'Контракт_всего_цена', value: `${contract.amount.priceTotal.str} $` },
+            { cell: 'Контракт_всего_места', value: `${contract.total.placesTotal.str} kg` },
+            { cell: 'Контракт_всего_цена', value: `${contract.total.priceTotal.str} $` },
         ],
         default: <CellObjT[]>[
-            { cell: 'Контракт_всего_цена', value: `Total amount of this Contract is: ${contract.amount.priceTotal.str} $` },
+            { cell: 'Контракт_всего_цена', value: `Total amount of this Contract is: ${contract.total.priceTotal.str} $` },
         ],
     };
 

@@ -1,8 +1,8 @@
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { formatCount } from '../../utils/formatCount';
-import { InvoiceKTIT } from './groupInvoiceKTIByNo';
+import type { InvoiceKTIGroupT } from './groupInvoiceKTIByNo';
 
-export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) => {
+export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<''>) => {
     ['eng', 'ru'].forEach((language) => {
         const cellName = language === 'eng' ? 'Инвойс_массив' : 'Инвойс_массив_п';
         const { insertRows } = utils.initRowMaker({ cellName });
@@ -11,7 +11,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) 
             records: invoice.rows,
             deleteStartAmount: 1,
             rowSettings: (r, index) => {
-                const placesTotal = formatCount(r.row.amount.placesTotal, 3, 4);
+                const placesTotal = formatCount(r.row.amount.placesTotal.count, 3, 4);
                 const fields = {
                     empty1: '',
                     description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${placesTotal} mt`,
@@ -19,15 +19,15 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) 
                     m2: '',
                     m3: '',
                     m4: '',
-                    days: `${r.row.amount?.days}`,
-                    price: r.row.amount.price,
-                    priceTotal: r.row.amount.priceTotal,
+                    days: `${r.row?.days}`,
+                    price: r.row.amount.price.count,
+                    priceTotal: r.row.amount.priceTotal.count,
                 };
 
                 if (language === 'ru') {
                     fields.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${placesTotal} тн`;
                 }
-                if (invoice.type === 'discharge') {
+                if (invoice.record.type === 'dischargeInvoices') {
                     delete fields.days;
                 }
 
@@ -41,7 +41,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) 
                 const rowObj = {
                     desc: row.getCell(2),
                     days:
-                        invoice.type === 'storage'
+                        invoice.record.type === 'storageInvoices'
                             ? row.getCell(+fieldsTitles.days)
                             : null,
                     price: row.getCell(+fieldsTitles.price),
@@ -56,7 +56,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) 
                     horizontal: 'right',
                     vertical: 'middle',
                 };
-                if (invoice.type === 'storage') {
+                if (invoice.record.type === 'storageInvoices') {
                     rowObj.days.style = {
                         border: {
                             left: { style: 'thin' },
@@ -72,7 +72,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIT, utils: CellUtilsT<''>) 
                     docType: 'invoiceKTI',
                     style: {
                         common: {
-                            height: invoice.type === 'discharge' ? 45 : 60,
+                            height: invoice.record.type === 'dischargeInvoices' ? 45 : 60,
                             alignment: {
                                 wrapText: true,
                             },

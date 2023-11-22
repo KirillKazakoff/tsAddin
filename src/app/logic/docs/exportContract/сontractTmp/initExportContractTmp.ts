@@ -2,12 +2,13 @@ import { Workbook } from 'exceljs';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { initExportDefaultContractTmp } from './exportDefaultContractTmp/initExportDefaultContractTmp';
 import { initExportStorageContractTmp } from './exportStorageContractTmp/initExportStorageContractTmp';
-import { AgreementT } from '../groupBy/initAgreement';
+
 import { getExportContractCells } from './getExportContractCells.ts';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { setPrintArea } from '../../../excel/utils/excelUtilsObj/setPrintArea';
+import { ExportGroupT } from '../groupBy/groupAgByNo';
 
-export const initExportContractTmp = async (book: Workbook, agreement: AgreementT) => {
+export const initExportContractTmp = async (book: Workbook, agreement: ExportGroupT) => {
     const ws = book.getWorksheet('Export_Contract');
     const { operation, fields } = exportContractStore;
     const offsetCol = 'MID_Contract';

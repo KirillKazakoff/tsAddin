@@ -26,7 +26,7 @@ export const useInitRequestSection = () => {
 
     return useInitSection({
         store: requestContractStore as any,
-        docs: Object.values(groupByContractNo()),
+        docs: groupByContractNo(),
         getSettings: () => ({
             formik,
             loadCb: createRequestContract,

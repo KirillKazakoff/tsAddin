@@ -1,16 +1,16 @@
 import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { InvoiceProductGroupT, InvoicesT } from '../../groupBy/initInvoice';
+import { ExportGroupT } from '../../groupBy/groupAgByNo';
 
 export const initExportDefaultContractRowsFCA = (
-    invoices: InvoicesT,
+    invoices: ExportGroupT[],
     utils: CellUtilsT<string>,
 ) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Предмет_массив' });
 
     // Get product groups
     const invoicesArr = Object.values(invoices);
-    const groups = invoicesArr.reduce<InvoiceProductGroupT[]>((total, invoice) => {
-        const invoiceGroups = Object.values(invoice.productGroups);
+    const groups = invoicesArr.reduce<ExportGroupT[]>((total, invoice) => {
+        const invoiceGroups = invoice.groupedBy.product;
         total.push(...invoiceGroups);
         return total;
     }, []);

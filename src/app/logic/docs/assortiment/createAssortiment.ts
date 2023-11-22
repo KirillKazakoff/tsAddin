@@ -2,9 +2,9 @@
 import ExcelJS from 'exceljs';
 import { saveFile } from '../../excel/utils/saveFile';
 import { initAssortiment } from './initAssortiment';
-import { AssortimentT } from './initAssortimentTable';
+import { AssortimentObjT } from './initAssortimentObj';
 
-export const createAssortiment = async (assortiment: AssortimentT) => {
+export const createAssortiment = async (assortiment: AssortimentObjT) => {
     const book = new ExcelJS.Workbook();
     const ws = book.addWorksheet('assortiment');
     initAssortiment(assortiment, ws);

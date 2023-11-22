@@ -1,77 +1,56 @@
+/* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
-import { addToAmount } from '../../../../stores/tablesStore/utils/initAmount';
 import { ExportRowT } from '../../../../types/typesTables';
-import { groupify } from '../../../utils/groupify';
+import { groupTotal } from '../../../utils/groupTotal';
 import { calcSamples } from '../calcSamples';
-import {
-    AssortimentT,
-    AssortimentTablesT,
-    SamplesT,
-    initAssortimentTable,
-} from '../initAssortimentTable';
+import { initAssortimentObj } from '../initAssortimentObj';
 import { isProductForAssortiment } from './isProductForAssortiment';
 
 export const groupSamples = (rows: ExportRowT[]) => {
-    const tables = rows.reduce<AssortimentTablesT>((total, row) => {
-        if (!isProductForAssortiment(row.product)) return total;
+    const samples = groupTotal({
+        rows,
+        input: (row) => ({
+            init: () => isProductForAssortiment(row.product),
+            code: `${row.consignee.codeName}`,
+            groupedBy: {
+                table: {
+                    code: `${row.vessel.codeName}${row.product.codeName}${row.pack}`,
+                    groupedBy: {
+                        sort: { code: row.sort },
+                    },
+                    additional: {
+                        samples: {
+                            rows: <number[]>[],
+                            total: 0,
+                        },
+                    },
+                },
+            },
+            groupModify: (group) => {
+                const isStorageRowInExport = group.record.type === 'export' && row.type === 'exportStorage';
+                return !isStorageRowInExport;
+            },
+        }),
+    });
 
-        const tableCode = `${row.consignee.codeName}${row.vessel.codeName}${row.product.codeName}${row.pack}`;
-        const initTableObj = initAssortimentTable(row);
-        const table = groupify(total, initTableObj, tableCode);
-
-        const isStorageRowInExport = table.record.type === 'export' && row.type === 'exportStorage';
-        if (isStorageRowInExport) return total;
-
-        // groupBySort
-        const rowSameSort = table.rows.find((r) => r.sort === row.sort);
-        if (rowSameSort) {
-            addToAmount(rowSameSort.amount.places, row.amount.places.count);
-            addToAmount(
-                rowSameSort.amount.placesTotal,
-                row.amount.placesTotal.count,
-            );
-        } else {
-            table.rows.push(row);
-        }
-
-        addToAmount(table.amount.places, row.amount.places.count);
-        addToAmount(table.amount.placesTotal, row.amount.placesTotal.count * 1000);
-
-        return total;
-    }, {});
-
-    // setSamplesCount
-    const tablesArr = Object.values(tables);
-
-    tablesArr.forEach((table) => {
-        table.rows.forEach((row) => {
-            const rowSamples = calcSamples(
-                row.amount.placesTotal.count * 1000,
-                row.pack,
-            );
-            table.samples.rows.push(rowSamples);
-            table.samples.total += rowSamples;
+    samples.forEach((sample) => {
+        sample.groupedBy.table.forEach((table) => {
+            table.groupedBy.sort.forEach((row) => {
+                const samplesCount = calcSamples(
+                    row.total.placesTotal.count * 1000,
+                    row.record.pack,
+                );
+                table.additional.samples.rows.push(samplesCount);
+                table.additional.samples.total += samplesCount;
+            });
         });
     });
 
-    // groupByConsignee
-    const samples = tablesArr.reduce<SamplesT>((total, table) => {
-        const r = table.record;
-        const initAssortimentObj: AssortimentT = {
-            isSample: true,
-            record: r,
-            tables: {},
-        };
+    const assortments = samples.map((sample) => {
+        return initAssortimentObj(sample.groupedBy.table, true);
+    });
 
-        const assortiment = groupify(
-            total,
-            initAssortimentObj,
-            r.consignee.codeName,
-        );
-
-        assortiment.tables[`${r.vessel.codeName}${r.product.codeName}${r.pack}`] = table;
-        return total;
-    }, {});
-
-    return samples;
+    return assortments;
 };
+
+export type SamplesT = ReturnType<typeof groupSamples>;

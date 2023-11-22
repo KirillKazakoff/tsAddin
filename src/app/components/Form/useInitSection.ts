@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useMyFormik } from './useMyFormik';
 
-type DocGen = { record?: { id?: string } & unknown };
+type DocGen = { record?: { id?: string } };
 type SettingsT<FormValuesT, DocT extends DocGen> = {
     formik: ReturnType<typeof useMyFormik<FormValuesT>>;
     loadCb: (doc?: DocT) => Promise<void>;

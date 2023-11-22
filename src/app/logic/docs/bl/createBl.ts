@@ -1,7 +1,7 @@
 import { ExportRowT } from '../../../types/typesTables';
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
-import { BlGroupT } from '../exportContract/groupBy/initBlGroup';
+import { BlGroupT } from '../exportContract/groupBy/groupByBl';
 import { readTmp } from '../readTmp';
 import { initBlTmp } from './initBlTmp';
 

@@ -1,8 +1,8 @@
-import { InvoiceT } from '../groupBy/initInvoice';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { ExportGroupT } from '../groupBy/groupAgByNo';
 
 export const initExportInvoiceRowsFCA = (
-    invoice: InvoiceT,
+    invoice: ExportGroupT,
     arrayCl: { row: number; col: number },
     utils: CellUtilsT<''>,
 ) => {
@@ -13,7 +13,7 @@ export const initExportInvoiceRowsFCA = (
 
     insertRows({
         deleteStartAmount: 2,
-        records: Object.values(invoice.productSortGroups),
+        records: invoice.groupedBy.productSort,
         rowSettings: ({ record: r, total }) => {
             const fields = {
                 empty1: '',
@@ -58,11 +58,11 @@ export const initExportInvoiceRowsFCA = (
             empty6: '',
             empty7: '',
             totalHeader: 'TOTAL / ВСЕГО',
-            placesTotal: invoice.amount.placesTotal.count,
+            placesTotal: invoice.total.placesTotal.count,
             m1: '',
             price: '-',
             m2: '',
-            priceTotal: invoice.amount.priceTotal.count,
+            priceTotal: invoice.total.priceTotal.count,
         },
         docType: 'exportInvoice',
         style: {

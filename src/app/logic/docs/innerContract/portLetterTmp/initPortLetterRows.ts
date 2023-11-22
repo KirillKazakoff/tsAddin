@@ -3,9 +3,9 @@ import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import pageStatusStore from '../../../../stores/pageStatusStore.ts/pageStatusStore';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
-import { ContractRowT } from '../groupByContractNo';
+import { InnerCombRowT } from '../groupByContractNo';
 
-export const initPortLetterRows = (rows: ContractRowT[], utils: CellUtilsT<''>) => {
+export const initPortLetterRows = (rows: InnerCombRowT[], utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Письмо_массив' });
 
     insertRows({

@@ -1,14 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { AgreementT } from '../../groupBy/initAgreement';
+import { ExportGroupT } from '../../groupBy/groupAgByNo';
 import { initExportDefaultContractRowsFCA } from './initExportDefaultContractFCARows';
 import { initExportDefaultContractRows } from './initExportDefaultContractRows';
 
 export const initExportDefaultContractTmp = async (
     utils: CellUtilsT<string>,
-    agreement: AgreementT,
+    agreement: ExportGroupT,
 ) => {
-    const { invoices } = agreement.productsGroupedBy;
+    const { invoices } = agreement.groupedBy;
     if (agreement.record.terms === 'FCA') {
         initExportDefaultContractRowsFCA(invoices, utils);
     } else {

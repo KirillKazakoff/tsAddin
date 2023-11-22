@@ -1,32 +1,38 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
-import _ from 'lodash';
-import { addToAmount } from '../../../../stores/tablesStore/utils/initAmount';
 import { ExportRowT } from '../../../../types/typesTables';
-import { groupify } from '../../../utils/groupify';
-import {
-    AssortimentTablesT,
-    initAssortimentObj,
-    initAssortimentTable,
-} from '../initAssortimentTable';
+import { groupTotal } from '../../../utils/groupTotal';
+import { initAssortimentObj } from '../initAssortimentObj';
 import { isProductForAssortiment } from './isProductForAssortiment';
-import { groupByBl } from '../../exportContract/groupBy/groupByBl';
+
+const groupFn = (rows: ExportRowT[]) => {
+    return groupTotal({
+        rows,
+        input: (row) => ({
+            init: () => isProductForAssortiment(row.product),
+            code: `${row.blNo}${row.product.codeName}${row.pack}`,
+            groupedBy: {
+                sort: { code: row.sort },
+            },
+            additional: {
+                samples: {
+                    rows: <number[]>[],
+                    total: 0,
+                },
+            },
+            groupModify: (group) => {
+                const isStorageRowInExport = group.record.type === 'export' && row.type === 'exportStorage';
+                return !isStorageRowInExport;
+            },
+        }),
+    });
+};
+
+export type AssortimentGroupT = ReturnType<typeof groupFn>[number];
 
 export const groupAssortiment = (rows: ExportRowT[]) => {
-    const tables = rows.reduce<AssortimentTablesT>((total, row) => {
-        if (!isProductForAssortiment(row.product)) return total;
-        const initObj = initAssortimentTable(row);
+    const assortimentTables = groupFn(rows);
 
-        const table = groupify(total, initObj, `${row.blNo}${row.pack}`);
-
-        const isStorageRowInExport = table.record.type === 'export' && row.type === 'exportStorage';
-        if (isStorageRowInExport) return total;
-
-        addToAmount(table.amount.places, row.amount.places.count);
-        addToAmount(table.amount.placesTotal, row.amount.placesTotal.count * 1000);
-        table.rows.push(row);
-
-        // sort
+    assortimentTables.forEach((table) => {
         table.rows = table.rows.sort((a, b) => {
             const prev = a.sort.length;
             const next = b.sort.length;
@@ -40,30 +46,7 @@ export const groupAssortiment = (rows: ExportRowT[]) => {
 
             return -1;
         });
-
-        return total;
-    }, {});
-
-    // groupProductByBL
-    Object.values(tables).forEach((table) => {
-        table.groupedByBlRows = groupByBl(table.rows);
-
-        table.rows = Object.values(table.groupedByBlRows).reduce<ExportRowT[]>(
-            (total, bl) => {
-                const clone = _.cloneDeep(bl);
-
-                clone.groupedProductsSortArr.forEach((group) => {
-                    const row = group.record;
-                    row.amount = group.total;
-                    total.push(row);
-                });
-                return total;
-            },
-            [],
-        );
     });
 
-    const assortiment = initAssortimentObj(tables, false);
-    console.log(assortiment);
-    return assortiment;
+    return initAssortimentObj(assortimentTables, false);
 };

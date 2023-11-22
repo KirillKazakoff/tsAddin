@@ -137,13 +137,9 @@ export interface InvoiceKTIRowT extends CommonRowT {
     product: ProductionT;
     seller: SellerT;
     dateInvoice: string;
-    amount: {
-        price: number;
-        priceTotal: number;
-        placesTotal: number;
-        days?: number;
-        operationResult?: number;
-    };
+    amount: AmountObjT;
+    days?: number;
+    operationResult?: number;
     dateStorageStart?: string;
     dateStorageEnd?: string;
     dateDischarge?: string;

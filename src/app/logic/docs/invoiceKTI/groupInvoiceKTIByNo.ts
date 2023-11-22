@@ -1,39 +1,28 @@
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { ExportRowT, InvoiceKTIRowT } from '../../../types/typesTables';
-import { groupify } from '../../utils/groupify';
+import { groupTotal } from '../../utils/groupTotal';
 import { groupByBl } from '../exportContract/groupBy/groupByBl';
-import { BlGroupsT } from '../exportContract/groupBy/initBlGroup';
-
-const initInvoice = (blGrouped: BlGroupsT<ExportRowT>, row: InvoiceKTIRowT) => {
-    return {
-        type: row.dateDischarge ? 'discharge' : 'storage',
-        priceTotal: 0,
-        exportRecord: blGrouped[row.blNo].record,
-        record: row,
-        rows: <{ exportRow: ExportRowT; row: InvoiceKTIRowT }[]>[],
-    };
-};
-
-export type InvoiceKTIT = ReturnType<typeof initInvoice> & {
-    type: 'discharge' | 'storage';
-};
-export type InvoicesKTIT = { [key: string]: InvoiceKTIT };
 
 export const groupInvoiceKTIByNo = () => {
     const { dischargeInvoicesT, storageInvoicesT, exportStorageT } = tablesStore;
-    const rowsArray = [...dischargeInvoicesT, ...storageInvoicesT];
     const blGrouped = groupByBl(exportStorageT);
 
-    const invoicesKTI = rowsArray.reduce<InvoicesKTIT>((total, row) => {
-        const initObj = initInvoice(blGrouped, row);
-        if (!row.invoiceNo) return total;
-        const invoice = groupify(total, initObj, row.invoiceNo);
+    const rows = [...dischargeInvoicesT, ...storageInvoicesT].map((row) => {
+        const exportRow = blGrouped.find((group) => group.code === row.blNo)?.record;
+        return {
+            row,
+            exportRow,
+            type: row.type,
+            amount: row.amount,
+        };
+    });
 
-        invoice.rows.push({ row, exportRow: blGrouped[row.blNo].record });
-        invoice.priceTotal += row.amount.priceTotal;
-
-        return total;
-    }, {});
-
-    return Object.values(invoicesKTI);
+    return groupTotal({
+        rows,
+        input: (row) => ({
+            init: () => !!row.row.invoiceNo,
+            code: row.row.invoiceNo,
+        }),
+    });
 };
+
+export type InvoiceKTIGroupT = ReturnType<typeof groupInvoiceKTIByNo>[number];

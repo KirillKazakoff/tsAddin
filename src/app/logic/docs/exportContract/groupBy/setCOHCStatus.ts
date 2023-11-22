@@ -1,21 +1,23 @@
 /* eslint-disable no-param-reassign */
-import { AgreementT } from './initAgreement';
+import { ExportRowT } from '../../../../types/typesTables';
 
 export type COHCT = 'no' | 'cohc' | 'co' | 'hc';
 
-export const setCOHCStatus = (agreement: AgreementT) => {
-    const isCO = agreement.rows.some((row) => row.coNo);
-    const isHC = agreement.rows.some((row) => row.hcNo);
+export const setCOHCStatus = (rows: ExportRowT[]) => {
+    const isCO = rows.some((row) => row.coNo);
+    const isHC = rows.some((row) => row.hcNo);
 
     if (isCO && isHC) {
-        agreement.cohc = 'cohc';
-    } else if (isCO) {
-        agreement.cohc = 'co';
-    } else if (isHC) {
-        agreement.cohc = 'hc';
+        return 'cohc';
+    }
+    if (isCO) {
+        return 'co';
+    }
+    if (isHC) {
+        return 'hc';
     }
 
-    return agreement;
+    return 'no';
 };
 
 export const matchCOHCLanguage = (status: COHCT, language: 'eng' | 'ru') => {

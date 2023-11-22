@@ -8,9 +8,9 @@ import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 
 export const SectionComponent = observer(() => {
     const initObj = useInitAssortimentSection();
-    const { onLoad, onLoadAll, samplesArr } = initObj;
+    const { onLoad, onLoadAll, samples } = initObj;
 
-    const sampleDocs = samplesArr.map((sample) => {
+    const sampleDocs = samples.map((sample) => {
         const consignee = sample.record.consignee.codeName;
         return (
             <Doc
@@ -22,7 +22,7 @@ export const SectionComponent = observer(() => {
         );
     });
 
-    if (samplesArr.length === 0) return null;
+    if (samples.length === 0) return null;
 
     return (
         <form className='docs__form assortiment-form'>

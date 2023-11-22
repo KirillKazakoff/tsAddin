@@ -4,14 +4,14 @@ import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
-import { ContractT } from './groupByContractNo';
+import { InnerGroupT } from './groupByContractNo';
 import { initPortLetterTmp } from './portLetterTmp/initPortLetterTmp';
 import { initPortLetterTmpFCA } from './portLetterTmp/initPortLetterTmpFCA';
 
-export const createPortLetter = async (contract: ContractT) => {
-    const { record } = contract;
+export const createPortLetter = async (contract: InnerGroupT) => {
+    const { row } = contract.record;
     const { podpisant, isPictures } = portLetterStore.fields;
-    const { seller } = contract.record;
+    const { seller } = row;
 
     // getPathToTemplate
     const path = portLetterStore.fields.termsPort === 'FCA'
@@ -54,5 +54,5 @@ export const createPortLetter = async (contract: ContractT) => {
         isPictures,
     );
 
-    await saveFile(book, `Письмо ${record.buyer.codeName}`);
+    await saveFile(book, `Письмо ${row.buyer.codeName}`);
 };

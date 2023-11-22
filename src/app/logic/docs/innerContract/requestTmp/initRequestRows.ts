@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { RequestGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupByContractNo';
 
-export const initRequestRows = (rows: RequestGroupT[], utils: CellUtilsT<''>) => {
+export const initRequestRows = (groups: InnerGroupT[], utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Заявка_массив' });
 
     insertRows({
-        records: rows,
+        records: groups,
         deleteStartAmount: 1,
         rowSettings: ({ record: r, total }) => {
             const fields = {

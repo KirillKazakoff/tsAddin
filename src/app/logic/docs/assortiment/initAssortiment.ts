@@ -3,9 +3,9 @@ import { Worksheet } from 'exceljs';
 import { addAssortimentTable } from './addAssortimentTable';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import { initRowMaker } from '../../excel/utils/excelUtilsObj/initRows';
-import { AssortimentT } from './initAssortimentTable';
+import { AssortimentObjT } from './initAssortimentObj';
 
-export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) => {
+export const initAssortiment = async (assortiment: AssortimentObjT, ws: Worksheet) => {
     const rowMaker = initRowMaker(ws)();
 
     // column width setup
@@ -40,15 +40,10 @@ export const initAssortiment = async (assortiment: AssortimentT, ws: Worksheet) 
     rowMaker.insertRows({ records: [rows.eta, rows.empty] });
 
     // sort by seller and add tables
-    const tables = Object.values(assortiment.tables)
-        .sort((a, b) => {
-            if (a.record.vessel.eng.name > b.record.vessel.eng.name) return -1;
-            return 1;
-        })
-        .sort((a, b) => {
-            if (a.record.product.eng.name > b.record.product.eng.name) return -1;
-            return 1;
-        });
+    const tables = assortiment.tables.sort((a, b) => {
+        if (a.record.vessel.eng.name < b.record.vessel.eng.name) return -1;
+        return 1;
+    });
 
     tables.forEach((table, i) => {
         addAssortimentTable(table, rowMaker, i, assortiment.isSample);

@@ -5,7 +5,7 @@ import { createAssortiment } from './createAssortiment';
 import { groupAssortiment } from './group/groupAssortiment';
 import { groupSamples } from './group/groupSamples';
 import { createSample } from './createSample';
-import { AssortimentT } from './initAssortimentTable';
+import { AssortimentObjT } from './initAssortimentObj';
 
 export const useInitAssortimentSection = () => {
     const { exportStorageT, exportT } = tablesStore;
@@ -13,16 +13,16 @@ export const useInitAssortimentSection = () => {
     const rows = [...exportT, ...exportStorageT];
 
     const assortiment = groupAssortiment(_.cloneDeep(rows));
-    const samplesArr = Object.values(groupSamples(_.cloneDeep(rows)));
+    const samples = groupSamples(_.cloneDeep(rows));
 
     const onLoad = {
         assortiment: async () => createAssortiment(assortiment),
-        sample: async (sample: AssortimentT) => createSample(sample),
+        sample: async (sample: AssortimentObjT) => createSample(sample),
     };
 
     const onLoadAll = async () => {
-        await Promise.all(samplesArr.map((sample) => onLoad.sample(sample)));
+        await Promise.all(samples.map((sample) => onLoad.sample(sample)));
     };
 
-    return { onLoad, onLoadAll, samplesArr };
+    return { onLoad, onLoadAll, samples };
 };

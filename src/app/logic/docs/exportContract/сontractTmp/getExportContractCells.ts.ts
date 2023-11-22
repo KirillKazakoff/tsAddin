@@ -2,10 +2,10 @@ import exportContractStore from '../../../../stores/docsStores/exportContractSto
 import { CellObjDoubleT as CellObjT } from '../../../../types/typesExcelUtils';
 import { getDeliveryDate, getExcelDateStr } from '../../../excel/utils/getExcelDate';
 import { formatCount, formatCurrencyLong } from '../../../utils/formatCount';
-import { AgreementT } from '../groupBy/initAgreement';
+import { ExportGroupT } from '../groupBy/groupAgByNo';
 import { matchCOHCLanguage } from '../groupBy/setCOHCStatus';
 
-export const getExportContractCells = (agreement: AgreementT) => {
+export const getExportContractCells = (agreement: ExportGroupT) => {
     const {
         date: dateAgreement,
         agreementNo,
@@ -18,7 +18,7 @@ export const getExportContractCells = (agreement: AgreementT) => {
         consignee,
         type,
     } = agreement.record;
-    const { priceTotal } = agreement;
+    const { priceTotal } = agreement.total;
     const { podpisant } = exportContractStore.fields;
     const { currentTerms: terms } = exportContractStore;
 
@@ -29,12 +29,12 @@ export const getExportContractCells = (agreement: AgreementT) => {
     };
     const currency = {
         eng: {
-            short: `USD ${formatCount(priceTotal, 2, 2)}`,
-            full: formatCurrencyLong(priceTotal, 'en'),
+            short: `USD ${formatCount(priceTotal.count, 2, 2)}`,
+            full: formatCurrencyLong(priceTotal.count, 'en'),
         },
         ru: {
-            short: `$${formatCount(priceTotal, 2, 2)}`,
-            full: formatCurrencyLong(priceTotal, 'ru'),
+            short: `$${formatCount(priceTotal.count, 2, 2)}`,
+            full: formatCurrencyLong(priceTotal.count, 'ru'),
         },
     };
 
@@ -250,8 +250,8 @@ export const getExportContractCells = (agreement: AgreementT) => {
         certificates: <CellObjT[]>[
             {
                 cell: 'Обязательство_хранение',
-                eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.cohc, 'eng')} for the following quantity:`,
-                ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.cohc, 'ru')} на нижеследущие партии:`,
+                eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.additional.cohc, 'eng')} for the following quantity:`,
+                ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.additional.cohc, 'ru')} на нижеследущие партии:`,
             },
         ],
     };

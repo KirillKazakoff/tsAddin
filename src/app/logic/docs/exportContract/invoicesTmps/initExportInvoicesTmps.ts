@@ -5,10 +5,13 @@ import _ from 'lodash';
 import { getExportInvoiceCells } from './getExportInvoiceCells';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { InvoicesT } from '../groupBy/initInvoice';
 import { mergeExportInvoice } from './mergeExportInvoices';
+import { ExportGroupT } from '../groupBy/groupAgByNo';
 
-export const initExportInvoicesTmps = async (book: Workbook, invoices: InvoicesT) => {
+export const initExportInvoicesTmps = async (
+    book: Workbook,
+    invoices: ExportGroupT[],
+) => {
     const sheetName = 'Invoice';
     const wsOriginal = book.getWorksheet(sheetName);
     book.removeWorksheet(sheetName);
@@ -22,9 +25,9 @@ export const initExportInvoicesTmps = async (book: Workbook, invoices: InvoicesT
     const utilsDouble = initExcelUtils(wsOriginal, 'MID_Invoice');
     const utilsSingle = initExcelUtils(wsOriginal, '');
 
-    for await (const key of Object.keys(invoices)) {
-        const invoice = invoices[key];
+    for await (const invoice of invoices) {
         // initInvoice
+        const key = invoice.code;
         const cells = getExportInvoiceCells(invoice);
 
         cells.double.forEach((cell) => utilsDouble.setCell(cell));

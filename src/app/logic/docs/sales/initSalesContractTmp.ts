@@ -1,11 +1,11 @@
 import { Workbook } from 'exceljs';
-import { SalesContractT } from './groupBy/initSalesContract';
 import { initSalesTableRows } from './initSalesTableRows';
 import { getSalesContractCells } from './getSalesContractCells';
 import { initSalesRowsDefault } from './initSalesRowsDefault';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
+import { SalesGroupT } from './groupBy/groupSalesContract';
 
-export const initSalesContractTmp = async (book: Workbook, contract: SalesContractT) => {
+export const initSalesContractTmp = async (book: Workbook, contract: SalesGroupT) => {
     const { seller } = contract.record;
     const ws = book.getWorksheet('Sales_Contract');
     const utils = initExcelUtils(ws, '');
@@ -16,7 +16,7 @@ export const initSalesContractTmp = async (book: Workbook, contract: SalesContra
 
     if (contract.record.isLive) {
         initSalesTableRows({
-            rows: contract.rows,
+            groups: contract.groupedBy.noGroup,
             isContract: true,
             utils,
         });

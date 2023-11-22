@@ -2,12 +2,12 @@ import exportContractStore from '../../../stores/docsStores/exportContractStore'
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
-import { AgreementT } from './groupBy/initAgreement';
+import type { ExportGroupT } from './groupBy/groupAgByNo';
 import { initExportInvoicesTmps } from './invoicesTmps/initExportInvoicesTmps';
 import { initExportContractTmp } from './сontractTmp/initExportContractTmp';
 
-export const createExportContractDoc = async (agreement: AgreementT) => {
-    const { invoices } = agreement.productsGroupedBy;
+export const createExportContractDoc = async (agreement: ExportGroupT) => {
+    const { invoices } = agreement.groupedBy;
     const { operation } = exportContractStore;
     const { agreementNo, id } = agreement.record;
 

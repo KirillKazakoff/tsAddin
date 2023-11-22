@@ -1,14 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { Cell, Workbook } from 'exceljs';
-import { InvoiceT } from '../groupBy/initInvoice';
 import { initExportInvoiceRows } from './initExportInvoiceRows';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initExportInvoiceRowsFCA } from './initExportInvoiceRowsFCA';
+import { ExportGroupT } from '../groupBy/groupAgByNo';
 
-export const mergeExportInvoice = async (book: Workbook, invoice: InvoiceT) => {
+export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) => {
     const xls64 = await book.xlsx.writeBuffer();
     await book.xlsx.load(xls64);
-    const ws = book.getWorksheet(`invoice ${invoice.invoiceNo}`);
+    const ws = book.getWorksheet(`invoice ${invoice.record.invoice}`);
 
     const initMerge = () => ({ col: { start: 0, end: 0 }, row: { start: 0, end: 0 } });
     const distance = 5;
@@ -71,11 +71,7 @@ export const mergeExportInvoice = async (book: Workbook, invoice: InvoiceT) => {
 
                 mergeArray.push(merge);
             },
-            // removeWithTitles: () => {
-            //     const rowTitle = ws.getCell(+cell.row - 1, +cell.col);
-            //     cell.value = '';
-            //     rowTitle.value = '';
-            // },
+
             setBlNo: () => {
                 arrayCl.row = +cell.row + 1;
                 arrayCl.col = +cell.col;

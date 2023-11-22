@@ -2,8 +2,8 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Doc } from '../../components/Doc/Doc';
 import {
+    InvoiceKTIGroupT,
     groupInvoiceKTIByNo,
-    InvoiceKTIT,
 } from '../../logic/docs/invoiceKTI/groupInvoiceKTIByNo';
 import { createInvoiceKTI } from '../../logic/docs/invoiceKTI/createInvoiceKTI';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
@@ -11,7 +11,7 @@ import tablesStore from '../../stores/tablesStore/tablesStore';
 
 export const SectionComponent = observer(() => {
     const invoicesGrouped = groupInvoiceKTIByNo();
-    const onLoad = async (invoice: InvoiceKTIT) => {
+    const onLoad = async (invoice: InvoiceKTIGroupT) => {
         await createInvoiceKTI(invoice);
     };
 
@@ -19,9 +19,9 @@ export const SectionComponent = observer(() => {
         const onClick = async () => onLoad(invoice);
         return (
             <Doc
-                key={invoice.record.invoiceNo}
+                key={invoice.record.row.invoiceNo}
                 onClick={onClick}
-                title={`${invoice.exportRecord.seller.codeName} ${invoice.record.invoiceNo}`}
+                title={`${invoice.record.exportRow.seller.codeName} ${invoice.record.row.invoiceNo}`}
                 isPreventDefault
             />
         );

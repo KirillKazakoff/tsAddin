@@ -1,32 +1,46 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
 import _ from 'lodash';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
+import { groupTotal } from '../../../utils/groupTotal';
 import { setMSC } from '../../../../stores/tablesStore/utils/setMSC';
-import { groupAgByInvoice } from './groupAgByInvoice';
-import { AgreementsT, initAgreement } from './initAgreement';
-import { groupify } from '../../../utils/groupify';
-import { groupByBl } from './groupByBl';
 import { setCOHCStatus } from './setCOHCStatus';
 
 export const groupAgByNo = () => {
-    const table = exportContractStore.currentTable;
-
-    const agreements = table.reduce<AgreementsT>((total, row) => {
-        const clonedRow = _.cloneDeep(row);
-        const agreement = groupify(total, initAgreement(clonedRow), row.id);
-
-        if (row.msc) setMSC(clonedRow);
-
-        agreement.rows.push(clonedRow);
-        agreement.priceTotal += clonedRow.amount.priceTotal.count;
-        return total;
-    }, {});
-
-    Object.entries(agreements).forEach(([key, agreement]) => {
-        agreements[key] = groupAgByInvoice(agreement);
-        agreements[key].productsGroupedBy.bl = groupByBl(agreement.rows);
-        agreements[key] = setCOHCStatus(agreement);
+    const res = groupTotal({
+        rows: _.cloneDeep(exportContractStore.currentTable),
+        input: (row) => ({
+            init: () => {
+                if (row.msc) setMSC(row);
+                return true;
+            },
+            code: row.id,
+            groupedBy: {
+                invoices: {
+                    code: row.invoice,
+                    groupedBy: {
+                        product: { code: row.product.codeName },
+                        productPack: { code: row.product.codeName + row.pack },
+                        productSort: { code: row.product.codeName + row.pack + row.sort },
+                    },
+                },
+                bl: {
+                    code: row.blNo,
+                    groupedBy: {
+                        product: { code: `${row.product.codeName}${row.pack}` },
+                        productSort: { code: `${row.product.codeName}${row.sort}` },
+                    },
+                },
+            },
+            additional: { cohc: 'no' },
+            groupModify: (agreement) => {
+                agreement.additional.cohc = setCOHCStatus(agreement.rows);
+                return true;
+            },
+        }),
     });
 
-    return Object.values(agreements);
+    return res;
 };
+
+export type ExportGroupT = ReturnType<typeof groupAgByNo>[number];

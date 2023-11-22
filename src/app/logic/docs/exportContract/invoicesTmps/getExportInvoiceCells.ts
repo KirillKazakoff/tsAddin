@@ -4,9 +4,9 @@ import {
     CellObjT as CellSingleT,
 } from '../../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
-import { InvoiceT } from '../groupBy/initInvoice';
+import { ExportGroupT } from '../groupBy/groupAgByNo';
 
-export const getExportInvoiceCells = (invoice: InvoiceT) => {
+export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     const {
         seller,
         transport,
@@ -14,16 +14,19 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
         portTo,
         agreementNo,
         contract,
-        date: agreementDate,
+        date: docDate,
         terms,
         bankSeller,
-    } = invoice.agreement.record;
-    const {
-        invoiceDate, invoiceNo, msc, consignee, record,
-    } = invoice;
+        invoice: invoiceNo,
+        msc,
+        consignee,
+        agent,
+        vessel,
+    } = invoice.record;
+
     const date = {
-        agreement: (locale: string) => getExcelDateStr(agreementDate, locale),
-        invoice: (language: string) => getExcelDateStr(invoiceDate, language),
+        agreement: (locale: string) => getExcelDateStr(docDate, locale),
+        invoice: (language: string) => getExcelDateStr(docDate, language),
         contract: (language: string) => getExcelDateStr(contract.date, language),
     };
 
@@ -52,13 +55,13 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
             },
             {
                 cell: 'Инвойс_покупатель',
-                eng: `${record.agent.name}`,
-                ru: `${record.agent.name}`,
+                eng: `${agent.name}`,
+                ru: `${agent.name}`,
             },
             {
                 cell: 'Инвойс_покупатель_адрес',
-                eng: `${record.agent.address}`,
-                ru: `${record.agent.address}`,
+                eng: `${agent.address}`,
+                ru: `${agent.address}`,
             },
             {
                 cell: 'Инвойс_получатель',
@@ -87,8 +90,8 @@ export const getExportInvoiceCells = (invoice: InvoiceT) => {
             },
             {
                 cell: 'Инвойс_изготовитель',
-                eng: `${record.vessel.eng.name}`,
-                ru: `${record.vessel.ru.name}`,
+                eng: `${vessel.eng.name}`,
+                ru: `${vessel.ru.name}`,
             },
             {
                 cell: 'Инвойс_МСЦ',

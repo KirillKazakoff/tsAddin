@@ -15,7 +15,6 @@ export const getCell = (ws: Worksheet) => (cellName: string, offsetRow?: number)
             const cellMatched = match as Cell;
             return ws.getCell(cellMatched.row + offsetRow, cellMatched.col);
         }
-
         if (!match) throw new Error();
         return match;
     } catch (e) {

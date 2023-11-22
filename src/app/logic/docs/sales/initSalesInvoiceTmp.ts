@@ -1,14 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { Workbook } from 'exceljs';
-import { SalesContractT } from './groupBy/initSalesContract';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initSalesTableRows } from './initSalesTableRows';
 import { setPrintArea } from '../../excel/utils/excelUtilsObj/setPrintArea';
 import salesContractStore from '../../../stores/docsStores/salesContractStore';
+import { SalesGroupT } from './groupBy/groupSalesContract';
 
-export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesContractT) => {
+export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesGroupT) => {
     const r = contract.record;
     const ws = book.getWorksheet('Invoice');
     const utils = initExcelUtils(ws, '');
@@ -23,8 +23,8 @@ export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesContrac
         { cell: 'Инвойс_покупатель', value: r.buyer.fullName },
         { cell: 'Инвойс_продавец', value: r.seller.name },
         { cell: 'Инвойс_условия_доставки', value: `${r.terms} ${r.port}`.toUpperCase() },
-        { cell: 'Инвойс_всего_места', value: `TOTAL: ${contract.amount.placesTotal.str} kg` },
-        { cell: 'Инвойс_всего_цена', value: `${contract.amount.priceTotal.str} $` },
+        { cell: 'Инвойс_всего_места', value: `TOTAL: ${contract.total.placesTotal.str} kg` },
+        { cell: 'Инвойс_всего_цена', value: `${contract.total.priceTotal.str} $` },
         { cell: 'Инвойс_адреса_продавец', value: r.seller.name },
         { cell: 'Инвойс_адреса_адрес', value: r.seller.address },
         { cell: 'Инвойс_адреса_счет', value: `A/C NO: ${r.seller.acNo}` },
@@ -37,9 +37,9 @@ export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesContrac
     cells.forEach((cell) => utils.setCell(cell));
 
     initSalesTableRows({
-        rows: salesContractStore.fields.isSortGroup
+        groups: salesContractStore.fields.isSortGroup
             ? contract.groupedBy.blProduct
-            : contract.rows,
+            : contract.groupedBy.noGroup,
         isContract: false,
         utils,
     });

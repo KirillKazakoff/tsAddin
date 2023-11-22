@@ -1,12 +1,7 @@
-/* eslint-disable no-param-reassign */
-import { CommonRowT } from '../../../../types/typesTables';
-import { groupify } from '../../../utils/groupify';
-import type { ProductionSalesT, ProductionT } from '../../../../types/typesSP';
-import {
-    AmountObjT,
-    addToAmountObj,
-} from '../../../../stores/tablesStore/utils/initAmount';
-import { BlGroupsT, initBlGroup, initProductGroup } from './initBlGroup';
+import { TableKeyT } from '../../../../stores/tablesStore/tablesStore';
+import { AmountObjT } from '../../../../stores/tablesStore/utils/initAmount';
+import { ProductionT, ProductionSalesT } from '../../../../types/typesSP';
+import { groupTotal } from '../../../utils/groupTotal';
 
 type RowBlExtendT = {
     blNo: string;
@@ -14,41 +9,28 @@ type RowBlExtendT = {
     pack: number;
     product: ProductionT | ProductionSalesT;
     sort: string;
-} & CommonRowT;
+    type: TableKeyT;
+};
 
 export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
-    const blGrouped = rows.reduce<BlGroupsT<RowT>>((total, row) => {
-        if (!row.blNo || row.blNo === '-') return total;
-
-        const bl = groupify(total, initBlGroup(row), row.blNo);
-
-        const productGroup = groupify(
-            bl.groupedBy.product,
-            initProductGroup(row),
-            `${row.product.codeName}${row.pack}`,
-        );
-        productGroup.rows.push(row);
-
-        const productSortGroup = groupify(
-            bl.groupedBy.productSort,
-            initProductGroup(row),
-            `${row.product.codeName}${row.sort}`,
-        );
-        productSortGroup.rows.push(row);
-
-        addToAmountObj(productSortGroup.total, row.amount);
-        addToAmountObj(productGroup.total, row.amount);
-        addToAmountObj(bl.total, row.amount);
-        return total;
-    }, {});
-
-    Object.values(blGrouped).forEach((group) => {
-        group.groupedProductsArr.push(...Object.values(group.groupedBy.product));
+    const bl = groupTotal({
+        rows,
+        input: (row) => ({
+            code: row.blNo,
+            groupedBy: {
+                product: {
+                    code: `${row.product.codeName}${row.pack}`,
+                },
+                productSort: {
+                    code: `${row.product.codeName}${row.sort}`,
+                },
+            },
+        }),
     });
 
-    Object.values(blGrouped).forEach((group) => {
-        group.groupedProductsSortArr.push(...Object.values(group.groupedBy.productSort));
-    });
-
-    return blGrouped;
+    return bl;
 };
+
+export type BlGroupT<RowT extends RowBlExtendT> = ReturnType<
+    typeof groupByBl<RowT>
+>[number];

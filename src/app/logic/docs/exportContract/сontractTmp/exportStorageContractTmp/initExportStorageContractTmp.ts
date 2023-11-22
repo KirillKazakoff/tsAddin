@@ -2,18 +2,18 @@
 import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
 import { initExportStorageContractRowsR } from './initExportStorageContractRowsR';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
-import { AgreementT } from '../../groupBy/initAgreement';
 import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
+import { ExportGroupT } from '../../groupBy/groupAgByNo';
 
 export const initExportStorageContractTmp = async (
     utils: CellUtilsT<string>,
-    agreement: AgreementT,
+    agreement: ExportGroupT,
 ) => {
     if (exportContractStore.operation === 'export_storage') {
-        initExportStorageContractRows(agreement.productsGroupedBy.invoices, utils);
+        initExportStorageContractRows(agreement.groupedBy.invoices, utils);
     }
     if (exportContractStore.operation === 'certificates') {
-        initExportStorageContractRowsR(agreement.productsGroupedBy.bl, utils);
+        initExportStorageContractRowsR(agreement.groupedBy.bl, utils);
     }
 
     // prettier-ignore
