@@ -18,7 +18,10 @@ export const groupByContractNo = () => {
         input: ({ row }) => ({
             code: row.id,
             groupedBy: {
-                request: { code: row.product.codeName + row.sort + row.pack },
+                request: {
+                    code:
+                        row.product.codeName + row.vessel.codeName + row.sort + row.pack,
+                },
             },
         }),
     });
