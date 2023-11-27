@@ -41,12 +41,7 @@ export const initPicturesExcel = (ws: Worksheet) => async (settings: PictureSett
         getCell(ws)(setup.range.end).value = '';
     });
 
-    if (!isActive || !picturesStore.isPicturesFound) {
-        // if (!picturesStore.isPicturesFound) {
-        //     pageStatusStore.setPageStatus('picturesError');
-        // }
-        return;
-    }
+    if (!isActive || !picturesStore.isPicturesFound) return;
 
     const promises = settings.map((setup) => initPictureExcel(ws, setup));
     await Promise.all(promises);

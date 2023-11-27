@@ -8,6 +8,7 @@ export const groupInvoiceKTIByNo = () => {
 
     const rows = [...dischargeInvoicesT, ...storageInvoicesT].map((row) => {
         const exportRow = blGrouped.find((group) => group.code === row.blNo)?.record;
+
         return {
             row,
             exportRow,

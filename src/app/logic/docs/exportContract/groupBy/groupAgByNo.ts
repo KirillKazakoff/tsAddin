@@ -27,8 +27,8 @@ export const groupAgByNo = () => {
                 bl: {
                     code: row.blNo,
                     groupedBy: {
-                        product: { code: `${row.product.codeName}${row.pack}` },
-                        productSort: { code: `${row.product.codeName}${row.sort}` },
+                        product: { code: row.product.codeName + row.pack },
+                        productSort: { code: row.product.codeName + row.sort },
                     },
                 },
             },

@@ -1,16 +1,15 @@
-import { checkTable } from '../../../logic/excel/checkTable/checkTable';
-import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
-import { ExportRowT, ExportInitRowT } from '../../../types/typesTables';
+import { ExportInitRowT } from '../../../types/typesTables';
 import { getExportRow } from '../getExportRow';
-import tablesStore from '../tablesStore';
+import { setTable } from './setTable';
 
 /* eslint-disable max-len */
 export const setExport = (table: any[][]) => {
     table.shift();
-    const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<ExportRowT[]>(
-        (totalObj, row, index) => {
+    setTable({
+        table,
+        type: 'export',
+        row: (r) => {
             const [
                 contract,
                 seller,
@@ -35,26 +34,35 @@ export const setExport = (table: any[][]) => {
                 price,
                 priceTotal,
                 id,
-            ] = row;
+            ] = r;
 
-            try {
-                // prettier-ignore
-                const rowInit: ExportInitRowT = {
-                    contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, terms, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index,
-                };
-                const rowObj = getExportRow(rowInit);
+            const rowInit: ExportInitRowT = {
+                contract,
+                seller,
+                agent,
+                vessel,
+                transport,
+                agreementNo,
+                invoice,
+                date,
+                blMode,
+                blNo,
+                portFrom,
+                terms,
+                portTo,
+                consignee,
+                msc,
+                product,
+                sort,
+                pack,
+                places,
+                placesTotal,
+                price,
+                priceTotal,
+                id,
+            };
 
-                rowObj.type = 'export';
-                totalObj.push(rowObj);
-                return totalObj;
-            } catch (e) {
-                console.log(e);
-                return totalObj;
-            }
+            return getExportRow(rowInit);
         },
-        [],
-    );
-
-    checkTable(transformedTable, 'export');
-    tablesStore.setTable.export(transformedTable);
+    });
 };

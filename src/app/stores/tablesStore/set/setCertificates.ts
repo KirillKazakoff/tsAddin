@@ -1,18 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import _ from 'lodash';
-import { checkTable } from '../../../logic/excel/checkTable/checkTable';
-import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { selectSp } from '../../spsStore/select';
 import tablesStore from '../tablesStore';
 import { initAmount } from '../utils/initAmount';
 import { ExportRowT } from '../../../types/typesTables';
+import { setTable } from './setTable';
 
 export const setCertificates = (table: any[][]) => {
     table.shift();
-    const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<ExportRowT[]>(
-        (totalObj, row, index) => {
+    setTable<ExportRowT>({
+        table,
+        type: 'certificates',
+        row: (r) => {
             const [
                 blNo,
                 srSuffix,
@@ -27,45 +27,32 @@ export const setCertificates = (table: any[][]) => {
                 hcNo,
                 iuuNo,
                 date,
-            ] = row;
+            ] = r;
 
-            try {
-                const exportRow = _.cloneDeep(
-                    tablesStore.exportStorageT.find(
-                        (r) => `${r.agreementNo}${r.contract.code}${r.blNo}`
-                            === `${agreementNo}${contractCode}${blNo}`,
-                    ),
-                );
-                exportRow.amount = {
-                    places: initAmount(exportRow.amount.places.count, 0, 0),
-                    placesTotal: initAmount(placesTotal, 3, 4),
-                    price: initAmount(exportRow.amount.price.count, 2, 2),
-                    priceTotal: initAmount(exportRow.amount.priceTotal.count, 3, 4),
-                };
-                exportRow.id = `${exportRow.id}-${srSuffix}${srNo}`;
-                exportRow.agreementNo = `${exportRow.agreementNo}-R${srNo}`;
-                exportRow.date = date;
-                exportRow.type = 'certificates';
+            const exportRow = _.cloneDeep(
+                tablesStore.exportStorageT.find(
+                    (eRow) => `${eRow.agreementNo}${eRow.contract.code}${eRow.blNo}`
+                        === `${agreementNo}${contractCode}${blNo}`,
+                ),
+            );
+            exportRow.amount = {
+                places: initAmount(exportRow.amount.places.count, 0, 0),
+                placesTotal: initAmount(placesTotal, 3, 4),
+                price: initAmount(exportRow.amount.price.count, 2, 2),
+                priceTotal: initAmount(exportRow.amount.priceTotal.count, 3, 4),
+            };
+            exportRow.id = `${exportRow.id}-${srSuffix}${srNo}`;
+            exportRow.agreementNo = `${exportRow.agreementNo}-R${srNo}`;
+            exportRow.date = date;
 
-                const rowObj: ExportRowT = {
-                    ...exportRow,
-                    seller: selectSp.seller(seller),
-                    date,
-                    hcNo,
-                    coNo,
-                    iuuNo,
-                    index: index.toString(),
-                };
-
-                totalObj.push(rowObj);
-                return totalObj;
-            } catch (e) {
-                return totalObj;
-            }
+            return {
+                ...exportRow,
+                seller: selectSp.seller(seller),
+                date,
+                hcNo,
+                coNo,
+                iuuNo,
+            };
         },
-        [],
-    );
-
-    checkTable(transformedTable, 'certificates');
-    tablesStore.setTable.certificates(transformedTable);
+    });
 };

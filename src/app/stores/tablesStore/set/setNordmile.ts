@@ -1,32 +1,31 @@
-import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { NordmileRowT } from '../../../types/typesTables';
 import { selectSp } from '../../spsStore/select';
-import tablesStore from '../tablesStore';
 import { initAmount } from '../utils/initAmount';
+import { setTable } from './setTable';
 
 export const setNordmile = (table: any[][]) => {
     table.shift();
-    const excluded = excludeOfEmptyRows(table);
 
-    const requests = excluded.reduce<NordmileRowT[]>((totalObj, row, index) => {
-        const [
-            contractNo,
-            contractDate,
-            seller,
-            buyer,
-            producer,
-            product,
-            pack,
-            placesTotal,
-            price,
-            priceTotal,
-            bankSeller,
-            paymentDate,
-        ] = row;
+    setTable<NordmileRowT>({
+        table,
+        type: 'nordmile',
+        row: (r) => {
+            const [
+                contractNo,
+                contractDate,
+                seller,
+                buyer,
+                producer,
+                product,
+                pack,
+                placesTotal,
+                price,
+                priceTotal,
+                bankSeller,
+                paymentDate,
+            ] = r;
 
-        try {
-            const rowObj: NordmileRowT = {
-                type: 'nordmile',
+            return {
                 contractNo,
                 contractDate,
                 seller: selectSp.seller(seller),
@@ -41,15 +40,7 @@ export const setNordmile = (table: any[][]) => {
                 },
                 bankSeller,
                 paymentDate,
-                index: index.toString(),
             };
-
-            totalObj.push(rowObj);
-            return totalObj;
-        } catch (e) {
-            return totalObj;
-        }
-    }, []);
-
-    tablesStore.setTable.nordmile(requests);
+        },
+    });
 };

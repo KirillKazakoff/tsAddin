@@ -73,7 +73,6 @@ export interface ExportInitRowT {
     placesLeft?: string;
     datePusan?: string;
     dateClose?: string;
-    index: number;
     terms: TermsT;
 }
 

@@ -1,37 +1,34 @@
-import { checkTable } from '../../../logic/excel/checkTable/checkTable';
-import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { InvoiceKTIRowT } from '../../../types/typesTables';
-import tablesStore from '../tablesStore';
 import { selectSp } from '../../spsStore/select';
+import { setTable } from './setTable';
 
 export const setStorageInvoices = (table: any[][]) => {
-    if (!table) return;
     table.shift();
-    const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<InvoiceKTIRowT[]>((totalObj, row, index) => {
-        const [
-            blNo,
-            agreementNo,
-            seller,
-            vessel,
-            product,
-            dateStorageStart,
-            dateStorageEnd,
-            placesTotal,
-            days,
-            invoiceNo,
-            dateInvoice,
-            price,
-            priceTotal,
-            operation,
-            operationResult,
-            dateAccountSent,
-        ] = row;
+    setTable<InvoiceKTIRowT>({
+        table,
+        type: 'storageInvoices',
+        row: (r) => {
+            const [
+                blNo,
+                agreementNo,
+                seller,
+                vessel,
+                product,
+                dateStorageStart,
+                dateStorageEnd,
+                placesTotal,
+                days,
+                invoiceNo,
+                dateInvoice,
+                price,
+                priceTotal,
+                operation,
+                operationResult,
+                dateAccountSent,
+            ] = r;
 
-        try {
-            const rowObj: InvoiceKTIRowT = {
-                type: 'storageInvoices',
+            return {
                 blNo,
                 agreementNo,
                 invoiceNo,
@@ -50,16 +47,7 @@ export const setStorageInvoices = (table: any[][]) => {
                 days,
                 operationResult,
                 operation,
-                index: index.toString(),
             };
-
-            totalObj.push(rowObj);
-            return totalObj;
-        } catch (e) {
-            return totalObj;
-        }
-    }, []);
-
-    checkTable(transformedTable, 'storageInvoices');
-    tablesStore.setTable.storageInvoices(transformedTable);
+        },
+    });
 };

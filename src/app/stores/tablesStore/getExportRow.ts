@@ -11,7 +11,6 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
     const placesGross = packSp?.coefficient ? row.placesTotal * packSp.coefficient : 1;
 
     return {
-        type: 'export',
         contract: contractSp,
         seller: selectSp.seller(row.seller),
         bankSeller: selectSp.bankProdavec(contractSp?.bankSeller),
@@ -40,9 +39,8 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
         pack: row.pack,
         msc: row.msc,
         id: row.id,
-        index: row.index.toString(),
         placesLeft: row.placesLeft,
         dateClose: row.dateClose,
         datePusan: row.datePusan,
-    };
+    } as ExportRowT;
 };

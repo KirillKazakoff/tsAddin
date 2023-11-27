@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { formatCount } from '../../../logic/utils/formatCount';
 import { TableKeyT } from '../tablesStore';
 

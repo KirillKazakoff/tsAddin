@@ -154,128 +154,132 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 ru: `A/C: ${agent.acNo}`,
             },
         ],
-        exportDefault: <CellObjT[]>[
-            {
-                cell: 'Соглашение',
-                eng: `AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
-                ru: `Дополнительное соглашение № ${agreementNo} от ${date.agreement('ru')}`,
-            },
-            {
-                cell: 'Контракт',
-                eng: `to a contract of sale No. ${contract.contractNo}`,
-                ru: `к контракту купли-продажи № ${contract.contractNo}`,
-            },
-            {
-                cell: 'Цена_всего',
-                eng: `${currency.eng.short} (${currency.eng.full})`,
-                ru: `${currency.ru.short} (${currency.ru.full})`,
-            },
-            {
-                cell: 'Адреса_подпись',
-                eng: `Продавец/Seller ______________________________${podpisant.eng.name}`,
-                ru: `Покупатель/Buyer ______________________________${agent.eng.signatory}`,
-            },
-        ],
-        exportEXWCFR: <CellObjT[]>[
-            {
-                cell: 'Доставка_условия',
-                eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
-                ru: `3.1 Поставка осуществляется на условиях ${terms} ${portTo.ru.name}`,
-            },
-            {
-                cell: 'Доставка_порт',
-                eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} no later than ${date.delivery('eng')}`,
-                ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country} не позднее чем ${date.delivery('ru')}`,
-            },
-        ],
-        exportFCA: <CellObjT[]>[
-            {
-                cell: 'Доставка_условия',
-                eng: `3.1 Supply of products is carried out on FCA Terms.\nAcceptance- transfer of Goods by quantity and quality is made on the territory of: ${portTo.eng.countryFull} in ${portTo.eng.name}.`,
-                ru: `3.1 Поставка осуществляется на условиях FCA.\nПриемка-передача Товара по количеству и качеству производится на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}`,
-            },
-            {
-                cell: 'Доставка_приемка',
-                eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of ${portTo.eng.name} on behalf of the Buyer will be carried out by: ${consignee.fullName} ${consignee.addres}`,
-                ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. ${portTo.ru.name} от имени покупателя будет осуществлять: ${consignee.fullName} ${consignee.addres}`,
-            },
-            {
-                cell: 'Доставка_дата',
-                eng: `Expected delivery date: ${exportContractStore.fields.departureDate}`,
-                ru: `Дата поставки ориентировочно: ${exportContractStore.fields.departureDate}`,
-            },
-        ],
-        exportStorage: <CellObjT[]>[
-            {
-                cell: 'Соглашение',
-                eng: `Supplementary AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
-                ru: `Дополнительное соглашение № ${agreementNo} от ${date.agreement('ru')}`,
-            },
-            {
-                cell: 'Контракт',
-                eng: `to the Storage Services Contract No. ${contract.contractNo}`,
-                ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
-            },
-            {
-                cell: 'Обязательство_хранение',
-                eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country}, the batch of:`,
-                ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country}, переданную Заказчиком партию:`,
-            },
-            {
-                cell: 'Доставка_транспорт',
-                eng: `2. The Goods will be delivered to ${portTo.eng.name}, ${portTo.eng.country} by the transport vessel ${transport.eng.name} no later than ${date.delivery('eng')}`,
-                ru: `2. Товар будет доставлен в г. ${portTo.ru.name}, ${portTo.ru.country} транспортным судном ${transport.ru.name} не позднее чем ${date.delivery('ru')}`,
-            },
-            {
-                cell: 'Остальное_контракт',
-                eng: `3. In all other matters not covered by this Supplementary Agreement, the parties shall be governed by the terms and conditions of Storage Services Contract No. ${contract.contractNo}, dated ${date.contract('eng')}`,
-                ru: `3. Во всем остальном, что не предусмотрено настоящим дополнительным соглашением, стороны руководствуются условиями контракта оказания услуг хранения ${contract.contractNo} от ${date.contract('ru')}`,
-            },
-            {
-                cell: 'Соглашение_вступление',
-                eng: `4. The present Supplementary Agreement shall come into force from the moment of its signing and is an integral part of the Storage Services Contract No. ${contract.contractNo} dated ${date.contract('eng')}`,
-                ru: `4. Настоящее дополнительное соглашение вступает в силу с момента его подписания и является неотъемлемой частью контракта оказания услуг хранения № ${contract.contractNo} от ${date.contract('ru')}`,
-            },
-            {
-                cell: 'Юридикция',
-                eng: '5. This Supplementary Agreement has been drawn up and signed in two original duplicates of equal legal force.',
-                ru: '5. Настоящее дополнительное соглашение составлено и подписано в двух подлинных экземплярах, имеющих одинаковую юридическую силу.',
-            },
-            {
-                cell: 'Адреса_подпись',
-                eng: `Заказчик/Customer ______________________________${podpisant.eng.name}`,
-                ru: `Исполнитель/Contractor ______________________________${agent.eng.signatory}`,
-            },
-        ],
-        certificates: <CellObjT[]>[
-            {
-                cell: 'Обязательство_хранение',
-                eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.additional.cohc, 'eng')} for the following quantity:`,
-                ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.additional.cohc, 'ru')} на нижеследущие партии:`,
-            },
-        ],
+        default: {
+            common: <CellObjT[]>[
+                {
+                    cell: 'Соглашение',
+                    eng: `AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
+                    ru: `Дополнительное соглашение № ${agreementNo} от ${date.agreement('ru')}`,
+                },
+                {
+                    cell: 'Контракт',
+                    eng: `to a contract of sale No. ${contract.contractNo}`,
+                    ru: `к контракту купли-продажи № ${contract.contractNo}`,
+                },
+                {
+                    cell: 'Цена_всего',
+                    eng: `${currency.eng.short} (${currency.eng.full})`,
+                    ru: `${currency.ru.short} (${currency.ru.full})`,
+                },
+                {
+                    cell: 'Адреса_подпись',
+                    eng: `Продавец/Seller ______________________________${podpisant.eng.name}`,
+                    ru: `Покупатель/Buyer ______________________________${agent.eng.signatory}`,
+                },
+            ],
+            exwCfr: <CellObjT[]>[
+                {
+                    cell: 'Доставка_условия',
+                    eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
+                    ru: `3.1 Поставка осуществляется на условиях ${terms} ${portTo.ru.name}`,
+                },
+                {
+                    cell: 'Доставка_порт',
+                    eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} no later than ${date.delivery('eng')}`,
+                    ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country} не позднее чем ${date.delivery('ru')}`,
+                },
+            ],
+            fca: <CellObjT[]>[
+                {
+                    cell: 'Доставка_условия',
+                    eng: `3.1 Supply of products is carried out on FCA Terms.\nAcceptance- transfer of Goods by quantity and quality is made on the territory of: ${portTo.eng.countryFull} in ${portTo.eng.name}.`,
+                    ru: `3.1 Поставка осуществляется на условиях FCA.\nПриемка-передача Товара по количеству и качеству производится на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}`,
+                },
+                {
+                    cell: 'Доставка_приемка',
+                    eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of ${portTo.eng.name} on behalf of the Buyer will be carried out by: ${consignee.fullName} ${consignee.addres}`,
+                    ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. ${portTo.ru.name} от имени покупателя будет осуществлять: ${consignee.fullName} ${consignee.addres}`,
+                },
+                {
+                    cell: 'Доставка_дата',
+                    eng: `Expected delivery date: ${exportContractStore.fields.departureDate}`,
+                    ru: `Дата поставки ориентировочно: ${exportContractStore.fields.departureDate}`,
+                },
+            ],
+        },
+        storage: {
+            common: <CellObjT[]>[
+                {
+                    cell: 'Соглашение',
+                    eng: `Supplementary AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
+                    ru: `Дополнительное соглашение № ${agreementNo} от ${date.agreement('ru')}`,
+                },
+                {
+                    cell: 'Контракт',
+                    eng: `to the Storage Services Contract No. ${contract.contractNo}`,
+                    ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
+                },
+                {
+                    cell: 'Обязательство_хранение',
+                    eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country}, the batch of:`,
+                    ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country}, переданную Заказчиком партию:`,
+                },
+                {
+                    cell: 'Доставка_транспорт',
+                    eng: `2. The Goods will be delivered to ${portTo.eng.name}, ${portTo.eng.country} by the transport vessel ${transport.eng.name} no later than ${date.delivery('eng')}`,
+                    ru: `2. Товар будет доставлен в г. ${portTo.ru.name}, ${portTo.ru.country} транспортным судном ${transport.ru.name} не позднее чем ${date.delivery('ru')}`,
+                },
+                {
+                    cell: 'Остальное_контракт',
+                    eng: `3. In all other matters not covered by this Supplementary Agreement, the parties shall be governed by the terms and conditions of Storage Services Contract No. ${contract.contractNo}, dated ${date.contract('eng')}`,
+                    ru: `3. Во всем остальном, что не предусмотрено настоящим дополнительным соглашением, стороны руководствуются условиями контракта оказания услуг хранения ${contract.contractNo} от ${date.contract('ru')}`,
+                },
+                {
+                    cell: 'Соглашение_вступление',
+                    eng: `4. The present Supplementary Agreement shall come into force from the moment of its signing and is an integral part of the Storage Services Contract No. ${contract.contractNo} dated ${date.contract('eng')}`,
+                    ru: `4. Настоящее дополнительное соглашение вступает в силу с момента его подписания и является неотъемлемой частью контракта оказания услуг хранения № ${contract.contractNo} от ${date.contract('ru')}`,
+                },
+                {
+                    cell: 'Юридикция',
+                    eng: '5. This Supplementary Agreement has been drawn up and signed in two original duplicates of equal legal force.',
+                    ru: '5. Настоящее дополнительное соглашение составлено и подписано в двух подлинных экземплярах, имеющих одинаковую юридическую силу.',
+                },
+                {
+                    cell: 'Адреса_подпись',
+                    eng: `Заказчик/Customer ______________________________${podpisant.eng.name}`,
+                    ru: `Исполнитель/Contractor ______________________________${agent.eng.signatory}`,
+                },
+            ],
+            certificates: <CellObjT[]>[
+                {
+                    cell: 'Обязательство_хранение',
+                    eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.additional.cohc, 'eng')} for the following quantity:`,
+                    ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.additional.cohc, 'ru')} на нижеследущие партии:`,
+                },
+            ],
+        },
     };
 
     const resArr = [...cells.common];
 
     if (type === 'export') {
-        resArr.push(...cells.exportDefault);
-        if (terms === 'EXW') {
-            resArr.push(...cells.exportEXWCFR);
+        resArr.push(...cells.default.common);
+
+        if (terms === 'EXW' || terms === 'CFR') {
+            resArr.push(...cells.default.exwCfr);
         }
         if (terms === 'FCA') {
-            resArr.push(...cells.exportFCA);
-        }
-        if (terms === 'CFR') {
-            resArr.push(...cells.exportEXWCFR);
+            resArr.push(...cells.default.fca);
         }
     }
+
     if (type === 'exportStorage') {
-        resArr.push(...cells.exportStorage);
+        resArr.push(...cells.storage.common);
     }
+
     if (type === 'certificates') {
-        resArr.push(...cells.exportStorage);
-        resArr.push(...cells.certificates);
+        resArr.push(...cells.storage.common);
+        resArr.push(...cells.storage.certificates);
     }
 
     return resArr;

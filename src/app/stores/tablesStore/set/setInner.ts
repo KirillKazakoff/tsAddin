@@ -1,38 +1,36 @@
-import { checkTable } from '../../../logic/excel/checkTable/checkTable';
-import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { InnerRowT } from '../../../types/typesTables';
 import { selectSp } from '../../spsStore/select';
-import tablesStore from '../tablesStore';
 import { initAmount } from '../utils/initAmount';
+import { setTable } from './setTable';
 
 export const setInner = (table: any[][]) => {
     table.shift();
     table.pop();
-    const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<InnerRowT[]>((totalObj, row, index) => {
-        const [
-            client,
-            seller,
-            id,
-            contractDate,
-            transport,
-            vessel,
-            product,
-            sort,
-            pack,
-            konosament,
-            placesTotal,
-            price,
-            priceTotal,
-            bank,
-            deliveryDate,
-            paymentDate,
-        ] = row;
+    setTable<InnerRowT>({
+        table,
+        type: 'inner',
+        row: (r) => {
+            const [
+                client,
+                seller,
+                id,
+                contractDate,
+                transport,
+                vessel,
+                product,
+                sort,
+                pack,
+                konosament,
+                placesTotal,
+                price,
+                priceTotal,
+                bank,
+                deliveryDate,
+                paymentDate,
+            ] = r;
 
-        try {
-            const rowObj: InnerRowT = {
-                type: 'inner',
+            return {
                 buyer: selectSp.clientRu(client),
                 seller: selectSp.seller(seller),
                 id,
@@ -52,16 +50,7 @@ export const setInner = (table: any[][]) => {
                 bankSeller: bank,
                 deliveryDate,
                 paymentDate,
-                index: index.toString(),
             };
-
-            totalObj.push(rowObj);
-            return totalObj;
-        } catch (e) {
-            return totalObj;
-        }
-    }, []);
-
-    checkTable(transformedTable, 'inner');
-    tablesStore.setTable.inner(transformedTable);
+        },
+    });
 };

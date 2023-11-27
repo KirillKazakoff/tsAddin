@@ -1,16 +1,15 @@
 /* eslint-disable max-len */
-import { checkTable } from '../../../logic/excel/checkTable/checkTable';
-import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
-import { ExportRowT, ExportInitRowT } from '../../../types/typesTables';
+import { ExportInitRowT } from '../../../types/typesTables';
 import { getExportRow } from '../getExportRow';
-import tablesStore from '../tablesStore';
+import { setTable } from './setTable';
 
 export const setExportStorage = (table: any[][]) => {
     table.shift();
-    const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<ExportRowT[]>(
-        (totalObj, row, index) => {
+    setTable({
+        table,
+        type: 'exportStorage',
+        row: (r) => {
             const [
                 contract,
                 seller,
@@ -38,24 +37,38 @@ export const setExportStorage = (table: any[][]) => {
                 placesLeft,
                 datePusan,
                 dateClose,
-            ] = row;
-            // prettier-ignore
-            try {
-                const rowInit: ExportInitRowT = {
-                    contract, seller, agent, vessel, transport, agreementNo, invoice, date, blMode, blNo, portFrom, portTo, consignee, msc, product, sort, pack, places, placesTotal, price, priceTotal, id, index, placesLeft, datePusan, dateClose, terms: 'EXW',
-                };
-                const rowObj = getExportRow(rowInit);
+            ] = r;
 
-                rowObj.type = 'exportStorage';
-                totalObj.push(rowObj);
-                return totalObj;
-            } catch (e) {
-                return totalObj;
-            }
+            const rowInit: ExportInitRowT = {
+                contract,
+                seller,
+                agent,
+                vessel,
+                transport,
+                agreementNo,
+                invoice,
+                date,
+                blMode,
+                blNo,
+                portFrom,
+                portTo,
+                consignee,
+                msc,
+                product,
+                sort,
+                pack,
+                places,
+                placesTotal,
+                price,
+                priceTotal,
+                id,
+                placesLeft,
+                datePusan,
+                dateClose,
+                terms: 'EXW',
+            };
+
+            return getExportRow(rowInit);
         },
-        [],
-    );
-
-    checkTable(transformedTable, 'exportStorage');
-    tablesStore.setTable.exportStorage(transformedTable);
+    });
 };

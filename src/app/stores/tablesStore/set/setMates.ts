@@ -1,34 +1,32 @@
-import { checkTable } from '../../../logic/excel/checkTable/checkTable';
-import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { MateRowT } from '../../../types/typesTables';
 import letterStore from '../../letterStore/letterStore';
 import { selectSp } from '../../spsStore/select';
-import tablesStore from '../tablesStore';
 import { initAmount } from '../utils/initAmount';
+import { setTable } from './setTable';
 
 export const setMates = (table: any[][]) => {
     table.shift();
-    const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<MateRowT[]>((totalObj, row, index) => {
-        const [
-            reice,
-            konosament,
-            date,
-            vessel,
-            transport,
-            company,
-            product,
-            sort,
-            pack,
-            places,
-            placesTotal,
-            operation,
-        ] = row;
+    const transformed = setTable<MateRowT>({
+        table,
+        type: 'mates',
+        row: (r) => {
+            const [
+                reice,
+                konosament,
+                date,
+                vessel,
+                transport,
+                company,
+                product,
+                sort,
+                pack,
+                places,
+                placesTotal,
+                operation,
+            ] = r;
 
-        try {
-            const rowObj: MateRowT = {
-                type: 'mates',
+            return {
                 transport,
                 vessel: selectSp.vessel(vessel),
                 product: selectSp.product(product.toLowerCase()),
@@ -43,20 +41,9 @@ export const setMates = (table: any[][]) => {
                     places: initAmount(places, 0, 0),
                     placesTotal: initAmount(placesTotal, 0, 2),
                 },
-                index: index.toString(),
             };
+        },
+    });
 
-            if (operation === 'Образец') return totalObj;
-
-            totalObj.push(rowObj);
-            return totalObj;
-        } catch (e) {
-            return totalObj;
-        }
-    }, []);
-
-    checkTable(transformedTable, 'mates');
-    tablesStore.setTable.mates(transformedTable);
-
-    letterStore.setTransport(transformedTable[0].transport);
+    letterStore.setTransport(transformed[0].transport);
 };

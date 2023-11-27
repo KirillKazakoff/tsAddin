@@ -1,16 +1,14 @@
-import { checkTable } from '../../../logic/excel/checkTable/checkTable';
-import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { InvoiceKTIRowT } from '../../../types/typesTables';
-import tablesStore from '../tablesStore';
 import { selectSp } from '../../spsStore/select';
+import { setTable } from './setTable';
 
 export const setDischargeInvoices = (table: any[][]) => {
-    if (!table) return;
     table.shift();
-    const excluded = excludeOfEmptyRows(table);
 
-    const transformedTable = excluded.reduce<InvoiceKTIRowT[]>(
-        (totalObj, row, index) => {
+    setTable<InvoiceKTIRowT>({
+        table,
+        type: 'dischargeInvoices',
+        row: (r) => {
             const [
                 blNo,
                 seller,
@@ -23,36 +21,23 @@ export const setDischargeInvoices = (table: any[][]) => {
                 dateDischarge,
                 price,
                 priceTotal,
-            ] = row;
+            ] = r;
 
-            try {
-                const rowObj: InvoiceKTIRowT = {
-                    type: 'dischargeInvoices',
-                    agreementNo,
-                    invoiceNo,
-                    blNo,
-                    seller: selectSp.seller(seller),
-                    vessel: selectSp.vessel(vessel),
-                    product: selectSp.product(product),
-                    dateDischarge,
-                    dateInvoice,
-                    amount: {
-                        price,
-                        placesTotal,
-                        priceTotal,
-                    },
-                    index: index.toString(),
-                };
-
-                totalObj.push(rowObj);
-                return totalObj;
-            } catch (e) {
-                return totalObj;
-            }
+            return {
+                agreementNo,
+                invoiceNo,
+                blNo,
+                seller: selectSp.seller(seller),
+                vessel: selectSp.vessel(vessel),
+                product: selectSp.product(product),
+                dateDischarge,
+                dateInvoice,
+                amount: {
+                    price,
+                    placesTotal,
+                    priceTotal,
+                },
+            };
         },
-        [],
-    );
-
-    checkTable(transformedTable, 'dischargeInvoices');
-    tablesStore.setTable.dischargeInvoices(transformedTable);
+    });
 };
