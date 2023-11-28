@@ -4,8 +4,6 @@ import { getExportRow } from '../getExportRow';
 import { setTable } from './setTable';
 
 export const setExportStorage = (table: any[][]) => {
-    table.shift();
-
     setTable({
         table,
         type: 'exportStorage',

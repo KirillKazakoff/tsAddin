@@ -4,8 +4,6 @@ import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setNordmile = (table: any[][]) => {
-    table.shift();
-
     setTable<NordmileRowT>({
         table,
         type: 'nordmile',

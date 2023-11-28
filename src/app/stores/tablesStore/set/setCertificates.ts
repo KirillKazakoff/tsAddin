@@ -7,8 +7,6 @@ import { ExportRowT } from '../../../types/typesTables';
 import { setTable } from './setTable';
 
 export const setCertificates = (table: any[][]) => {
-    table.shift();
-
     setTable<ExportRowT>({
         table,
         type: 'certificates',

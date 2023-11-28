@@ -4,8 +4,6 @@ import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setSales = (table: any[][]) => {
-    table.shift();
-
     setTable<SalesRowT>({
         table,
         type: 'sales',

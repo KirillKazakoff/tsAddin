@@ -4,15 +4,15 @@ import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setInner = (table: any[][]) => {
-    table.shift();
     table.pop();
 
     setTable<InnerRowT>({
         table,
         type: 'inner',
         row: (r) => {
+            console.log(r);
             const [
-                client,
+                buyer,
                 seller,
                 id,
                 contractDate,
@@ -31,7 +31,7 @@ export const setInner = (table: any[][]) => {
             ] = r;
 
             return {
-                buyer: selectSp.clientRu(client),
+                buyer: selectSp.clientRu(buyer),
                 seller: selectSp.seller(seller),
                 id,
                 contractDate,

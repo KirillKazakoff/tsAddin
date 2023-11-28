@@ -13,10 +13,11 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     const utils = initExcelUtils(ws, '');
 
     // prettier-ignore
-    const { record: { row }, rows } = contract;
+    const { record: { row, mateRow }, rows } = contract;
     const { fields } = portLetterStore;
 
     const cells: CellObjT[] = [
+        { cell: 'Номер_письма', value: `Исх. номер: ${mateRow?.reice} - ${row.index}` },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },

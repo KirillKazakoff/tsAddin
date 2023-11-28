@@ -11,13 +11,14 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
     const utils = initExcelUtils(ws, '');
 
     const {
-        record: { row },
+        record: { row, mateRow },
         rows,
     } = contract;
     const { fields } = portLetterStore;
     const date = { delivery: getExcelDateNumeric(row.deliveryDate, 'ru') };
 
     const cells: CellObjT[] = [
+        { cell: 'Номер_письма', value: `Исх. номер: ${mateRow?.reice} - ${row.index}` },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },

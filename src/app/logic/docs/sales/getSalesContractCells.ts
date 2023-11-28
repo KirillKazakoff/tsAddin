@@ -1,4 +1,5 @@
 import { CellObjT } from '../../../types/typesExcelUtils';
+import { CellDeclarationT } from '../../../types/typesUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { SalesGroupT } from './groupBy/groupSalesContract';
 
@@ -7,7 +8,7 @@ export const getSalesContractCells = (contract: SalesGroupT) => {
 
     // prettier-ignore
     const cells = {
-        common: <CellObjT[]>[
+        common: [
             { cell: 'Контракт_номер', value: `(${r.id})` },
             { cell: 'Контракт_дата', value: `This contract is made on ${getExcelDateStr(r.contractDate, 'en')} between:` },
             { cell: 'Контракт_продавец', value: r.seller.name },
@@ -26,16 +27,16 @@ export const getSalesContractCells = (contract: SalesGroupT) => {
             { cell: 'Контракт_покупатель_печать_подвал_2', value: r.buyer.fullName },
             { cell: 'Контракт_доставка', value: `Supply of products is carried out on ${r.terms} ${r.port}` },
         ],
-        live: <CellObjT[]>[
+        live: [
             { cell: 'Контракт_предмет', value: `1.1. The Seller agrees to sell and the Buyer agrees to purchase goods produced by ${r.vessel} with following in table assortment: ` },
             { cell: 'Контракт_ЕТА', value: `ETA ${r.port} ${getExcelDateStr(r.dateETA, 'en')}` },
             { cell: 'Контракт_всего_места', value: `${contract.total.placesTotal.str} kg` },
             { cell: 'Контракт_всего_цена', value: `${contract.total.priceTotal.str} $` },
         ],
-        default: <CellObjT[]>[
+        default: [
             { cell: 'Контракт_всего_цена', value: `Total amount of this Contract is: ${contract.total.priceTotal.str} $` },
         ],
-    };
+    } satisfies CellDeclarationT<CellObjT>;
 
     if (r.isLive) {
         return [...cells.live, ...cells.common];

@@ -4,8 +4,6 @@ import { setTable } from './setTable';
 
 /* eslint-disable max-len */
 export const setExport = (table: any[][]) => {
-    table.shift();
-
     setTable({
         table,
         type: 'export',

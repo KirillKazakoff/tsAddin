@@ -5,8 +5,6 @@ import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setMates = (table: any[][]) => {
-    table.shift();
-
     const transformed = setTable<MateRowT>({
         table,
         type: 'mates',

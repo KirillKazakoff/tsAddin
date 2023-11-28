@@ -1,5 +1,6 @@
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { CellObjDoubleT as CellObjT } from '../../../../types/typesExcelUtils';
+import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getDeliveryDate, getExcelDateStr } from '../../../excel/utils/getExcelDate';
 import { formatCount, formatCurrencyLong } from '../../../utils/formatCount';
 import { ExportGroupT } from '../groupBy/groupAgByNo';
@@ -40,7 +41,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
 
     // prettier-ignore
     const cells = {
-        common: <CellObjT[]>[
+        common: [
             // Header
             {
                 cell: 'Контракт_дата',
@@ -155,7 +156,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             },
         ],
         default: {
-            common: <CellObjT[]>[
+            common: [
                 {
                     cell: 'Соглашение',
                     eng: `AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
@@ -177,7 +178,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     ru: `Покупатель/Buyer ______________________________${agent.eng.signatory}`,
                 },
             ],
-            exwCfr: <CellObjT[]>[
+            exwCfr: [
                 {
                     cell: 'Доставка_условия',
                     eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
@@ -189,7 +190,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country} не позднее чем ${date.delivery('ru')}`,
                 },
             ],
-            fca: <CellObjT[]>[
+            fca: [
                 {
                     cell: 'Доставка_условия',
                     eng: `3.1 Supply of products is carried out on FCA Terms.\nAcceptance- transfer of Goods by quantity and quality is made on the territory of: ${portTo.eng.countryFull} in ${portTo.eng.name}.`,
@@ -208,7 +209,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             ],
         },
         storage: {
-            common: <CellObjT[]>[
+            common: [
                 {
                     cell: 'Соглашение',
                     eng: `Supplementary AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
@@ -250,7 +251,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     ru: `Исполнитель/Contractor ______________________________${agent.eng.signatory}`,
                 },
             ],
-            certificates: <CellObjT[]>[
+            certificates: [
                 {
                     cell: 'Обязательство_хранение',
                     eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.additional.cohc, 'eng')} for the following quantity:`,
@@ -258,7 +259,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 },
             ],
         },
-    };
+    } satisfies CellDeclarationT<CellObjT>;
 
     const resArr = [...cells.common];
 

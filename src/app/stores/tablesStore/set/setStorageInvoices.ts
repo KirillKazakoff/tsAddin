@@ -3,8 +3,6 @@ import { selectSp } from '../../spsStore/select';
 import { setTable } from './setTable';
 
 export const setStorageInvoices = (table: any[][]) => {
-    table.shift();
-
     setTable<InvoiceKTIRowT>({
         table,
         type: 'storageInvoices',

@@ -3,6 +3,7 @@ import {
     CellObjDoubleT as CellDoubleT,
     CellObjT as CellSingleT,
 } from '../../../../types/typesExcelUtils';
+import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 import { ExportGroupT } from '../groupBy/groupAgByNo';
 
@@ -32,7 +33,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
 
     // prettier-ignore
     const doubleObj = {
-        common: <CellDoubleT[]>[
+        common: [
             {
                 cell: 'Инвойс_контракт',
                 eng: `to the Contract of sale № ${contract.contractNo}`,
@@ -104,7 +105,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `${terms}, ${portTo.ru.name}`,
             },
         ],
-        exportDefault: <CellDoubleT[]>[
+        exportDefault: [
             {
                 cell: 'Инвойс',
                 eng: `Commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
@@ -122,7 +123,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 isEmptyTitle: exportContractStore.currentTerms === 'CFR',
             },
         ],
-        exportStorage: <CellDoubleT[]>[
+        exportStorage: [
             {
                 cell: 'Инвойс',
                 eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
@@ -134,16 +135,16 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `к Дополнительному соглашению No. ${agreementNo} от ${date.agreement('ru')}`,
             },
         ],
-    };
+    } satisfies CellDeclarationT<CellDoubleT>;
 
     const singleObj = {
-        common: <CellSingleT[]>[
+        common: [
             {
                 cell: 'Инвойс_подписант',
                 value: `Signed by ${exportContractStore.fields.podpisant.eng.name} / ${exportContractStore.fields.podpisant.ru.name}`,
             },
         ],
-        exportDefault: <CellSingleT[]>[
+        exportDefault: [
             {
                 cell: 'Инвойс_банк_получателя',
                 value: `Beneficiary Bank: ${bankSeller.eng.name}`,
@@ -165,7 +166,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 value: `A/C: ${bankSeller.accountNo}`,
             },
         ],
-    };
+    } satisfies CellDeclarationT<CellSingleT>;
 
     const fcaSplice = ['Инвойс_откуда', 'Инвойс_декларация'];
 
