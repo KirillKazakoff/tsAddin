@@ -4,21 +4,25 @@ import type { CellObjT } from '../../../../types/typesExcelUtils';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initPortLetterRows } from './initPortLetterRows';
-import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
+import { getExcelDateNumeric, getNowDate } from '../../../excel/utils/getExcelDate';
+import { indexToStr } from '../../../utils/indexToStr';
 
 export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
     const ws = book.getWorksheet('Port_Letter');
     const utils = initExcelUtils(ws, '');
 
-    const {
-        record: { row, mateRow },
-        rows,
-    } = contract;
+    // prettier-ignore
+    const { record: { row, mateRow }, rows, index } = contract;
     const { fields } = portLetterStore;
     const date = { delivery: getExcelDateNumeric(row.deliveryDate, 'ru') };
 
     const cells: CellObjT[] = [
-        { cell: 'Номер_письма', value: `Исх. номер: ${mateRow?.reice} - ${row.index}` },
+        {
+            cell: 'Номер_письма',
+            value: `Исх. №: ${mateRow?.reice} - ${indexToStr(index)} от ${
+                fields.dateLetter || getNowDate()
+            }`,
+        },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
@@ -45,7 +49,6 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
 
         { cell: 'Подписант_комментарий', value: fields.podpisant.ru.comment },
         { cell: 'Подписант', value: fields.podpisant.ru.name },
-        { cell: 'Письмо_дата', value: fields.dateLetter },
     ];
 
     initPortLetterRows(rows, utils);

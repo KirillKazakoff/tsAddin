@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import { ExportRowT } from '../../../../types/typesTables';
-import { groupTotal } from '../../../utils/groupTotal';
+import { groupTotal } from '../../../utils/groupify/groupTotal';
 import { calcSamples } from '../calcSamples';
 import { initAssortimentObj } from '../initAssortimentObj';
 import { isProductForAssortiment } from './isProductForAssortiment';

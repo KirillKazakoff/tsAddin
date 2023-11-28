@@ -2,7 +2,7 @@
 import { addToAmount } from '../../../stores/tablesStore/utils/initAmount';
 import { ProductT, ProductionInfoT } from '../../../types/typesLetter';
 import { MateRowT } from '../../../types/typesTables';
-import { groupify } from '../../utils/groupify';
+import { groupify } from '../../utils/groupify/groupify';
 import { isStOff } from './isStOff';
 
 const initProduct = (tableRow: MateRowT): ProductT => {

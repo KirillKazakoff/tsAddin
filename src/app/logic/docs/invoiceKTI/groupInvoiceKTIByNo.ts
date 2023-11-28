@@ -1,6 +1,6 @@
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { groupTotal } from '../../utils/groupTotal';
-import { groupByBl } from '../exportContract/groupBy/groupByBl';
+import { groupByBl } from '../bl/groupByBl';
+import { groupTotal } from '../../utils/groupify/groupTotal';
 
 export const groupInvoiceKTIByNo = () => {
     const { dischargeInvoicesT, storageInvoicesT, exportStorageT } = tablesStore;

@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
-import { TableKeyT } from '../../stores/tablesStore/tablesStore';
+import { TableKeyT } from '../../../stores/tablesStore/tablesStore';
 import {
     AmountObjT,
-    addToAmountObj,
     initAmountObj,
-} from '../../stores/tablesStore/utils/initAmount';
-import { Paths } from '../../types/typesUtils';
-import { COHCT } from '../docs/exportContract/groupBy/setCOHCStatus';
+    addToAmountObj,
+} from '../../../stores/tablesStore/utils/initAmount';
+import { Paths } from '../../../types/typesUtils';
+import { COHCT } from '../../docs/exportContract/setCOHCStatus';
 import { groupify } from './groupify';
 
 type RowExtT = { amount?: AmountObjT; type: TableKeyT };
@@ -24,6 +24,7 @@ export type OutputObjGroupT<R, K> = {
     total?: AmountObjT;
     additional: AdditionalT;
     groupedBy?: Record<P<K>, Record<string, OutputObjGroupT<R, K>>>;
+    index: number;
 };
 
 export type OutputGroupT<R, K> = {
@@ -33,6 +34,7 @@ export type OutputGroupT<R, K> = {
     total?: AmountObjT;
     additional?: AdditionalT;
     groupedBy?: Record<P<K>, OutputGroupT<R, K>[]>;
+    index: number;
 };
 
 type AssociativeT<R, K> = Record<string, OutputObjGroupT<R, K>>;
@@ -47,7 +49,9 @@ export type InputGroupT<R> = {
 
 type IExtT<R> = (row: R) => InputGroupT<R>;
 
-const arrayifyRecursive = <R, K>(group: OutputObjGroupT<R, K>) => {
+const arrayifyRecursive = <R, K>(group: OutputObjGroupT<R, K>, i: number) => {
+    group.index = i + 1;
+
     Object.keys(group.groupedBy).forEach((key) => {
         const associative = group.groupedBy[key];
         const associativeArray = Object.values(associative) as any;
@@ -55,14 +59,16 @@ const arrayifyRecursive = <R, K>(group: OutputObjGroupT<R, K>) => {
         group.groupedBy[key] = associativeArray;
 
         if (associativeArray[0]?.groupedBy) {
-            associativeArray.forEach((subGroup) => arrayifyRecursive(subGroup));
+            associativeArray.forEach((subGroup, subI) => {
+                arrayifyRecursive(subGroup, subI);
+            });
         }
     });
 };
 
 export const arrayify = <R, K>(total: AssociativeT<R, K>): OutputGroupT<R, K>[] => {
-    const groupArray = Object.values(total).map((group) => {
-        arrayifyRecursive(group);
+    const groupArray = Object.values(total).map((group, i) => {
+        arrayifyRecursive(group, i);
         return group;
     });
 
@@ -82,6 +88,7 @@ const groupifyOutput = <R extends RowExtT, K>(
         groupedBy: {} as Record<P<K>, Record<string, OutputObjGroupT<R, K>>>,
         total: initAmountObj(row.type),
         additional,
+        index: 0,
     };
 
     const group = groupify(associative, init, code);

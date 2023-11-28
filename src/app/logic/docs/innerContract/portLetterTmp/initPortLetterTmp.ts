@@ -6,6 +6,8 @@ import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtil
 import { InnerGroupT } from '../groupByContractNo';
 import { initPortLetterRows } from './initPortLetterRows';
 import spsStore from '../../../../stores/spsStore/spsStore';
+import { indexToStr } from '../../../utils/indexToStr';
+import { getNowDate } from '../../../excel/utils/getExcelDate';
 
 export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     const phones = spsStore.confidentialPhones;
@@ -13,11 +15,16 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     const utils = initExcelUtils(ws, '');
 
     // prettier-ignore
-    const { record: { row, mateRow }, rows } = contract;
+    const { record: { row, mateRow }, rows, index } = contract;
     const { fields } = portLetterStore;
 
     const cells: CellObjT[] = [
-        { cell: 'Номер_письма', value: `Исх. номер: ${mateRow?.reice} - ${row.index}` },
+        {
+            cell: 'Номер_письма',
+            value: `Исх. №: ${mateRow?.reice} - ${indexToStr(index)} от ${
+                fields.dateLetter || getNowDate()
+            }`,
+        },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
@@ -81,7 +88,6 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
             value: `${fields.podpisant.ru.position}`,
         },
         { cell: 'Подписант', value: fields.podpisant.ru.name },
-        { cell: 'Письмо_дата', value: fields.dateLetter },
     ];
 
     initPortLetterRows(rows, utils);

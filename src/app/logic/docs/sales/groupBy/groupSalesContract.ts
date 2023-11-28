@@ -1,5 +1,5 @@
 import tablesStore from '../../../../stores/tablesStore/tablesStore';
-import { groupTotal } from '../../../utils/groupTotal';
+import { groupTotal } from '../../../utils/groupify/groupTotal';
 
 export const groupSalesContract = () => {
     const contractsNew = groupTotal({

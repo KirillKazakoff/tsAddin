@@ -5,7 +5,7 @@ import {
 } from '../../../../types/typesExcelUtils';
 import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
-import { ExportGroupT } from '../groupBy/groupAgByNo';
+import { ExportGroupT } from '../groupAgByNo';
 
 export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     const {

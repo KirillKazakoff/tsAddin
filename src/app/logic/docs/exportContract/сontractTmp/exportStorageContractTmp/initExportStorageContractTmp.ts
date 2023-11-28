@@ -3,7 +3,7 @@ import exportContractStore from '../../../../../stores/docsStores/exportContract
 import { initExportStorageContractRowsR } from './initExportStorageContractRowsR';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
 import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { ExportGroupT } from '../../groupBy/groupAgByNo';
+import { ExportGroupT } from '../../groupAgByNo';
 
 export const initExportStorageContractTmp = async (
     utils: CellUtilsT<string>,

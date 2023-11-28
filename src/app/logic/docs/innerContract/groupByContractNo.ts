@@ -1,9 +1,10 @@
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { groupTotal } from '../../utils/groupTotal';
+import { groupTotal } from '../../utils/groupify/groupTotal';
 
 export const groupByContractNo = () => {
     const rows = tablesStore.innerT.map((row) => {
         const mateRow = tablesStore.matesT.find((r) => r.konosament === row.konosament);
+
         return {
             row,
             mateRow,
@@ -13,7 +14,7 @@ export const groupByContractNo = () => {
         };
     });
 
-    return groupTotal({
+    const res = groupTotal({
         rows,
         input: ({ row }) => ({
             code: row.id,
@@ -25,6 +26,8 @@ export const groupByContractNo = () => {
             },
         }),
     });
+
+    return res;
 };
 
 export type InnerGroupT = ReturnType<typeof groupByContractNo>[number];

@@ -1,7 +1,7 @@
-import { TableKeyT } from '../../../../stores/tablesStore/tablesStore';
-import { AmountObjT } from '../../../../stores/tablesStore/utils/initAmount';
-import { ProductionT, ProductionSalesT } from '../../../../types/typesSP';
-import { groupTotal } from '../../../utils/groupTotal';
+import { TableKeyT } from '../../../stores/tablesStore/tablesStore';
+import { AmountObjT } from '../../../stores/tablesStore/utils/initAmount';
+import { ProductionT, ProductionSalesT } from '../../../types/typesSP';
+import { groupTotal } from '../../utils/groupify/groupTotal';
 
 type RowBlExtendT = {
     blNo: string;

@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { ExportRowT } from '../../../../types/typesTables';
-import { groupTotal } from '../../../utils/groupTotal';
+import { groupTotal } from '../../../utils/groupify/groupTotal';
 import { initAssortimentObj } from '../initAssortimentObj';
 import { isProductForAssortiment } from './isProductForAssortiment';
 

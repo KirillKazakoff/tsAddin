@@ -3,8 +3,8 @@ import { CellObjDoubleT as CellObjT } from '../../../../types/typesExcelUtils';
 import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getDeliveryDate, getExcelDateStr } from '../../../excel/utils/getExcelDate';
 import { formatCount, formatCurrencyLong } from '../../../utils/formatCount';
-import { ExportGroupT } from '../groupBy/groupAgByNo';
-import { matchCOHCLanguage } from '../groupBy/setCOHCStatus';
+import { ExportGroupT } from '../groupAgByNo';
+import { matchCOHCLanguage } from '../setCOHCStatus';
 
 export const getExportContractCells = (agreement: ExportGroupT) => {
     const {

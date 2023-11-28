@@ -42,3 +42,11 @@ export const getDeliveryDate = (
 
     return res;
 };
+
+export const getNowDate = () => {
+    return new Date().toLocaleString('ru', {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+    });
+};

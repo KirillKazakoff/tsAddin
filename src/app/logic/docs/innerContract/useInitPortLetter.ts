@@ -25,7 +25,6 @@ export const useInitPortLetter = () => {
         validateCb(errors, values) {
             if (!values.portRu) errors.portRu = 'valueMissing';
             if (!values.podpisant) errors.podpisant = 'valueMissing';
-            if (!values.dateLetter) errors.dateLetter = 'valueMissing';
             if (!values.termsPort) errors.termsPort = 'valueMissing';
 
             if (!values.termsPort || !values.termsPort.includes('CFR')) {

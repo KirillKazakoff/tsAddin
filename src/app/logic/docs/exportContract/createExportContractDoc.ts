@@ -2,7 +2,7 @@ import exportContractStore from '../../../stores/docsStores/exportContractStore'
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
-import type { ExportGroupT } from './groupBy/groupAgByNo';
+import type { ExportGroupT } from './groupAgByNo';
 import { initExportInvoicesTmps } from './invoicesTmps/initExportInvoicesTmps';
 import { initExportContractTmp } from './сontractTmp/initExportContractTmp';
 

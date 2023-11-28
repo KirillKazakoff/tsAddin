@@ -1,6 +1,6 @@
 import { ExportRowT } from '../../../types/typesTables';
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
-import { BlGroupT } from '../exportContract/groupBy/groupByBl';
+import { BlGroupT } from './groupByBl';
 
 export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Bl_массив' });

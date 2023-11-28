@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { ExportRowT } from '../../../../types/typesTables';
+import { ExportRowT } from '../../../types/typesTables';
 
 export type COHCT = 'no' | 'cohc' | 'co' | 'hc';
 

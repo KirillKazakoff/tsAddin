@@ -10,7 +10,6 @@ export const setInner = (table: any[][]) => {
         table,
         type: 'inner',
         row: (r) => {
-            console.log(r);
             const [
                 buyer,
                 seller,

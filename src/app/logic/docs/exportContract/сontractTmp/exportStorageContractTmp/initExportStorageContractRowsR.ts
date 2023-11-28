@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { ExportGroupT } from '../../groupBy/groupAgByNo';
+import { ExportGroupT } from '../../groupAgByNo';
 
 export const initExportStorageContractRowsR = (
     blGrouped: ExportGroupT[],

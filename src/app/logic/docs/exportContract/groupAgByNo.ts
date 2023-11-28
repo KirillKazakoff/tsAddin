@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
 import _ from 'lodash';
-import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import { groupTotal } from '../../../utils/groupTotal';
-import { setMSC } from '../../../../stores/tablesStore/utils/setMSC';
+import exportContractStore from '../../../stores/docsStores/exportContractStore';
+import { setMSC } from '../../../stores/tablesStore/utils/setMSC';
 import { setCOHCStatus } from './setCOHCStatus';
+import { groupTotal } from '../../utils/groupify/groupTotal';
 
 export const groupAgByNo = () => {
     const res = groupTotal({

@@ -3,7 +3,7 @@ import { Cell, Workbook } from 'exceljs';
 import { initExportInvoiceRows } from './initExportInvoiceRows';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initExportInvoiceRowsFCA } from './initExportInvoiceRowsFCA';
-import { ExportGroupT } from '../groupBy/groupAgByNo';
+import { ExportGroupT } from '../groupAgByNo';
 
 export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) => {
     const xls64 = await book.xlsx.writeBuffer();

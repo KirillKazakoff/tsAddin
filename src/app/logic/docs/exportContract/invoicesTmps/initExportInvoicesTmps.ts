@@ -6,7 +6,7 @@ import { getExportInvoiceCells } from './getExportInvoiceCells';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { mergeExportInvoice } from './mergeExportInvoices';
-import { ExportGroupT } from '../groupBy/groupAgByNo';
+import { ExportGroupT } from '../groupAgByNo';
 
 export const initExportInvoicesTmps = async (
     book: Workbook,

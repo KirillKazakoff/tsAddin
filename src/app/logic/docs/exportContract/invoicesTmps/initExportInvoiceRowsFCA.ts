@@ -1,5 +1,5 @@
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { ExportGroupT } from '../groupBy/groupAgByNo';
+import { ExportGroupT } from '../groupAgByNo';
 
 export const initExportInvoiceRowsFCA = (
     invoice: ExportGroupT,

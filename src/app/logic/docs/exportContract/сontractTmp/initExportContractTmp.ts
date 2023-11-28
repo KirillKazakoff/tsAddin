@@ -6,7 +6,7 @@ import { initExportStorageContractTmp } from './exportStorageContractTmp/initExp
 import { getExportContractCells } from './getExportContractCells.ts';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { setPrintArea } from '../../../excel/utils/excelUtilsObj/setPrintArea';
-import { ExportGroupT } from '../groupBy/groupAgByNo';
+import { ExportGroupT } from '../groupAgByNo';
 
 export const initExportContractTmp = async (book: Workbook, agreement: ExportGroupT) => {
     const ws = book.getWorksheet('Export_Contract');

@@ -3,7 +3,7 @@ import { useInitSection } from '../../../components/Form/useInitSection';
 import { useMyFormik } from '../../../components/Form/useMyFormik';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import { createExportContractDoc } from './createExportContractDoc';
-import { groupAgByNo } from './groupBy/groupAgByNo';
+import { groupAgByNo } from './groupAgByNo';
 
 export const useInitContractSection = () => {
     const formik = useMyFormik({
