@@ -1,3 +1,4 @@
+import { isNumber } from '../../../logic/utils/isNumber';
 import { MateRowT } from '../../../types/typesTables';
 import letterStore from '../../letterStore/letterStore';
 import { selectSp } from '../../spsStore/select';
@@ -24,11 +25,14 @@ export const setMates = (table: any[][]) => {
                 operation,
             ] = r;
 
+            let parsedReice: string | number = window.parseInt(reice, 10);
+            parsedReice = isNumber(parsedReice) ? parsedReice : '';
+
             return {
                 transport,
                 vessel: selectSp.vessel(vessel),
                 product: selectSp.product(product.toLowerCase()),
-                reice,
+                reice: parsedReice,
                 konosament,
                 date,
                 company,

@@ -33,7 +33,7 @@ export type TableStatusT = {
 
 // Tables
 export interface MateRowT extends CommonRowT {
-    reice: string;
+    reice: string | number;
     konosament: string;
     date: string;
     transport: string;

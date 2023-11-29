@@ -1,5 +1,9 @@
+/* eslint-disable no-param-reassign */
 import tablesStore from '../../../stores/tablesStore/tablesStore';
+import { getNowDate } from '../../excel/utils/getExcelDate';
 import { groupTotal } from '../../utils/groupify/groupTotal';
+import { indexToStr } from '../../utils/indexToStr';
+import portLetterStore from '../../../stores/docsStores/portLetterStore';
 
 export const groupByContractNo = () => {
     const rows = tablesStore.innerT.map((row) => {
@@ -16,13 +20,25 @@ export const groupByContractNo = () => {
 
     const res = groupTotal({
         rows,
-        input: ({ row }) => ({
+        input: ({ row, mateRow }) => ({
             code: row.id,
             groupedBy: {
                 request: {
                     code:
                         row.product.codeName + row.vessel.codeName + row.sort + row.pack,
                 },
+            },
+            additional: { portLetterNo: '' },
+            groupModify: (group) => {
+                const letterIndex = `${indexToStr(group.index)} от ${
+                    portLetterStore.fields.dateLetter || getNowDate()
+                }`;
+
+                group.additional.portLetterNo = `Исх. № ${
+                    mateRow?.reice ? `${mateRow.reice} - ` : ''
+                }${letterIndex}`;
+
+                return true;
             },
         }),
     });

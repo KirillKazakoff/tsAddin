@@ -13,6 +13,7 @@ type RowExtT = { amount?: AmountObjT; type: TableKeyT };
 type AdditionalT = Partial<{
     samples: { rows: number[]; total: number };
     cohc: COHCT;
+    portLetterNo: string;
 }>;
 
 type P<T> = Paths<T>;
@@ -49,9 +50,7 @@ export type InputGroupT<R> = {
 
 type IExtT<R> = (row: R) => InputGroupT<R>;
 
-const arrayifyRecursive = <R, K>(group: OutputObjGroupT<R, K>, i: number) => {
-    group.index = i + 1;
-
+const arrayifyRecursive = <R, K>(group: OutputObjGroupT<R, K>) => {
     Object.keys(group.groupedBy).forEach((key) => {
         const associative = group.groupedBy[key];
         const associativeArray = Object.values(associative) as any;
@@ -59,16 +58,16 @@ const arrayifyRecursive = <R, K>(group: OutputObjGroupT<R, K>, i: number) => {
         group.groupedBy[key] = associativeArray;
 
         if (associativeArray[0]?.groupedBy) {
-            associativeArray.forEach((subGroup, subI) => {
-                arrayifyRecursive(subGroup, subI);
+            associativeArray.forEach((subGroup) => {
+                arrayifyRecursive(subGroup);
             });
         }
     });
 };
 
 export const arrayify = <R, K>(total: AssociativeT<R, K>): OutputGroupT<R, K>[] => {
-    const groupArray = Object.values(total).map((group, i) => {
-        arrayifyRecursive(group, i);
+    const groupArray = Object.values(total).map((group) => {
+        arrayifyRecursive(group);
         return group;
     });
 
@@ -92,6 +91,7 @@ const groupifyOutput = <R extends RowExtT, K>(
     };
 
     const group = groupify(associative, init, code);
+    group.index += 1;
 
     addToAmountObj(group.total, row.amount);
     group.rows.push(row);
@@ -109,6 +109,7 @@ const groupRecursive = <R extends RowExtT, K>(
     }
 
     const group = groupifyOutput(input.code, output, row, input.additional);
+    group.index = Object.values(output).findIndex((g) => g.code === group.code) + 1;
 
     if (input?.groupModify) {
         const goNext = input?.groupModify(group);
@@ -120,7 +121,6 @@ const groupRecursive = <R extends RowExtT, K>(
 
     Object.entries(input.groupedBy).forEach(([key, subInput]) => {
         const subOutput = groupify(output[group.code].groupedBy, {}, key);
-
         groupRecursive(subInput as InputGroupT<R>, subOutput, row);
     });
 };
