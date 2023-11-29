@@ -1,5 +1,6 @@
 import { InnerRowT } from '../../../types/typesTables';
 import { selectSp } from '../../spsStore/select';
+import { innerDictionary } from '../utils/headerRecognition';
 import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
@@ -7,11 +8,11 @@ export const setInner = (table: any[][]) => {
     table.pop();
 
     setTable<InnerRowT>({
+        rowSettings: innerDictionary,
         table,
         type: 'inner',
         row: (r) => {
-            console.log(r);
-            const [
+            const {
                 buyer,
                 seller,
                 id,
@@ -28,10 +29,10 @@ export const setInner = (table: any[][]) => {
                 bank,
                 deliveryDate,
                 paymentDate,
-            ] = r;
+            } = r;
 
             return {
-                buyer: selectSp.clientRu(buyer),
+                buyer: selectSp.clientRu(r.buyer),
                 seller: selectSp.seller(seller),
                 id,
                 contractDate,

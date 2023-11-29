@@ -2,11 +2,15 @@ import { checkTable } from '../../../logic/excel/checkTable/checkTable';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import { CommonRowT } from '../../../types/typesTables';
 import tablesStore, { TableKeyT } from '../tablesStore';
-import { headerRecognition } from '../utils/headerRecognition';
+import { headerRecognition, innerDictionary } from '../utils/headerRecognition';
 
-export const setTable = <R extends CommonRowT>(settings: {
+export const setTable = <
+    R extends CommonRowT,
+    T extends Record<string, number>,
+>(settings: {
     table: any[][];
-    row: (row: any) => Omit<R, 'type' | 'index'>;
+    rowSettings: T;
+    row: (row: Record<keyof T, string>) => Omit<R, 'type' | 'index'>;
     type: TableKeyT;
 }) => {
     const { table, row: getRow, type } = settings;
@@ -16,21 +20,15 @@ export const setTable = <R extends CommonRowT>(settings: {
 
     const transformedTable = excluded.reduce<R[]>((total, rowInit, i) => {
         try {
-            // if (type === 'inner') {
-            //     const dictionary = headerRecognition(headers);
+            const dictionary = headerRecognition(settings.rowSettings, headers);
 
-            //     Object.keys(dictionary).forEach((key) => {
-            //         const index = dictionary[key];
-            //         dictionary[key] = rowInit[index];
-            //     });
-
-            //     const initObj = { index: i.toString(), type };
-            //     const row = { ...getRow(dictionary), ...initObj };
-            //     total.push(row as any);
-            // }
+            Object.keys(dictionary).forEach((key) => {
+                const index = dictionary[key];
+                dictionary[key] = rowInit[index];
+            });
 
             const initObj = { index: i.toString(), type };
-            const row = { ...getRow(rowInit), ...initObj };
+            const row = { ...getRow(dictionary as any), ...initObj };
             total.push(row as any);
         } catch (e) {
             return total;

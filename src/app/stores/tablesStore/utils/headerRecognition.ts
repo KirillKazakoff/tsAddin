@@ -1,33 +1,47 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-param-reassign */
 
-export const headerRecognition = (headers: string[]) => {
-    const dictionary = {
-        buyer: ['Покупатель', 0],
-        seller: ['Продавец', 0],
-        id: ['Договор поставки', 0],
-        contractDate: ['Дата Договора', 0],
-        transport: ['Транспорт', 0],
-        vessel: ['Изготовитель', 0],
-        product: ['Продукция', 0],
-        sort: ['Сорт', 0],
-        pack: ['Упаковка', 0],
-        konosament: ['Коносамент', 0],
-        placesTotal: ['Объем, кг', 0],
-        price: ['Цена', 0],
-        priceTotal: ['Сумма', 0],
-        bank: ['Банк', 0],
-        deliveryDate: ['Дата поставки', 0],
-        paymentDate: ['Дата оплаты', 0],
-    };
+export const innerDictionary = {
+    buyer: 'Покупатель',
+    seller: 'Продавец',
+    id: 'Договор поставки',
+    contractDate: 'Дата Договора',
+    transport: 'Транспорт',
+    vessel: 'Изготовитель',
+    product: 'Продукция',
+    sort: 'Сорт',
+    pack: 'Упаковка',
+    konosament: 'Коносамент',
+    placesTotal: 'Объем, кг',
+    price: 'Цена',
+    priceTotal: 'Сумма',
+    bank: 'Банк',
+    deliveryDate: 'Дата поставки',
+    paymentDate: 'Дата оплаты',
+};
 
-    Object.values(dictionary).forEach((tuple) => {
+// prettier-ignore
+type RecordInputT = Record<string, string>;
+type RecordMiddleT<T extends RecordInputT> = Record<keyof T, (string | number)[]>;
+type RecordOutputT<T extends RecordInputT> = Record<keyof T, number>;
+
+export const headerRecognition = <T extends RecordInputT>(
+    rowSettings: T,
+    headers: string[],
+): RecordOutputT<T> => {
+    const arrayed = Object.keys(rowSettings).reduce<RecordMiddleT<T>>((total, key) => {
+        const header = rowSettings[key];
+        total[key as keyof T] = [header, 0];
+        return total;
+    }, {} as RecordMiddleT<T>);
+
+    Object.values(arrayed).forEach((tuple) => {
         tuple[1] = headers.findIndex((title) => title === tuple[0]);
     });
 
-    Object.keys(dictionary).forEach((key) => {
-        dictionary[key] = dictionary[key][1];
+    Object.keys(arrayed).forEach((key) => {
+        arrayed[key as keyof T] = arrayed[key][1] as any;
     });
 
-    return dictionary;
+    return arrayed as any;
 };
