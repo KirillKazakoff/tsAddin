@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
+import { nanoid } from 'nanoid';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { getNowDate } from '../../excel/utils/getExcelDate';
+import { getExcelDateNumeric, getNowDate } from '../../excel/utils/getExcelDate';
 import { groupTotal } from '../../utils/groupify/groupTotal';
 import { indexToStr } from '../../utils/indexToStr';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
@@ -23,9 +24,34 @@ export const groupByContractNo = () => {
         input: ({ row, mateRow }) => ({
             code: row.id,
             groupedBy: {
+                noGroup: {
+                    code: nanoid(),
+                    additional: { konosamentGrouped: '' },
+                    groupModify: (group) => {
+                        group.additional.konosamentGrouped = `${
+                            mateRow.konosament
+                        } от ${getExcelDateNumeric(mateRow.date, 'ru')}`;
+                        return true;
+                    },
+                },
                 request: {
                     code:
                         row.product.codeName + row.vessel.codeName + row.sort + row.pack,
+                },
+                portLetter: {
+                    code:
+                        row.product.codeName + row.vessel.codeName + row.sort + row.pack,
+                    additional: { konosamentGrouped: '' },
+                    groupModify: (group) => {
+                        // prettier-ignore
+                        if (group.additional.konosamentGrouped.includes(mateRow.konosament)) {
+                            return true;
+                        }
+                        group.additional.konosamentGrouped += `${
+                            mateRow.konosament
+                        } от ${getExcelDateNumeric(mateRow.date, 'ru')} \n`;
+                        return true;
+                    },
                 },
             },
             additional: { portLetterNo: '' },

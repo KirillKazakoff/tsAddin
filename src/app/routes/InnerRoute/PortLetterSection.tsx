@@ -39,6 +39,7 @@ const SectionComponent = observer(() => {
                     <DischargeTerms />
                     <CheckBox title={'Включить картинки:'} name='isPictures' />
                     <CheckBox title={'Контрольный звонок'} name='isControlPhone' />
+                    <CheckBox title={'Группировка коносаменты'} name='isGroupingKns' />
                 </div>
 
                 <h3 className='title port-letter-title'>Загрузить письма в порт</h3>

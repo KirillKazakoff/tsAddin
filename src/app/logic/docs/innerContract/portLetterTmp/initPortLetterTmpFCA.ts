@@ -11,7 +11,7 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
     const utils = initExcelUtils(ws, '');
 
     // prettier-ignore
-    const { record: { row }, rows, additional: { portLetterNo } } = contract;
+    const { record: { row }, additional: { portLetterNo } } = contract;
     const { fields } = portLetterStore;
     const date = { delivery: getExcelDateNumeric(row.deliveryDate, 'ru') };
 
@@ -48,7 +48,7 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
         { cell: 'Подписант', value: fields.podpisant.ru.name },
     ];
 
-    initPortLetterRows(rows, utils);
+    initPortLetterRows(contract, utils);
 
     cells.forEach((cell) => utils.setCell(cell));
 };

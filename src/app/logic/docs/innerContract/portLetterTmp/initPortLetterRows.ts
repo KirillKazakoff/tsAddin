@@ -2,16 +2,16 @@
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import pageStatusStore from '../../../../stores/pageStatusStore.ts/pageStatusStore';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
-import { InnerCombRowT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupByContractNo';
 
-export const initPortLetterRows = (rows: InnerCombRowT[], utils: CellUtilsT<''>) => {
+export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Письмо_массив' });
+    const { noGroup, portLetter } = contract.groupedBy;
 
     insertRows({
-        records: rows,
+        records: portLetterStore.fields.isGroupingKns ? portLetter : noGroup,
         deleteStartAmount: 1,
-        rowSettings: ({ row: r, mateRow }) => {
+        rowSettings: ({ record: { mateRow, row: r }, total, additional }) => {
             const date = mateRow?.date;
             if (!date) {
                 pageStatusStore.setPageStatus('mismatchKonosamentId', r.konosament);
@@ -21,12 +21,12 @@ export const initPortLetterRows = (rows: InnerCombRowT[], utils: CellUtilsT<''>)
             const noPack = +r.pack === 1;
             // prettier-ignore
             const fields = {
-                konosament: `${r.konosament} от ${getExcelDateNumeric(mateRow.date, 'ru')}`,
+                konosament: additional.konosamentGrouped,
                 product: `${r.product.ru.name} ${r.sort}`,
                 vessel: r.vessel.ru.name,
                 pack: noPack ? '-' : `1/${r.pack} кг `,
-                places: noPack ? '-' : r.amount.places.count,
-                placesTotal: r.amount.placesTotal.count,
+                places: noPack ? '-' : total.places.count,
+                placesTotal: total.placesTotal.count,
             };
 
             if (portLetterStore.fields.termsPort === 'FCA') {
