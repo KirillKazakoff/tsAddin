@@ -1,7 +1,6 @@
 import { getExportRow } from '../getExportRow';
 import { setTable } from './setTable';
 
-/* eslint-disable max-len */
 export const setExport = (table: any[][]) => {
     setTable({
         table,

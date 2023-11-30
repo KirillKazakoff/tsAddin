@@ -13,7 +13,7 @@ export const initExportInvoiceRows = (
 
     insertRows({
         deleteStartAmount: 2,
-        records: invoice.groupedBy.productSort,
+        records: invoice.groupedBy.productPack,
         rowSettings: ({ record: r, total }) => {
             const fields = {
                 empty1: '',

@@ -1,3 +1,4 @@
+import { isNumber } from '../../../logic/utils/isNumber';
 import { MateRowT } from '../../../types/typesTables';
 import letterStore from '../../letterStore/letterStore';
 import { selectSp } from '../../spsStore/select';
@@ -26,7 +27,7 @@ export const setMates = (table: any[][]) => {
             transport: r.transport,
             vessel: selectSp.vessel(r.vessel),
             product: selectSp.product(r.product.toLowerCase()),
-            reice: r.reice,
+            reice: isNumber(r.reice) ? r.reice : '',
             konosament: r.konosament,
             date: r.date,
             company: r.company,
