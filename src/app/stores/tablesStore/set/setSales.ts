@@ -1,57 +1,55 @@
-import { SalesRowT } from '../../../types/typesTables';
 import { selectSp } from '../../spsStore/select';
 import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setSales = (table: any[][]) => {
-    setTable<SalesRowT>({
+    const tables = setTable({
         table,
         type: 'sales',
-        row: (r) => {
-            const [
-                id,
-                contractDate,
-                seller,
-                buyer,
-                blNo,
-                transport,
-                dateETA,
-                port,
-                terms,
-                vessel,
-                product,
-                sort,
-                places,
-                pack,
-                placesTotal,
-                price,
-                priceTotal,
-                certificateDate,
-            ] = r;
-
-            return {
-                id,
-                contractDate,
-                seller: selectSp.agent(seller),
-                buyer: selectSp.consignee(buyer),
-                blNo: blNo || '-',
-                transport,
-                dateETA,
-                port,
-                terms,
-                vessel,
-                product: selectSp.productSales(product),
-                sort,
-                pack,
-                amount: {
-                    places: initAmount(places, 0, 0),
-                    placesTotal: initAmount(placesTotal, 2, 2),
-                    price: initAmount(price, 2, 2),
-                    priceTotal: initAmount(priceTotal, 2, 2),
-                },
-                certificateDate,
-                isLive: product.toLowerCase().includes('live'),
-            };
+        headers: {
+            id: 'Номер контракта',
+            contractDate: 'Дата контракта',
+            seller: 'Продавец',
+            buyer: 'Покупатель',
+            blNo: 'Номер B/L',
+            transport: 'Транспорт',
+            dateETA: 'ETA',
+            port: 'Порт',
+            terms: 'Условия',
+            vessel: 'Изготовитель',
+            product: 'Продукция',
+            sort: 'Сорт',
+            places: 'Кол-во мест',
+            pack: 'Тара',
+            placesTotal: 'Количество, кг.',
+            price: 'Цена, USD',
+            priceTotal: 'Сумма, USD',
+            certificateDate: 'Срок получения сертификатов',
         },
+        row: (r) => ({
+            id: r.id,
+            contractDate: r.contractDate,
+            seller: selectSp.agent(r.seller),
+            buyer: selectSp.consignee(r.buyer),
+            blNo: r.blNo || '-',
+            transport: r.transport,
+            dateETA: r.dateETA,
+            port: r.port,
+            terms: r.terms,
+            vessel: r.vessel,
+            product: selectSp.productSales(r.product),
+            sort: r.sort,
+            pack: r.pack,
+            amount: {
+                places: initAmount(r.places, 0, 0),
+                placesTotal: initAmount(r.placesTotal, 2, 2),
+                price: initAmount(r.price, 2, 2),
+                priceTotal: initAmount(r.priceTotal, 2, 2),
+            },
+            certificateDate: r.certificateDate,
+            isLive: r.product.toLowerCase().includes('live'),
+        }),
     });
+
+    console.log(tables);
 };

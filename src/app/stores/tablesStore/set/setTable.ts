@@ -1,34 +1,40 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-use-before-define */
+import _ from 'lodash';
 import { checkTable } from '../../../logic/excel/checkTable/checkTable';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
-import { CommonRowT } from '../../../types/typesTables';
 import tablesStore, { TableKeyT } from '../tablesStore';
-import { headerRecognition, innerDictionary } from '../utils/headerRecognition';
+import { headerRecognition } from './headerRecognition';
 
-export const setTable = <
-    R extends CommonRowT,
-    T extends Record<string, number>,
->(settings: {
+export const setTable = <T extends Record<string, any>>(settings: {
     table: any[][];
-    rowSettings: T;
-    row: (row: Record<keyof T, string>) => Omit<R, 'type' | 'index'>;
+    headers: T;
     type: TableKeyT;
+    row: (
+        row: Record<keyof T, any>
+    ) => Omit<
+    ReturnType<(typeof tablesStore.setTable)[typeof settings.type]>[number],
+    'index' | 'type'
+    >;
 }) => {
     const { table, row: getRow, type } = settings;
 
+    type RowT = ReturnType<(typeof tablesStore.setTable)[typeof type]>[number];
+
     const headers = table.shift();
     const excluded = excludeOfEmptyRows(table);
+    const dictionary = headerRecognition(settings.headers, headers);
 
-    const transformedTable = excluded.reduce<R[]>((total, rowInit, i) => {
+    const transformedTable = excluded.reduce<RowT[]>((total, rowInit, i) => {
+        const dictionaryCopy = _.cloneDeep(dictionary);
         try {
-            const dictionary = headerRecognition(settings.rowSettings, headers);
-
             Object.keys(dictionary).forEach((key) => {
-                const index = dictionary[key];
-                dictionary[key] = rowInit[index];
+                const index = dictionaryCopy[key];
+                dictionaryCopy[key as keyof typeof settings.headers] = rowInit[index];
             });
 
             const initObj = { index: i.toString(), type };
-            const row = { ...getRow(dictionary as any), ...initObj };
+            const row = { ...getRow(dictionaryCopy as any), ...initObj };
             total.push(row as any);
         } catch (e) {
             return total;

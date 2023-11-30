@@ -1,26 +1,5 @@
-/* eslint-disable prefer-destructuring */
 /* eslint-disable no-param-reassign */
 
-export const innerDictionary = {
-    buyer: 'Покупатель',
-    seller: 'Продавец',
-    id: 'Договор поставки',
-    contractDate: 'Дата Договора',
-    transport: 'Транспорт',
-    vessel: 'Изготовитель',
-    product: 'Продукция',
-    sort: 'Сорт',
-    pack: 'Упаковка',
-    konosament: 'Коносамент',
-    placesTotal: 'Объем, кг',
-    price: 'Цена',
-    priceTotal: 'Сумма',
-    bank: 'Банк',
-    deliveryDate: 'Дата поставки',
-    paymentDate: 'Дата оплаты',
-};
-
-// prettier-ignore
 type RecordInputT = Record<string, string>;
 type RecordMiddleT<T extends RecordInputT> = Record<keyof T, (string | number)[]>;
 type RecordOutputT<T extends RecordInputT> = Record<keyof T, number>;
