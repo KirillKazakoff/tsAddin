@@ -1,4 +1,3 @@
-import { ExportInitRowT } from '../../../types/typesTables';
 import { getExportRow } from '../getExportRow';
 import { setTable } from './setTable';
 
@@ -7,60 +6,32 @@ export const setExport = (table: any[][]) => {
     setTable({
         table,
         type: 'export',
-        row: (r) => {
-            const [
-                contract,
-                seller,
-                agent,
-                vessel,
-                transport,
-                agreementNo,
-                invoice,
-                date,
-                blMode,
-                blNo,
-                portFrom,
-                terms,
-                portTo,
-                consignee,
-                msc,
-                product,
-                sort,
-                pack,
-                places,
-                placesTotal,
-                price,
-                priceTotal,
-                id,
-            ] = r;
-
-            const rowInit: ExportInitRowT = {
-                contract,
-                seller,
-                agent,
-                vessel,
-                transport,
-                agreementNo,
-                invoice,
-                date,
-                blMode,
-                blNo,
-                portFrom,
-                terms,
-                portTo,
-                consignee,
-                msc,
-                product,
-                sort,
-                pack,
-                places,
-                placesTotal,
-                price,
-                priceTotal,
-                id,
-            };
-
-            return getExportRow(rowInit);
+        headers: {
+            contract: 'Контракт',
+            seller: 'Продавец',
+            agent: 'Покупатель',
+            vessel: 'Судно',
+            transport: 'Транспорт',
+            agreementNo: 'Дополнение к контракту',
+            invoice: 'Инвойс',
+            date: 'Дата',
+            blMode: 'BL mod',
+            blNo: 'BL No',
+            portFrom: 'Порт Декларирования',
+            terms: 'Условия продажи',
+            portTo: 'Порт',
+            consignee: 'Получатель (если отличается от покупателя)',
+            msc: 'MSC',
+            product: 'Продукция',
+            sort: 'Сорт',
+            pack: 'Упаковка',
+            places: 'Кол-во мест',
+            placesTotal: 'Объем, тн',
+            price: 'Цена',
+            priceTotal: 'Сумма',
+            id: 'ID',
         },
+
+        row: (r) => getExportRow(r),
     });
 };

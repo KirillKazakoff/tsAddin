@@ -1,4 +1,3 @@
-import { InnerRowT } from '../../../types/typesTables';
 import { selectSp } from '../../spsStore/select';
 import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
@@ -6,50 +5,47 @@ import { setTable } from './setTable';
 export const setInner = (table: any[][]) => {
     table.pop();
 
-    setTable<InnerRowT>({
+    setTable({
         table,
         type: 'inner',
-        row: (r) => {
-            const [
-                buyer,
-                seller,
-                id,
-                contractDate,
-                transport,
-                vessel,
-                product,
-                sort,
-                pack,
-                konosament,
-                placesTotal,
-                price,
-                priceTotal,
-                bank,
-                deliveryDate,
-                paymentDate,
-            ] = r;
-
-            return {
-                buyer: selectSp.clientRu(buyer),
-                seller: selectSp.seller(seller),
-                id,
-                contractDate,
-                vessel: selectSp.vessel(vessel),
-                product: selectSp.product(product),
-                transport: selectSp.transport(transport),
-                sort,
-                pack,
-                konosament,
-                amount: {
-                    places: initAmount(placesTotal / pack, 0, 0),
-                    placesTotal: initAmount(placesTotal, 1, 3),
-                    price: initAmount(price, 2, 2),
-                    priceTotal: initAmount(priceTotal, 2, 2),
-                },
-                bankSeller: bank,
-                deliveryDate,
-                paymentDate,
-            };
+        headers: {
+            buyer: 'Покупатель',
+            seller: 'Продавец',
+            id: 'Договор поставки',
+            contractDate: 'Дата Договора',
+            transport: 'Транспорт',
+            vessel: 'Изготовитель',
+            product: 'Продукция',
+            sort: 'Сорт',
+            pack: 'Упаковка',
+            konosament: 'Коносамент',
+            placesTotal: 'Объем, кг',
+            price: 'Цена',
+            priceTotal: 'Сумма',
+            bank: 'Банк',
+            deliveryDate: 'Дата поставки',
+            paymentDate: 'Дата оплаты',
         },
+        row: (r) => ({
+            buyer: selectSp.clientRu(r.buyer),
+            seller: selectSp.seller(r.seller),
+            id: r.id,
+            contractDate: r.contractDate,
+            vessel: selectSp.vessel(r.vessel),
+            product: selectSp.product(r.product),
+            transport: selectSp.transport(r.transport),
+            sort: r.sort,
+            pack: r.pack,
+            konosament: r.konosament,
+            amount: {
+                places: initAmount(r.placesTotal / r.pack, 0, 0),
+                placesTotal: initAmount(r.placesTotal, 1, 3),
+                price: initAmount(r.price, 2, 2),
+                priceTotal: initAmount(r.priceTotal, 2, 2),
+            },
+            bankSeller: r.bank,
+            deliveryDate: r.deliveryDate,
+            paymentDate: r.paymentDate,
+        }),
     });
 };

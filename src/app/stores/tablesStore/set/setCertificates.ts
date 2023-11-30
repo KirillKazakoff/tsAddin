@@ -3,53 +3,49 @@ import _ from 'lodash';
 import { selectSp } from '../../spsStore/select';
 import tablesStore from '../tablesStore';
 import { initAmount } from '../utils/initAmount';
-import { ExportRowT } from '../../../types/typesTables';
 import { setTable } from './setTable';
 
 export const setCertificates = (table: any[][]) => {
-    setTable<ExportRowT>({
+    setTable({
         table,
         type: 'certificates',
+        headers: {
+            blNo: 'BL',
+            srSuffix: 'Приставка',
+            srNo: '№SR',
+            agreementNo: '№Доп',
+            contractCode: 'Контракт',
+            seller: 'Компания',
+            placesTotal: 'Получатель',
+            coNo: 'CO',
+            hcNo: 'HC',
+            iuuNo: 'IUU',
+            date: 'Дата',
+        },
         row: (r) => {
-            const [
-                blNo,
-                srSuffix,
-                srNo,
-                agreementNo,
-                contractCode,
-                seller,
-                product,
-                placesTotal,
-                consignee,
-                coNo,
-                hcNo,
-                iuuNo,
-                date,
-            ] = r;
-
             const exportRow = _.cloneDeep(
                 tablesStore.exportStorageT.find(
                     (eRow) => `${eRow.agreementNo}${eRow.contract.code}${eRow.blNo}`
-                        === `${agreementNo}${contractCode}${blNo}`,
+                        === `${r.agreementNo}${r.contractCode}${r.blNo}`,
                 ),
             );
             exportRow.amount = {
                 places: initAmount(exportRow.amount.places.count, 0, 0),
-                placesTotal: initAmount(placesTotal, 3, 4),
+                placesTotal: initAmount(r.placesTotal, 3, 4),
                 price: initAmount(exportRow.amount.price.count, 2, 2),
                 priceTotal: initAmount(exportRow.amount.priceTotal.count, 3, 4),
             };
-            exportRow.id = `${exportRow.id}-${srSuffix}${srNo}`;
-            exportRow.agreementNo = `${exportRow.agreementNo}-R${srNo}`;
-            exportRow.date = date;
+            exportRow.id = `${exportRow.id}-${r.srSuffix}${r.srNo}`;
+            exportRow.agreementNo = `${exportRow.agreementNo}-R${r.srNo}`;
+            exportRow.date = r.date;
 
             return {
                 ...exportRow,
-                seller: selectSp.seller(seller),
-                date,
-                hcNo,
-                coNo,
-                iuuNo,
+                seller: selectSp.seller(r.seller),
+                date: r.date,
+                hcNo: r.hcNo,
+                coNo: r.coNo,
+                iuuNo: r.iuuNo,
             };
         },
     });
