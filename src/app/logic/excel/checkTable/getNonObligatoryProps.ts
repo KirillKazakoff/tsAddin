@@ -12,6 +12,8 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
         'datePusan',
         'placesLeft',
         'dateClose',
+        'idProduct',
+        'index',
     ];
 
     const nonObligatoryProps = {

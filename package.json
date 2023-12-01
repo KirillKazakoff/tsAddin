@@ -27,6 +27,7 @@
     "dependencies": {
         "@fluentui/react": "^8.52.3",
         "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
+        "convertapi-js": "~1.1",
         "core-js": "^3.9.1",
         "exceljs": "^4.3.0",
         "file-saver": "^2.0.5",

@@ -70,6 +70,7 @@ export interface ExportInitRowT {
     pack: number;
     msc: string;
     id: string;
+    idProduct: string;
     placesLeft?: string;
     datePusan?: string;
     dateClose?: string;
@@ -106,6 +107,7 @@ export interface ExportRowT extends CommonRowT, CertificateRowT {
     pack: number;
     msc: string;
     id: string;
+    idProduct: string;
     placesLeft?: string;
     datePusan?: string;
     dateClose?: string;

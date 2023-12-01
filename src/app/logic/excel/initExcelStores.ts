@@ -2,10 +2,7 @@
 /* eslint-disable no-param-reassign */
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
-import {
-    ExcelStoresDictionaryT,
-    excelStoresDictionary,
-} from './excelStoresDictionary';
+import { ExcelStoresDictionaryT, excelStoresDictionary } from './excelStoresDictionary';
 import { initExcelImages } from './initExcelImages';
 import { initRange } from './utils/initRange';
 
@@ -66,7 +63,6 @@ export const initStoresOnFileName = async (context: Excel.RequestContext) => {
     context.workbook.load('name');
     await context.sync();
     const fileName = context.workbook.name.toLowerCase();
-    console.log(fileName);
 
     await initStores(context);
     await initExcelImages(context);

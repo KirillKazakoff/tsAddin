@@ -29,6 +29,7 @@ export const setExport = (table: any[][]) => {
             price: 'Цена',
             priceTotal: 'Сумма',
             id: 'ID',
+            idProduct: 'ID_product',
         },
 
         row: (r) => getExportRow(r),

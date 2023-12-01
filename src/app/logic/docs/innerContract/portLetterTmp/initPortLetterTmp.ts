@@ -6,6 +6,7 @@ import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtil
 import { InnerGroupT } from '../groupByContractNo';
 import { initPortLetterRows } from './initPortLetterRows';
 import spsStore from '../../../../stores/spsStore/spsStore';
+import popupStore from '../../../../stores/popupStore.ts/popupStore';
 
 export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     const phones = spsStore.confidentialPhones;
@@ -15,6 +16,13 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     // prettier-ignore
     const { record: { row }, additional: { portLetterNo } } = contract;
     const { fields } = portLetterStore;
+
+    if (!row.buyer.inn) {
+        popupStore.setStatus({
+            title: 'Отсутствует ИНН',
+            desc: 'Проверьте наличие ИНН в справочнике',
+        });
+    }
 
     const cells: CellObjT[] = [
         { cell: 'Номер_письма', value: portLetterNo },

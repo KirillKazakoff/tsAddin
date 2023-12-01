@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import { ExportRowT } from '../../../../types/typesTables';
 import { groupTotal } from '../../../utils/groupify/groupTotal';
