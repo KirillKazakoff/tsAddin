@@ -6,20 +6,17 @@ import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmp
 import tablesStore, { TableKeyT } from '../tablesStore';
 import { headerRecognition } from './headerRecognition';
 
-export const setTable = <T extends Record<string, any>>(settings: {
+export const setTable = <T extends Record<string, any>, K extends TableKeyT>(settings: {
     table: any[][];
     headers: T;
-    type: TableKeyT;
+    type: K;
     row: (
         row: Record<keyof T, any>
-    ) => Omit<
-    ReturnType<(typeof tablesStore.setTable)[typeof settings.type]>[number],
-    'index' | 'type'
-    >;
+    ) => Omit<ReturnType<(typeof tablesStore.setTable)[K]>[number], 'index' | 'type'>;
 }) => {
     const { table, row: getRow, type } = settings;
 
-    type RowT = ReturnType<(typeof tablesStore.setTable)[typeof type]>[number];
+    type RowT = ReturnType<(typeof tablesStore.setTable)[K]>[number];
 
     const headers = table.shift();
     const excluded = excludeOfEmptyRows(table);
@@ -37,6 +34,7 @@ export const setTable = <T extends Record<string, any>>(settings: {
             const row = { ...getRow(dictionaryCopy as any), ...initObj };
             total.push(row as any);
         } catch (e) {
+            console.log(e);
             return total;
         }
         return total;

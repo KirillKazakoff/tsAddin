@@ -8,7 +8,6 @@ import { FormValuesT } from '../../types/typesUtils';
 const initFields = () => ({
     podpisant: initPodpisant(),
     departureDate: '',
-    declaration: '',
     isPictures: false,
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
@@ -16,7 +15,7 @@ type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 class ExportContractStore {
     name = 'exportContractStore';
     fields = initFields();
-    operation: OperationT = 'export_storage';
+    operation: OperationT = 'export';
     currentId = '';
 
     constructor() {
@@ -25,7 +24,6 @@ class ExportContractStore {
 
     setFields(values: FormFieldsT) {
         this.fields.podpisant = selectSp.podpisant(values.podpisant);
-        this.fields.declaration = values.declaration;
         this.fields.departureDate = values.departureDate;
         this.fields.isPictures = values.isPictures;
     }

@@ -17,14 +17,19 @@ const getExistedStores = (context: Excel.RequestContext) => {
             );
 
             if (!storeWS) {
-                // console.warn(`В excel-книге нет Листа с названием ${key}`);
+                console.warn(`В excel-книге нет Листа с названием ${key}`);
                 return total;
             }
             if (!table) {
-                console.error(
-                    `В листе ${key} не удалось найти диапазон значений таблицы по названию ${store.table}`,
-                );
-                return total;
+                const range = context.workbook.worksheets
+                    .getItem(key)
+                    .getRange(store.table);
+                if (!range) {
+                    console.error(
+                        `В листе ${key} не удалось найти диапазон значений таблицы по названию ${store.table}`,
+                    );
+                    return total;
+                }
             }
 
             total[key] = store;
@@ -46,7 +51,7 @@ const initStores = async (context: Excel.RequestContext) => {
 
     const storeObjects = Object.entries(existingStores).map(([key, store]) => {
         return {
-            range: initRange(worksheets, key, store.table),
+            range: initRange(worksheets, key, store),
             setter: store.setter,
         };
     });

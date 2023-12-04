@@ -50,6 +50,4 @@ export const setSales = (table: any[][]) => {
             isLive: r.product.toLowerCase().includes('live'),
         }),
     });
-
-    console.log(tables);
 };

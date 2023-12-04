@@ -7,6 +7,7 @@ export const setNordmile = (table: any[][]) => {
         table,
         type: 'nordmile',
         headers: {
+            producer: 'Изготовитель',
             contractNo: 'Договор',
             contractDate: 'Дата',
             seller: 'Продавец',
@@ -20,6 +21,7 @@ export const setNordmile = (table: any[][]) => {
             paymentDate: 'Дата оплаты',
         },
         row: (r) => ({
+            producer: r.producer,
             contractNo: r.contractNo,
             contractDate: r.contractDate,
             seller: selectSp.seller(r.seller),

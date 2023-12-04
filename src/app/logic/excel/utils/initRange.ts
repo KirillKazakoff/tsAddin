@@ -1,17 +1,24 @@
+import { ExcelStoreT } from '../excelStoresDictionary';
+
 type InitRangeT = (
     worksheets: Excel.WorksheetCollection,
     wsName: string,
-    tableName: string
+    store: ExcelStoreT
 ) => Excel.Range | false;
 
-export type InitRangeBoundT = (wsName: string, tableName: string) => Excel.Range;
+export const initRange: InitRangeT = (worksheets, wsName, store) => {
+    const { table, isJustRange } = store;
 
-export const initRange: InitRangeT = (worksheets, wsName, tableName) => {
     const ws = worksheets.getItem(wsName);
-    const tableSrc = ws.tables.getItem(tableName);
+    let range: Excel.Range;
 
-    const range = tableSrc.getRange();
+    if (!isJustRange) {
+        const src = ws.tables.getItem(store.table);
+        range = src.getRange();
+    } else {
+        range = ws.getRange(table);
+    }
+
     range.load('values');
-
     return range;
 };

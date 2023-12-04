@@ -21,7 +21,7 @@ export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'CFR (контейнер)';
 
 export type CommonRowT = {
     index: string;
-    terms?: TermsT;
+    terms?: TermsT | '';
     type: TableKeyT;
 };
 
@@ -50,6 +50,7 @@ export interface ExportInitRowT {
     contract: number;
     seller: string;
     bankSeller?: string;
+    declarationNo?: string;
     agent: string;
     vessel: string;
     transport: string;
@@ -89,6 +90,7 @@ export interface ExportRowT extends CommonRowT, CertificateRowT {
     contract: ContractT;
     seller: SellerT;
     bankSeller?: BankProdavecT;
+    declarationNo?: string;
     agent: AgentT;
     vessel: VesselT;
     transport: TransportT;
@@ -111,6 +113,12 @@ export interface ExportRowT extends CommonRowT, CertificateRowT {
     placesLeft?: string;
     datePusan?: string;
     dateClose?: string;
+}
+
+export interface CustomsDutiesRowT extends CommonRowT {
+    id: string;
+    blNo: string;
+    declarationNo: string;
 }
 
 export interface InnerRowT extends CommonRowT {
@@ -149,11 +157,11 @@ export interface InvoiceKTIRowT extends CommonRowT {
 }
 
 export interface NordmileRowT extends CommonRowT {
+    producer: string;
     contractNo: number;
     contractDate: string;
     seller: SellerT;
     buyer: string;
-    producer: string;
     product: string;
     pack: string;
     amount: AmountObjT;

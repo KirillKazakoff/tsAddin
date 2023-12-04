@@ -32,7 +32,9 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
         ],
         certificates: ['coNo', 'hcNo', 'iuuNo', 'date', 'placesRemain'],
         sales: ['blNo', 'isLive'],
-    };
+        nordmile: [''],
+        customs: [''],
+    } satisfies Record<TableKeyT, string[]>;
 
     if (row.terms === 'FCA') {
         nonObligatoryProps.export.push('blNo', 'portFrom');

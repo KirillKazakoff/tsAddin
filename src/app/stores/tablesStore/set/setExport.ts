@@ -1,4 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import _ from 'lodash';
 import { getExportRow } from '../getExportRow';
+import tablesStore from '../tablesStore';
 import { setTable } from './setTable';
 
 export const setExport = (table: any[][]) => {
@@ -32,6 +35,13 @@ export const setExport = (table: any[][]) => {
             idProduct: 'ID_product',
         },
 
-        row: (r) => getExportRow(r),
+        row: (r) => {
+            const res = getExportRow(r);
+            const { declarationNo } = tablesStore.customs.find(
+                (cR) => cR.blNo === r.blNo,
+            );
+
+            return { ...res, declarationNo };
+        },
     });
 };

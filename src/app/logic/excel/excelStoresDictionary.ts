@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable quote-props */
 import { setAgents } from '../../stores/spsStore/set/setAgents';
 import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
@@ -25,6 +26,13 @@ import { setNordmile } from '../../stores/tablesStore/set/setNordmile';
 import { setSales } from '../../stores/tablesStore/set/setSales';
 import { setProductionSales } from '../../stores/spsStore/set/setProductionSales';
 import { setConfidentialPhone } from '../../stores/spsStore/set/setConfidentialPhone';
+import { setCustoms } from '../../stores/tablesStore/set/setCustoms';
+
+export type ExcelStoreT = {
+    table: string;
+    setter: (table: any[][]) => void;
+    isJustRange?: boolean;
+};
 
 export const excelStoresDictionary = {
     'Инвойсы хранение': {
@@ -108,11 +116,11 @@ export const excelStoresDictionary = {
         table: 'Коносаменты',
         setter: setMates,
     },
-    'Экспорт': {
-        table: 'Экспорт',
-        setter: setExport,
+    'Внутренний рынок': {
+        table: 'Продажи_ВР',
+        setter: setInner,
     },
-    // save initialize order (Сертификаты after Экспорт Хранение);
+    // save initialize order (Сертификаты after Экспорт_хранение);
     'Экспорт Хранение': {
         table: 'Экспорт_хранение',
         setter: setExportStorage,
@@ -121,9 +129,15 @@ export const excelStoresDictionary = {
         table: 'Сертификаты',
         setter: setCertificates,
     },
-    'Внутренний рынок': {
-        table: 'Продажи_ВР',
-        setter: setInner,
+    // save initialize order (Пошлина before Экспорт_хранение);
+    'Пошлина': {
+        table: 'Customs',
+        setter: setCustoms,
+        isJustRange: true,
+    },
+    'Экспорт': {
+        table: 'Экспорт',
+        setter: setExport,
     },
     'Продажи': {
         table: 'Sales',
@@ -133,8 +147,6 @@ export const excelStoresDictionary = {
         table: 'Nordmile',
         setter: setNordmile,
     },
-};
+} satisfies Record<string, ExcelStoreT>;
 
-const ESD = excelStoresDictionary;
-
-export type ExcelStoresDictionaryT = Partial<typeof ESD>;
+export type ExcelStoresDictionaryT = Partial<typeof excelStoresDictionary>;

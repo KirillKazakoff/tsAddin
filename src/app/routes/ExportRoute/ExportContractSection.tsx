@@ -5,7 +5,6 @@ import CheckBox from '../../components/CheckBox';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { ExportDepartureDate } from './ExportDepartureDate';
 import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
-import { ExportDeclarationEXW } from './ExportDeclarationEXW';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { Form } from '../../components/Form/Form';
 import { DocList } from '../../components/Doc/DocList';
@@ -33,7 +32,6 @@ export const ExportContractSection = observer(() => {
                         <div className='fields-wrapper'>
                             <SelectPodpisant />
                             <ExportDepartureDate />
-                            <ExportDeclarationEXW />
                             <CheckBox title='Включить картинки' name='isPictures' />
                             <DocsDownloadBtn
                                 title='Загрузить контракт'
