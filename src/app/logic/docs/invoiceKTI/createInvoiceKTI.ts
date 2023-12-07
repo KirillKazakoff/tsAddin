@@ -9,7 +9,7 @@ const createInvoiceKTIStorage = async (invoice: InvoiceKTIGroupT) => {
     const book = await readTmp(pathObj.invoiceKTIStorage);
 
     initInvoiceKTItmp(book, invoice);
-    await mergeInvoiceKTICells(book, [[2, 6]]);
+    await mergeInvoiceKTICells(book);
 
     const fileName = `KTI Storage invoice - ${invoice.record.row.invoiceNo}`;
     await saveFile(book, fileName);
@@ -19,7 +19,7 @@ const createInvoiceKTIDischarge = async (invoice: InvoiceKTIGroupT) => {
     const book = await readTmp(pathObj.invoiceKTIDischarge);
     initInvoiceKTItmp(book, invoice);
     // prettier-ignore
-    await mergeInvoiceKTICells(book, [[2, 6]]);
+    await mergeInvoiceKTICells(book);
 
     const fileName = `KTI Discharge invoice - ${invoice.record.row.invoiceNo}`;
     await saveFile(book, fileName);

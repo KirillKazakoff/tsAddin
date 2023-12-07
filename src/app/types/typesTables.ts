@@ -110,9 +110,6 @@ export interface ExportRowT extends CommonRowT, CertificateRowT {
     msc: string;
     id: string;
     idProduct: string;
-    placesLeft?: string;
-    datePusan?: string;
-    dateClose?: string;
 }
 
 export interface CustomsDutiesRowT extends CommonRowT {

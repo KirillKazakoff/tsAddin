@@ -1,6 +1,6 @@
 import { Workbook } from 'exceljs';
 
-export const mergeInvoiceKTICells = async (book: Workbook, ranges: number[][]) => {
+export const mergeInvoiceKTICells = async (book: Workbook) => {
     const xls64 = await book.xlsx.writeBuffer();
     await book.xlsx.load(xls64);
 
@@ -19,13 +19,6 @@ export const mergeInvoiceKTICells = async (book: Workbook, ranges: number[][]) =
                     }
                 });
             });
-
-            // prettier-ignore
-            // mergeTotal({
-            //     rows: [rowNumber],
-            //     ranges,
-            //     ws,
-            // });
         }
     });
 };

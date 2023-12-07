@@ -5,6 +5,7 @@ import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initPortLetterRows } from './initPortLetterRows';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
+import { getPortLetterNo } from './getPortLetterNo';
 
 export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
     const ws = book.getWorksheet('Port_Letter');
@@ -18,7 +19,7 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
     const cells: CellObjT[] = [
         {
             cell: 'Номер_письма',
-            value: portLetterNo,
+            value: getPortLetterNo(portLetterNo),
         },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },

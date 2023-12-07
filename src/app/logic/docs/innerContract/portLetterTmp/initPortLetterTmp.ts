@@ -7,6 +7,7 @@ import { InnerGroupT } from '../groupByContractNo';
 import { initPortLetterRows } from './initPortLetterRows';
 import spsStore from '../../../../stores/spsStore/spsStore';
 import popupStore from '../../../../stores/popupStore.ts/popupStore';
+import { getPortLetterNo } from './getPortLetterNo';
 
 export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     const phones = spsStore.confidentialPhones;
@@ -25,7 +26,7 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     }
 
     const cells: CellObjT[] = [
-        { cell: 'Номер_письма', value: portLetterNo },
+        { cell: 'Номер_письма', value: getPortLetterNo(portLetterNo) },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },

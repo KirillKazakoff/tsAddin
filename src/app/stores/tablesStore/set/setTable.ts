@@ -34,6 +34,7 @@ export const setTable = <T extends Record<string, any>, K extends TableKeyT>(set
             const row = { ...getRow(dictionaryCopy as any), ...initObj };
             total.push(row as any);
         } catch (e) {
+            // eslint-disable-next-line no-console
             console.log(e);
             return total;
         }

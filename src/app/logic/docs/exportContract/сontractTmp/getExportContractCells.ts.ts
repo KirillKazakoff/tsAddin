@@ -155,7 +155,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 ru: `A/C: ${agent.acNo}`,
             },
         ],
-        default: {
+        export: {
             common: [
                 {
                     cell: 'Соглашение',
@@ -208,7 +208,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 },
             ],
         },
-        storage: {
+        exportStorage: {
             common: [
                 {
                     cell: 'Соглашение',
@@ -251,36 +251,36 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     ru: `Исполнитель/Contractor ______________________________${agent.eng.signatory}`,
                 },
             ],
-            certificates: [
-                {
-                    cell: 'Обязательство_хранение',
-                    eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.additional.cohc, 'eng')} for the following quantity:`,
-                    ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.additional.cohc, 'ru')} на нижеследущие партии:`,
-                },
-            ],
         },
+        certificates: [
+            {
+                cell: 'Обязательство_хранение',
+                eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.additional.cohc, 'eng')} for the following quantity:`,
+                ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.additional.cohc, 'ru')} на нижеследущие партии:`,
+            },
+        ],
     } satisfies CellDeclarationT<CellObjT>;
 
     const resArr = [...cells.common];
 
     if (type === 'export') {
-        resArr.push(...cells.default.common);
+        resArr.push(...cells.export.common);
 
         if (terms === 'EXW' || terms === 'CFR') {
-            resArr.push(...cells.default.exwCfr);
+            resArr.push(...cells.export.exwCfr);
         }
         if (terms === 'FCA') {
-            resArr.push(...cells.default.fca);
+            resArr.push(...cells.export.fca);
         }
     }
 
     if (type === 'exportStorage') {
-        resArr.push(...cells.storage.common);
+        resArr.push(...cells.exportStorage.common);
     }
 
     if (type === 'certificates') {
-        resArr.push(...cells.storage.common);
-        resArr.push(...cells.storage.certificates);
+        resArr.push(...cells.exportStorage.common);
+        resArr.push(...cells.certificates);
     }
 
     return resArr;

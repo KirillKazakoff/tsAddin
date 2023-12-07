@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { useFormikContext } from 'formik';
@@ -34,18 +35,13 @@ export const LetterMainFields = observer(() => {
                 name='isExport'
             />
             <InputText
-                title={
-                    context.values.isExport ? 'ETD Владивосток' : 'ETA Владивосток'
-                }
-                placeholder={
-                    context.values.isExport ? 'Дата отбытия' : 'Дата прибытия'
-                }
+                title={context.values.isExport ? 'ETD Владивосток' : 'ETA Владивосток'}
+                placeholder={context.values.isExport ? 'Дата отбытия' : 'Дата прибытия'}
                 name='arrivalVld'
             />
             <SelectPort name='port' />
             <InputText
-                title='Дата оплаты'
-                placeholder='Дата оплаты'
+                title='Дата оплаты' placeholder='Дата оплаты'
                 name='payment'
             />
         </div>

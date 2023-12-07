@@ -9,6 +9,7 @@ type Props = FieldHookConfig<string> & {
 };
 
 export default function Select(props: Props) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [field, meta] = useField(props);
     const invalidCls = meta.error && meta.touched ? 'form__control--invalid' : '';
 
@@ -19,9 +20,7 @@ export default function Select(props: Props) {
     ));
 
     return (
-        <div
-            className={`form__control select-wrapper ${invalidCls} ${props.wrapperCls}`}
-        >
+        <div className={`form__control select-wrapper ${invalidCls} ${props.wrapperCls}`}>
             <span className='select-title'>{props.title}</span>
             <Field
                 as='select' className='select'

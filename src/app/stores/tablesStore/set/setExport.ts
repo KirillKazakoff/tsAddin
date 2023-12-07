@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import _ from 'lodash';
 import { getExportRow } from '../getExportRow';
 import tablesStore from '../tablesStore';
 import { setTable } from './setTable';

@@ -54,5 +54,5 @@ export const createPortLetter = async (contract: InnerGroupT) => {
         isPictures,
     );
 
-    await saveFile(book, `Письмо ${row.buyer.codeName}`);
+    await saveFile(book, `Письмо ${contract.index} ${row.buyer.codeName}`);
 };

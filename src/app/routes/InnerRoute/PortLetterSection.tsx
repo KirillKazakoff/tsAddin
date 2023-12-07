@@ -28,15 +28,20 @@ const SectionComponent = observer(() => {
             <Form className='docs__form port-letter-form'>
                 <h3>Письмо:</h3>
                 <div className='fields-wrapper'>
+                    <SelectPortRu />
+                    <SelectPodpisant />
+                    <SelectTerms name='termsPort' />
+                    <DischargeTerms />
                     <InputText
                         name='dateLetter'
                         title='Дата письма:'
                         placeholder='Дата письма'
                     />
-                    <SelectPortRu />
-                    <SelectPodpisant />
-                    <SelectTerms name='termsPort' />
-                    <DischargeTerms />
+                    <InputText
+                        name='correctedNo'
+                        title='Коррект номер:'
+                        placeholder='Введите номер'
+                    />
                     <CheckBox title={'Включить картинки:'} name='isPictures' />
                     <CheckBox title={'Контрольный звонок'} name='isControlPhone' />
                     <CheckBox title={'Группировка коносаменты'} name='isGroupingKns' />

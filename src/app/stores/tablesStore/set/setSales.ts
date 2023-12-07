@@ -3,7 +3,7 @@ import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setSales = (table: any[][]) => {
-    const tables = setTable({
+    setTable({
         table,
         type: 'sales',
         headers: {

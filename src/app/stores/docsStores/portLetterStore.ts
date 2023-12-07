@@ -20,6 +20,7 @@ const initFields = () => ({
     isGroupingKns: false,
     isPictures: true,
     isControlPhone: false,
+    correctedNo: '',
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
@@ -44,6 +45,7 @@ class PortLetterStore {
         this.fields.termsPort = values.termsPort as TermsT;
         this.fields.isControlPhone = values.isControlPhone;
         this.fields.isGroupingKns = values.isGroupingKns;
+        this.fields.correctedNo = values.correctedNo;
     }
 }
 
