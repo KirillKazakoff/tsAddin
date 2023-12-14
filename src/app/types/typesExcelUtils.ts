@@ -2,7 +2,7 @@ type Common = {
     cell: string;
     offsetRow?: number;
     numFmt?: string;
-    isEmptyTitle?: boolean;
+    isEmpty?: boolean;
 };
 
 export type CellObjDoubleT = Common & {

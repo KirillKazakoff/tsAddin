@@ -35,9 +35,12 @@ export const setExport = (table: any[][]) => {
 
         row: (r) => {
             const res = getExportRow(r);
-            const { declarationNo } = tablesStore.customs.find(
+
+            let declarationNo = tablesStore.customs.find(
                 (cR) => cR.blNo === r.blNo,
-            );
+            )?.declarationNo;
+
+            if (!declarationNo) declarationNo = '';
 
             return { ...res, declarationNo };
         },

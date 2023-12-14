@@ -121,7 +121,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 cell: 'Инвойс_декларация',
                 eng: declarationNo,
                 ru: declarationNo,
-                isEmptyTitle: exportContractStore.currentTerms === 'CFR',
+                isEmpty: exportContractStore.currentTerms === 'CFR',
             },
         ],
         exportStorage: [
