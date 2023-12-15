@@ -6,18 +6,18 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
     const { insertRows } = utils.initRowMaker({ cellName: 'Bl_массив' });
 
     insertRows({
-        records: blGroup.rows,
+        records: blGroup.groupedBy.product,
         deleteStartAmount: 1,
-        rowSettings: (r) => {
+        rowSettings: ({ record: r, total }) => {
             const fields = {
                 emptyFirst: '',
                 bl: r.blNo,
                 product: r.product.eng.name,
                 sort: '-',
                 pack: `1/${r.pack} kg`,
-                places: blGroup.total.places.count,
-                placesTotal: blGroup.total.placesTotal.count,
-                placesGross: blGroup.total.placesGross.count,
+                places: total.places.count,
+                placesTotal: total.placesTotal.count,
+                placesGross: total.placesGross.count,
             };
 
             return {
