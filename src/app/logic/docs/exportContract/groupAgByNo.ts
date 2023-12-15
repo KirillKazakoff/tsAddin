@@ -20,7 +20,7 @@ export const groupAgByNo = () => {
                     code: row.invoice,
                     groupedBy: {
                         product: { code: row.product.codeName },
-                        productPack: { code: row.product.codeName + row.pack },
+                        productPack: { code: row.blNo + row.product.codeName + row.pack },
                         productSort: { code: row.product.codeName + row.pack + row.sort },
                     },
                 },
