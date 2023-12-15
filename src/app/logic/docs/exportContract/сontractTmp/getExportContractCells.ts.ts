@@ -160,7 +160,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 {
                     cell: 'Соглашение',
                     eng: `AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
-                    ru: `Дополнительное соглашение № ${agreementNo} от ${date.agreement('ru')}`,
+                    ru: `Дополнение № ${agreementNo} от ${date.agreement('ru')}`,
                 },
                 {
                     cell: 'Контракт',
@@ -212,8 +212,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             common: [
                 {
                     cell: 'Соглашение',
-                    eng: `Supplementary AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
-                    ru: `Дополнительное соглашение № ${agreementNo} от ${date.agreement('ru')}`,
+                    eng: `AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
+                    ru: `Дополнение № ${agreementNo} от ${date.agreement('ru')}`,
                 },
                 {
                     cell: 'Контракт',
@@ -232,18 +232,18 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 },
                 {
                     cell: 'Остальное_контракт',
-                    eng: `3. In all other matters not covered by this Supplementary Agreement, the parties shall be governed by the terms and conditions of Storage Services Contract No. ${contract.contractNo}, dated ${date.contract('eng')}`,
-                    ru: `3. Во всем остальном, что не предусмотрено настоящим дополнительным соглашением, стороны руководствуются условиями контракта оказания услуг хранения ${contract.contractNo} от ${date.contract('ru')}`,
+                    eng: `3. In all other matters not covered by this Agreement, the parties shall be governed by the terms and conditions of Storage Services Contract No. ${contract.contractNo}, dated ${date.contract('eng')}`,
+                    ru: `3. Во всем остальном, что не предусмотрено настоящим дополнением, стороны руководствуются условиями контракта оказания услуг хранения ${contract.contractNo} от ${date.contract('ru')}`,
                 },
                 {
                     cell: 'Соглашение_вступление',
-                    eng: `4. The present Supplementary Agreement shall come into force from the moment of its signing and is an integral part of the Storage Services Contract No. ${contract.contractNo} dated ${date.contract('eng')}`,
-                    ru: `4. Настоящее дополнительное соглашение вступает в силу с момента его подписания и является неотъемлемой частью контракта оказания услуг хранения № ${contract.contractNo} от ${date.contract('ru')}`,
+                    eng: `4. The present Agreement shall come into force from the moment of its signing and is an integral part of the Storage Services Contract No. ${contract.contractNo} dated ${date.contract('eng')}`,
+                    ru: `4. Настоящее дополнение вступает в силу с момента его подписания и является неотъемлемой частью контракта оказания услуг хранения № ${contract.contractNo} от ${date.contract('ru')}`,
                 },
                 {
                     cell: 'Юридикция',
-                    eng: '5. This Supplementary Agreement has been drawn up and signed in two original duplicates of equal legal force.',
-                    ru: '5. Настоящее дополнительное соглашение составлено и подписано в двух подлинных экземплярах, имеющих одинаковую юридическую силу.',
+                    eng: '5. This Agreement has been drawn up and signed in two original duplicates of equal legal force.',
+                    ru: '5. Настоящее дополнение составлено и подписано в двух подлинных экземплярах, имеющих одинаковую юридическую силу.',
                 },
                 {
                     cell: 'Адреса_подпись',

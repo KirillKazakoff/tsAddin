@@ -132,8 +132,8 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
             },
             {
                 cell: 'Инвойс_соглашение',
-                eng: `to the Storage Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
-                ru: `к Дополнительному соглашению No. ${agreementNo} от ${date.agreement('ru')}`,
+                eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
+                ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
             },
         ],
     } satisfies CellDeclarationT<CellDoubleT>;
