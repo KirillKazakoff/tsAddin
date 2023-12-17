@@ -17,7 +17,7 @@ import {
     VesselT,
 } from './typesSP';
 
-export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'CFR (контейнер)';
+export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'DAP' | 'CFR (контейнер)';
 
 export type CommonRowT = {
     index: string;

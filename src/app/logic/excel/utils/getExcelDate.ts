@@ -29,7 +29,7 @@ export const getDeliveryDate = (
         date.setMonth(date.getMonth() + 1);
     }
     if (time === 'day') {
-        date.setDate(date.getDate() + 1);
+        date.setDate(date.getDate());
     }
 
     const res = date.toLocaleString(locale, {

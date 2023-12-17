@@ -26,7 +26,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
     const date = {
         agreement: (locale: string) => getExcelDateStr(dateAgreement, locale),
         contract: (locale: string) => getExcelDateStr(contract.date, locale),
-        delivery: (locale: string) => getDeliveryDate(dateAgreement, locale, terms === 'EXW' ? 'month' : 'day'),
+        delivery: (locale: string) => getDeliveryDate(dateAgreement, locale, terms === 'EXW' ? 'day' : 'month'),
     };
     const currency = {
         eng: {
@@ -56,7 +56,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             {
                 cell: 'Продавец_подписант',
                 eng: `${podpisant.eng.name} and`,
-                ru: `${podpisant.declination} и`,
+                ru: `${podpisant.ru.name} и`,
             },
             {
                 cell: 'Продавец_представитель',

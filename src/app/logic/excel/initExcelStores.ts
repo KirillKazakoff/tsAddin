@@ -1,42 +1,56 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
+import popupStore from '../../stores/popupStore.ts/popupStore';
 import { ExcelStoresDictionaryT, excelStoresDictionary } from './excelStoresDictionary';
 import { initExcelImages } from './initExcelImages';
 import { initRange } from './utils/initRange';
 
-const getExistedStores = (context: Excel.RequestContext) => {
-    return Object.entries(excelStoresDictionary).reduce<ExcelStoresDictionaryT>(
-        (total, [key, store]) => {
-            const storeWS = context.workbook.worksheets.items.find(
-                (item) => item.name === key,
-            );
-            const table = context.workbook.tables.items.find(
-                (item) => item.name === store.table,
-            );
+const getExistedStores = async (context: Excel.RequestContext) => {
+    const transformedDictionary: ExcelStoresDictionaryT = [] as any;
 
-            if (!storeWS) {
-                console.warn(`В excel-книге нет Листа с названием ${key}`);
-                return total;
+    for await (const [key, store] of Object.entries(excelStoresDictionary)) {
+        console.log(key);
+        const storeWS = context.workbook.worksheets.items.find(
+            (item) => item.name === key,
+        );
+        const table = context.workbook.tables.items.find(
+            (item) => item.name === store.table,
+        );
+
+        if (!storeWS) {
+            console.warn(`В excel-книге нет Листа с названием ${key}`);
+            continue;
+        }
+
+        if (!table) {
+            if (key === 'Экспорт') {
+                console.log('hello');
             }
-            if (!table) {
+            try {
                 const range = context.workbook.worksheets
                     .getItem(key)
                     .getRange(store.table);
-                if (!range) {
-                    console.error(
-                        `В листе ${key} не удалось найти диапазон значений таблицы по названию ${store.table}`,
-                    );
-                    return total;
-                }
-            }
+                range.load('values');
 
-            total[key] = store;
-            return total;
-        },
-        {},
-    );
+                await context.sync();
+
+                if (!range) throw new Error();
+            } catch (e) {
+                popupStore.setStatus({
+                    title: `Неверное наименование ${key}`,
+                    desc: `В листе ${key} не удалось найти диапазон значений по названию ${store.table}`,
+                });
+                continue;
+            }
+        }
+
+        transformedDictionary[key] = store;
+    }
+
+    return transformedDictionary;
 };
 
 const initStores = async (context: Excel.RequestContext) => {
@@ -47,7 +61,7 @@ const initStores = async (context: Excel.RequestContext) => {
 
     await context.sync();
 
-    const existingStores = getExistedStores(context);
+    const existingStores = await getExistedStores(context);
 
     const storeObjects = Object.entries(existingStores).map(([key, store]) => {
         return {

@@ -24,4 +24,12 @@ export const initExportStorageContractTmp = async (
         },
         cols: [[2, 4], [5, 8]],
     });
+    // prettier-ignore
+    utils.mergeFromTo({
+        row: {
+            from: { name: 'Адреса_покупатель_банк_адрес' },
+            to: { name: 'Адреса_покупатель_банк_адрес' },
+        },
+        cols: [[2, 4], [5, 8]],
+    });
 };
