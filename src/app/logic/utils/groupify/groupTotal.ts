@@ -14,7 +14,7 @@ type AdditionalT = Partial<{
     samples: { rows: number[]; total: number };
     cohc: COHCT;
     portLetterNo: string;
-    konosamentGrouped: string;
+    konosamentGroup: { value: string; index: number };
 }>;
 
 type P<T> = Paths<T>;

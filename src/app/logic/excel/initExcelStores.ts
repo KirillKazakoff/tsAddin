@@ -12,7 +12,6 @@ const getExistedStores = async (context: Excel.RequestContext) => {
     const transformedDictionary: ExcelStoresDictionaryT = [] as any;
 
     for await (const [key, store] of Object.entries(excelStoresDictionary)) {
-        console.log(key);
         const storeWS = context.workbook.worksheets.items.find(
             (item) => item.name === key,
         );

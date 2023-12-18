@@ -1,18 +1,35 @@
 /* eslint-disable no-param-reassign */
 import { nanoid } from 'nanoid';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { getExcelDateNumeric, getNowDate } from '../../excel/utils/getExcelDate';
+import { getExcelDateShort, getNowDate } from '../../excel/utils/getExcelDate';
 import { groupTotal } from '../../utils/groupify/groupTotal';
 import { indexToStr } from '../../utils/indexToStr';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
+import { groupMatesByKns } from './groupMatesByKns';
 
 export const groupByContractNo = () => {
+    const matesGrouped = groupMatesByKns();
+
     const rows = tablesStore.innerT.map((row) => {
         const mateRow = tablesStore.matesT.find((r) => r.konosament === row.konosament);
+
+        const konosamentGroup = matesGrouped
+            .find((mGroup) => mGroup.kns.includes(mateRow))
+            .kns.reduce<{ value: string; index: number }>(
+            // prettier-ignore
+            (total, r, i, source) => {
+                const isLast = source.length === i + 1;
+                total.value += `${r.konosament} от ${getExcelDateShort(r.date, 'ru')} ${isLast ? '' : '\n'}`;
+                total.index += 1;
+                return total;
+            },
+            { value: '', index: 0 },
+        );
 
         return {
             row,
             mateRow,
+            konosamentGroup,
             type: row.type,
             amount: row.amount,
             id: row.id,
@@ -26,11 +43,13 @@ export const groupByContractNo = () => {
             groupedBy: {
                 noGroup: {
                     code: nanoid(),
-                    additional: { konosamentGrouped: '' },
+                    additional: { konosamentGroup: { value: '', index: 0 } },
                     groupModify: (group) => {
-                        group.additional.konosamentGrouped = `${
-                            mateRow.konosament
-                        } от ${getExcelDateNumeric(mateRow.date, 'ru')}`;
+                        const { konosamentGroup } = group.additional;
+                        const { konosament, date } = group.record.mateRow;
+                        // prettier-ignore
+                        konosamentGroup.value = `${konosament} от ${getExcelDateShort(date, 'ru')}`;
+                        konosamentGroup.index = 1;
                         return true;
                     },
                 },
@@ -41,17 +60,6 @@ export const groupByContractNo = () => {
                 portLetter: {
                     code:
                         row.product.codeName + row.vessel.codeName + row.sort + row.pack,
-                    additional: { konosamentGrouped: '' },
-                    groupModify: (group) => {
-                        // prettier-ignore
-                        if (group.additional.konosamentGrouped.includes(mateRow.konosament)) {
-                            return true;
-                        }
-                        group.additional.konosamentGrouped += `${
-                            mateRow.konosament
-                        } от ${getExcelDateNumeric(mateRow.date, 'ru')} \n`;
-                        return true;
-                    },
                 },
             },
             additional: { portLetterNo: '' },

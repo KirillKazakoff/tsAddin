@@ -7,21 +7,29 @@ import { InnerGroupT } from '../groupByContractNo';
 export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Письмо_массив' });
     const { noGroup, portLetter } = contract.groupedBy;
+    const { isGroupingKns } = portLetterStore.fields;
 
     insertRows({
-        records: portLetterStore.fields.isGroupingKns ? portLetter : noGroup,
+        records: isGroupingKns ? portLetter : noGroup,
         deleteStartAmount: 1,
-        rowSettings: ({ record: { mateRow, row: r }, total, additional }) => {
+        rowSettings: ({
+            record: { mateRow, row: r, konosamentGroup },
+            total,
+            additional,
+        }) => {
             const date = mateRow?.date;
             if (!date) {
                 pageStatusStore.setPageStatus('mismatchKonosamentId', r.konosament);
                 return null;
             }
+            if (!isGroupingKns) {
+                konosamentGroup = additional.konosamentGroup;
+            }
 
             const noPack = +r.pack === 1;
             // prettier-ignore
             const fields = {
-                konosament: additional.konosamentGrouped,
+                konosament: konosamentGroup.value,
                 product: `${r.product.ru.name} ${r.sort}`,
                 vessel: r.vessel.ru.name,
                 pack: noPack ? '-' : `1/${r.pack} кг `,
@@ -41,8 +49,11 @@ export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>)
                     common: {
                         border: 'all',
                         alignment: 'center',
-                        height: 35,
+                        height: 20 + 15 * konosamentGroup.index,
                     },
+                    // special: {
+                    //     konosament: { style: { alignment: { vertical: 'top' } } },
+                    // },
                 },
             };
         },
