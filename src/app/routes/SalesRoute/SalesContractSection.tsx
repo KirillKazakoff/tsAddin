@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { DocList } from '../../components/Doc/DocList';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import salesContractStore from '../../stores/docsStores/salesContractStore';
-import { useInitSalesSection } from './useInitSalesSection';
+import { useInitSalesSection } from '../../logic/docs/sales/useInitSalesSection';
 import { Form } from '../../components/Form/Form';
 import CheckBox from '../../components/CheckBox';
 

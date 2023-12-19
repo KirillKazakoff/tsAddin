@@ -36,7 +36,7 @@ export const groupByContractNo = () => {
         };
     });
 
-    const res = groupTotal({
+    const contracts = groupTotal({
         rows,
         input: ({ row, mateRow }) => ({
             code: row.id,
@@ -77,7 +77,7 @@ export const groupByContractNo = () => {
         }),
     });
 
-    return res;
+    return contracts;
 };
 
 export type InnerGroupT = ReturnType<typeof groupByContractNo>[number];

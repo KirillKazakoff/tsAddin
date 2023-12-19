@@ -25,10 +25,10 @@ export const initExportInvoiceRowsFCA = (
                 m4: '',
                 pack: '-',
                 placesTotal: total.placesTotal.count,
-                m5: '',
                 price: r.amount.price.count,
-                m6: '',
+                m5: '',
                 priceTotal: r.amount.priceTotal.count,
+                m6: '',
             };
 
             // prettier-ignore

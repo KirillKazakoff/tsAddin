@@ -1,16 +1,16 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
-import { useInitRequestSection } from '../../logic/docs/innerContract/useInitRequestSection';
+import { useInitRequestSection } from '../../logic/docs/inner/request/useInitRequestSection';
 import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
 import { SelectTerms } from '../../components/Select/SelectTerms';
 import RequestList from './RequestList';
-import { ReiceNo } from './ReiceNo';
 import CheckBox from '../../components/CheckBox';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { Form } from '../../components/Form/Form';
+import InputText from '../../components/Form/InputText';
 
 const SectionComponent = observer(() => {
     const { initObj, formik } = useInitRequestSection();
@@ -27,7 +27,11 @@ const SectionComponent = observer(() => {
                 <h3 className='title request-title'>Заявка:</h3>
                 <div className='fields-wrapper'>
                     <CheckBox title={'Только счет:'} name='isInvoiceOnly' />
-                    <ReiceNo />
+                    <InputText
+                        name='reiceNo'
+                        title='Введите № рейса:'
+                        placeholder='№ рейса'
+                    />
                     <SelectTerms />
                     <SelectPortTamozhnya />
                 </div>

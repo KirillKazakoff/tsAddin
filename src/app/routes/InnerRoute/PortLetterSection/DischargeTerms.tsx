@@ -1,9 +1,9 @@
 import React from 'react';
 import { useFormikContext } from 'formik';
-import InputText from '../../components/Form/InputText';
-import { TermsT } from '../../types/typesTables';
-import { SelectCargo } from '../../components/Select/SelectCargo';
-import SelectPersonDischarge from '../../components/Select/SelectPersonDischarge';
+import InputText from '../../../components/Form/InputText';
+import { TermsT } from '../../../types/typesTables';
+import { SelectCargo } from '../../../components/Select/SelectCargo';
+import SelectPersonDischarge from '../../../components/Select/SelectPersonDischarge';
 
 const TemplateCFR = () => (
     <>

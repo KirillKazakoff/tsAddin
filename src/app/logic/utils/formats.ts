@@ -37,11 +37,12 @@ type FormatsDocT = Partial<{
 
 export const formatsDocs = {
     exportInvoice: {
-        price: formats.common.priceDollar,
+        m1: formats.common.basePlacesTotalTn,
+        // m5: formats.common.priceDollar,
         m6: formats.common.priceDollar,
         placesTotal: formats.common.basePlacesTotalTn,
-        m1: formats.common.basePlacesTotalTn,
-        m5: formats.common.priceDollar,
+
+        price: formats.common.priceDollar,
         priceTotal: formats.common.priceDollar,
         places: formats.unique.placesSlash,
     },

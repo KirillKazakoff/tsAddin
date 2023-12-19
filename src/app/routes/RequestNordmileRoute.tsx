@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { createRequestNordmile } from '../logic/docs/innerContract/createRequestNordmile';
+import { createRequestNordmile } from '../logic/docs/inner/request/createRequestNordmile';
 import tablesStore from '../stores/tablesStore/tablesStore';
 import { RequestSection } from './InnerRoute/RequestSection';
 import { Doc } from '../components/Doc/Doc';

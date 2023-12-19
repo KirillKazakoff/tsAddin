@@ -1,6 +1,6 @@
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
-import { SalesGroupT } from './groupBy/groupSalesContract';
+import { SalesGroupT } from './groupSalesContract';
 
 export const initSalesRowsDefault = (contract: SalesGroupT, utils: CellUtilsT<''>) => {
     const { insertRow, insertRows, deleteStartRows } = utils.initRowMaker({

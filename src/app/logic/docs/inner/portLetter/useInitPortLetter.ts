@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
-import { useInitSection } from '../../../components/Form/useInitSection';
-import { useMyFormik } from '../../../components/Form/useMyFormik';
-import portLetterStore from '../../../stores/docsStores/portLetterStore';
-import { TermsT } from '../../../types/typesTables';
+import { useInitSection } from '../../../../components/Form/useInitSection';
+import { useMyFormik } from '../../../../components/Form/useMyFormik';
+import portLetterStore from '../../../../stores/docsStores/portLetterStore';
+import { TermsT } from '../../../../types/typesTables';
 import { createPortLetter } from './createPortLetter';
-import { groupByContractNo } from './groupByContractNo';
+import { groupByContractNo } from '../groupByContractNo';
 
 export const useInitPortLetter = () => {
     const formik = useMyFormik({

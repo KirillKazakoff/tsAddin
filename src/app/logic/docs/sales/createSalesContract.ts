@@ -1,7 +1,7 @@
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { readTmp } from '../readTmp';
-import { SalesGroupT } from './groupBy/groupSalesContract';
+import { SalesGroupT } from './groupSalesContract';
 import { initSalesContractTmp } from './initSalesContractTmp';
 import { initSalesInvoiceTmp } from './initSalesInvoiceTmp';
 

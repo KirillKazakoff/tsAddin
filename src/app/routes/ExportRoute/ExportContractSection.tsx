@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import CheckBox from '../../components/CheckBox';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { ExportDepartureDate } from './ExportDepartureDate';
-import { useInitContractSection } from '../../logic/docs/exportContract/useInitContractSection';
+import { useInitContractSection } from '../../logic/docs/export/useInitContractSection';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { Form } from '../../components/Form/Form';
 import { DocList } from '../../components/Doc/DocList';
