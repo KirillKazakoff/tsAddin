@@ -201,6 +201,32 @@ export type ClientRuT = {
     inn: string;
     phone: string;
     mail: string;
+    req: {
+        org: {
+            formName: string;
+            codeName: string;
+            mail: string;
+            phoneFax: string;
+            address: string;
+            kpp: string;
+            ogrn: string;
+            okpo: string;
+        };
+        podpisant: {
+            face: string;
+            fullName: string;
+            shortName: string;
+            sex: string;
+            position: string;
+            basis: string;
+        };
+        bank: {
+            name: string;
+            bik: string;
+            ks: string;
+            rs: string;
+        };
+    };
 };
 
 export type ClientsRuT = Dictionary<ClientRuT>;
