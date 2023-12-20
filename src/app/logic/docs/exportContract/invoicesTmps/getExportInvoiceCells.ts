@@ -89,6 +89,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 cell: 'Инвойс_откуда',
                 eng: `${portFrom?.eng?.name}`,
                 ru: `${portFrom?.ru?.name}`,
+                isEmpty: invoice.record.terms === 'FCA',
             },
             {
                 cell: 'Инвойс_изготовитель',
@@ -121,7 +122,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 cell: 'Инвойс_декларация',
                 eng: declarationNo,
                 ru: declarationNo,
-                isEmpty: exportContractStore.currentTerms === 'CFR',
+                isEmpty: invoice.record.terms !== 'EXW',
             },
         ],
         exportStorage: [
@@ -169,8 +170,6 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
         ],
     } satisfies CellDeclarationT<CellSingleT>;
 
-    const fcaSplice = ['Инвойс_откуда', 'Инвойс_декларация'];
-
     const singleCells = [...singleObj.common];
     const doubleCells = [...doubleObj.common];
 
@@ -180,13 +179,6 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     }
     if (invoice.record.type === 'exportStorage') {
         doubleCells.push(...doubleObj.exportStorage);
-    }
-    if (invoice.record.terms === 'FCA') {
-        // splice non-FCA cells
-        fcaSplice.forEach((cellName) => {
-            const index = doubleCells.findIndex((settings) => settings.cell === cellName);
-            doubleCells.splice(index, 1);
-        });
     }
 
     return { double: doubleCells, single: singleCells };

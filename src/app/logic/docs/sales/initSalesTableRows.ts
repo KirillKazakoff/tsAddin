@@ -1,3 +1,4 @@
+import salesContractStore from '../../../stores/docsStores/salesContractStore';
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { SalesGroupT } from './groupBy/groupSalesContract';
 
@@ -21,7 +22,7 @@ export const initSalesTableRows = (settings: SettingsT) => {
                 bl: r.blNo,
                 product: `${r.product.name}`,
                 vessel: r.vessel,
-                sort: r.sort,
+                sort: salesContractStore.fields.isSortGroup ? '-' : r.sort,
                 price: r.amount.price.count,
                 placesTotal: total.placesTotal.count,
                 priceTotal: total.priceTotal.count,
