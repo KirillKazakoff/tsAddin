@@ -54,9 +54,9 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
         const row = ws.insertRow(insertIndex, rowArr);
         insertIndex += 1;
 
-        mergeRowCells(ws, settings.fields, row.number);
         styleRow(settings, row, firstCellCount);
         setFormats(row, settings.fields as FieldsObjT, settings.docType);
+        mergeRowCells(ws, settings.fields, row.number);
     };
 
     const insertRows = <RecordT, FieldsT extends FieldsGenT>(
