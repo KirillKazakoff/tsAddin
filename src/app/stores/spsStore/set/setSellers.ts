@@ -5,7 +5,19 @@ import spsStore from '../spsStore';
 
 export const setSellers = (spRange: any[][]) => {
     const transformed = spRange.reduce<SellersT>((total, row) => {
-        const [codeName, fullNameRu, addresRu, nameEng, addresEng, code, inn] = row;
+        const [
+            codeName,
+            form,
+            fullNameRu,
+            fullOutForm,
+            shortName,
+            addresRu,
+            nameEng,
+            addresEng,
+            code,
+            inn,
+        ] = row;
+
         total[codeName] = {
             codeName,
             eng: {

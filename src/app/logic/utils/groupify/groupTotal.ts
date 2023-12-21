@@ -92,7 +92,7 @@ const groupifyOutput = <R extends RowExtT, K>(
     };
 
     const group = groupify(associative, init, code);
-    group.index += 1;
+    // group.index += 1;
 
     addToAmountObj(group.total, row.amount);
     group.rows.push(row);
@@ -110,7 +110,6 @@ const groupRecursive = <R extends RowExtT, K>(
     }
 
     const group = groupifyOutput(input.code, output, row, input.additional);
-    group.index = Object.values(output).findIndex((g) => g.code === group.code) + 1;
 
     if (input?.groupModify) {
         const goNext = input?.groupModify(group);
@@ -124,6 +123,8 @@ const groupRecursive = <R extends RowExtT, K>(
         const subOutput = groupify(output[group.code].groupedBy, {}, key);
         groupRecursive(subInput as InputGroupT<R>, subOutput, row);
     });
+
+    group.index = Object.values(output).findIndex((g) => g.code === group.code) + 1;
 };
 
 export const groupTotal = <R extends RowExtT, I extends IExtT<R>>(settings: {
@@ -137,6 +138,10 @@ export const groupTotal = <R extends RowExtT, I extends IExtT<R>>(settings: {
     rows.forEach((row) => {
         const input = getInput(row);
         groupRecursive(input as any, output, row);
+    });
+
+    Object.values(output).forEach((g, i) => {
+        g.index = i + 1;
     });
 
     return arrayify(output) as unknown as OutputGroupT<R, K>[];
