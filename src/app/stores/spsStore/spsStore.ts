@@ -67,4 +67,6 @@ class SpsStore {
 }
 
 const spsStore = new SpsStore();
+export type SpsKeyT = keyof { [P in keyof typeof spsStore.setSp]: string };
+
 export default spsStore;

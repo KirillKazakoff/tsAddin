@@ -36,6 +36,7 @@ export const groupByContractNo = () => {
         };
     });
 
+    // prettier-ignore
     const contracts = groupTotal({
         rows,
         input: ({ row, mateRow }) => ({
@@ -53,13 +54,16 @@ export const groupByContractNo = () => {
                         return true;
                     },
                 },
+                sortPack: {
+                    code: row.product.code + row.vessel.code + row.sort + row.pack,
+                },
                 request: {
                     code:
-                        row.product.codeName + row.vessel.codeName + row.sort + row.pack,
+                        row.product.code + row.vessel.code + row.sort + row.pack,
                 },
                 portLetter: {
                     code:
-                        row.product.codeName + row.vessel.codeName + row.sort + row.pack,
+                        row.product.code + row.vessel.code + row.sort + row.pack,
                 },
             },
             additional: { portLetterNo: '' },

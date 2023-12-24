@@ -10,7 +10,7 @@ export const getSubject = () => {
     const subjectObj = mates.reduce<SubjectT>((total, row) => {
         const { product, sort } = row;
 
-        const sorts = groupify<string[]>(total, [], product.codeName);
+        const sorts = groupify<string[]>(total, [], product.code);
 
         if (sorts.includes(sort)) return total;
         if (isStOff(sort)) return total;

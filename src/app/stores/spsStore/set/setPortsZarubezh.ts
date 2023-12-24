@@ -1,35 +1,29 @@
-/* eslint-disable no-param-reassign */
-import { PortsZarubezhT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setPortsZarubezh = (spRange: any[][]) => {
-    spRange.shift();
-
-    const transformed = spRange.reduce<PortsZarubezhT>((total, row) => {
-        const [
-            codeName,
-            nameEng,
-            countryEng,
-            countryRu,
-            countryFullRu,
-            countryFullEng,
-        ] = row;
-
-        total[codeName] = {
-            codeName,
-            eng: {
-                name: nameEng,
-                country: countryEng,
-                countryFull: countryFullEng,
-            },
+    setSp({
+        table: spRange,
+        type: 'portsZarubezh',
+        headers: {
+            code: 'Порт',
+            nameEng: 'Port',
+            countryEng: 'Country',
+            countryRu: 'Страна',
+            countryNameFullRu: 'Страна полное рус',
+            countryNameFullEng: 'Country full eng',
+        },
+        row: (r) => ({
+            code: r.code,
             ru: {
-                name: codeName,
-                country: countryRu,
-                countryFull: countryFullRu,
+                country: r.countryRu,
+                countryFull: r.countryNameFullRu,
+                name: r.code,
             },
-        };
-        return total;
-    }, {});
-
-    spsStore.setSp.portsZarubezh(transformed);
+            eng: {
+                country: r.countryEng,
+                countryFull: r.countryNameFullEng,
+                name: r.nameEng,
+            },
+        }),
+    });
 };

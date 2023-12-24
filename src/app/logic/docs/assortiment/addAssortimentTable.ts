@@ -16,7 +16,7 @@ export const addAssortimentTable = (
     const { places, placesTotal } = table.total;
 
     // headerInsert
-    const freezing = calcFreezing(product.codeName, vessel.codeName);
+    const freezing = calcFreezing(product.code, vessel.code);
     const rows = {
         product: [
             `${tableIndex + 1}. ${freezing} ${
@@ -24,11 +24,11 @@ export const addAssortimentTable = (
             } producing by ${vessel.eng.name.toUpperCase()}`,
         ],
         pack: [`package - carton box 1/${pack} kg`],
-        info: ['', '', seller.codeName, blNo],
+        info: ['', '', seller.code, blNo],
         titles: ['grade', 'weight', 'c/t', 'kg', 'Sampling Plan'],
     };
 
-    if (vessel.codeName.includes('Шалин')) {
+    if (vessel.code.includes('Шалин')) {
         rows.pack = [`package - laminated bag 1/${pack} kg`];
     }
 

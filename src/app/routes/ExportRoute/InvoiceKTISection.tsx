@@ -21,7 +21,7 @@ export const SectionComponent = observer(() => {
             <Doc
                 key={invoice.record.row.invoiceNo}
                 onClick={onClick}
-                title={`${invoice.record.exportRow.seller.codeName} ${invoice.record.row.invoiceNo}`}
+                title={`${invoice.record.exportRow.seller.code} ${invoice.record.row.invoiceNo}`}
                 isPreventDefault
             />
         );

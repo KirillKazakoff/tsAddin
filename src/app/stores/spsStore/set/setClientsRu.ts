@@ -1,74 +1,66 @@
-/* eslint-disable no-param-reassign */
-import { ClientRuT, ClientsRuT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setClientsRu = (spRange: any[][]) => {
-    spRange.shift();
-    const transformed = spRange.reduce<ClientsRuT>((total, row) => {
-        const [
-            name,
-            formOrgReq,
-            codeName,
-            codeNameOrgReq,
-            inn,
-            phone,
-            mail,
-            mailReq,
-            phoneFaxReq,
-            addressReq,
-            kppReq,
-            ogrnReq,
-            okpoReq,
-            bankNameReq,
-            bikReq,
-            ksReq,
-            rsReq,
-            faceReq,
-            fullNameReq,
-            sexReq,
-            basisReq,
-            positionReq,
-            shortNameReq,
-        ] = row;
-
-        const rowObj: ClientRuT = {
-            codeName,
-            name,
-            inn,
-            phone,
-            mail,
+    setSp({
+        table: spRange,
+        type: 'clientsRu',
+        headers: {
+            fullNameCompany: 'Полное наименование',
+            form: 'Реквизиты.Форма',
+            code: 'Краткое наименование',
+            shortNameCompany: 'Реквизиты.краткое наименование',
+            inn: 'ИНН',
+            phone: 'Телефон',
+            mailMain: 'Элект.почта',
+            mailReq: 'Реквизиты.email',
+            phoneFaxReq: 'Реквизиты.тел/факс',
+            addressReq: 'Реквизиты.адрес',
+            mailReqAddress: 'Реквизиты.почтовый адрес',
+            kppReq: 'Реквизиты.КПП',
+            ogrnReq: 'Реквизиты.ОГРН',
+            okpoReq: 'Реквизиты.ОКПО',
+            bankNameReq: 'Реквизиты.Банк',
+            bikReq: 'Реквизиты.БИК',
+            ksReq: 'Реквизиты.к/с',
+            rsReq: 'Реквизиты.р/с',
+            faceReq: 'Реквизиты.в лице',
+            sexReq: 'Реквизиты.пол',
+            basisReq: 'Реквизиты.Основание',
+            positionReq: 'Реквизиты.должность',
+            podpisantShortNameReq: 'Реквизиты.ФИО короткое',
+        },
+        row: (r) => ({
+            code: r.code,
+            mail: r.mailMain,
+            name: r.fullNameCompany,
+            phone: r.phone,
+            inn: r.inn,
             req: {
-                org: {
-                    formName: formOrgReq,
-                    codeName: codeNameOrgReq,
-                    mail: mailReq,
-                    phoneFax: phoneFaxReq,
-                    address: addressReq,
-                    kpp: kppReq,
-                    ogrn: ogrnReq,
-                    okpo: okpoReq,
-                },
                 bank: {
-                    name: bankNameReq,
-                    bik: bikReq,
-                    ks: ksReq,
-                    rs: rsReq,
+                    bik: r.bikReq,
+                    ks: r.ksReq,
+                    name: r.bankNameReq,
+                    rs: r.rsReq,
+                },
+                org: {
+                    address: r.addressReq,
+                    formName: r.form,
+                    kpp: r.kppReq,
+                    mail: r.mailReq,
+                    mailAddress: r.mailReqAddress,
+                    ogrn: r.ogrnReq,
+                    okpo: r.okpoReq,
+                    phoneFax: r.phoneFaxReq,
+                    shortName: r.shortNameCompany,
                 },
                 podpisant: {
-                    face: faceReq,
-                    fullName: fullNameReq,
-                    shortName: shortNameReq,
-                    sex: sexReq,
-                    basis: basisReq,
-                    position: positionReq,
+                    basis: r.basisReq,
+                    face: r.faceReq,
+                    position: r.positionReq,
+                    sex: r.sexReq,
+                    shortName: r.shortNameCompany,
                 },
             },
-        };
-
-        total[codeName] = rowObj;
-
-        return total;
-    }, {});
-
-    spsStore.setSp.clientsRu(transformed);
+        }),
+    });
 };

@@ -18,10 +18,10 @@ export const initRequestTmp = (book: Workbook, contract: InnerGroupT) => {
         portTamozhnya, terms, reiceNo, isInvoiceOnly,
     } = requestContractStore.fields;
 
-    const isVld = portTamozhnya.codeName === 'Владивосток';
+    const isVld = portTamozhnya.code === 'Владивосток';
     const isCfrVld = terms.includes('CFR') && isVld;
 
-    let dischargeStr1 = `Приемка по качеству в г.${portTamozhnya.codeName} в течение 3-х дней_____________________`;
+    let dischargeStr1 = `Приемка по качеству в г.${portTamozhnya.code} в течение 3-х дней_____________________`;
     let dischargeStr2 = '';
     if (terms === 'FCA') {
         dischargeStr1 = ' * Приемка по качеству и количеству осуществляется';

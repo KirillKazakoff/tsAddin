@@ -21,7 +21,7 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
         export: exportProps,
         exportStorage: exportProps,
         mates: ['sort', 'periodCreation', 'reice', 'operation', 'index'],
-        inner: ['sort', 'deliveryDate', 'paymentDate', 'pack'],
+        inner: ['sort', 'deliveryDate', 'paymentDate', 'pack', 'packSp'],
         dischargeInvoices: ['i', 'invoiceDate', 'invoiceNo', 'dischargeDate'],
         storageInvoices: [
             'operation',

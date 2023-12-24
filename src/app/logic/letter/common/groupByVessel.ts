@@ -4,7 +4,7 @@ import { MateRowT } from '../../../types/typesTables';
 export const groupByVessel = (vessels: VesselT[], mates: MateRowT[]) => {
     return vessels.reduce<MateRowT[][]>((groupVessel, vessel) => {
         const group = mates.reduce<MateRowT[]>((total, row) => {
-            if (vessel.codeName === row.vessel.codeName) total.push(row);
+            if (vessel.code === row.vessel.code) total.push(row);
             return total;
         }, []);
 

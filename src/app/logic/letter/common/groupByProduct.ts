@@ -24,7 +24,7 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
         const productObj = groupify(
             productionTypes,
             initProduct(tableRow),
-            product.codeName,
+            product.code,
         );
 
         const newDetails = { sort, amount: amount.placesTotal };

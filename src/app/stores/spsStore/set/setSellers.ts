@@ -1,26 +1,44 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-param-reassign */
-import { SellersT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setSellers = (spRange: any[][]) => {
-    const transformed = spRange.reduce<SellersT>((total, row) => {
-        const [codeName, fullNameRu, addresRu, nameEng, addresEng, code, inn] = row;
-        total[codeName] = {
-            codeName,
+    setSp({
+        table: spRange,
+        type: 'sellers',
+        headers: {
+            code: 'Компания',
+            orgForm: 'Форма',
+            fullNameRu: 'Полное наименование',
+            fullNameWithoutOrg: 'Реквизиты.Полное наименование',
+            shortName: 'Краткое наименование',
+            addressRu: 'Адрес',
+            nameEng: 'Company Name',
+            addressEng: 'Address',
+            codeEng: 'Code',
+            inn: 'ИНН',
+            kpp: 'КПП',
+            ogrn: 'ОГРН',
+            okpo: 'ОКПО',
+            phoneFax: 'Телефон/факс ',
+            mail: 'Электронный адрес',
+        },
+        row: (r) => ({
+            code: r.code,
+            info: {
+                inn: r.inn,
+                kpp: r.kpp,
+                mail: r.mail,
+                ogrn: r.ogrn,
+                okpo: r.okpo,
+                phoneFax: r.phoneFax,
+            },
             eng: {
-                name: nameEng,
-                address: addresEng,
+                address: r.addressEng,
+                name: r.nameEng,
             },
             ru: {
-                name: fullNameRu,
-                address: addresRu,
+                address: r.addressRu,
+                name: r.fullNameRu,
             },
-            inn,
-        };
-
-        return total;
-    }, {});
-
-    spsStore.setSp.sellers(transformed);
+        }),
+    });
 };

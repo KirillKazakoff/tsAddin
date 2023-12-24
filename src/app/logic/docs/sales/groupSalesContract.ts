@@ -8,8 +8,8 @@ export const groupSalesContract = () => {
             code: row.id,
             groupedBy: {
                 bl: { code: row.blNo },
-                blProduct: { code: row.product.codeName + row.pack },
-                noGroup: { code: row.product.codeName + row.pack + row.sort },
+                blProduct: { code: row.product.code + row.pack },
+                noGroup: { code: row.product.code + row.pack + row.sort },
             },
         }),
     });

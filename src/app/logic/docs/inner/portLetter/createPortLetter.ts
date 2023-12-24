@@ -29,14 +29,14 @@ export const createPortLetter = async (contract: InnerGroupT) => {
     }
 
     await initPictureGit({
-        url: seller.codeName === 'ТРК' ? pathObj.bg.trk : pathObj.bg.msi,
+        url: seller.code === 'ТРК' ? pathObj.bg.trk : pathObj.bg.msi,
         ws,
         rangeObj: { start: 'Banner_start', end: 'Banner_end' },
     });
     await utils.initPictures(
         [
             {
-                key: podpisant.codeName,
+                key: podpisant.code,
                 range: {
                     start: 'Sign_seller_start',
                     end: `${
@@ -47,12 +47,12 @@ export const createPortLetter = async (contract: InnerGroupT) => {
                 },
             },
             {
-                key: seller.codeName,
+                key: seller.code,
                 range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
             },
         ],
         isPictures,
     );
 
-    await saveFile(book, `Письмо ${contract.index} ${row.buyer.codeName}`);
+    await saveFile(book, `Письмо ${contract.index} ${row.buyer.code}`);
 };

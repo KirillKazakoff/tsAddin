@@ -40,6 +40,8 @@ export const setCell = (ws: Worksheet) => (setObj: CellObjT) => {
         const cellObj = getCell(ws)(cell, offsetRow);
         cellObj.value = value;
 
+        cellObj.style.alignment.indent = 2;
+
         if (numFmt) cellObj.numFmt = numFmt;
         if (isEmpty) {
             setEmptyFn(ws, cellObj);

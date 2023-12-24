@@ -19,10 +19,10 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
             code: row.blNo,
             groupedBy: {
                 product: {
-                    code: `${row.product.codeName}${row.pack}`,
+                    code: `${row.product.code}${row.pack}`,
                 },
                 productSort: {
-                    code: `${row.product.codeName}${row.sort}`,
+                    code: `${row.product.code}${row.sort}`,
                 },
             },
         }),

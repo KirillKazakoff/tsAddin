@@ -12,7 +12,7 @@ export default function LetterList({ contracts, onLoad }: Props) {
         return (
             <Doc
                 onClick={onClick}
-                title={`${buyer.codeName}`}
+                title={`${buyer.code}`}
                 key={contractNo}
                 cls='port-letter'
             />

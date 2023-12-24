@@ -5,7 +5,7 @@ import Select from './Select';
 
 export const SelectPortTamozhnya = observer(() => {
     const { portsTamozhnya } = spsStore;
-    const options = Object.values(portsTamozhnya).map((port) => port.codeName);
+    const options = Object.values(portsTamozhnya).map((port) => port.code);
 
     return (
         <Select

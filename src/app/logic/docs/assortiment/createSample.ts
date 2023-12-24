@@ -8,6 +8,6 @@ export const createSample = async (assortiment: AssortimentObjT) => {
     const ws = book.addWorksheet('sample');
     initAssortiment(assortiment, ws);
 
-    const consignee = assortiment.record.consignee.codeName;
+    const consignee = assortiment.record.consignee.code;
     await saveFile(book, `Sample plan ${consignee}`);
 };

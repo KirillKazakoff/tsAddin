@@ -12,7 +12,7 @@ export default function RequestList({ contracts, onLoad }: Props) {
         return (
             <Doc
                 onClick={onClick}
-                title={`${row.buyer.codeName}`}
+                title={`${row.buyer.code}`}
                 key={row.id}
                 cls={'request'}
             />

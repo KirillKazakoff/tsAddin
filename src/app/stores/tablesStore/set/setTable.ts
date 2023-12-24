@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { checkTable } from '../../../logic/excel/checkTable/checkTable';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import tablesStore, { TableKeyT } from '../tablesStore';
-import { headerRecognition } from './headerRecognition';
+import { headerRecognition } from '../../headerRecognition';
 
 export const setTable = <T extends Record<string, any>, K extends TableKeyT>(settings: {
     table: any[][];

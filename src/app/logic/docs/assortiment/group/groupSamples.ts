@@ -10,10 +10,10 @@ export const groupSamples = (rows: ExportRowT[]) => {
         rows,
         input: (row) => ({
             init: () => isProductForAssortiment(row.product),
-            code: `${row.consignee.codeName}`,
+            code: `${row.consignee.code}`,
             groupedBy: {
                 table: {
-                    code: `${row.vessel.codeName}${row.product.codeName}${row.pack}`,
+                    code: `${row.vessel.code}${row.product.code}${row.pack}`,
                     groupedBy: {
                         sort: { code: row.sort },
                     },

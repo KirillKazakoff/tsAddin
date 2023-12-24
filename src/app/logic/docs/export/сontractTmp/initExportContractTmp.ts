@@ -26,11 +26,11 @@ export const initExportContractTmp = async (book: Workbook, agreement: ExportGro
     await utils.initPictures(
         [
             {
-                key: exportContractStore.fields.podpisant.codeName,
+                key: exportContractStore.fields.podpisant.code,
                 range: { start: 'Sign_seller_start', end: 'Seal_seller_end' },
             },
             {
-                key: agreement.record.seller.codeName,
+                key: agreement.record.seller.code,
                 range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
             },
             {

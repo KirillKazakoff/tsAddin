@@ -14,6 +14,6 @@ export const createSalesContract = async (contract: SalesGroupT) => {
     await initSalesContractTmp(book, contract);
     await initSalesInvoiceTmp(book, contract);
 
-    const fileName = `${contract.record.buyer.codeName} ${contractNo}`;
+    const fileName = `${contract.record.buyer.code} ${contractNo}`;
     await saveFile(book, fileName);
 };

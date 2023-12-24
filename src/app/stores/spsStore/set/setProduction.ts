@@ -1,37 +1,32 @@
 /* eslint-disable no-param-reassign */
-import { ProductionsT, ProductionT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setProduction = (spRange: any[][]) => {
-    const production = spRange.reduce<ProductionsT>((total, row) => {
-        const [
-            fullNameRu,
-            nameEng,
-            codeNameUncased,
-            expirationDate,
-            packRu,
-            packEng,
-            standart,
-        ] = row;
-        const codeName = codeNameUncased.toLowerCase();
-
-        const rowObj: ProductionT = {
-            codeName,
+    setSp({
+        table: spRange,
+        type: 'production',
+        headers: {
+            fullNameRu: 'Наименование',
+            fullNameEng: 'Product name',
+            code: 'Короткое наименование',
+            expirationDate: 'Срок годности',
+            packRu: 'Упаковка',
+            packEng: 'Упаковка (eng)',
+            standart: 'Стандарт',
+            codeNew: 'Код',
+        },
+        row: (r) => ({
+            code: r.code.toLowerCase(),
             eng: {
-                name: nameEng,
-                pack: packEng || 'No package',
+                name: r.fullNameEng,
+                pack: r.packEng || 'No package',
             },
             ru: {
-                name: fullNameRu,
-                pack: packRu || 'Нет упаковки',
+                name: r.fullNameRu,
+                pack: r.packRu || 'Нет упаковки',
             },
-            expirationDate: expirationDate || 'ХХХ',
-            standart: standart || 'Нет стандарта',
-        };
-
-        total[codeName] = rowObj;
-        return total;
-    }, {});
-
-    spsStore.setSp.production(production);
+            expirationDate: r.expirationDate || 'ХХХ',
+            standart: r.standart || 'Нет стандарта',
+        }),
+    });
 };

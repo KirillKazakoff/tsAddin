@@ -7,7 +7,7 @@ import { PortZarubezhT } from '../../../types/typesSP';
 export const footerToStrRu = () => {
     const { arrivalVld, payment, port } = letterStore.fields;
 
-    const arrivalStr = `Прибытие в п. ${port.codeName} ${arrivalVld}`;
+    const arrivalStr = `Прибытие в п. ${port.code} ${arrivalVld}`;
     const paymentStr = payment ? `Оплата до ${payment}` : '';
     const conclusionStr = 'В случае Вашей заинтересованности, просим Вас направить предложение';
 
@@ -25,7 +25,7 @@ export const footerToStrEng = () => {
     if (terms === 'EXW') {
         weightInformStr = 'Send you warehouse certificate reports in attached files.';
     }
-    if (tablesStore.matesT[0].product.codeName === 'мука рыбная') {
+    if (tablesStore.matesT[0].product.code === 'мука рыбная') {
         weightInformStr
             += '\nSend to you result of analysis and certificate of warehouse in attached files.';
     }

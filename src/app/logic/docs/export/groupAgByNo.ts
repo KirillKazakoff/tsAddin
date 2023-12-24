@@ -19,16 +19,16 @@ export const groupAgByNo = () => {
                 invoices: {
                     code: row.invoice,
                     groupedBy: {
-                        product: { code: row.product.codeName },
-                        productPack: { code: row.blNo + row.product.codeName + row.pack },
-                        productSort: { code: row.product.codeName + row.pack + row.sort },
+                        product: { code: row.product.code },
+                        productPack: { code: row.blNo + row.product.code + row.pack },
+                        productSort: { code: row.product.code + row.pack + row.sort },
                     },
                 },
                 bl: {
                     code: row.blNo,
                     groupedBy: {
-                        product: { code: row.product.codeName + row.pack },
-                        productSort: { code: row.product.codeName + row.sort },
+                        product: { code: row.product.code + row.pack },
+                        productSort: { code: row.product.code + row.sort },
                     },
                 },
             },
