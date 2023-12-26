@@ -34,8 +34,8 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
             cell: 'Письмо_описание_шапка',
             value: `Просим вас рыбопродукцию, ${
                 fields.termsPort.includes('CFR')
-                    ? `которая прибудет в п. Владивосток на ${row.transport.ru.name} в адрес ${row.seller.ru.name} по следующим коносаментам:`
-                    : `находящуюся на хранении ${row.seller.ru.name}`
+                    ? `которая прибудет в п. Владивосток на ${row.transport.ru.name} в адрес ООО "${row.seller.ru.name}" по следующим коносаментам:`
+                    : `находящуюся на хранении ООО "${row.seller.ru.name}"`
             }`,
         },
         {

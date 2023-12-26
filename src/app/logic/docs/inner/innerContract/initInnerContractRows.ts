@@ -18,7 +18,6 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
         records: contract.groupedBy.sortPack,
         deleteStartAmount: 2,
         rowSettings: ({ record: { row: r }, total }) => {
-            console.log(r.packSp.fullName);
             const fields = {
                 empty1: '',
                 product: r.product.ru.name,
