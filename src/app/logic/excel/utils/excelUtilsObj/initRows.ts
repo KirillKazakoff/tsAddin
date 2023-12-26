@@ -24,6 +24,7 @@ export type SettingsRowT<FieldsT> = {
 type SettingsRowsT<RecordT, FieldsT> = {
     records: RecordT[];
     deleteStartAmount?: number;
+    mergeHeader?: boolean;
     rowSettings?: (
         rec: RecordT,
         insertIndex: number,
@@ -63,16 +64,17 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
         settingsTmp: SettingsRowsT<RecordT, FieldsT>,
     ) => {
         settingsTmp.records.forEach((record, cycleIndex) => {
+            const row = ws.getRow(insertIndex);
             const settings = settingsTmp.rowSettings
-                ? settingsTmp.rowSettings(
-                    record,
-                    insertIndex + 1,
-                    cycleIndex,
-                    ws.getRow(insertIndex),
-                )
+                ? settingsTmp.rowSettings(record, insertIndex + 1, cycleIndex, row)
                 : { fields: record };
 
             if (!settings) return;
+
+            if (cycleIndex === 0 && settingsTmp.mergeHeader) {
+                mergeRowCells(ws, settings.fields as FieldsGenT, insertIndex - 1);
+                styleRow(settings as any, row, firstCellCount);
+            }
 
             insertRow(settings as SettingsRowT<FieldsT>);
         });

@@ -1,41 +1,36 @@
-/* eslint-disable no-param-reassign */
-import { AgentsT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setAgents = (spRange: any[][]) => {
-    spRange.shift();
-    const transformed = spRange.reduce<AgentsT>((total, row) => {
-        const [
-            name,
-            signatoryEng,
-            signatoryRu,
-            beneficiaryBank,
-            branch,
-            bankAdress,
-            acNo,
-            swift,
-            adress,
-            code,
-        ] = row;
-
-        total[code] = {
-            code,
+    setSp({
+        type: 'agents',
+        table: spRange,
+        headers: {
+            name: 'Contractor',
+            signatoryEng: 'Signatory',
+            signatoryRus: 'Signatory RUS',
+            beneficiaryBank: 'BENEFICIARY’S BANK',
+            branch: 'Branch Name',
+            bankAddress: 'Bank Address',
+            acNo: 'A/C NO.',
+            swift: 'SWIFT',
+            address: 'Address',
+            code: 'Code',
+        },
+        row: (r) => ({
+            code: r.code,
             eng: {
-                signatory: signatoryEng,
+                signatory: r.signatoryEng,
             },
             ru: {
-                signatory: signatoryRu,
+                signatory: r.signatoryRus,
             },
-            name: name.toUpperCase(),
-            beneficiaryBank,
-            branch,
-            bankAddress: bankAdress,
-            acNo,
-            swift,
-            address: adress,
-        };
-        return total;
-    }, {});
-
-    spsStore.setSp.agents(transformed);
+            acNo: r.acNo,
+            address: r.address,
+            bankAddress: r.bankAddress,
+            branch: r.branch,
+            beneficiaryBank: r.beneficiaryBank,
+            name: r.name,
+            swift: r.swift,
+        }),
+    });
 };

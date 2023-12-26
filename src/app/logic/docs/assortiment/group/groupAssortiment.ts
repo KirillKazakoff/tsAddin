@@ -9,7 +9,7 @@ const groupFn = (rows: ExportRowT[]) => {
         rows,
         input: (row) => ({
             init: () => isProductForAssortiment(row.product),
-            code: `${row.blNo}${row.product.codeName}${row.pack}`,
+            code: `${row.blNo}${row.product.code}${row.pack}`,
             groupedBy: {
                 sort: { code: row.sort },
             },

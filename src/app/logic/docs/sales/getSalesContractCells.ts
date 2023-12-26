@@ -1,7 +1,7 @@
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { CellDeclarationT } from '../../../types/typesUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
-import { SalesGroupT } from './groupBy/groupSalesContract';
+import { SalesGroupT } from './groupSalesContract';
 
 export const getSalesContractCells = (contract: SalesGroupT) => {
     const { record: r } = contract;

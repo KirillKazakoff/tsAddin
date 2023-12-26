@@ -1,5 +1,5 @@
-import tablesStore from '../../../../stores/tablesStore/tablesStore';
-import { groupTotal } from '../../../utils/groupify/groupTotal';
+import tablesStore from '../../../stores/tablesStore/tablesStore';
+import { groupTotal } from '../../utils/groupify/groupTotal';
 
 export const groupSalesContract = () => {
     const contractsNew = groupTotal({
@@ -8,8 +8,8 @@ export const groupSalesContract = () => {
             code: row.id,
             groupedBy: {
                 bl: { code: row.blNo },
-                blProduct: { code: row.product.codeName + row.pack },
-                noGroup: { code: row.product.codeName + row.pack + row.sort },
+                blProduct: { code: row.blNo + row.product.code + row.pack },
+                noGroup: { code: row.blNo + row.product.code + row.pack + row.sort },
             },
         }),
     });

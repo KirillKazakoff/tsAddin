@@ -6,7 +6,7 @@ import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initSalesTableRows } from './initSalesTableRows';
 import { setPrintArea } from '../../excel/utils/excelUtilsObj/setPrintArea';
 import salesContractStore from '../../../stores/docsStores/salesContractStore';
-import { SalesGroupT } from './groupBy/groupSalesContract';
+import { SalesGroupT } from './groupSalesContract';
 
 export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesGroupT) => {
     const r = contract.record;

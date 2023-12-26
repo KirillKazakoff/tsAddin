@@ -11,7 +11,7 @@ export const SectionComponent = observer(() => {
     const { onLoad, onLoadAll, samples } = initObj;
 
     const sampleDocs = samples.map((sample) => {
-        const consignee = sample.record.consignee.codeName;
+        const consignee = sample.record.consignee.code;
         return (
             <Doc
                 isPreventDefault

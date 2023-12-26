@@ -2,12 +2,13 @@ import { Dictionary } from './typesUtils';
 
 // Transport
 export type TransportT = {
-    codeName: string;
+    code: string;
     eng: {
         name: string;
     };
     ru: {
         name: string;
+        noSpec: string;
     };
     id: string;
 };
@@ -16,7 +17,7 @@ export type TransportsT = Dictionary<TransportT>;
 
 // Vessels
 export type VesselT = {
-    codeName: string;
+    code: string;
     eng: {
         name: string;
     };
@@ -30,7 +31,7 @@ export type VesselsT = Dictionary<VesselT>;
 
 // Production
 export type ProductionT = {
-    codeName: string;
+    code: string;
     eng: {
         name: string;
         pack: string;
@@ -48,18 +49,19 @@ export type ProductionsT = Dictionary<ProductionT>;
 
 // Package
 export type PackageT = {
-    codeName: string;
+    code: string;
     vessel: string;
     name: string;
     pack: number;
     coefficient: number;
+    fullName: string;
 };
 
 export type PackagesT = Dictionary<PackageT>;
 
 // SortAssortiment
 export type SortAssortimentT = {
-    codeName: string;
+    code: string;
     sort: string;
     product: string;
     weight: string;
@@ -67,25 +69,9 @@ export type SortAssortimentT = {
 
 export type SortsAssortimentT = Dictionary<SortAssortimentT>;
 
-// Sellers
-export type SellerT = {
-    codeName: string;
-    eng: {
-        name: string;
-        address: string;
-    };
-    ru: {
-        name: string;
-        address: string;
-    };
-    inn: string;
-};
-
-export type SellersT = Dictionary<SellerT>;
-
 // Consignee
 export type ConsigneeT = {
-    codeName: string;
+    code: string;
     fullName: string;
     addres: string;
 };
@@ -94,7 +80,7 @@ export type ConsigneesT = Dictionary<ConsigneeT>;
 
 // PortZarubezh
 export type PortZarubezhT = {
-    codeName: string;
+    code: string;
     eng: {
         name: string;
         country: string;
@@ -111,7 +97,7 @@ export type PortsZarubezhT = Dictionary<PortZarubezhT>;
 
 // PortTamozhnyaT
 export type PortTamozhnyaT = {
-    codeName: string;
+    code: string;
     eng: {
         name: string;
     };
@@ -139,7 +125,7 @@ export type ContractsT = Dictionary<ContractT>;
 
 // PodpisantsT
 export type PodpisantT = {
-    codeName: string;
+    code: string;
     eng: {
         name: string;
         comment: string;
@@ -150,6 +136,11 @@ export type PodpisantT = {
         position: string;
     };
     declination: string;
+    req: {
+        face: string;
+        sex: string;
+        base: string;
+    };
 };
 
 export type PodpisantsT = Dictionary<PodpisantT>;
@@ -176,7 +167,7 @@ export type AgentsT = Dictionary<AgentT>;
 
 // BanksProdavec
 export type BankProdavecT = {
-    codeName: string;
+    code: string;
     eng: {
         name: string;
         inForward: string;
@@ -188,24 +179,63 @@ export type BankProdavecT = {
     address: string;
     swift: string;
     intermediary: string;
-    intermediaryAddres: string;
+    intermediaryAddress: string;
     intermediarySwift: string;
     accountNo: string;
+    inner: {
+        name: string;
+        bik: string;
+        ks: string;
+        rs: string;
+    };
 };
 export type BanksProdavecT = Dictionary<BankProdavecT>;
 
+// OrgFormT
+export type OrgFormT = {
+    code: string;
+    name: string;
+};
+
+export type OrgFormsT = Dictionary<OrgFormT>;
+
+// Sellers
+export type SellerT = {
+    code: string;
+    eng: {
+        name: string;
+        address: string;
+    };
+    ru: {
+        shortName: string;
+        name: string;
+        address: string;
+    };
+    info: {
+        inn: string;
+        kpp: string;
+        ogrn: string;
+        okpo: string;
+        phoneFax: string;
+        mail: string;
+    };
+};
+
+export type SellersT = Dictionary<SellerT>;
+
 // ClientsSellRu
 export type ClientRuT = {
-    codeName: string;
+    code: string;
     name: string;
     inn: string;
     phone: string;
     mail: string;
     req: {
         org: {
-            formName: string;
-            codeName: string;
+            form: OrgFormT;
+            shortName: string;
             mail: string;
+            mailAddress: string;
             phoneFax: string;
             address: string;
             kpp: string;
@@ -214,11 +244,10 @@ export type ClientRuT = {
         };
         podpisant: {
             face: string;
-            fullName: string;
             shortName: string;
             sex: string;
             position: string;
-            basis: string;
+            base: string;
         };
         bank: {
             name: string;
@@ -233,7 +262,7 @@ export type ClientsRuT = Dictionary<ClientRuT>;
 
 // PortsRu
 export type PortRuT = {
-    codeName: string;
+    code: string;
     name: string;
     phone: string;
     director: string;
@@ -245,14 +274,14 @@ export type PortsRuT = Dictionary<PortRuT>;
 // Sales
 export type ProductionSalesT = {
     name: string;
-    codeName: string;
+    code: string;
     expirationDate: number;
 };
 
 export type ProductionsSalesT = Dictionary<ProductionSalesT>;
 
 export type ConfidentialPhoneT = {
-    codeName: string;
+    code: string;
     fullName: string;
     name: string;
     phone: string;

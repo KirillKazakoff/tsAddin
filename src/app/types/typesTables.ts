@@ -17,7 +17,7 @@ import {
     VesselT,
 } from './typesSP';
 
-export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'DAP' | 'CFR (контейнер)';
+export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'DAP' | 'CFR(Контейнер)';
 
 export type CommonRowT = {
     index: string;
@@ -128,11 +128,14 @@ export interface InnerRowT extends CommonRowT {
     product: ProductionT;
     sort: string;
     pack: string;
+    packSp: PackageT;
     konosament: string;
     amount: AmountObjT;
-    bankSeller: string;
+    bankSeller: BankProdavecT;
     deliveryDate: string;
     paymentDate: string;
+    terms: TermsT;
+    port: PortTamozhnyaT;
 }
 
 export interface InvoiceKTIRowT extends CommonRowT {

@@ -11,8 +11,7 @@ import { ExportGroupT } from '../groupAgByNo';
 export const initExportContractTmp = async (book: Workbook, agreement: ExportGroupT) => {
     const ws = book.getWorksheet('Export_Contract');
     const { operation, fields } = exportContractStore;
-    const offsetCol = 'MID_Contract';
-    const utils = initExcelUtils(ws, offsetCol);
+    const utils = initExcelUtils(ws, 'MID_Contract');
 
     const cells = getExportContractCells(agreement);
     cells.forEach((cell) => utils.setCell(cell));
@@ -27,11 +26,11 @@ export const initExportContractTmp = async (book: Workbook, agreement: ExportGro
     await utils.initPictures(
         [
             {
-                key: exportContractStore.fields.podpisant.codeName,
+                key: exportContractStore.fields.podpisant.code,
                 range: { start: 'Sign_seller_start', end: 'Seal_seller_end' },
             },
             {
-                key: agreement.record.seller.codeName,
+                key: agreement.record.seller.code,
                 range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
             },
             {

@@ -5,7 +5,7 @@ import Select from './Select';
 
 export const SelectPodpisant = observer(() => {
     const { podpisants } = spsStore;
-    const options = Object.values(podpisants).map((podpisant) => podpisant.codeName);
+    const options = Object.values(podpisants).map((podpisant) => podpisant.code);
 
     return (
         <Select

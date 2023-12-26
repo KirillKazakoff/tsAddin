@@ -1,23 +1,24 @@
-/* eslint-disable no-param-reassign */
-import { PackagesT, PackageT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setPackages = (spRange: any[][]) => {
-    spRange.shift();
-    const packages = spRange.reduce<PackagesT>((totalObj, row) => {
-        const [codeName, vessel, name, pack, coefficient] = row;
-
-        const rowObj: PackageT = {
-            codeName,
-            vessel,
-            name,
-            pack,
-            coefficient,
-        };
-
-        totalObj[codeName] = rowObj;
-        return totalObj;
-    }, {});
-
-    spsStore.setSp.packages(packages);
+    setSp({
+        table: spRange,
+        type: 'packages',
+        headers: {
+            codeName: 'Ключ',
+            vessel: 'Судно',
+            production: 'Продукция',
+            pack: 'Упаковка',
+            coefficient: 'Коэффициент вес',
+            fullName: 'Наименование',
+        },
+        row: (r) => ({
+            code: r.codeName,
+            coefficient: r.coefficient,
+            vessel: r.vessel,
+            fullName: r.fullName,
+            name: r.production,
+            pack: r.pack,
+        }),
+    });
 };

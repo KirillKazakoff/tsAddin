@@ -1,20 +1,19 @@
-/* eslint-disable no-param-reassign */
-import { VesselsT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setVessels = (spRange: any[][]) => {
-    spRange.shift();
-
-    const transformed = spRange.reduce<VesselsT>((total, vessel) => {
-        const [codeName, nameEng, id] = vessel;
-        total[codeName] = {
-            codeName,
-            eng: { name: nameEng },
-            ru: { name: codeName },
-            id,
-        };
-        return total;
-    }, {});
-
-    spsStore.setSp.vessels(transformed);
+    setSp({
+        table: spRange,
+        type: 'vessels',
+        headers: {
+            code: 'Судно',
+            nameEng: 'Vessel',
+            codeSuffix: 'Код судна',
+        },
+        row: (r) => ({
+            code: r.code,
+            eng: { name: r.nameEng },
+            ru: { name: r.code },
+            id: r.codeSuffix,
+        }),
+    });
 };

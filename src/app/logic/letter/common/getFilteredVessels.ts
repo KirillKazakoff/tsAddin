@@ -4,7 +4,7 @@ import tablesStore from '../../../stores/tablesStore/tablesStore';
 // LetterSelects
 export const getFilteredVessels = () => {
     const vessels = tablesStore.matesT.reduce<VesselT[]>((total, row) => {
-        if (total.some((vessel) => vessel.codeName === row.vessel.codeName)) {
+        if (total.some((vessel) => vessel.code === row.vessel.code)) {
             return total;
         }
 

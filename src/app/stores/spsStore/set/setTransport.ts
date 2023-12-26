@@ -1,25 +1,20 @@
-/* eslint-disable no-param-reassign */
-import { TransportT, TransportsT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setTransports = (spRange: any[][]) => {
-    const transports = spRange.reduce<TransportsT>((total, row) => {
-        const [codeName, nameEng, id] = row;
-
-        const rowObj: TransportT = {
-            codeName,
-            eng: {
-                name: nameEng,
-            },
-            ru: {
-                name: codeName,
-            },
-            id,
-        };
-
-        total[codeName] = rowObj;
-        return total;
-    }, {});
-
-    spsStore.setSp.transports(transports);
+    setSp({
+        table: spRange,
+        type: 'transports',
+        headers: {
+            code: 'Транспорт',
+            nameEng: 'Transport',
+            codeEng: 'Код',
+            noSpec: 'Без Спецификации',
+        },
+        row: (r) => ({
+            code: r.code,
+            eng: { name: r.nameEng },
+            ru: { name: r.code, noSpec: r.noSpec },
+            id: r.codeEng,
+        }),
+    });
 };

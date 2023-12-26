@@ -1,43 +1,47 @@
-/* eslint-disable no-param-reassign */
-import { BanksProdavecT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setBanksProdavec = (spRange: any[][]) => {
-    spRange.shift();
-    const transformed = spRange.reduce<BanksProdavecT>((total, row) => {
-        const [
-            codeName,
-            nameEng,
-            adress,
-            swift,
-            intermediary,
-            intermediaryAddres,
-            intermediarySwift,
-            inForwardRu,
-            inForwardEng,
-            accountNo,
-        ] = row;
-
-        total[codeName] = {
-            codeName,
+    setSp({
+        table: spRange,
+        type: 'banksProdavec',
+        headers: {
+            code: 'Название',
+            nameEng: 'Банк-получатель',
+            address: 'Адрес Банка',
+            swift: 'SWIFT',
+            intermediary: 'Банк-посредник',
+            intermediaryAddress: 'Адрес Посредника',
+            intermediarySwift: 'SWIFT посредника',
+            inForwardRu: 'В пользу',
+            inForwardEng: 'In forward',
+            accountNo: 'Счет №',
+            innerName: 'РФ.Банк',
+            innerBik: 'РФ.БИК',
+            innerKs: 'РФ.к/с',
+            innerRs: 'РФ.р/с',
+        },
+        row: (r) => ({
+            code: r.code,
             eng: {
-                name: nameEng,
-                inForward: inForwardEng,
+                name: r.nameEng,
+                inForward: r.inForwardEng,
             },
             ru: {
-                name: codeName,
-                inForward: inForwardRu,
+                name: r.code,
+                inForward: r.inForwardRu,
             },
-            address: adress,
-            swift,
-            intermediary,
-            intermediaryAddres,
-            intermediarySwift,
-            accountNo,
-        };
-
-        return total;
-    }, {});
-
-    spsStore.setSp.banksProdavec(transformed);
+            address: r.address,
+            accountNo: r.accountNo,
+            inner: {
+                bik: r.innerBik,
+                ks: r.innerKs,
+                name: r.innerName,
+                rs: r.innerRs,
+            },
+            intermediary: r.intermediary,
+            intermediaryAddress: r.intermediaryAddress,
+            intermediarySwift: r.intermediarySwift,
+            swift: r.swift,
+        }),
+    });
 };

@@ -26,7 +26,7 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
         {
             cell: 'Письмо_описание_шапка',
-            value: `Просим Вас рыбопродукцию, которая прибудет на ${row.vessel.codeName} ${date.delivery} (ориентировочно в 08:00 с уточнением) в адрес ${row.seller.ru.name}`,
+            value: `Просим Вас рыбопродукцию, которая прибудет на ${row.vessel.code} ${date.delivery} (ориентировочно в 08:00 с уточнением) в адрес ${row.seller.ru.name}`,
         },
         {
             cell: 'Письмо_описание_подвал',
@@ -38,7 +38,7 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
         },
         {
             cell: 'Выгрузка_ответственный1',
-            value: `При выгрузке ${row.vessel.codeName} ${date.delivery} расходы по диспетчеризации и подвозу`,
+            value: `При выгрузке ${row.vessel.code} ${date.delivery} расходы по диспетчеризации и подвозу`,
         },
         {
             cell: 'Выгрузка_ответственный2',

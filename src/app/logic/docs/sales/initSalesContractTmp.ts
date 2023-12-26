@@ -3,7 +3,7 @@ import { initSalesTableRows } from './initSalesTableRows';
 import { getSalesContractCells } from './getSalesContractCells';
 import { initSalesRowsDefault } from './initSalesRowsDefault';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
-import { SalesGroupT } from './groupBy/groupSalesContract';
+import { SalesGroupT } from './groupSalesContract';
 
 export const initSalesContractTmp = async (book: Workbook, contract: SalesGroupT) => {
     const { seller } = contract.record;
@@ -24,7 +24,6 @@ export const initSalesContractTmp = async (book: Workbook, contract: SalesGroupT
         initSalesRowsDefault(contract, utils);
     }
 
-    // merge cells
     utils.mergeFromTo({
         row: {
             from: { name: 'Контракт_оплата', offset: -1 },

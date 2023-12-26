@@ -13,6 +13,7 @@ export const selectSp = {
     agent: (codeName: string) => spsStore.agents[codeName],
     bankProdavec: (codeName: string) => spsStore.banksProdavec[codeName],
     clientRu: (codeName: string) => spsStore.clientsRu[codeName],
+    orgForm: (code: string) => spsStore.orgForms[code],
     portRu: (codeName: string) => spsStore.portsRu[codeName],
     package: (codeName: string) => spsStore.packages[codeName],
     sortAssortiment: (codeName: string) => spsStore.sortsAssortiment[codeName.toLowerCase()],

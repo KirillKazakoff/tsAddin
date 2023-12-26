@@ -2,6 +2,7 @@
 import { Cell, Worksheet } from 'exceljs';
 import { CellObjDoubleT, CellObjT } from '../../../../types/typesExcelUtils';
 import { getCell, getCellDouble } from './getCell';
+import { getRow } from './getRow';
 
 const setEmptyFn = (ws: Worksheet, cell: Cell) => {
     const mainCell = ws.getCell(+cell.row, +cell.col);
@@ -27,6 +28,7 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (setObj: Cel
         }
         return cellObj;
     } catch (e) {
+        if (isEmpty) return null;
         console.error(`Ошибка при установке значения ${cell}`);
         return null;
     }
@@ -34,13 +36,17 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (setObj: Cel
 
 export const setCell = (ws: Worksheet) => (setObj: CellObjT) => {
     const {
-        cell, value, offsetRow, numFmt, isEmpty,
+        cell, value, offsetRow, numFmt, isEmpty, height,
     } = setObj;
     try {
         const cellObj = getCell(ws)(cell, offsetRow);
         cellObj.value = value;
 
         if (numFmt) cellObj.numFmt = numFmt;
+        if (height) {
+            const row = getRow(ws)(cell);
+            row.height = height;
+        }
         if (isEmpty) {
             setEmptyFn(ws, cellObj);
         }

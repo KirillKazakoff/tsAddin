@@ -36,7 +36,8 @@ export const groupByContractNo = () => {
         };
     });
 
-    const res = groupTotal({
+    // prettier-ignore
+    const contracts = groupTotal({
         rows,
         input: ({ row, mateRow }) => ({
             code: row.id,
@@ -53,13 +54,16 @@ export const groupByContractNo = () => {
                         return true;
                     },
                 },
+                sortPack: {
+                    code: row.product.code + row.vessel.code + row.sort + row.pack,
+                },
                 request: {
                     code:
-                        row.product.codeName + row.vessel.codeName + row.sort + row.pack,
+                        row.product.code + row.vessel.code + row.sort + row.pack,
                 },
                 portLetter: {
                     code:
-                        row.product.codeName + row.vessel.codeName + row.sort + row.pack,
+                        row.product.code + row.vessel.code + row.sort + row.pack,
                 },
             },
             additional: { portLetterNo: '' },
@@ -77,7 +81,7 @@ export const groupByContractNo = () => {
         }),
     });
 
-    return res;
+    return contracts;
 };
 
 export type InnerGroupT = ReturnType<typeof groupByContractNo>[number];

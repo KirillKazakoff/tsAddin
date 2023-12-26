@@ -1,24 +1,22 @@
-/* eslint-disable no-param-reassign */
-import { PortsTamozhnyaT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setPortsTamozhnya = (spRange: any[][]) => {
-    spRange.shift();
-
-    const transformed = spRange.reduce<PortsTamozhnyaT>((total, row) => {
-        const [codeName, nameEng] = row;
-
-        total[codeName] = {
-            codeName,
+    setSp({
+        table: spRange,
+        type: 'portsTamozhnya',
+        headers: {
+            code: 'Порт',
+            engName: 'Port of Customs',
+            ruName: 'Порт декларирования',
+        },
+        row: (r) => ({
+            code: r.code,
             eng: {
-                name: nameEng,
+                name: r.engName,
             },
             ru: {
-                name: codeName,
+                name: r.ruName,
             },
-        };
-        return total;
-    }, {});
-
-    spsStore.setSp.portsTamozhnya(transformed);
+        }),
+    });
 };

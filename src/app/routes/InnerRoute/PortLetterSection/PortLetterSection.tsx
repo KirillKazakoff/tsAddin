@@ -1,18 +1,18 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
-import { SelectPortRu } from '../../components/Select/SelectPortRu';
-import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
-import CheckBox from '../../components/CheckBox';
-import InputText from '../../components/Form/InputText';
+import { SelectPortRu } from '../../../components/Select/SelectPortRu';
+import { SelectPodpisant } from '../../../components/Select/SelectPodpisant';
+import CheckBox from '../../../components/CheckBox';
+import InputText from '../../../components/Form/InputText';
 import LetterList from './LetterList';
 import DischargeTerms from './DischargeTerms';
-import { useInitPortLetter } from '../../logic/docs/innerContract/useInitPortLetter';
-import { SelectTerms } from '../../components/Select/SelectTerms';
-import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
-import { SectionErrorHOC } from '../../components/SectionErrorHOC';
-import tablesStore from '../../stores/tablesStore/tablesStore';
-import { Form } from '../../components/Form/Form';
+import { useInitPortLetter } from '../../../logic/docs/inner/portLetter/useInitPortLetter';
+import { SelectTerms } from '../../../components/Select/SelectTerms';
+import DocsDownloadBtn from '../../../components/Doc/DocsDownloadBtn';
+import { SectionErrorHOC } from '../../../components/SectionErrorHOC';
+import tablesStore from '../../../stores/tablesStore/tablesStore';
+import { Form } from '../../../components/Form/Form';
 
 const SectionComponent = observer(() => {
     const { formik, initObj } = useInitPortLetter();

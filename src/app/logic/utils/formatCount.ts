@@ -1,10 +1,6 @@
 import numberToString from 'number-to-cyrillic';
 
-export function formatCount(
-    count: number,
-    fractionMin: number,
-    fractionMax: number,
-) {
+export function formatCount(count: number, fractionMin: number, fractionMax: number) {
     const formatter = new Intl.NumberFormat('ru', {
         maximumFractionDigits: fractionMax,
         minimumFractionDigits: fractionMin,
@@ -25,20 +21,21 @@ type ConvertedIntT = {
     shortName: string;
 };
 
-export const formatCurrencyLong = (amount: number, language: 'en' | 'ru') => {
+export const formatCurrencyLong = (
+    amount: number,
+    language: 'en' | 'ru',
+    currency?: 'rub' | 'usd',
+) => {
     const customCurrencyPrefixForEnglish = language === 'en' ? 'US' : '';
     const converted: ConvertedIntT = numberToString.convert(amount, {
         capitalize: true,
-        currency: 'usd',
+        currency: currency || 'usd',
         language,
         customCurrencyPrefixForEnglish,
     });
 
     const {
-        convertedInteger,
-        fractionalCurrency,
-        fractionalString,
-        integerCurrency,
+        convertedInteger, fractionalCurrency, fractionalString, integerCurrency,
     } = converted;
 
     return `${convertedInteger} ${integerCurrency} ${fractionalString} ${fractionalCurrency}`;

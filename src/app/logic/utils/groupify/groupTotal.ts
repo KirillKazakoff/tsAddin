@@ -6,7 +6,7 @@ import {
     addToAmountObj,
 } from '../../../stores/tablesStore/utils/initAmount';
 import { Paths } from '../../../types/typesUtils';
-import { COHCT } from '../../docs/exportContract/setCOHCStatus';
+import { COHCT } from '../../docs/export/setCOHCStatus';
 import { groupify } from './groupify';
 
 type RowExtT = { amount?: AmountObjT; type: TableKeyT };

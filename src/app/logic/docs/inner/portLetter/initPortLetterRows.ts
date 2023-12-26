@@ -51,9 +51,6 @@ export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>)
                         alignment: 'center',
                         height: 20 + 15 * konosamentGroup.index,
                     },
-                    // special: {
-                    //     konosament: { style: { alignment: { vertical: 'top' } } },
-                    // },
                 },
             };
         },

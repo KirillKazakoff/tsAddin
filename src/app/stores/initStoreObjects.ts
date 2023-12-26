@@ -7,14 +7,14 @@ import {
 } from '../types/typesSP';
 
 export const initTransport = (): TransportT => ({
-    codeName: '',
+    code: '',
     eng: { name: '' },
-    ru: { name: '' },
+    ru: { name: '', noSpec: '' },
     id: '',
 });
 
 export const initPortRu = (): PortRuT => ({
-    codeName: '',
+    code: '',
     director: '',
     mail: '',
     name: '',
@@ -22,13 +22,13 @@ export const initPortRu = (): PortRuT => ({
 });
 
 export const initPortTamozhnya = (): PortTamozhnyaT => ({
-    codeName: '',
+    code: '',
     eng: { name: '' },
     ru: { name: '' },
 });
 
 export const initPortZarubezh = (): PortZarubezhT => ({
-    codeName: '',
+    code: '',
     eng: {
         name: '',
         country: '',
@@ -42,7 +42,7 @@ export const initPortZarubezh = (): PortZarubezhT => ({
 });
 
 export const initPodpisant = (): PodpisantT => ({
-    codeName: '',
+    code: '',
     ru: {
         name: '',
         comment: '',
@@ -53,4 +53,9 @@ export const initPodpisant = (): PodpisantT => ({
         comment: '',
     },
     declination: '',
+    req: {
+        base: '',
+        face: '',
+        sex: '',
+    },
 });

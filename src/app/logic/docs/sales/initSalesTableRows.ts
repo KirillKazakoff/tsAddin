@@ -1,6 +1,6 @@
 import salesContractStore from '../../../stores/docsStores/salesContractStore';
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
-import { SalesGroupT } from './groupBy/groupSalesContract';
+import { SalesGroupT } from './groupSalesContract';
 
 type SettingsT = {
     groups: SalesGroupT[];

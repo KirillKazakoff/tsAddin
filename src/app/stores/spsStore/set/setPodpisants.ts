@@ -1,27 +1,37 @@
-/* eslint-disable no-param-reassign */
-import { PodpisantsT } from '../../../types/typesSP';
-import spsStore from '../spsStore';
+import { setSp } from './setSp';
 
 export const setPodpisants = (spRange: any[][]) => {
-    spRange.shift();
-    const transformed = spRange.reduce<PodpisantsT>((total, row) => {
-        const [codeName, declination, nameEng, commentRu, commentEng, position] = row;
-
-        total[codeName] = {
-            codeName,
+    setSp({
+        table: spRange,
+        type: 'podpisants',
+        headers: {
+            code: 'Подписант',
+            declination: 'Подписант(Склонение)',
+            nameEng: 'Signatory',
+            commentRu: 'Коментарий',
+            commentEng: 'Comment',
+            position: 'Должность',
+            faceReq: 'Реквизиты.в лице',
+            sexReq: 'Реквизиты.пол',
+            baseReq: 'Реквизиты.Основание',
+        },
+        row: (r) => ({
+            code: r.code,
+            declination: r.declination,
             eng: {
-                name: nameEng,
-                comment: commentEng,
+                comment: r.commentEng,
+                name: r.nameEng,
             },
             ru: {
-                name: codeName,
-                comment: commentRu,
-                position,
+                comment: r.commentRu,
+                name: r.code,
+                position: r.position,
             },
-            declination,
-        };
-        return total;
-    }, {});
-
-    spsStore.setSp.podpisants(transformed);
+            req: {
+                face: r.faceReq,
+                base: r.baseReq,
+                sex: r.sexReq,
+            },
+        }),
+    });
 };

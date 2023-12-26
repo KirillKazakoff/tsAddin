@@ -27,6 +27,7 @@ import { setSales } from '../../stores/tablesStore/set/setSales';
 import { setProductionSales } from '../../stores/spsStore/set/setProductionSales';
 import { setConfidentialPhone } from '../../stores/spsStore/set/setConfidentialPhone';
 import { setCustoms } from '../../stores/tablesStore/set/setCustoms';
+import { setOrgForm } from '../../stores/spsStore/set/setOrgForm';
 
 export type ExcelStoreT = {
     table: string;
@@ -42,6 +43,10 @@ export const excelStoresDictionary = {
     'Инвойсы выгрузка': {
         table: 'Инвойсы_выгрузка',
         setter: setDischargeInvoices,
+    },
+    'SPOrg': {
+        table: 'SPOrg',
+        setter: setOrgForm,
     },
     'Транспорта': {
         table: 'SPTransport',

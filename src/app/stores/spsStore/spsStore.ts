@@ -20,6 +20,7 @@ import {
     TransportsT,
     ProductionsSalesT,
     ConfidentialPhonesT,
+    OrgFormsT,
 } from '../../types/typesSP';
 
 class SpsStore {
@@ -40,6 +41,7 @@ class SpsStore {
     sortsAssortiment: SortsAssortimentT = {};
     productionSales: ProductionsSalesT = {};
     confidentialPhones: ConfidentialPhonesT = {};
+    orgForms: OrgFormsT = {};
 
     constructor() {
         makeAutoObservable(this);
@@ -63,8 +65,11 @@ class SpsStore {
         sortsAssortiment: (sorts: SortsAssortimentT) => (this.sortsAssortiment = sorts),
         productionSales: (prod: ProductionsSalesT) => (this.productionSales = prod),
         confidentialPhones: (phones: ConfidentialPhonesT) => (this.confidentialPhones = phones),
+        orgForms: (forms: OrgFormsT) => (this.orgForms = forms),
     };
 }
 
 const spsStore = new SpsStore();
+export type SpsKeyT = keyof { [P in keyof typeof spsStore.setSp]: string };
+
 export default spsStore;

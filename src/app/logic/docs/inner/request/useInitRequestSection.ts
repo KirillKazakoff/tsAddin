@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
-import { useInitSection } from '../../../components/Form/useInitSection';
-import { useMyFormik } from '../../../components/Form/useMyFormik';
-import requestContractStore from '../../../stores/docsStores/requestContractStore';
+import { useInitSection } from '../../../../components/Form/useInitSection';
+import { useMyFormik } from '../../../../components/Form/useMyFormik';
+import requestContractStore from '../../../../stores/docsStores/requestContractStore';
 import { createRequestContract } from './createRequestContract';
-import { groupByContractNo } from './groupByContractNo';
+import { groupByContractNo } from '../groupByContractNo';
 
 export const useInitRequestSection = () => {
     const formik = useMyFormik({

@@ -18,10 +18,10 @@ export const initRequestTmp = (book: Workbook, contract: InnerGroupT) => {
         portTamozhnya, terms, reiceNo, isInvoiceOnly,
     } = requestContractStore.fields;
 
-    const isVld = portTamozhnya.codeName === 'Владивосток';
+    const isVld = portTamozhnya.code === 'Владивосток';
     const isCfrVld = terms.includes('CFR') && isVld;
 
-    let dischargeStr1 = `Приемка по качеству в г.${portTamozhnya.codeName} в течение 3-х дней_____________________`;
+    let dischargeStr1 = `Приемка по качеству в г.${portTamozhnya.code} в течение 3-х дней_____________________`;
     let dischargeStr2 = '';
     if (terms === 'FCA') {
         dischargeStr1 = ' * Приемка по качеству и количеству осуществляется';
@@ -42,7 +42,7 @@ export const initRequestTmp = (book: Workbook, contract: InnerGroupT) => {
         { cell: 'Заявка', value: `Прошу разработать договор поставки № ${row.id} от ${date.contract}` },
         { cell: 'Заявка_дата', value: date.contract },
         { cell: 'Заявка_стороны', value: `между ${row.seller.ru.name} (ПОСТАВЩИК) и ${row.buyer.name}` },
-        { cell: 'Сумма', value: `Сумма по договору : ${total.priceTotal.str} Р` },
+        { cell: 'Сумма', value: `Сумма по договору : ${total.priceTotal.str} руб.` },
         { cell: 'Доставка_условия', value: `На условиях ${terms} ${portTamozhnya.ru.name}` },
         { cell: 'Оплата_дата', value: `Порядок расчетов: 100% до ${date.payment} путем перечисления на р/с Продавца по счету` },
         { cell: 'Банковские_реквизиты', value: `Указать банковские реквизиты ${row.seller.ru.name} в ${row.bankSeller}____________` },

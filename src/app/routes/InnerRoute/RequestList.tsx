@@ -1,5 +1,5 @@
 import React from 'react';
-import type { InnerGroupT } from '../../logic/docs/innerContract/groupByContractNo';
+import type { InnerGroupT } from '../../logic/docs/inner/groupByContractNo';
 import { Doc } from '../../components/Doc/Doc';
 
 type Props = { contracts: InnerGroupT[]; onLoad: any };
@@ -12,7 +12,7 @@ export default function RequestList({ contracts, onLoad }: Props) {
         return (
             <Doc
                 onClick={onClick}
-                title={`${row.buyer.codeName}`}
+                title={`${row.buyer.code}`}
                 key={row.id}
                 cls={'request'}
             />
