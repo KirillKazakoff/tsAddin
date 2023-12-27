@@ -32,7 +32,10 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
             return {
                 fields,
                 docType: 'inner',
-                style: { common },
+                style: {
+                    common,
+                    special: { m2: { style: { border: { right: { style: 'thin' } } } } },
+                },
             };
         },
     });
@@ -54,7 +57,7 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
                 sort: r.sort,
                 pack: r.packSp.fullName,
                 price: r.amount.price.count,
-                nds: '10%',
+                nds: r.product.nds,
             };
 
             return {

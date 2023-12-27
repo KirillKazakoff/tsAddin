@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { Worksheet } from 'exceljs';
+import _ from 'lodash';
 import { getRow } from './getRow';
 import type { FieldsGenT } from './initRows';
 import { getCell } from './getCell';
@@ -85,10 +87,15 @@ export const mergeRowCells = (ws: Worksheet, fields: FieldsGenT, row: number) =>
     });
 
     merge.forEach(({ start, end }) => {
+        // const { style } = _.cloneDeep(ws.getCell(row, start));
+
         mergeCells(ws)({
             startCol: start,
             endCol: end,
             row,
         });
+
+        // const cell = ws.getCell(row, end);
+        // cell.style = style;
     });
 };

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { setSp } from './setSp';
 
 export const setProduction = (spRange: any[][]) => {
@@ -14,6 +13,7 @@ export const setProduction = (spRange: any[][]) => {
             packEng: 'Упаковка (eng)',
             standart: 'Стандарт',
             codeNew: 'Код',
+            nds: 'НДС',
         },
         row: (r) => ({
             code: r.code.toLowerCase(),
@@ -27,6 +27,7 @@ export const setProduction = (spRange: any[][]) => {
             },
             expirationDate: r.expirationDate || 'ХХХ',
             standart: r.standart || 'Нет стандарта',
+            nds: r.nds,
         }),
     });
 };

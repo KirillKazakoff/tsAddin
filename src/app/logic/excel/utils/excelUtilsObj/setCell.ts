@@ -40,7 +40,9 @@ export const setCell = (ws: Worksheet) => (setObj: CellObjT) => {
     } = setObj;
     try {
         const cellObj = getCell(ws)(cell, offsetRow);
-        cellObj.value = value;
+        if (value) {
+            cellObj.value = value;
+        }
 
         if (numFmt) cellObj.numFmt = numFmt;
         if (height) {

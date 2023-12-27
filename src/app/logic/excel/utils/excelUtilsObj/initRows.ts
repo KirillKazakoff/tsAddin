@@ -58,6 +58,9 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
         styleRow(settings, row, firstCellCount);
         setFormats(row, settings.fields as FieldsObjT, settings.docType);
         mergeRowCells(ws, settings.fields, row.number);
+
+        // styleRow(settings, row, firstCellCount);
+        // setFormats(row, settings.fields as FieldsObjT, settings.docType);
     };
 
     const insertRows = <RecordT, FieldsT extends FieldsGenT>(

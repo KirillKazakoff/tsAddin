@@ -19,6 +19,8 @@ export const formats = {
         placesTotalKg: '#,##0.00_) "кг"',
         placesTotalTn: '#,##0.000#_) "тн"',
         priceKg: '#,##0.00_)"р/кг"',
+        priceTotal: '#,##0.00_)"р."',
+        nds: '0.00%',
     },
     eng: {
         places: '# ### "PCS"',
@@ -68,7 +70,8 @@ export const formatsDocs = {
         places: formats.ru.places,
         placesTotal: formats.ru.placesTotalKg,
         price: formats.ru.priceKg,
-        priceTotal: formats.ru.priceKg,
+        priceTotal: formats.ru.priceTotal,
+        nds: formats.ru.nds,
     },
     sales: {
         places: formats.eng.places,
@@ -106,10 +109,6 @@ export const setFormats = (
         const cell = cellObj[key];
 
         if (!cell) return;
-
-        if (key === 'priceTotal') {
-            console.log(+cellObj[key].col);
-        }
 
         cellObj[key].numFmt = formatsDoc[key];
     });

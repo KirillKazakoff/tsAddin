@@ -43,6 +43,7 @@ export type ProductionT = {
 
     standart: string;
     expirationDate: string;
+    nds: string;
 };
 
 export type ProductionsT = Dictionary<ProductionT>;
