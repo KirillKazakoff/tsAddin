@@ -6,7 +6,6 @@ import { getRow } from './getRow';
 
 const setEmptyFn = (ws: Worksheet, cell: Cell) => {
     const mainCell = ws.getCell(+cell.row, +cell.col);
-    console.log(mainCell.value);
     const titleCell = ws.getCell(+cell.row - 1, +cell.col);
     mainCell.value = '';
     titleCell.value = '';
@@ -22,7 +21,6 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (setObj: Cel
         cellObj.cellRus.value = ru;
 
         if (isEmpty) {
-            console.log(cell);
             setEmptyFn(ws, cellObj.cellEng);
             setEmptyFn(ws, cellObj.cellRus);
         }

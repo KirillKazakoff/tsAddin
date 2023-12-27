@@ -4,7 +4,7 @@ import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initInvoiceKTIRows } from './initInvoiceKTIRows';
-import { formats } from '../../utils/formats';
+import { formats } from '../../excel/utils/formats';
 import { InvoiceKTIGroupT } from './groupInvoiceKTIByNo';
 
 export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIGroupT) => {

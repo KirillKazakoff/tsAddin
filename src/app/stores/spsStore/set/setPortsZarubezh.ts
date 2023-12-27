@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setPortsZarubezh = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         type: 'portsZarubezh',
         headers: {
@@ -27,3 +27,5 @@ export const setPortsZarubezh = (spRange: any[][]) => {
         }),
     });
 };
+
+export type PortZarubezhT = ReturnType<typeof setPortsZarubezh>[string];

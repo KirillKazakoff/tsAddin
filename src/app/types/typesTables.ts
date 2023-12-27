@@ -1,21 +1,19 @@
+import { AgentT } from '../stores/spsStore/set/setAgents';
+import { BankProdavecT } from '../stores/spsStore/set/setBanksProdavec';
+import { ClientRuT } from '../stores/spsStore/set/setClientsRu';
+import { ConsigneeT } from '../stores/spsStore/set/setConsignees';
+import { ContractT } from '../stores/spsStore/set/setContracts';
+import { PackageT } from '../stores/spsStore/set/setPackages';
+import { PortTamozhnyaT } from '../stores/spsStore/set/setPortsTamozhnya';
+import { PortZarubezhT } from '../stores/spsStore/set/setPortsZarubezh';
+import { ProductionT } from '../stores/spsStore/set/setProduction';
+import { ProductionSalesT } from '../stores/spsStore/set/setProductionSales';
+import { SellerT } from '../stores/spsStore/set/setSellers';
+import { SortAssortimentT } from '../stores/spsStore/set/setSortsAssortiment';
+import { TransportT } from '../stores/spsStore/set/setTransport';
+import { VesselT } from '../stores/spsStore/set/setVessels';
 import type { TableKeyT } from '../stores/tablesStore/tablesStore';
 import type { AmountObjT } from '../stores/tablesStore/utils/initAmount';
-import {
-    AgentT,
-    BankProdavecT,
-    ClientRuT,
-    ConsigneeT,
-    ContractT,
-    PackageT,
-    PortTamozhnyaT,
-    PortZarubezhT,
-    ProductionSalesT,
-    ProductionT,
-    SellerT,
-    SortAssortimentT,
-    TransportT,
-    VesselT,
-} from './typesSP';
 
 export type TermsT = 'CFR' | 'EXW' | 'FCA' | 'DAP' | 'CFR(Контейнер)';
 

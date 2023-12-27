@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-useless-escape */
 import letterStore from '../../../stores/letterStore/letterStore';
+import { PortZarubezhT } from '../../../stores/spsStore/set/setPortsZarubezh';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { PortZarubezhT } from '../../../types/typesSP';
 
 export const footerToStrRu = () => {
     const { arrivalVld, payment, port } = letterStore.fields;

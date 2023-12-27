@@ -20,13 +20,13 @@ export type AmountObjT = Partial<{
 }>;
 
 export const initAmount = (
-    count: number,
+    count: number | string,
     fractionMin: number,
     fractionMax: number,
 ): AmountT => {
     const amount = {
-        str: formatCount(count, fractionMin, fractionMax),
-        count,
+        str: formatCount(+count, fractionMin, fractionMax),
+        count: +count,
         fraction: {
             min: fractionMin,
             max: fractionMax,

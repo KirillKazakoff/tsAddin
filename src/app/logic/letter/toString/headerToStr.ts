@@ -1,5 +1,5 @@
 import letterStore from '../../../stores/letterStore/letterStore';
-import { PortZarubezhT } from '../../../types/typesSP';
+import { PortZarubezhT } from '../../../stores/spsStore/set/setPortsZarubezh';
 import { getVesselsStrEng, getVesselsStrRu } from '../common/getFilteredVessels';
 
 export const headerToStrRu = () => {

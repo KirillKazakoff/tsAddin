@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setVessels = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         type: 'vessels',
         headers: {
@@ -17,3 +17,5 @@ export const setVessels = (spRange: any[][]) => {
         }),
     });
 };
+
+export type VesselT = ReturnType<typeof setVessels>[string];

@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setBanksProdavec = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         type: 'banksProdavec',
         headers: {
@@ -45,3 +45,5 @@ export const setBanksProdavec = (spRange: any[][]) => {
         }),
     });
 };
+
+export type BankProdavecT = ReturnType<typeof setBanksProdavec>[string];

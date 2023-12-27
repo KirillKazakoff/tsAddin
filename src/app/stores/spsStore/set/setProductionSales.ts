@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setProductionSales = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         type: 'productionSales',
         headers: {
@@ -12,3 +12,5 @@ export const setProductionSales = (spRange: any[][]) => {
         row: (r) => ({ code: r.code, expirationDate: r.expirationDate, name: r.name }),
     });
 };
+
+export type ProductionSalesT = ReturnType<typeof setProductionSales>[string];

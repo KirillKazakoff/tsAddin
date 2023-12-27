@@ -5,16 +5,16 @@ import spsStore, { SpsKeyT } from '../spsStore';
 import { headerRecognition } from '../../headerRecognition';
 
 export const setSp = <
-    T extends Record<string, any>,
+    T extends Record<string, string>,
     K extends SpsKeyT,
-    R extends ReturnType<(typeof spsStore.setSp)[K]>[number] & { code: string },
+    R extends { code: string },
 >(settings: {
     table: any[][];
     headers: T;
     type: K;
-    row: (row: Record<keyof T, any>) => R;
+    row: (row: Record<keyof T, string>) => R;
 }) => {
-    const { table, row: getRow, type } = settings;
+    const { table, row: getRow, type: spsKey } = settings;
     const headers = table.shift();
     const dictionary = headerRecognition(settings.headers, headers);
 
@@ -31,6 +31,6 @@ export const setSp = <
         return total;
     }, {});
 
-    spsStore.setSp[type](transformedTable as any);
+    spsStore.setSp(transformedTable, spsKey);
     return transformedTable;
 };

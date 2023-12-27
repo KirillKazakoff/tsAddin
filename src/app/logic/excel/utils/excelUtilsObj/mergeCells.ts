@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
 import { Worksheet } from 'exceljs';
 import _ from 'lodash';
@@ -86,8 +87,14 @@ export const mergeRowCells = (ws: Worksheet, fields: FieldsGenT, row: number) =>
         }
     });
 
-    merge.forEach(({ start, end }) => {
-        // const { style } = _.cloneDeep(ws.getCell(row, start));
+    merge.forEach(({ start, end }, i, { length }) => {
+        const { style: styleStart } = _.cloneDeep(ws.getCell(row, start));
+        const styleEnd = _.cloneDeep(ws.getCell(row, end));
+
+        // merge take first cell styles so set last cell border if last cell merge
+        if (length - 1 === i) {
+            ws.getCell(row, start).style.border = ws.getCell(row, end).style.border;
+        }
 
         mergeCells(ws)({
             startCol: start,
@@ -95,7 +102,6 @@ export const mergeRowCells = (ws: Worksheet, fields: FieldsGenT, row: number) =>
             row,
         });
 
-        // const cell = ws.getCell(row, end);
-        // cell.style = style;
+        styleEnd.border = styleStart.border;
     });
 };

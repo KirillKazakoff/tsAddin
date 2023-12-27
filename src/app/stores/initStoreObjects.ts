@@ -1,10 +1,8 @@
-import {
-    PodpisantT,
-    PortRuT,
-    PortTamozhnyaT,
-    PortZarubezhT,
-    TransportT,
-} from '../types/typesSP';
+import { PodpisantT } from './spsStore/set/setPodpisants';
+import { PortRuT } from './spsStore/set/setPortsRu';
+import { PortTamozhnyaT } from './spsStore/set/setPortsTamozhnya';
+import { PortZarubezhT } from './spsStore/set/setPortsZarubezh';
+import { TransportT } from './spsStore/set/setTransport';
 
 export const initTransport = (): TransportT => ({
     code: '',

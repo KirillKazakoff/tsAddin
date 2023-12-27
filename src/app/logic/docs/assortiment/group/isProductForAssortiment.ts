@@ -1,4 +1,4 @@
-import { ProductionT } from '../../../../types/typesSP';
+import { ProductionT } from '../../../../stores/spsStore/set/setProduction';
 
 export const isProductForAssortiment = (product: ProductionT) => {
     const { name } = product.eng;

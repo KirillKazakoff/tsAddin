@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setConfidentialPhone = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         headers: {
             code: 'Код',
@@ -18,3 +18,5 @@ export const setConfidentialPhone = (spRange: any[][]) => {
         }),
     });
 };
+
+export type ConfidentialPhoneT = ReturnType<typeof setConfidentialPhone>[string];

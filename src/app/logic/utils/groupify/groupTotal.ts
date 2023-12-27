@@ -92,7 +92,6 @@ const groupifyOutput = <R extends RowExtT, K>(
     };
 
     const group = groupify(associative, init, code);
-    // group.index += 1;
 
     addToAmountObj(group.total, row.amount);
     group.rows.push(row);

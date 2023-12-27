@@ -3,7 +3,7 @@ import letterStore from '../../../stores/letterStore/letterStore';
 import { DetailsT, ProductT } from '../../../types/typesLetter';
 import { isStOff } from '../common/isStOff';
 import { p } from '../../utils/constants';
-import { PortZarubezhT } from '../../../types/typesSP';
+import { PortZarubezhT } from '../../../stores/spsStore/set/setPortsZarubezh';
 
 function getDetailsStr(details: DetailsT[], name: string, measure: string) {
     const detailsStr = details.reduce((total, detailsObj) => {

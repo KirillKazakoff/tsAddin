@@ -1,6 +1,7 @@
+import { ProductionT } from '../../../stores/spsStore/set/setProduction';
+import { ProductionSalesT } from '../../../stores/spsStore/set/setProductionSales';
 import { TableKeyT } from '../../../stores/tablesStore/tablesStore';
 import { AmountObjT } from '../../../stores/tablesStore/utils/initAmount';
-import { ProductionT, ProductionSalesT } from '../../../types/typesSP';
 import { groupTotal } from '../../utils/groupify/groupTotal';
 
 type RowBlExtendT = {

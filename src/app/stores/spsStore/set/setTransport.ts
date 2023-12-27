@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setTransports = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         type: 'transports',
         headers: {
@@ -18,3 +18,5 @@ export const setTransports = (spRange: any[][]) => {
         }),
     });
 };
+
+export type TransportT = ReturnType<typeof setTransports>[string];

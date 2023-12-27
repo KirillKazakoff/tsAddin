@@ -1,4 +1,4 @@
-import { VesselT } from '../../../types/typesSP';
+import { VesselT } from '../../../stores/spsStore/set/setVessels';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 
 // LetterSelects

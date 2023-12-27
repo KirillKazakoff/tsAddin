@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setSellers = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         type: 'sellers',
         headers: {
@@ -42,3 +42,5 @@ export const setSellers = (spRange: any[][]) => {
         }),
     });
 };
+
+export type SellerT = ReturnType<typeof setSellers>[string];

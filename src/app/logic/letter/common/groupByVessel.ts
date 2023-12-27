@@ -1,4 +1,4 @@
-import { VesselT } from '../../../types/typesSP';
+import { VesselT } from '../../../stores/spsStore/set/setVessels';
 import { MateRowT } from '../../../types/typesTables';
 
 export const groupByVessel = (vessels: VesselT[], mates: MateRowT[]) => {

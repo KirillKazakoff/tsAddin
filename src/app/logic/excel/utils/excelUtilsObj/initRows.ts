@@ -1,5 +1,5 @@
 import { Cell, Row, Worksheet } from 'exceljs';
-import { DocTypeT, setFormats } from '../../../utils/formats';
+import { DocTypeT, setFormats } from '../formats';
 import { getCell } from './getCell';
 import { mergeRowCells } from './mergeCells';
 import { RowStyleSettingsT, styleRow } from '../styleRowCells';
@@ -39,7 +39,6 @@ type RowMakerSettingsT = {
     firstCol?: number;
 };
 
-// eslint-disable-next-line max-len
 export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
     let insertIndex = setup?.rowIndex || 1;
     let firstCellCount = setup?.firstCol || 1;
@@ -58,9 +57,6 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
         styleRow(settings, row, firstCellCount);
         setFormats(row, settings.fields as FieldsObjT, settings.docType);
         mergeRowCells(ws, settings.fields, row.number);
-
-        // styleRow(settings, row, firstCellCount);
-        // setFormats(row, settings.fields as FieldsObjT, settings.docType);
     };
 
     const insertRows = <RecordT, FieldsT extends FieldsGenT>(

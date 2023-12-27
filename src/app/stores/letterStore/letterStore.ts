@@ -3,7 +3,8 @@ import { makeAutoObservable } from 'mobx';
 import { selectSp } from '../spsStore/select';
 import { FormValuesT } from '../../types/typesUtils';
 import { initPortRu, initTransport } from '../initStoreObjects';
-import { PortRuT, PortZarubezhT } from '../../types/typesSP';
+import { PortRuT } from '../spsStore/set/setPortsRu';
+import { PortZarubezhT } from '../spsStore/set/setPortsZarubezh';
 
 export const initFields = () => ({
     arrivalVld: '',

@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setPackages = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         type: 'packages',
         headers: {
@@ -14,7 +14,7 @@ export const setPackages = (spRange: any[][]) => {
         },
         row: (r) => ({
             code: r.codeName,
-            coefficient: r.coefficient,
+            coefficient: +r.coefficient,
             vessel: r.vessel,
             fullName: r.fullName,
             name: r.production,
@@ -22,3 +22,5 @@ export const setPackages = (spRange: any[][]) => {
         }),
     });
 };
+
+export type PackageT = ReturnType<typeof setPackages>[string];

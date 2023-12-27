@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setAgents = (spRange: any[][]) => {
-    setSp({
+    const res = setSp({
         type: 'agents',
         table: spRange,
         headers: {
@@ -33,4 +33,8 @@ export const setAgents = (spRange: any[][]) => {
             swift: r.swift,
         }),
     });
+
+    return res;
 };
+
+export type AgentT = ReturnType<typeof setAgents>[string];

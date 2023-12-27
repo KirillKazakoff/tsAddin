@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setPodpisants = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         type: 'podpisants',
         headers: {
@@ -35,3 +35,5 @@ export const setPodpisants = (spRange: any[][]) => {
         }),
     });
 };
+
+export type PodpisantT = ReturnType<typeof setPodpisants>[string];

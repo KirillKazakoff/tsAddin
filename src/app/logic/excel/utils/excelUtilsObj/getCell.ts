@@ -23,7 +23,6 @@ export const getCell = (ws: Worksheet) => (cellName: string, offsetRow?: number)
     }
 };
 
-// eslint-disable-next-line max-len
 export const getCellDouble = <T extends string>(ws: Worksheet, offsetCellName: T) => {
     const midCell = getCell(ws)(offsetCellName);
     const distance = +midCell.col - 1;

@@ -2,7 +2,7 @@ import { selectSp } from '../select';
 import { setSp } from './setSp';
 
 export const setClientsRu = (spRange: any[][]) => {
-    setSp({
+    return setSp({
         table: spRange,
         type: 'clientsRu',
         headers: {
@@ -65,3 +65,5 @@ export const setClientsRu = (spRange: any[][]) => {
         }),
     });
 };
+
+export type ClientRuT = ReturnType<typeof setClientsRu>[string];
