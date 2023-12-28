@@ -1,11 +1,10 @@
-import { ExportInitRowT } from '../../../types/typesTables';
 import { getExportRow } from '../getExportRow';
 import { setTable } from './setTable';
 
 export const setExportStorage = (table: any[][]) => {
-    setTable({
+    return setTable({
         table,
-        type: 'exportStorage',
+        type: 'exportStorageT',
         headers: {
             contract: 'Контракт',
             seller: 'Продавец',
@@ -33,8 +32,7 @@ export const setExportStorage = (table: any[][]) => {
         },
 
         row: (r) => {
-            const rowInit: ExportInitRowT = { ...r, terms: 'EXW' };
-            return getExportRow(rowInit);
+            return getExportRow({ ...r, terms: 'EXW' });
         },
     });
 };

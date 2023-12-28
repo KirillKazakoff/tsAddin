@@ -1,9 +1,9 @@
-import { ExportRowT } from '../../../types/typesTables';
 import { saveFile } from '../../excel/utils/saveFile';
 import { pathObj } from '../../utils/constants';
 import { BlGroupT } from './groupByBl';
 import { readTmp } from '../readTmp';
 import { initBlTmp } from './initBlTmp';
+import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 
 export const createBL = async (blGroup: BlGroupT<ExportRowT>) => {
     const book = await readTmp(pathObj.bl);

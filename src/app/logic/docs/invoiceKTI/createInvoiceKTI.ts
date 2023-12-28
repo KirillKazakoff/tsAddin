@@ -26,7 +26,7 @@ const createInvoiceKTIDischarge = async (invoice: InvoiceKTIGroupT) => {
 };
 
 export const createInvoiceKTI = async (invoice: InvoiceKTIGroupT) => {
-    if (invoice.record.type === 'dischargeInvoices') {
+    if (invoice.record.type === 'dischargeInvoicesT') {
         await createInvoiceKTIDischarge(invoice);
     } else {
         await createInvoiceKTIStorage(invoice);

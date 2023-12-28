@@ -1,9 +1,10 @@
-/* eslint-disable no-param-reassign */
-import { ExportRowT } from '../../../types/typesTables';
+import { CertificateRowT } from '../../../stores/tablesStore/set/setCertificates';
+import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 
+/* eslint-disable no-param-reassign */
 export type COHCT = 'no' | 'cohc' | 'co' | 'hc';
 
-export const setCOHCStatus = (rows: ExportRowT[]) => {
+export const setCOHCStatus = (rows: CertificateRowT[]) => {
     const isCO = rows.some((row) => row.coNo);
     const isHC = rows.some((row) => row.hcNo);
 

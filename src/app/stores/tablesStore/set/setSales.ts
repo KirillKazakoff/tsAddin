@@ -3,9 +3,9 @@ import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setSales = (table: any[][]) => {
-    setTable({
+    return setTable({
         table,
-        type: 'sales',
+        type: 'salesT',
         headers: {
             id: 'Номер контракта',
             contractDate: 'Дата контракта',
@@ -51,3 +51,5 @@ export const setSales = (table: any[][]) => {
         }),
     });
 };
+
+export type SalesRowT = ReturnType<typeof setSales>[number];

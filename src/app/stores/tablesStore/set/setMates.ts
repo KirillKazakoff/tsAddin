@@ -1,5 +1,4 @@
 import { isNumber } from '../../../logic/utils/isNumber';
-import { MateRowT } from '../../../types/typesTables';
 import letterStore from '../../letterStore/letterStore';
 import { selectSp } from '../../spsStore/select';
 import { initAmount } from '../utils/initAmount';
@@ -8,7 +7,7 @@ import { setTable } from './setTable';
 export const setMates = (table: any[][]) => {
     const transformed = setTable({
         table,
-        type: 'mates',
+        type: 'matesT',
         headers: {
             reice: 'Номер рейса',
             konosament: 'Коносамент',
@@ -27,7 +26,7 @@ export const setMates = (table: any[][]) => {
             transport: r.transport,
             vessel: selectSp.vessel(r.vessel),
             product: selectSp.product(r.product.toLowerCase()),
-            reice: isNumber(r.reice) ? r.reice : '',
+            reice: isNumber(+r.reice) ? r.reice : '',
             konosament: r.konosament,
             date: r.date,
             company: r.company,
@@ -39,7 +38,11 @@ export const setMates = (table: any[][]) => {
                 placesTotal: initAmount(r.placesTotal, 0, 2),
             },
         }),
-    }) as MateRowT[];
+    });
 
     letterStore.setTransport(transformed[0].transport);
+
+    return transformed;
 };
+
+export type MateRowT = ReturnType<typeof setMates>[number];

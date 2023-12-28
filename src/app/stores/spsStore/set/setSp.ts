@@ -12,7 +12,7 @@ export const setSp = <
     table: any[][];
     headers: T;
     type: K;
-    row: (row: Record<keyof T, string>) => R;
+    row: (row: Record<keyof T, any>) => R;
 }) => {
     const { table, row: getRow, type: spsKey } = settings;
     const headers = table.shift();

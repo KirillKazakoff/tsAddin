@@ -6,9 +6,9 @@ import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setCertificates = (table: any[][]) => {
-    setTable({
+    return setTable({
         table,
-        type: 'certificates',
+        type: 'certificatesT',
         headers: {
             blNo: 'BL',
             srSuffix: 'Приставка',
@@ -34,6 +34,7 @@ export const setCertificates = (table: any[][]) => {
                 placesTotal: initAmount(r.placesTotal, 3, 4),
                 price: initAmount(exportRow.amount.price.count, 2, 2),
                 priceTotal: initAmount(exportRow.amount.priceTotal.count, 3, 4),
+                placesGross: initAmount(exportRow.amount.placesTotal.count, 3, 4),
             };
             exportRow.id = `${exportRow.id}-${r.srSuffix}${r.srNo}`;
             exportRow.agreementNo = `${exportRow.agreementNo}-R${r.srNo}`;
@@ -50,3 +51,5 @@ export const setCertificates = (table: any[][]) => {
         },
     });
 };
+
+export type CertificateRowT = ReturnType<typeof setCertificates>[number];

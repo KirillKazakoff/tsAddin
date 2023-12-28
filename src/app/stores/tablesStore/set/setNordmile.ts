@@ -3,9 +3,9 @@ import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setNordmile = (table: any[][]) => {
-    setTable({
+    return setTable({
         table,
-        type: 'nordmile',
+        type: 'nordmileT',
         headers: {
             producer: 'Изготовитель',
             contractNo: 'Договор',
@@ -38,3 +38,5 @@ export const setNordmile = (table: any[][]) => {
         }),
     });
 };
+
+export type NordmileRowT = ReturnType<typeof setNordmile>[number];

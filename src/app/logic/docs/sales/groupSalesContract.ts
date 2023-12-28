@@ -3,7 +3,7 @@ import { groupTotal } from '../../utils/groupify/groupTotal';
 
 export const groupSalesContract = () => {
     const contractsNew = groupTotal({
-        rows: tablesStore.sales,
+        rows: tablesStore.salesT,
         input: (row) => ({
             code: row.id,
             groupedBy: {

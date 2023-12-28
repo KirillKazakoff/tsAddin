@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { ExportRowT } from '../../../types/typesTables';
+import { ExportRowT } from '../set/setExport';
 
 export const setMSC = (row: ExportRowT) => {
     const { eng, ru } = row.product;

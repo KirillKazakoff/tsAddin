@@ -1,4 +1,4 @@
-import { NordmileRowT } from '../../../../types/typesTables';
+import { NordmileRowT } from '../../../../stores/tablesStore/set/setNordmile';
 import { saveFile } from '../../../excel/utils/saveFile';
 import { pathObj } from '../../../utils/constants';
 import { readTmp } from '../../readTmp';

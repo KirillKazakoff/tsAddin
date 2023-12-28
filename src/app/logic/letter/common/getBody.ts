@@ -1,6 +1,6 @@
 import { VesselT } from '../../../stores/spsStore/set/setVessels';
+import { MateRowT } from '../../../stores/tablesStore/set/setMates';
 import { BodyRowT } from '../../../types/typesLetter';
-import { MateRowT } from '../../../types/typesTables';
 import { groupByProduct } from './groupByProduct';
 import { groupByVessel } from './groupByVessel';
 

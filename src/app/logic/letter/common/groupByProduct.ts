@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
+import { MateRowT } from '../../../stores/tablesStore/set/setMates';
 import { addToAmount } from '../../../stores/tablesStore/utils/initAmount';
 import { ProductT, ProductionInfoT } from '../../../types/typesLetter';
-import { MateRowT } from '../../../types/typesTables';
 import { groupify } from '../../utils/groupify/groupify';
 import { isStOff } from './isStOff';
 
@@ -21,11 +21,7 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
     return groupVessel.reduce<ProductionInfoT>((productionTypes, tableRow) => {
         const { product, sort, amount } = tableRow;
 
-        const productObj = groupify(
-            productionTypes,
-            initProduct(tableRow),
-            product.code,
-        );
+        const productObj = groupify(productionTypes, initProduct(tableRow), product.code);
 
         const newDetails = { sort, amount: amount.placesTotal };
 
@@ -34,9 +30,7 @@ export const groupByProduct = (groupVessel: MateRowT[]): ProductionInfoT => {
             return productionTypes;
         }
 
-        const matchedDetails = productObj.details.find(
-            (d) => d.sort === newDetails.sort,
-        );
+        const matchedDetails = productObj.details.find((d) => d.sort === newDetails.sort);
         if (isStOff(newDetails.sort)) {
             addToAmount(productObj.details[0].amount, newDetails.amount.count);
             return productionTypes;

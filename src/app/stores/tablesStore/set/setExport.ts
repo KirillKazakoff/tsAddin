@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/indent */
 import { getExportRow } from '../getExportRow';
 import tablesStore from '../tablesStore';
 import { setTable } from './setTable';
 
 export const setExport = (table: any[][]) => {
-    setTable({
+    return setTable({
         table,
-        type: 'export',
+        type: 'exportT',
         headers: {
             contract: 'Контракт',
             seller: 'Продавец',
@@ -36,7 +37,7 @@ export const setExport = (table: any[][]) => {
         row: (r) => {
             const res = getExportRow(r);
 
-            let declarationNo = tablesStore.customs.find(
+            let declarationNo = tablesStore.customsT.find(
                 (cR) => cR.blNo === r.blNo,
             )?.declarationNo;
 
@@ -46,3 +47,12 @@ export const setExport = (table: any[][]) => {
         },
     });
 };
+
+export type ExportRowT = ReturnType<typeof setExport>[number] &
+    Partial<{
+        date: any;
+        hcNo: any;
+        coNo: any;
+        iuuNo: any;
+        country: any;
+    }>;

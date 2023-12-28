@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { NordmileRowT } from '../../../../types/typesTables';
+import { NordmileRowT } from '../../../../stores/tablesStore/set/setNordmile';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { alignmentCenter, borderAll } from '../../../excel/utils/styleRowCells';
 

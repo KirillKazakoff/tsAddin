@@ -1,8 +1,8 @@
-const calcExcelDate = (excelSerial: string) => {
+const calcExcelDate = (excelSerial: number) => {
     return new Date(Date.UTC(0, 0, +excelSerial - 1));
 };
 
-const getExcelDate = (month: Intl.DateTimeFormatOptions['month']) => (excelSerial: string, locale: string) => {
+const getExcelDate = (month: Intl.DateTimeFormatOptions['month']) => (excelSerial: number, locale: string) => {
     return calcExcelDate(excelSerial).toLocaleString(locale, {
         day: 'numeric',
         month,
@@ -14,7 +14,7 @@ export const getExcelDateNumeric = getExcelDate('numeric');
 export const getExcelDateShort = getExcelDate('2-digit');
 
 export const getDeliveryDate = (
-    excelSerial: string,
+    excelSerial: number,
     locale: string,
     time: 'month' | 'day',
 ) => {

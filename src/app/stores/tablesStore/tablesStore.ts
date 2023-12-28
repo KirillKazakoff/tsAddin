@@ -1,17 +1,15 @@
 /* eslint-disable no-use-before-define */
-/* eslint-disable no-return-assign */
+
 import { makeAutoObservable } from 'mobx';
-import {
-    MateRowT,
-    ExportRowT,
-    InnerRowT,
-    NordmileRowT,
-    InvoiceKTIRowT,
-    TableStatusT,
-    SalesRowT,
-    CustomsDutiesRowT,
-} from '../../types/typesTables';
 import { initTableStatus } from './utils/tableStatus';
+import { TableStatusT } from '../../types/typesTables';
+import type { InvoiceKTIRowT } from './set/setDischargeInvoices';
+import type { ExportRowT } from './set/setExport';
+import type { InnerRowT } from './set/setInner';
+import type { MateRowT } from './set/setMates';
+import type { NordmileRowT } from './set/setNordmile';
+import type { SalesRowT } from './set/setSales';
+import type { CustomsRowT } from './set/setCustoms';
 
 class TablesStore {
     matesT: MateRowT[] = [];
@@ -22,8 +20,8 @@ class TablesStore {
     nordmileT: NordmileRowT[] = [];
     dischargeInvoicesT: InvoiceKTIRowT[] = [];
     storageInvoicesT: InvoiceKTIRowT[] = [];
-    sales: SalesRowT[] = [];
-    customs: CustomsDutiesRowT[] = [];
+    salesT: SalesRowT[] = [];
+    customsT: CustomsRowT[] = [];
 
     status = {
         export: initTableStatus(),
@@ -42,24 +40,17 @@ class TablesStore {
         makeAutoObservable(this);
     }
 
-    setTable = {
-        mates: (table: MateRowT[]) => (this.matesT = table),
-        export: (table: ExportRowT[]) => (this.exportT = table),
-        exportStorage: (table: ExportRowT[]) => (this.exportStorageT = table),
-        certificates: (table: ExportRowT[]) => (this.certificatesT = table),
-        dischargeInvoices: (table: InvoiceKTIRowT[]) => (this.dischargeInvoicesT = table),
-        storageInvoices: (table: InvoiceKTIRowT[]) => (this.storageInvoicesT = table),
-        inner: (table: InnerRowT[]) => (this.innerT = table),
-        nordmile: (table: NordmileRowT[]) => (this.nordmileT = table),
-        sales: (table: SalesRowT[]) => (this.sales = table),
-        customs: (table: CustomsDutiesRowT[]) => (this.customs = table),
-    };
+    setTable(data: any, key: TableKeyT) {
+        this[key] = data;
+    }
+
     setStatus(status: TableStatusT, key: TableKeyT) {
         this.status[key] = status;
     }
 }
 
 const tablesStore = new TablesStore();
-export type TableKeyT = keyof { [P in keyof typeof tablesStore.setTable]: string };
 
+// prettier-ignore
+export type TableKeyT = keyof Omit<typeof tablesStore, 'setTable' | 'setStatus' | 'status'>;
 export default tablesStore;

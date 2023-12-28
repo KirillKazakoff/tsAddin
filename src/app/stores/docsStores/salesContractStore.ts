@@ -24,7 +24,7 @@ class SalesContractStore {
     }
 
     get currentRecord() {
-        return tablesStore.sales.find((row) => row.id === this.currentId);
+        return tablesStore.salesT.find((row) => row.id === this.currentId);
     }
 }
 

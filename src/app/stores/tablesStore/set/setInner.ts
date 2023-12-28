@@ -5,9 +5,9 @@ import { setTable } from './setTable';
 export const setInner = (table: any[][]) => {
     table.pop();
 
-    setTable({
+    return setTable({
         table,
-        type: 'inner',
+        type: 'innerT',
         headers: {
             buyer: 'Покупатель',
             seller: 'Продавец',
@@ -46,7 +46,7 @@ export const setInner = (table: any[][]) => {
                 packSp,
                 konosament: r.konosament,
                 amount: {
-                    places: initAmount(r.placesTotal / r.pack, 0, 0),
+                    places: initAmount(+r.placesTotal / +r.pack, 0, 0),
                     placesTotal: initAmount(r.placesTotal, 1, 3),
                     price: initAmount(r.price, 2, 2),
                     priceTotal: initAmount(r.priceTotal, 2, 2),
@@ -60,3 +60,5 @@ export const setInner = (table: any[][]) => {
         },
     });
 };
+
+export type InnerRowT = ReturnType<typeof setInner>[number];

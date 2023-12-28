@@ -1,5 +1,5 @@
 import { VesselT } from '../../../stores/spsStore/set/setVessels';
-import { MateRowT } from '../../../types/typesTables';
+import { MateRowT } from '../../../stores/tablesStore/set/setMates';
 
 export const groupByVessel = (vessels: VesselT[], mates: MateRowT[]) => {
     return vessels.reduce<MateRowT[][]>((groupVessel, vessel) => {

@@ -174,11 +174,11 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     const singleCells = [...singleObj.common];
     const doubleCells = [...doubleObj.common];
 
-    if (invoice.record.type === 'export') {
+    if (invoice.record.type === 'exportT') {
         singleCells.push(...singleObj.exportDefault);
         doubleCells.push(...doubleObj.exportDefault);
     }
-    if (invoice.record.type === 'exportStorage') {
+    if (invoice.record.type === 'exportStorageT') {
         doubleCells.push(...doubleObj.exportStorage);
     }
 

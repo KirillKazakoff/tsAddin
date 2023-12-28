@@ -1,9 +1,9 @@
 import { Workbook } from 'exceljs';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { NordmileRowT } from '../../../../types/typesTables';
 import { CellObjT } from '../../../../types/typesExcelUtils';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
 import { initRequestRowsNordmile } from './initRequestRowsNordmile';
+import { NordmileRowT } from '../../../../stores/tablesStore/set/setNordmile';
 
 export const initRequestNordmileTmp = (book: Workbook, row: NordmileRowT) => {
     const ws = book.getWorksheet('Request_Contract');

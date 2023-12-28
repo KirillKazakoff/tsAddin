@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { ExportRowT } from '../../../../types/typesTables';
+import { ExportRowT } from '../../../../stores/tablesStore/set/setExport';
 import { groupTotal } from '../../../utils/groupify/groupTotal';
 import { initAssortimentObj } from '../initAssortimentObj';
 import { isProductForAssortiment } from './isProductForAssortiment';
@@ -20,7 +20,7 @@ const groupFn = (rows: ExportRowT[]) => {
                 },
             },
             groupModify: (group) => {
-                const isStorageRowInExport = group.record.type === 'export' && row.type === 'exportStorage';
+                const isStorageRowInExport = group.record.type === 'exportT' && row.type === 'exportStorageT';
                 return !isStorageRowInExport;
             },
         }),

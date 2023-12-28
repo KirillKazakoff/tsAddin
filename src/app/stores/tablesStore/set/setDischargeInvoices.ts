@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/indent */
 import { selectSp } from '../../spsStore/select';
 import { setTable } from './setTable';
 
 export const setDischargeInvoices = (table: any[][]) => {
-    setTable({
+    return setTable({
         table,
-        type: 'dischargeInvoices',
+        type: 'dischargeInvoicesT',
         headers: {
             blNo: 'BL',
             seller: 'Продавец',
@@ -35,3 +36,13 @@ export const setDischargeInvoices = (table: any[][]) => {
         }),
     });
 };
+
+export type InvoiceKTIRowT = ReturnType<typeof setDischargeInvoices>[number] &
+    Partial<{
+        dateAccountSent: string;
+        operation: string;
+        days: number;
+        operationResult: number;
+        dateStorageStart: string;
+        dateStorageEnd: string;
+    }>;

@@ -1,9 +1,9 @@
 import { setTable } from './setTable';
 
 export const setCustoms = (table: any[][]) => {
-    setTable({
+    return setTable({
         table,
-        type: 'customs',
+        type: 'customsT',
         headers: {
             id: 'ID',
             declarationNo: 'ДТ',
@@ -16,3 +16,5 @@ export const setCustoms = (table: any[][]) => {
         }),
     });
 };
+
+export type CustomsRowT = ReturnType<typeof setCustoms>[number];

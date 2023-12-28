@@ -33,7 +33,7 @@ export const initExportInvoicesTmps = async (
         cells.double.forEach((cell) => utilsDouble.setCell(cell));
         cells.single.forEach((cell) => utilsSingle.setCell(cell));
 
-        if (invoice.record.type === 'export' && invoice.record.terms === 'EXW') {
+        if (invoice.record.type === 'exportT' && invoice.record.terms === 'EXW') {
             const row = utilsDouble.getRow('Инвойс_транспорт', -1);
             wsOriginal.spliceRows(row.number, 2);
         }

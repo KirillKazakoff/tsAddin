@@ -263,7 +263,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
 
     const resArr = [...cells.common];
 
-    if (type === 'export') {
+    if (type === 'exportT') {
         resArr.push(...cells.export.common);
 
         if (terms === 'EXW' || terms === 'CFR') {
@@ -274,11 +274,11 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         }
     }
 
-    if (type === 'exportStorage') {
+    if (type === 'exportStorageT') {
         resArr.push(...cells.exportStorage.common);
     }
 
-    if (type === 'certificates') {
+    if (type === 'certificatesT') {
         resArr.push(...cells.exportStorage.common);
         resArr.push(...cells.certificates);
     }

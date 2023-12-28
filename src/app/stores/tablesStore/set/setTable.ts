@@ -1,28 +1,28 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-use-before-define */
 import _ from 'lodash';
 import { checkTable } from '../../../logic/excel/checkTable/checkTable';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import tablesStore, { TableKeyT } from '../tablesStore';
 import { headerRecognition } from '../../headerRecognition';
+import { CommonRowT } from '../../../types/typesTables';
 
-export const setTable = <T extends Record<string, any>, K extends TableKeyT>(settings: {
+export const setTable = <
+    T extends Record<string, any>,
+    K extends TableKeyT,
+    R,
+>(settings: {
     table: any[][];
     headers: T;
     type: K;
-    row: (
-        row: Record<keyof T, any>
-    ) => Omit<ReturnType<(typeof tablesStore.setTable)[K]>[number], 'index' | 'type'>;
+    row: (row: Record<keyof T, any>) => R;
 }) => {
     const { table, row: getRow, type } = settings;
-
-    type RowT = ReturnType<(typeof tablesStore.setTable)[K]>[number];
 
     const headers = table.shift();
     const excluded = excludeOfEmptyRows(table);
     const dictionary = headerRecognition(settings.headers, headers);
 
-    const transformedTable = excluded.reduce<RowT[]>((total, rowInit, i) => {
+    const transformedTable = excluded.reduce<(R & CommonRowT)[]>((total, rowInit, i) => {
         const dictionaryCopy = _.cloneDeep(dictionary);
         try {
             Object.keys(dictionary).forEach((key) => {
@@ -39,10 +39,10 @@ export const setTable = <T extends Record<string, any>, K extends TableKeyT>(set
             return total;
         }
         return total;
-    }, []);
+    }, [] as any);
 
-    checkTable(transformedTable, type);
-    tablesStore.setTable[type](transformedTable as any);
+    checkTable(transformedTable as any, type);
 
+    tablesStore.setTable(transformedTable, type);
     return transformedTable;
 };

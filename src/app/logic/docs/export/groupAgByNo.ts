@@ -5,6 +5,7 @@ import exportContractStore from '../../../stores/docsStores/exportContractStore'
 import { setMSC } from '../../../stores/tablesStore/utils/setMSC';
 import { setCOHCStatus } from './setCOHCStatus';
 import { groupTotal } from '../../utils/groupify/groupTotal';
+import { CertificateRowT } from '../../../stores/tablesStore/set/setCertificates';
 
 export const groupAgByNo = () => {
     const res = groupTotal({
@@ -33,8 +34,9 @@ export const groupAgByNo = () => {
                 },
             },
             additional: { cohc: 'no' },
+            // prettier-ignore
             groupModify: (agreement) => {
-                agreement.additional.cohc = setCOHCStatus(agreement.rows);
+                agreement.additional.cohc = setCOHCStatus(agreement.rows as CertificateRowT[]);
                 return true;
             },
         }),

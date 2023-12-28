@@ -1,8 +1,8 @@
-import { ExportInitRowT, ExportRowT } from '../../types/typesTables';
+import { ExportInitRowT } from '../../types/typesTables';
 import { selectSp } from '../spsStore/select';
 import { initAmount } from './utils/initAmount';
 
-export const getExportRow = (row: ExportInitRowT): ExportRowT => {
+export const getExportRow = (row: ExportInitRowT) => {
     const contractSp = selectSp.contract(row.contract);
     const consigneeSp = selectSp.consignee(row.consignee) || selectSp.consignee(row.agent);
     const packSp = selectSp.package(
@@ -40,5 +40,5 @@ export const getExportRow = (row: ExportInitRowT): ExportRowT => {
         msc: row.msc,
         id: row.id,
         idProduct: row.idProduct,
-    } as ExportRowT;
+    };
 };

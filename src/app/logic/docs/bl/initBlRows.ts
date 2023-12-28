@@ -1,4 +1,4 @@
-import { ExportRowT } from '../../../types/typesTables';
+import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { BlGroupT } from './groupByBl';
 

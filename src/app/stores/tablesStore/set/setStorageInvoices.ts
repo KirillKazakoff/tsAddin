@@ -2,9 +2,9 @@ import { selectSp } from '../../spsStore/select';
 import { setTable } from './setTable';
 
 export const setStorageInvoices = (table: any[][]) => {
-    setTable({
+    return setTable({
         table,
-        type: 'storageInvoices',
+        type: 'storageInvoicesT',
         headers: {
             blNo: 'BL',
             agreementNo: 'Доп',

@@ -27,7 +27,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
                 if (language === 'ru') {
                     fields.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${placesTotal} тн`;
                 }
-                if (invoice.record.type === 'dischargeInvoices') {
+                if (invoice.record.type === 'dischargeInvoicesT') {
                     delete fields.days;
                 }
 
@@ -41,7 +41,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
                 const rowObj = {
                     desc: row.getCell(2),
                     days:
-                        invoice.record.type === 'storageInvoices'
+                        invoice.record.type === 'storageInvoicesT'
                             ? row.getCell(+fieldsTitles.days)
                             : null,
                     price: row.getCell(+fieldsTitles.price),
@@ -56,7 +56,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
                     horizontal: 'right',
                     vertical: 'middle',
                 };
-                if (invoice.record.type === 'storageInvoices') {
+                if (invoice.record.type === 'storageInvoicesT') {
                     rowObj.days.style = {
                         border: {
                             left: { style: 'thin' },
@@ -72,7 +72,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
                     docType: 'invoiceKTI',
                     style: {
                         common: {
-                            height: invoice.record.type === 'dischargeInvoices' ? 45 : 60,
+                            height: invoice.record.type === 'dischargeInvoicesT' ? 45 : 60,
                             alignment: {
                                 wrapText: true,
                             },

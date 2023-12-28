@@ -18,12 +18,12 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
     ];
 
     const nonObligatoryProps = {
-        export: exportProps,
-        exportStorage: exportProps,
-        mates: ['sort', 'periodCreation', 'reice', 'operation', 'index'],
-        inner: ['sort', 'deliveryDate', 'paymentDate', 'pack', 'packSp'],
-        dischargeInvoices: ['i', 'invoiceDate', 'invoiceNo', 'dischargeDate'],
-        storageInvoices: [
+        exportT: exportProps,
+        exportStorageT: exportProps,
+        matesT: ['sort', 'periodCreation', 'reice', 'operation', 'index'],
+        innerT: ['sort', 'deliveryDate', 'paymentDate', 'pack', 'packSp'],
+        dischargeInvoicesT: ['i', 'invoiceDate', 'invoiceNo', 'dischargeDate'],
+        storageInvoicesT: [
             'operation',
             'index',
             'dateStorageEnd',
@@ -31,15 +31,15 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
             'dateAccountSent',
             'invoiceNo',
         ],
-        certificates: ['coNo', 'hcNo', 'iuuNo', 'date', 'placesRemain'],
-        sales: ['blNo', 'isLive'],
-        nordmile: [''],
-        customs: [''],
+        certificatesT: ['coNo', 'hcNo', 'iuuNo', 'date', 'placesRemain'],
+        salesT: ['blNo', 'isLive'],
+        nordmileT: [''],
+        customsT: [''],
     } satisfies Record<TableKeyT, string[]>;
 
     if (row.terms === 'FCA') {
-        nonObligatoryProps.export.push('blNo', 'portFrom');
-        nonObligatoryProps.sales.push('blNo');
+        nonObligatoryProps.exportT.push('blNo', 'portFrom');
+        nonObligatoryProps.salesT.push('blNo');
     }
 
     return nonObligatoryProps[tableName];
