@@ -27,6 +27,7 @@ export const setInner = (table: any[][]) => {
             paymentDate: 'Дата оплаты',
             terms: 'Условия',
             port: 'Порт поставки',
+            cargo: 'Грузовые договор',
         },
         row: (r) => {
             const packSp = selectSp.package(
@@ -56,6 +57,7 @@ export const setInner = (table: any[][]) => {
                 paymentDate: r.paymentDate,
                 port: selectSp.portTamozhnya(r.port),
                 terms: r.terms,
+                cargo: (r.cargo ? r.cargo : 'Покупатель') as 'Покупатель' | 'Продавец',
             };
         },
     });
