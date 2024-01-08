@@ -44,13 +44,15 @@ export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesGroupT)
         utils,
     });
 
-    utils.mergeFromTo({
-        row: {
-            from: { name: 'Инвойс_адреса_продавец' },
-            to: { name: 'Инвойс_адреса_банк_свифт' },
+    utils.mergeFromTo([
+        {
+            row: {
+                from: { name: 'Инвойс_адреса_продавец' },
+                to: { name: 'Инвойс_адреса_банк_свифт' },
+            },
+            cols: [[1, 3]],
         },
-        cols: [[1, 3]],
-    });
+    ]);
 
     // init pictures
     await utils.initPictures(

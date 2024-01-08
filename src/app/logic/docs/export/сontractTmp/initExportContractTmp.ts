@@ -2,7 +2,6 @@ import { Workbook } from 'exceljs';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { initExportDefaultContractTmp } from './exportDefaultContractTmp/initExportDefaultContractTmp';
 import { initExportStorageContractTmp } from './exportStorageContractTmp/initExportStorageContractTmp';
-
 import { getExportContractCells } from './getExportContractCells.ts';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { setPrintArea } from '../../../excel/utils/excelUtilsObj/setPrintArea';

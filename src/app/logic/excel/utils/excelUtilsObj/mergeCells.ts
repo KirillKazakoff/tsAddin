@@ -23,45 +23,49 @@ export const mergeCells = (ws: Worksheet) => (settings: MergeSettingsT) => {
     ws.mergeCells(row, startCol, endRow, endCol);
 };
 
-export const mergeFromTo = (ws: Worksheet) => (settings: {
-    row: {
-        from: {
-            name: string;
-            offset?: number;
+export const mergeFromTo = (ws: Worksheet) => (
+    settings: {
+        row: {
+            from: {
+                name: string;
+                offset?: number;
+            };
+            to: {
+                name: string;
+                offset?: number;
+            };
         };
-        to: {
-            name: string;
-            offset?: number;
-        };
-    };
-    cols?:
-    | number[][]
-    | {
-        start: string;
-        end: string;
-    }[];
-}) => {
-    const { row, cols } = settings;
-    const startRow = getRow(ws)(row.from.name, row.from.offset || 0).number;
-    const endRow = getRow(ws)(row.to.name, row.to.offset || 0).number;
+        cols?:
+        | number[][]
+        | {
+            start: string;
+            end: string;
+        }[];
+    }[],
+) => {
+    settings.forEach((setup) => {
+        const { row, cols } = setup;
+        const startRow = getRow(ws)(row.from.name, row.from.offset || 0).number;
+        const endRow = getRow(ws)(row.to.name, row.to.offset || 0).number;
 
-    for (let i = startRow; i <= endRow; i += 1) {
-        cols.forEach((c: unknown) => {
-            let start = 0;
-            let end = 0;
+        for (let i = startRow; i <= endRow; i += 1) {
+            cols.forEach((c: unknown) => {
+                let start = 0;
+                let end = 0;
 
-            if (typeof cols[0][0] === 'number') {
-                const [s, e] = c as number[];
-                start = s;
-                end = e;
-            } else {
-                const col = c as { start: string; end: string };
-                start = +getCell(ws)(col.start).col;
-                end = +getCell(ws)(col.end).col;
-            }
-            mergeCells(ws)({ row: i, startCol: start, endCol: end });
-        });
-    }
+                if (typeof cols[0][0] === 'number') {
+                    const [s, e] = c as number[];
+                    start = s;
+                    end = e;
+                } else {
+                    const col = c as { start: string; end: string };
+                    start = +getCell(ws)(col.start).col;
+                    end = +getCell(ws)(col.end).col;
+                }
+                mergeCells(ws)({ row: i, startCol: start, endCol: end });
+            });
+        }
+    });
 };
 
 export const mergeRowCells = (ws: Worksheet, fields: FieldsGenT, row: number) => {

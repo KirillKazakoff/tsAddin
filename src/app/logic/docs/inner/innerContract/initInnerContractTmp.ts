@@ -13,29 +13,30 @@ export const initInnerContractTmp = (book: Workbook, contract: InnerGroupT) => {
 
     initInnerContractRows(contract, utils);
 
-    utils.mergeFromTo({
-        row: {
-            from: { name: 'Договор_конец_предмет' },
-            to: { name: 'Договор_цена_начало' },
+    utils.mergeFromTo([
+        {
+            row: {
+                from: { name: 'Договор_конец_предмет' },
+                to: { name: 'Договор_цена_начало' },
+            },
+            cols: [{ start: 'Pg_start', end: 'Pg_end' }],
         },
-        cols: [{ start: 'Pg_start', end: 'Pg_end' }],
-    });
-    utils.mergeFromTo({
-        row: {
-            from: { name: 'Договор_цена_всего' },
-            to: { name: 'Договор_адреса_заголовок' },
+        {
+            row: {
+                from: { name: 'Договор_цена_всего' },
+                to: { name: 'Договор_адреса_заголовок' },
+            },
+            cols: [{ start: 'Pg_start', end: 'Pg_end' }],
         },
-        cols: [{ start: 'Pg_start', end: 'Pg_end' }],
-    });
-
-    utils.mergeFromTo({
-        row: {
-            from: { name: 'Договор_адреса_поставщик' },
-            to: { name: 'Договор_адреса_поставщик_фио' },
+        {
+            row: {
+                from: { name: 'Договор_адреса_поставщик' },
+                to: { name: 'Договор_адреса_поставщик_фио' },
+            },
+            cols: [
+                { start: 'Pg_start', end: 'Договор_адреса_поставщик_конец' },
+                { start: 'Договор_адреса_покупатель', end: 'Pg_end' },
+            ],
         },
-        cols: [
-            { start: 'Pg_start', end: 'Договор_адреса_поставщик_конец' },
-            { start: 'Договор_адреса_покупатель', end: 'Pg_end' },
-        ],
-    });
+    ]);
 };

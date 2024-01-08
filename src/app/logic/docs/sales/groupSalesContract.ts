@@ -14,7 +14,7 @@ export const groupSalesContract = () => {
         }),
     });
 
-    return contractsNew.slice(-5);
+    return contractsNew.slice(-50);
 };
 
 export type SalesGroupT = ReturnType<typeof groupSalesContract>[number];

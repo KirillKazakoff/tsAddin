@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { Workbook } from 'exceljs';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { CellObjT } from '../../../../types/typesExcelUtils';
@@ -96,9 +95,13 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
 
     cells.forEach((cell) => utils.setCell(cell));
 
-    const rowCargoStorage = +utils.getCell('Грузовые_борт_склад').row;
-    utils.mergeCells({ row: rowCargoStorage, startCol: 1, endCol: 6 });
-
-    const rowCargoAuto = +utils.getCell('Грузовые_склад_авто').row;
-    utils.mergeCells({ row: rowCargoAuto, startCol: 1, endCol: 6 });
+    utils.mergeFromTo([
+        {
+            row: {
+                from: { name: 'Письмо_описание_подвал' },
+                to: { name: 'Merge_end' },
+            },
+            cols: [{ start: 'Banner_start', end: 'Pg_end' }],
+        },
+    ]);
 };

@@ -17,19 +17,20 @@ export const initExportStorageContractTmp = async (
     }
 
     // prettier-ignore
-    utils.mergeFromTo({
-        row: {
-            from: { name: 'Доставка_транспорт' },
-            to: { name: 'Адреса_покупатель_адрес' },
+    utils.mergeFromTo([
+        {
+            row: {
+                from: { name: 'Доставка_транспорт' },
+                to: { name: 'Адреса_покупатель_адрес' },
+            },
+            cols: [[2, 4], [5, 8]],
         },
-        cols: [[2, 4], [5, 8]],
-    });
-    // prettier-ignore
-    utils.mergeFromTo({
-        row: {
-            from: { name: 'Адреса_покупатель_банк_адрес' },
-            to: { name: 'Адреса_покупатель_банк_адрес' },
+        {
+            row: {
+                from: { name: 'Адреса_покупатель_банк_адрес' },
+                to: { name: 'Адреса_покупатель_банк_адрес' },
+            },
+            cols: [[2, 4], [5, 8]],
         },
-        cols: [[2, 4], [5, 8]],
-    });
+    ]);
 };

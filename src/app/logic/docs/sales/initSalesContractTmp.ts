@@ -24,13 +24,15 @@ export const initSalesContractTmp = async (book: Workbook, contract: SalesGroupT
         initSalesRowsDefault(contract, utils);
     }
 
-    utils.mergeFromTo({
-        row: {
-            from: { name: 'Контракт_оплата', offset: -1 },
-            to: { name: 'Документация_BL', offset: 1 },
+    utils.mergeFromTo([
+        {
+            row: {
+                from: { name: 'Контракт_оплата', offset: -1 },
+                to: { name: 'Документация_BL', offset: 1 },
+            },
+            cols: [[1, 5]],
         },
-        cols: [[1, 5]],
-    });
+    ]);
 
     await utils.initPictures(
         [

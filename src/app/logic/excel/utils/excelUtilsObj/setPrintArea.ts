@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsT } from './initExcelUtils';
 
-type PrintSettingsT = {
+export type PrintSettingsT = {
     endCell: string;
     offset?: number;
     utils: CellUtilsT<''> | CellUtilsT<string>;
