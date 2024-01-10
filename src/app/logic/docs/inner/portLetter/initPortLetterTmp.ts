@@ -49,29 +49,24 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
         },
         {
             cell: 'Грузовые_борт_склад',
-            value: !fields.cargoToStorage
-                ? ''
-                : `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
-                    fields.cargoToStorage === 'Покупатель'
-                        ? row.buyer.name
-                        : row.seller.ru.name
-                }`,
+            isEmpty: !fields.cargoToStorage,
+            value: `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
+                fields.cargoToStorage === 'Покупатель'
+                    ? row.buyer.name
+                    : row.seller.ru.name
+            }`,
         },
         {
             cell: 'Грузовые_склад_авто',
-            value: !fields.cargoToAuto
-                ? ''
-                : `Оплата грузовых работ (склад-авто) будет производиться за счет ${
-                    fields.cargoToAuto === 'Покупатель'
-                        ? row.buyer.name
-                        : row.seller.ru.name
-                }`,
+            isEmpty: !fields.cargoToAuto,
+            value: `Оплата грузовых работ (склад-авто) будет производиться за счет ${
+                fields.cargoToAuto === 'Покупатель' ? row.buyer.name : row.seller.ru.name
+            }`,
         },
         {
             cell: 'Хранение',
-            value: !fields.termsPort.includes('CFR')
-                ? `Хранение стороной продавца осуществляется до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`
-                : '',
+            isEmpty: fields.termsPort !== 'EXW',
+            value: `Хранение стороной продавца осуществляется до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`,
         },
         {
             cell: 'Телефон_представитель',
@@ -80,20 +75,15 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
         { cell: 'Имя_представитель', value: phones?.['ДМА']?.fullName },
         {
             cell: 'Контрольный_звонок',
-            value: fields.isControlPhone
-                ? `Передача продукции по контрольному звонку: т. ${phones?.['КНФ']?.phone}, ${phones?.['МСФ']?.phone}`
-                : '',
+            isEmpty: !fields.isControlPhone,
+            value: `Передача продукции по контрольному звонку: т. ${phones?.['КНФ']?.phone}, ${phones?.['МСФ']?.phone}`,
         },
-        {
-            cell: 'Подписант_комментарий',
-            value: `${fields.podpisant.ru.position}`,
-        },
+        { cell: 'Подписант_комментарий', value: `${fields.podpisant.ru.position}` },
         { cell: 'Подписант', value: fields.podpisant.ru.name },
     ];
 
-    initPortLetterRows(contract, utils);
-
     cells.forEach((cell) => utils.setCell(cell));
+    initPortLetterRows(contract, utils);
 
     utils.mergeFromTo([
         {

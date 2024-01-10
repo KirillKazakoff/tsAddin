@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import popupStore from './popupStore.ts/popupStore';
 
 type RecordInputT = Record<string, string>;
 type RecordMiddleT<T extends RecordInputT> = Record<keyof T, (string | number)[]>;
@@ -16,6 +17,13 @@ export const headerRecognition = <T extends RecordInputT>(
 
     Object.values(arrayed).forEach((tuple) => {
         tuple[1] = headers.findIndex((title) => title === tuple[0]);
+
+        if (tuple[1] === -1) {
+            popupStore.setStatus({
+                title: 'Ошибка в наименовании столбца таблицы',
+                desc: `Проверьте столбец ${tuple[0]}`,
+            });
+        }
     });
 
     Object.keys(arrayed).forEach((key) => {

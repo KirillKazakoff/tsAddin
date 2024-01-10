@@ -40,7 +40,7 @@ export const setMates = (table: any[][]) => {
         }),
     });
 
-    letterStore.setTransport(transformed[0].transport);
+    letterStore.setTransport(transformed[0]?.transport);
 
     return transformed;
 };

@@ -3,6 +3,7 @@ import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import { addChangeHandler } from './addChangeHandler';
 import { initStoresOnFileName } from './initExcelStores';
+import popupStore from '../../stores/popupStore.ts/popupStore';
 
 export const useInitExcel = () => {
     const { statusType } = pageStatusStore.status;
@@ -23,7 +24,7 @@ export const useInitExcel = () => {
                 pageStatusStore.setPageStatus('excelInEditingMode');
             } else {
                 // eslint-disable-next-line no-console
-                console.log(e);
+                console.error(e);
                 pageStatusStore.setPageStatus('unknownError', message);
             }
         }
@@ -33,8 +34,8 @@ export const useInitExcel = () => {
         excelSyncStore.setLoading(true);
         setTimeout(() => {
             if (statusType === 'ok' || !isSync) {
-                // eslint-disable-next-line no-console
                 console.log('initExcel');
+                popupStore.setActive(false);
                 initExcel();
             }
         }, 1000);

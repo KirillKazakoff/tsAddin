@@ -5,7 +5,7 @@ import { setTable } from './setTable';
 export const setInner = (table: any[][]) => {
     table.pop();
 
-    return setTable({
+    const res = setTable({
         table,
         type: 'innerT',
         headers: {
@@ -61,6 +61,9 @@ export const setInner = (table: any[][]) => {
             };
         },
     });
+
+    console.log(res);
+    return res;
 };
 
 export type InnerRowT = ReturnType<typeof setInner>[number];

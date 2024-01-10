@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import _ from 'lodash';
-import { checkTable } from '../../../logic/excel/checkTable/checkTable';
+import { checkRow } from '../../../logic/excel/checkTable/checkRow';
 import { excludeOfEmptyRows } from '../../../logic/excel/checkTable/excludeOfEmptyRows';
 import tablesStore, { TableKeyT } from '../tablesStore';
 import { headerRecognition } from '../../headerRecognition';
@@ -32,6 +32,8 @@ export const setTable = <
 
             const initObj = { index: i.toString(), type };
             const row = { ...getRow(dictionaryCopy as any), ...initObj };
+
+            checkRow(row, type, i);
             total.push(row as any);
         } catch (e) {
             // eslint-disable-next-line no-console
@@ -40,8 +42,6 @@ export const setTable = <
         }
         return total;
     }, [] as any);
-
-    checkTable(transformedTable as any, type);
 
     tablesStore.setTable(transformedTable, type);
     return transformedTable;

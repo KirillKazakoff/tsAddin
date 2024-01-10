@@ -16,8 +16,7 @@ const SectionComponent = observer(() => {
 
         return (
             <Doc
-                onClick={onClick}
-                title={`${row.buyer.code}-${row.id}`}
+                onClick={onClick} title={`${row.buyer?.code}-${row.id}`}
                 key={row.id}
             />
         );

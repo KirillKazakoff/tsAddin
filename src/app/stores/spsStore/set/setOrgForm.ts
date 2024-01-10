@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setOrgForm = (spRange: any[][]) => {
-    return setSp({
+    const res = setSp({
         type: 'orgForms',
         table: spRange,
         headers: {
@@ -13,6 +13,8 @@ export const setOrgForm = (spRange: any[][]) => {
             name: r.name,
         }),
     });
+
+    return res;
 };
 
 export type OrgFormT = ReturnType<typeof setOrgForm>[string];
