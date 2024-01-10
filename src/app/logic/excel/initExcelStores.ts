@@ -25,10 +25,9 @@ const getExistedStores = async (context: Excel.RequestContext) => {
         );
 
         if (!storeWS) {
-            popupStore.setStatus({
+            popupStore.pushStatus({
                 title: 'Отсутствует справочник',
                 desc: `В excel-книге нет Листа с названием ${key.toUpperCase()}`,
-                immediate: true,
             });
             continue;
         }
@@ -44,7 +43,7 @@ const getExistedStores = async (context: Excel.RequestContext) => {
 
                 if (!range) throw new Error();
             } catch (e) {
-                popupStore.setStatus({
+                popupStore.pushStatus({
                     title: `Неверное наименование ${key}`,
                     desc: `В листе ${key} не удалось найти диапазон значений по названию ${store.table}`,
                 });

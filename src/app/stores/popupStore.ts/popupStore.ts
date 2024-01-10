@@ -3,35 +3,25 @@ import { makeAutoObservable } from 'mobx';
 export type PopupStatus = {
     title: string;
     desc: string;
-    immediate?: boolean;
 };
 
-const initStatus = (): PopupStatus => ({
-    title: '',
-    desc: '',
-    immediate: false,
-});
-
 class PopupStore {
-    status = initStatus();
+    statuses: PopupStatus[] = [];
 
     isActive = false;
 
-    setStatus(status: PopupStatus) {
-        if (this.status.immediate && !status.immediate) {
-            return;
-        }
-
-        this.status = status;
-
-        this.setActive(true);
+    pushStatus(status: PopupStatus) {
+        if (this.statuses.some((s) => s.desc === status.desc)) return;
+        this.statuses.push(status);
     }
 
-    setActive(isActive: boolean) {
-        this.isActive = isActive;
-        if (isActive === false) {
-            this.status.immediate = false;
-        }
+    killStatus() {
+        this.statuses.shift();
+    }
+
+    get currentStatus() {
+        if (this.statuses.length === 0) return null;
+        return this.statuses[0];
     }
 
     constructor() {

@@ -18,7 +18,7 @@ export const initPictureExcel = async (ws: Worksheet, settings: PictureSettingsT
 
     const key = selectPicture(keyCode);
     if (!key) {
-        popupStore.setStatus({
+        popupStore.pushStatus({
             title: 'Отсутствует изображение:',
             desc: `${keyCode} изображение отсутствует в справочнике`,
         });

@@ -1,21 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import popupStore from '../stores/popupStore.ts/popupStore';
 
 export const Popup = observer(() => {
-    const { status } = popupStore;
-    useEffect(() => {
-        let timer: NodeJS.Timeout;
-        if (popupStore.isActive) {
-            timer = setTimeout(() => popupStore.setActive(false), 8000);
-        }
+    const { currentStatus } = popupStore;
 
-        return () => clearTimeout(timer);
-    }, [status]);
+    if (!currentStatus) return null;
 
-    const onClickX = () => popupStore.setActive(false);
+    const onClickX = () => popupStore.killStatus();
 
-    if (!popupStore.isActive) return null;
+    if (!currentStatus) return null;
 
     return (
         <div className='popup-wrapper'>
@@ -27,10 +21,50 @@ export const Popup = observer(() => {
                     X
                 </button>
                 <div className='popup-text'>
-                    <div className='title'>{status.title}</div>
-                    <div className='message'>{status.desc}</div>
+                    <div className='title'>{currentStatus.title}</div>
+                    <div className='message'>{currentStatus.desc}</div>
                 </div>
             </div>
         </div>
     );
 });
+
+// import React, { useEffect } from 'react';
+// import { observer } from 'mobx-react-lite';
+// import popupStore from '../stores/popupStore.ts/popupStore';
+
+// export const Popup = observer(() => {
+//     const { statuses, currentStatus } = popupStore;
+
+//     useEffect(() => {
+//         let timer: NodeJS.Timeout;
+//         if (popupStore.isActive) {
+//             timer = setTimeout(() => popupStore.killStatus(), 8000);
+//         }
+
+//         return () => clearTimeout(timer);
+//     }, [statuses]);
+
+//     if (!currentStatus) return null;
+
+//     const onClickX = () => popupStore.killStatus();
+
+//     if (!currentStatus) return null;
+
+//     return (
+//         <div className='popup-wrapper'>
+//             <div className='popup'>
+//                 <button
+//                     type='button' className='btn x-mark'
+//                     onClick={onClickX}
+//                 >
+//                     X
+//                 </button>
+//                 <div className='popup-text'>
+//                     <div className='title'>{currentStatus.title}</div>
+//                     <div className='message'>{currentStatus.desc}</div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// });

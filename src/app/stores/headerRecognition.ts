@@ -19,7 +19,7 @@ export const headerRecognition = <T extends RecordInputT>(
         tuple[1] = headers.findIndex((title) => title === tuple[0]);
 
         if (tuple[1] === -1) {
-            popupStore.setStatus({
+            popupStore.pushStatus({
                 title: 'Ошибка в наименовании столбца таблицы',
                 desc: `Проверьте столбец ${tuple[0]}`,
             });

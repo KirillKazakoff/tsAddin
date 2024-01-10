@@ -5,7 +5,6 @@ export type AppStatusT = 'Offer' | 'Docs' | 'Sales' | 'Init' | 'NoRoute';
 class ExcelSyncStore {
     isSync = true;
     isLoading = true;
-    changedTable = '';
     appStatus: AppStatusT = 'Init';
 
     constructor() {
@@ -14,10 +13,6 @@ class ExcelSyncStore {
 
     setSync(isSync: boolean) {
         this.isSync = isSync;
-    }
-
-    setExcelChanged(table: string) {
-        this.changedTable = table;
     }
 
     setLoading(isLoading: boolean) {

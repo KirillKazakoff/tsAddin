@@ -18,7 +18,7 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     const { fields } = portLetterStore;
 
     if (!row.buyer.inn) {
-        popupStore.setStatus({
+        popupStore.pushStatus({
             title: 'Отсутствует ИНН',
             desc: 'Проверьте наличие ИНН в справочнике',
         });
@@ -72,11 +72,11 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
             cell: 'Исполнитель_информация',
             value: `Исполнитель: ${phones?.['МСФ']?.fullName}; телефон: ${phones?.['МСФ']?.phone}`,
         },
+        { cell: 'Имя_представитель', value: phones?.['ДМА']?.fullName },
         {
             cell: 'Телефон_представитель',
             value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
         },
-        { cell: 'Имя_представитель', value: phones?.['ДМА']?.fullName },
         {
             cell: 'Контрольный_звонок',
             isEmpty: !fields.isControlPhone,
