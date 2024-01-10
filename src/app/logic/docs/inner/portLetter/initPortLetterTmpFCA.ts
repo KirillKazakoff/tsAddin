@@ -12,14 +12,14 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
     const utils = initExcelUtils(ws, '');
 
     // prettier-ignore
-    const { record: { row }, additional: { portLetterNo } } = contract;
+    const { record: { row } } = contract;
     const { fields } = portLetterStore;
     const date = { delivery: getExcelDateNumeric(row.deliveryDate, 'ru') };
 
     const cells: CellObjT[] = [
         {
             cell: 'Номер_письма',
-            value: getPortLetterNo(portLetterNo),
+            value: getPortLetterNo(contract.index),
         },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },

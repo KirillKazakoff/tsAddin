@@ -14,7 +14,7 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     const utils = initExcelUtils(ws, '');
 
     // prettier-ignore
-    const { record: { row }, additional: { portLetterNo } } = contract;
+    const { record: { row } } = contract;
     const { fields } = portLetterStore;
 
     if (!row.buyer.inn) {
@@ -25,7 +25,7 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     }
 
     const cells: CellObjT[] = [
-        { cell: 'Номер_письма', value: getPortLetterNo(portLetterNo) },
+        { cell: 'Номер_письма', value: getPortLetterNo(contract.index) },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },

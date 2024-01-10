@@ -30,10 +30,7 @@ export const initRequestTmp = (book: Workbook, contract: InnerGroupT) => {
 
     const date = {
         contract: getExcelDateNumeric(row.contractDate, 'ru'),
-        delivery:
-            typeof row.deliveryDate === 'number'
-                ? getExcelDateNumeric(row.deliveryDate, 'ru')
-                : row.deliveryDate,
+        delivery: getExcelDateNumeric(row.deliveryDate, 'ru'),
         payment: getExcelDateNumeric(row.paymentDate, 'ru'),
     };
 

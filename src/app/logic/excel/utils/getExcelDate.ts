@@ -3,6 +3,8 @@ const calcExcelDate = (excelSerial: number) => {
 };
 
 const getExcelDate = (month: Intl.DateTimeFormatOptions['month']) => (excelSerial: number, locale: string) => {
+    if (typeof excelSerial === 'string') return excelSerial;
+
     return calcExcelDate(excelSerial).toLocaleString(locale, {
         day: 'numeric',
         month,
