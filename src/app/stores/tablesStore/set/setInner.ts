@@ -62,7 +62,6 @@ export const setInner = (table: any[][]) => {
         },
     });
 
-    console.log(res);
     return res;
 };
 

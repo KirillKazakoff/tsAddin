@@ -25,7 +25,7 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     }
 
     const cells: CellObjT[] = [
-        { cell: 'Номер_письма', value: getPortLetterNo(contract.index) },
+        { cell: 'Номер_письма', value: getPortLetterNo(contract) },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
@@ -41,7 +41,9 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
             cell: 'Письмо_описание_подвал',
             value: `передать с ${
                 fields.termsPort.includes('CFR') ? 'борта судна' : 'нашего хранения'
-            } компании ${row.buyer.name} ИНН ${row.buyer.inn}`,
+            } компании ${row.buyer.req.org.form.code} ${row.buyer.name} ИНН ${
+                row.buyer.inn
+            }`,
         },
         {
             cell: 'Покупатель_телефон',

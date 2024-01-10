@@ -65,7 +65,6 @@ export const setClientsRu = (spRange: any[][]) => {
         }),
     });
 
-    console.log(res);
     return res;
 };
 

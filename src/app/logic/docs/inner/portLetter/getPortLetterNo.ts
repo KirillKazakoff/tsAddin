@@ -1,13 +1,14 @@
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { getNowDate } from '../../../excel/utils/getExcelDate';
 import { indexToStr } from '../../../utils/indexToStr';
+import { InnerGroupT } from '../groupByContractNo';
 
-export const getPortLetterNo = (index: number, reice?: string) => {
+export const getPortLetterNo = ({ index, record }: InnerGroupT) => {
     const letterIndex = `${indexToStr(index)} от ${
         portLetterStore.fields.dateLetter || getNowDate()
     }`;
 
-    const portLetterNo = `Исх. № ${reice || ''}${letterIndex}`;
+    const portLetterNo = `Исх. № ${`${record.mateRow.reice}-` || ''}${letterIndex}`;
 
     const { fields } = portLetterStore;
     if (!fields.correctedNo) return portLetterNo;

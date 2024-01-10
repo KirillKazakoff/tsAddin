@@ -17,10 +17,7 @@ export const initPortLetterTmpFCA = (book: Workbook, contract: InnerGroupT) => {
     const date = { delivery: getExcelDateNumeric(row.deliveryDate, 'ru') };
 
     const cells: CellObjT[] = [
-        {
-            cell: 'Номер_письма',
-            value: getPortLetterNo(contract.index),
-        },
+        { cell: 'Номер_письма', value: getPortLetterNo(contract) },
         { cell: 'Порт', value: `${fields.portRu.name}` },
         { cell: 'Порт_директор', value: `${fields.portRu.director}` },
         { cell: 'Порт_почта', value: `${fields.portRu.mail}` },

@@ -20,6 +20,7 @@ export const Popup = observer(() => {
                 >
                     X
                 </button>
+
                 <div className='popup-text'>
                     <div className='title'>{currentStatus.title}</div>
                     <div className='message'>{currentStatus.desc}</div>

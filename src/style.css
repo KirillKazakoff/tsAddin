@@ -305,10 +305,15 @@ b {
     font-weight: bold;
 
     border-radius: 10px;
-    padding: 5px;
+    padding: 10px;
 
     min-width: 250px;
+
     min-height: 120px;
+}
+
+.popup-text .title {
+    margin-bottom: 10px;
 }
 
 .popup-wrapper {
@@ -332,6 +337,7 @@ b {
     color: white;
     font-size: 24px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .x-mark:hover {
