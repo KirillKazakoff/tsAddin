@@ -1,17 +1,22 @@
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import popupStore from '../../stores/popupStore.ts/popupStore';
-import { ExcelStoresDictionaryT, excelStoresDictionary } from './excelStoresDictionary';
+import {
+    ExcelStoresDictionaryT,
+    movementDictionary,
+    excelStoresDictionary,
+} from './excelStoresDictionary';
 import { initExcelImages } from './initExcelImages';
 import { initRange } from './utils/initRange';
 
 const getExistedStores = async (context: Excel.RequestContext) => {
     const transformedDictionary: ExcelStoresDictionaryT = [] as any;
 
-    for await (const [key, store] of Object.entries(excelStoresDictionary)) {
+    const stores = excelSyncStore.appStatus === 'Docs' ? movementDictionary : excelStoresDictionary;
+
+    for await (const [key, store] of Object.entries(stores)) {
         const storeWS = context.workbook.worksheets.items.find(
             (item) => item.name === key,
         );
@@ -20,14 +25,15 @@ const getExistedStores = async (context: Excel.RequestContext) => {
         );
 
         if (!storeWS) {
-            console.warn(`В excel-книге нет Листа с названием ${key}`);
+            popupStore.setStatus({
+                title: 'Отсутствует справочник',
+                desc: `В excel-книге нет Листа с названием ${key.toUpperCase()}`,
+                immediate: true,
+            });
             continue;
         }
 
         if (!table) {
-            if (key === 'Экспорт') {
-                console.log('hello');
-            }
             try {
                 const range = context.workbook.worksheets
                     .getItem(key)
@@ -82,21 +88,16 @@ export const initStoresOnFileName = async (context: Excel.RequestContext) => {
     await context.sync();
     const fileName = context.workbook.name.toLowerCase();
 
-    await initStores(context);
-    await initExcelImages(context);
-
     if (fileName.includes('письмо заявки')) {
         excelSyncStore.setAppStatus('Offer');
-        return;
-    }
-    if (fileName.includes('движение')) {
+    } else if (fileName.includes('движение')) {
         excelSyncStore.setAppStatus('Docs');
-        return;
-    }
-    if (fileName.includes('продажи')) {
+    } else if (fileName.includes('продажи')) {
         excelSyncStore.setAppStatus('Sales');
-        return;
+    } else {
+        pageStatusStore.setPageStatus('noRouteMatchFileName', fileName);
     }
 
-    pageStatusStore.setPageStatus('noRouteMatchFileName', fileName);
+    await initStores(context);
+    await initExcelImages(context);
 };

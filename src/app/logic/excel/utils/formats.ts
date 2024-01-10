@@ -20,7 +20,7 @@ export const formats = {
         placesTotalTn: '#,##0.000#_) "тн"',
         priceKg: '#,##0.00_)"р/кг"',
         priceTotal: '#,##0.00_)"р."',
-        nds: '0.00%',
+        nds: '0%',
     },
     eng: {
         places: '# ### "PCS"',

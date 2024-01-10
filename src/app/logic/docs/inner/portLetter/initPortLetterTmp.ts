@@ -66,7 +66,11 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
         {
             cell: 'Хранение',
             isEmpty: fields.termsPort !== 'EXW',
-            value: `Хранение стороной продавца осуществляется до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`,
+            value: `Хранение стороной продавца осуществляется включительно до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`,
+        },
+        {
+            cell: 'Исполнитель_информация',
+            value: `Исполнитель: ${phones?.['МСФ']?.fullName}; телефон: ${phones?.['МСФ']?.phone}`,
         },
         {
             cell: 'Телефон_представитель',
