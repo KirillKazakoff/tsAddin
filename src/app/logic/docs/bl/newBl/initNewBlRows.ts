@@ -3,7 +3,7 @@ import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { BlGroupT } from '../groupByBl';
 
 export const initNewBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>) => {
-    const { insertRows, insertRow } = utils.initRowMaker({ cellName: 'BL_массив' });
+    const { insertRows, insertRow } = utils.initRowMaker({ cellName: 'Bl_массив' });
 
     insertRows({
         records: blGroup.groupedBy.product,

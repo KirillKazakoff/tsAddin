@@ -7,13 +7,14 @@ import { initNewBlRows } from './initNewBlRows';
 
 export const initNewBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>) => {
     const ws = book.getWorksheet('BL');
+    console.log(ws);
     const utils = initExcelUtils(ws, '');
     const { record: r } = blGroup;
 
     // prettier-ignore
     const cells: CellObjT[] = [
         { cell: 'BL_No', value: `B/L No. ${r.blNo}` },
-        { cell: 'Продавец', value: r.seller.eng.name },
+        { cell: 'Seller', value: r.seller.eng.name },
         { cell: 'Продавец_адрес', value: r.seller.eng.address },
         { cell: 'Получатель', value: r.consignee?.fullName || r.agent.name },
         { cell: 'Получатель_адрес', value: r.consignee?.addres || r.agent.address },

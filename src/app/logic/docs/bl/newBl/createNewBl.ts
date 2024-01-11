@@ -6,7 +6,7 @@ import { BlGroupT } from '../groupByBl';
 import { initNewBlTmp } from './initNewBlTmp';
 
 export const createNewBL = async (blGroup: BlGroupT<ExportRowT>) => {
-    const book = await readTmp(pathObj.bl);
+    const book = await readTmp(pathObj.newBl);
     initNewBlTmp(book, blGroup);
 
     await saveFile(book, blGroup.record.blNo);

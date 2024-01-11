@@ -181,6 +181,7 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
             { cell: 'Договор_адреса_покупатель_огрн', value: `${r.buyer.req.org.ogrn ? `ОГРН ${r.buyer.req.org.ogrn}, ` : ''} ${r.buyer.req.org.okpo ? `ОКПО ${r.buyer.req.org.okpo}` : ''}` },
             { cell: 'Договор_адреса_покупатель_банк', value: `Наименование банка: ${r.buyer.req.bank.name}` },
             { cell: 'Договор_адреса_покупатель_бик', value: `БИК ${r.buyer.req.bank.bik}` },
+            { cell: 'Договор_адреса_покупатель_кс', value: `к/c ${r.buyer.req.bank.ks}` },
             { cell: 'Договор_адреса_покупатель_рс', value: `р/с ${r.buyer.req.bank.rs}` },
             { cell: 'Договор_адреса_покупатель_должность', value: `${r.buyer.req.podpisant.position}` },
             { cell: 'Договор_адреса_покупатель_фио', value: `_____________________________ ${r.buyer.req.podpisant.shortName}` },

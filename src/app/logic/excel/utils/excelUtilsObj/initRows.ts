@@ -71,8 +71,8 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
             if (!settings) return;
 
             if (cycleIndex === 0 && settingsTmp.mergeHeader) {
-                mergeRowCells(ws, settings.fields as FieldsGenT, insertIndex - 1);
                 styleRow(settings as any, row, firstCellCount);
+                mergeRowCells(ws, settings.fields as FieldsGenT, insertIndex - 1);
             }
 
             insertRow(settings as SettingsRowT<FieldsT>);
