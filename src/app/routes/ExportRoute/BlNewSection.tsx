@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Doc } from '../../components/Doc/Doc';
-import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
+import { useInitNewBlSection } from '../../logic/docs/bl/newBl/useInitNewBlSection';
 
-export const BlSection = observer(() => {
-    const initObj = useInitBlSection();
+export const BlNewSection = observer(() => {
+    const initObj = useInitNewBlSection();
     const { blGroupsArr, onLoad, onLoadAll } = initObj;
 
     const blDocs = blGroupsArr.map((group) => {
@@ -22,7 +22,7 @@ export const BlSection = observer(() => {
 
     return (
         <form className='docs__form bl-form'>
-            <h2 className='title bl-title'>BL</h2>
+            <h2 className='title bl-title'>BL NEW SECTION</h2>
             <ul className='docs'>{blDocs}</ul>
             <DocsDownloadBtn
                 onClick={onLoadAll}

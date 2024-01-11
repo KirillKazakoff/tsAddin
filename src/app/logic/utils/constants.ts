@@ -9,6 +9,7 @@ const baseUrl = mode === 'production' ? 'https://kirillkazakoff.github.io/tsAddi
 
 export const pathObj = {
     bl: `${baseUrl}templates/BL.xlsx`,
+    newBl: `${baseUrl}templates/BL_New.xlsx`,
     exportContract: `${baseUrl}templates/Export_Agreement.xlsx`,
     exportContractFCA: `${baseUrl}templates/Export_Agreement_FCA.xlsx`,
     exportStorageContract: `${baseUrl}templates/Export_Storage_Agreement.xlsx`,

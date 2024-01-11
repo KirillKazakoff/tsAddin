@@ -1,10 +1,15 @@
 /* eslint-disable no-param-reassign */
 import { Cell, Row } from 'exceljs';
+import exportContractStore from '../../../stores/docsStores/exportContractStore';
 
 // prettier-ignore
-export const formats = {
+export const formats = () => ({
     unique: {
         placesSlash: '# ### "/"',
+        placesBl: `# ### "${exportContractStore.fields.podpisant.code}"`,
+        packBl: `# ### "${exportContractStore.fields.podpisant.code}"`,
+        placesTotalBl: '#,##0.00_) "MTS"',
+        placesGrossBl: '#,##0.00_) "MTS"',
     },
     common: {
         basePlacesTotalTn: '#,##0.000#_)',
@@ -27,7 +32,7 @@ export const formats = {
         placesTotalKg: '#,##0.00_) "kg"',
         placesTotalTn: '#,##0.000#_) "tn"',
     },
-};
+});
 
 type FormatsDocT = Partial<{
     price: number;
@@ -38,55 +43,65 @@ type FormatsDocT = Partial<{
     pack: number;
 }>;
 
-export const formatsDocs = {
-    exportInvoice: {
-        placesTotal: formats.common.basePlacesTotalTn,
-        priceTotal: formats.common.priceDollar,
-        price: formats.common.priceDollar,
-        places: formats.unique.placesSlash,
-    },
-    exportContract: {
-        price: formats.common.priceDollar,
-        placesTotal: formats.common.basePlacesTotalTn,
-    },
-    exportEng: {
-        placesTotal: formats.eng.placesTotalTn,
-        placesGross: formats.eng.placesTotalTn,
-        places: formats.eng.places,
-        price: formats.common.priceDollar,
-        priceTotal: formats.common.priceDollarUSD,
-    },
-    exportRu: {
-        places: formats.ru.places,
-        placesTotal: formats.ru.placesTotalTn,
-        price: formats.common.priceDollar,
-        priceTotal: formats.common.priceDollar,
-    },
-    invoiceKTI: {
-        price: formats.common.priceDollar,
-        priceTotal: formats.common.priceDollar,
-    },
-    inner: {
-        places: formats.ru.places,
-        placesTotal: formats.ru.placesTotalKg,
-        price: formats.ru.priceKg,
-        priceTotal: formats.ru.priceTotal,
-        nds: formats.ru.nds,
-    },
-    sales: {
-        places: formats.eng.places,
-        placesTotal: formats.eng.placesTotalKg,
-        price: formats.common.priceDollar,
-        priceTotal: formats.common.priceDollar,
-    },
-    assortiment: {
-        places: formats.eng.places,
-        placesTotal: formats.eng.placesTotalKg,
-        percentage: formats.common.percentage,
-    },
+const formatsDocs = () => {
+    const f = formats();
+
+    return {
+        exportInvoice: {
+            placesTotal: f.common.basePlacesTotalTn,
+            priceTotal: f.common.priceDollar,
+            price: f.common.priceDollar,
+            places: f.unique.placesSlash,
+        },
+        exportContract: {
+            price: f.common.priceDollar,
+            placesTotal: f.common.basePlacesTotalTn,
+        },
+        exportEng: {
+            placesTotal: f.eng.placesTotalTn,
+            placesGross: f.eng.placesTotalTn,
+            places: f.eng.places,
+            price: f.common.priceDollar,
+            priceTotal: f.common.priceDollarUSD,
+        },
+        bl: {
+            places: f.unique.placesBl,
+            pack: f.unique.packBl,
+            placesTotal: f.unique.placesTotalBl,
+            placesGross: f.unique.placesGrossBl,
+        },
+        exportRu: {
+            places: f.ru.places,
+            placesTotal: f.ru.placesTotalTn,
+            price: f.common.priceDollar,
+            priceTotal: f.common.priceDollar,
+        },
+        invoiceKTI: {
+            price: f.common.priceDollar,
+            priceTotal: f.common.priceDollar,
+        },
+        inner: {
+            places: f.ru.places,
+            placesTotal: f.ru.placesTotalKg,
+            price: f.ru.priceKg,
+            priceTotal: f.ru.priceTotal,
+            nds: f.ru.nds,
+        },
+        sales: {
+            places: f.eng.places,
+            placesTotal: f.eng.placesTotalKg,
+            price: f.common.priceDollar,
+            priceTotal: f.common.priceDollar,
+        },
+        assortiment: {
+            places: f.eng.places,
+            placesTotal: f.eng.placesTotalKg,
+            percentage: f.common.percentage,
+        },
+    };
 };
 
-export type DocTypeT = keyof typeof formatsDocs;
+export type DocTypeT = keyof ReturnType<typeof formatsDocs>;
 
 export const setFormats = (
     row: Row,
@@ -102,7 +117,7 @@ export const setFormats = (
         cellObj[keys[index - 1]] = cell;
     });
 
-    const formatsDoc = formatsDocs[docType];
+    const formatsDoc = formatsDocs()[docType];
 
     Object.keys(cellObj).forEach((k) => {
         const key = k as keyof FormatsDocT;

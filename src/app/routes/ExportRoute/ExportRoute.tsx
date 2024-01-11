@@ -2,12 +2,13 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
-import BlSection from './BlSection';
+import { BlSection } from './BlSection';
 import { ExportContractSection } from './ExportContractSection';
 import { ExportRadio } from './ExportRadio';
 import { AssortimentSection } from './AssortimentSection';
 import { InvoiceKTISection } from './InvoiceKTISection';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
+import { BlNewSection } from './BlNewSection';
 
 export const ExportRoute = observer(() => {
     if (excelSyncStore.isLoading) return null;
@@ -15,6 +16,7 @@ export const ExportRoute = observer(() => {
     let ExportSection = () => (
         <>
             <BlSection />
+            {/* <BlNewSection /> */}
             <ExportContractSection />
             <AssortimentSection />
             <InvoiceKTISection />

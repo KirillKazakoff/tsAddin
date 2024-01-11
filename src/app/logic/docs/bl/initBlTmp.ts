@@ -9,19 +9,19 @@ import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>) => {
     const ws = book.getWorksheet('BL');
     const utils = initExcelUtils(ws, '');
-    const { record } = blGroup;
+    const { record: r } = blGroup;
 
     // prettier-ignore
     const cells: CellObjT[] = [
-        { cell: 'Продавец', value: record.seller.eng.name },
-        { cell: 'Продавец_адрес', value: record.seller.eng.address },
-        { cell: 'Получатель', value: record.consignee?.fullName || record.agent.name },
-        { cell: 'Получатель_адрес', value: record.consignee?.addres || record.agent.address },
-        { cell: 'Дата', value: getExcelDateStr(record.date, 'eng') },
-        { cell: 'Судно', value: record.vessel.eng.name },
-        { cell: 'Транспорт', value: record.transport.eng.name },
-        { cell: 'Куда', value: record.portTo.eng.name },
-        { cell: 'Откуда', value: record.portFrom.eng.name },
+        { cell: 'Продавец', value: r.seller.eng.name },
+        { cell: 'Продавец_адрес', value: r.seller.eng.address },
+        { cell: 'Получатель', value: r.consignee?.fullName || r.agent.name },
+        { cell: 'Получатель_адрес', value: r.consignee?.addres || r.agent.address },
+        { cell: 'Дата', value: getExcelDateStr(r.date, 'eng') },
+        { cell: 'Судно', value: r.vessel.eng.name },
+        { cell: 'Транспорт', value: r.transport.eng.name },
+        { cell: 'Куда', value: r.portTo.eng.name },
+        { cell: 'Откуда', value: r.portFrom.eng.name },
     ];
 
     initBlRows(blGroup, utils);

@@ -17,10 +17,10 @@ export const checkRow = (row: CommonRowT, tableName: TableKeyT, i: number) => {
     });
 
     if (errorProp) {
-        popupStore.pushStatus({
-            title: `Ошибка в таблице ${tableName}`,
-            desc: `Не заполнена строка ${i}, столбец "${errorProp.toUpperCase()}"`,
-        });
+        // popupStore.pushStatus({
+        //     title: `Ошибка в таблице ${tableName}`,
+        //     desc: `Не заполнена строка ${i}, столбец "${errorProp.toUpperCase()}"`,
+        // });
         throw new Error(`problem with table prop ${errorProp}`);
     }
 };

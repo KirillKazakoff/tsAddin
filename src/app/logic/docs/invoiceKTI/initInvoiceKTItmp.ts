@@ -11,6 +11,7 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIGro
     const ws = book.getWorksheet('Invoice_KTI');
     const utils = initExcelUtils(ws, '');
     const { row, exportRow } = invoice.record;
+    const f = formats();
 
     const date = {
         invoice: (locale: string) => getExcelDateStr(row.dateInvoice, locale),
@@ -40,7 +41,7 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIGro
         {
             cell: 'Инвойс_всего',
             value: invoice.total.priceTotal.count,
-            numFmt: formats.common.priceDollar,
+            numFmt: f.common.priceDollar,
         },
     ];
 
@@ -65,7 +66,7 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIGro
         {
             cell: 'Инвойс_всего_п',
             value: invoice.total.priceTotal.count,
-            numFmt: formats.common.priceDollar,
+            numFmt: f.common.priceDollar,
         },
     ];
 
