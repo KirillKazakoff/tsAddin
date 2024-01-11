@@ -3,36 +3,40 @@ import { Cell, Row } from 'exceljs';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 
 // prettier-ignore
-export const formats = () => ({
-    unique: {
-        placesSlash: '# ### "/"',
-        placesBl: `# ### "${exportContractStore.fields.podpisant.code}"`,
-        packBl: `# ### "${exportContractStore.fields.podpisant.code}"`,
-        placesTotalBl: '#,##0.00_) "MTS"',
-        placesGrossBl: '#,##0.00_) "MTS"',
-    },
-    common: {
-        basePlacesTotalTn: '#,##0.000#_)',
-        basePlaces: '# ###',
-        priceDollar: '#,##0.00_) "$"',
-        priceRub: '#,##0.00_)"руб."',
-        priceDollarUSD: '#,##0.00_) "USD"',
-        percentage: '0.00%',
-    },
-    ru: {
-        places: '# ### "шт"',
-        placesTotalKg: '#,##0.00_) "кг"',
-        placesTotalTn: '#,##0.000#_) "тн"',
-        priceKg: '#,##0.00_)"р/кг"',
-        priceTotal: '#,##0.00_)"р."',
-        nds: '0%',
-    },
-    eng: {
-        places: '# ### "PCS"',
-        placesTotalKg: '#,##0.00_) "kg"',
-        placesTotalTn: '#,##0.000#_) "tn"',
-    },
-});
+export const formats = () => {
+    const packSp = exportContractStore.currentAgreementRecord?.packSp;
+
+    return {
+        unique: {
+            placesSlash: '# ### "/"',
+            placesBl: `# ### "${packSp?.type}S"`,
+            packBl: `#,##0.00_) "${packSp?.type}/KG"`,
+            placesTotalBl: '#,##0.0000_) "MTS"',
+            placesGrossBl: '#,##0.0000_) "MTS"',
+        },
+        common: {
+            basePlacesTotalTn: '#,##0.000#_)',
+            basePlaces: '# ###',
+            priceDollar: '#,##0.00_) "$"',
+            priceRub: '#,##0.00_)"руб."',
+            priceDollarUSD: '#,##0.00_) "USD"',
+            percentage: '0.00%',
+        },
+        ru: {
+            places: '# ### "шт"',
+            placesTotalKg: '#,##0.00_) "кг"',
+            placesTotalTn: '#,##0.000#_) "тн"',
+            priceKg: '#,##0.00_)"р/кг"',
+            priceTotal: '#,##0.00_)"р."',
+            nds: '0%',
+        },
+        eng: {
+            places: '# ### "PCS"',
+            placesTotalKg: '#,##0.00_) "kg"',
+            placesTotalTn: '#,##0.000#_) "tn"',
+        },
+    };
+};
 
 type FormatsDocT = Partial<{
     price: number;

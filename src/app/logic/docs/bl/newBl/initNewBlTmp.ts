@@ -19,12 +19,32 @@ export const initNewBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRow
         { cell: 'Получатель_адрес', value: r.consignee?.addres || r.agent.address },
         { cell: 'Получатель_уведомление', value: r.consignee?.fullName || r.agent.name },
         { cell: 'Получатель_уведомление_адрес', value: r.consignee?.addres || r.agent.address },
-        { cell: 'Судно', value: r.transport.eng.name },
-        { cell: 'Куда', value: r.portTo.eng.name },
+        { cell: 'Судно', value: r.transport.eng.name.toUpperCase() },
+        { cell: 'Куда', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
         { cell: 'Зона_вылова', value: 'OKHOTSK SEA' },
+        { cell: 'Место_дата', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
     ];
 
     initNewBlRows(blGroup, utils);
+
+    utils.mergeFromTo([
+        {
+            row: {
+                from: { name: 'Shipped_merge_start' },
+                to: { name: 'Shipped_merge_end' },
+                oneRow: true,
+            },
+            cols: [{ start: 'Shipped_merge_start', end: 'Shipped_merge_end' }],
+        },
+        {
+            row: {
+                from: { name: 'At_the_port_merge_start' },
+                to: { name: 'At_the_port_merge_end' },
+                oneRow: true,
+            },
+            cols: [{ start: 'At_the_port_merge_start', end: 'At_the_port_merge_end' }],
+        },
+    ]);
 
     cells.forEach((cell) => utils.setCell(cell));
 };

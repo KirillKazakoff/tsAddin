@@ -1,6 +1,8 @@
 import { setSp } from './setSp';
 
 export const setPackages = (spRange: any[][]) => {
+    const getType = (fullName: string) => (fullName.includes('мешок') ? 'BAG' : 'CARTOON');
+
     return setSp({
         table: spRange,
         type: 'packages',
@@ -17,6 +19,7 @@ export const setPackages = (spRange: any[][]) => {
             coefficient: +r.coefficient,
             vessel: r.vessel,
             fullName: r.fullName,
+            type: getType(r.fullName),
             name: r.production,
             pack: r.pack,
         }),

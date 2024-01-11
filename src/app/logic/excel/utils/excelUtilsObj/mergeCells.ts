@@ -34,6 +34,7 @@ export const mergeFromTo = (ws: Worksheet) => (
                 name: string;
                 offset?: number;
             };
+            oneRow?: boolean;
         };
         cols?:
         | number[][]
@@ -48,22 +49,33 @@ export const mergeFromTo = (ws: Worksheet) => (
         const startRow = getRow(ws)(row.from.name, row.from.offset || 0).number;
         const endRow = getRow(ws)(row.to.name, row.to.offset || 0).number;
 
-        for (let i = startRow; i <= endRow; i += 1) {
-            cols.forEach((c: unknown) => {
-                let start = 0;
-                let end = 0;
-
-                if (typeof cols[0][0] === 'number') {
-                    const [s, e] = c as number[];
-                    start = s;
-                    end = e;
-                } else {
-                    const col = c as { start: string; end: string };
-                    start = +getCell(ws)(col.start).col;
-                    end = +getCell(ws)(col.end).col;
-                }
-                mergeCells(ws)({ row: i, startCol: start, endCol: end });
+        const cbCols = (cArray: unknown, rowIndex: number) => {
+            let start = 0;
+            let end = 0;
+            if (typeof cols[0][0] === 'number') {
+                const [s, e] = cArray as number[];
+                start = s;
+                end = e;
+            } else {
+                const col = cArray as { start: string; end: string };
+                start = +getCell(ws)(col.start).col;
+                end = +getCell(ws)(col.end).col;
+            }
+            mergeCells(ws)({
+                row: rowIndex,
+                endRow: row.oneRow ? endRow : null,
+                startCol: start,
+                endCol: end,
             });
+        };
+
+        if (row.oneRow) {
+            cols.forEach((cArray: unknown) => cbCols(cArray, startRow));
+            return;
+        }
+
+        for (let i = startRow; i <= endRow; i += 1) {
+            cols.forEach((cArray: unknown) => cbCols(cArray, i));
         }
     });
 };
