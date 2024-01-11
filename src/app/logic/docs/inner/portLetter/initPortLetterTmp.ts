@@ -16,6 +16,10 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     // prettier-ignore
     const { record: { row } } = contract;
     const { fields } = portLetterStore;
+    const orgName = {
+        seller: `ООО "${row.seller.ru.name}"`,
+        buyer: `${row.buyer.req.org.form.code} "${row.buyer.name}"`,
+    };
 
     if (!row.buyer.inn) {
         popupStore.pushStatus({
@@ -34,35 +38,31 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
             value: `Просим вас рыбопродукцию, ${
                 fields.termsPort.includes('CFR')
                     ? `которая прибудет в п. Владивосток на ${row.transport.ru.name} в адрес ООО "${row.seller.ru.name}" по следующим коносаментам:`
-                    : `находящуюся на хранении ООО "${row.seller.ru.name}"`
+                    : `находящуюся на хранении ${orgName.seller}`
             }`,
         },
         {
             cell: 'Письмо_описание_подвал',
             value: `передать с ${
                 fields.termsPort.includes('CFR') ? 'борта судна' : 'нашего хранения'
-            } компании ${row.buyer.req.org.form.code} ${row.buyer.name} ИНН ${
-                row.buyer.inn
-            }`,
+            } компании ${orgName.buyer}; ИНН ${row.buyer.inn}`,
         },
         {
             cell: 'Покупатель_телефон',
-            value: `( контактный телефон ${row.buyer.phone} )`,
+            value: `Контактный телефон: ${row.buyer.phone}`,
         },
         {
             cell: 'Грузовые_борт_склад',
             isEmpty: !fields.cargoToStorage,
             value: `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
-                fields.cargoToStorage === 'Покупатель'
-                    ? row.buyer.name
-                    : row.seller.ru.name
+                fields.cargoToStorage === 'Покупатель' ? orgName.buyer : orgName.seller
             }`,
         },
         {
             cell: 'Грузовые_склад_авто',
             isEmpty: !fields.cargoToAuto,
             value: `Оплата грузовых работ (склад-авто) будет производиться за счет ${
-                fields.cargoToAuto === 'Покупатель' ? row.buyer.name : row.seller.ru.name
+                fields.cargoToAuto === 'Покупатель' ? orgName.buyer : orgName.seller
             }`,
         },
         {
