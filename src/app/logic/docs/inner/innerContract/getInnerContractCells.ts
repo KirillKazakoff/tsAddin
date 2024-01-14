@@ -118,7 +118,7 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
                     value: {
                         richText: [
                             richText({ text: `4.2. Товар доставляется в порт ${r.port.code} из порта Магадан в рефрижераторном(ых) контейнере(ах) морским транспортом ` }),
-                            richText({ text: `${r.transport.ru.name}, рейс ${mr.reice}`, isBold: true }),
+                            richText({ text: `${r.transport.ru.name}, рейс ${mr.reice}, `, isBold: true }),
                             richText({ text: `зафрахтованным Поставщиком. Ориентировочная дата подхода судна в порт ${r.port.code} ` }),
                             richText({ text: date.delivery, isBold: true }),
                         ],

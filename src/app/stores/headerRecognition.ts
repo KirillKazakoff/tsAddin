@@ -8,6 +8,7 @@ type RecordOutputT<T extends RecordInputT> = Record<keyof T, number>;
 export const headerRecognition = <T extends RecordInputT>(
     rowSettings: T,
     headers: string[],
+    type: string,
 ): RecordOutputT<T> => {
     const arrayed = Object.keys(rowSettings).reduce<RecordMiddleT<T>>((total, key) => {
         const header = rowSettings[key];
@@ -20,7 +21,7 @@ export const headerRecognition = <T extends RecordInputT>(
 
         if (tuple[1] === -1) {
             popupStore.pushStatus({
-                title: 'Ошибка в наименовании столбца таблицы',
+                title: `Ошибка в наименовании столбца таблицы ${type}`,
                 desc: `Проверьте столбец ${tuple[0]}`,
             });
         }
