@@ -6,7 +6,6 @@ import { pathObj } from '../../../utils/constants';
 import { readTmp } from '../../readTmp';
 import { InnerGroupT } from '../groupByContractNo';
 import { initPortLetterTmp } from './initPortLetterTmp';
-import { initPortLetterTmpFCA } from './initPortLetterTmpFCA';
 
 export const createPortLetter = async (contract: InnerGroupT) => {
     const { row } = contract.record;
@@ -22,11 +21,7 @@ export const createPortLetter = async (contract: InnerGroupT) => {
     const utils = initExcelUtils(ws, '');
 
     // save order (tmp first then pictures)
-    if (portLetterStore.fields.termsPort === 'FCA') {
-        initPortLetterTmpFCA(book, contract);
-    } else {
-        initPortLetterTmp(book, contract);
-    }
+    initPortLetterTmp(book, contract);
 
     await initPictureGit({
         url: seller.code === 'ТРК' ? pathObj.bg.trk : pathObj.bg.msi,

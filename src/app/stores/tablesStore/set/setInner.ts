@@ -1,3 +1,4 @@
+import { TermsT } from '../../../types/typesTables';
 import { selectSp } from '../../spsStore/select';
 import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
@@ -56,7 +57,7 @@ export const setInner = (table: any[][]) => {
                 deliveryDate: r.deliveryDate,
                 paymentDate: r.paymentDate,
                 port: selectSp.portTamozhnya(r.port),
-                terms: r.terms,
+                terms: r.terms as TermsT,
                 cargo: (r.cargo ? r.cargo : 'Покупатель') as 'Покупатель' | 'Продавец',
             };
         },

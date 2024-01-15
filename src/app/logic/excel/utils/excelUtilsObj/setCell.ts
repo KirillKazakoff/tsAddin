@@ -21,6 +21,7 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (setObj: Cel
         cellObj.cellRus.value = ru;
 
         if (isEmpty) {
+            console.log(cellObj);
             setEmptyFn(ws, cellObj.cellEng);
             setEmptyFn(ws, cellObj.cellRus);
         }

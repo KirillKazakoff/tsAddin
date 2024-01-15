@@ -1,25 +1,16 @@
 import { Workbook } from 'exceljs';
-import portLetterStore from '../../../../stores/docsStores/portLetterStore';
-import { CellObjT } from '../../../../types/typesExcelUtils';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { InnerGroupT } from '../groupByContractNo';
 import { initPortLetterRows } from './initPortLetterRows';
-import spsStore from '../../../../stores/spsStore/spsStore';
 import popupStore from '../../../../stores/popupStore.ts/popupStore';
-import { getPortLetterNo } from './getPortLetterNo';
+import { getPortLetterCells } from './getPortLetterCells';
 
 export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
-    const phones = spsStore.confidentialPhones;
     const ws = book.getWorksheet('Port_Letter');
     const utils = initExcelUtils(ws, '');
 
     // prettier-ignore
     const { record: { row } } = contract;
-    const { fields } = portLetterStore;
-    const orgName = {
-        seller: `ООО "${row.seller.ru.name}"`,
-        buyer: `${row.buyer.req.org.form.code} "${row.buyer.name}"`,
-    };
 
     if (!row.buyer.inn) {
         popupStore.pushStatus({
@@ -28,67 +19,10 @@ export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
         });
     }
 
-    const cells: CellObjT[] = [
-        { cell: 'Номер_письма', value: getPortLetterNo(contract) },
-        { cell: 'Порт', value: `${fields.portRu.name}` },
-        { cell: 'Порт_директор', value: `${fields.portRu.director}` },
-        { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
-        {
-            cell: 'Письмо_описание_шапка',
-            value: `Просим вас рыбопродукцию, ${
-                fields.termsPort.includes('CFR')
-                    ? `которая прибудет в п. Владивосток на ${row.transport.ru.name} в адрес ООО "${row.seller.ru.name}" по следующим коносаментам:`
-                    : `находящуюся на хранении ${orgName.seller}`
-            }`,
-        },
-        {
-            cell: 'Письмо_описание_подвал',
-            value: `передать с ${
-                fields.termsPort.includes('CFR') ? 'борта судна' : 'нашего хранения'
-            } компании ${orgName.buyer}; ИНН ${row.buyer.inn}`,
-        },
-        {
-            cell: 'Покупатель_телефон',
-            value: `Контактный телефон: ${row.buyer.phone}`,
-        },
-        {
-            cell: 'Грузовые_борт_склад',
-            isEmpty: !fields.cargoToStorage,
-            value: `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
-                fields.cargoToStorage === 'Покупатель' ? orgName.buyer : orgName.seller
-            }`,
-        },
-        {
-            cell: 'Грузовые_склад_авто',
-            isEmpty: !fields.cargoToAuto,
-            value: `Оплата грузовых работ (склад-авто) будет производиться за счет ${
-                fields.cargoToAuto === 'Покупатель' ? orgName.buyer : orgName.seller
-            }`,
-        },
-        {
-            cell: 'Хранение',
-            isEmpty: fields.termsPort !== 'EXW',
-            value: `Хранение стороной продавца осуществляется включительно до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`,
-        },
-        {
-            cell: 'Исполнитель_информация',
-            value: `Исполнитель: ${phones?.['МСФ']?.fullName}; телефон: ${phones?.['МСФ']?.phone}`,
-        },
-        { cell: 'Имя_представитель', value: phones?.['ДМА']?.fullName },
-        {
-            cell: 'Телефон_представитель',
-            value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
-        },
-        {
-            cell: 'Контрольный_звонок',
-            isEmpty: !fields.isControlPhone,
-            value: `Передача продукции по контрольному звонку: т. ${phones?.['КНФ']?.phone}, ${phones?.['МСФ']?.phone}`,
-        },
-        { cell: 'Подписант_комментарий', value: `${fields.podpisant.ru.position}` },
-        { cell: 'Подписант', value: fields.podpisant.ru.name },
-    ];
+    const cells = getPortLetterCells(contract);
 
     cells.forEach((cell) => utils.setCell(cell));
+
     initPortLetterRows(contract, utils);
 
     utils.mergeFromTo([
