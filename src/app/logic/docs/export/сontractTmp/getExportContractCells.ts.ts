@@ -26,7 +26,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
     const date = {
         agreement: (locale: string) => getExcelDateStr(dateAgreement, locale),
         contract: (locale: string) => getExcelDateStr(contract.date, locale),
-        delivery: (locale: string) => getDeliveryDate(dateAgreement, locale, terms === 'EXW' ? 'day' : 'month'),
+        delivery: (locale: string, time: 'day' | 'month') => getDeliveryDate(dateAgreement, locale, time),
     };
     const currency = {
         eng: {
@@ -178,7 +178,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     ru: `Покупатель/Buyer ______________________________${agent.eng.signatory}`,
                 },
             ],
-            exwCfr: [
+            exw: [
                 {
                     cell: 'Доставка_условия',
                     eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
@@ -186,8 +186,20 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 },
                 {
                     cell: 'Доставка_порт',
-                    eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} no later than ${date.delivery('eng')}`,
-                    ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country} не позднее чем ${date.delivery('ru')}`,
+                    eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} no later than ${date.delivery('eng', 'day')}`,
+                    ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country} не позднее чем ${date.delivery('ru', 'day')}`,
+                },
+            ],
+            cfr: [
+                {
+                    cell: 'Доставка_условия',
+                    eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
+                    ru: `3.1 Поставка осуществляется на условиях ${terms} ${portTo.ru.name}`,
+                },
+                {
+                    cell: 'Доставка_порт',
+                    eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} no later than ${date.delivery('eng', 'month')}`,
+                    ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country} не позднее чем ${date.delivery('ru', 'month')}`,
                 },
             ],
             fca: [
@@ -227,8 +239,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 },
                 {
                     cell: 'Доставка_транспорт',
-                    eng: `2. The Goods will be delivered to ${portTo.eng.name}, ${portTo.eng.country} by the transport vessel ${transport.eng.name} no later than ${date.delivery('eng')}`,
-                    ru: `2. Товар будет доставлен в г. ${portTo.ru.name}, ${portTo.ru.country} транспортным судном ${transport.ru.name} не позднее чем ${date.delivery('ru')}`,
+                    eng: `2. The Goods will be delivered to ${portTo.eng.name}, ${portTo.eng.country} by the transport vessel ${transport.eng.name} no later than ${date.delivery('eng', 'month')}`,
+                    ru: `2. Товар будет доставлен в г. ${portTo.ru.name}, ${portTo.ru.country} транспортным судном ${transport.ru.name} не позднее чем ${date.delivery('ru', 'month')}`,
                 },
                 {
                     cell: 'Остальное_контракт',
@@ -266,8 +278,11 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
     if (type === 'exportT') {
         resArr.push(...cells.export.common);
 
-        if (terms === 'EXW' || terms === 'CFR') {
-            resArr.push(...cells.export.exwCfr);
+        if (terms === 'EXW') {
+            resArr.push(...cells.export.exw);
+        }
+        if (terms === 'CFR') {
+            resArr.push(...cells.export.cfr);
         }
         if (terms === 'FCA') {
             resArr.push(...cells.export.fca);
