@@ -20,6 +20,9 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
         buyer: `${r.buyer.req.org.form.code} "${r.buyer.name}"`,
     };
 
+    console.log(fields.cargoToAuto);
+    console.log(fields.cargoToStorage);
+
     // prettier-ignore
     const cells = {
         common: [
@@ -31,7 +34,7 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
             { cell: 'Подписант', value: fields.podpisant.ru.name },
             {
                 cell: 'Контрольный_звонок',
-                isEmpty: !fields.isControlPhone,
+                isEmptyCell: !fields.isControlPhone,
                 value: `Передача продукции по контрольному звонку: т. ${phones?.['КНФ']?.phone}, ${phones?.['МСФ']?.phone}`,
             },
         ],
@@ -56,21 +59,21 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
             },
             {
                 cell: 'Грузовые_борт_склад',
-                isEmpty: !fields.cargoToStorage,
+                isEmptyCell: !fields.cargoToStorage,
                 value: `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
                     fields.cargoToStorage === 'Покупатель' ? orgName.buyer : orgName.seller
                 }`,
             },
             {
                 cell: 'Грузовые_склад_авто',
-                isEmpty: !fields.cargoToAuto,
+                isEmptyCell: !fields.cargoToAuto,
                 value: `Оплата грузовых работ (склад-авто) будет производиться за счет ${
                     fields.cargoToAuto === 'Покупатель' ? orgName.buyer : orgName.seller
                 }`,
             },
             {
                 cell: 'Хранение',
-                isEmpty: fields.termsPort !== 'EXW',
+                isEmptyCell: fields.termsPort !== 'EXW',
                 value: `Хранение стороной продавца осуществляется включительно до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`,
             },
             {

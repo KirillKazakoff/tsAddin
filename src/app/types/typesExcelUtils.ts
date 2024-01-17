@@ -5,6 +5,7 @@ type Common = {
     offsetRow?: number;
     numFmt?: string;
     isEmpty?: boolean;
+    isEmptyCell?: boolean;
     height?: number;
 };
 

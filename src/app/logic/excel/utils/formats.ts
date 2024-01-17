@@ -10,7 +10,7 @@ export const formats = () => {
         unique: {
             placesSlash: '# ### "/"',
             placesBl: `# ### "${packSp?.type}S"`,
-            packBl: `#,##0.00_) "${packSp?.type}/KG"`,
+            packBl: `#,##0.00_) "KG/${packSp?.type}"`,
             placesTotalBl: '#,##0.0000_) "MTS"',
             placesGrossBl: '#,##0.0000_) "MTS"',
         },

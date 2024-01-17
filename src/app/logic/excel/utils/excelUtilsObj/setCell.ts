@@ -21,7 +21,6 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (setObj: Cel
         cellObj.cellRus.value = ru;
 
         if (isEmpty) {
-            console.log(cellObj);
             setEmptyFn(ws, cellObj.cellEng);
             setEmptyFn(ws, cellObj.cellRus);
         }
@@ -35,10 +34,15 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (setObj: Cel
 
 export const setCell = (ws: Worksheet) => (setObj: CellObjT) => {
     const {
-        cell, value, offsetRow, numFmt, isEmpty, height,
+        cell, value, offsetRow, numFmt, isEmpty, height, isEmptyCell,
     } = setObj;
     try {
         const cellObj = getCell(ws)(cell, offsetRow);
+        if (isEmptyCell) {
+            cellObj.value = '';
+            return cellObj;
+        }
+
         if (value) {
             cellObj.value = value;
         }

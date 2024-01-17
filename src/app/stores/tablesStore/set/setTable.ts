@@ -37,7 +37,7 @@ export const setTable = <
             total.push(row as any);
         } catch (e) {
             // eslint-disable-next-line no-console
-            console.log(e);
+            // console.log(e);
             return total;
         }
         return total;

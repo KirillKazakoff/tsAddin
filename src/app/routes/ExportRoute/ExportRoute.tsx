@@ -15,7 +15,7 @@ export const ExportRoute = observer(() => {
 
     let ExportSection = () => (
         <>
-            <BlSection />
+            {/* <BlSection /> */}
             <BlNewSection />
             <ExportContractSection />
             <AssortimentSection />

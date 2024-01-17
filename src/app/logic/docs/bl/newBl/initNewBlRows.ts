@@ -21,7 +21,7 @@ export const initNewBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<'
         rowSettings: ({ record: r, total }) => {
             const fields = {
                 places: total.places.count,
-                product: r.product.eng.name,
+                product: r.product.eng.name.toUpperCase(),
                 m1: '',
                 m2: '',
                 m3: '',

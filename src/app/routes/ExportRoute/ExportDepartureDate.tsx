@@ -7,8 +7,8 @@ export const ExportDepartureDate = observer(() => {
     const { currentTerms: terms } = exportContractStore;
     const title = 'ETD порт:';
 
-    const isCFRorFCA = terms && (terms.includes('CFR') || terms.includes('FCA'));
-    if (!isCFRorFCA) return null;
+    const isFCA = terms && terms.includes('FCA');
+    if (!isFCA) return null;
 
     return (
         <InputText

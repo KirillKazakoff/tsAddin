@@ -14,19 +14,8 @@ export const useInitContractSection = () => {
             isPictures: false,
         },
         validateCb: (errors, values) => {
-            const { currentAgreementRecord: r } = exportContractStore;
-
             if (!values.podpisant) {
                 errors.podpisant = 'valueMissing';
-            }
-
-            if (r.terms !== 'EXW') {
-                if (!values.departureDate) {
-                    errors.departureDate = 'valueMissing';
-                }
-                if (!values.departureDate.match(/^$|^\d{2}\.\d{2}\.\d{4}$/)) {
-                    errors.departureDate = 'formatMismatch';
-                }
             }
         },
     });
