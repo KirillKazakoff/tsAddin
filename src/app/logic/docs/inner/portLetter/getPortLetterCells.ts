@@ -20,9 +20,6 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
         buyer: `${r.buyer.req.org.form.code} "${r.buyer.name}"`,
     };
 
-    console.log(fields.cargoToAuto);
-    console.log(fields.cargoToStorage);
-
     // prettier-ignore
     const cells = {
         common: [

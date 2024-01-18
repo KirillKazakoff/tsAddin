@@ -1,7 +1,10 @@
 import { setSp } from './setSp';
 
 export const setPackages = (spRange: any[][]) => {
-    const getType = (fullName: string) => (fullName.includes('мешок') ? 'BAG' : 'CARTOON');
+    const getType = (fullName: string) => {
+        const res = fullName.toLowerCase().includes('мешок') ? 'BAG' : 'CARTOON';
+        return res;
+    };
 
     return setSp({
         table: spRange,

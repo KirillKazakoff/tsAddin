@@ -1,5 +1,9 @@
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import { ExportRowT } from '../../../../stores/tablesStore/set/setExport';
+import {
+    initAmount,
+    remainderToZero,
+} from '../../../../stores/tablesStore/utils/initAmount';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { RowStyleSettingsT } from '../../../excel/utils/styleRowCells';
 import { BlGroupT } from '../groupByBl';
@@ -31,9 +35,21 @@ export const initNewBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<'
                 placesGross: total.placesGross.count,
             };
 
+            const totalPlacesAmounted = remainderToZero(
+                initAmount(total.placesTotal.count, 5, 7).str,
+            );
+            const totalGrossAmounted = remainderToZero(
+                initAmount(total.placesGross.count, 5, 7).str,
+            );
+
             return {
                 fields,
-                docType: 'bl',
+                dynamicFormats: {
+                    places: `# ### "${r.packSp?.type}S"`,
+                    pack: `#,##0.00_) "KG/${r.packSp?.type}"`,
+                    placesTotal: `#,##0.${totalPlacesAmounted}_) "MTS"`,
+                    placesGross: `#,##0.${totalGrossAmounted}_) "MTS"`,
+                },
                 style: {
                     common,
                     special: {
@@ -45,6 +61,13 @@ export const initNewBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<'
     });
 
     insertRows({ records: [[''], [''], ['']] });
+
+    const totalPlacesAmounted = remainderToZero(
+        initAmount(blGroup.total.placesTotal.count, 5, 7).str,
+    );
+    const totalGrossAmounted = remainderToZero(
+        initAmount(blGroup.total.placesGross.count, 5, 7).str,
+    );
 
     const totalFields = {
         e1: '',
@@ -59,7 +82,11 @@ export const initNewBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<'
     };
     insertRow({
         fields: totalFields,
-        docType: 'bl',
+        dynamicFormats: {
+            places: `# ### "${blGroup.record.packSp?.type}S"`,
+            placesTotal: `#,##0.${totalPlacesAmounted}_) "MTS"`,
+            placesGross: `#,##0.${totalGrossAmounted}_) "MTS"`,
+        },
         style: {
             common,
             special: {

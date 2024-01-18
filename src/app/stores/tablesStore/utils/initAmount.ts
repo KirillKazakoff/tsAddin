@@ -59,3 +59,15 @@ export const addToAmountObj = (addTo: AmountObjT, addFrom: AmountObjT) => {
         addToAmount(addTo[key], addFrom[key]?.count);
     });
 };
+
+export const remainderToZero = (count: number | string) => {
+    const str = count.toString();
+    const separator = str.includes('.') ? '.' : ',';
+
+    return count
+        .toString()
+        .split(separator)[1]
+        .split('')
+        .map(() => '0')
+        .join('');
+};

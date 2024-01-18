@@ -4,7 +4,7 @@ import { indexToStr } from '../../../utils/indexToStr';
 import { InnerGroupT } from '../groupByContractNo';
 
 export const getPortLetterNo = ({ index, record }: InnerGroupT) => {
-    const letterIndex = `${indexToStr(index)} от ${
+    const letterIndex = `${indexToStr(record.row.id)} от ${
         portLetterStore.fields.dateLetter || getNowDate()
     }`;
 

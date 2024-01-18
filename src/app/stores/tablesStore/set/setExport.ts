@@ -4,7 +4,7 @@ import tablesStore from '../tablesStore';
 import { setTable } from './setTable';
 
 export const setExport = (table: any[][]) => {
-    return setTable({
+    const transformed = setTable({
         table,
         type: 'exportT',
         headers: {
@@ -46,6 +46,8 @@ export const setExport = (table: any[][]) => {
             return { ...res, declarationNo };
         },
     });
+
+    return transformed;
 };
 
 export type ExportRowT = ReturnType<typeof setExport>[number] &

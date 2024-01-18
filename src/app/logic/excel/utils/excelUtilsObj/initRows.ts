@@ -1,5 +1,5 @@
 import { Cell, Row, Worksheet } from 'exceljs';
-import { DocTypeT, setFormats } from '../formats';
+import { DocTypeT, setDynamicFormats, setFormats } from '../formats';
 import { getCell } from './getCell';
 import { mergeRowCells } from './mergeCells';
 import { RowStyleSettingsT, styleRow } from '../styleRowCells';
@@ -10,6 +10,7 @@ export type FieldsGenT = FieldsObjT | string[] | number[];
 export type SettingsRowT<FieldsT> = {
     fields: FieldsT;
     docType?: DocTypeT;
+    dynamicFormats?: { [P in keyof FieldsT]?: string };
     style?: {
         common: RowStyleSettingsT;
         special?: {
@@ -56,6 +57,7 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
 
         styleRow(settings, row, firstCellCount);
         setFormats(row, settings.fields as FieldsObjT, settings.docType);
+        setDynamicFormats(settings.fields as FieldsObjT, settings.dynamicFormats, row);
         mergeRowCells(ws, settings.fields, row.number);
     };
 

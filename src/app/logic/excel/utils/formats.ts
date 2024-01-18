@@ -11,8 +11,8 @@ export const formats = () => {
             placesSlash: '# ### "/"',
             placesBl: `# ### "${packSp?.type}S"`,
             packBl: `#,##0.00_) "KG/${packSp?.type}"`,
-            placesTotalBl: '#,##0.0000_) "MTS"',
-            placesGrossBl: '#,##0.0000_) "MTS"',
+            placesTotalBl: '#,##0.0000000_) "MTS"',
+            placesGrossBl: '#,##0.0000000_) "MTS"',
         },
         common: {
             basePlacesTotalTn: '#,##0.000#_)',
@@ -130,5 +130,29 @@ export const setFormats = (
         if (!cell) return;
 
         cellObj[key].numFmt = formatsDoc[key];
+    });
+};
+
+export const setDynamicFormats = (
+    fields: { [key: string]: string | number },
+    dynamicFormats: { [key: string]: string },
+    row: Row,
+) => {
+    if (!dynamicFormats) return;
+
+    const cellObj: { [key: string]: Cell } = {};
+    const keys = Object.keys(fields);
+
+    row.eachCell((cell, index) => {
+        cellObj[keys[index - 1]] = cell;
+    });
+
+    Object.keys(dynamicFormats).forEach((k) => {
+        const key = k as keyof FormatsDocT;
+        const cell = cellObj[key];
+
+        if (!cell) return;
+
+        cellObj[key].numFmt = dynamicFormats[key];
     });
 };
