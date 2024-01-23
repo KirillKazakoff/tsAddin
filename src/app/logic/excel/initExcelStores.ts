@@ -41,7 +41,7 @@ const getExistedStores = async (context: Excel.RequestContext) => {
 
                 await context.sync();
 
-                if (!range) throw new Error();
+                if (!range) throw new Error('no range');
             } catch (e) {
                 popupStore.pushStatus({
                     title: `Неверное наименование ${key}`,
@@ -83,20 +83,24 @@ const initStores = async (context: Excel.RequestContext) => {
 };
 
 export const initStoresOnFileName = async (context: Excel.RequestContext) => {
-    context.workbook.load('name');
-    await context.sync();
-    const fileName = context.workbook.name.toLowerCase();
+    try {
+        context.workbook.load('name');
+        await context.sync();
+        const fileName = context.workbook.name.toLowerCase();
 
-    if (fileName.includes('письмо заявки')) {
-        excelSyncStore.setAppStatus('Offer');
-    } else if (fileName.includes('движение')) {
-        excelSyncStore.setAppStatus('Docs');
-    } else if (fileName.includes('продажи')) {
-        excelSyncStore.setAppStatus('Sales');
-    } else {
-        pageStatusStore.setPageStatus('noRouteMatchFileName', fileName);
+        if (fileName.includes('письмо заявки')) {
+            excelSyncStore.setAppStatus('Offer');
+        } else if (fileName.includes('движение')) {
+            excelSyncStore.setAppStatus('Docs');
+        } else if (fileName.includes('продажи')) {
+            excelSyncStore.setAppStatus('Sales');
+        } else {
+            pageStatusStore.setPageStatus('noRouteMatchFileName', fileName);
+        }
+
+        await initStores(context);
+        await initExcelImages(context);
+    } catch (e) {
+        console.log(e);
     }
-
-    await initStores(context);
-    await initExcelImages(context);
 };

@@ -20,7 +20,7 @@ export const setTable = <
 
     const headers = table.shift();
     const excluded = excludeOfEmptyRows(table);
-    const dictionary = headerRecognition(settings.headers, headers, type);
+    const dictionary = headerRecognition(settings.headers, headers, type, 'table');
 
     const transformedTable = excluded.reduce<(R & CommonRowT)[]>((total, rowInit, i) => {
         const dictionaryCopy = _.cloneDeep(dictionary);

@@ -18,12 +18,12 @@ export const useInitExcel = () => {
                 excelSyncStore.setLoading(false);
             });
         } catch (e) {
-            const message = e.message as string;
+            const message = (e.message as string) || (e as string);
             if (message.includes('Excel is in cell-editing mode')) {
                 pageStatusStore.setPageStatus('excelInEditingMode');
             } else {
                 // eslint-disable-next-line no-console
-                console.error(e);
+                console.error(e.message);
                 pageStatusStore.setPageStatus('unknownError', message);
             }
         }

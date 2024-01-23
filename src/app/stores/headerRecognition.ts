@@ -9,6 +9,7 @@ export const headerRecognition = <T extends RecordInputT>(
     rowSettings: T,
     headers: string[],
     type: string,
+    tableType: 'sp' | 'table',
 ): RecordOutputT<T> => {
     const arrayed = Object.keys(rowSettings).reduce<RecordMiddleT<T>>((total, key) => {
         const header = rowSettings[key];
@@ -21,7 +22,9 @@ export const headerRecognition = <T extends RecordInputT>(
 
         if (tuple[1] === -1) {
             popupStore.pushStatus({
-                title: `Ошибка в наименовании столбца таблицы ${type}`,
+                title: `Ошибка в наименовании столбца ${
+                    tableType === 'sp' ? 'справочника' : 'таблицы'
+                } ${type}`,
                 desc: `Проверьте столбец ${tuple[0]}`,
             });
         }

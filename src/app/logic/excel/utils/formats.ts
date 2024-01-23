@@ -1,18 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { Cell, Row } from 'exceljs';
-import exportContractStore from '../../../stores/docsStores/exportContractStore';
 
 // prettier-ignore
 export const formats = () => {
-    const packSp = exportContractStore.currentAgreementRecord?.packSp;
-
     return {
         unique: {
             placesSlash: '# ### "/"',
-            placesBl: `# ### "${packSp?.type}S"`,
-            packBl: `#,##0.00_) "KG/${packSp?.type}"`,
-            placesTotalBl: '#,##0.0000000_) "MTS"',
-            placesGrossBl: '#,##0.0000000_) "MTS"',
         },
         common: {
             basePlacesTotalTn: '#,##0.000#_)',
@@ -67,12 +60,6 @@ const formatsDocs = () => {
             places: f.eng.places,
             price: f.common.priceDollar,
             priceTotal: f.common.priceDollarUSD,
-        },
-        bl: {
-            places: f.unique.placesBl,
-            pack: f.unique.packBl,
-            placesTotal: f.unique.placesTotalBl,
-            placesGross: f.unique.placesGrossBl,
         },
         exportRu: {
             places: f.ru.places,

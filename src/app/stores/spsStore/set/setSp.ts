@@ -16,7 +16,7 @@ export const setSp = <
 }) => {
     const { table, row: getRow, type: spsKey } = settings;
     const headers = table.shift();
-    const dictionary = headerRecognition(settings.headers, headers, spsKey);
+    const dictionary = headerRecognition(settings.headers, headers, spsKey, 'sp');
 
     const transformedTable = table.reduce<Record<string, R>>((total, rowInit) => {
         const dictionaryCopy = _.cloneDeep(dictionary);
