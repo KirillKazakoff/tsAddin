@@ -27,7 +27,7 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
             { cell: 'Порт', value: `${fields.portRu.name}` },
             { cell: 'Порт_директор', value: `${fields.portRu.director}` },
             { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
-            { cell: 'Подписант_комментарий', value: fields.podpisant.ru.comment },
+            { cell: 'Подписант_комментарий', value: fields.podpisant.ru.position },
             { cell: 'Подписант', value: fields.podpisant.ru.name },
             {
                 cell: 'Контрольный_звонок',
