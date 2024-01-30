@@ -6,7 +6,7 @@ const getExcelDate = (month: Intl.DateTimeFormatOptions['month']) => (excelSeria
     if (typeof excelSerial === 'string') return excelSerial;
 
     return calcExcelDate(excelSerial).toLocaleString(locale, {
-        day: 'numeric',
+        day: '2-digit',
         month,
         year: 'numeric',
     });
@@ -30,7 +30,7 @@ export const getDeliveryDate = (
     }
 
     const res = date.toLocaleString(locale, {
-        day: 'numeric',
+        day: '2-digit',
         month: 'long',
         year: 'numeric',
     });
@@ -40,7 +40,7 @@ export const getDeliveryDate = (
 
 export const getNowDate = () => {
     return new Date().toLocaleString('ru', {
-        day: 'numeric',
+        day: '2-digit',
         month: 'numeric',
         year: 'numeric',
     });
