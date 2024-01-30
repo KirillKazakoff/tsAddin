@@ -40,5 +40,6 @@ export const getExportRow = (row: ExportInitRowT) => {
         msc: row.msc,
         id: row.id,
         idProduct: row.idProduct,
+        currency: row.currency,
     };
 };
