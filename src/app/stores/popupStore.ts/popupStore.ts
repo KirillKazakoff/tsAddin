@@ -12,11 +12,21 @@ class PopupStore {
 
     pushStatus(status: PopupStatus) {
         if (this.statuses.some((s) => s.desc === status.desc)) return;
+        this.setActive(true);
         this.statuses.push(status);
     }
 
     killStatus() {
         this.statuses.shift();
+    }
+
+    killAll() {
+        this.statuses = [];
+        this.setActive(false);
+    }
+
+    setActive(status: boolean) {
+        this.isActive = status;
     }
 
     get currentStatus() {

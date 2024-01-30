@@ -1,3 +1,4 @@
+import popupStore from '../../../stores/popupStore.ts/popupStore';
 import { TableKeyT } from '../../../stores/tablesStore/tablesStore';
 import { CommonRowT } from '../../../types/typesTables';
 import { getNonObligatoryProps } from './getNonObligatoryProps';
@@ -16,10 +17,10 @@ export const checkRow = (row: CommonRowT, tableName: TableKeyT, i: number) => {
     });
 
     if (errorProp) {
-        // popupStore.pushStatus({
-        //     title: `Ошибка в таблице ${tableName}`,
-        //     desc: `Не заполнена строка ${i}, столбец "${errorProp.toUpperCase()}"`,
-        // });
+        popupStore.pushStatus({
+            title: `Ошибка в таблице ${tableName}`,
+            desc: `Не заполнена строка ${i}, столбец "${errorProp.toUpperCase()}"`,
+        });
         throw new Error(`error table prop ${errorProp} in ${tableName}, row ${i}`);
     }
 };

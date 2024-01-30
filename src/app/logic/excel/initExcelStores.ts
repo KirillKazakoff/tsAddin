@@ -27,7 +27,7 @@ const getExistedStores = async (context: Excel.RequestContext) => {
         if (!storeWS) {
             popupStore.pushStatus({
                 title: 'Отсутствует справочник',
-                desc: `В excel-книге нет Листа с названием ${key.toUpperCase()}`,
+                desc: `В excel-книге нет Листа с названием ${key}`,
             });
             continue;
         }
@@ -84,7 +84,6 @@ const initStores = async (context: Excel.RequestContext) => {
 
 export const initStoresOnFileName = async (context: Excel.RequestContext) => {
     try {
-        console.log(Office.FileType.Pdf);
         context.workbook.load('name');
         await context.sync();
         const fileName = context.workbook.name.toLowerCase();
@@ -102,6 +101,6 @@ export const initStoresOnFileName = async (context: Excel.RequestContext) => {
         await initStores(context);
         await initExcelImages(context);
     } catch (e) {
-        console.log(e);
+        popupStore.pushStatus({ title: 'Неизвестная ошибка', desc: `error${e}` });
     }
 };

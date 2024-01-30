@@ -38,14 +38,14 @@ export type ExcelStoreT = {
 };
 
 export const excelStoresDictionary = {
-    'Инвойсы хранение': {
-        table: 'Инвойсы_хранение',
-        setter: setStorageInvoices,
-    },
-    'Инвойсы выгрузка': {
-        table: 'Инвойсы_выгрузка',
-        setter: setDischargeInvoices,
-    },
+    // 'Инвойсы хранение': {
+    //     table: 'Инвойсы_хранение',
+    //     setter: setStorageInvoices,
+    // },
+    // 'Инвойсы выгрузка': {
+    //     table: 'Инвойсы_выгрузка',
+    //     setter: setDischargeInvoices,
+    // },
     'SPOrg': {
         table: 'SPOrg',
         setter: setOrgForm,
@@ -157,10 +157,11 @@ export const excelStoresDictionary = {
 } satisfies Record<string, ExcelStoreT>;
 
 const D = excelStoresDictionary;
+export type ExcelStoresDictionaryT = Partial<typeof excelStoresDictionary>;
 
 export const movementDictionary = {
-    'Инвойсы хранение': D['Инвойсы хранение'],
-    'Инвойсы выгрузка': D['Инвойсы выгрузка'],
+    // 'Инвойсы хранение': D['Инвойсы хранение'],
+    // 'Инвойсы выгрузка': D['Инвойсы выгрузка'],
     'SPOrg': D['SPOrg'],
     'Транспорта': D['Транспорта'],
     'Суда': D['Суда'],
@@ -183,10 +184,8 @@ export const movementDictionary = {
     'Внутренний рынок': D['Внутренний рынок'],
     // save initialize order (Сертификаты after Экспорт_хранение);
     'Экспорт Хранение': D['Экспорт Хранение'],
-    'Сертификаты': D['Сертификаты'],
+    // 'Сертификаты': D['Сертификаты'],
     // save initialize order (Пошлина after Экспорт_хранение);
     'Пошлина': D['Пошлина'],
     'Экспорт': D['Экспорт'],
-};
-
-export type ExcelStoresDictionaryT = Partial<typeof excelStoresDictionary>;
+} satisfies ExcelStoresDictionaryT;
