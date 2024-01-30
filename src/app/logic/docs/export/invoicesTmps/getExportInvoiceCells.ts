@@ -48,7 +48,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
             {
                 cell: 'Инвойс_продавец',
                 eng: `${seller.eng.name}`,
-                ru: `${seller.ru.name}`,
+                ru: `${seller.ru.fullNameOrg}`,
             },
             {
                 cell: 'Инвойс_продавец_адрес',

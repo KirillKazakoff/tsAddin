@@ -1,4 +1,3 @@
-import popupStore from '../../../stores/popupStore.ts/popupStore';
 import { TableKeyT } from '../../../stores/tablesStore/tablesStore';
 import { CommonRowT } from '../../../types/typesTables';
 import { getNonObligatoryProps } from './getNonObligatoryProps';

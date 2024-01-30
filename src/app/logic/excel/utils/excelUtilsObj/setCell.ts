@@ -11,31 +11,39 @@ const setEmptyFn = (ws: Worksheet, cell: Cell) => {
     titleCell.value = '';
 };
 
-export const setCellDouble = (ws: Worksheet, offsetCell: string) => (setObj: CellObjDoubleT) => {
-    const {
-        cell, eng, ru, offsetRow, isEmpty,
-    } = setObj;
-    try {
-        const cellObj = getCellDouble(ws, offsetCell)(cell, offsetRow);
-        cellObj.cellEng.value = eng;
-        cellObj.cellRus.value = ru;
+export const setCellDouble =
+    (ws: Worksheet, offsetCell: string) => (setObj: CellObjDoubleT) => {
+        const { cell, eng, ru, offsetRow, isEmpty, isEmptyCell, height } = setObj;
+        try {
+            const cellObj = getCellDouble(ws, offsetCell)(cell, offsetRow);
+            cellObj.cellEng.value = eng;
+            cellObj.cellRus.value = ru;
 
-        if (isEmpty) {
-            setEmptyFn(ws, cellObj.cellEng);
-            setEmptyFn(ws, cellObj.cellRus);
+            if (height) {
+                const row = getRow(ws)(cell);
+                console.log(row);
+                row.height = height;
+            }
+
+            if (isEmptyCell) {
+                cellObj.cellEng.value = '';
+                cellObj.cellRus.value = '';
+                return cellObj;
+            }
+            if (isEmpty) {
+                setEmptyFn(ws, cellObj.cellEng);
+                setEmptyFn(ws, cellObj.cellRus);
+            }
+            return cellObj;
+        } catch (e) {
+            if (isEmpty) return null;
+            console.error(`Ошибка при установке значения ${cell}`);
+            return null;
         }
-        return cellObj;
-    } catch (e) {
-        if (isEmpty) return null;
-        console.error(`Ошибка при установке значения ${cell}`);
-        return null;
-    }
-};
+    };
 
 export const setCell = (ws: Worksheet) => (setObj: CellObjT) => {
-    const {
-        cell, value, offsetRow, numFmt, isEmpty, height, isEmptyCell,
-    } = setObj;
+    const { cell, value, offsetRow, numFmt, isEmpty, height, isEmptyCell } = setObj;
     try {
         const cellObj = getCell(ws)(cell, offsetRow);
         if (isEmptyCell) {

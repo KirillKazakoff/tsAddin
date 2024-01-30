@@ -7,6 +7,7 @@ export const setSellers = (spRange: any[][]) => {
         headers: {
             code: 'Компания',
             orgForm: 'Форма',
+            fullNameOrg: 'Полное наименование',
             fullNameRu: 'Реквизиты.Полное наименование',
             shortName: 'Краткое наименование',
             addressRu: 'Адрес',
@@ -35,6 +36,7 @@ export const setSellers = (spRange: any[][]) => {
                 name: r.nameEng,
             },
             ru: {
+                fullNameOrg: r.fullNameOrg,
                 shortName: r.shortName,
                 address: r.addressRu,
                 name: r.fullNameRu,

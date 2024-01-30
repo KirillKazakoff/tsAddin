@@ -53,17 +53,12 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             {
                 cell: 'Продавец',
                 eng: `${seller.eng.name}`,
-                ru: `${seller.ru.name}`,
-            },
-            {
-                cell: 'Продавец_подписант',
-                eng: `${podpisant.eng.name} and`,
-                ru: `${podpisant.ru.name} и`,
+                ru: `${seller.ru.fullNameOrg}`,
             },
             {
                 cell: 'Продавец_представитель',
-                eng: `${podpisant.eng.comment}`,
-                ru: `${podpisant.ru.comment}`,
+                eng: `${podpisant.eng.comment}\n${podpisant.eng.name}`,
+                ru: `${podpisant.req.face}`,
             },
             {
                 cell: 'Покупатель',
@@ -84,7 +79,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             {
                 cell: 'Адреса_продавец',
                 eng: `${seller.eng.name}`,
-                ru: `${seller.ru.name}`,
+                ru: `${seller.ru.fullNameOrg}`,
             },
             {
                 cell: 'Адреса_продавец_адрес',
@@ -109,7 +104,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             {
                 cell: 'Адреса_получатель_в_пользу',
                 eng: `in forward to ${seller.eng.name}`,
-                ru: `в пользу ${seller.ru.name}`,
+                ru: `в пользу ${seller.ru.fullNameOrg}`,
             },
             {
                 cell: 'Адреса_получатель_счет',
@@ -178,6 +173,13 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     cell: 'Адреса_подпись',
                     eng: `Продавец/Seller ______________________________${podpisant.eng.name}`,
                     ru: `Покупатель/Buyer ______________________________${agent.eng.signatory}`,
+                },
+                {
+                    height: terms === 'EXW' ? 1 : 27,
+                    isEmptyCell: terms === 'EXW',
+                    cell: 'Сертификаты_обязательства',
+                    eng: 'Seller is obligated to issue set of sertificates for consignees, mentioned in clause 1.',
+                    ru: 'Покупатель обязуется выпустить комплект сертификатов на получателей, перечисленных в пункте 1.',
                 },
             ],
             exw: [
@@ -295,6 +297,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         resArr.push(...cells.exportStorage.common);
     }
 
+    console.log(type);
     if (type === 'certificatesT') {
         resArr.push(...cells.exportStorage.common);
         resArr.push(...cells.certificates);
