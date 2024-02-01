@@ -1,41 +1,54 @@
-const currenciesSp = [
-    {
-        symbol: 'CNY',
+export const currenciesSp = {
+    CNY: {
+        key: 'CNY',
+        symbol: '¥',
         ru: {
             padezh: {
                 thinkAbout: 'юанях',
                 seeWhat: ['юань', 'юаня', 'юаней'],
             },
-            decimals: 'цзяо',
+            decimals: 'фэней',
+            country: 'КНР',
         },
         eng: {
+            country: 'PRC',
             name: 'yuan',
-            decimals: 'jiao',
+            decimals: 'fens',
         },
     },
-    {
-        symbol: 'RUB',
+    RUB: {
+        key: 'RUB',
+        symbol: '₽',
         ru: {
             padezh: {
                 thinkAbout: 'рублях',
-                seeWhat: ['рубль', 'рубли', 'рублей'],
+                seeWhat: ['рубль', 'рубля', 'рублей'],
             },
             decimals: 'копеек',
         },
         eng: {
+            country: 'RU',
             name: 'ruble',
-            decimals: 'kopeck',
+            decimals: 'kopecks',
         },
     },
-    {
-        symbol: 'USD',
+    USD: {
+        key: 'USD',
+        symbol: '$',
         ru: {
-            name: 'Доллар',
+            padezh: {
+                thinkAbout: 'долларах США',
+                seeWhat: ['доллар США', 'доллара США', 'долларов США'],
+            },
             decimals: 'центов',
+            country: 'РФ',
         },
         eng: {
-            name: 'Dollar',
             decimals: 'cents',
+            name: 'US dollar',
+            country: 'US',
         },
     },
-];
+};
+
+export type CurrencyT = (typeof currenciesSp)['CNY'];

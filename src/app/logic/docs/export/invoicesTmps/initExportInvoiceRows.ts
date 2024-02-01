@@ -14,6 +14,10 @@ export const initExportInvoiceRows = (
     insertRows({
         deleteStartAmount: 2,
         records: invoice.groupedBy.productPack,
+        headers: ({ record: r }) => ({
+            price: `Price, ${r.currency.symbol}/tn\nЦена, ${r.currency.symbol}/тн`,
+            priceTotal: `Amount, ${r.currency.symbol}\nСумма, ${r.currency.symbol}`,
+        }),
         rowSettings: ({ record: r, total }) => {
             const fields = {
                 empty1: '',
@@ -35,6 +39,10 @@ export const initExportInvoiceRows = (
             return {
                 fields,
                 docType: 'exportInvoice',
+                dynamicFormats: {
+                    price: `#,##0.00_) \n${r.currency.symbol}`,
+                    priceTotal: `#,##0.00_) \n${r.currency.symbol}`,
+                },
                 style: {
                     common: {
                         height: 50,
@@ -83,6 +91,9 @@ export const initExportInvoiceRows = (
                 empty1: { style: { border: { right: { style: 'thin' }, top: {} } } },
                 priceTotal: { style: { border: { right: { style: 'thin' } } } },
             },
+        },
+        dynamicFormats: {
+            priceTotal: `#,##0.00_) \n${invoice.record.currency.symbol}`,
         },
     });
 };

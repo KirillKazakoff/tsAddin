@@ -29,6 +29,7 @@ export const setExportStorage = (table: any[][]) => {
             portFrom: 'Порт Декларирования',
             id: 'ID',
             idProduct: 'ID_product',
+            currency: 'Currency',
         },
 
         row: (r) => {

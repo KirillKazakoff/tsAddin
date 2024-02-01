@@ -1,3 +1,4 @@
+import { CurrencyT, currenciesSp } from '../../logic/utils/currencyBuilder';
 import { ExportInitRowT } from '../../types/typesTables';
 import { selectSp } from '../spsStore/select';
 import { initAmount } from './utils/initAmount';
@@ -40,6 +41,6 @@ export const getExportRow = (row: ExportInitRowT) => {
         msc: row.msc,
         id: row.id,
         idProduct: row.idProduct,
-        currency: row.currency,
+        currency: currenciesSp[row.currency] as CurrencyT,
     };
 };

@@ -84,7 +84,6 @@ const initStores = async (context: Excel.RequestContext) => {
 
 export const initStoresOnFileName = async (context: Excel.RequestContext) => {
     try {
-        console.log(Office.FileType.Pdf);
         context.workbook.load('name');
         await context.sync();
         const fileName = context.workbook.name.toLowerCase();
