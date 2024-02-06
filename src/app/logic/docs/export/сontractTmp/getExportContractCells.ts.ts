@@ -297,7 +297,6 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         resArr.push(...cells.exportStorage.common);
     }
 
-    console.log(type);
     if (type === 'certificatesT') {
         resArr.push(...cells.exportStorage.common);
         resArr.push(...cells.certificates);

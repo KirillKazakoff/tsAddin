@@ -9,13 +9,14 @@ import { groupMatesByKns } from './groupMatesByKns';
 
 export const groupByContractNo = () => {
     const matesGrouped = groupMatesByKns();
+    matesGrouped[0].kns;
 
     const rows = tablesStore.innerT.map((row) => {
         const mateRow = tablesStore.matesT.find((r) => r.konosament === row.konosament);
 
         const konosamentGroup = matesGrouped
             .find((mGroup) => mGroup.kns.includes(mateRow))
-            .kns.reduce<{ value: string; index: number }>(
+            ?.kns.reduce<{ value: string; index: number }>(
             // prettier-ignore
             (total, r, i, source) => {
                 const isLast = source.length === i + 1;
