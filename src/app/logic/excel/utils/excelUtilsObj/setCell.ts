@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Cell, Worksheet } from 'exceljs';
 import { CellObjDoubleT, CellObjT } from '../../../../types/typesExcelUtils';
 import { getCell, getCellDouble } from './getCell';
@@ -22,7 +21,6 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (setObj: Cel
 
         if (height) {
             const row = getRow(ws)(cell);
-            console.log(row);
             row.height = height;
         }
 

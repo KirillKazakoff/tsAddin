@@ -41,7 +41,7 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIGro
         {
             cell: 'Инвойс_всего',
             value: invoice.total.priceTotal.count,
-            numFmt: f.common.priceDollar,
+            numFmt: f.common.price.dollar,
         },
     ];
 
@@ -66,7 +66,7 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIGro
         {
             cell: 'Инвойс_всего_п',
             value: invoice.total.priceTotal.count,
-            numFmt: f.common.priceDollar,
+            numFmt: f.common.price.dollar,
         },
     ];
 

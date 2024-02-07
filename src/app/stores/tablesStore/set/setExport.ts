@@ -32,6 +32,7 @@ export const setExport = (table: any[][]) => {
             priceTotal: 'Сумма',
             id: 'ID',
             idProduct: 'ID_product',
+            currency: 'Currency',
         },
 
         row: (r) => {

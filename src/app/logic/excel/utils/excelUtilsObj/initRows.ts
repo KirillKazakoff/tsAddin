@@ -3,6 +3,7 @@ import { DocTypeT, setDynamicFormats, setFormats } from '../formats';
 import { getCell } from './getCell';
 import { mergeRowCells } from './mergeCells';
 import { RowStyleSettingsT, styleRow } from '../styleRowCells';
+import { setHeaders } from '../setHeaders';
 
 type FieldsObjT = { [key: string]: string | number };
 export type FieldsGenT = FieldsObjT | string[] | number[];
@@ -26,6 +27,7 @@ type SettingsRowsT<RecordT, FieldsT> = {
     records: RecordT[];
     deleteStartAmount?: number;
     mergeHeader?: boolean;
+    headers?: (r: RecordT) => { [P in keyof FieldsT]?: string };
     rowSettings?: (
         rec: RecordT,
         insertIndex: number,
@@ -64,6 +66,12 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
     const insertRows = <RecordT, FieldsT extends FieldsGenT>(
         settingsTmp: SettingsRowsT<RecordT, FieldsT>,
     ) => {
+        if (settingsTmp.headers) {
+            const firstRec = settingsTmp.records[0];
+            const { fields } = settingsTmp.rowSettings(firstRec, insertIndex, 0, null);
+
+            setHeaders(fields as any, settingsTmp.headers(firstRec), ws, insertIndex - 1);
+        }
         settingsTmp.records.forEach((record, cycleIndex) => {
             const row = ws.getRow(insertIndex);
             const settings = settingsTmp.rowSettings

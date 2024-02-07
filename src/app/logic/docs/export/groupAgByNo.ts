@@ -6,6 +6,7 @@ import { setMSC } from '../../../stores/tablesStore/utils/setMSC';
 import { setCOHCStatus } from './setCOHCStatus';
 import { groupTotal } from '../../utils/groupify/groupTotal';
 import { CertificateRowT } from '../../../stores/tablesStore/set/setCertificates';
+import { getCostGoodsStr } from './сontractTmp/getCostGoodsStr';
 
 export const groupAgByNo = () => {
     const res = groupTotal({

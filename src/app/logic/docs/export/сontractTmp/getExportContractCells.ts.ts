@@ -2,9 +2,9 @@ import exportContractStore from '../../../../stores/docsStores/exportContractSto
 import { CellObjDoubleT as CellObjT } from '../../../../types/typesExcelUtils';
 import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getDeliveryDate, getExcelDateStr } from '../../../excel/utils/getExcelDate';
-import { formatCount, formatCurrencyLong } from '../../../utils/formatCount';
 import { ExportGroupT } from '../groupAgByNo';
 import { matchCOHCLanguage } from '../setCOHCStatus';
+import { getCostGoodsStr } from './getCostGoodsStr';
 
 export const getExportContractCells = (agreement: ExportGroupT) => {
     const {
@@ -19,7 +19,6 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         consignee,
         type,
     } = agreement.record;
-    const { priceTotal } = agreement.total;
     const { podpisant } = exportContractStore.fields;
     const { currentTerms: terms } = exportContractStore;
 
@@ -30,16 +29,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             return getDeliveryDate(dateAgreement, locale, time);
         },
     };
-    const currency = {
-        eng: {
-            short: `USD ${formatCount(priceTotal.count, 2, 2)}`,
-            full: formatCurrencyLong(priceTotal.count, 'en'),
-        },
-        ru: {
-            short: `$${formatCount(priceTotal.count, 2, 2)}`,
-            full: formatCurrencyLong(priceTotal.count, 'ru'),
-        },
-    };
+
+    const currency = getCostGoodsStr(agreement);
 
     // prettier-ignore
     const cells = {
@@ -166,8 +157,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 },
                 {
                     cell: 'Цена_всего',
-                    eng: `${currency.eng.short} (${currency.eng.full})`,
-                    ru: `${currency.ru.short} (${currency.ru.full})`,
+                    eng: `${currency.eng}`,
+                    ru: `${currency.ru}`,
                 },
                 {
                     cell: 'Адреса_подпись',

@@ -17,6 +17,9 @@ export const initExportDefaultContractRows = (
     insertRows({
         records: groups,
         deleteStartAmount: 1,
+        headers: ({ record: r }) => ({
+            price: `Цена, ${r.currency.symbol}/тн\nPrice, ${r.currency.symbol}/тн`,
+        }),
         rowSettings: ({ record: r, total }) => {
             const fields = {
                 empty1: '',
@@ -44,6 +47,9 @@ export const initExportDefaultContractRows = (
                     special: {
                         consignee: { style: { alignment: { horizontal: 'left', indent: 2 } } },
                     },
+                },
+                dynamicFormats: {
+                    price: `#,##0.00_) \n${r.currency.symbol}`,
                 },
             };
         },

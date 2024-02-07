@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { Cell, Row } from 'exceljs';
 
-// prettier-ignore
 export const formats = () => {
     return {
         unique: {
@@ -10,9 +9,11 @@ export const formats = () => {
         common: {
             basePlacesTotalTn: '#,##0.000#_)',
             basePlaces: '# ###',
-            priceDollar: '#,##0.00_) "$"',
-            priceRub: '#,##0.00_)"руб."',
-            priceDollarUSD: '#,##0.00_) "USD"',
+            price: {
+                rub: '#,##0.00_)"руб."',
+                dollar: '#,##0.00_) "USD"',
+                uan: '#,##0.00_) "CNY"',
+            },
             percentage: '0.00%',
         },
         ru: {
@@ -46,30 +47,30 @@ const formatsDocs = () => {
     return {
         exportInvoice: {
             placesTotal: f.common.basePlacesTotalTn,
-            priceTotal: f.common.priceDollar,
-            price: f.common.priceDollar,
+            priceTotal: f.common.price.dollar,
+            price: f.common.price.dollar,
             places: f.unique.placesSlash,
         },
         exportContract: {
-            price: f.common.priceDollar,
+            price: f.common.price.dollar,
             placesTotal: f.common.basePlacesTotalTn,
         },
         exportEng: {
             placesTotal: f.eng.placesTotalTn,
             placesGross: f.eng.placesTotalTn,
             places: f.eng.places,
-            price: f.common.priceDollar,
-            priceTotal: f.common.priceDollarUSD,
+            price: f.common.price.dollar,
+            priceTotal: f.common.price.dollar,
         },
         exportRu: {
             places: f.ru.places,
             placesTotal: f.ru.placesTotalTn,
-            price: f.common.priceDollar,
-            priceTotal: f.common.priceDollar,
+            price: f.common.price.dollar,
+            priceTotal: f.common.price.dollar,
         },
         invoiceKTI: {
-            price: f.common.priceDollar,
-            priceTotal: f.common.priceDollar,
+            price: f.common.price.dollar,
+            priceTotal: f.common.price.dollar,
         },
         inner: {
             places: f.ru.places,
@@ -81,8 +82,8 @@ const formatsDocs = () => {
         sales: {
             places: f.eng.places,
             placesTotal: f.eng.placesTotalKg,
-            price: f.common.priceDollar,
-            priceTotal: f.common.priceDollar,
+            price: f.common.price.dollar,
+            priceTotal: f.common.price.dollar,
         },
         assortiment: {
             places: f.eng.places,

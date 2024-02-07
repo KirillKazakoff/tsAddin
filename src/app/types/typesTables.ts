@@ -44,6 +44,7 @@ export interface ExportInitRowT {
     datePusan?: string;
     dateClose?: string;
     terms: TermsT;
+    currency: string;
 }
 
 // utilstype

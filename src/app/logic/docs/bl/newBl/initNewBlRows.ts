@@ -18,7 +18,7 @@ export const initNewBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<'
     };
 
     insertRows({
-        records: blGroup.groupedBy.product,
+        records: blGroup.groupedBy.productSort,
         deleteStartAmount: 1,
         rowSettings: ({ record: r, total }) => {
             const fields = {
