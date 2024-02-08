@@ -1,7 +1,7 @@
 import { setSp } from './setSp';
 
 export const setPodpisants = (spRange: any[][]) => {
-    return setSp({
+    const sp = setSp({
         table: spRange,
         type: 'podpisants',
         headers: {
@@ -13,7 +13,8 @@ export const setPodpisants = (spRange: any[][]) => {
             position: 'Должность',
             faceReq: 'Реквизиты.в лице',
             sexReq: 'Реквизиты.пол',
-            baseReq: 'Реквизиты.Основание',
+            baseReqTRK: 'Реквизиты.Основание ТРК',
+            baseReqMSI: 'Реквизиты.Основание МСИ',
         },
         row: (r) => ({
             code: r.code,
@@ -29,11 +30,16 @@ export const setPodpisants = (spRange: any[][]) => {
             },
             req: {
                 face: r.faceReq,
-                base: r.baseReq,
+                base: {
+                    ТРК: r.baseReqTRK,
+                    МСИ: r.baseReqMSI,
+                },
                 sex: r.sexReq,
             },
         }),
     });
+
+    return sp;
 };
 
 export type PodpisantT = ReturnType<typeof setPodpisants>[string];

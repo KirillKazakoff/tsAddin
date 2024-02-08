@@ -52,7 +52,10 @@ export const initPodpisant = (): PodpisantT => ({
     },
     declination: '',
     req: {
-        base: '',
+        base: {
+            ТРК: '',
+            МСИ: '',
+        },
         face: '',
         sex: '',
     },
