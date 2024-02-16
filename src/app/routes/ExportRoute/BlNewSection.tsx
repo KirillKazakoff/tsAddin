@@ -22,7 +22,7 @@ export const BlNewSection = observer(() => {
 
     return (
         <form className='docs__form bl-form'>
-            <h2 className='title bl-title'>BL NEW SECTION</h2>
+            <h2 className='title bl-title'>BL</h2>
             <ul className='docs'>{blDocs}</ul>
             <DocsDownloadBtn
                 onClick={onLoadAll}

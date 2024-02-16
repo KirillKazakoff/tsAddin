@@ -2,7 +2,6 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
-import { BlSection } from './BlSection';
 import { ExportContractSection } from './ExportContractSection';
 import { ExportRadio } from './ExportRadio';
 import { AssortimentSection } from './AssortimentSection';

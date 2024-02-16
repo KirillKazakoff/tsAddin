@@ -159,6 +159,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     cell: 'Цена_всего',
                     eng: `${currency.eng}`,
                     ru: `${currency.ru}`,
+                    height: 40,
                 },
                 {
                     cell: 'Адреса_подпись',
