@@ -10,7 +10,7 @@ import popupStore from '../../../stores/popupStore.ts/popupStore';
 
 export type PictureSettingsT = {
     key: string;
-    range: { start: string; end: string };
+    range: { start: string; end?: string; ext?: { width: number; height: number } };
 };
 
 export const initPictureExcel = async (ws: Worksheet, settings: PictureSettingsT) => {
@@ -26,7 +26,6 @@ export const initPictureExcel = async (ws: Worksheet, settings: PictureSettingsT
     }
 
     const blob = blobFromBase64(picturesStore.pictures[key]);
-
     if (!blob) return;
 
     const range = getPictureRange(rangeObj, ws);

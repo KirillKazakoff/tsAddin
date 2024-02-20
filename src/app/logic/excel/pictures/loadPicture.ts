@@ -1,9 +1,10 @@
-import { Worksheet } from 'exceljs';
+import { type Worksheet } from 'exceljs';
+import { type PictureRangeT } from './getPictureRange';
 
 export type LoadPictureSettingsT = {
     ws: Worksheet;
     blob: Blob;
-    range: string;
+    range: PictureRangeT;
 };
 
 export const loadPicture = async (settings: LoadPictureSettingsT) => {
@@ -17,10 +18,18 @@ export const loadPicture = async (settings: LoadPictureSettingsT) => {
                 extension: 'png',
             });
 
-            ws.addImage(imgId, range);
+            if (!range.ext) {
+                ws.addImage(imgId, range.text);
+            } else {
+                ws.addImage(imgId, {
+                    ext: { height: range.ext.height, width: range.ext.width },
+                    tl: range.tl,
+                });
+            }
 
             resolve(true);
         };
+
         reader.readAsDataURL(blob);
     });
 };

@@ -1,11 +1,12 @@
 import { Worksheet } from 'exceljs';
-import { PictureRangeObjT, getPictureRange } from './getPictureRange';
+import { getPictureRange } from './getPictureRange';
 import { loadPicture } from './loadPicture';
+import { PictureSettingsT } from './initPictureExcel';
 
 export type PictureGitSettingsT = {
     url: string;
     ws: Worksheet;
-    rangeObj: PictureRangeObjT;
+    rangeObj: PictureSettingsT['range'];
 };
 
 export const initPictureGit = async (settings: PictureGitSettingsT) => {

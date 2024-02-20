@@ -1,14 +1,25 @@
-import { Worksheet } from 'exceljs';
+import { Cell, Worksheet } from 'exceljs';
 import { getCell } from '../utils/excelUtilsObj/getCell';
+import type { PictureSettingsT } from './initPictureExcel';
 
-export type PictureRangeObjT = {
-    start: string;
-    end: string;
-};
-
-export const getPictureRange = (range: PictureRangeObjT, ws: Worksheet) => {
+export const getPictureRange = (range: PictureSettingsT['range'], ws: Worksheet) => {
     const startCl = getCell(ws)(range.start);
-    const endCl = getCell(ws)(range.end);
+    let endCl: Cell;
+    let text = '';
 
-    return `${startCl.$col$row}:${endCl.$col$row}`;
+    if (range?.end) {
+        endCl = getCell(ws)(range.end);
+        text = `${startCl.$col$row}:${endCl.$col$row}`;
+    }
+
+    const rangeRes = {
+        text,
+        tl: { col: +startCl.col - 1, row: +startCl.row },
+        ext: range?.ext,
+        startCl,
+        endCl,
+    };
+    return rangeRes;
 };
+
+export type PictureRangeT = ReturnType<typeof getPictureRange>;

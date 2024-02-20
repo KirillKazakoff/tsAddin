@@ -33,11 +33,32 @@ export const initExportInvoicesTmps = async (
         cells.double.forEach((cell) => utilsDouble.setCell(cell));
         cells.single.forEach((cell) => utilsSingle.setCell(cell));
 
+        // ?? in cells
         if (invoice.record.type === 'exportT' && invoice.record.terms === 'EXW') {
             const row = utilsDouble.getRow('Инвойс_транспорт', -1);
             wsOriginal.spliceRows(row.number, 2);
         }
         // finish initInvoice
+
+        await utilsDouble.initPictures(
+            [
+                {
+                    key: exportContractStore.fields.podpisant.code,
+                    range: {
+                        start: 'Invoice_sign_seller_start',
+                        ext: { height: 80, width: 180 },
+                    },
+                },
+                {
+                    key: invoice.record.seller.code,
+                    range: {
+                        start: 'Invoice_seal_seller_start',
+                        ext: { height: 175, width: 175 },
+                    },
+                },
+            ],
+            exportContractStore.fields.isPictures,
+        );
 
         const wsCopyTo = book.addWorksheet(`invoice ${key}`);
         wsCopyTo.model = _.cloneDeep(wsOriginal.model);

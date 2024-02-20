@@ -18,21 +18,26 @@ type RowBlExtendT = {
 export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
     const bl = groupTotal({
         rows,
-        input: (row) => ({
-            init: () => {
-                if (row.msc) setMSC(row as any);
-                return true;
-            },
-            code: row.blNo,
-            groupedBy: {
-                product: {
-                    code: `${row.product.code}${row.pack}`,
+        input: (row) => {
+            const isRoe = row.product.code.toLowerCase().includes('икра');
+            const sort = isRoe ? '' : row.sort;
+
+            return {
+                init: () => {
+                    if (row.msc) setMSC(row as any);
+                    return true;
                 },
-                productSort: {
-                    code: `${row.product.code}${row.sort}`,
+                code: row.blNo,
+                groupedBy: {
+                    product: {
+                        code: `${row.product.code}${row.pack}`,
+                    },
+                    productSort: {
+                        code: `${row.product.code}${sort}`,
+                    },
                 },
-            },
-        }),
+            };
+        },
     });
 
     return bl;

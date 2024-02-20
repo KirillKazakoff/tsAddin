@@ -6,6 +6,11 @@ import { initAmount } from './utils/initAmount';
 export const getExportRow = (row: ExportInitRowT) => {
     const contractSp = selectSp.contract(row.contract);
     const consigneeSp = selectSp.consignee(row.consignee) || selectSp.consignee(row.agent);
+    if (consigneeSp) {
+        consigneeSp.fullName = consigneeSp.fullName.toUpperCase();
+        consigneeSp.addres = consigneeSp.addres.toUpperCase();
+    }
+
     const packSp = selectSp.package(
         `${row.vessel}${row.product}${row.pack.toString().replace('.', ',')}`,
     );
