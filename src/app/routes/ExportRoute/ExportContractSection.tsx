@@ -7,7 +7,7 @@ import { ExportDepartureDate } from './ExportDepartureDate';
 import { useInitContractSection } from '../../logic/docs/export/useInitContractSection';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { Form } from '../../components/Form/Form';
-import { DocList } from '../../components/Doc/DocList';
+import { DocListActive } from '../../components/Doc/DocListActive';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const ExportContractSection = observer(() => {
@@ -17,7 +17,7 @@ export const ExportContractSection = observer(() => {
         <div className='export-section'>
             <div className='export-section__choose'>
                 <h2 className='mb0'>Выберите контракт:</h2>
-                <DocList docs={initObj.docs} store={exportContractStore} />
+                <DocListActive docs={initObj.docs} store={exportContractStore} />
             </div>
             {initObj.currentDoc ? (
                 <Formik

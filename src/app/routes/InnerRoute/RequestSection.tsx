@@ -4,13 +4,13 @@ import { Formik } from 'formik';
 import { useInitRequestSection } from '../../logic/docs/inner/request/useInitRequestSection';
 import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
 import { SelectTerms } from '../../components/Select/SelectTerms';
-import RequestList from './RequestList';
 import CheckBox from '../../components/CheckBox';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { Form } from '../../components/Form/Form';
 import InputText from '../../components/Form/InputText';
+import { DocList } from '../../components/Doc/DocList';
 
 const SectionComponent = observer(() => {
     const { initObj, formik } = useInitRequestSection();
@@ -39,7 +39,20 @@ const SectionComponent = observer(() => {
                 <h3 className='title request-docs-title'>
                     Загрузить заявки на договора:
                 </h3>
-                <RequestList contracts={initObj.docs} onLoad={initObj.onLoad} />
+
+                <DocList
+                    docs={initObj.docs}
+                    docSettings={(doc) => {
+                        const { row } = doc.record;
+
+                        return {
+                            onClick: () => initObj.onLoad(doc),
+                            key: row.id,
+                            title: row.buyer?.code,
+                        };
+                    }}
+                />
+
                 <DocsDownloadBtn
                     onClick={initObj.onLoadAll}
                     title='Загрузить все заявки'
@@ -49,10 +62,10 @@ const SectionComponent = observer(() => {
     );
 });
 
-export const RequestSection = observer(() => {
+export const RequestSection = () => {
     return (
         <SectionErrorHOC status={tablesStore.status.inner} title='Заявки на договора:'>
             <SectionComponent />
         </SectionErrorHOC>
     );
-});
+};

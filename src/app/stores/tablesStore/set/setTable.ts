@@ -36,8 +36,6 @@ export const setTable = <
             checkRow(row, type, i);
             total.push(row as any);
         } catch (e) {
-            // eslint-disable-next-line no-console
-            // console.log(e);
             return total;
         }
         return total;

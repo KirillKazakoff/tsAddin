@@ -1,6 +1,6 @@
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { RowStyleSettingsT } from '../../../excel/utils/styleRowCells';
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
 
 export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<''>) => {
     const { insertRows: insertSubject } = utils.initRowMaker({

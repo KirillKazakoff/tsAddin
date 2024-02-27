@@ -3,7 +3,7 @@ import requestContractStore from '../../../../stores/docsStores/requestContractS
 import { CellObjT } from '../../../../types/typesExcelUtils';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
 import { initRequestRows } from './initRequestRows';
 
 export const initRequestTmp = (book: Workbook, contract: InnerGroupT) => {

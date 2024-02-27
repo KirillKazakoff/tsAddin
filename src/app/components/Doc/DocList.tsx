@@ -1,31 +1,34 @@
+/* eslint-disable comma-spacing */
+/* eslint-disable @typescript-eslint/comma-dangle */
 import React from 'react';
 import { observer } from 'mobx-react-lite';
+import { Doc } from './Doc';
 
-type DocT = { record: { id: string } } & unknown;
-type StoreT = { currentId: string; setCurrentId: (id: string) => void } & unknown;
+type Props<D> = {
+    docs: D[];
+    docSettings: (doc: D) => {
+        title: string;
+        key: string;
+        onClick: () => Promise<void>;
+        cls?: string;
+    };
+};
 
-type Props = { docs: DocT[]; store: StoreT };
+export type DocSettingsT<D> = Props<D>['docSettings'];
 
-export const DocList = observer(({ docs, store }: Props) => {
+export const DocList = observer(<T,>({ docs, docSettings }: Props<T>) => {
     const docList = docs.map((doc) => {
-        const isActiveTab = doc.record.id === store.currentId;
-        const { id } = doc.record;
-        const onClick = async () => {
-            store.setCurrentId(id);
-        };
-
-        let className = 'doc-link doc-tab';
-        isActiveTab ? (className = `${className} doc-tab--active`) : className;
+        const {
+            key, onClick, title, cls,
+        } = docSettings(doc);
 
         return (
-            <button
-                type='button' onClick={onClick}
-                key={id} className={className}
-            >
-                {`№ ${id}`}
-            </button>
+            <Doc
+                onClick={onClick} title={title}
+                key={key} cls={cls}
+            />
         );
     });
 
-    return <ul className='docs'>{docList}</ul>;
+    return <ul className='docs port-letter-docs'>{docList}</ul>;
 });

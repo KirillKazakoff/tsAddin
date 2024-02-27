@@ -5,14 +5,14 @@ import { getExcelDateShort, getNowDate } from '../../excel/utils/getExcelDate';
 import { groupTotal } from '../../utils/groupify/groupTotal';
 import { indexToStr } from '../../utils/indexToStr';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
-import { groupMatesByKns } from './groupMatesByKns';
+import { groupMates } from './groupMates';
 
-export const groupByContractNo = () => {
-    const matesGrouped = groupMatesByKns();
+export const groupInnerContracts = () => {
+    const matesGrouped = groupMates();
     matesGrouped[0].kns;
 
     const rows = tablesStore.innerT.map((row) => {
-        const mateRow = tablesStore.matesT.find((r) => r.konosament === row.konosament);
+        const mateRow = tablesStore.matesT.find((r) => r.konosament === row.knsNo);
 
         const konosamentGroup = matesGrouped
             .find((mGroup) => mGroup.kns.includes(mateRow))
@@ -85,5 +85,4 @@ export const groupByContractNo = () => {
     return contracts;
 };
 
-export type InnerGroupT = ReturnType<typeof groupByContractNo>[number];
-export type InnerCombRowT = InnerGroupT['rows'][number];
+export type InnerGroupT = ReturnType<typeof groupInnerContracts>[number];

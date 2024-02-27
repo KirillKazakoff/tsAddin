@@ -2,7 +2,7 @@
 import { useInitSection } from '../../../../components/Form/useInitSection';
 import { useMyFormik } from '../../../../components/Form/useMyFormik';
 import innerContractStore from '../../../../stores/docsStores/innerContractStore';
-import { groupByContractNo } from '../groupByContractNo';
+import { groupInnerContracts } from '../groupInnerContracts';
 import { createInnerContract } from './createInnerContract';
 
 export const useInitInnerContract = () => {
@@ -20,7 +20,7 @@ export const useInitInnerContract = () => {
 
     return useInitSection({
         store: innerContractStore as any,
-        docs: groupByContractNo(),
+        docs: groupInnerContracts(),
         getSettings: () => ({
             formik,
             loadCb: createInnerContract,

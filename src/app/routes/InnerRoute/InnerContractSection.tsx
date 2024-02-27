@@ -4,23 +4,12 @@ import { Formik } from 'formik';
 import { useInitInnerContract } from '../../logic/docs/inner/innerContract/useInitInnerContract';
 import { Form } from '../../components/Form/Form';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
-import { Doc } from '../../components/Doc/Doc';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
+import { DocList } from '../../components/Doc/DocList';
 
 const SectionComponent = observer(() => {
     const { initObj, formik } = useInitInnerContract();
-    const contracts = initObj.docs.map((doc) => {
-        const { row } = doc.record;
-        const onClick = () => initObj.onLoad(doc);
-
-        return (
-            <Doc
-                onClick={onClick} title={`${row.buyer?.code}-${row.id}`}
-                key={row.id}
-            />
-        );
-    });
 
     return (
         <Formik
@@ -36,7 +25,17 @@ const SectionComponent = observer(() => {
                     <SelectPodpisant />
                 </div>
 
-                <ul className='docs request-docs'>{contracts}</ul>
+                <DocList
+                    docs={initObj.docs}
+                    docSettings={(doc) => {
+                        const { row } = doc.record;
+                        return {
+                            title: `${row.buyer?.code}-${row.id}`,
+                            onClick: () => initObj.onLoad(doc),
+                            key: row.id,
+                        };
+                    }}
+                />
             </Form>
         </Formik>
     );

@@ -19,3 +19,11 @@ export const selectSp = {
     sortAssortiment: (codeName: string) => spsStore.sortsAssortiment[codeName.toLowerCase()],
     productSales: (codeName: string) => spsStore.productionSales[codeName],
 };
+
+// const selectSpObj = () => {
+//     try {
+//         const functions = Object.values(selectSp);
+//     } catch (e) {
+//         console.log(e);
+//     }
+// };

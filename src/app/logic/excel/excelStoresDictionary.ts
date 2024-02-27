@@ -29,6 +29,7 @@ import { setInner } from '../../stores/tablesStore/set/setInner';
 import { setMates } from '../../stores/tablesStore/set/setMates';
 import { setNordmile } from '../../stores/tablesStore/set/setNordmile';
 import { setSales } from '../../stores/tablesStore/set/setSales';
+import { setSamplesInner } from '../../stores/tablesStore/set/setSamplesInner';
 import { setStorageInvoices } from '../../stores/tablesStore/set/setStorageInvoices';
 
 export type ExcelStoreT = {
@@ -142,6 +143,11 @@ export const excelStoresDictionary = {
         setter: setCustoms,
         isJustRange: true,
     },
+    'Образцы': {
+        table: 'Samples',
+        setter: setSamplesInner,
+        isJustRange: true,
+    },
     'Экспорт': {
         table: 'Экспорт',
         setter: setExport,
@@ -188,4 +194,5 @@ export const movementDictionary = {
     // save initialize order (Пошлина after Экспорт_хранение);
     'Пошлина': D['Пошлина'],
     'Экспорт': D['Экспорт'],
+    'Образцы': D['Образцы'],
 } satisfies ExcelStoresDictionaryT;

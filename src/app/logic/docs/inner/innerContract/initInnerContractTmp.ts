@@ -1,5 +1,5 @@
 import { Workbook } from 'exceljs';
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getInnerContractCells } from './getInnerContractCells';
 import { initInnerContractRows } from './initInnerContractRows';

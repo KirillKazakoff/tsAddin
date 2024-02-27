@@ -1,6 +1,6 @@
 import { Workbook } from 'exceljs';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
 import { initPortLetterRows } from './initPortLetterRows';
 import popupStore from '../../../../stores/popupStore.ts/popupStore';
 import { getPortLetterCells } from './getPortLetterCells';

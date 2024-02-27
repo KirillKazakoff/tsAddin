@@ -1,8 +1,7 @@
 /* eslint-disable no-param-reassign */
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
-import pageStatusStore from '../../../../stores/pageStatusStore.ts/pageStatusStore';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
 
 export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Письмо_массив' });
@@ -12,16 +11,7 @@ export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>)
     insertRows({
         records: isGroupingKns ? portLetter : noGroup,
         deleteStartAmount: 1,
-        rowSettings: ({
-            record: { mateRow, row: r, konosamentGroup },
-            total,
-            additional,
-        }) => {
-            const date = mateRow?.date;
-            if (!date) {
-                pageStatusStore.setPageStatus('mismatchKonosamentId', r.konosament);
-                return null;
-            }
+        rowSettings: ({ record: { row: r, konosamentGroup }, total, additional }) => {
             if (!isGroupingKns) {
                 konosamentGroup = additional.konosamentGroup;
             }

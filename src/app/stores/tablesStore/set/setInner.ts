@@ -46,7 +46,7 @@ export const setInner = (table: any[][]) => {
                 sort: r.sort,
                 pack: r.pack,
                 packSp,
-                konosament: r.konosament,
+                knsNo: r.konosament,
                 amount: {
                     places: initAmount(+r.placesTotal / +r.pack, 0, 0),
                     placesTotal: initAmount(r.placesTotal, 1, 3),

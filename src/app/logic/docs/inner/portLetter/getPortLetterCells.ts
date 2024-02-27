@@ -1,4 +1,4 @@
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
 import { CellObjT } from '../../../../types/typesExcelUtils';
 import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getPortLetterNo } from './getPortLetterNo';

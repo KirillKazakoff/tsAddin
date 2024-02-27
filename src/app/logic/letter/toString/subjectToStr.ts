@@ -7,17 +7,14 @@ export const subjectToStrRu = () => {
     const transport = letterStore.transport.ru.name;
     const subjectObj = getSubject();
 
-    const subjectStr = Object.entries(subjectObj).reduce(
-        (total, [productKey, sorts]) => {
-            const productSp = selectSp.product(productKey);
+    const subjectStr = Object.entries(subjectObj).reduce((total, [productKey, sorts]) => {
+        const productSp = selectSp.product(productKey);
 
-            const sortsStr = sorts.join(', ');
-            total = `${total}${productSp.ru.name} ${sortsStr}; `;
+        const sortsStr = sorts.join(', ');
+        total = `${total}${productSp.ru.name} ${sortsStr}; `;
 
-            return total;
-        },
-        '',
-    );
+        return total;
+    }, '');
 
     return `Предложение ${subjectStr} ${transport}`;
 };
@@ -26,17 +23,14 @@ export const subjectToStrEng = () => {
     const transport = letterStore.transport.eng.name;
     const subjectObj = getSubject();
 
-    const subjectStr = Object.entries(subjectObj).reduce(
-        (total, [productKey, sorts]) => {
-            const productSp = selectSp.product(productKey);
+    const subjectStr = Object.entries(subjectObj).reduce((total, [productKey, sorts]) => {
+        const productSp = selectSp.product(productKey);
 
-            const sortsStr = sorts.join(', ');
-            total = `${total}${productSp.eng.name} ${sortsStr}; `;
+        const sortsStr = sorts.join(', ');
+        total = `${total}${productSp.eng.name} ${sortsStr}; `;
 
-            return total;
-        },
-        '',
-    );
+        return total;
+    }, '');
 
     return `Offer ${subjectStr} ${transport}`;
 };

@@ -1,8 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
-import { RequestSection } from './RequestSection';
-import { PortLetterSection } from './PortLetterSection/PortLetterSection';
+import { PortLetterSection } from './PortLetterSection';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { InnerContractSection } from './InnerContractSection';
 
@@ -20,7 +19,6 @@ export const InnerRoute = observer(() => {
     return (
         <div className='doc-links'>
             <InnerContractSection />
-            <RequestSection />
             <PortLetterSection />
         </div>
     );

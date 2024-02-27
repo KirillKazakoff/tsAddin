@@ -7,15 +7,14 @@ import { ExportRadio } from './ExportRadio';
 import { AssortimentSection } from './AssortimentSection';
 import { InvoiceKTISection } from './InvoiceKTISection';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
-import { BlNewSection } from './BlNewSection';
+import { BlSection } from './BlSection';
 
 export const ExportRoute = observer(() => {
     if (excelSyncStore.isLoading) return null;
 
     let ExportSection = () => (
         <>
-            {/* <BlSection /> */}
-            <BlNewSection />
+            <BlSection />
             <ExportContractSection />
             <AssortimentSection />
             <InvoiceKTISection />

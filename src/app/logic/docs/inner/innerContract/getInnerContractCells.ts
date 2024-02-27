@@ -4,7 +4,7 @@ import { CellObjT } from '../../../../types/typesExcelUtils';
 import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 import { formatCurrencyLong } from '../../../utils/formatCount';
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
 
 export const getInnerContractCells = (contract: InnerGroupT) => {
     const { row: r, mateRow: mr } = contract.record;
@@ -20,7 +20,6 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
         text,
     });
 
-    console.log(r.seller.code);
     // prettier-ignore
     const cells = {
         common: [

@@ -4,7 +4,8 @@ import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtil
 import { saveFile } from '../../../excel/utils/saveFile';
 import { pathObj } from '../../../utils/constants';
 import { readTmp } from '../../readTmp';
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
+import { InnerSampleGroupT } from '../groupInnerSamples';
 import { initPortLetterTmp } from './initPortLetterTmp';
 
 export const createPortLetter = async (contract: InnerGroupT) => {

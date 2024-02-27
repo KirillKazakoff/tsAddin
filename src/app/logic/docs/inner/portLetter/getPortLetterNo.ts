@@ -1,7 +1,7 @@
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { getNowDate } from '../../../excel/utils/getExcelDate';
 import { indexToStr } from '../../../utils/indexToStr';
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
 
 export const getPortLetterNo = ({ index, record }: InnerGroupT) => {
     const letterIndex = `${indexToStr(record.row.id)} от ${

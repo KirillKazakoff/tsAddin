@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
-import { DocList } from '../../components/Doc/DocList';
+import { DocListActive } from '../../components/Doc/DocListActive';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import salesContractStore from '../../stores/docsStores/salesContractStore';
 import { useInitSalesSection } from '../../logic/docs/sales/useInitSalesSection';
@@ -14,7 +14,7 @@ export const SalesContractSection = observer(() => {
         <div className='form-section'>
             <div className='form-section__choose'>
                 <h2 className='mb0'>Выберите контракт:</h2>
-                <DocList docs={initObj.docs} store={salesContractStore} />
+                <DocListActive docs={initObj.docs} store={salesContractStore} />
             </div>
             {initObj.currentDoc ? (
                 <Formik

@@ -4,7 +4,7 @@ import { useMyFormik } from '../../../../components/Form/useMyFormik';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { TermsT } from '../../../../types/typesTables';
 import { createPortLetter } from './createPortLetter';
-import { groupByContractNo } from '../groupByContractNo';
+import { groupInnerContracts } from '../groupInnerContracts';
 
 export const useInitPortLetter = () => {
     const formik = useMyFormik({
@@ -49,7 +49,7 @@ export const useInitPortLetter = () => {
 
     return useInitSection({
         store: portLetterStore as any,
-        docs: Object.values(groupByContractNo()),
+        docs: groupInnerContracts(),
         getSettings: () => ({
             formik,
             loadCb: createPortLetter,

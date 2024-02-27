@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { InnerGroupT } from '../groupByContractNo';
+import { InnerGroupT } from '../groupInnerContracts';
 
 export const initRequestRows = (groups: InnerGroupT[], utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Заявка_массив' });
