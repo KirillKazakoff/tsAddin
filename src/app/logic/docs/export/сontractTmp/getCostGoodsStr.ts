@@ -9,10 +9,10 @@ export const getCostGoodsStr = ({ record, total }: ExportGroupT) => {
 
     const longFormatEng = formatCurrencyLong(priceTotal, 'en')
         .replace('USD', currency.key)
+        .replace('US dollar', `${currency.eng.name}`)
         .replace('US dollars', `${currency.eng.name}s`)
-        .replace('US dollar', `${currency.eng.name}s`)
         .replace('cents', `${currency.eng.decimals}`);
-    const eng = `2.2. Total amount of this Agreement is specified in ${currency.key} (${currency.eng.country} ${currency.eng.name}s)\nand is the following: ${shortFormat} (${longFormatEng})`;
+    const eng = `2.2. Total amount of this Agreement is specified in ${currency.key} (${currency.eng.name}s)\nand is the following: ${shortFormat} (${longFormatEng})`;
 
     const longFormatRu = formatCurrencyLong(priceTotal, 'ru')
         .replace('$', currency.key)
@@ -20,7 +20,7 @@ export const getCostGoodsStr = ({ record, total }: ExportGroupT) => {
         .replace('доллара США', currency.ru.padezh.seeWhat[1])
         .replace('долларов США', currency.ru.padezh.seeWhat[2])
         .replace('центов', currency.ru.decimals);
-    const ru = `2.2. Общая сумма настоящего Дополнения указана в ${currency.key} (${currency.ru.padezh.thinkAbout} ${currency.ru.country})\nи составляет: ${shortFormat} (${longFormatRu})`;
+    const ru = `2.2. Общая сумма настоящего Дополнения указана в ${currency.key} (${currency.ru.padezh.thinkAbout})\nи составляет: ${shortFormat} (${longFormatRu})`;
 
     return { eng, ru };
 };
