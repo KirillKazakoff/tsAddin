@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { InnerGroupT } from '../groupInnerContracts';
+import type { PortDocT } from './createPortLetter';
 
-export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>) => {
+export const initPortLetterRows = (contract: PortDocT, utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Письмо_массив' });
     const { noGroup, portLetter } = contract.groupedBy;
     const { isGroupingKns } = portLetterStore.fields;

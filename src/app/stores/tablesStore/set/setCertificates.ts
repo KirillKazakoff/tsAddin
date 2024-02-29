@@ -16,7 +16,8 @@ export const setCertificates = (table: any[][]) => {
             agreementNo: '№Доп',
             contractCode: 'Контракт',
             seller: 'Компания',
-            placesTotal: 'Получатель',
+            consignee: 'Получатель',
+            placesTotal: 'Количество',
             coNo: 'CO',
             hcNo: 'HC',
             iuuNo: 'IUU',
@@ -29,6 +30,7 @@ export const setCertificates = (table: any[][]) => {
                         === `${r.agreementNo}${r.contractCode}${r.blNo}`,
                 ),
             );
+
             exportRow.amount = {
                 places: initAmount(exportRow.amount.places.count, 0, 0),
                 placesTotal: initAmount(r.placesTotal, 3, 4),
@@ -43,6 +45,7 @@ export const setCertificates = (table: any[][]) => {
             return {
                 ...exportRow,
                 seller: selectSp.seller(r.seller),
+                consignee: selectSp.consignee(r.consignee),
                 date: r.date,
                 hcNo: r.hcNo,
                 coNo: r.coNo,

@@ -1,24 +1,12 @@
 import { Workbook } from 'exceljs';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { InnerGroupT } from '../groupInnerContracts';
 import { initPortLetterRows } from './initPortLetterRows';
-import popupStore from '../../../../stores/popupStore.ts/popupStore';
 import { getPortLetterCells } from './getPortLetterCells';
+import type { PortDocT } from './createPortLetter';
 
-export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
+export const initPortLetterTmp = (book: Workbook, contract: PortDocT) => {
     const ws = book.getWorksheet('Port_Letter');
     const utils = initExcelUtils(ws, '');
-
-    // prettier-ignore
-    const { record: { row } } = contract;
-
-    if (!row.buyer.inn) {
-        popupStore.pushStatus({
-            title: 'Отсутствует ИНН',
-            desc: 'Проверьте наличие ИНН в справочнике',
-        });
-    }
-
     const cells = getPortLetterCells(contract);
 
     cells.forEach((cell) => utils.setCell(cell));

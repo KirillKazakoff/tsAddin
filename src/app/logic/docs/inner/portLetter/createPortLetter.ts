@@ -8,7 +8,9 @@ import { InnerGroupT } from '../groupInnerContracts';
 import { InnerSampleGroupT } from '../groupInnerSamples';
 import { initPortLetterTmp } from './initPortLetterTmp';
 
-export const createPortLetter = async (contract: InnerGroupT) => {
+export type PortDocT = InnerGroupT & InnerSampleGroupT;
+
+export const createPortLetter = async (contract: PortDocT) => {
     const { row } = contract.record;
     const { podpisant, isPictures } = portLetterStore.fields;
     const { seller } = row;
@@ -50,5 +52,10 @@ export const createPortLetter = async (contract: InnerGroupT) => {
         isPictures,
     );
 
-    await saveFile(book, `Письмо №${contract.code} ${row.buyer.code}`);
+    await saveFile(
+        book,
+        `Письмо №${contract.code} ${
+            row.buyer ? row.buyer.code : `${row.seller.code} Образец`
+        }`,
+    );
 };

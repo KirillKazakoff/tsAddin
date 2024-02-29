@@ -62,11 +62,15 @@ const SectionComponent = observer(() => {
                     }}
                 />
 
+                <DocsDownloadBtn
+                    title='Загрузить все письма'
+                    onClick={initObj.onLoadAll}
+                />
                 <h3 className='title port-letter-title'>Загрузить образцы</h3>
                 <DocList
                     docs={innerSamples}
                     docSettings={(doc) => {
-                        const { docNo, product } = doc.record;
+                        const { docNo, product } = doc.record.row.record;
 
                         return {
                             onClick: () => initObj.onLoad(doc as any),
@@ -74,11 +78,6 @@ const SectionComponent = observer(() => {
                             key: docNo,
                         };
                     }}
-                />
-
-                <DocsDownloadBtn
-                    title='Загрузить все письма'
-                    onClick={initObj.onLoadAll}
                 />
             </Form>
         </Formik>

@@ -1,12 +1,12 @@
-import { InnerGroupT } from '../groupInnerContracts';
 import { CellObjT } from '../../../../types/typesExcelUtils';
 import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getPortLetterNo } from './getPortLetterNo';
 import spsStore from '../../../../stores/spsStore/spsStore';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
+import type { PortDocT } from './createPortLetter';
 
-export const getPortLetterCells = (contract: InnerGroupT) => {
+export const getPortLetterCells = (contract: PortDocT) => {
     const {
         record: { row: r },
     } = contract;
@@ -32,7 +32,7 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
             {
                 cell: 'Контрольный_звонок',
                 isEmptyCell: !fields.isControlPhone,
-                value: `Передача продукции по контрольному звонку: т. ${phones?.['КНФ']?.phone}, ${phones?.['МСФ']?.phone}`,
+                value: `Передача продукции по контрольному звонку: т. ${phones?.['МСФ']?.phone}`,
             },
         ],
         default: [

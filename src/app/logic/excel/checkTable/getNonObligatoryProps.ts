@@ -20,6 +20,7 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
     const nonObligatoryProps = {
         exportT: exportProps,
         exportStorageT: exportProps,
+        certificatesT: ['coNo', 'hcNo', 'iuuNo', 'date', 'placesRemain', ...exportProps],
         matesT: ['sort', 'periodCreation', 'reice', 'operation', 'index'],
         innerT: ['sort', 'deliveryDate', 'paymentDate', 'pack', 'packSp'],
         dischargeInvoicesT: ['i', 'invoiceDate', 'invoiceNo', 'dischargeDate'],
@@ -31,7 +32,6 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
             'dateAccountSent',
             'invoiceNo',
         ],
-        certificatesT: ['coNo', 'hcNo', 'iuuNo', 'date', 'placesRemain'],
         salesT: ['blNo', 'isLive'],
         nordmileT: [''],
         customsT: [''],

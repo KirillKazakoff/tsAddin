@@ -8,7 +8,7 @@ export const groupInnerSamples = () => {
             code: r.docNo,
         }),
     });
-    return samples;
+    return samples.map((sample) => ({ record: { row: sample } }));
 };
 
 export type InnerSampleGroupT = ReturnType<typeof groupInnerSamples>[number];

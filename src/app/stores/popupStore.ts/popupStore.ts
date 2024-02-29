@@ -10,10 +10,12 @@ class PopupStore {
 
     isActive = false;
 
+    // eslint-disable-next-line class-methods-use-this
     pushStatus(status: PopupStatus) {
-        if (this.statuses.some((s) => s.desc === status.desc)) return;
-        this.setActive(true);
-        this.statuses.push(status);
+        console.log();
+        // if (this.statuses.some((s) => s.desc === status.desc)) return;
+        // this.setActive(true);
+        // this.statuses.push(status);
     }
 
     killStatus() {
@@ -22,12 +24,12 @@ class PopupStore {
 
     killAll() {
         this.statuses = [];
-        this.setActive(false);
+        // this.setActive(false);
     }
 
-    setActive(status: boolean) {
-        this.isActive = status;
-    }
+    // setActive(status: boolean) {
+    // this.isActive = status;
+    // }
 
     get currentStatus() {
         if (this.statuses.length === 0) return null;
