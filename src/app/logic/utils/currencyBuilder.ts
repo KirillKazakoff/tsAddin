@@ -25,6 +25,7 @@ export const currenciesSp = {
                 seeWhat: ['рубль', 'рубля', 'рублей'],
             },
             decimals: 'копеек',
+            country: 'РФ',
         },
         eng: {
             country: 'RU',
@@ -41,7 +42,7 @@ export const currenciesSp = {
                 seeWhat: ['доллар США', 'доллара США', 'долларов США'],
             },
             decimals: 'центов',
-            country: 'РФ',
+            country: 'США',
         },
         eng: {
             decimals: 'cents',

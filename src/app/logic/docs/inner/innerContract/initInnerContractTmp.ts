@@ -3,8 +3,9 @@ import { InnerGroupT } from '../groupInnerContracts';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { getInnerContractCells } from './getInnerContractCells';
 import { initInnerContractRows } from './initInnerContractRows';
+import innerContractStore from '../../../../stores/docsStores/innerContractStore';
 
-export const initInnerContractTmp = (book: Workbook, contract: InnerGroupT) => {
+export const initInnerContractTmp = async (book: Workbook, contract: InnerGroupT) => {
     const ws = book.getWorksheet('Contract');
     const utils = initExcelUtils(ws, '');
 
@@ -12,6 +13,26 @@ export const initInnerContractTmp = (book: Workbook, contract: InnerGroupT) => {
     cells.forEach((cell) => utils.setCell(cell));
 
     initInnerContractRows(contract, utils);
+
+    await utils.initPictures(
+        [
+            {
+                key: innerContractStore.fields.podpisant.code,
+                range: {
+                    start: 'Sign_seller_start',
+                    ext: { height: 80, width: 180 },
+                },
+            },
+            {
+                key: contract.record.row.seller.code,
+                range: {
+                    start: 'Seal_seller_start',
+                    ext: { height: 175, width: 175 },
+                },
+            },
+        ],
+        innerContractStore.fields.isPictures,
+    );
 
     utils.mergeFromTo([
         {

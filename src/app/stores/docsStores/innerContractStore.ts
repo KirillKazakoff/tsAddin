@@ -5,6 +5,7 @@ import { selectSp } from '../spsStore/select';
 
 const initFields = () => ({
     podpisant: initPodpisant(),
+    isPictures: false,
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
@@ -18,6 +19,7 @@ class InnerContractStore {
 
     setFields(values: FormFieldsT) {
         this.fields.podpisant = selectSp.podpisant(values.podpisant);
+        this.fields.isPictures = values.isPictures;
     }
 }
 

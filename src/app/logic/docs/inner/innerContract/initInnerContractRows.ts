@@ -21,12 +21,13 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
             const fields = {
                 empty1: '',
                 product: r.product.ru.name,
-                vessel: r.vessel.ru.name,
                 m1: '',
+                vessel: r.vessel.ru.name,
+                m2: '',
                 sort: r.sort,
                 pack: r.packSp.fullName,
                 placesTotal: total.placesTotal.count,
-                m2: '',
+                m3: '',
             };
 
             return {
@@ -34,7 +35,7 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
                 docType: 'inner',
                 style: {
                     common,
-                    special: { m2: { style: { border: { right: { style: 'thin' } } } } },
+                    special: { m3: { style: { border: { right: { style: 'thin' } } } } },
                 },
             };
         },
@@ -52,8 +53,9 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
             const fields = {
                 empty1: '',
                 product: r.product.ru.name,
-                vessel: r.vessel.ru.name,
                 m1: '',
+                vessel: r.vessel.ru.name,
+                m2: '',
                 sort: r.sort,
                 pack: r.packSp.fullName,
                 price: r.amount.price.count,

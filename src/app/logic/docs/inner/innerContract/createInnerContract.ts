@@ -8,7 +8,7 @@ export const createInnerContract = async (contract: InnerGroupT) => {
     const book = await readTmp(pathObj.innerContract);
     const { buyer, id } = contract.record.row;
 
-    initInnerContractTmp(book, contract);
+    await initInnerContractTmp(book, contract);
 
     await saveFile(book, `Договор ${buyer.code} №${id}`);
 };

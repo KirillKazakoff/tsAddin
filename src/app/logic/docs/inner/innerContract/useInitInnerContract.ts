@@ -10,6 +10,7 @@ export const useInitInnerContract = () => {
         store: innerContractStore,
         initialFields: {
             podpisant: '',
+            isPictures: false,
         },
         validateCb: (errors, values) => {
             if (!values.podpisant) {

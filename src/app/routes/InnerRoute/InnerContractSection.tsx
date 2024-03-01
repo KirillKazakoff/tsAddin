@@ -7,6 +7,7 @@ import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { DocList } from '../../components/Doc/DocList';
+import CheckBox from '../../components/CheckBox';
 
 const SectionComponent = observer(() => {
     const { initObj, formik } = useInitInnerContract();
@@ -23,6 +24,7 @@ const SectionComponent = observer(() => {
                 <h3 className='title request-docs-title'>Загрузить договора:</h3>
                 <div className='fields-wrapper'>
                     <SelectPodpisant />
+                    <CheckBox title='Включить картинки' name='isPictures' />
                 </div>
 
                 <DocList

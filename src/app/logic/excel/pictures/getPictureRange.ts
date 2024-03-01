@@ -14,7 +14,7 @@ export const getPictureRange = (range: PictureSettingsT['range'], ws: Worksheet)
 
     const rangeRes = {
         text,
-        tl: { col: +startCl.col - 1, row: +startCl.row },
+        tl: { col: +startCl.col - 1, row: +startCl.row - 1 },
         ext: range?.ext,
         startCl,
         endCl,
