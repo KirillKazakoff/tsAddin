@@ -13,10 +13,7 @@ export const createPortLetter = async (contract: InnerGroupT) => {
     const { seller } = row;
 
     // getPathToTemplate
-    const path = portLetterStore.fields.termsPort === 'FCA'
-        ? pathObj.portLetterFCA
-        : pathObj.portLetter;
-    const book = await readTmp(path);
+    const book = await readTmp(pathObj.portLetter);
     const ws = book.getWorksheet('Port_Letter');
     const utils = initExcelUtils(ws, '');
 

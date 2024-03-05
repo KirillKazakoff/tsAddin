@@ -33,6 +33,14 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
             isEmptyCell: !fields.isControlPhone,
             value: `Передача продукции по контрольному звонку: т. ${phones?.['МСФ']?.phone}`,
         },
+        {
+            cell: 'Имя_представитель',
+            value: phones?.['ДМА']?.fullName,
+        },
+        {
+            cell: 'Телефон_представитель',
+            value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
+        },
     ];
 
     // prettier-ignore
@@ -102,18 +110,17 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
             {
                 cell: 'Письмо_описание_подвал',
                 value: 'Выгрузить на АВТО',
+                height: 20,
             },
             {
                 cell: 'Расходы_компания',
                 value: `Расходы по судозаходу и ПРР просьба выставлять на компанию ${orgName.seller}`,
+                height: 30,
             },
             {
-                cell: 'Выгрузка_ответственный1',
-                value: `При выгрузке ${r.vessel.code} ${date.delivery} расходы по диспетчеризации и подвозу`,
-            },
-            {
-                cell: 'Выгрузка_ответственный2',
-                value: `технологического оборудования просим выставлять на ${fields.personDischarge}`,
+                cell: 'Выгрузка_ответственный',
+                value: `При выгрузке ${r.vessel.code} ${date.delivery} расходы по диспетчеризации и подвозу технологического оборудования просим выставлять на ${fields.personDischarge}`,
+                height: 40,
             },
         ],
     } satisfies CellDeclarationT<CellObjT> : {
@@ -132,14 +139,6 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
                 cell: 'Образцы_подвал',
                 value: '- Заказчик предупрежден об ответственности за достоверность сведений, указанных в заявки.\n- Заказчик несет ответственность за все последствия неправильности, неточности или неполноты сведений, указанных им в Заявке',
                 height: 60,
-            },
-            {
-                cell: 'Имя_представитель',
-                value: phones?.['ДМА']?.fullName,
-            },
-            {
-                cell: 'Телефон_представитель',
-                value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
             },
         ],
     } satisfies CellDeclarationT<CellObjT>;

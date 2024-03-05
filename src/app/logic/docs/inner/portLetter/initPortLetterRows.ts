@@ -31,8 +31,8 @@ export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>)
             };
 
             if (portLetterStore.fields.termsPort === 'FCA') {
-                delete fields.places;
-                delete fields.pack;
+                fields.places = '-';
+                fields.pack = '-';
             }
 
             return {
