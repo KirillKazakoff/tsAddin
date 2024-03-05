@@ -23,7 +23,7 @@ export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>)
             // prettier-ignore
             const fields = {
                 konosament: konosamentGroup.value,
-                product: `${r.product.ru.name} ${r.sort}`,
+                product: `${r.product.ru.name} ${r.sort ? r.sort : ''}`,
                 vessel: r.vessel.ru.name,
                 pack: noPack ? '-' : `1/${r.pack} кг `,
                 places: noPack ? '-' : total.places.count,

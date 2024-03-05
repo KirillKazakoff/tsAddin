@@ -85,7 +85,10 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
                 value: `Исполнитель: ${phones?.['МСФ']?.fullName}; телефон: ${phones?.['МСФ']?.phone}`,
                 height: 25,
             },
-            { cell: 'Имя_представитель', value: phones?.['ДМА']?.fullName },
+            {
+                cell: 'Имя_представитель',
+                value: phones?.['ДМА']?.fullName,
+            },
             {
                 cell: 'Телефон_представитель',
                 value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
@@ -129,6 +132,14 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
                 cell: 'Образцы_подвал',
                 value: '- Заказчик предупрежден об ответственности за достоверность сведений, указанных в заявки.\n- Заказчик несет ответственность за все последствия неправильности, неточности или неполноты сведений, указанных им в Заявке',
                 height: 60,
+            },
+            {
+                cell: 'Имя_представитель',
+                value: phones?.['ДМА']?.fullName,
+            },
+            {
+                cell: 'Телефон_представитель',
+                value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
             },
         ],
     } satisfies CellDeclarationT<CellObjT>;
