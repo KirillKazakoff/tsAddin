@@ -35,6 +35,7 @@ const SectionComponent = observer(() => {
                             title: `${row.buyer?.code}-${row.id}`,
                             onClick: () => initObj.onLoad(doc),
                             key: row.id,
+                            isNull: row.type !== 'innerT',
                         };
                     }}
                 />

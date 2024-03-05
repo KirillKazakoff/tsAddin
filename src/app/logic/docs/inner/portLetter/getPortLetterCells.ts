@@ -4,9 +4,9 @@ import { getPortLetterNo } from './getPortLetterNo';
 import spsStore from '../../../../stores/spsStore/spsStore';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
-import type { PortDocT } from './createPortLetter';
+import { InnerGroupT } from '../groupInnerContracts';
 
-export const getPortLetterCells = (contract: PortDocT) => {
+export const getPortLetterCells = (contract: InnerGroupT) => {
     const {
         record: { row: r },
     } = contract;
@@ -17,24 +17,27 @@ export const getPortLetterCells = (contract: PortDocT) => {
 
     const orgName = {
         seller: `ООО "${r.seller.ru.name}"`,
-        buyer: `${r.buyer.req.org.form.code} "${r.buyer.name}"`,
+        buyer:
+            r.type === 'innerT' ? `${r.buyer.req.org.form.code} "${r.buyer.name}"` : '',
     };
 
+    const common = [
+        { cell: 'Номер_письма', value: getPortLetterNo(contract) },
+        { cell: 'Порт', value: `${fields.portRu.name}` },
+        { cell: 'Порт_директор', value: `${fields.portRu.director}` },
+        { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
+        { cell: 'Подписант_комментарий', value: fields.podpisant.ru.position },
+        { cell: 'Подписант', value: fields.podpisant.ru.name },
+        {
+            cell: 'Контрольный_звонок',
+            isEmptyCell: !fields.isControlPhone,
+            value: `Передача продукции по контрольному звонку: т. ${phones?.['МСФ']?.phone}`,
+        },
+    ];
+
     // prettier-ignore
-    const cells = {
-        common: [
-            { cell: 'Номер_письма', value: getPortLetterNo(contract) },
-            { cell: 'Порт', value: `${fields.portRu.name}` },
-            { cell: 'Порт_директор', value: `${fields.portRu.director}` },
-            { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
-            { cell: 'Подписант_комментарий', value: fields.podpisant.ru.position },
-            { cell: 'Подписант', value: fields.podpisant.ru.name },
-            {
-                cell: 'Контрольный_звонок',
-                isEmptyCell: !fields.isControlPhone,
-                value: `Передача продукции по контрольному звонку: т. ${phones?.['МСФ']?.phone}`,
-            },
-        ],
+    const cells = r.type === 'innerT' ? {
+        common,
         default: [
             {
                 cell: 'Письмо_описание_шапка',
@@ -53,6 +56,7 @@ export const getPortLetterCells = (contract: PortDocT) => {
             {
                 cell: 'Покупатель_телефон',
                 value: `Контактный телефон: ${r.buyer.phone}`,
+                height: 15,
             },
             {
                 cell: 'Грузовые_борт_склад',
@@ -60,6 +64,7 @@ export const getPortLetterCells = (contract: PortDocT) => {
                 value: `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
                     fields.cargoToStorage === 'Покупатель' ? orgName.buyer : orgName.seller
                 }`,
+                height: 30,
             },
             {
                 cell: 'Грузовые_склад_авто',
@@ -67,15 +72,18 @@ export const getPortLetterCells = (contract: PortDocT) => {
                 value: `Оплата грузовых работ (склад-авто) будет производиться за счет ${
                     fields.cargoToAuto === 'Покупатель' ? orgName.buyer : orgName.seller
                 }`,
+                height: 30,
             },
             {
                 cell: 'Хранение',
                 isEmptyCell: fields.termsPort !== 'EXW',
                 value: `Хранение стороной продавца осуществляется включительно до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`,
+                height: 32,
             },
             {
                 cell: 'Исполнитель_информация',
                 value: `Исполнитель: ${phones?.['МСФ']?.fullName}; телефон: ${phones?.['МСФ']?.phone}`,
+                height: 25,
             },
             { cell: 'Имя_представитель', value: phones?.['ДМА']?.fullName },
             {
@@ -105,14 +113,36 @@ export const getPortLetterCells = (contract: PortDocT) => {
                 value: `технологического оборудования просим выставлять на ${fields.personDischarge}`,
             },
         ],
+    } satisfies CellDeclarationT<CellObjT> : {
+        common,
+        samples: [
+            {
+                cell: 'Письмо_описание_шапка',
+                value: `Просим Вас рыбопродукцию, находящуюся на хранении ${orgName.seller} по следующим коносаментам:`,
+            },
+            {
+                cell: 'Образцы_выдача',
+                value: `Выдать представителю в г. Владивосток, ${phones?.['ИРК'].fullName} паспорт ${phones?.['ИРК'].passport}, выдан ${phones?.['ИРК'].passportInfo}`,
+                height: 60,
+            },
+            {
+                cell: 'Образцы_подвал',
+                value: '- Заказчик предупрежден об ответственности за достоверность сведений, указанных в заявки.\n- Заказчик несет ответственность за все последствия неправильности, неточности или неполноты сведений, указанных им в Заявке',
+                height: 60,
+            },
+        ],
     } satisfies CellDeclarationT<CellObjT>;
 
     const resArr = [...cells.common];
 
-    if (r.terms === 'FCA') {
-        resArr.push(...cells.fca);
+    if (r.type === 'innerT') {
+        if (r.terms === 'FCA') {
+            resArr.push(...cells.fca);
+        } else {
+            resArr.push(...cells.default);
+        }
     } else {
-        resArr.push(...cells.default);
+        resArr.push(...cells.samples);
     }
 
     return resArr;

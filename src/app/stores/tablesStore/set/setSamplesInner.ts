@@ -22,7 +22,7 @@ export const setSamplesInner = (table: any[][]) => {
             operation: 'Вид операции',
         },
         row: (r) => ({
-            docNo: r.docNo,
+            id: r.docNo,
             reiceNo: r.reiceNo,
             knsNo: r.knsNo,
             dateDischarge: r.dateDischarge,
@@ -42,4 +42,4 @@ export const setSamplesInner = (table: any[][]) => {
     return transformed;
 };
 
-export type SampleInnerRowT = ReturnType<typeof setSamplesInner>[number];
+export type InnerSampleRowT = ReturnType<typeof setSamplesInner>[number];

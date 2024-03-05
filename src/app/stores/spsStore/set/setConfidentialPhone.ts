@@ -8,6 +8,8 @@ export const setConfidentialPhone = (spRange: any[][]) => {
             name: 'Имя',
             fullName: 'Полное имя',
             phone: 'Телефон',
+            passport: 'Паспорт',
+            passportInfo: 'Выдан',
         },
         type: 'confidentialPhones',
         row: (r) => ({
@@ -15,6 +17,8 @@ export const setConfidentialPhone = (spRange: any[][]) => {
             fullName: r.fullName,
             name: r.name,
             phone: r.phone,
+            passport: r.passport,
+            passportInfo: r.passportInfo,
         }),
     });
 };

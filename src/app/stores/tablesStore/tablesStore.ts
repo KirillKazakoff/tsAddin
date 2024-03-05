@@ -9,7 +9,7 @@ import type { MateRowT } from './set/setMates';
 import type { NordmileRowT } from './set/setNordmile';
 import type { SalesRowT } from './set/setSales';
 import type { CustomsRowT } from './set/setCustoms';
-import type { SampleInnerRowT } from './set/setSamplesInner';
+import type { InnerSampleRowT } from './set/setSamplesInner';
 
 class TablesStore {
     matesT: MateRowT[] = [];
@@ -22,7 +22,7 @@ class TablesStore {
     storageInvoicesT: InvoiceKTIRowT[] = [];
     salesT: SalesRowT[] = [];
     customsT: CustomsRowT[] = [];
-    samplesInnerT: SampleInnerRowT[] = [];
+    samplesInnerT: InnerSampleRowT[] = [];
 
     status = {
         export: initTableStatus(),

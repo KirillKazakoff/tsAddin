@@ -2,9 +2,9 @@ import { Workbook } from 'exceljs';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initPortLetterRows } from './initPortLetterRows';
 import { getPortLetterCells } from './getPortLetterCells';
-import type { PortDocT } from './createPortLetter';
+import { InnerGroupT } from '../groupInnerContracts';
 
-export const initPortLetterTmp = (book: Workbook, contract: PortDocT) => {
+export const initPortLetterTmp = (book: Workbook, contract: InnerGroupT) => {
     const ws = book.getWorksheet('Port_Letter');
     const utils = initExcelUtils(ws, '');
     const cells = getPortLetterCells(contract);
@@ -16,7 +16,7 @@ export const initPortLetterTmp = (book: Workbook, contract: PortDocT) => {
     utils.mergeFromTo([
         {
             row: {
-                from: { name: 'Письмо_описание_подвал' },
+                from: { name: 'Образцы_выдача' },
                 to: { name: 'Merge_end' },
             },
             cols: [{ start: 'Banner_start', end: 'Pg_end' }],

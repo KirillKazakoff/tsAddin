@@ -3,7 +3,7 @@ import { getNowDate } from '../../../excel/utils/getExcelDate';
 import { indexToStr } from '../../../utils/indexToStr';
 import { InnerGroupT } from '../groupInnerContracts';
 
-export const getPortLetterNo = ({ index, record }: InnerGroupT) => {
+export const getPortLetterNo = ({ record }: InnerGroupT) => {
     const letterIndex = `${indexToStr(record.row.id)} от ${
         portLetterStore.fields.dateLetter || getNowDate()
     }`;

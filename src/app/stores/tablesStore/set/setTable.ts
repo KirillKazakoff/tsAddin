@@ -18,10 +18,6 @@ export const setTable = <
 }) => {
     const { table, row: getRow, type } = settings;
 
-    if (settings.type === 'certificatesT') {
-        console.log(settings.table);
-    }
-
     const headers = table.shift();
     const excluded = excludeOfEmptyRows(table);
     const dictionary = headerRecognition(settings.headers, headers, type, 'table');

@@ -13,11 +13,9 @@ import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { Form } from '../../components/Form/Form';
 import { DocList } from '../../components/Doc/DocList';
-import { groupInnerSamples } from '../../logic/docs/inner/groupInnerSamples';
 
 const SectionComponent = observer(() => {
     const { formik, initObj } = useInitPortLetter();
-    const innerSamples = groupInnerSamples();
 
     return (
         <Formik
@@ -58,24 +56,26 @@ const SectionComponent = observer(() => {
                             onClick: () => initObj.onLoad(doc),
                             title: `${doc.code}-${buyer?.code}`,
                             key: contractNo,
+                            isNull: doc.record.type !== 'innerT',
                         };
                     }}
                 />
-
                 <DocsDownloadBtn
                     title='Загрузить все письма'
                     onClick={initObj.onLoadAll}
                 />
+
                 <h3 className='title port-letter-title'>Загрузить образцы</h3>
                 <DocList
-                    docs={innerSamples}
+                    docs={initObj.docs}
                     docSettings={(doc) => {
-                        const { docNo, product } = doc.record.row.record;
+                        const { id, product } = doc.record.row;
 
                         return {
                             onClick: () => initObj.onLoad(doc as any),
-                            title: `${docNo}-${product.code}`,
-                            key: docNo,
+                            title: `${id}-${product.code}`,
+                            key: id,
+                            isNull: doc.record.type !== 'samplesInnerT',
                         };
                     }}
                 />

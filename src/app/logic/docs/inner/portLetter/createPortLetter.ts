@@ -5,12 +5,9 @@ import { saveFile } from '../../../excel/utils/saveFile';
 import { pathObj } from '../../../utils/constants';
 import { readTmp } from '../../readTmp';
 import { InnerGroupT } from '../groupInnerContracts';
-import { InnerSampleGroupT } from '../groupInnerSamples';
 import { initPortLetterTmp } from './initPortLetterTmp';
 
-export type PortDocT = InnerGroupT & InnerSampleGroupT;
-
-export const createPortLetter = async (contract: PortDocT) => {
+export const createPortLetter = async (contract: InnerGroupT) => {
     const { row } = contract.record;
     const { podpisant, isPictures } = portLetterStore.fields;
     const { seller } = row;
@@ -35,18 +32,11 @@ export const createPortLetter = async (contract: PortDocT) => {
         [
             {
                 key: podpisant.code,
-                range: {
-                    start: 'Sign_seller_start',
-                    end: `${
-                        portLetterStore.fields.termsPort === 'FCA'
-                            ? 'Sign_seller_start'
-                            : 'Sign_seller_end'
-                    }`,
-                },
+                range: { start: 'Sign_seller_start', ext: { height: 65, width: 170 } },
             },
             {
                 key: seller.code,
-                range: { start: 'Seal_seller_start', end: 'Seal_seller_end' },
+                range: { start: 'Seal_seller_start', ext: { height: 175, width: 175 } },
             },
         ],
         isPictures,
@@ -55,7 +45,7 @@ export const createPortLetter = async (contract: PortDocT) => {
     await saveFile(
         book,
         `Письмо №${contract.code} ${
-            row.buyer ? row.buyer.code : `${row.seller.code} Образец`
+            row.type === 'innerT' ? row.buyer.code : `${row.seller.code} Образец`
         }`,
     );
 };

@@ -5,7 +5,7 @@ export const groupInnerSamples = () => {
     const samples = groupTotal({
         rows: tablesStore.samplesInnerT,
         input: (r) => ({
-            code: r.docNo,
+            code: r.id,
         }),
     });
     return samples.map((sample) => ({ record: { row: sample } }));

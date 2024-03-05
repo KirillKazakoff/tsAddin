@@ -6,12 +6,14 @@ import { groupTotal } from '../../utils/groupify/groupTotal';
 import { indexToStr } from '../../utils/indexToStr';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { groupMates } from './groupMates';
+import { InnerRowT } from '../../../stores/tablesStore/set/setInner';
+import { InnerSampleRowT } from '../../../stores/tablesStore/set/setSamplesInner';
 
 export const groupInnerContracts = () => {
     const matesGrouped = groupMates();
     matesGrouped[0].kns;
 
-    const rows = tablesStore.innerT.map((row) => {
+    const rows = [...tablesStore.innerT, ...tablesStore.samplesInnerT].map((row) => {
         const mateRow = tablesStore.matesT.find((r) => r.konosament === row.knsNo);
 
         const konosamentGroup = matesGrouped
@@ -28,7 +30,7 @@ export const groupInnerContracts = () => {
         );
 
         return {
-            row,
+            row: row as InnerRowT & InnerSampleRowT,
             mateRow,
             konosamentGroup,
             type: row.type,
