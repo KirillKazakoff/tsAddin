@@ -23,6 +23,7 @@ export const setSellers = (spRange: any[][]) => {
         },
         row: (r) => ({
             code: r.code,
+            orgName: `ООО ${r.fullNameRu}`,
             info: {
                 inn: r.inn,
                 kpp: r.kpp,

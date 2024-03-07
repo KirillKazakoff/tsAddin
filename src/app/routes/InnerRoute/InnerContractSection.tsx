@@ -10,8 +10,7 @@ import { DocList } from '../../components/Doc/DocList';
 import CheckBox from '../../components/CheckBox';
 
 const SectionComponent = observer(() => {
-    const { initObj, formik } = useInitInnerContract();
-
+    const { initObj, formik, invoicesOnly } = useInitInnerContract();
     return (
         <Formik
             initialValues={formik.initialFields}

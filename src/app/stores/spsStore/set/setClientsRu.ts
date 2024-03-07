@@ -34,6 +34,7 @@ export const setClientsRu = (spRange: any[][]) => {
             code: r.code,
             mail: r.mailMain,
             name: r.fullNameCompany,
+            orgName: `${r.form} "${r.fullNameCompany}"`,
             phone: r.phone,
             inn: r.inn,
             req: {

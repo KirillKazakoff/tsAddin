@@ -6,7 +6,7 @@ import { groupInnerContracts } from '../groupInnerContracts';
 import { createInnerContract } from './createInnerContract';
 
 export const useInitInnerContract = () => {
-    const formik = useMyFormik({
+    const formikObj = useMyFormik({
         store: innerContractStore,
         initialFields: {
             podpisant: '',
@@ -19,12 +19,26 @@ export const useInitInnerContract = () => {
         },
     });
 
-    return useInitSection({
+    const { initObj, formik } = useInitSection({
         store: innerContractStore as any,
         docs: groupInnerContracts(),
         getSettings: () => ({
-            formik,
+            formik: formikObj,
             loadCb: createInnerContract,
         }),
     });
+
+    const invoicesOnly = initObj.docs.reduce<typeof initObj.docs>(
+        (invoices, contract) => {
+            if (contract.record.row.id.includes('счет')) return invoices;
+            invoices.push(contract);
+
+            return invoices;
+        },
+        [],
+    );
+
+    // onInvoiceLoad
+
+    return { initObj, formik, invoicesOnly };
 };
