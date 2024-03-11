@@ -1,71 +1,31 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Formik } from 'formik';
-import { useInitRequestSection } from '../../logic/docs/inner/request/useInitRequestSection';
-import { SelectPortTamozhnya } from '../../components/Select/SelectPortTamozhnya';
-import { SelectTerms } from '../../components/Select/SelectTerms';
-import CheckBox from '../../components/CheckBox';
-import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
+import { useInitRequestNew } from '../../logic/docs/inner/request/useInitRequestNew';
+import { DocList } from '../../components/Doc/DocList';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
-import { Form } from '../../components/Form/Form';
-import InputText from '../../components/Form/InputText';
-import { DocList } from '../../components/Doc/DocList';
 
 const SectionComponent = observer(() => {
-    const { initObj, formik } = useInitRequestSection();
+    const { docs, onLoad } = useInitRequestNew();
 
     return (
-        <Formik
-            initialValues={formik.initialFields}
-            validate={formik.validate}
-            onSubmit={formik.onSubmit}
-            innerRef={formik.formRef}
-            validateOnMount
-        >
-            <Form className='docs__form request-section-form'>
-                <h3 className='title request-title'>Заявка:</h3>
-                <div className='fields-wrapper'>
-                    <CheckBox title={'Только счет:'} name='isInvoiceOnly' />
-                    <InputText
-                        name='reiceNo'
-                        title='Введите № рейса:'
-                        placeholder='№ рейса'
-                    />
-                    <SelectTerms />
-                    <SelectPortTamozhnya />
-                </div>
-
-                <h3 className='title request-docs-title'>
-                    Загрузить заявки на договора:
-                </h3>
-
-                <DocList
-                    docs={initObj.docs}
-                    docSettings={(doc) => {
-                        const { row } = doc.record;
-
-                        return {
-                            onClick: () => initObj.onLoad(doc),
-                            key: row.id,
-                            title: row.buyer?.code,
-                        };
-                    }}
-                />
-
-                <DocsDownloadBtn
-                    onClick={initObj.onLoadAll}
-                    title='Загрузить все заявки'
-                />
-            </Form>
-        </Formik>
+        <DocList
+            docs={docs}
+            docSettings={(doc) => {
+                const { row } = doc.record;
+                return {
+                    title: `Cчет ${row?.buyer?.code}`,
+                    onClick: () => onLoad(doc),
+                    key: `${row.id}${row?.buyer?.code}`,
+                    isNull: row.type !== 'innerT',
+                };
+            }}
+        />
     );
 });
 
-export const RequestSection = () => {
-    return (
-        <SectionErrorHOC status={tablesStore.status.inner} title='Заявки на договора:'>
-            <SectionComponent />
-        </SectionErrorHOC>
-    );
-};
+export const RequestSection = () => (
+    <SectionErrorHOC status={tablesStore.status.inner} title='Счета Вн.Рынок'>
+        <SectionComponent />
+    </SectionErrorHOC>
+);

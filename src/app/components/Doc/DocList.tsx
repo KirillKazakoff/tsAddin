@@ -18,6 +18,8 @@ type Props<D> = {
 export type DocSettingsT<D> = Props<D>['docSettings'];
 
 export const DocList = observer(<T,>({ docs, docSettings }: Props<T>) => {
+    if (docs.length === 0) return null;
+
     const docList = docs.map((doc) => {
         const {
             key, onClick, title, cls, isNull,

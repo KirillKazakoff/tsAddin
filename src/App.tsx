@@ -6,7 +6,6 @@ import NavigatorRoute from './app/routes/NavigatorRoute';
 import { PageStatusRoute } from './app/routes/ErrorRoute/PageStatusRoute';
 import { ExportRoute } from './app/routes/ExportRoute/ExportRoute';
 import { InnerRoute } from './app/routes/InnerRoute/InnerRoute';
-import { RequestNordmileRoute } from './app/routes/RequestNordmileRoute';
 import { SalesRoute } from './app/routes/SalesRoute/SalesRoute';
 
 export default function App() {
@@ -18,7 +17,6 @@ export default function App() {
                     <Route path='/export' element={<ExportRoute />} />
                     <Route path='/inner' element={<InnerRoute />} />
                     <Route path='/letter' element={<LetterRoute />} />
-                    <Route path='/request' element={<RequestNordmileRoute />} />
                     <Route path='/pageStatus' element={<PageStatusRoute />} />
                     <Route path='/sales' element={<SalesRoute />} />
                 </Route>

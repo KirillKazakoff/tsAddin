@@ -22,6 +22,7 @@ export const SectionErrorHOC = observer(({ status, children, title }: Props) => 
     }
 
     const html = getHtml(children);
+
     if (!html) return null;
 
     return (

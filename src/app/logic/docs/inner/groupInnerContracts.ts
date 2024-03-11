@@ -43,7 +43,7 @@ export const groupInnerContracts = () => {
     const contracts = groupTotal({
         rows,
         input: ({ row, mateRow }) => ({
-            code: row.id,
+            code: row.id + row.buyer.code,
             groupedBy: {
                 noGroup: {
                     code: nanoid(),

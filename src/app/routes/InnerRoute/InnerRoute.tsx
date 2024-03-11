@@ -4,6 +4,7 @@ import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import { PortLetterSection } from './PortLetterSection';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { InnerContractSection } from './InnerContractSection';
+import { RequestSection } from './RequestSection';
 
 export const InnerRoute = observer(() => {
     if (excelSyncStore.isLoading) return null;
@@ -19,6 +20,7 @@ export const InnerRoute = observer(() => {
     return (
         <div className='doc-links'>
             <InnerContractSection />
+            <RequestSection />
             <PortLetterSection />
         </div>
     );

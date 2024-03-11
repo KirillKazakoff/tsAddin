@@ -54,8 +54,8 @@ const SectionComponent = observer(() => {
                         const { buyer, id: contractNo } = doc.record.row;
                         return {
                             onClick: () => initObj.onLoad(doc),
-                            title: `${doc.code}-${buyer?.code}`,
-                            key: contractNo,
+                            title: `${doc.record.id}-${buyer?.code}`,
+                            key: `${contractNo}${buyer?.code}`,
                             isNull: doc.record.type !== 'innerT',
                         };
                     }}

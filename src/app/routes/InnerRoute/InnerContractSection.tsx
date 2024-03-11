@@ -10,7 +10,9 @@ import { DocList } from '../../components/Doc/DocList';
 import CheckBox from '../../components/CheckBox';
 
 const SectionComponent = observer(() => {
-    const { initObj, formik, invoicesOnly } = useInitInnerContract();
+    const { initObj, formik, contracts } = useInitInnerContract();
+    if (contracts.length === 0) return null;
+
     return (
         <Formik
             initialValues={formik.initialFields}
@@ -27,13 +29,13 @@ const SectionComponent = observer(() => {
                 </div>
 
                 <DocList
-                    docs={initObj.docs}
+                    docs={contracts}
                     docSettings={(doc) => {
                         const { row } = doc.record;
                         return {
                             title: `${row.buyer?.code}-${row.id}`,
                             onClick: () => initObj.onLoad(doc),
-                            key: row.id,
+                            key: `${row.id}${row?.buyer?.code}`,
                             isNull: row.type !== 'innerT',
                         };
                     }}

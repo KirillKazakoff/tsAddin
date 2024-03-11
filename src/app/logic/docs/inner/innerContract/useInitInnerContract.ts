@@ -28,17 +28,12 @@ export const useInitInnerContract = () => {
         }),
     });
 
-    const invoicesOnly = initObj.docs.reduce<typeof initObj.docs>(
-        (invoices, contract) => {
-            if (contract.record.row.id.includes('счет')) return invoices;
-            invoices.push(contract);
+    const contracts = initObj.docs.reduce<typeof initObj.docs>((invoices, contract) => {
+        if (contract.record.row.id.includes('счет')) return invoices;
+        invoices.push(contract);
 
-            return invoices;
-        },
-        [],
-    );
+        return invoices;
+    }, []);
 
-    // onInvoiceLoad
-
-    return { initObj, formik, invoicesOnly };
+    return { initObj, formik, contracts };
 };
