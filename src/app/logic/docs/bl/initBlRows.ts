@@ -21,9 +21,12 @@ export const initNewBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<'
         records: blGroup.groupedBy.productSort,
         deleteStartAmount: 1,
         rowSettings: ({ record: r, total }) => {
+            const isRoe = r.product.code.toLowerCase().includes('икра');
+            const sort = isRoe ? '' : r.sort;
+
             const fields = {
                 places: total.places.count,
-                product: r.product.eng.name.toUpperCase(),
+                product: `${r.product.eng.name.toUpperCase()} ${sort}`,
                 m1: '',
                 m2: '',
                 m3: '',

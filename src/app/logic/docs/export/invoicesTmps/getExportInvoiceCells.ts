@@ -36,11 +36,6 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     const doubleObj = {
         common: [
             {
-                cell: 'Инвойс_контракт',
-                eng: `to the Contract of sale № ${contract.contractNo}`,
-                ru: `к контракту купли-продажи № ${contract.contractNo}`,
-            },
-            {
                 cell: 'Инвойс_дата',
                 eng: `Magadan, ${date.contract('eng')}`,
                 ru: `Магадан, от ${date.contract('ru')}`,
@@ -120,6 +115,11 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
             },
             {
+                cell: 'Инвойс_контракт',
+                eng: `to the Contract of sale № ${contract.contractNo}`,
+                ru: `к контракту купли-продажи № ${contract.contractNo}`,
+            },
+            {
                 cell: 'Инвойс_декларация',
                 eng: declarationNo,
                 ru: declarationNo,
@@ -136,6 +136,11 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 cell: 'Инвойс_соглашение',
                 eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
                 ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
+            },
+            {
+                cell: 'Инвойс_контракт',
+                eng: `to the Storage Services Contract No. ${contract.contractNo}`,
+                ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
             },
         ],
     } satisfies CellDeclarationT<CellDoubleT>;

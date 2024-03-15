@@ -60,6 +60,7 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
                 value: `передать с ${
                     fields.termsPort.includes('CFR') ? 'борта судна' : 'нашего хранения'
                 } компании ${orgName.buyer}; ИНН ${r.buyer.inn}`,
+                height: 30,
             },
             {
                 cell: 'Покупатель_телефон',
