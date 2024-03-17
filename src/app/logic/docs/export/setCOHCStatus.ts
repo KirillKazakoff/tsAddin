@@ -1,5 +1,4 @@
 import { CertificateRowT } from '../../../stores/tablesStore/set/setCertificates';
-import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 
 /* eslint-disable no-param-reassign */
 export type COHCT = 'no' | 'cohc' | 'co' | 'hc';
@@ -23,19 +22,27 @@ export const setCOHCStatus = (rows: CertificateRowT[]) => {
 
 export const matchCOHCLanguage = (status: COHCT, language: 'eng' | 'ru') => {
     const matchDictionary = {
-        eng: <{ [key in COHCT]: string }>{
-            co: 'Certificate of Origin',
-            hc: 'Health Certificate',
-            cohc: 'Certificate of Origin and Health Certificate',
-            no: '',
+        eng: {
+            common: 'set of',
+            status: {
+                co: 'certificates of Origin',
+                hc: 'Health certificates',
+                cohc: 'certificates of Origin and Health certificates',
+                no: '',
+            },
         },
-        ru: <{ [key in COHCT]: string }>{
-            co: 'Сертификат Происхождения',
-            hc: 'Сертификат Здоровья',
-            cohc: 'Сертификат Происхождения и Сертификат Здоровья',
-            no: '',
+        ru: {
+            common: 'комплект',
+            status: {
+                co: 'сертификатов происхождения',
+                hc: 'сертификатов здоровья',
+                cohc: 'сертификатов происхождения и сертификатов здоровья',
+                no: '',
+            },
         },
     };
 
-    return matchDictionary[language][status];
+    const dictionary = matchDictionary[language];
+
+    return `${dictionary.common} ${dictionary.status[status]}`;
 };

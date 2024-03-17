@@ -21,6 +21,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
     } = agreement.record;
     const { podpisant } = exportContractStore.fields;
     const { currentTerms: terms } = exportContractStore;
+    const { cohc } = agreement.additional;
 
     const date = {
         agreement: (locale: string) => getExcelDateStr(dateAgreement, locale),
@@ -237,6 +238,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     cell: 'Доставка_транспорт',
                     eng: `2. The Goods will be delivered to ${portTo.eng.name}, ${portTo.eng.country} by the transport vessel ${transport.eng.name} no later than ${date.delivery('eng', 'month')}`,
                     ru: `2. Товар будет доставлен в г. ${portTo.ru.name}, ${portTo.ru.country} транспортным судном ${transport.ru.name} не позднее чем ${date.delivery('ru', 'month')}`,
+                    height: 40,
                 },
                 {
                     cell: 'Остальное_контракт',
@@ -263,8 +265,14 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         certificates: [
             {
                 cell: 'Обязательство_хранение',
-                eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch and issue ${matchCOHCLanguage(agreement.additional.cohc, 'eng')} for the following quantity:`,
-                ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию и выпустить ${matchCOHCLanguage(agreement.additional.cohc, 'ru')} на нижеследущие партии:`,
+                eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch of the following quantity:`,
+                ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию:`,
+            },
+            {
+                cell: 'Доставка_транспорт',
+                eng: `2. The Goods will be delivered to ${portTo.eng.name}, ${portTo.eng.country} by the transport vessel ${transport.eng.name} no later than ${date.delivery('eng', 'month')}. Customer is obligated to issue the ${matchCOHCLanguage(cohc, 'eng')} for Consignees from pt 1.`,
+                ru: `2. Товар будет доставлен в г. ${portTo.ru.name}, ${portTo.ru.country} транспортным судном ${transport.ru.name} не позднее чем ${date.delivery('ru', 'month')}. Заказчик обязуется выпустить ${matchCOHCLanguage(cohc, 'ru')} на получателей перечисленных в п. 1`,
+                height: 55,
             },
         ],
     } satisfies CellDeclarationT<CellObjT>;
