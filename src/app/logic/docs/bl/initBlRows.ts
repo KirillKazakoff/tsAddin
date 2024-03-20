@@ -1,3 +1,4 @@
+import blStore from '../../../stores/docsStores/blStore';
 import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 import {
     initAmount,
@@ -17,12 +18,16 @@ export const initNewBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<'
         font: { size: 8, name: 'Arial' },
     };
 
+    const records = blStore.isSortable
+        ? blGroup.groupedBy.product
+        : blGroup.groupedBy.productSort;
+
     insertRows({
-        records: blGroup.groupedBy.productSort,
+        records,
         deleteStartAmount: 1,
         rowSettings: ({ record: r, total }) => {
             const isRoe = r.product.code.toLowerCase().includes('икра');
-            const sort = isRoe ? '' : r.sort;
+            const sort = isRoe || !blStore.isSortable ? '' : r.sort;
 
             const fields = {
                 places: total.places.count,

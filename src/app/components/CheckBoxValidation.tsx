@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import pageStatusStore from '../stores/pageStatusStore.ts/pageStatusStore';
+import { CheckBoxComponent } from './CheckBoxComponent';
 
 export const CheckBoxValidation = observer(() => {
     const onChange = () => {
@@ -8,15 +9,11 @@ export const CheckBoxValidation = observer(() => {
     };
 
     return (
-        <div className={'form__control select-wrapper checkbox-validation'}>
-            <span className='input-title'>{'Проверка формы:'}</span>
-            <input
-                name='isValidation'
-                type='checkbox'
-                className='input-checkbox'
-                checked={pageStatusStore.isValidation}
-                onChange={onChange}
-            />
-        </div>
+        <CheckBoxComponent
+            state={pageStatusStore.isValidation}
+            setState={onChange}
+            title='Проверка формы:'
+            name='isValidation'
+        />
     );
 });
