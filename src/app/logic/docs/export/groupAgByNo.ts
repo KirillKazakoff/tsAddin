@@ -1,3 +1,4 @@
+// groupAgByNo.ts
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
 import _ from 'lodash';
@@ -20,23 +21,28 @@ export const groupAgByNo = () => {
                 invoices: {
                     code: row.invoice,
                     groupedBy: {
-                        product: { code: row.product.code },
-                        productPack: { code: row.blNo + row.product.code + row.pack },
-                        productSort: { code: row.product.code + row.pack + row.sort },
+                        product: { code: `${row.product.code}` },
+                        productPack: {
+                            code: (row.blNo + row.product.code + row.pack) as string,
+                        },
+                        productSort: {
+                            code: (row.product.code + row.pack + row.sort) as string,
+                        },
                     },
                 },
                 bl: {
                     code: row.blNo,
                     groupedBy: {
-                        product: { code: row.product.code + row.pack },
-                        productSort: { code: row.product.code + row.sort },
+                        product: { code: (row.product.code + row.pack) as string },
+                        productSort: { code: (row.product.code + row.sort) as string },
                     },
                 },
             },
             additional: { cohc: 'no' },
-            // prettier-ignore
             groupModify: (agreement) => {
-                agreement.additional.cohc = setCOHCStatus(agreement.rows as CertificateRowT[]);
+                agreement.additional.cohc = setCOHCStatus(
+                    agreement.rows as CertificateRowT[],
+                );
                 return true;
             },
         }),
