@@ -6,14 +6,11 @@ import { SelectCargo } from '../../components/Select/SelectCargo';
 import SelectPersonDischarge from '../../components/Select/SelectPersonDischarge';
 
 const TemplateCFR = () => (
-    <>
-        <SelectCargo title='Грузовые работы склад-авто' name='cargoToAuto' />
-        <SelectCargo title='Грузовые работы борт-склад' name='cargoToStorage' />
-    </>
+    <SelectCargo title='Грузовые работы борт-склад' name='cargoToStorage' />
 );
 const TemplateEXW = () => (
     <>
-        <TemplateCFR />
+        <SelectCargo title='Грузовые работы склад-авто' name='cargoToAuto' />
         <InputText
             name='storageFrom'
             title='Хранение покупателя с:'
