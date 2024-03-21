@@ -7,7 +7,8 @@ export const groupMates = () => {
             (r) => r.operation === 'Внутренний рынок' || r.operation === 'Образец',
         ),
         input: (row) => ({
-            code: row.vessel.code + row.product.code + row.sort + row.pack,
+            code:
+                row.vessel.code + row.product.code + row.sort + row.pack + row.operation,
         }),
     }).map((group) => ({
         code: group.code,

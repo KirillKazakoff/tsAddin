@@ -11,9 +11,9 @@ export const useInitPortLetter = () => {
         store: portLetterStore,
         initialFields: {
             dateLetter: '',
-            portRu: 'ВМРП',
-            podpisant: 'Кузьменко Е.А.',
-            termsPort: <TermsT>'CFR',
+            portRu: '',
+            podpisant: '',
+            termsPort: <TermsT>'',
             isPictures: true,
             cargoToAuto: '',
             cargoToStorage: '',

@@ -1,4 +1,3 @@
-import popupStore from '../popupStore.ts/popupStore';
 import { PictureKey } from './picturesStore';
 
 const switchPictureGet = (codeName: string): PictureKey => {
@@ -32,15 +31,5 @@ const switchPictureGet = (codeName: string): PictureKey => {
 
 export const selectPicture = (codeName: string): PictureKey => {
     const res = switchPictureGet(codeName);
-
-    console.log(res);
-
-    if (!res) {
-        popupStore.pushStatus({
-            title: `Не найдено изображение ${codeName.toUpperCase()}`,
-            desc: 'Возможно не заполнен лист с изображениями',
-        });
-    }
-
     return res;
 };

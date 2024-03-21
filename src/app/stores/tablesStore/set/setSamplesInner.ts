@@ -7,7 +7,7 @@ export const setSamplesInner = (table: any[][]) => {
         table,
         type: 'samplesInnerT',
         headers: {
-            docNo: '№ письма',
+            id: '№ письма',
             reiceNo: 'Номер рейса',
             knsNo: 'Коносамент',
             dateDischarge: 'Дата перегруза',
@@ -21,8 +21,9 @@ export const setSamplesInner = (table: any[][]) => {
             placesTotal: 'Объем, кг',
             operation: 'Вид операции',
         },
+        init: (r) => !!r.id,
         row: (r) => ({
-            id: r.docNo ? `${r.docNo.toString()}-О` : '',
+            id: `${r.id.toString()}-О`,
             reiceNo: r.reiceNo,
             knsNo: r.knsNo,
             dateDischarge: r.dateDischarge,

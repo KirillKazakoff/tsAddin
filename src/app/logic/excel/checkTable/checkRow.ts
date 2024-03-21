@@ -18,6 +18,7 @@ export const checkRow = (row: CommonRowT, tableName: TableKeyT, i: number) => {
 
     if (errorProp) {
         if (tableName === 'customsT') return;
+        if (tableName === 'certificatesT') return;
 
         popupStore.pushStatus({
             title: `Ошибка в таблице ${tableName}`,

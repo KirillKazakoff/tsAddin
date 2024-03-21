@@ -19,14 +19,20 @@ export const initPictureExcel = async (ws: Worksheet, settings: PictureSettingsT
     const key = selectPicture(keyCode);
     if (!key) {
         popupStore.pushStatus({
-            title: 'Отсутствует изображение:',
-            desc: `${keyCode} изображение отсутствует в справочнике`,
+            title: 'Отсутствует изображение для указанного ключа:',
+            desc: `${keyCode} изображение отсутствует в программе`,
         });
         return;
     }
 
     const blob = blobFromBase64(picturesStore.pictures[key]);
-    if (!blob) return;
+    if (!blob || blob.size === 0) {
+        popupStore.pushStatus({
+            title: 'Отсутствует изображение:',
+            desc: `${keyCode} изображение отсутствует в справочнике Картинки`,
+        });
+        return;
+    }
 
     const range = getPictureRange(rangeObj, ws);
 

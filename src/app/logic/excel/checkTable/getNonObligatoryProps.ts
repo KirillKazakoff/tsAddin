@@ -35,7 +35,7 @@ export const getNonObligatoryProps = (row: CommonRowT, tableName: TableKeyT) => 
         salesT: ['blNo', 'isLive'],
         nordmileT: [''],
         customsT: [''],
-        samplesInnerT: ['sort'],
+        samplesInnerT: ['sort', 'id'],
     } satisfies Record<TableKeyT, string[]>;
 
     if (row.terms === 'FCA') {

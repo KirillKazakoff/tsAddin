@@ -15,6 +15,7 @@ export const setTable = <
     headers: T;
     type: K;
     row: (row: Record<keyof T, any>) => R;
+    init?: (row: Record<keyof T, any>) => boolean;
 }) => {
     const { table, row: getRow, type } = settings;
 
@@ -31,9 +32,14 @@ export const setTable = <
             });
 
             const initObj = { index: i.toString(), type };
-            const row = { ...getRow(dictionaryCopy as any), ...initObj };
+            if (settings.init) {
+                const check = settings.init(dictionaryCopy as any);
+                if (!check) return total;
+            }
 
+            const row = { ...getRow(dictionaryCopy as any), ...initObj };
             checkRow(row, type, i);
+
             total.push(row as any);
         } catch (e) {
             console.log(e);
