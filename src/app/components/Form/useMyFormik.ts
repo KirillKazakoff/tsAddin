@@ -31,7 +31,8 @@ export const useMyFormik = <FormValuesT>(settings: SettingsT<FormValuesT>) => {
     return {
         onSubmit,
         validate,
-        initialFields: (storedValues as FormValuesT) || initialFields,
+        // initialFields: (storedValues as FormValuesT) || initialFields,
+        initialFields,
         formRef,
     };
 };

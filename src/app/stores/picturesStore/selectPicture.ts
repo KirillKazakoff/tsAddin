@@ -1,3 +1,4 @@
+import popupStore from '../popupStore.ts/popupStore';
 import { PictureKey } from './picturesStore';
 
 const switchPictureGet = (codeName: string): PictureKey => {
@@ -13,10 +14,12 @@ const switchPictureGet = (codeName: string): PictureKey => {
             return 'Sign_KOTOVMN';
         case 'Котов Н.М.':
             return 'Sign_KOTOVNM';
-        case 'SE JI YOUNG':
-            return 'Sign_SOJI';
+        case 'Кузьменко Е.А.':
+            return 'Sign_KUZMENKOEA';
         case 'Крузина М.Н.':
             return 'Sign_KRUZINAMN';
+        case 'SE JI YOUNG':
+            return 'Sign_SOJI';
         case 'OCEANIC':
             return 'Sign_OCEANIC';
         case 'CHANGRUN':
@@ -30,8 +33,13 @@ const switchPictureGet = (codeName: string): PictureKey => {
 export const selectPicture = (codeName: string): PictureKey => {
     const res = switchPictureGet(codeName);
 
+    console.log(res);
+
     if (!res) {
-        // popup
+        popupStore.pushStatus({
+            title: `Не найдено изображение ${codeName.toUpperCase()}`,
+            desc: 'Возможно не заполнен лист с изображениями',
+        });
     }
 
     return res;

@@ -1,5 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 import { nanoid } from 'nanoid';
+import _ from 'lodash';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import { getExcelDateShort, getNowDate } from '../../excel/utils/getExcelDate';
 import { groupTotal } from '../../utils/groupify/groupTotal';
@@ -16,12 +18,16 @@ export const groupInnerContracts = () => {
     const rows = [...tablesStore.innerT, ...tablesStore.samplesInnerT].map((row) => {
         const mateRow = tablesStore.matesT.find((r) => r.konosament === row.knsNo);
 
+        console.log(_.cloneDeep(matesGrouped));
+
         const konosamentGroup = matesGrouped
             .find((mGroup) => mGroup.kns.includes(mateRow))
             ?.kns.reduce<{ value: string; index: number }>(
             // prettier-ignore
             (total, r, i, source) => {
                 const isLast = source.length === i + 1;
+                if (total.value.includes(r.konosament)) return total;
+
                 total.value += `${r.konosament} от ${getExcelDateShort(r.date, 'ru')} ${isLast ? '' : '\n'}`;
                 total.index += 1;
                 return total;
@@ -43,7 +49,7 @@ export const groupInnerContracts = () => {
     const contracts = groupTotal({
         rows,
         input: ({ row, mateRow }) => ({
-            code: row.id + row.buyer.code,
+            code: row.buyer ? `${row.id}${row?.buyer?.code}` : row.id,
             groupedBy: {
                 noGroup: {
                     code: nanoid(),

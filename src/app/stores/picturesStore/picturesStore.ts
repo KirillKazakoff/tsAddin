@@ -8,8 +8,9 @@ class PicturesStore {
 
         Sign_KOTOVMN: '',
         Sign_KOTOVNM: '',
-        Sign_SOJI: '',
         Sign_KRUZINAMN: '',
+        Sign_KUZMENKOEA: '',
+        Sign_SOJI: '',
         Sign_OCEANIC: '',
         Sign_CHANGRUN: '',
     };

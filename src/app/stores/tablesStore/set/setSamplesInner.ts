@@ -22,7 +22,7 @@ export const setSamplesInner = (table: any[][]) => {
             operation: 'Вид операции',
         },
         row: (r) => ({
-            id: r.docNo,
+            id: r.docNo ? `${r.docNo.toString()}-О` : '',
             reiceNo: r.reiceNo,
             knsNo: r.knsNo,
             dateDischarge: r.dateDischarge,

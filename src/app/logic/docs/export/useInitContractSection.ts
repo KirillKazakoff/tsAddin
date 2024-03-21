@@ -14,6 +14,7 @@ export const useInitContractSection = () => {
             isPictures: false,
         },
         validateCb: (errors, values) => {
+            console.log(values.podpisant);
             if (!values.podpisant) {
                 errors.podpisant = 'valueMissing';
             }
