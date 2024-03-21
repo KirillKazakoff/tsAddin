@@ -13,6 +13,7 @@ import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { Form } from '../../components/Form/Form';
 import { DocList } from '../../components/Doc/DocList';
+import { SelectExecutive } from '../../components/Select/SelectExecutive';
 
 const SectionComponent = observer(() => {
     const { formik, initObj } = useInitPortLetter();
@@ -32,7 +33,7 @@ const SectionComponent = observer(() => {
                     <SelectPodpisant />
                     <SelectTerms name='termsPort' />
                     <DischargeTerms />
-                    <InputText
+                    {/* <InputText
                         name='dateLetter'
                         title='Дата письма:'
                         placeholder='Дата письма'
@@ -41,10 +42,11 @@ const SectionComponent = observer(() => {
                         name='correctedNo'
                         title='Коррект номер:'
                         placeholder='Введите номер'
-                    />
+                    /> */}
                     <CheckBox title={'Включить картинки:'} name='isPictures' />
                     <CheckBox title={'Контрольный звонок'} name='isControlPhone' />
                     <CheckBox title={'Группировка коносаменты'} name='isGroupingKns' />
+                    <SelectExecutive />
                 </div>
 
                 <h3 className='title port-letter-title'>Загрузить письма в порт</h3>

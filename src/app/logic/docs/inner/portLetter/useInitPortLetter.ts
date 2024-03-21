@@ -23,6 +23,7 @@ export const useInitPortLetter = () => {
             isControlPhone: false,
             isGroupingKns: false,
             correctedNo: '',
+            executive: 'МСФ',
         },
         validateCb(errors, values) {
             if (!values.portRu) errors.portRu = 'valueMissing';

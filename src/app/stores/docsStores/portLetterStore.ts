@@ -21,6 +21,7 @@ const initFields = () => ({
     isPictures: true,
     isControlPhone: false,
     correctedNo: '',
+    executive: 'МСФ',
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
@@ -33,6 +34,7 @@ class PortLetterStore {
     }
 
     setFields(values: FormFieldsT) {
+        this.fields.executive = values.executive;
         this.fields.portRu = selectSp.portRu(values.portRu);
         this.fields.podpisant = selectSp.podpisant(values.podpisant);
         this.fields.dateLetter = values.dateLetter;

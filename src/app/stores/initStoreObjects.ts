@@ -1,3 +1,4 @@
+import { ConfidentialPhoneT } from './spsStore/set/setConfidentialPhone';
 import { PodpisantT } from './spsStore/set/setPodpisants';
 import { PortRuT } from './spsStore/set/setPortsRu';
 import { PortTamozhnyaT } from './spsStore/set/setPortsTamozhnya';
@@ -59,4 +60,13 @@ export const initPodpisant = (): PodpisantT => ({
         face: '',
         sex: '',
     },
+});
+
+export const initExecutive = (): ConfidentialPhoneT => ({
+    code: '',
+    fullName: '',
+    name: '',
+    passport: '',
+    passportInfo: '',
+    phone: '',
 });

@@ -91,7 +91,7 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
             },
             {
                 cell: 'Исполнитель_информация',
-                value: `Исполнитель: ${phones?.['МСФ']?.fullName}; телефон: ${phones?.['МСФ']?.phone}`,
+                value: `Исполнитель: ${phones?.[fields.executive]?.fullName}; телефон: ${phones?.[fields.executive]?.phone}`,
                 height: 25,
             },
             {

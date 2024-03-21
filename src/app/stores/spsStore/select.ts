@@ -18,6 +18,7 @@ export const selectSp = {
     package: (codeName: string) => spsStore.packages[codeName],
     sortAssortiment: (codeName: string) => spsStore.sortsAssortiment[codeName.toLowerCase()],
     productSales: (codeName: string) => spsStore.productionSales[codeName],
+    confidential: (codeName: string) => spsStore.confidentialPhones[codeName],
 };
 
 // const selectSpObj = () => {
