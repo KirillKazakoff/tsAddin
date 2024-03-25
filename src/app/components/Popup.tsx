@@ -7,18 +7,18 @@ import popupStore from '../stores/popupStore.ts/popupStore';
 export const Popup = observer(() => {
     const { currentStatus } = popupStore;
 
-    useEffect(() => {
-        if (!popupStore.isActive) return;
+    // useEffect(() => {
+    //     if (!popupStore.isActive) return;
 
-        let timer: NodeJS.Timeout;
-        if (popupStore.isActive) {
-            timer = setTimeout(() => popupStore.killAll(), 8000);
-        }
+    //     let timer: NodeJS.Timeout;
+    //     if (popupStore.isActive) {
+    //         timer = setTimeout(() => popupStore.killAll(), 8000);
+    //     }
 
-        return () => {
-            clearTimeout(timer);
-        };
-    });
+    //     return () => {
+    //         clearTimeout(timer);
+    //     };
+    // });
 
     if (!currentStatus) return null;
 

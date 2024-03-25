@@ -29,7 +29,7 @@ export const useInitInnerContract = () => {
     });
 
     const contracts = initObj.docs.reduce<typeof initObj.docs>((invoices, contract) => {
-        if (contract.record.row.id.includes('счет')) return invoices;
+        if (contract.record.row.id.toString().includes('счет')) return invoices;
         invoices.push(contract);
         return invoices;
     }, []);

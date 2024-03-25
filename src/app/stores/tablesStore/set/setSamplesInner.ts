@@ -40,6 +40,9 @@ export const setSamplesInner = (table: any[][]) => {
         }),
     });
 
+    console.log('hely');
+    console.log(transformed);
+
     return transformed;
 };
 
