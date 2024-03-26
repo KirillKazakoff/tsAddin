@@ -296,7 +296,7 @@ b {
     top: 0;
 
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.9;
     background-color: #000000;
     text-align: center;
     color: white;
@@ -323,23 +323,66 @@ b {
     justify-content: center;
 }
 
-.x-mark {
-    border: none;
-    pointer-events: all;
+.popup-wrapper {
     display: flex;
-    margin-left: auto;
-    width: 20%;
-    justify-content: flex-end;
+}
+
+.popup__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 10px;
+}
+
+.mark {
+    text-align: center;
     background-color: transparent;
-    text-align: end;
-    padding-right: 5px;
-    margin-top: -5px;
     color: white;
-    font-size: 24px;
     font-weight: bold;
     cursor: pointer;
+    border: none;
+    pointer-events: all;
+    width: 20%;
+}
+
+.mark:focus-visible {
+    border: none;
+    outline: none;
+}
+
+.x-mark {
+    margin-right: 5px;
+    font-size: 24px;
 }
 
 .x-mark:hover {
     color: red;
+}
+
+.arrow-mark {
+    font-size: 28px;
+}
+
+.arrow-mark:hover {
+    color: var(--yellow-lighter);
+}
+
+.svg-bell {
+    width: 20px;
+}
+
+.svg-btn {
+    margin-left: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.svg--scale:hover {
+    transform: scale(1.5);
+    filter: var(--aux-main-filter);
+}
+
+.svg-bell--error {
+    filter: var(--red-filter);
 }

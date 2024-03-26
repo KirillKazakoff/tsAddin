@@ -1,40 +1,42 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable consistent-return */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import popupStore from '../stores/popupStore.ts/popupStore';
 
 export const Popup = observer(() => {
-    const { currentStatus } = popupStore;
+    const { currentStatus, isActive } = popupStore;
 
-    // useEffect(() => {
-    //     if (!popupStore.isActive) return;
+    if (!currentStatus || !isActive) return null;
 
-    //     let timer: NodeJS.Timeout;
-    //     if (popupStore.isActive) {
-    //         timer = setTimeout(() => popupStore.killAll(), 8000);
-    //     }
-
-    //     return () => {
-    //         clearTimeout(timer);
-    //     };
-    // });
-
-    if (!currentStatus) return null;
-
-    const onClickX = () => popupStore.killStatus();
-
-    if (!currentStatus) return null;
+    const onClickHide = () => popupStore.setActive(false);
+    const onClickLeft = () => popupStore.operateIndex('decrease');
+    const onClickRight = () => popupStore.operateIndex('increase');
 
     return (
         <div className='popup-wrapper'>
             <div className='popup'>
-                <button
-                    type='button' className='btn x-mark'
-                    onClick={onClickX}
-                >
-                    X
-                </button>
+                <div className='popup__buttons'>
+                    <button
+                        type='button'
+                        className='btn mark arrow-mark'
+                        onClick={onClickLeft}
+                    >
+                        {'<'}
+                    </button>
+                    <button
+                        type='button'
+                        className='btn mark x-mark'
+                        onClick={onClickHide}
+                    >
+                        X
+                    </button>
+                    <button
+                        type='button'
+                        className='btn mark arrow-mark'
+                        onClick={onClickRight}
+                    >
+                        {'>'}
+                    </button>
+                </div>
 
                 <div className='popup-text'>
                     <div className='title'>{currentStatus.title}</div>
@@ -44,3 +46,16 @@ export const Popup = observer(() => {
         </div>
     );
 });
+
+// useEffect(() => {
+//     if (!popupStore.isActive) return;
+
+//     let timer: NodeJS.Timeout;
+//     if (popupStore.isActive) {
+//         timer = setTimeout(() => popupStore.killAll(), 8000);
+//     }
+
+//     return () => {
+//         clearTimeout(timer);
+//     };
+// });

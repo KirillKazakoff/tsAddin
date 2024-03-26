@@ -8,31 +8,34 @@ export type PopupStatus = {
 class PopupStore {
     statuses: PopupStatus[] = [];
 
+    currentIndex = 0;
+
     isActive = false;
 
     // eslint-disable-next-line class-methods-use-this
     pushStatus(status: PopupStatus) {
         if (this.statuses.some((s) => s.desc === status.desc)) return;
-        this.setActive(true);
         this.statuses.push(status);
-    }
-
-    killStatus() {
-        this.statuses.shift();
-    }
-
-    killAll() {
-        this.statuses = [];
-        this.setActive(false);
     }
 
     setActive(status: boolean) {
         this.isActive = status;
     }
 
+    operateIndex(operation: 'increase' | 'decrease') {
+        const isLast = this.currentIndex === this.statuses.length - 1;
+        const isFirst = this.currentIndex === 0;
+
+        if (operation === 'increase' && !isLast) {
+            this.currentIndex += 1;
+        } else if (operation === 'decrease' && !isFirst) {
+            this.currentIndex -= 1;
+        }
+    }
+
     get currentStatus() {
         if (this.statuses.length === 0) return null;
-        return this.statuses[0];
+        return this.statuses[this.currentIndex];
     }
 
     constructor() {

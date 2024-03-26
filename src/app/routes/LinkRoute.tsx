@@ -6,6 +6,7 @@ import pageStatusStore from '../stores/pageStatusStore.ts/pageStatusStore';
 import { useInitExcel } from '../logic/excel/useInitExcel';
 import { CheckBoxValidation } from '../components/CheckBoxValidation';
 import { Popup } from '../components/Popup';
+import { NotificationBtn } from './NotificationBtn';
 
 export const LinkRoute = observer(() => {
     const { statusType } = pageStatusStore.status;
@@ -59,6 +60,7 @@ export const LinkRoute = observer(() => {
         <div className='main-route'>
             <nav className='nav'>
                 <Links />
+                <NotificationBtn />
             </nav>
 
             <Outlet />

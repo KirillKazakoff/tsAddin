@@ -26,4 +26,5 @@ export const pathObj = {
         trk: `${baseUrl}assets/TRK.png`,
         msi: `${baseUrl}assets/MSI.png`,
     },
+    bell: `${baseUrl}assets/bell.svg`,
 };
