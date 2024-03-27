@@ -3,6 +3,7 @@ import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../../stores/pageStatusStore.ts/pageStatusStore';
 import { addChangeHandler } from './addChangeHandler';
 import { initStoresOnFileName } from './initExcelStores';
+import popupStore from '../../stores/popupStore.ts/popupStore';
 
 export const useInitExcel = () => {
     const { statusType } = pageStatusStore.status;
@@ -30,7 +31,9 @@ export const useInitExcel = () => {
     };
 
     useEffect(() => {
+        popupStore.reset();
         excelSyncStore.setLoading(true);
+
         setTimeout(() => {
             if (statusType === 'ok' || !isSync) {
                 initExcel();

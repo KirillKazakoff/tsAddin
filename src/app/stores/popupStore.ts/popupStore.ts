@@ -12,7 +12,6 @@ class PopupStore {
 
     isActive = false;
 
-    // eslint-disable-next-line class-methods-use-this
     pushStatus(status: PopupStatus) {
         if (this.statuses.some((s) => s.desc === status.desc)) return;
         this.statuses.push(status);
@@ -31,6 +30,10 @@ class PopupStore {
         } else if (operation === 'decrease' && !isFirst) {
             this.currentIndex -= 1;
         }
+    }
+
+    reset() {
+        this.statuses = [];
     }
 
     get currentStatus() {

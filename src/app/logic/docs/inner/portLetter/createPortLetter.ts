@@ -41,7 +41,7 @@ export const createPortLetter = async (contract: InnerGroupT) => {
 
     await saveFile(
         book,
-        `Письмо №${contract.code} ${
+        `Письмо №${contract.record.row.id} ${
             row.type === 'innerT' ? row.buyer.code : `${row.seller.code} Образец`
         }`,
     );
