@@ -11,7 +11,6 @@ import { InnerSampleRowT } from '../../../stores/tablesStore/set/setSamplesInner
 
 export const groupInnerContracts = () => {
     const matesGrouped = groupMates();
-    matesGrouped[0].kns;
 
     const rows = [...tablesStore.innerT, ...tablesStore.samplesInnerT].map((row) => {
         const mateRow = tablesStore.matesT.find((r) => r.konosament === row.knsNo);
@@ -68,7 +67,7 @@ export const groupInnerContracts = () => {
                 },
                 portLetter: {
                     code:
-                        row.product.code + row.vessel.code + row.sort + row.pack,
+                        row.product.code + row.vessel.code + row.sort + row.pack + row.knsNo,
                 },
             },
             additional: { portLetterNo: '' },
