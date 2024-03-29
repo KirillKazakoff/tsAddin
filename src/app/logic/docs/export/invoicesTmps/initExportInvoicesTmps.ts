@@ -35,8 +35,12 @@ export const initExportInvoicesTmps = async (
 
         // ?? in cells
         if (invoice.record.type === 'exportT' && invoice.record.terms === 'EXW') {
-            const row = utilsDouble.getRow('Инвойс_транспорт', -1);
-            wsOriginal.spliceRows(row.number, 2);
+            const cell = utilsSingle.getCell('Инвойс_транспорт');
+
+            if (cell) {
+                const row = utilsSingle.getRow('Инвойс_транспорт', -1);
+                wsOriginal.spliceRows(row.number, 2);
+            }
         }
         // finish initInvoice
 

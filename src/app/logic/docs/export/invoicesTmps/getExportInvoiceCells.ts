@@ -74,18 +74,19 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 cell: 'Инвойс_транспорт',
                 eng: `${transport.eng.name}`,
                 ru: `${transport.ru.name}`,
-                isEmpty: invoice.record.terms === 'FCA',
+                isEmpty: invoice.record.terms === 'FCA' || invoice.record.terms === 'EXW',
             },
             {
                 cell: 'Инвойс_куда',
                 eng: `${portTo.eng.name}, ${portTo.eng.country}`,
                 ru: `${portTo.ru.name}, ${portTo.ru.country}`,
+                isEmpty: invoice.record.terms === 'EXW',
             },
             {
                 cell: 'Инвойс_откуда',
                 eng: `${portFrom?.eng?.name}`,
                 ru: `${portFrom?.ru?.name}`,
-                isEmpty: invoice.record.terms === 'FCA',
+                isEmpty: invoice.record.terms === 'FCA' || invoice.record.terms === 'EXW',
             },
             {
                 cell: 'Инвойс_изготовитель',
