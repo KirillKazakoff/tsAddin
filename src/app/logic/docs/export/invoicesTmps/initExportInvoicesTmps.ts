@@ -44,6 +44,7 @@ export const initExportInvoicesTmps = async (
         }
         // finish initInvoice
 
+        console.log(exportContractStore.fields.isPictures);
         await utilsDouble.initPictures(
             [
                 {

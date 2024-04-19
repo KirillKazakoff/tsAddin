@@ -41,10 +41,14 @@ export const initPictureExcel = async (ws: Worksheet, settings: PictureSettingsT
 
 export const initPicturesExcel = (ws: Worksheet) => async (settings: PictureSettingsT[], isActive: boolean) => {
     // clear picture fields '-'
-    settings.forEach((setup) => {
-        getCell(ws)(setup.range.start).value = '';
-        getCell(ws)(setup.range.end).value = '';
-    });
+    try {
+        settings.forEach((setup) => {
+            getCell(ws)(setup.range.start).value = '';
+            getCell(ws)(setup.range.end).value = '';
+        });
+    } catch (e) {
+        return;
+    }
 
     if (!isActive || !picturesStore.isPicturesFound) return;
 

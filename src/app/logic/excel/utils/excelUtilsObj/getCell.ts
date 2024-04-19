@@ -18,7 +18,7 @@ export const getCell = (ws: Worksheet) => (cellName: string, offsetRow?: number)
         if (!match) throw new Error();
         return match;
     } catch (e) {
-        console.error(`ошибка в клетке ${cellName}`);
+        console.warn(`Не найдена клетка ${cellName}`);
         return null;
     }
 };
