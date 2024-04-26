@@ -35,6 +35,8 @@ export const setInner = (table: any[][]) => {
                 `${r.vessel}${r.product}${r.pack.toString().replace('.', ',')}`,
             );
 
+            console.log(packSp);
+
             return {
                 buyer: selectSp.clientRu(r.buyer),
                 seller: selectSp.seller(r.seller),
@@ -43,9 +45,9 @@ export const setInner = (table: any[][]) => {
                 vessel: selectSp.vessel(r.vessel),
                 product: selectSp.product(r.product),
                 transport: selectSp.transport(r.transport),
-                sort: r.sort,
-                pack: r.pack,
-                packSp,
+                sort: r.sort || '-',
+                pack: r.pack || '-',
+                packSp: packSp || ('-' as unknown as typeof packSp),
                 knsNo: r.konosament,
                 amount: {
                     places: initAmount(+r.placesTotal / +r.pack, 0, 0),

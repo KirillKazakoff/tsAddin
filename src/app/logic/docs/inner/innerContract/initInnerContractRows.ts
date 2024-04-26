@@ -25,7 +25,7 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
                 vessel: r.vessel.ru.name,
                 m2: '',
                 sort: r.sort,
-                pack: r.packSp.fullName,
+                pack: r.packSp?.fullName || '-',
                 placesTotal: total.placesTotal.count,
                 m3: '',
             };
@@ -57,7 +57,7 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
                 vessel: r.vessel.ru.name,
                 m2: '',
                 sort: r.sort,
-                pack: r.packSp.fullName,
+                pack: r.packSp?.fullName || '-',
                 price: r.amount.price.count,
                 nds: r.product.nds,
             };
