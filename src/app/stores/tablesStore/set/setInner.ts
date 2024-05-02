@@ -35,8 +35,6 @@ export const setInner = (table: any[][]) => {
                 `${r.vessel}${r.product}${r.pack.toString().replace('.', ',')}`,
             );
 
-            console.log(packSp);
-
             return {
                 buyer: selectSp.clientRu(r.buyer),
                 seller: selectSp.seller(r.seller),

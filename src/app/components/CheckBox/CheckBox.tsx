@@ -6,7 +6,7 @@ import {
     useFormikContext,
 } from 'formik';
 import React from 'react';
-import Feedback from './Form/Feedback';
+import Feedback from '../Form/Feedback';
 
 type Props = FieldHookConfig<string> & {
     title: string;

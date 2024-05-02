@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
-import CheckBox from '../../components/CheckBox';
+import CheckBox from '../../components/CheckBox/CheckBox';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { ExportDepartureDate } from './ExportDepartureDate';
 import { useInitContractSection } from '../../logic/docs/export/useInitContractSection';

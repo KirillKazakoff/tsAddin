@@ -5,7 +5,7 @@ import { useFormikContext } from 'formik';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPortZarubezh } from '../../components/Select/SelectPortZarubezh';
 import InputText from '../../components/Form/InputText';
-import CheckBox from '../../components/CheckBox';
+import CheckBox from '../../components/CheckBox/CheckBox';
 
 export const LetterMainFields = observer(() => {
     const context = useFormikContext<{

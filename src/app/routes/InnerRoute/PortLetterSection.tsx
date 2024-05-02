@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
 import { SelectPortRu } from '../../components/Select/SelectPortRu';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
-import CheckBox from '../../components/CheckBox';
+import CheckBox from '../../components/CheckBox/CheckBox';
 import InputText from '../../components/Form/InputText';
 import DischargeTerms from './DischargeTerms';
 import { useInitPortLetter } from '../../logic/docs/inner/portLetter/useInitPortLetter';

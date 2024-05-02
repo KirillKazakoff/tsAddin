@@ -7,7 +7,7 @@ import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { DocList } from '../../components/Doc/DocList';
-import CheckBox from '../../components/CheckBox';
+import CheckBox from '../../components/CheckBox/CheckBox';
 
 const SectionComponent = observer(() => {
     const { initObj, formik, contracts } = useInitInnerContract();

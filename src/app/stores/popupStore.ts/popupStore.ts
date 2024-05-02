@@ -18,6 +18,9 @@ class PopupStore {
     }
 
     setActive(status: boolean) {
+        if (!this.currentStatus) {
+            return;
+        }
         this.isActive = status;
     }
 

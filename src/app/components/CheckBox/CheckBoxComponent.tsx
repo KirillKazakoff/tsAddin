@@ -23,6 +23,3 @@ export const CheckBoxComponent = observer((props: Props) => {
         </div>
     );
 });
-
-//
-// isValidation

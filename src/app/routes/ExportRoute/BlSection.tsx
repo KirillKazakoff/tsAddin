@@ -3,7 +3,7 @@ import React from 'react';
 import { Doc } from '../../components/Doc/Doc';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
-import { CheckBoxComponent } from '../../components/CheckBoxComponent';
+import { CheckBoxComponent } from '../../components/CheckBox/CheckBoxComponent';
 import blStore from '../../stores/docsStores/blStore';
 
 export const BlSection = observer(() => {

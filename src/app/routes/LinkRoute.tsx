@@ -4,9 +4,9 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import excelSyncStore from '../stores/excelSyncStore.ts/excelSyncStore';
 import pageStatusStore from '../stores/pageStatusStore.ts/pageStatusStore';
 import { useInitExcel } from '../logic/excel/useInitExcel';
-import { CheckBoxValidation } from '../components/CheckBoxValidation';
-import { Popup } from '../components/Popup';
-import { NotificationBtn } from './NotificationBtn';
+import { CheckBoxValidation } from '../components/CheckBox/CheckBoxValidation';
+import { Popup } from '../components/Notification/Popup';
+import { NotificationBtn } from '../components/Notification/NotificationBtn';
 
 export const LinkRoute = observer(() => {
     const { statusType } = pageStatusStore.status;

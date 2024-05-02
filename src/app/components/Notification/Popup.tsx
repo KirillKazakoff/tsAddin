@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import popupStore from '../stores/popupStore.ts/popupStore';
+import popupStore from '../../stores/popupStore.ts/popupStore';
 
 export const Popup = observer(() => {
     const { currentStatus, isActive } = popupStore;
@@ -46,16 +46,3 @@ export const Popup = observer(() => {
         </div>
     );
 });
-
-// useEffect(() => {
-//     if (!popupStore.isActive) return;
-
-//     let timer: NodeJS.Timeout;
-//     if (popupStore.isActive) {
-//         timer = setTimeout(() => popupStore.killAll(), 8000);
-//     }
-
-//     return () => {
-//         clearTimeout(timer);
-//     };
-// });
