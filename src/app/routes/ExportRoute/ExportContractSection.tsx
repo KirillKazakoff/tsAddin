@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
 import CheckBox from '../../components/CheckBox/CheckBox';
 import { SelectPodpisant } from '../../components/Select/SelectPodpisant';
-import { ExportDepartureDate } from './ExportDepartureDate';
+import { ExportFCA } from './ExportFCA';
 import { useInitContractSection } from '../../logic/docs/export/useInitContractSection';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { Form } from '../../components/Form/Form';
@@ -31,7 +31,7 @@ export const ExportContractSection = observer(() => {
                         <h3>{initObj.title}</h3>
                         <div className='fields-wrapper'>
                             <SelectPodpisant />
-                            <ExportDepartureDate />
+                            <ExportFCA />
                             <CheckBox title='Включить картинки' name='isPictures' />
                             <DocsDownloadBtn
                                 title='Загрузить контракт'

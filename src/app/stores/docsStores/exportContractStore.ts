@@ -9,6 +9,7 @@ const initFields = () => ({
     podpisant: initPodpisant(),
     departureDate: '',
     isPictures: false,
+    isNonComFCA: false,
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
@@ -26,6 +27,7 @@ class ExportContractStore {
         this.fields.podpisant = selectSp.podpisant(values.podpisant);
         this.fields.departureDate = values.departureDate;
         this.fields.isPictures = values.isPictures;
+        this.fields.isNonComFCA = values.isNonComFCA;
     }
     setOperation(value: OperationT) {
         this.operation = value;

@@ -33,6 +33,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
 
     const currency = getCostGoodsStr(agreement);
 
+    console.log(exportContractStore.fields.isNonComFCA);
+
     // prettier-ignore
     const cells = {
         common: [
@@ -200,6 +202,12 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 },
             ],
             fca: [
+                {
+                    cell: 'Цена_неком',
+                    eng: '2.1 The price is approximate. The final price will be set by the parties after',
+                    ru: '2.1  Цена является ориентировочной. Окончательная цена будет установлена.',
+                    height: exportContractStore.fields.isNonComFCA ? 20 : 1,
+                },
                 {
                     cell: 'Доставка_условия',
                     eng: `3.1 Supply of products is carried out on FCA Terms.\nAcceptance- transfer of Goods by quantity and quality is made on the territory of: ${portTo.eng.countryFull} in ${portTo.eng.name}.`,

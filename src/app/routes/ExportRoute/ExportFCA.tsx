@@ -2,8 +2,9 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import InputText from '../../components/Form/InputText';
+import CheckBox from '../../components/CheckBox/CheckBox';
 
-export const ExportDepartureDate = observer(() => {
+export const ExportFCA = observer(() => {
     const { currentTerms: terms } = exportContractStore;
     const title = 'ETD порт:';
 
@@ -11,11 +12,14 @@ export const ExportDepartureDate = observer(() => {
     if (!isFCA) return null;
 
     return (
-        <InputText
-            name='departureDate'
-            title={title}
-            placeholder={title}
-            wrapperCls='export__date'
-        />
+        <>
+            <InputText
+                name='departureDate'
+                title={title}
+                placeholder={title}
+                wrapperCls='export__date'
+            />
+            <CheckBox title='Некоммерческий FCA' name='isNonComFCA' />
+        </>
     );
 });

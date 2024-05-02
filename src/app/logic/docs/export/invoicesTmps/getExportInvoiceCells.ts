@@ -144,6 +144,13 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
             },
         ],
+        fca: [
+            {
+                cell: 'Инвойс',
+                eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+            },
+        ],
     } satisfies CellDeclarationT<CellDoubleT>;
 
     const singleObj = {
@@ -186,6 +193,9 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     }
     if (invoice.record.type === 'exportStorageT') {
         doubleCells.push(...doubleObj.exportStorage);
+    }
+    if (terms === 'FCA' && exportContractStore.fields.isNonComFCA) {
+        doubleCells.push(...doubleObj.fca);
     }
 
     return { double: doubleCells, single: singleCells };

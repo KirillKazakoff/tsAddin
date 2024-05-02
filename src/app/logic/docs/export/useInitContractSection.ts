@@ -11,11 +11,15 @@ export const useInitContractSection = () => {
         initialFields: {
             podpisant: '',
             departureDate: '',
+            isNonComFCA: false,
             isPictures: false,
         },
         validateCb: (errors, values) => {
             if (!values.podpisant) {
                 errors.podpisant = 'valueMissing';
+            }
+            if (exportContractStore.currentTerms === 'FCA' && !values.departureDate) {
+                errors.departureDate = 'valueMissing';
             }
         },
     });
