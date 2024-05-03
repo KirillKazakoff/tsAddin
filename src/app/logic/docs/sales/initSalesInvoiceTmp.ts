@@ -16,22 +16,22 @@ export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesGroupT)
     // init cells
     // prettier-ignore
     const cells: CellObjT[] = [
-        { cell: 'Инвойс_заголовок_продавец', value: r.seller.name },
-        { cell: 'Инвойс_заголовок_продавец_адрес', value: r.seller.address },
-        { cell: 'Инвойс_дата', value: `DATE: ${getExcelDateStr(r.contractDate, 'en')}` },
-        { cell: 'Инвойс_номер', value: `INVOICE NO: ${r.id}` },
-        { cell: 'Инвойс_покупатель', value: r.buyer.fullName },
-        { cell: 'Инвойс_продавец', value: r.seller.name },
-        { cell: 'Инвойс_условия_доставки', value: `${r.terms} ${r.port}`.toUpperCase() },
-        { cell: 'Инвойс_всего_места', value: `TOTAL: ${contract.total.placesTotal.str} kg` },
-        { cell: 'Инвойс_всего_цена', value: `${contract.total.priceTotal.str} $` },
-        { cell: 'Инвойс_адреса_продавец', value: r.seller.name },
-        { cell: 'Инвойс_адреса_адрес', value: r.seller.address },
-        { cell: 'Инвойс_адреса_счет', value: `A/C NO: ${r.seller.acNo}` },
-        { cell: 'Инвойс_адреса_банк', value: `BENEFICIARY BANK ${r.seller.beneficiaryBank}` },
-        { cell: 'Инвойс_адреса_банк_адрес', value: `ADDRESS ${r.seller.bankAddress}` },
-        { cell: 'Инвойс_адреса_банк_свифт', value: `SWIFT: ${r.seller.swift}` },
-        { cell: 'Инвойс_продавец_печать_подвал', value: r.seller.name },
+        { name: 'Инвойс_заголовок_продавец', value: r.seller.name },
+        { name: 'Инвойс_заголовок_продавец_адрес', value: r.seller.address },
+        { name: 'Инвойс_дата', value: `DATE: ${getExcelDateStr(r.contractDate, 'en')}` },
+        { name: 'Инвойс_номер', value: `INVOICE NO: ${r.id}` },
+        { name: 'Инвойс_покупатель', value: r.buyer.fullName },
+        { name: 'Инвойс_продавец', value: r.seller.name },
+        { name: 'Инвойс_условия_доставки', value: `${r.terms} ${r.port}`.toUpperCase() },
+        { name: 'Инвойс_всего_места', value: `TOTAL: ${contract.total.placesTotal.str} kg` },
+        { name: 'Инвойс_всего_цена', value: `${contract.total.priceTotal.str} $` },
+        { name: 'Инвойс_адреса_продавец', value: r.seller.name },
+        { name: 'Инвойс_адреса_адрес', value: r.seller.address },
+        { name: 'Инвойс_адреса_счет', value: `A/C NO: ${r.seller.acNo}` },
+        { name: 'Инвойс_адреса_банк', value: `BENEFICIARY BANK ${r.seller.beneficiaryBank}` },
+        { name: 'Инвойс_адреса_банк_адрес', value: `ADDRESS ${r.seller.bankAddress}` },
+        { name: 'Инвойс_адреса_банк_свифт', value: `SWIFT: ${r.seller.swift}` },
+        { name: 'Инвойс_продавец_печать_подвал', value: r.seller.name },
     ];
 
     cells.forEach((cell) => utils.setCell(cell));

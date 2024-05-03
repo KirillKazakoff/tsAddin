@@ -1,19 +1,24 @@
-import { CellValue } from 'exceljs';
+import { Cell, CellValue } from 'exceljs';
 
-type Common = {
-    cell: string;
+type CellSettingsT = {
+    name: string;
     offsetRow?: number;
     numFmt?: string;
-    isEmpty?: boolean;
+    isEmptyTitle?: boolean;
     isEmptyCell?: boolean;
     height?: number;
 };
 
-export type CellObjDoubleT = Common & {
+export type CellObjDoubleT = CellSettingsT & {
     eng: CellValue;
     ru: CellValue;
 };
 
-export type CellObjT = Common & {
+export type CellObjT = CellSettingsT & {
     value: CellValue;
+};
+
+export type CellFullT = {
+    settings: CellSettingsT & { value: CellValue };
+    cell: Cell;
 };

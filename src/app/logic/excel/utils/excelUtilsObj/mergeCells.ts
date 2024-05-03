@@ -4,7 +4,7 @@ import { Worksheet } from 'exceljs';
 import _ from 'lodash';
 import { getRow } from './getRow';
 import type { FieldsGenT } from './initRows';
-import { getCell } from './getCell';
+import { getCellSingle } from './getCell';
 
 export type MergeSettingsT = {
     row: number;
@@ -58,8 +58,8 @@ export const mergeFromTo = (ws: Worksheet) => (
                 end = e;
             } else {
                 const col = cArray as { start: string; end: string };
-                start = +getCell(ws)(col.start).col;
-                end = +getCell(ws)(col.end).col;
+                start = +getCellSingle(ws)(col.start).col;
+                end = +getCellSingle(ws)(col.end).col;
             }
             mergeCells(ws)({
                 row: rowIndex,

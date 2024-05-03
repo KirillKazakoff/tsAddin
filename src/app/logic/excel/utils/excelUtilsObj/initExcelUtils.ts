@@ -1,7 +1,7 @@
 import { Worksheet } from 'exceljs';
 import { getRow } from './getRow';
-import { getCell, getCellDouble } from './getCell';
-import { setCell, setCellDouble } from './setCell';
+import { getCellSingle, getCellDouble } from './getCell';
+import { setCellSingle, setCellDouble } from './setCell';
 import { deleteRow } from './deleteRow';
 import { mergeCells, mergeFromTo } from './mergeCells';
 import { initPicturesExcel } from '../../pictures/initPictureExcel';
@@ -34,8 +34,8 @@ export const initExcelUtils = <T extends string>(ws: Worksheet, offsetCell: T) =
         mergeCells: mergeCells(ws),
         mergeFromTo: mergeFromTo(ws),
         deleteRow: deleteRow(ws),
-        getCell: getUtilsCb(ws, getCell, getCellDouble, offsetCell),
-        setCell: getUtilsCb(ws, setCell, setCellDouble, offsetCell),
+        getCell: getUtilsCb(ws, getCellSingle, getCellDouble, offsetCell),
+        setCell: getUtilsCb(ws, setCellSingle, setCellDouble, offsetCell),
         initPictures: initPicturesExcel(ws),
         initRowMaker: initRowMaker(ws),
     };

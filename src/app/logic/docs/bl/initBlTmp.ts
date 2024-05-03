@@ -12,17 +12,17 @@ export const initNewBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRow
 
     // prettier-ignore
     const cells: CellObjT[] = [
-        { cell: 'BL_No', value: `B/L No. ${r.blNo}` },
-        { cell: 'Продавец', value: r.seller.eng.name },
-        { cell: 'Продавец_адрес', value: r.seller.eng.address },
-        { cell: 'Получатель', value: r.consignee?.fullName || r.agent.name },
-        { cell: 'Получатель_адрес', value: r.consignee?.addres || r.agent.address },
-        { cell: 'Получатель_уведомление', value: r.consignee?.fullName || r.agent.name },
-        { cell: 'Получатель_уведомление_адрес', value: r.consignee?.addres || r.agent.address },
-        { cell: 'Судно', value: r.transport.eng.name.toUpperCase() },
-        { cell: 'Куда', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
-        { cell: 'Зона_вылова', value: 'OKHOTSK SEA' },
-        { cell: 'Место_дата', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
+        { name: 'BL_No', value: `B/L No. ${r.blNo}` },
+        { name: 'Продавец', value: r.seller.eng.name },
+        { name: 'Продавец_адрес', value: r.seller.eng.address },
+        { name: 'Получатель', value: r.consignee?.fullName || r.agent.name },
+        { name: 'Получатель_адрес', value: r.consignee?.addres || r.agent.address },
+        { name: 'Получатель_уведомление', value: r.consignee?.fullName || r.agent.name },
+        { name: 'Получатель_уведомление_адрес', value: r.consignee?.addres || r.agent.address },
+        { name: 'Судно', value: r.transport.eng.name.toUpperCase() },
+        { name: 'Куда', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
+        { name: 'Зона_вылова', value: 'OKHOTSK SEA' },
+        { name: 'Место_дата', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
     ];
 
     initNewBlRows(blGroup, utils);

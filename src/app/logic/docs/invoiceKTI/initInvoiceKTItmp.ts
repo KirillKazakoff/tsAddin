@@ -21,50 +21,50 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIGro
     };
 
     const cellsEng: CellObjT[] = [
-        { cell: 'Инвойс_номер', value: `KTICOLTD - ${row.invoiceNo}` },
-        { cell: 'Инвойс_компания', value: exportRow.seller.eng.name },
-        { cell: 'Инвойс_дата', value: date.invoice('eng') },
+        { name: 'Инвойс_номер', value: `KTICOLTD - ${row.invoiceNo}` },
+        { name: 'Инвойс_компания', value: exportRow.seller.eng.name },
+        { name: 'Инвойс_дата', value: date.invoice('eng') },
         {
-            cell: 'Инвойс_контракт',
+            name: 'Инвойс_контракт',
             value: `Storage Service contract № ${
                 exportRow.contract.contractNo
             } from ${date.contract('eng')}`,
         },
-        { cell: 'Инвойс_выгрузка_дата', value: date.discharge('eng') },
-        { cell: 'Инвойс_транспорт', value: exportRow.transport.eng.name },
+        { name: 'Инвойс_выгрузка_дата', value: date.discharge('eng') },
+        { name: 'Инвойс_транспорт', value: exportRow.transport.eng.name },
         {
-            cell: 'Инвойс_соглашение',
+            name: 'Инвойс_соглашение',
             value: `Supplementary Agreement №${
                 exportRow.agreementNo
             } dated ${date.agreement('eng')}`,
         },
         {
-            cell: 'Инвойс_всего',
+            name: 'Инвойс_всего',
             value: invoice.total.priceTotal.count,
             numFmt: f.common.price.dollar,
         },
     ];
 
     const cellsRu: CellObjT[] = [
-        { cell: 'Инвойс_номер_п', value: `KTICOLTD - ${row.invoiceNo}` },
-        { cell: 'Инвойс_компания_п', value: exportRow.seller.ru.name },
-        { cell: 'Инвойс_дата_п', value: date.invoice('ru') },
+        { name: 'Инвойс_номер_п', value: `KTICOLTD - ${row.invoiceNo}` },
+        { name: 'Инвойс_компания_п', value: exportRow.seller.ru.name },
+        { name: 'Инвойс_дата_п', value: date.invoice('ru') },
         {
-            cell: 'Инвойс_контракт_п',
+            name: 'Инвойс_контракт_п',
             value: `Договор оказания услуг хранения № ${
                 exportRow.contract.contractNo
             } from ${date.contract('ru')}`,
         },
-        { cell: 'Инвойс_выгрузка_дата_п', value: date.discharge('ru') },
-        { cell: 'Инвойс_транспорт_п', value: exportRow.transport.ru.name },
+        { name: 'Инвойс_выгрузка_дата_п', value: date.discharge('ru') },
+        { name: 'Инвойс_транспорт_п', value: exportRow.transport.ru.name },
         {
-            cell: 'Инвойс_соглашение_п',
+            name: 'Инвойс_соглашение_п',
             value: `Дополнительное соглашение №${
                 exportRow.agreementNo
             } от ${date.agreement('ru')}`,
         },
         {
-            cell: 'Инвойс_всего_п',
+            name: 'Инвойс_всего_п',
             value: invoice.total.priceTotal.count,
             numFmt: f.common.price.dollar,
         },

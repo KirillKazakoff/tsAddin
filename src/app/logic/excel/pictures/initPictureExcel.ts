@@ -5,7 +5,7 @@ import { selectPicture } from '../../../stores/picturesStore/selectPicture';
 import { blobFromBase64 } from './blobFromBase64';
 import { getPictureRange } from './getPictureRange';
 import { loadPicture } from './loadPicture';
-import { getCell } from '../utils/excelUtilsObj/getCell';
+import { getCellSingle } from '../utils/excelUtilsObj/getCell';
 import popupStore from '../../../stores/popupStore.ts/popupStore';
 
 export type PictureSettingsT = {
@@ -43,8 +43,8 @@ export const initPicturesExcel = (ws: Worksheet) => async (settings: PictureSett
     // clear picture fields '-'
     try {
         settings.forEach((setup) => {
-            getCell(ws)(setup.range.start).value = '';
-            getCell(ws)(setup.range.end).value = '';
+            getCellSingle(ws)(setup.range.start).value = '';
+            getCellSingle(ws)(setup.range.end).value = '';
         });
     } catch (e) {
         return;

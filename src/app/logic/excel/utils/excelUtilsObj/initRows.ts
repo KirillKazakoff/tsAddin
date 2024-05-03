@@ -1,6 +1,6 @@
 import { Cell, Row, Worksheet } from 'exceljs';
 import { DocTypeT, setDynamicFormats, setFormats } from '../formats';
-import { getCell } from './getCell';
+import { getCellSingle } from './getCell';
 import { mergeRowCells } from './mergeCells';
 import { RowStyleSettingsT, styleRow } from '../styleRowCells';
 import { setHeaders } from '../setHeaders';
@@ -47,7 +47,7 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
     let firstCellCount = setup?.firstCol || 1;
 
     if (setup?.cellName) {
-        const arrayCl = getCell(ws)(setup?.cellName);
+        const arrayCl = getCellSingle(ws)(setup?.cellName);
         firstCellCount = ws.getColumn(arrayCl.col).number;
         insertIndex = +arrayCl.row;
     }

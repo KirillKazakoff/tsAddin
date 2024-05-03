@@ -1,72 +1,76 @@
-import { Cell, Worksheet } from 'exceljs';
-import { CellObjDoubleT, CellObjT } from '../../../../types/typesExcelUtils';
-import { getCell, getCellDouble } from './getCell';
+/* eslint-disable max-len */
+/* eslint-disable no-param-reassign */
+import { Worksheet } from 'exceljs';
+import { CellFullT, CellObjDoubleT, CellObjT } from '../../../../types/typesExcelUtils';
+import { getCellSingle, getCellDouble } from './getCell';
 import { getRow } from './getRow';
 
-const setEmptyFn = (ws: Worksheet, cell: Cell) => {
-    const mainCell = ws.getCell(+cell.row, +cell.col);
-    const titleCell = ws.getCell(+cell.row - 1, +cell.col);
-    mainCell.value = '';
-    titleCell.value = '';
-};
-
-export const setCellDouble = (ws: Worksheet, offsetCell: string) => (setObj: CellObjDoubleT) => {
+// eslint-disable-next-line max-len
+export const setCells = (cells: CellFullT[]) => {
     const {
-        cell, eng, ru, offsetRow, isEmpty, isEmptyCell, height,
-    } = setObj;
+        height, name, isEmptyCell, isEmptyTitle, numFmt,
+    } = cells[0].settings;
     try {
-        const cellObj = getCellDouble(ws, offsetCell)(cell, offsetRow);
-        cellObj.cellEng.value = eng;
-        cellObj.cellRus.value = ru;
+        cells.forEach((c) => {
+            // trycatc
+            const { value } = c.settings;
+            const ws = c.cell.worksheet;
 
-        if (height) {
-            const row = getRow(ws)(cell);
-            row.height = height;
-        }
+            if (value) {
+                c.cell.value = value;
+            }
 
-        if (isEmptyCell) {
-            cellObj.cellEng.value = '';
-            cellObj.cellRus.value = '';
-            return cellObj;
-        }
-        if (isEmpty) {
-            setEmptyFn(ws, cellObj.cellEng);
-            setEmptyFn(ws, cellObj.cellRus);
-        }
-        return cellObj;
+            if (isEmptyCell) {
+                c.cell.value = '';
+                return;
+            }
+
+            if (numFmt) c.cell.numFmt = numFmt;
+
+            if (height) {
+                const row = getRow(ws)(name);
+                row.height = height;
+            }
+            if (isEmptyTitle) {
+                const mainCell = ws.getCell(+c.cell.row, +c.cell.col);
+                const titleCell = ws.getCell(+c.cell.row - 1, +c.cell.col);
+                mainCell.value = '';
+                titleCell.value = '';
+            }
+        });
+        return cells;
     } catch (e) {
-        if (isEmpty) return null;
-        console.error(`Ошибка при установке значения ${cell}`);
+        if (isEmptyTitle) return null;
+        // eslint-disable-next-line no-console
+        console.error(`Ошибка при установке значения ${name}`);
         return null;
     }
 };
 
-export const setCell = (ws: Worksheet) => (setObj: CellObjT) => {
+export const setCellSingle = (ws: Worksheet) => (settings: CellObjT) => {
+    const { name, offsetRow } = settings;
+
+    const cellObj = setCells([
+        {
+            cell: getCellSingle(ws)(name, offsetRow),
+            settings,
+        },
+    ]);
+    return cellObj[0].cell;
+};
+
+export const setCellDouble = (ws: Worksheet, offsetCell: string) => (settings: CellObjDoubleT) => {
     const {
-        cell, value, offsetRow, numFmt, isEmpty, height, isEmptyCell,
-    } = setObj;
-    try {
-        const cellObj = getCell(ws)(cell, offsetRow);
-        if (isEmptyCell) {
-            cellObj.value = '';
-            return cellObj;
-        }
+        name, offsetRow, eng, ru,
+    } = settings;
 
-        if (value) {
-            cellObj.value = value;
-        }
+    const { cellEng, cellRus } = getCellDouble(ws, offsetCell)(name, offsetRow);
+    if (!cellEng) return null;
 
-        if (numFmt) cellObj.numFmt = numFmt;
-        if (height) {
-            const row = getRow(ws)(cell);
-            row.height = height;
-        }
-        if (isEmpty) {
-            setEmptyFn(ws, cellObj);
-        }
-        return cellObj;
-    } catch (e) {
-        console.error(`Ошибка при установке значения ${cell}`);
-        return null;
-    }
+    const cellObj = setCells([
+        { cell: cellEng, settings: { ...(settings as any), value: eng } },
+        { cell: cellRus, settings: { ...(settings as any), value: ru } },
+    ]);
+
+    return { cellEng: cellObj[0].cell, cellRus: cellObj[0].cell };
 };

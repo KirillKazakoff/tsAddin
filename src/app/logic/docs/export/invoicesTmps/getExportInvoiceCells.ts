@@ -36,117 +36,117 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     const doubleObj = {
         common: [
             {
-                cell: 'Инвойс_дата',
+                name: 'Инвойс_дата',
                 eng: `Magadan, ${date.contract('eng')}`,
                 ru: `Магадан, от ${date.contract('ru')}`,
             },
             {
-                cell: 'Инвойс_продавец',
+                name: 'Инвойс_продавец',
                 eng: `${seller.eng.name}`,
                 ru: `${seller.ru.fullNameOrg}`,
             },
             {
-                cell: 'Инвойс_продавец_адрес',
+                name: 'Инвойс_продавец_адрес',
                 eng: `${seller.eng.address}`,
                 ru: `${seller.ru.address}`,
             },
             {
-                cell: 'Инвойс_покупатель',
+                name: 'Инвойс_покупатель',
                 eng: `${agent.name}`,
                 ru: `${agent.name}`,
             },
             {
-                cell: 'Инвойс_покупатель_адрес',
+                name: 'Инвойс_покупатель_адрес',
                 eng: `${agent.address}`,
                 ru: `${agent.address}`,
             },
             {
-                cell: 'Инвойс_получатель',
+                name: 'Инвойс_получатель',
                 eng: `${consignee.fullName}`,
                 ru: `${consignee.fullName}`,
             },
             {
-                cell: 'Инвойс_получатель_адрес',
+                name: 'Инвойс_получатель_адрес',
                 eng: `${consignee.addres}`,
                 ru: `${consignee.addres}`,
             },
             {
-                cell: 'Инвойс_транспорт',
+                name: 'Инвойс_транспорт',
                 eng: `${transport.eng.name}`,
                 ru: `${transport.ru.name}`,
-                isEmpty: invoice.record.terms === 'FCA' || invoice.record.terms === 'EXW',
+                isEmptyTitle: invoice.record.terms === 'FCA' || invoice.record.terms === 'EXW',
             },
             {
-                cell: 'Инвойс_куда',
+                name: 'Инвойс_куда',
                 eng: `${portTo.eng.name}, ${portTo.eng.country}`,
                 ru: `${portTo.ru.name}, ${portTo.ru.country}`,
-                isEmpty: invoice.record.terms === 'EXW',
+                isEmptyTitle: invoice.record.terms === 'EXW',
             },
             {
-                cell: 'Инвойс_откуда',
+                name: 'Инвойс_откуда',
                 eng: `${portFrom?.eng?.name}`,
                 ru: `${portFrom?.ru?.name}`,
-                isEmpty: invoice.record.terms === 'FCA' || invoice.record.terms === 'EXW',
+                isEmptyTitle: invoice.record.terms === 'FCA' || invoice.record.terms === 'EXW',
             },
             {
-                cell: 'Инвойс_изготовитель',
+                name: 'Инвойс_изготовитель',
                 eng: `${vessel.eng.name}`,
                 ru: `${vessel.ru.name}`,
             },
             {
-                cell: 'Инвойс_МСЦ',
+                name: 'Инвойс_МСЦ',
                 eng: msc ? 'MSC-C-52870' : 'Non-MSC product',
                 ru: msc ? 'MSC-C-52870' : 'Non-MSC product',
             },
             {
-                cell: 'Инвойс_условия',
+                name: 'Инвойс_условия',
                 eng: `${terms}, ${portTo.eng.name}`,
                 ru: `${terms}, ${portTo.ru.name}`,
             },
         ],
         exportDefault: [
             {
-                cell: 'Инвойс',
+                name: 'Инвойс',
                 eng: `Commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
                 ru: `Коммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
             },
             {
-                cell: 'Инвойс_соглашение',
+                name: 'Инвойс_соглашение',
                 eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
                 ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
             },
             {
-                cell: 'Инвойс_контракт',
+                name: 'Инвойс_контракт',
                 eng: `to the Contract of sale № ${contract.contractNo}`,
                 ru: `к контракту купли-продажи № ${contract.contractNo}`,
             },
             {
-                cell: 'Инвойс_декларация',
+                name: 'Инвойс_декларация',
                 eng: declarationNo,
                 ru: declarationNo,
-                isEmpty: invoice.record.terms !== 'EXW',
+                isEmptyTitle: invoice.record.terms !== 'EXW',
             },
         ],
         exportStorage: [
             {
-                cell: 'Инвойс',
+                name: 'Инвойс',
                 eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
                 ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
             },
             {
-                cell: 'Инвойс_соглашение',
+                name: 'Инвойс_соглашение',
                 eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
                 ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
             },
             {
-                cell: 'Инвойс_контракт',
+                name: 'Инвойс_контракт',
                 eng: `to the Storage Services Contract No. ${contract.contractNo}`,
                 ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
             },
         ],
         fca: [
             {
-                cell: 'Инвойс',
+                name: 'Инвойс',
                 eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
                 ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
             },
@@ -156,29 +156,29 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     const singleObj = {
         common: [
             {
-                cell: 'Инвойс_подписант',
+                name: 'Инвойс_подписант',
                 value: `Signed by ${exportContractStore.fields.podpisant.eng.name} / ${exportContractStore.fields.podpisant.ru.name}`,
             },
         ],
         exportDefault: [
             {
-                cell: 'Инвойс_банк_получателя',
+                name: 'Инвойс_банк_получателя',
                 value: `Beneficiary Bank: ${bankSeller.eng.name}`,
             },
             {
-                cell: 'Инвойс_банк_получателя_адрес',
+                name: 'Инвойс_банк_получателя_адрес',
                 value: `Bank address: ${bankSeller.address}`,
             },
             {
-                cell: 'Инвойс_банк_получателя_свифт',
+                name: 'Инвойс_банк_получателя_свифт',
                 value: `SWIFT: ${bankSeller.swift}`,
             },
             {
-                cell: 'Инвойс_получатель_в_пользу',
+                name: 'Инвойс_получатель_в_пользу',
                 value: `in forward to ${seller.eng.name}`,
             },
             {
-                cell: 'Инвойс_получатель_счет',
+                name: 'Инвойс_получатель_счет',
                 value: `A/C: ${bankSeller.accountNo}`,
             },
         ],

@@ -22,23 +22,23 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
     };
 
     const common = [
-        { cell: 'Номер_письма', value: getPortLetterNo(contract) },
-        { cell: 'Порт', value: `${fields.portRu.name}` },
-        { cell: 'Порт_директор', value: `${fields.portRu.director}` },
-        { cell: 'Порт_почта', value: `${fields.portRu.mail}` },
-        { cell: 'Подписант_комментарий', value: fields.podpisant.ru.position },
-        { cell: 'Подписант', value: fields.podpisant.ru.name },
+        { name: 'Номер_письма', value: getPortLetterNo(contract) },
+        { name: 'Порт', value: `${fields.portRu.name}` },
+        { name: 'Порт_директор', value: `${fields.portRu.director}` },
+        { name: 'Порт_почта', value: `${fields.portRu.mail}` },
+        { name: 'Подписант_комментарий', value: fields.podpisant.ru.position },
+        { name: 'Подписант', value: fields.podpisant.ru.name },
         {
-            cell: 'Контрольный_звонок',
+            name: 'Контрольный_звонок',
             isEmptyCell: !fields.isControlPhone,
             value: `Передача продукции по контрольному звонку: т. ${phones?.['МСФ']?.phone}`,
         },
         {
-            cell: 'Имя_представитель',
+            name: 'Имя_представитель',
             value: phones?.['ДМА']?.fullName,
         },
         {
-            cell: 'Телефон_представитель',
+            name: 'Телефон_представитель',
             value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
         },
     ];
@@ -48,7 +48,7 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
         common,
         default: [
             {
-                cell: 'Письмо_описание_шапка',
+                name: 'Письмо_описание_шапка',
                 value: `Просим вас рыбопродукцию, ${
                     fields.termsPort.includes('CFR')
                         ? `которая прибудет в п. Владивосток на ${r.transport.ru.name} в адрес ООО "${r.seller.ru.name}" по следующим коносаментам:`
@@ -56,19 +56,19 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
                 }`,
             },
             {
-                cell: 'Письмо_описание_подвал',
+                name: 'Письмо_описание_подвал',
                 value: `передать с ${
                     fields.termsPort.includes('CFR') ? 'борта судна' : 'нашего хранения'
                 } компании ${orgName.buyer}; ИНН ${r.buyer.inn}`,
                 height: 30,
             },
             {
-                cell: 'Покупатель_телефон',
+                name: 'Покупатель_телефон',
                 value: `Контактный телефон: ${r.buyer.phone}`,
                 height: 15,
             },
             {
-                cell: 'Грузовые_борт_склад',
+                name: 'Грузовые_борт_склад',
                 isEmptyCell: !fields.cargoToStorage,
                 value: `Оплата грузовых работ (борт-склад) и хранения с момента закладки будет производиться за счет ${
                     fields.cargoToStorage === 'Покупатель' ? orgName.buyer : orgName.seller
@@ -76,7 +76,7 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
                 height: 30,
             },
             {
-                cell: 'Грузовые_склад_авто',
+                name: 'Грузовые_склад_авто',
                 isEmptyCell: !fields.cargoToAuto,
                 value: `Оплата грузовых работ (склад-авто) будет производиться за счет ${
                     fields.cargoToAuto === 'Покупатель' ? orgName.buyer : orgName.seller
@@ -84,42 +84,42 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
                 height: 30,
             },
             {
-                cell: 'Хранение',
+                name: 'Хранение',
                 isEmptyCell: fields.termsPort !== 'EXW',
                 value: `Хранение стороной продавца осуществляется включительно до ${fields.storageTo}. Хранение покупателя осуществляется с ${fields.storageFrom}`,
                 height: 32,
             },
             {
-                cell: 'Исполнитель_информация',
+                name: 'Исполнитель_информация',
                 value: `Исполнитель: ${phones?.[fields.executive]?.fullName}; телефон: ${phones?.[fields.executive]?.phone}`,
                 height: 25,
             },
             {
-                cell: 'Имя_представитель',
+                name: 'Имя_представитель',
                 value: phones?.['ДМА']?.fullName,
             },
             {
-                cell: 'Телефон_представитель',
+                name: 'Телефон_представитель',
                 value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
             },
         ],
         fca: [
             {
-                cell: 'Письмо_описание_шапка',
+                name: 'Письмо_описание_шапка',
                 value: `Просим Вас рыбопродукцию, которая прибудет на ${r.vessel.code} ${date.delivery} (ориентировочно в 08:00 с уточнением) в адрес ${orgName.seller}`,
             },
             {
-                cell: 'Письмо_описание_подвал',
+                name: 'Письмо_описание_подвал',
                 value: 'Выгрузить на АВТО',
                 height: 20,
             },
             {
-                cell: 'Расходы_компания',
+                name: 'Расходы_компания',
                 value: `Расходы по судозаходу и ПРР просьба выставлять на компанию ${orgName.seller}`,
                 height: 30,
             },
             {
-                cell: 'Выгрузка_ответственный',
+                name: 'Выгрузка_ответственный',
                 value: `При выгрузке ${r.vessel.code} ${date.delivery} расходы по диспетчеризации и подвозу технологического оборудования просим выставлять на ${fields.personDischarge}`,
                 height: 40,
             },
@@ -128,16 +128,16 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
         common,
         samples: [
             {
-                cell: 'Письмо_описание_шапка',
+                name: 'Письмо_описание_шапка',
                 value: `Просим Вас рыбопродукцию, находящуюся на хранении ${orgName.seller} по следующим коносаментам:`,
             },
             {
-                cell: 'Образцы_выдача',
+                name: 'Образцы_выдача',
                 value: `Выдать представителю в г. Владивосток, ${phones?.['ИРК'].fullName} паспорт ${phones?.['ИРК'].passport}, выдан ${phones?.['ИРК'].passportInfo}`,
                 height: 60,
             },
             {
-                cell: 'Образцы_подвал',
+                name: 'Образцы_подвал',
                 value: '- Заказчик предупрежден об ответственности за достоверность сведений, указанных в заявки.\n- Заказчик несет ответственность за все последствия неправильности, неточности или неполноты сведений, указанных им в Заявке',
                 height: 60,
             },
