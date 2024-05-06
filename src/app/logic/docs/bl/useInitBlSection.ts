@@ -2,13 +2,13 @@
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 import { groupByBl, BlGroupT } from './groupByBl';
-import { createNewBL } from './createBl';
+import { createBL } from './createBl';
 
 export const useInitBlSection = () => {
     const table = exportContractStore.currentTable;
 
     const blGroupsArr = Object.values(groupByBl(table));
-    const onLoad = async (group: BlGroupT<ExportRowT>) => createNewBL(group);
+    const onLoad = async (group: BlGroupT<ExportRowT>) => createBL(group);
 
     const onLoadAll = async () => {
         await Promise.all(blGroupsArr.map((group) => onLoad(group)));

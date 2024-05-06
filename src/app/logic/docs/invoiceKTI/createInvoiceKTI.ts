@@ -1,34 +1,27 @@
-import { saveFile } from '../../excel/utils/saveFile';
-import { pathObj } from '../../utils/constants';
-import { readTmp } from '../readTmp';
+import { createDoc } from '../../excel/utils/excelUtilsObj/createDoc';
+import { PathKeyT } from '../../utils/constants';
 import { InvoiceKTIGroupT } from './groupInvoiceKTIByNo';
 import { initInvoiceKTItmp } from './initInvoiceKTItmp';
 import { mergeInvoiceKTICells } from './mergeInvoiceKTICells';
 
-const createInvoiceKTIStorage = async (invoice: InvoiceKTIGroupT) => {
-    const book = await readTmp(pathObj.invoiceKTIStorage);
+export const createInvoiceKTI = (invoice: InvoiceKTIGroupT) => {
+    let tmpPath: PathKeyT;
+    let fileName = '';
 
-    initInvoiceKTItmp(book, invoice);
-    await mergeInvoiceKTICells(book);
-
-    const fileName = `KTI Storage invoice - ${invoice.record.row.invoiceNo}`;
-    await saveFile(book, fileName);
-};
-
-const createInvoiceKTIDischarge = async (invoice: InvoiceKTIGroupT) => {
-    const book = await readTmp(pathObj.invoiceKTIDischarge);
-    initInvoiceKTItmp(book, invoice);
-    // prettier-ignore
-    await mergeInvoiceKTICells(book);
-
-    const fileName = `KTI Discharge invoice - ${invoice.record.row.invoiceNo}`;
-    await saveFile(book, fileName);
-};
-
-export const createInvoiceKTI = async (invoice: InvoiceKTIGroupT) => {
     if (invoice.record.type === 'dischargeInvoicesT') {
-        await createInvoiceKTIDischarge(invoice);
+        tmpPath = 'invoiceKTIDischarge';
+        fileName = `KTI Discharge invoice - ${invoice.record.row.invoiceNo}`;
     } else {
-        await createInvoiceKTIStorage(invoice);
+        tmpPath = 'invoiceKTIStorage';
+        fileName = `KTI Storage invoice - ${invoice.record.row.invoiceNo}`;
     }
+
+    createDoc({
+        tmpPath,
+        initTmpsCb: async (book) => {
+            initInvoiceKTItmp(book, invoice);
+            await mergeInvoiceKTICells(book);
+        },
+        fileName,
+    });
 };

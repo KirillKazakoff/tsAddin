@@ -28,3 +28,5 @@ export const pathObj = {
     },
     bell: `${baseUrl}assets/bell.svg`,
 };
+
+export type PathKeyT = keyof typeof pathObj;

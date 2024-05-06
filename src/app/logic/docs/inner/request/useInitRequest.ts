@@ -1,7 +1,7 @@
 import { useInitInnerContract } from '../innerContract/useInitInnerContract';
-import { createRequestNew } from './createRequestNew';
+import { createRequest } from './createRequest';
 
-export const useInitRequestNew = () => {
+export const useInitRequest = () => {
     const { initObj: iObj } = useInitInnerContract();
 
     const invoicesOnly = iObj.docs.reduce<typeof iObj.docs>((invoices, contract) => {
@@ -13,6 +13,6 @@ export const useInitRequestNew = () => {
 
     return {
         docs: invoicesOnly,
-        onLoad: createRequestNew,
+        onLoad: createRequest,
     };
 };

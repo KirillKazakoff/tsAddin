@@ -1,13 +1,12 @@
 import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
-import { saveFile } from '../../excel/utils/saveFile';
-import { pathObj } from '../../utils/constants';
-import { readTmp } from '../readTmp';
+import { createDoc } from '../../excel/utils/excelUtilsObj/createDoc';
 import { BlGroupT } from './groupByBl';
-import { initNewBlTmp } from './initBlTmp';
+import { initBlTmp } from './initBlTmp';
 
-export const createNewBL = async (blGroup: BlGroupT<ExportRowT>) => {
-    const book = await readTmp(pathObj.newBl);
-    initNewBlTmp(book, blGroup);
-
-    await saveFile(book, blGroup.record.blNo);
+export const createBL = async (blGroup: BlGroupT<ExportRowT>) => {
+    await createDoc({
+        tmpPath: 'newBl',
+        initTmpsCb: (book) => initBlTmp(book, blGroup),
+        fileName: blGroup.record.blNo,
+    });
 };

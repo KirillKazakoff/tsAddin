@@ -8,7 +8,7 @@ import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { RowStyleSettingsT } from '../../excel/utils/styleRowCells';
 import { BlGroupT } from './groupByBl';
 
-export const initNewBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>) => {
+export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>) => {
     const { insertRows, insertRow, deleteStartRows } = utils.initRowMaker({
         cellName: 'Bl_массив',
     });

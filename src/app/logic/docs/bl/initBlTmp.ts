@@ -2,9 +2,9 @@ import ExcelJS from 'exceljs';
 import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 import { BlGroupT } from './groupByBl';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
-import { initNewBlRows } from './initBlRows';
+import { initBlRows } from './initBlRows';
 
-export const initNewBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>) => {
+export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>) => {
     const ws = book.getWorksheet('BL');
     const utils = initExcelUtils(ws, '');
     const { record: r } = blGroup;
@@ -24,7 +24,7 @@ export const initNewBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRow
             { name: 'Зона_вылова', value: 'OKHOTSK SEA' },
             { name: 'Место_дата', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
         ],
-        initRows: () => initNewBlRows(blGroup, utils),
+        initRows: () => initBlRows(blGroup, utils),
         mergeCells: [
             {
                 row: {
