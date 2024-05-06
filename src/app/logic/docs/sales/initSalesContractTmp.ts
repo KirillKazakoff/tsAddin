@@ -1,7 +1,7 @@
 import { Workbook } from 'exceljs';
 import { initSalesTableRows } from './initSalesTableRows';
 import { getSalesContractCells } from './getSalesContractCells';
-import { initSalesRowsDefault } from './initSalesRowsDefault';
+import { initSalesDefaultRows } from './initSalesRowsDefault';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { SalesGroupT } from './groupSalesContract';
 
@@ -21,7 +21,7 @@ export const initSalesContractTmp = async (book: Workbook, contract: SalesGroupT
             utils,
         });
     } else {
-        initSalesRowsDefault(contract, utils);
+        initSalesDefaultRows(contract, utils);
     }
 
     utils.mergeFromTo([

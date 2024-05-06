@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import exportContractStore from '../../../../../stores/docsStores/exportContractStore';
 import { initExportStorageContractRowsR } from './initExportStorageContractRowsR';
 import { initExportStorageContractRows } from './initExportStorageContractRows';
@@ -9,28 +8,31 @@ export const initExportStorageContractTmp = async (
     utils: CellUtilsT<string>,
     agreement: ExportGroupT,
 ) => {
-    if (exportContractStore.operation === 'export_storage') {
-        initExportStorageContractRows(agreement.groupedBy.invoices, utils);
-    }
-    if (exportContractStore.operation === 'certificates') {
-        initExportStorageContractRowsR(agreement.groupedBy.bl, utils);
-    }
-
-    // prettier-ignore
-    utils.mergeFromTo([
-        {
-            row: {
-                from: { name: 'Доставка_транспорт' },
-                to: { name: 'Адреса_покупатель_адрес' },
-            },
-            cols: [[2, 4], [5, 8]],
+    utils.initTmp({
+        initRows() {
+            if (exportContractStore.operation === 'export_storage') {
+                initExportStorageContractRows(agreement.groupedBy.invoices, utils);
+            }
+            if (exportContractStore.operation === 'certificates') {
+                initExportStorageContractRowsR(agreement.groupedBy.bl, utils);
+            }
         },
-        {
-            row: {
-                from: { name: 'Адреса_покупатель_банк_адрес' },
-                to: { name: 'Адреса_покупатель_банк_адрес' },
+        // prettier-ignore
+        mergeCells: [
+            {
+                row: {
+                    from: { name: 'Доставка_транспорт' },
+                    to: { name: 'Адреса_покупатель_адрес' },
+                },
+                cols: [[2, 4], [5, 8]],
             },
-            cols: [[2, 4], [5, 8]],
-        },
-    ]);
+            {
+                row: {
+                    from: { name: 'Адреса_покупатель_банк_адрес' },
+                    to: { name: 'Адреса_покупатель_банк_адрес' },
+                },
+                cols: [[2, 4], [5, 8]],
+            },
+        ],
+    });
 };

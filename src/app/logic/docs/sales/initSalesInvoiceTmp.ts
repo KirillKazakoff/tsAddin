@@ -68,5 +68,5 @@ export const initSalesInvoiceTmp = async (book: Workbook, contract: SalesGroupT)
         true,
     );
 
-    setPrintArea({ endCell: 'Инвойс_продавец_печать_подвал', utils });
+    setPrintArea(utils as any)({ endCell: 'Инвойс_продавец_печать_подвал' });
 };

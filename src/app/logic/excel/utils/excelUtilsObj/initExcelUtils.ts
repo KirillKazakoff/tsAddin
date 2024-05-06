@@ -6,6 +6,8 @@ import { deleteRow } from './deleteRow';
 import { mergeCells, mergeFromTo } from './mergeCells';
 import { initPicturesExcel } from '../../pictures/initPictureExcel';
 import { initRowMaker } from './initRows';
+import { initTmp } from './initTmp';
+import { setPrintArea } from './setPrintArea';
 
 type ResT<
     T1,
@@ -27,9 +29,11 @@ const getUtilsCb: <
     return cb as any;
 };
 
-export const initExcelUtils = <T extends string>(ws: Worksheet, offsetCell: T) => {
+// eslint-disable-next-line no-underscore-dangle
+const _initExcelUtils = <T extends string>(ws: Worksheet, offsetCell: T) => {
     return {
         ws,
+        book: ws.workbook,
         getRow: getRow(ws),
         mergeCells: mergeCells(ws),
         mergeFromTo: mergeFromTo(ws),
@@ -40,4 +44,15 @@ export const initExcelUtils = <T extends string>(ws: Worksheet, offsetCell: T) =
         initRowMaker: initRowMaker(ws),
     };
 };
+
+export const initExcelUtils = <T extends string>(ws: Worksheet, offsetCell: T) => {
+    const utilsMain = _initExcelUtils(ws, offsetCell);
+    return {
+        ...utilsMain,
+        initTmp: initTmp(utilsMain),
+        setPrintArea: setPrintArea(utilsMain),
+    };
+};
+
+export type _CellUtilsT<T extends string> = ReturnType<typeof _initExcelUtils<T>>;
 export type CellUtilsT<T extends string> = ReturnType<typeof initExcelUtils<T>>;

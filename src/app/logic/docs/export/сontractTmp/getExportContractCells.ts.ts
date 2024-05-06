@@ -33,8 +33,6 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
 
     const currency = getCostGoodsStr(agreement);
 
-    console.log(exportContractStore.fields.isNonComFCA);
-
     // prettier-ignore
     const cells = {
         common: [
