@@ -42,6 +42,7 @@ const _initExcelUtils = <T extends string>(ws: Worksheet, offsetCell: T) => {
         setCell: getUtilsCb(ws, setCellSingle, setCellDouble, offsetCell),
         initPictures: initPicturesExcel(ws),
         initRowMaker: initRowMaker(ws),
+        setPrintArea: setPrintArea(ws),
     };
 };
 
@@ -50,7 +51,6 @@ export const initExcelUtils = <T extends string>(ws: Worksheet, offsetCell: T) =
     return {
         ...utilsMain,
         initTmp: initTmp(utilsMain),
-        setPrintArea: setPrintArea(utilsMain),
     };
 };
 

@@ -1,7 +1,5 @@
-/* eslint-disable no-console */
 import ExcelJS from 'exceljs';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
-import { CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { initInvoiceKTIRows } from './initInvoiceKTIRows';
 import { formats } from '../../excel/utils/formats';
@@ -20,62 +18,54 @@ export const initInvoiceKTItmp = (book: ExcelJS.Workbook, invoice: InvoiceKTIGro
         contract: (locale: string) => getExcelDateStr(exportRow.contract.date, locale),
     };
 
-    const cellsEng: CellObjT[] = [
-        { name: 'Инвойс_номер', value: `KTICOLTD - ${row.invoiceNo}` },
-        { name: 'Инвойс_компания', value: exportRow.seller.eng.name },
-        { name: 'Инвойс_дата', value: date.invoice('eng') },
-        {
-            name: 'Инвойс_контракт',
-            value: `Storage Service contract № ${
-                exportRow.contract.contractNo
-            } from ${date.contract('eng')}`,
-        },
-        { name: 'Инвойс_выгрузка_дата', value: date.discharge('eng') },
-        { name: 'Инвойс_транспорт', value: exportRow.transport.eng.name },
-        {
-            name: 'Инвойс_соглашение',
-            value: `Supplementary Agreement №${
-                exportRow.agreementNo
-            } dated ${date.agreement('eng')}`,
-        },
-        {
-            name: 'Инвойс_всего',
-            value: invoice.total.priceTotal.count,
-            numFmt: f.common.price.dollar,
-        },
-    ];
+    utils.initTmp({
+        cells: [
+            { name: 'Инвойс_номер', value: `KTICOLTD - ${row.invoiceNo}` },
+            { name: 'Инвойс_компания', value: exportRow.seller.eng.name },
+            { name: 'Инвойс_дата', value: date.invoice('eng') },
+            {
+                name: 'Инвойс_контракт',
+                value: `Storage Service contract № ${
+                    exportRow.contract.contractNo
+                } from ${date.contract('eng')}`,
+            },
+            { name: 'Инвойс_выгрузка_дата', value: date.discharge('eng') },
+            { name: 'Инвойс_транспорт', value: exportRow.transport.eng.name },
+            {
+                name: 'Инвойс_соглашение',
+                value: `Supplementary Agreement №${
+                    exportRow.agreementNo
+                } dated ${date.agreement('eng')}`,
+            },
+            {
+                name: 'Инвойс_всего',
+                value: invoice.total.priceTotal.count,
+                numFmt: f.common.price.dollar,
+            },
 
-    const cellsRu: CellObjT[] = [
-        { name: 'Инвойс_номер_п', value: `KTICOLTD - ${row.invoiceNo}` },
-        { name: 'Инвойс_компания_п', value: exportRow.seller.ru.name },
-        { name: 'Инвойс_дата_п', value: date.invoice('ru') },
-        {
-            name: 'Инвойс_контракт_п',
-            value: `Договор оказания услуг хранения № ${
-                exportRow.contract.contractNo
-            } from ${date.contract('ru')}`,
-        },
-        { name: 'Инвойс_выгрузка_дата_п', value: date.discharge('ru') },
-        { name: 'Инвойс_транспорт_п', value: exportRow.transport.ru.name },
-        {
-            name: 'Инвойс_соглашение_п',
-            value: `Дополнительное соглашение №${
-                exportRow.agreementNo
-            } от ${date.agreement('ru')}`,
-        },
-        {
-            name: 'Инвойс_всего_п',
-            value: invoice.total.priceTotal.count,
-            numFmt: f.common.price.dollar,
-        },
-    ];
-
-    const cells = [...cellsEng, ...cellsRu];
-
-    cells.forEach((cell) => {
-        utils.setCell(cell);
+            { name: 'Инвойс_номер_п', value: `KTICOLTD - ${row.invoiceNo}` },
+            { name: 'Инвойс_компания_п', value: exportRow.seller.ru.name },
+            { name: 'Инвойс_дата_п', value: date.invoice('ru') },
+            {
+                name: 'Инвойс_контракт_п',
+                value: `Договор оказания услуг хранения № ${
+                    exportRow.contract.contractNo
+                } from ${date.contract('ru')}`,
+            },
+            { name: 'Инвойс_выгрузка_дата_п', value: date.discharge('ru') },
+            { name: 'Инвойс_транспорт_п', value: exportRow.transport.ru.name },
+            {
+                name: 'Инвойс_соглашение_п',
+                value: `Дополнительное соглашение №${
+                    exportRow.agreementNo
+                } от ${date.agreement('ru')}`,
+            },
+            {
+                name: 'Инвойс_всего_п',
+                value: invoice.total.priceTotal.count,
+                numFmt: f.common.price.dollar,
+            },
+        ],
+        initRows: () => initInvoiceKTIRows(invoice, utils),
     });
-
-    initInvoiceKTIRows(invoice, utils);
-    return cells;
 };

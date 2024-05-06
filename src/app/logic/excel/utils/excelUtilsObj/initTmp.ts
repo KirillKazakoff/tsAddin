@@ -44,6 +44,6 @@ export const initTmp = (utils: _CellUtilsT<string>) => async <C>(settings: Setti
         utils.getRow(settings.pageBreakCellName).addPageBreak();
     }
     if (settings?.printSettings) {
-        // utils.setPrintArea(settings.printSettings);
+        utils.setPrintArea(settings.printSettings);
     }
 };

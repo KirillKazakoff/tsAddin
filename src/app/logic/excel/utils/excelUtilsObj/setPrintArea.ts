@@ -1,15 +1,16 @@
 /* eslint-disable no-param-reassign */
-import type { _CellUtilsT } from './initExcelUtils';
+import { Worksheet } from 'exceljs';
+import { getRow } from './getRow';
 
 export type PrintSettingsT = {
     endCell: string;
     offset?: number;
 };
 
-export const setPrintArea = (utils: _CellUtilsT<string>) => (settings: PrintSettingsT) => {
+export const setPrintArea = (ws: Worksheet) => (settings: PrintSettingsT) => {
     const { offset, endCell } = settings;
-    const { cellCount, number } = utils.getRow(endCell, offset || 0);
-    const column = utils.ws.getColumn(cellCount).letter;
+    const { cellCount, number } = getRow(ws)(endCell, offset || 0);
+    const column = ws.getColumn(cellCount).letter;
 
-    utils.ws.pageSetup.printArea = `A1:${column}${number + 1}`;
+    ws.pageSetup.printArea = `A1:${column}${number + 1}`;
 };

@@ -38,7 +38,6 @@ export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) 
         ],
         setNonComPrice: ['данная цена указана', 'this price given'],
         setBlNo: ['bl no'],
-        // removeWithTitles: [],
     };
 
     const mergeArray = [];
