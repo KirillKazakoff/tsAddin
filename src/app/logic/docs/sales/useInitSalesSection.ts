@@ -1,9 +1,9 @@
-/* eslint-disable no-param-reassign */
 import { useInitSection } from '../../../components/Form/useInitSection';
 import { useMyFormik } from '../../../components/Form/useMyFormik';
-import { createSalesContract } from './createSalesContract';
 import { groupSalesContract } from './groupSalesContract';
 import salesContractStore from '../../../stores/docsStores/salesContractStore';
+import { initSalesContractTmp } from './initSalesContractTmp';
+import { initSalesInvoiceTmp } from './initSalesInvoiceTmp';
 
 export const useInitSalesSection = () => {
     const formik = useMyFormik({
@@ -17,10 +17,21 @@ export const useInitSalesSection = () => {
     return useInitSection({
         store: salesContractStore,
         docs: groupSalesContract(),
-        getSettings: (currentDoc) => ({
+        getSettings: (contract) => ({
             formik,
-            loadCb: async () => createSalesContract(currentDoc),
-            title: `Контракт №${currentDoc?.record?.id}`,
+            createDoc: () => {
+                const { id: contractNo, isLive } = contract.record;
+
+                return {
+                    tmpPath: isLive ? 'salesContractLive' : 'salesContract',
+                    fileName: `${contract.record.buyer.code} ${contractNo}`,
+                    initTmpsCb: async (book) => {
+                        await initSalesContractTmp(book, contract);
+                        await initSalesInvoiceTmp(book, contract);
+                    },
+                };
+            },
+            title: `Контракт №${contract?.record?.id}`,
         }),
     });
 };

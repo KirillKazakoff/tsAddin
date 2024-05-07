@@ -1,14 +1,21 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
 import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 import { groupByBl, BlGroupT } from './groupByBl';
-import { createBL } from './createBl';
+import { createDoc } from '../../excel/utils/excelUtilsObj/createDoc';
+import { initBlTmp } from './initBlTmp';
 
 export const useInitBlSection = () => {
     const table = exportContractStore.currentTable;
 
     const blGroupsArr = Object.values(groupByBl(table));
-    const onLoad = async (group: BlGroupT<ExportRowT>) => createBL(group);
+
+    const onLoad = async (group: BlGroupT<ExportRowT>) => {
+        await createDoc({
+            tmpPath: 'newBl',
+            initTmpsCb: (book) => initBlTmp(book, group),
+            fileName: group.record.blNo,
+        });
+    };
 
     const onLoadAll = async () => {
         await Promise.all(blGroupsArr.map((group) => onLoad(group)));

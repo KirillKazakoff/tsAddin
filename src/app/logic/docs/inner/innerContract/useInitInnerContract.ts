@@ -3,7 +3,7 @@ import { useInitSection } from '../../../../components/Form/useInitSection';
 import { useMyFormik } from '../../../../components/Form/useMyFormik';
 import innerContractStore from '../../../../stores/docsStores/innerContractStore';
 import { groupInnerContracts } from '../groupInnerContracts';
-import { createInnerContract } from './createInnerContract';
+import { initInnerContractTmp } from './initInnerContractTmp';
 
 export const useInitInnerContract = () => {
     const formikObj = useMyFormik({
@@ -24,7 +24,15 @@ export const useInitInnerContract = () => {
         docs: groupInnerContracts(),
         getSettings: () => ({
             formik: formikObj,
-            loadCb: createInnerContract,
+            createDoc: (contract) => {
+                const { buyer, id } = contract.record.row;
+
+                return {
+                    fileName: `Договор ${buyer.code} №${id}`,
+                    initTmpsCb: async (book) => initInnerContractTmp(book, contract),
+                    tmpPath: 'innerContract',
+                };
+            },
         }),
     });
 

@@ -37,11 +37,15 @@ export const useInitLetterSection = () => {
         store: letterStore as any,
         getSettings: () => ({
             formik,
-            loadCb: async () => {
-                const href = getHref();
-                document.location.href = href;
-                // refresh stores
-                excelSyncStore.setSync(false);
+            createDoc: () => {
+                return {
+                    initTmpsCb: () => {
+                        const href = getHref();
+                        document.location.href = href;
+                        // refresh stores
+                        excelSyncStore.setSync(false);
+                    },
+                };
             },
         }),
     });

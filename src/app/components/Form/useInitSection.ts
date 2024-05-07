@@ -1,10 +1,14 @@
 /* eslint-disable no-console */
+import {
+    CreateDocSettingsT,
+    createDoc,
+} from '../../logic/excel/utils/excelUtilsObj/createDoc';
 import { useMyFormik } from './useMyFormik';
 
 type DocGen = { record?: { id?: string } };
 type SettingsT<FormValuesT, DocT extends DocGen> = {
     formik: ReturnType<typeof useMyFormik<FormValuesT>>;
-    loadCb: (doc?: DocT) => Promise<void>;
+    createDoc: (doc?: DocT) => CreateDocSettingsT;
     title?: string;
 };
 
@@ -22,7 +26,7 @@ export const useInitSection = <FormValuesT, DocT extends DocGen>(
         ? settings.docs.find((doc) => doc.record.id === store.currentId)
         : null;
 
-    const { formik, title, loadCb } = getSettings(currentDoc);
+    const { formik, title, createDoc: getCreateDocSettings } = getSettings(currentDoc);
 
     const onLoad = async (doc?: DocT) => {
         await formik.formRef.current.validateForm(formik.formRef.current.values);
@@ -34,7 +38,8 @@ export const useInitSection = <FormValuesT, DocT extends DocGen>(
         }
 
         await formik.onSubmit(values);
-        await loadCb(doc);
+
+        await createDoc(getCreateDocSettings(doc));
     };
 
     const onLoadAll = async () => {

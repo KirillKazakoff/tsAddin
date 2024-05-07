@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import _ from 'lodash';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
-import { createAssortiment } from './createAssortiment';
 import { groupAssortiment } from './group/groupAssortiment';
 import { groupSamples } from './group/groupSamples';
-import { createSample } from './createSample';
 import { AssortimentObjT } from './initAssortimentObj';
+import { createDoc } from '../../excel/utils/excelUtilsObj/createDoc';
+import { initAssortiment } from './initAssortiment';
 
 export const useInitAssortimentSection = () => {
     const { exportStorageT, exportT } = tablesStore;
@@ -16,8 +16,24 @@ export const useInitAssortimentSection = () => {
     const samples = groupSamples(_.cloneDeep(rows));
 
     const onLoad = {
-        assortiment: async () => createAssortiment(assortiment),
-        sample: async (sample: AssortimentObjT) => createSample(sample),
+        assortiment: async () => {
+            await createDoc({
+                fileName: `Assortment ${assortiment.record.transport.eng.name}`,
+                initTmpsCb: (book) => {
+                    const ws = book.addWorksheet('assortiment');
+                    initAssortiment(assortiment, ws);
+                },
+            });
+        },
+        sample: async (sample: AssortimentObjT) => {
+            await createDoc({
+                fileName: `Sample plan ${sample.record.consignee.code}`,
+                initTmpsCb: (book) => {
+                    const ws = book.addWorksheet('sample');
+                    initAssortiment(sample, ws);
+                },
+            });
+        },
     };
 
     const onLoadAll = async () => {

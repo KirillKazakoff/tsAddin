@@ -3,8 +3,8 @@ import { useInitSection } from '../../../../components/Form/useInitSection';
 import { useMyFormik } from '../../../../components/Form/useMyFormik';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { TermsT } from '../../../../types/typesTables';
-import { createPortLetter } from './createPortLetter';
 import { groupInnerContracts } from '../groupInnerContracts';
+import { initPortLetterTmp } from './initPortLetterTmp';
 
 export const useInitPortLetter = () => {
     const formik = useMyFormik({
@@ -51,9 +51,21 @@ export const useInitPortLetter = () => {
     return useInitSection({
         store: portLetterStore as any,
         docs: groupInnerContracts(),
-        getSettings: () => ({
+        getSettings: (contract) => ({
             formik,
-            loadCb: createPortLetter,
+            createDoc: () => {
+                const { row } = contract.record;
+
+                return {
+                    tmpPath: 'portLetter',
+                    initTmpsCb: async (book) => initPortLetterTmp(book, contract),
+                    fileName: `Письмо №${row.id} ${
+                        row.type === 'innerT'
+                            ? row.buyer.code
+                            : `${row.seller.code} Образец`
+                    }`,
+                };
+            },
         }),
     });
 };

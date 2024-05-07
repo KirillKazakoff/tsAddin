@@ -2,8 +2,10 @@
 import { useInitSection } from '../../../components/Form/useInitSection';
 import { useMyFormik } from '../../../components/Form/useMyFormik';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
-import { createExportContractDoc } from './createExportContractDoc';
+import { PathKeyT } from '../../utils/constants';
 import { groupAgByNo } from './groupAgByNo';
+import { initExportInvoicesTmps } from './invoicesTmps/initExportInvoicesTmps';
+import { initExportContractTmp } from './сontractTmp/initExportContractTmp';
 
 export const useInitContractSection = () => {
     const formik = useMyFormik({
@@ -27,16 +29,33 @@ export const useInitContractSection = () => {
     return useInitSection({
         store: exportContractStore,
         docs: groupAgByNo(),
-        getSettings: (currentDoc) => {
+        getSettings: (agreement) => {
             return {
                 formik,
-                loadCb: async () => {
-                    await createExportContractDoc(currentDoc);
-                    if (exportContractStore.currentTerms === 'EXW') {
-                        formik.formRef.current.setFieldValue('declaration', '');
-                    }
+                createDoc: () => {
+                    const { invoices } = agreement.groupedBy;
+                    const { operation } = exportContractStore;
+                    const { agreementNo, id } = agreement.record;
+
+                    let tmpPath: PathKeyT = operation === 'export'
+                        ? 'exportContract'
+                        : 'exportStorageContract';
+                    if (agreement.record.terms === 'FCA') tmpPath = 'exportContractFCA';
+
+                    return {
+                        fileName: `Доп №${agreementNo} (${id})`,
+                        initTmpsCb: async (book) => {
+                            await initExportInvoicesTmps(book, invoices);
+                            await initExportContractTmp(book, agreement);
+
+                            if (exportContractStore.currentTerms === 'EXW') {
+                                formik.formRef.current.setFieldValue('declaration', '');
+                            }
+                        },
+                        tmpPath,
+                    };
                 },
-                title: `Контракт №${currentDoc?.record?.id}`,
+                title: `Контракт №${agreement?.record?.id}`,
             };
         },
     });
