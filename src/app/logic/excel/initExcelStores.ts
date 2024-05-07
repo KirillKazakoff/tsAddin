@@ -7,6 +7,7 @@ import {
     ExcelStoresDictionaryT,
     movementDictionary,
     excelStoresDictionary,
+    salesDictionary,
 } from './excelStoresDictionary';
 import { initExcelImages } from './initExcelImages';
 import { initRange } from './utils/initRange';
@@ -14,7 +15,13 @@ import { initRange } from './utils/initRange';
 const getExistedStores = async (context: Excel.RequestContext) => {
     const transformedDictionary: ExcelStoresDictionaryT = [] as any;
 
-    const stores = excelSyncStore.appStatus === 'Docs' ? movementDictionary : excelStoresDictionary;
+    let stores = excelStoresDictionary as ExcelStoresDictionaryT;
+    if (excelSyncStore.appStatus === 'Docs') {
+        stores = movementDictionary;
+    }
+    if (excelSyncStore.appStatus === 'Sales') {
+        stores = salesDictionary;
+    }
 
     for await (const [key, store] of Object.entries(stores)) {
         const storeWS = context.workbook.worksheets.items.find(

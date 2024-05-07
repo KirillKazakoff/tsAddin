@@ -196,3 +196,12 @@ export const movementDictionary = {
     'Экспорт': D['Экспорт'],
     'Образцы': D['Образцы'],
 } satisfies ExcelStoresDictionaryT;
+
+export const salesDictionary = {
+    SPProductionSales: D['SPProductionSales'],
+    SP_Consignee: D['SP_Consignee'],
+    SPAgent: D['SPAgent'],
+
+    Продажи: D['Продажи'],
+    Суда: D['Суда'],
+} satisfies ExcelStoresDictionaryT;
