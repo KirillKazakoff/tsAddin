@@ -68,7 +68,7 @@ export const addAssortimentTable = (
             const fields = {
                 sort: r.record.sort,
                 weight: r?.record?.sortSp?.weight,
-                places: r?.record?.amount.places.count,
+                places: r?.total?.places.count,
                 placesTotal: r.total.placesTotal.count * 1000,
                 samples: table.additional.samples.rows[cycleIndex],
                 percentage: (r.total.placesTotal.count * 1000) / placesTotal.count,
@@ -118,9 +118,13 @@ export const addAssortimentTable = (
     };
     if (!isSample) delete totalFields.samples;
 
-    const sumCb = (address: AddressT) => `SUM(${address.col}${+address.row - 1}:${address.col}${
-        +address.row - table.rows.length
-    })`;
+    const sumCb = (address: AddressT) => {
+        const { length } = table.groupedBy.sort;
+
+        return `SUM(${address.col}${+address.row - 1}:${address.col}${
+            +address.row - length
+        })`;
+    };
 
     insertRow({
         fields: totalFields,
