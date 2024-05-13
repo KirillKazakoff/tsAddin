@@ -31,6 +31,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
         invoice: (language: string) => getExcelDateStr(docDate, language),
         contract: (language: string) => getExcelDateStr(contract.date, language),
     };
+    const { podpisant, isNonComFCA } = exportContractStore.fields;
 
     // prettier-ignore
     const doubleObj = {
@@ -80,7 +81,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_куда',
                 eng: `${portTo.eng.name}, ${portTo.eng.country}`,
                 ru: `${portTo.ru.name}, ${portTo.ru.country}`,
-                isEmptyTitle: invoice.record.terms === 'EXW',
+                isEmptyTitle: invoice.record.terms === 'EXW' && !isNonComFCA,
             },
             {
                 name: 'Инвойс_откуда',
@@ -157,7 +158,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
         common: [
             {
                 name: 'Инвойс_подписант',
-                value: `Signed by ${exportContractStore.fields.podpisant.eng.name} / ${exportContractStore.fields.podpisant.ru.name}`,
+                value: `Signed by ${podpisant.eng.name} / ${podpisant.ru.name}`,
             },
         ],
         exportDefault: [
@@ -194,7 +195,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     if (invoice.record.type === 'exportStorageT') {
         doubleCells.push(...doubleObj.exportStorage);
     }
-    if (terms === 'FCA' && exportContractStore.fields.isNonComFCA) {
+    if (terms === 'FCA' && isNonComFCA) {
         doubleCells.push(...doubleObj.fca);
     }
 

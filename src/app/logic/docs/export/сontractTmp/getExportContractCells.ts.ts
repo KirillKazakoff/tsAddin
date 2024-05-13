@@ -20,8 +20,9 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         type,
     } = agreement.record;
     const { podpisant } = exportContractStore.fields;
-    const { currentTerms: terms } = exportContractStore;
+    const { currentTerms: terms, fields } = exportContractStore;
     const { cohc } = agreement.additional;
+    const { isNonComFCA, departureDate } = fields;
 
     const date = {
         agreement: (locale: string) => getExcelDateStr(dateAgreement, locale),
@@ -204,7 +205,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     name: 'Цена_неком',
                     eng: '2.1 The price is approximate. The final price will be set by the parties after',
                     ru: '2.1  Цена является ориентировочной. Окончательная цена будет установлена.',
-                    height: exportContractStore.fields.isNonComFCA ? 20 : 1,
+                    height: isNonComFCA ? 20 : 1,
                 },
                 {
                     name: 'Доставка_условия',
@@ -218,8 +219,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 },
                 {
                     name: 'Доставка_дата',
-                    eng: `Expected delivery date: ${exportContractStore.fields.departureDate}`,
-                    ru: `Дата поставки ориентировочно: ${exportContractStore.fields.departureDate}`,
+                    eng: `Expected delivery date: ${departureDate}`,
+                    ru: `Дата поставки ориентировочно: ${departureDate}`,
                 },
             ],
         },
@@ -294,13 +295,15 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         if (terms === 'CFR') {
             resArr.push(...cells.export.cfr);
         }
-        if (terms === 'FCA') {
-            resArr.push(...cells.export.fca);
-        }
     }
 
-    if (type === 'exportStorageT') {
+    if (type === 'exportStorageT' && !isNonComFCA) {
         resArr.push(...cells.exportStorage.common);
+    }
+
+    if (terms === 'FCA' || isNonComFCA) {
+        resArr.push(...cells.export.common);
+        resArr.push(...cells.export.fca);
     }
 
     if (type === 'certificatesT') {

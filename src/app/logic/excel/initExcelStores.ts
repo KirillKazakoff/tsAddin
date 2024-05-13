@@ -22,6 +22,9 @@ const getExistedStores = async (context: Excel.RequestContext) => {
     if (excelSyncStore.appStatus === 'Sales') {
         stores = salesDictionary;
     }
+    if (excelSyncStore.appStatus === 'DT') {
+        stores = [] as any;
+    }
 
     for await (const [key, store] of Object.entries(stores)) {
         const storeWS = context.workbook.worksheets.items.find(
@@ -99,6 +102,8 @@ export const initStoresOnFileName = async (context: Excel.RequestContext) => {
             excelSyncStore.setAppStatus('Offer');
         } else if (fileName.includes('движение')) {
             excelSyncStore.setAppStatus('Docs');
+        } else if (fileName.includes('дт_таблица')) {
+            excelSyncStore.setAppStatus('DT');
         } else if (fileName.includes('продажи')) {
             excelSyncStore.setAppStatus('Sales');
         } else {

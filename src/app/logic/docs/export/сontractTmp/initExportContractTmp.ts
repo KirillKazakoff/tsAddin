@@ -14,7 +14,9 @@ export const initExportContractTmp = async (book: Workbook, agreement: ExportGro
     await utils.initTmp({
         cells: getExportContractCells(agreement),
         initTmpCb: async () => {
-            if (operation === 'export_storage' || operation === 'certificates') {
+            const isStorageTmp = operation === 'export_storage' || operation === 'certificates';
+
+            if (isStorageTmp && !fields.isNonComFCA) {
                 await initExportStorageContractTmp(utils, agreement);
             } else {
                 initExportDefaultContractTmp(utils, agreement);
@@ -24,7 +26,7 @@ export const initExportContractTmp = async (book: Workbook, agreement: ExportGro
             isActive: fields.isPictures,
             settings: [
                 {
-                    key: exportContractStore.fields.podpisant.code,
+                    key: fields.podpisant.code,
                     range: { start: 'Sign_seller_start', end: 'Seal_seller_end' },
                 },
                 {

@@ -6,7 +6,8 @@ import NavigatorRoute from './app/routes/NavigatorRoute';
 import { PageStatusRoute } from './app/routes/ErrorRoute/PageStatusRoute';
 import { ExportRoute } from './app/routes/ExportRoute/ExportRoute';
 import { InnerRoute } from './app/routes/InnerRoute/InnerRoute';
-import { SalesRoute } from './app/routes/SalesRoute/SalesRoute';
+import { SalesRoute } from './app/routes/SalesRoute';
+import { DTRoute } from './app/routes/DTRoute/DTRoute';
 
 export default function App() {
     return (
@@ -19,6 +20,7 @@ export default function App() {
                     <Route path='/letter' element={<LetterRoute />} />
                     <Route path='/pageStatus' element={<PageStatusRoute />} />
                     <Route path='/sales' element={<SalesRoute />} />
+                    <Route path='/dt' element={<DTRoute />} />
                 </Route>
             </Routes>
         </Router>

@@ -5,11 +5,11 @@ import InputText from '../../components/Form/InputText';
 import CheckBox from '../../components/CheckBox/CheckBox';
 
 export const ExportFCA = observer(() => {
-    const { currentTerms: terms } = exportContractStore;
+    // const { currentTerms: terms } = exportContractStore;
     const title = 'ETD порт:';
 
-    const isFCA = terms && terms.includes('FCA');
-    if (!isFCA) return null;
+    // const isFCA = terms && terms.includes('FCA');
+    // if (!isFCA) return null;
 
     return (
         <>

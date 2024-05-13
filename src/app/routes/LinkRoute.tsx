@@ -40,6 +40,14 @@ export const LinkRoute = observer(() => {
                 </NavLink>
             );
         }
+        if (appStatus === 'DT') {
+            return (
+                <NavLink to={'/dt'} className={'nav-link'}>
+                    ДТ
+                </NavLink>
+            );
+        }
+
         if (appStatus === 'Docs') {
             return (
                 <>
