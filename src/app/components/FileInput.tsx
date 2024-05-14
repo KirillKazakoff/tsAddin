@@ -17,6 +17,7 @@ const FileInput = ({ onChange, ...rest }: Props) => {
             <label>
                 Click to select some files...
                 <input
+                    multiple
                     ref={ref}
                     {...rest}
                     style={{ display: 'none' }}

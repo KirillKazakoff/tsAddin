@@ -6,7 +6,12 @@ export const DTRoute = observer(() => {
     return (
         <div>
             <h1>DT Route</h1>
-            <FileInput onChange={(e) => console.log(e.target.files)} />
+            <FileInput
+                onChange={(e) => {
+                    const { files } = e.target;
+                    console.log(files);
+                }}
+            />
         </div>
     );
 });
