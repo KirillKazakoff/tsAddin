@@ -23,7 +23,7 @@
         "stop": "office-addin-debugging stop manifest.xml",
         "validate": "office-addin-manifest validate manifest.xml",
         "watch": "webpack --mode development --watch",
-        "push-dir": "push-dir --dir=dist --branch=gh-pages --force --verbose"
+        "deploy": "push-dir --dir=dist --branch=gh-pages --force --verbose"
     },
     "dependencies": {
         "@fluentui/react": "^8.52.3",
