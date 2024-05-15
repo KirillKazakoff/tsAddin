@@ -1,0 +1,482 @@
+{
+    "Signature": {
+        "SignedInfo": {
+            "CanonicalizationMethod": "",
+            "SignatureMethod": "",
+            "Reference": [
+                {
+                    "Transforms": {
+                        "Transform": ""
+                    },
+                    "DigestMethod": "",
+                    "DigestValue": "7XzR3Y8tqic+7BBgciBOdAG7LKH8I8Pa29DlP61ZwAs="
+                },
+                {
+                    "Transforms": {
+                        "Transform": ""
+                    },
+                    "DigestMethod": "",
+                    "DigestValue": "BQSL6SaxAElaR1SIG11Myi24yBs5CtkDhykSApnednM="
+                }
+            ]
+        },
+        "SignatureValue": "MIIE+gYJKoZIhvcNAQcCoIIE6zCCBOcCAQExDjAMBggqhQMHAQECAgUAMAsGCSqGSIb3DQEHATGCBMMwggS/AgEBMIIByjCCAbQxGTAXBgkqhkiG9w0BCQEWCmNhQGllY3AucnUxXTBbBgNVBAkMVNGD0LsuINCg0LDQtNC40L4sINC00L7QvCAyNCwg0LrQvtGA0L/Rg9GBIDEsINC/0L7QvNC10YnQtdC90LjQtSBWLCDQutC+0LzQvdCw0YLQsCAyMzELMAkGA1UEBhMCUlUxHDAaBgNVBAgMEzc3INCzLiDQnNC+0YHQutCy0LAxGTAXBgNVBAcMENCzLiDQnNC+0YHQutCy0LAxMDAuBgNVBAsMJ9Cj0LTQvtGB0YLQvtCy0LXRgNGP0Y7RidC40Lkg0YbQtdC90YLRgDFYMFYGA1UECgxP0JDQutGG0LjQvtC90LXRgNC90L7QtSDQvtCx0YnQtdGB0YLQstC+ICLQkNC90LDQu9C40YLQuNGH0LXRgdC60LjQuSDQptC10L3RgtGAIjEYMBYGBSqFA2QBEg0xMTA1MjYwMDAxMTc1MRUwEwYFKoUDZAQSCjUyNjAyNzA2OTYxNTAzBgNVBAMMLNCQ0J4gItCQ0L3QsNC70LjRgtC40YfQtdGB0LrQuNC5INCm0LXQvdGC0YAiAhAB2hXYviVdkAAGXzU4HQACMAwGCCqFAwcBAQICBQCgggKOMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0MDQyNDIzMTMwNVowLwYJKoZIhvcNAQkEMSIEIKW8kVQ/C7S4vyHTnpVqGGMrZ5BDgkdQZFD45vzBOecgMIICIQYLKoZIhvcNAQkQAi8xggIQMIICDDCCAggwggIEMAoGCCqFAwcBAQICBCDuS6PJmO5maJAJpv3c/+CIKPLxAz28GGRnkxpP4J+ZaTCCAdIwggG8pIIBuDCCAbQxGTAXBgkqhkiG9w0BCQEWCmNhQGllY3AucnUxXTBbBgNVBAkMVNGD0LsuINCg0LDQtNC40L4sINC00L7QvCAyNCwg0LrQvtGA0L/Rg9GBIDEsINC/0L7QvNC10YnQtdC90LjQtSBWLCDQutC+0LzQvdCw0YLQsCAyMzELMAkGA1UEBhMCUlUxHDAaBgNVBAgMEzc3INCzLiDQnNC+0YHQutCy0LAxGTAXBgNVBAcMENCzLiDQnNC+0YHQutCy0LAxMDAuBgNVBAsMJ9Cj0LTQvtGB0YLQvtCy0LXRgNGP0Y7RidC40Lkg0YbQtdC90YLRgDFYMFYGA1UECgxP0JDQutGG0LjQvtC90LXRgNC90L7QtSDQvtCx0YnQtdGB0YLQstC+ICLQkNC90LDQu9C40YLQuNGH0LXRgdC60LjQuSDQptC10L3RgtGAIjEYMBYGBSqFA2QBEg0xMTA1MjYwMDAxMTc1MRUwEwYFKoUDZAQSCjUyNjAyNzA2OTYxNTAzBgNVBAMMLNCQ0J4gItCQ0L3QsNC70LjRgtC40YfQtdGB0LrQuNC5INCm0LXQvdGC0YAiAhAB2hXYviVdkAAGXzU4HQACMAoGCCqFAwcBAQEBBEAahVPyFiiWZSCN15DBF6zx621me1uLyh9x3zGMMES5rdTjxwgZ02PxqLvekuBxyKakcJ1XeibKHh9hzE+p6GJ9",
+        "KeyInfo": {
+            "X509Data": {
+                "X509Certificate": "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"
+            },
+            "MCDId": "f53f9f0b-3379-475f-b9de-2e3a59f63c44",
+            "INNPrincipal": 4909070355
+        },
+        "Object": {
+            "ESADout_CU": {
+                "DocumentID": "7F1469AF-A5CB-48C8-AB69-DBDB134D41C1",
+                "EECEDocHeaderAddInfo": {
+                    "EDocCode": "R.036",
+                    "EDocDateTime": "2024-04-25T16:58:00",
+                    "LanguageCode": "RU",
+                    "SourceCountryCode": "RU",
+                    "DestinationCountryCode": "RU"
+                },
+                "CustomsProcedure": "ЭК",
+                "CustomsModeCode": 10,
+                "ElectronicDocumentSign": "ЭД",
+                "DeclarationKind": "ВТД",
+                "RecipientCountryCode": "RU",
+                "ESADout_CUGoodsShipment": {
+                    "OriginCountryName": "РОССИЯ",
+                    "OriginCountryCode": "RU",
+                    "TotalGoodsNumber": 1,
+                    "TotalPackageNumber": 14,
+                    "TotalSheetNumber": 1,
+                    "TotalCustCost": 69260942.58,
+                    "CustCostCurrencyCode": "RUB",
+                    "ESADout_CUConsignor": {
+                        "SubjectAddressDetails": {
+                            "CountryCode": "RU",
+                            "CounryName": "РОССИЯ"
+                        },
+                        "EqualIndicator": 1
+                    },
+                    "ESADout_CUConsignee": {
+                        "OrganizationName": "MARUKAICHI SUISAN CO., LTD",
+                        "SubjectAddressDetails": {
+                            "PostalCode": "094-0012",
+                            "CountryCode": "JP",
+                            "CounryName": "ЯПОНИЯ",
+                            "Region": "HOKKAIDO",
+                            "City": "MONBETSU",
+                            "StreetHouse": "2-11-7, SHINKO-CHO"
+                        }
+                    },
+                    "ESADout_CUDeclarant": {
+                        "OrganizationName": "ООО&quot;МАГ-СИ ИНТЕРНЕШНЛ&quot;",
+                        "RFOrganizationFeatures": {
+                            "OGRN": 1024900953681,
+                            "INN": 4909070355,
+                            "KPP": 490901001
+                        },
+                        "SubjectAddressDetails": {
+                            "PostalCode": 685000,
+                            "CountryCode": "RU",
+                            "CounryName": "РОССИЯ",
+                            "Region": "МАГАДАНСКАЯ ОБЛАСТЬ",
+                            "City": "Г.МАГАДАН",
+                            "StreetHouse": "УЛ.ПОРТОВАЯ,Д.1"
+                        }
+                    },
+                    "ESADout_CUGoodsLocation": {
+                        "CustomsOffice": 10702080,
+                        "CustomsCountryCode": "RU"
+                    },
+                    "ESADout_CUConsigment": {
+                        "ContainerIndicator": 0,
+                        "DispatchCountryCode": "RU",
+                        "DispatchCountryName": "РОССИЯ",
+                        "DestinationCountryCode": "JP",
+                        "DestinationCountryName": "ЯПОНИЯ",
+                        "ESADout_CUDepartureArrivalTransport": {
+                            "TransportModeCode": 10
+                        },
+                        "ESADout_CUBorderTransport": {
+                            "TransportModeCode": 10,
+                            "TransportNationalityCode": "RU",
+                            "TransportMeansQuantity": 1,
+                            "RUTransportMeans": {
+                                "TransportIdentifier": "КЕДОН",
+                                "TransportMeansNationalityCode": "RU"
+                            }
+                        }
+                    },
+                    "ESADout_CUMainContractTerms": {
+                        "ContractCurrencyCode": "USD",
+                        "ContractCurrencyRate": 92.5058,
+                        "TotalInvoiceAmount": 748720,
+                        "TradeCountryCode": "KR",
+                        "DealFeatureCode": 0,
+                        "DealNatureCode": 10,
+                        "CUESADDeliveryTerms": {
+                            "DeliveryPlace": "МОМБЕЦУ",
+                            "DeliveryTermsStringCode": "FCA"
+                        }
+                    },
+                    "ESADout_CUGoods": {
+                        "GoodsNumeric": 1,
+                        "GoodsDescription": "ЖИВОЙ КРАБ-СТРИГУН ОПИЛИО(CHIONOECETES OPILIO) В ПАНЦИРЕ. ПОГРУЖЕН В СПЕЦИАЛИЗИРОВАННЫЕ КОНТЕЙНЕРЫ С ЧАНАМИ,НАПОЛНЕНЫЕ МОРСКОЙ ВОДОЙ СНАБЖЕННЫЕ СИСТЕМОЙ ЖИЗНЕОБЕСПЕЧЕНИЯ,ВСЕГО ВЕС НЕТТО 74872КГ.ТУ 03.11.30-136-33620410-2017.",
+                        "GrossWeightQuantity": 74872,
+                        "NetWeightQuantity": 74872,
+                        "InvoicedCost": 748720,
+                        "CustomsCost": 69260942.58,
+                        "GoodsTNVEDCode": 306339000,
+                        "BeginPeriodDate": "2024-04-25",
+                        "EndPeriodDate": "2024-05-25",
+                        "OriginCountryCode": "RU",
+                        "CustomsCostCorrectMethod": 1,
+                        "DeliveryTime": "2024-04-25",
+                        "DeliveryTimeEND": "2024-05-25",
+                        "AdditionalSheetCount": 1,
+                        "GoodsGroupDescription": {
+                            "GoodsDescription": ":",
+                            "GoodsGroupInformation": {
+                                "Manufacturer": "РС&quot;КЕДОН&quot;",
+                                "ManufacturerINN": 4909070355,
+                                "ManufacturerOKATO": 44401000000,
+                                "TradeMark": "ТОВАРНЫМ ЗНАКОМ НЕ ОБОЗНАЧЕН"
+                            },
+                            "GroupNum": 1
+                        },
+                        "Preferencii": {
+                            "CustomsTax": "ОО",
+                            "CustomsDuty": "ОО",
+                            "Excise": "-",
+                            "Rate": "--"
+                        },
+                        "LanguageGoods": "RU",
+                        "ESADout_CUPresentedDocument": [
+                            {
+                                "PrDocumentName": "ЛИЦЕНЗИЯ НА ЭКСПОРТ И (ИЛИ) ИМПОРТ ТОВАРОВ",
+                                "PrDocumentNumber": "062RU24002301664",
+                                "PrDocumentDate": "2024-03-22",
+                                "PresentedDocumentModeCode": 1011,
+                                "DocumentBeginActionsDate": "2024-03-22",
+                                "DocumentEndActionsDate": "2025-03-01",
+                                "RecordID": "6E8780D2-F9A9-4201-9010-0B4FDE28C96E",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "ce65af4b-cd55-4a15-9826-f9d6a1801b16",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1006088E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 2,
+                                    "PresentedDocumentModeCode": 1011,
+                                    "CustomsDocIdDetails": {
+                                        "CustomsCode": 10720010,
+                                        "RegistrationDate": "2024-04-23",
+                                        "GTDNumber": 5002787
+                                    }
+                                }
+                            },
+                            {
+                                "PrDocumentName": "КОНОСАМЕНТ",
+                                "PrDocumentNumber": "MMBKD-3M",
+                                "PresentedDocumentModeCode": 2011,
+                                "RecordID": "D5C9088A-485D-4127-B351-4BB004D44E7B",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "ba844abc-06bb-4dc4-aca8-2747aefd26dd",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1003202E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 0,
+                                    "PresentedDocumentModeCode": 2011
+                                }
+                            },
+                            {
+                                "PrDocumentName": "ВОЗМЕЗДНЫЙ ДОГОВОР",
+                                "PrDocumentNumber": "410/33957322/2402",
+                                "PrDocumentDate": "2024-03-06",
+                                "PresentedDocumentModeCode": 3011,
+                                "RecordID": "C2F371D9-5407-4166-910D-7F355745BADE",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "fc125790-6cf4-434f-a67b-432909c9c39d",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1002004E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 2,
+                                    "PresentedDocumentModeCode": 3011,
+                                    "CustomsDocIdDetails": {
+                                        "CustomsCode": 10720010,
+                                        "RegistrationDate": "2024-04-23",
+                                        "GTDNumber": 5002787
+                                    }
+                                }
+                            },
+                            {
+                                "PrDocumentName": "ДОКУМЕНТЫ, ВНОСЯЩИЕ ИЗМЕНЕНИЯ И (ИЛИ) ДОПОЛНЕНИЯ К ДОКУМЕНТУ, СВЕДЕНИЯ О КОТОРОМ УКАЗАНЫ ПОД КОДОМ 03011",
+                                "PrDocumentNumber": 2,
+                                "PrDocumentDate": "2024-04-24",
+                                "PresentedDocumentModeCode": 3012,
+                                "RecordID": "BCD0BD72-C64E-4429-8AAA-2E4CEDDAAE97",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "e76cb0c1-9424-42a7-b42b-336a3a0901ca",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1002014E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 0,
+                                    "PresentedDocumentModeCode": 3012
+                                }
+                            },
+                            {
+                                "PrDocumentName": "СЧЕТ-ПРОФОРМА К ДОГОВОРУ",
+                                "PrDocumentNumber": "3М",
+                                "PrDocumentDate": "2024-04-24",
+                                "PresentedDocumentModeCode": 4025,
+                                "RecordID": "3FBEBAED-5C1F-4121-881B-36D195881C2D",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "1e3e7466-a76b-43a0-98e9-eca76728954a",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1002012E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 0,
+                                    "PresentedDocumentModeCode": 4025
+                                }
+                            },
+                            {
+                                "PrDocumentName": "ДОКУМЕНТ ПО ВАЛЮТНОМУ КОНТРОЛЮ",
+                                "PrDocumentNumber": "24040086/1810/0000/1/1",
+                                "PrDocumentDate": "2024-04-18",
+                                "PresentedDocumentModeCode": 3031,
+                                "RecordID": "E042D467-5957-4182-8757-4A321DA9FDEC",
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 0,
+                                    "PresentedDocumentModeCode": 3031
+                                }
+                            },
+                            {
+                                "PrDocumentName": "СКАН ЛИЦЕНЗИИ",
+                                "PrDocumentNumber": "062RU24002301664",
+                                "PrDocumentDate": "2024-03-22",
+                                "PresentedDocumentModeCode": 9023,
+                                "RecordID": "D9A45CD9-53B9-49D1-BE29-B60DC0CD04CA",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "a4a3e2c0-48a3-42f8-88ef-24670bf828da",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1006110E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 2,
+                                    "PresentedDocumentModeCode": 9023,
+                                    "CustomsDocIdDetails": {
+                                        "CustomsCode": 10720010,
+                                        "RegistrationDate": "2024-04-23",
+                                        "GTDNumber": 5002787
+                                    }
+                                }
+                            },
+                            {
+                                "PrDocumentName": "СВИДЕТЕЛЬСТВО ОГРН",
+                                "PrDocumentNumber": "49 000061325",
+                                "PrDocumentDate": "1997-12-08",
+                                "PresentedDocumentModeCode": 9999,
+                                "RecordID": "C291BF37-0402-419B-8B48-24BC565ABD95",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "ab7db1ff-7e2b-4e26-beab-148ee290f95c",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1006088E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 2,
+                                    "PresentedDocumentModeCode": 9999,
+                                    "CustomsDocIdDetails": {
+                                        "CustomsCode": 10702070,
+                                        "RegistrationDate": "2023-04-26",
+                                        "GTDNumber": 3168217
+                                    }
+                                }
+                            },
+                            {
+                                "PrDocumentName": "СВИДЕТЕЛЬСТВО ИНН",
+                                "PrDocumentNumber": "49 000319150",
+                                "PrDocumentDate": "1998-01-05",
+                                "PresentedDocumentModeCode": 9999,
+                                "RecordID": "F21AFE17-26A2-4BA3-9568-47C1FC9DDA23",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "85c761df-099c-4015-b08e-ec9c7eb16dd6",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1001102E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 2,
+                                    "PresentedDocumentModeCode": 9999,
+                                    "CustomsDocIdDetails": {
+                                        "CustomsCode": 10702070,
+                                        "RegistrationDate": "2023-04-26",
+                                        "GTDNumber": 3168217
+                                    }
+                                }
+                            },
+                            {
+                                "PrDocumentName": "ПРИКАЗ О ПРИЕМЕ НА РАБОТУ",
+                                "PrDocumentNumber": 512,
+                                "PrDocumentDate": "2009-09-23",
+                                "PresentedDocumentModeCode": 9999,
+                                "RecordID": "9F64B4D8-9A3E-40B7-857F-75A91783889C",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "ad18eb98-56a4-498b-a1f3-cefae85ed7cd",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1002005E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 2,
+                                    "PresentedDocumentModeCode": 9999,
+                                    "CustomsDocIdDetails": {
+                                        "CustomsCode": 10702070,
+                                        "RegistrationDate": "2018-04-22",
+                                        "GTDNumber": 49602
+                                    }
+                                }
+                            },
+                            {
+                                "PrDocumentName": "ТРУДОВОЙ ДОГОВОР",
+                                "PrDocumentNumber": "Б/Н",
+                                "PrDocumentDate": "2009-09-23",
+                                "PresentedDocumentModeCode": 9999,
+                                "RecordID": "28EE99FD-A348-4A6A-9530-AFCA19C9ED3C",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "a1ad1c6e-fb25-425e-a3a0-4b92f691415f",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1006088E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 2,
+                                    "PresentedDocumentModeCode": 9999,
+                                    "CustomsDocIdDetails": {
+                                        "CustomsCode": 10720010,
+                                        "RegistrationDate": "2023-12-29",
+                                        "GTDNumber": 3104302
+                                    }
+                                }
+                            },
+                            {
+                                "PrDocumentName": "ОБЯЗАТЕЛЬСТВО",
+                                "PrDocumentNumber": "Б/Н",
+                                "PrDocumentDate": "2024-04-25",
+                                "PresentedDocumentModeCode": 9999,
+                                "RecordID": "9F23D0AE-3EA5-4DA9-800D-3C561E3819FB",
+                                "RFG44PresentedDocId": {
+                                    "ElectronicDocumentID": "d1bcbfe2-3bb8-4c37-b85c-bc6da4a6dce5",
+                                    "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                                    "DocumentModeID": "1006088E"
+                                },
+                                "DocumentPresentingDetails": {
+                                    "DocPresentKindCode": 0,
+                                    "PresentedDocumentModeCode": 9999
+                                }
+                            }
+                        ],
+                        "ESADout_CUCustomsPaymentCalculation": [
+                            {
+                                "PaymentModeCode": 1010,
+                                "PaymentAmount": 7750,
+                                "PaymentCurrencyCode": 643,
+                                "Rate": 7750,
+                                "RateTypeCode": "*",
+                                "RateCurrencyCode": 643,
+                                "RateUseDate": "2024-04-25",
+                                "PaymentCode": "ИУ"
+                            },
+                            {
+                                "PaymentModeCode": 3100,
+                                "PaymentAmount": 3809351.84,
+                                "PaymentCurrencyCode": 643,
+                                "TaxBase": 69260942.58,
+                                "TaxBaseCurrencyCode": 643,
+                                "Rate": 5.5,
+                                "RateTypeCode": "%",
+                                "RateUseDate": "2024-04-25",
+                                "PaymentCode": "ИУ"
+                            }
+                        ],
+                        "ESADGoodsPackaging": {
+                            "PakageQuantity": 14,
+                            "PakageTypeCode": 1,
+                            "PackagePalleteInformation": {
+                                "InfoKindCode": 0,
+                                "PalleteCode": "BM",
+                                "PalleteQuantity": 14
+                            }
+                        },
+                        "ESADCustomsProcedure": {
+                            "MainCustomsModeCode": 10,
+                            "PrecedingCustomsModeCode": 0,
+                            "GoodsTransferFeature": 0
+                        }
+                    },
+                    "ESADout_CUPayments": {
+                        "ESADout_CUCustomsPayment": [
+                            {
+                                "PaymentModeCode": 1010,
+                                "PaymentAmount": 7750,
+                                "PaymentCurrencyCode": 643,
+                                "CurrencyRate": 1,
+                                "RFOrganizationFeatures": {
+                                    "INN": 4909070355
+                                }
+                            },
+                            {
+                                "PaymentModeCode": 3100,
+                                "PaymentAmount": 3809351.84,
+                                "PaymentCurrencyCode": 643,
+                                "CurrencyRate": 1,
+                                "RFOrganizationFeatures": {
+                                    "INN": 4909070355
+                                }
+                            }
+                        ]
+                    }
+                },
+                "FilledPerson": {
+                    "SigningDetails": {
+                        "PersonSurname": "ДОРОНИН",
+                        "PersonName": "МИХАИЛ",
+                        "PersonMiddleName": "АНАТОЛЬЕВИЧ",
+                        "PersonPost": "СПЕЦИАЛИСТ ОТДЕЛА ФЛОТА",
+                        "CommunicationDetails": {
+                            "Phone": 79147356073
+                        },
+                        "SigningDate": "2024-04-25T16:58:00"
+                    },
+                    "SignatoryPersonIdentityDetails": {
+                        "IdentityCardCode": "RU01001",
+                        "IdentityCardName": "ПАСПОРТ",
+                        "IdentityCardSeries": "05 03",
+                        "IdentityCardNumber": 346552,
+                        "IdentityCardDate": "2003-02-03",
+                        "OrganizationName": "ФРУНЗЕНСКИМ РОВД Г.ВЛАДИВОСТОКА",
+                        "DocArchIdDetails": {
+                            "ElectronicDocumentID": "bac5a828-8a79-4259-8790-f2970117c98a",
+                            "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                            "DocumentModeID": "1001204E"
+                        }
+                    },
+                    "PowerOfAttorneyDetails": {
+                        "PrDocumentName": "ДОВЕРЕННОСТЬ",
+                        "PrDocumentNumber": 4,
+                        "PrDocumentDate": "2024-01-01",
+                        "DocStartDate": "2024-01-01",
+                        "DocValidityDate": "2025-01-01",
+                        "DocKindCode": 11004,
+                        "DocArchIdDetails": {
+                            "ElectronicDocumentID": "016af66b-1a4b-49eb-bdff-1dc44ca603a8",
+                            "ElectronicArchID": "df109767-b8a1-4b9a-863c-db546818c69b",
+                            "DocumentModeID": "1002008E"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
