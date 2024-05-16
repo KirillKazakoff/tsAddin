@@ -51,9 +51,9 @@ export const useInitPortLetter = () => {
     return useInitSection({
         store: portLetterStore as any,
         docs: groupInnerContracts(),
-        getSettings: (contract) => ({
+        getSettings: () => ({
             formik,
-            createDoc: () => {
+            createDoc: (contract) => {
                 const { row } = contract.record;
 
                 return {
