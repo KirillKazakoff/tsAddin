@@ -41,10 +41,7 @@ export const useInitContractSection = () => {
                         ? 'exportContract'
                         : 'exportStorageContract';
 
-                    if (
-                        agreement.record.terms === 'FCA'
-                        || exportContractStore.fields.isNonComFCA
-                    ) tmpPath = 'exportContractFCA';
+                    if (agreement.record.terms === 'FCA') tmpPath = 'exportContractFCA';
 
                     return {
                         fileName: `Доп №${agreementNo} (${id})`,

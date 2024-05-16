@@ -1,99 +1,115 @@
 /* eslint-disable no-use-before-define */
+
 export type DTReportT = {
-    Signature: Signature;
+    ED_Container: EDContainer;
 };
 
-type Signature = {
-    SignedInfo: SignedInfo;
-    SignatureValue: string;
-    KeyInfo: KeyInfo;
-    Object: ObjectT[];
-};
-
-type KeyInfo = {
-    X509Data: X509Data;
-    MCDId: string;
-    INNPrincipal: number;
-};
-
-type X509Data = {
-    X509Certificate: string;
-};
-
-type ObjectT = {
-    ESADout_CU: ESADoutCU[];
-};
-
-type ESADoutCU = {
+export type EDContainer = {
     DocumentID: string;
-    EECEDocHeaderAddInfo: EECEDocHeaderAddInfo[];
+    ContainerDoc: ContainerDoc;
+};
+
+export type ContainerDoc = {
+    DocBody: DocBody;
+};
+
+export type DocBody = {
+    ESADout_CU: ESADoutCU;
+};
+
+export type ESADoutCU = {
+    DocumentID: string;
+    EECEDocHeaderAddInfo: EECEDocHeaderAddInfo;
     CustomsProcedure: string;
-    CustomsModeCode: number;
+    CustomsModeCode: string;
     ElectronicDocumentSign: string;
     DeclarationKind: string;
     RecipientCountryCode: string;
-    ESADout_CUGoodsShipment: ESADoutCUGoodsShipment[];
+    ESADout_CUGoodsShipment: ESADoutCUGoodsShipment;
     FilledPerson: FilledPerson;
 };
 
-type EECEDocHeaderAddInfo = {
+export type EECEDocHeaderAddInfo = {
     EDocCode: string;
-    EDocDateTime: Date[];
+    EDocDateTime: Date;
     LanguageCode: string;
     SourceCountryCode: string;
     DestinationCountryCode: string;
 };
 
-type ESADoutCUGoodsShipment = {
+export type ESADoutCUGoodsShipment = {
     OriginCountryName: string;
     OriginCountryCode: string;
-    TotalGoodsNumber: number;
-    TotalPackageNumber: number;
-    TotalSheetNumber: number;
-    TotalCustCost: number;
+    TotalGoodsNumber: string;
+    TotalPackageNumber: string;
+    TotalSheetNumber: string;
+    TotalCustCost: string;
     CustCostCurrencyCode: string;
-    ESADout_CUConsignor: ESADoutCUConsignor[];
-    ESADout_CUConsignee: ESADoutCUConsignee[];
-    ESADout_CUDeclarant: ESADoutCUDeclarant[];
-    ESADout_CUGoodsLocation: ESADoutCUGoodsLocation[];
-    ESADout_CUConsigment: ESADoutCUConsigment[];
-    ESADout_CUMainContractTerms: ESADoutCUMainContractTerms[];
+    ESADout_CUConsignor: ESADoutCUConsignor;
+    ESADout_CUConsignee: ESADoutCUConsignee;
+    ESADout_CUDeclarant: ESADoutCUDeclarant;
+    ESADout_CUGoodsLocation: ESADoutCUGoodsLocation;
+    ESADout_CUConsigment: ESADoutCUConsigment;
+    ESADout_CUMainContractTerms: ESADoutCUMainContractTerms;
     ESADout_CUGoods: ESADoutCUGoods[];
-    ESADout_CUPayments: ESADoutCUPayments[];
+    ESADout_CUPayments: ESADoutCUPayments;
 };
 
-type ESADoutCUConsigment = {
-    ContainerIndicator: number;
+export type ESADoutCUConsigment = {
+    ContainerIndicator: string;
     DispatchCountryCode: string;
     DispatchCountryName: string;
     DestinationCountryCode: string;
     DestinationCountryName: string;
-    ESADout_CUDepartureArrivalTransport: ESADoutCUDepartureArrivalTransport[];
-    ESADout_CUBorderTransport: ESADoutCUBorderTransport[];
+    ESADout_CUDepartureArrivalTransport: ESADoutCUDepartureArrivalTransport;
+    ESADout_CUBorderTransport: ESADoutCUBorderTransport;
 };
 
-type ESADoutCUBorderTransport = {
-    TransportModeCode: number;
+export type ESADoutCUBorderTransport = {
+    TransportModeCode: string;
     TransportNationalityCode: string;
-    TransportMeansQuantity: number;
+    TransportMeansQuantity: string;
     RUTransportMeans: RUTransportMeans;
 };
 
-type RUTransportMeans = {
+export type RUTransportMeans = {
     TransportIdentifier: string;
     TransportMeansNationalityCode: string;
 };
 
-type ESADoutCUDepartureArrivalTransport = {
-    TransportModeCode: number;
+export type ESADoutCUDepartureArrivalTransport = {
+    TransportModeCode: string;
 };
 
-type ESADoutCUConsignee = {
+export type ESADoutCUConsignee = {
     OrganizationName: string;
-    SubjectAddressDetails: ESADoutCUConsigneeSubjectAddressDetails[];
+    SubjectAddressDetails: ESADoutCUConsigneeSubjectAddressDetails;
 };
 
-type ESADoutCUConsigneeSubjectAddressDetails = {
+export type ESADoutCUConsigneeSubjectAddressDetails = {
+    CountryCode: string;
+    CounryName: string;
+    City: string;
+    StreetHouse: string;
+};
+
+export type ESADoutCUConsignor = {
+    SubjectAddressDetails: ESADoutCUConsignorSubjectAddressDetails;
+    EqualIndicator: string;
+};
+
+export type ESADoutCUConsignorSubjectAddressDetails = {
+    CountryCode: string;
+    CounryName: string;
+};
+
+export type ESADoutCUDeclarant = {
+    OrganizationName: string;
+    RFOrganizationFeatures: { [key: string]: string };
+    SubjectAddressDetails: ESADoutCUDeclarantSubjectAddressDetails;
+};
+
+export type ESADoutCUDeclarantSubjectAddressDetails = {
     PostalCode: string;
     CountryCode: string;
     CounryName: string;
@@ -102,199 +118,172 @@ type ESADoutCUConsigneeSubjectAddressDetails = {
     StreetHouse: string;
 };
 
-type ESADoutCUConsignor = {
-    SubjectAddressDetails: ESADoutCUConsignorSubjectAddressDetails[];
-    EqualIndicator: number;
-};
-
-type ESADoutCUConsignorSubjectAddressDetails = {
-    CountryCode: string;
-    CounryName: string;
-};
-
-type ESADoutCUDeclarant = {
-    OrganizationName: string;
-    RFOrganizationFeatures: { [key: string]: number };
-    SubjectAddressDetails: ESADoutCUDeclarantSubjectAddressDetails[];
-};
-
-type ESADoutCUDeclarantSubjectAddressDetails = {
-    PostalCode: number;
-    CountryCode: string;
-    CounryName: string;
-    Region: string;
-    City: string;
-    StreetHouse: string;
-};
-
-type ESADoutCUGoods = {
-    GoodsNumeric: number;
+export type ESADoutCUGoods = {
+    GoodsNumeric: string;
     GoodsDescription: string;
-    GrossWeightQuantity: number;
-    NetWeightQuantity: number;
-    InvoicedCost: number;
-    CustomsCost: number;
-    GoodsTNVEDCode: number;
-    BeginPeriodDate: Date[];
-    EndPeriodDate: Date[];
+    GrossWeightQuantity: string;
+    NetWeightQuantity: string;
+    CustomsCost: string;
+    GoodsTNVEDCode: string;
+    BeginPeriodDate: Date;
+    EndPeriodDate: Date;
     OriginCountryCode: string;
-    CustomsCostCorrectMethod: number;
-    DeliveryTime: Date[];
-    DeliveryTimeEND: Date[];
-    AdditionalSheetCount: number;
-    GoodsGroupDescription: GoodsGroupDescription[];
-    Preferencii: Preferencii[];
+    CustomsCostCorrectMethod: string;
+    DeliveryTime: Date;
+    DeliveryTimeEND: Date;
+    AdditionalSheetCount: string;
+    GoodsGroupDescription: GoodsGroupDescription;
+    Preferencii: Preferencii;
     LanguageGoods: string;
     ESADout_CUPresentedDocument: ESADoutCUPresentedDocument[];
     ESADout_CUCustomsPaymentCalculation: ESADoutCUCustomsPaymentCalculation[];
-    ESADGoodsPackaging: ESADGoodsPackaging[];
-    ESADCustomsProcedure: ESADCustomsProcedure[];
+    ESADGoodsPackaging: ESADGoodsPackaging;
+    ESADCustomsProcedure: ESADCustomsProcedure;
 };
 
-type ESADCustomsProcedure = {
-    MainCustomsModeCode: number;
-    PrecedingCustomsModeCode: number;
-    GoodsTransferFeature: number;
+export type ESADCustomsProcedure = {
+    MainCustomsModeCode: string;
+    PrecedingCustomsModeCode: string;
+    GoodsTransferFeature: string;
 };
 
-type ESADGoodsPackaging = {
-    PakageQuantity: number;
-    PakageTypeCode: number;
-    PackagePalleteInformation: PackagePalleteInformation[];
+export type ESADGoodsPackaging = {
+    PakageQuantity: string;
+    PakageTypeCode: string;
+    PackagePalleteInformation: PackagePalleteInformation;
 };
 
-type PackagePalleteInformation = {
-    InfoKindCode: number;
+export type PackagePalleteInformation = {
+    InfoKindCode: string;
     PalleteCode: string;
-    PalleteQuantity: number;
+    PalleteQuantity: string;
 };
 
-type ESADoutCUCustomsPaymentCalculation = {
-    PaymentModeCode: number;
-    PaymentAmount: number;
-    PaymentCurrencyCode: number;
-    Rate: number;
+export type ESADoutCUCustomsPaymentCalculation = {
+    PaymentModeCode: string;
+    PaymentAmount: string;
+    PaymentCurrencyCode: string;
+    Rate: string;
     RateTypeCode: string;
-    RateCurrencyCode?: number;
-    RateUseDate: Date[];
+    RateCurrencyCode?: string;
+    RateUseDate: Date;
     PaymentCode: string;
-    TaxBase?: number;
-    TaxBaseCurrencyCode?: number;
+    TaxBase?: string;
+    TaxBaseCurrencyCode?: string;
 };
 
-type ESADoutCUPresentedDocument = {
+export type ESADoutCUPresentedDocument = {
     PrDocumentName: string;
-    PrDocumentNumber: number | string;
-    PrDocumentDate?: Date;
-    PresentedDocumentModeCode: number;
-    DocumentBeginActionsDate?: Date;
-    DocumentEndActionsDate?: Date;
+    PrDocumentNumber: string | string;
+    PresentedDocumentModeCode: string;
     RecordID: string;
     RFG44PresentedDocId?: DocArchIDDetails;
     DocumentPresentingDetails: DocumentPresentingDetails;
+    PrDocumentDate?: Date;
 };
 
-type DocumentPresentingDetails = {
-    DocPresentKindCode: number;
-    PresentedDocumentModeCode: number;
+export type DocumentPresentingDetails = {
+    DocPresentKindCode: string;
+    PresentedDocumentModeCode: string;
     CustomsDocIdDetails?: CustomsDocIDDetails;
 };
 
-type CustomsDocIDDetails = {
-    CustomsCode: number;
+export type CustomsDocIDDetails = {
+    CustomsCode: string;
     RegistrationDate: Date;
-    GTDNumber: number;
+    GTDNumber: string;
 };
 
-type DocArchIDDetails = {
+export type DocArchIDDetails = {
     ElectronicDocumentID: string;
     ElectronicArchID: string;
     DocumentModeID: string;
 };
 
-type GoodsGroupDescription = {
+export type GoodsGroupDescription = {
     GoodsDescription: string;
     GoodsGroupInformation: GoodsGroupInformation;
-    GroupNum: number;
+    GroupNum: string;
 };
 
-type GoodsGroupInformation = {
+export type GoodsGroupInformation = {
     Manufacturer: string;
-    ManufacturerINN: number;
-    ManufacturerOKATO: number;
+    ManufacturerINN: string;
+    ManufacturerOKATO: string;
     TradeMark: string;
 };
 
-type Preferencii = {
+export type Preferencii = {
     CustomsTax: string;
     CustomsDuty: string;
     Excise: string;
     Rate: string;
 };
 
-type ESADoutCUGoodsLocation = {
-    CustomsOffice: number;
+export type ESADoutCUGoodsLocation = {
+    InformationTypeCode: string;
+    CustomsOffice: string;
     CustomsCountryCode: string;
 };
 
-type ESADoutCUMainContractTerms = {
+export type ESADoutCUMainContractTerms = {
     ContractCurrencyCode: string;
-    ContractCurrencyRate: number;
-    TotalInvoiceAmount: number;
+    ContractCurrencyRate: string;
+    TotalInvoiceAmount: string;
     TradeCountryCode: string;
-    DealFeatureCode: number;
-    DealNatureCode: number;
+    DealFeatureCode: string;
+    DealNatureCode: string;
     CUESADDeliveryTerms: CUESADDeliveryTerms;
 };
 
-type CUESADDeliveryTerms = {
+export type CUESADDeliveryTerms = {
     DeliveryPlace: string;
     DeliveryTermsStringCode: string;
 };
 
-type ESADoutCUPayments = {
+export type ESADoutCUPayments = {
     ESADout_CUCustomsPayment: ESADoutCUCustomsPayment[];
 };
 
-type ESADoutCUCustomsPayment = {
-    PaymentModeCode: number;
-    PaymentAmount: number;
-    PaymentCurrencyCode: number;
-    CurrencyRate: number;
+export type ESADoutCUCustomsPayment = {
+    PaymentModeCode: string;
+    PaymentAmount: string;
+    PaymentCurrencyCode: string;
+    CurrencyRate: string;
     RFOrganizationFeatures: RFOrganizationFeatures;
 };
 
-type RFOrganizationFeatures = {
-    INN: number;
+export type RFOrganizationFeatures = {
+    INN: string;
 };
 
-type FilledPerson = {
+export type FilledPerson = {
     SigningDetails: SigningDetails;
     SignatoryPersonIdentityDetails: SignatoryPersonIdentityDetails;
     PowerOfAttorneyDetails: PowerOfAttorneyDetails;
 };
 
-type PowerOfAttorneyDetails = {
+export type PowerOfAttorneyDetails = {
     PrDocumentName: string;
-    PrDocumentNumber: number;
+    PrDocumentNumber: string;
     PrDocumentDate: Date;
     DocStartDate: Date;
     DocValidityDate: Date;
-    DocKindCode: number;
+    DocKindCode: string;
     DocArchIdDetails: DocArchIDDetails;
 };
 
-type SignatoryPersonIdentityDetails = {
+export type SignatoryPersonIdentityDetails = {
     IdentityCardCode: string;
     IdentityCardName: string;
     IdentityCardSeries: string;
-    IdentityCardNumber: number;
+    IdentityCardNumber: string;
     IdentityCardDate: Date;
     OrganizationName: string;
     DocArchIdDetails: DocArchIDDetails;
 };
 
-type SigningDetails = {
+export type SigningDetails = {
     PersonSurname: string;
     PersonName: string;
     PersonMiddleName: string;
@@ -303,22 +292,17 @@ type SigningDetails = {
     SigningDate: Date;
 };
 
-type CommunicationDetails = {
-    Phone: number;
+export type CommunicationDetails = {
+    Phone: string;
 };
 
-type SignedInfo = {
-    CanonicalizationMethod: string;
-    SignatureMethod: string;
-    Reference: Reference[];
-};
+// Converts JSON strings to/from your types
+export class Convert {
+    public static toDTRecord(json: string): DTReportT {
+        return JSON.parse(json);
+    }
 
-type Reference = {
-    Transforms: Transforms;
-    DigestMethod: string;
-    DigestValue: string;
-};
-
-type Transforms = {
-    Transform: string;
-};
+    public static dTRecordToJson(value: DTReportT): string {
+        return JSON.stringify(value);
+    }
+}

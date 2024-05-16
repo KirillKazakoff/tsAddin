@@ -8,7 +8,7 @@ import { ExportGroupT } from '../groupAgByNo';
 
 export const initExportContractTmp = async (book: Workbook, agreement: ExportGroupT) => {
     const ws = book.getWorksheet('Export_Contract');
-    const { operation, fields } = exportContractStore;
+    const { operation, fields, currentTerms } = exportContractStore;
     const utils = initExcelUtils(ws, 'MID_Contract');
 
     await utils.initTmp({
@@ -16,7 +16,7 @@ export const initExportContractTmp = async (book: Workbook, agreement: ExportGro
         initTmpCb: async () => {
             const isStorageTmp = operation === 'export_storage' || operation === 'certificates';
 
-            if (isStorageTmp && !fields.isNonComFCA) {
+            if (isStorageTmp && currentTerms !== 'FCA') {
                 await initExportStorageContractTmp(utils, agreement);
             } else {
                 initExportDefaultContractTmp(utils, agreement);

@@ -7,10 +7,12 @@ export const initExportDefaultContractTmp = async (
     utils: CellUtilsT<string>,
     agreement: ExportGroupT,
 ) => {
+    const { terms } = agreement.record;
+    const { invoices } = agreement.groupedBy;
+
     utils.initTmp({
         initRows() {
-            const { invoices } = agreement.groupedBy;
-            if (agreement.record.terms === 'FCA') {
+            if (terms === 'FCA') {
                 initExportDefaultContractRowsFCA(invoices, utils);
             } else {
                 initExportDefaultContractRows(invoices, utils);
@@ -20,7 +22,7 @@ export const initExportDefaultContractTmp = async (
         mergeCells: [
             {
                 row: {
-                    from: { name: 'Цена_всего' },
+                    from: { name: terms === 'FCA' ? 'Цена_неком' : 'Цена_всего' },
                     to: { name: 'Адреса_покупатель_адрес' },
                 },
                 cols: [[2, 5], [6, 9]],

@@ -7,6 +7,11 @@ type CellSettingsT = {
     isEmptyTitle?: boolean;
     isEmptyCell?: boolean;
     height?: number;
+    deleteRows?: {
+        onlyParent?: boolean;
+        start?: number;
+        end?: number;
+    };
 };
 
 export type CellObjDoubleT = CellSettingsT & {

@@ -1,3 +1,7 @@
 node_modules
 dist
-typesExtra
+src/app/typesExtra
+assets/DT_XML.xml
+assets/ВТД.xml
+assets/ПВД.xml
+assets/ЭК10.xml

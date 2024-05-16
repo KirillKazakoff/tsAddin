@@ -24,6 +24,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
         agent,
         vessel,
         declarationNo,
+        type,
     } = invoice.record;
 
     const date = {
@@ -125,7 +126,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_декларация',
                 eng: declarationNo,
                 ru: declarationNo,
-                isEmptyTitle: invoice.record.terms !== 'EXW',
+                isEmptyTitle: invoice.record.terms === 'CFR',
             },
         ],
         exportStorage: [
@@ -145,13 +146,22 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
             },
         ],
-        fca: [
-            {
-                name: 'Инвойс',
-                eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
-                ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
-            },
-        ],
+        fca: {
+            common: [],
+            nonCom: [
+                {
+                    name: 'Инвойс',
+                    eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                    ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+                },
+                {
+                    name: 'Инвойс_декларация',
+                    eng: '',
+                    ru: '',
+                    deleteRows: { start: -1, end: 1 },
+                },
+            ],
+        },
     } satisfies CellDeclarationT<CellDoubleT>;
 
     const singleObj = {
@@ -188,15 +198,17 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     const singleCells = [...singleObj.common];
     const doubleCells = [...doubleObj.common];
 
-    if (invoice.record.type === 'exportT') {
+    if (type === 'exportT') {
         singleCells.push(...singleObj.exportDefault);
         doubleCells.push(...doubleObj.exportDefault);
     }
-    if (invoice.record.type === 'exportStorageT') {
+
+    if (type === 'exportStorageT') {
         doubleCells.push(...doubleObj.exportStorage);
-    }
-    if (terms === 'FCA' && isNonComFCA) {
-        doubleCells.push(...doubleObj.fca);
+
+        if (terms === 'FCA') {
+            doubleCells.push(...doubleObj.fca.nonCom);
+        }
     }
 
     return { double: doubleCells, single: singleCells };

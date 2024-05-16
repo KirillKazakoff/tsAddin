@@ -68,6 +68,12 @@ export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) 
                 merge.row.start = +cell.row + 1;
                 merge.row.end = +cell.row + 1;
 
+                // const mergeTitle = initMerge();
+                // mergeTitle.col = merge.col;
+                // mergeTitle.row.start = +cell.row;
+                // mergeTitle.row.end = +cell.row;
+                // mergeArray.push(mergeTitle);
+
                 mergeArray.push(merge);
             },
 

@@ -33,7 +33,11 @@ export const setExportStorage = (table: any[][]) => {
         },
 
         row: (r) => {
-            return getExportRow({ ...r, terms: 'EXW' });
+            const terms = r.product.toLowerCase().includes('живой') ? 'FCA' : 'EXW';
+            return getExportRow({
+                ...r,
+                terms,
+            });
         },
     });
 };

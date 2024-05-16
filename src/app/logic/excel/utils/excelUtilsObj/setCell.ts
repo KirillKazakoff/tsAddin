@@ -4,21 +4,38 @@ import { Worksheet } from 'exceljs';
 import { CellFullT, CellObjDoubleT, CellObjT } from '../../../../types/typesExcelUtils';
 import { getCellSingle, getCellDouble } from './getCell';
 import { getRow } from './getRow';
+import { deleteRow } from './deleteRow';
 
 // eslint-disable-next-line max-len
 export const setCells = (cells: CellFullT[]) => {
     const {
-        height, name, isEmptyCell, isEmptyTitle, numFmt,
+        height,
+        name,
+        isEmptyCell,
+        isEmptyTitle,
+        numFmt,
+        deleteRows: deleteSettings,
     } = cells[0].settings;
     try {
         cells.forEach((c) => {
-            // trycatc
             const { value } = c.settings;
             const ws = c.cell.worksheet;
+            const mainCell = ws.getCell(+c.cell.row, +c.cell.col);
+            const titleCell = ws.getCell(+c.cell.row - 1, +c.cell.col);
 
-            if (value) {
-                c.cell.value = value;
+            if (deleteSettings) {
+                if (deleteSettings.onlyParent) {
+                    deleteRow(ws)(name, 0);
+                } else {
+                    for (let i = deleteSettings.start; i < deleteSettings.end; i += 1) {
+                        deleteRow(ws)(name, i);
+                    }
+                }
+
+                return;
             }
+
+            if (value) c.cell.value = value;
 
             if (isEmptyCell) {
                 c.cell.value = '';
@@ -32,8 +49,6 @@ export const setCells = (cells: CellFullT[]) => {
                 row.height = height;
             }
             if (isEmptyTitle) {
-                const mainCell = ws.getCell(+c.cell.row, +c.cell.col);
-                const titleCell = ws.getCell(+c.cell.row - 1, +c.cell.col);
                 mainCell.value = '';
                 titleCell.value = '';
             }
@@ -41,6 +56,7 @@ export const setCells = (cells: CellFullT[]) => {
         return cells;
     } catch (e) {
         if (isEmptyTitle) return null;
+        // console.log(e);
         // eslint-disable-next-line no-console
         console.error(`Ошибка при установке значения ${name}`);
         return null;
