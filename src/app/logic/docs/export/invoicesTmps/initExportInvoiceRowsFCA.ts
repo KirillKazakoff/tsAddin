@@ -28,7 +28,7 @@ export const initExportInvoiceRowsFCA = (
                 m5: '',
                 price: r.amount.price.count,
                 m6: '',
-                priceTotal: r.amount.priceTotal.count,
+                priceTotal: total.priceTotal.count,
             };
 
             // prettier-ignore
