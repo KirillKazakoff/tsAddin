@@ -51,7 +51,7 @@ export type ESADoutCUGoodsShipment = {
     ESADout_CUGoodsLocation: ESADoutCUGoodsLocation;
     ESADout_CUConsigment: ESADoutCUConsigment;
     ESADout_CUMainContractTerms: ESADoutCUMainContractTerms;
-    ESADout_CUGoods: ESADoutCUGoods[];
+    ESADout_CUGoods: ESADoutCUGoodsT[];
     ESADout_CUPayments: ESADoutCUPayments;
 };
 
@@ -118,7 +118,7 @@ export type ESADoutCUDeclarantSubjectAddressDetails = {
     StreetHouse: string;
 };
 
-export type ESADoutCUGoods = {
+export type ESADoutCUGoodsT = {
     GoodsNumeric: string;
     GoodsDescription: string;
     GrossWeightQuantity: string;
@@ -135,7 +135,7 @@ export type ESADoutCUGoods = {
     GoodsGroupDescription: GoodsGroupDescription;
     Preferencii: Preferencii;
     LanguageGoods: string;
-    ESADout_CUPresentedDocument: ESADoutCUPresentedDocument[];
+    ESADout_CUPresentedDocument: EADocumentT[];
     ESADout_CUCustomsPaymentCalculation: ESADoutCUCustomsPaymentCalculation[];
     ESADGoodsPackaging: ESADGoodsPackaging;
     ESADCustomsProcedure: ESADCustomsProcedure;
@@ -172,7 +172,7 @@ export type ESADoutCUCustomsPaymentCalculation = {
     TaxBaseCurrencyCode?: string;
 };
 
-export type ESADoutCUPresentedDocument = {
+export type EADocumentT = {
     PrDocumentName: string;
     PrDocumentNumber: string | string;
     PresentedDocumentModeCode: string;

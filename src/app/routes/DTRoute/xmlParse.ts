@@ -1,7 +1,8 @@
+/* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import xml2js from 'browser-xml2js';
 // import xml2js from 'xml2js';
-import { DTReportT } from '../../types/DTtype';
+import { DTReportT, EADocumentT } from '../../types/DTtype';
 
 export const xmlParse = (xml: any) => {
     xml2js.parseString(
@@ -13,7 +14,6 @@ export const xmlParse = (xml: any) => {
             mergeAttrs: false,
         },
         (err: any, json: DTReportT) => {
-            console.log(json);
             const report = json.ED_Container.ContainerDoc.DocBody.ESADout_CU;
             console.log(report);
 
@@ -26,35 +26,46 @@ export const xmlParse = (xml: any) => {
                 ESADout_CUGoods: products,
             } = report.ESADout_CUGoodsShipment;
 
+            const initDocBundle = () => ({
+                blNo: '',
+                contractNo: '',
+                contractDocs: <EADocumentT[]>[],
+                invoiceNo: '',
+                date: '',
+            });
+
+            console.log(products);
+
             const parsed = products.map((product) => {
-                const documents = product.ESADout_CUPresentedDocument.reduce(
-                    (total, val) => {
-                        const docName = val.PrDocumentName;
-                        const docNumber = val.PrDocumentNumber;
-                        const docTotal = {
-                            bl: '',
-                            agreement: '',
-                            contract: '',
-                            invoice: '',
-                        };
+                const documents = product.ESADout_CUPresentedDocument.reduce<
+                ReturnType<typeof initDocBundle>
+                >((total, val) => {
+                    const docName = val.PrDocumentName;
+                    const docNumber = val.PrDocumentNumber;
+                    const docDate = val.PrDocumentDate;
 
-                        if (docName === 'КОНОСАМЕНТ') {
-                            docTotal.bl = docNumber;
-                        }
-                        if (docName === 'ДОГОВОР ХРАНЕНИЯ') {
-                            docTotal.agreement = docNumber;
-                        }
-                        if (docName === 'НЕКОММЕРЧЕСКИЙ ИНВОЙС') {
-                            docTotal.invoice === docNumber;
-                        }
-                        // if (docName === '')
-                        // return {
-
+                    if (docName === 'КОНОСАМЕНТ') {
+                        total.blNo = docNumber;
+                    }
+                    // prettier-ignore
+                    if (docName.includes('ДОГОВОР') && !docName.includes('ТРУДОВОЙ') && !docName.includes('К ДОГОВОРУ')) {
+                        total.contractNo = docNumber;
+                    }
+                    if (docName.includes('ИНВОЙС')) {
+                        total.invoiceNo = docNumber;
+                        total.date = docDate.toString();
+                    }
+                    // prettier-ignore
+                    if (docName.includes('ДОКУМЕНТЫ, ВНОСЯЩИЕ ИЗМЕНЕНИЯ И (ИЛИ) ДОПОЛНЕНИЯ К ДОКУМЕНТУ, СВЕДЕНИЯ О КОТОРОМ УКАЗАНЫ ПОД КОДОМ 03011')) {
+                        total.contractDocs.push(val);
+                        // if (docDate.toString() === total.date) {
+                        //     total.agreementNo = docNumber;
                         // }
-                        return total;
-                    },
-                    {},
-                );
+                    }
+
+                    return total;
+                }, initDocBundle());
+
                 const parsedProd = {
                     consignee: consignee.OrganizationName,
                     declarant: declarant.OrganizationName,
@@ -85,14 +96,14 @@ export const xmlParse = (xml: any) => {
                             },
                         },
                         priceCustoms: product.CustomsCost,
-                        document: {},
+                        documents,
                     },
                 };
 
                 return parsedProd;
             });
 
-            return parsed;
+            console.log(parsed);
         },
     );
 };

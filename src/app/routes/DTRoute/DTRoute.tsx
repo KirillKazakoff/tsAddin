@@ -12,13 +12,13 @@ export const DTRoute = observer(() => {
 
     const url = {
         init: './assets/DT_XML.xml',
-        vtd: './assets/ВТД.XML',
+        vtd: './assets/ВТД.xml',
         pvd: './assets/ПВД.xml',
         ek10: './assets/ЭК10.xml',
     };
 
     useEffect(() => {
-        fetch(url.pvd).then((res) => {
+        fetch(url.vtd).then((res) => {
             res.blob().then((blob) => {
                 reader.readAsText(blob);
             });

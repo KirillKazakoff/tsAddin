@@ -15,6 +15,9 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
         delivery: getExcelDateStr(r.deliveryDate, 'ru'),
     };
 
+    let isPaymentMore = r.paymentDate > r.deliveryDate;
+    if (!r.deliveryDate) isPaymentMore = false;
+
     const richText = ({ text, isBold }: { text: string; isBold?: boolean }) => ({
         font: { name: 'Times New Roman', size: 11, bold: isBold },
         text,
@@ -52,7 +55,7 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
                 name: 'Договор_оплата_дата',
                 value: {
                     richText: [
-                        richText({ text: '4.1. Покупатель обязан внести предоплату в размере 100 % стоимости товара, указанной в п. 2.2 настоящего договора, путем перечисления денежных средств на расчетный счет Поставщика на основании счета ' }),
+                        richText({ text: `4.1. Покупатель обязан внести ${isPaymentMore ? 'оплату' : 'предоплату'} в размере 100 % стоимости товара, указанной в п. 2.2 настоящего договора, путем перечисления денежных средств на расчетный счет Поставщика на основании счета ` }),
                         richText({ text: `до ${date.payment} `, isBold: true }),
                         richText({ text: 'Денежные обязательства Покупателя считаются исполненными с момента зачисления денежных средств на расчетный счет Поставщика.' }),
                     ],
@@ -140,7 +143,7 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
         exw: [
             {
                 name: 'Договор_передача_EXW',
-                value: `4.2. Товар передается Покупателю с холодильника в порту Владивосток после внесения предоплаты. Грузовые работы с холодильника в порту ${r.port.code} – за счет ${r.cargo === 'Покупатель' ? 'Покупателя' : 'Поставщика'}.`,
+                value: `4.2. Товар передается Покупателю с холодильника в порту Владивосток ${isPaymentMore ? date.delivery : 'после внесения предоплаты.'} Грузовые работы с холодильника в порту ${r.port.code} – за счет ${r.cargo === 'Покупатель' ? 'Покупателя' : 'Поставщика'}.`,
                 height: 30,
             },
             {
