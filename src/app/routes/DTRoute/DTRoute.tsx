@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import FileInput from '../../components/FileInput';
-import { xmlParse } from './xmlParse';
+import { addRowsDT } from './addRowDT';
 
 export const DTRoute = observer(() => {
     const reader = new FileReader();
 
     reader.onload = async function callback() {
-        xmlParse(reader.result);
+        addRowsDT({ id: '100', xml: reader.result });
     };
 
     const url = {
@@ -18,7 +18,7 @@ export const DTRoute = observer(() => {
     };
 
     useEffect(() => {
-        fetch(url.vtd).then((res) => {
+        fetch(url.pvd).then((res) => {
             res.blob().then((blob) => {
                 reader.readAsText(blob);
             });
@@ -36,12 +36,14 @@ export const DTRoute = observer(() => {
     //     reader.readAsText(files[0]);
     // };
 
-    const onChange = () => {};
-
     return (
         <div>
             <h1>DT Route</h1>
-            <FileInput onChange={onChange} />
+            <FileInput
+                onChange={(e) => {
+                    console.log(e.currentTarget.files[0].name);
+                }}
+            />
         </div>
     );
 });

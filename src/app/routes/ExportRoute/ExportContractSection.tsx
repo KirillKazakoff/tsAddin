@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
 import CheckBox from '../../components/CheckBox/CheckBox';
@@ -12,6 +12,10 @@ import exportContractStore from '../../stores/docsStores/exportContractStore';
 
 export const ExportContractSection = observer(() => {
     const { formik, initObj } = useInitContractSection();
+
+    // useEffect(() => {
+    //     console.log(initObj.currentDoc);
+    // });
 
     return (
         <div className='export-section'>

@@ -217,13 +217,13 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 com: [
                     {
                         name: 'Цена_неком',
-                        eng: `2.1 The final price agreed upon by the parties after the cargo discharging at the ${portTo.eng.name} port of destination is detailed in the table in Item 1 of this Appendix.`,
+                        eng: `2.1 The final price agreed upon by the parties after the cargo discharging at the ${portTo.eng.name} port of destination is detailed in the table in Item 1 of this Agreement.`,
                         ru: `2.1 Окончательная цена, установленная сторонами по результатам выгрузки в порту назначения ${portTo.ru.name}, указана в таблице в п. 1 настоящего Дополнения.`,
                     },
                     {
                         name: 'Доставка_условия',
-                        eng: `3.1 The delivery was carried out under conditions of the FCA ${portTo.eng.name} in accordance with Appendix ${storageAgreementRow.agreementNo} dated ${date.storageAgreementDate('eng')} to the Contract of Sales No.${storageAgreementRow.contract.contractNo} dated ${date.agreement('eng')}. Acceptance and transfer of Goods in terms of quantity and quality was carried out on the territory of ${portTo.eng.countryFull} in the settlement of ${portTo.eng.name}.`,
-                        ru: `3.1 Поставка осуществлялась на условиях FCA ${portTo.ru.name} в рамках Дополнения № ${storageAgreementRow.agreementNo} к контракту ${storageAgreementRow.contract.contractNo} от ${date.storageAgreementDate('ru')} Приемка-передача Товара по количеству и качеству производилась на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}.`,
+                        eng: `3.1 The delivery was carried out under conditions of the FCA ${portTo.eng.name} in accordance with Agreement ${storageAgreementRow.agreementNo} dated ${date.storageAgreementDate('eng')} to the Contract of Sales No.${storageAgreementRow.contract.contractNo} dated ${date.contract('eng')}. Acceptance and transfer of Goods in terms of quantity and quality was carried out on the territory of ${portTo.eng.countryFull} in the settlement of ${portTo.eng.name}.`,
+                        ru: `3.1 Поставка осуществлялась на условиях FCA ${portTo.ru.name} в рамках Дополнения № ${storageAgreementRow.agreementNo} от ${date.storageAgreementDate('ru')} к контракту ${storageAgreementRow.contract.contractNo} от ${date.contract('ru')} Приемка-передача Товара по количеству и качеству производилась на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}.`,
                         height: terms === 'FCA' ? 60 : 45,
                     },
                     {
@@ -238,6 +238,16 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     },
                 ],
                 nonCom: [
+                    {
+                        name: 'Соглашение',
+                        eng: `AGREEMENT No. ${agreementNo} dated ${date.agreement('eng')}`,
+                        ru: `Дополнение № ${agreementNo} от ${date.agreement('ru')}`,
+                    },
+                    {
+                        name: 'Контракт',
+                        eng: `to a contract of sale No. ${contract.contractNo}`,
+                        ru: `к контракту купли-продажи № ${contract.contractNo}`,
+                    },
                     {
                         name: 'Цена_всего',
                         eng: `${currency.eng}`,

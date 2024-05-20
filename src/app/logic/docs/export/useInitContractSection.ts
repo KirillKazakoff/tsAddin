@@ -30,9 +30,12 @@ export const useInitContractSection = () => {
         store: exportContractStore,
         docs: groupAgByNo(),
         getSettings: (agreement) => {
+            console.log(agreement);
+
             return {
                 formik,
                 createDoc: () => {
+                    console.log(agreement);
                     const { invoices } = agreement.groupedBy;
                     const { operation } = exportContractStore;
                     const { agreementNo, id } = agreement.record;

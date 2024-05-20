@@ -10,6 +10,7 @@ import type { NordmileRowT } from './set/setNordmile';
 import type { SalesRowT } from './set/setSales';
 import type { CustomsRowT } from './set/setCustoms';
 import type { InnerSampleRowT } from './set/setSamplesInner';
+import type { DTRowT } from './set/setDT';
 
 class TablesStore {
     matesT: MateRowT[] = [];
@@ -21,6 +22,7 @@ class TablesStore {
     dischargeInvoicesT: InvoiceKTIRowT[] = [];
     storageInvoicesT: InvoiceKTIRowT[] = [];
     salesT: SalesRowT[] = [];
+    dtT: DTRowT[] = [];
     customsT: CustomsRowT[] = [];
     samplesInnerT: InnerSampleRowT[] = [];
 
@@ -36,6 +38,7 @@ class TablesStore {
         sales: initTableStatus(),
         customs: initTableStatus(),
         samplesInnerT: initTableStatus(),
+        dt: initTableStatus(),
     };
 
     constructor() {

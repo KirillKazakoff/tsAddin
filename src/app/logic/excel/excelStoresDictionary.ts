@@ -22,6 +22,7 @@ import { setTransports } from '../../stores/spsStore/set/setTransport';
 import { setVessels } from '../../stores/spsStore/set/setVessels';
 import { setCertificates } from '../../stores/tablesStore/set/setCertificates';
 import { setCustoms } from '../../stores/tablesStore/set/setCustoms';
+import { setDT } from '../../stores/tablesStore/set/setDT';
 import { setDischargeInvoices } from '../../stores/tablesStore/set/setDischargeInvoices';
 import { setExport } from '../../stores/tablesStore/set/setExport';
 import { setExportStorage } from '../../stores/tablesStore/set/setExportStorage';
@@ -160,6 +161,10 @@ export const excelStoresDictionary = {
         table: 'Nordmile',
         setter: setNordmile,
     },
+    'DT': {
+        table: 'DT',
+        setter: setDT,
+    },
 } satisfies Record<string, ExcelStoreT>;
 
 const D = excelStoresDictionary;
@@ -204,4 +209,8 @@ export const salesDictionary = {
 
     Продажи: D['Продажи'],
     Суда: D['Суда'],
+} satisfies ExcelStoresDictionaryT;
+
+export const dtDictionary = {
+    DT: D['DT'],
 } satisfies ExcelStoresDictionaryT;

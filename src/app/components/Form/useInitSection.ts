@@ -26,6 +26,8 @@ export const useInitSection = <FormValuesT, DocT extends DocGen>(
         ? settings.docs.find((doc) => doc.record.id === store.currentId)
         : null;
 
+    console.log(currentDoc);
+
     const { formik, title, createDoc: getCreateDocSettings } = getSettings(currentDoc);
 
     const onLoad = async (doc?: DocT) => {

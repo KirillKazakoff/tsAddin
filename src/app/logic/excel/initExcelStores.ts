@@ -8,6 +8,7 @@ import {
     movementDictionary,
     excelStoresDictionary,
     salesDictionary,
+    dtDictionary,
 } from './excelStoresDictionary';
 import { initExcelImages } from './initExcelImages';
 import { initRange } from './utils/initRange';
@@ -23,7 +24,7 @@ const getExistedStores = async (context: Excel.RequestContext) => {
         stores = salesDictionary;
     }
     if (excelSyncStore.appStatus === 'DT') {
-        stores = [] as any;
+        stores = dtDictionary;
     }
 
     for await (const [key, store] of Object.entries(stores)) {
