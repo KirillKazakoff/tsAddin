@@ -12,13 +12,13 @@ export const headerRecognition = <T extends RecordInputT>(
     tableType: 'sp' | 'table',
 ): RecordOutputT<T> => {
     const arrayed = Object.keys(rowSettings).reduce<RecordMiddleT<T>>((total, key) => {
-        const header = rowSettings[key];
+        const header = rowSettings[key].trim();
         total[key as keyof T] = [header, 0];
         return total;
     }, {} as RecordMiddleT<T>);
 
     Object.values(arrayed).forEach((tuple) => {
-        tuple[1] = headers.findIndex((title) => title === tuple[0]);
+        tuple[1] = headers.findIndex((title) => title.trim() === tuple[0]);
 
         if (tuple[1] === -1) {
             popupStore.pushStatus({

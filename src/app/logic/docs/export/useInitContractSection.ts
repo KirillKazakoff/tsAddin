@@ -29,28 +29,25 @@ export const useInitContractSection = () => {
     return useInitSection({
         store: exportContractStore,
         docs: groupAgByNo(),
-        getSettings: (agreement) => {
-            console.log(agreement);
-
+        getSettings: (current) => {
             return {
                 formik,
                 createDoc: () => {
-                    console.log(agreement);
-                    const { invoices } = agreement.groupedBy;
+                    const { invoices } = current.groupedBy;
                     const { operation } = exportContractStore;
-                    const { agreementNo, id } = agreement.record;
+                    const { agreementNo, id } = current.record;
 
                     let tmpPath: PathKeyT = operation === 'export'
                         ? 'exportContract'
                         : 'exportStorageContract';
 
-                    if (agreement.record.terms === 'FCA') tmpPath = 'exportContractFCA';
+                    if (current.record.terms === 'FCA') tmpPath = 'exportContractFCA';
 
                     return {
                         fileName: `Доп №${agreementNo} (${id})`,
                         initTmpsCb: async (book) => {
                             await initExportInvoicesTmps(book, invoices);
-                            await initExportContractTmp(book, agreement);
+                            await initExportContractTmp(book, current);
 
                             if (exportContractStore.currentTerms === 'EXW') {
                                 formik.formRef.current.setFieldValue('declaration', '');
@@ -59,7 +56,7 @@ export const useInitContractSection = () => {
                         tmpPath,
                     };
                 },
-                title: `Контракт №${agreement?.record?.id}`,
+                title: `Контракт №${current?.record?.id}`,
             };
         },
     });

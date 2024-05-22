@@ -7,6 +7,7 @@ const xml2js = xml2jsBrowser as typeof _xml2js;
 
 export const xmlParse = async (xml: any) => {
     const parseCallback = (err: Error, json: DTReportT) => {
+        console.log(json);
         const report = json.ED_Container.ContainerDoc.DocBody.ESADout_CU;
 
         const {
@@ -27,6 +28,7 @@ export const xmlParse = async (xml: any) => {
             contractDocs: <EADocumentT[]>[],
             invoiceNo: '',
             date: '',
+            passport: '-',
         });
 
         const parsedRes = products.map((product) => {
@@ -44,6 +46,11 @@ export const xmlParse = async (xml: any) => {
                 if (docName.includes('ДОГОВОР') && !docName.includes('ТРУДОВОЙ') && !docName.includes('К ДОГОВОРУ')) {
                     total.contractNo = docNumber;
                 }
+
+                if (docName === 'ДОКУМЕНТ ПО ВАЛЮТНОМУ КОНТРОЛЮ') {
+                    total.passport = docNumber;
+                }
+
                 if (docName.includes('ИНВОЙС')) {
                     total.invoiceNo = docNumber;
                     total.date = docDate.toString();
@@ -60,6 +67,21 @@ export const xmlParse = async (xml: any) => {
                 (doc) => doc.PrDocumentDate.toString() === documents.date.toString(),
             ).PrDocumentNumber;
 
+            let preceedingDT = '-';
+            if (report.DeclarationKind === 'ПВД') {
+                const {
+                    PrecedingDocumentCustomsCode: pCode,
+                    PrecedingDocumentDate: pDate,
+                    PrecedingDocumentGoodsNumeric: pGoodsNumeric,
+                    PrecedingDocumentNumber: pNumber,
+                } = product.ESADout_CUPrecedingDocument;
+
+                const splitDate = pDate.split('-');
+                const combinedDateNo = splitDate[0].substring(2, 10) + splitDate[1] + splitDate[2];
+
+                preceedingDT = `${pCode}/${combinedDateNo}/${pNumber}/${pGoodsNumeric}`;
+            }
+
             const parsedProd = {
                 id: '',
                 consignee: consignee.OrganizationName,
@@ -71,22 +93,23 @@ export const xmlParse = async (xml: any) => {
                 modeCode: report.CustomsModeCode,
                 docSign: report.ElectronicDocumentSign,
                 dtKind: report.DeclarationKind,
-
+                preceedingDT,
                 terms: {
                     incoterms: terms.CUESADDeliveryTerms.DeliveryTermsStringCode,
                     port: terms.CUESADDeliveryTerms.DeliveryPlace,
                     currency: {
-                        code: terms.ContractCurrencyCode,
                         rate: terms.ContractCurrencyRate,
                         priceTotal: terms.TotalInvoiceAmount,
                     },
                 },
                 productDT: {
                     product: {
+                        productNo: product.GoodsNumeric,
                         vessel: product.GoodsGroupDescription.GoodsGroupInformation
                             .Manufacturer,
                         places: product.ESADGoodsPackaging.PakageQuantity,
                         description: product.GoodsDescription,
+                        code: product.GoodsTNVEDCode,
                         placesAmount: {
                             net: product.NetWeightQuantity,
                             gross: product.GrossWeightQuantity,

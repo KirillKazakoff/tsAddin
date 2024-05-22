@@ -17,7 +17,7 @@ export const initExportInvoiceRowsFCA = (
         rowSettings: ({ record: r, total }) => {
             const fields = {
                 empty1: '',
-                bl: r.portTo.code === 'Зарубино' ? '-' : r.blNo,
+                bl: r.blNo,
                 product: `${r.product.ru.name}\n${r.product.eng.name}`,
                 m1: '',
                 m2: '',

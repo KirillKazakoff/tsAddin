@@ -131,6 +131,14 @@ export type ESADoutCUGoodsT = {
     CustomsCostCorrectMethod: string;
     DeliveryTime: Date;
     DeliveryTimeEND: Date;
+    ESADout_CUPrecedingDocument?: {
+        PrecedingDocumentCustomsCode: string;
+        PrecedingDocumentDate: string;
+        PrecedingDocumentGoodsNumeric: string;
+        PrecedingDocumentModeCode: string;
+        PrecedingDocumentName: string;
+        PrecedingDocumentNumber: string;
+    };
     AdditionalSheetCount: string;
     GoodsGroupDescription: GoodsGroupDescription;
     Preferencii: Preferencii;
