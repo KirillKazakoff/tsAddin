@@ -6,10 +6,10 @@ import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
 import { InnerGroupT } from '../groupInnerContracts';
 
-export const getPortLetterCells = (contract: InnerGroupT) => {
+export const getPortLetterCells = (doc: InnerGroupT) => {
     const {
         record: { row: r },
-    } = contract;
+    } = doc;
     const date = { delivery: getExcelDateNumeric(r.deliveryDate, 'ru') };
 
     const { confidentialPhones: phones } = spsStore;
@@ -22,7 +22,7 @@ export const getPortLetterCells = (contract: InnerGroupT) => {
     };
 
     const common = [
-        { name: 'Номер_письма', value: getPortLetterNo(contract) },
+        { name: 'Номер_письма', value: getPortLetterNo(doc) },
         { name: 'Порт', value: `${fields.portRu.name}` },
         { name: 'Порт_директор', value: `${fields.portRu.director}` },
         { name: 'Порт_почта', value: `${fields.portRu.mail}` },

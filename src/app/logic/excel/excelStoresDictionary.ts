@@ -26,6 +26,7 @@ import { setDT } from '../../stores/tablesStore/set/setDT';
 import { setDischargeInvoices } from '../../stores/tablesStore/set/setDischargeInvoices';
 import { setExport } from '../../stores/tablesStore/set/setExport';
 import { setExportStorage } from '../../stores/tablesStore/set/setExportStorage';
+import { setFescos } from '../../stores/tablesStore/set/setFescoContainers';
 import { setInner } from '../../stores/tablesStore/set/setInner';
 import { setMates } from '../../stores/tablesStore/set/setMates';
 import { setNordmile } from '../../stores/tablesStore/set/setNordmile';
@@ -165,6 +166,10 @@ export const excelStoresDictionary = {
         table: 'DT',
         setter: setDT,
     },
+    'FESCO': {
+        table: 'FESCO',
+        setter: setFescos,
+    },
 } satisfies Record<string, ExcelStoreT>;
 
 const D = excelStoresDictionary;
@@ -200,6 +205,7 @@ export const movementDictionary = {
     'Пошлина': D['Пошлина'],
     'Экспорт': D['Экспорт'],
     'Образцы': D['Образцы'],
+    'FESCO': D['FESCO'],
 } satisfies ExcelStoresDictionaryT;
 
 export const salesDictionary = {

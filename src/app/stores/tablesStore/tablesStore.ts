@@ -11,6 +11,7 @@ import type { SalesRowT } from './set/setSales';
 import type { CustomsRowT } from './set/setCustoms';
 import type { InnerSampleRowT } from './set/setSamplesInner';
 import type { DTRowT } from './set/setDT';
+import type { FescoRowT } from './set/setFescoContainers';
 
 class TablesStore {
     matesT: MateRowT[] = [];
@@ -23,6 +24,7 @@ class TablesStore {
     storageInvoicesT: InvoiceKTIRowT[] = [];
     salesT: SalesRowT[] = [];
     dtT: DTRowT[] = [];
+    fescoContainers: FescoRowT[] = [];
     customsT: CustomsRowT[] = [];
     samplesInnerT: InnerSampleRowT[] = [];
 
@@ -39,6 +41,7 @@ class TablesStore {
         customs: initTableStatus(),
         samplesInnerT: initTableStatus(),
         dt: initTableStatus(),
+        fescos: initTableStatus(),
     };
 
     constructor() {

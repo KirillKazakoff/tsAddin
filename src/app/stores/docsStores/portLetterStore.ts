@@ -27,7 +27,7 @@ type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
 class PortLetterStore {
     fields = initFields();
-    name: 'portLetterStore';
+    name = 'portLetterStore';
 
     constructor() {
         makeAutoObservable(this);

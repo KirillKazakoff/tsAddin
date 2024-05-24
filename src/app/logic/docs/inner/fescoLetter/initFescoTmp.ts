@@ -1,25 +1,25 @@
 import { Workbook } from 'exceljs';
+import { FescoGroupT } from './groupFesco';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
-import { initPortLetterRows } from './initPortLetterRows';
-import { getPortLetterCells } from './getPortLetterCells';
-import { InnerGroupT } from '../groupInnerContracts';
-import portLetterStore from '../../../../stores/docsStores/portLetterStore';
+import fescoLetterStore from '../../../../stores/docsStores/fescoLetterStore';
 import { initPictureGit } from '../../../excel/pictures/initPictureGit';
 import { pathObj } from '../../../utils/constants';
+import { getFescoLetterCells } from './getFescoLetterCells';
+import { initFescoRows } from './initFescoRows';
 
-export const initPortLetterTmp = async (book: Workbook, contract: InnerGroupT) => {
-    const ws = book.getWorksheet('Port_Letter');
+export const initFescoTmp = async (book: Workbook, doc: FescoGroupT) => {
+    const ws = book.getWorksheet('Fesco_Letter');
     const utils = initExcelUtils(ws, '');
-    const { podpisant, isPictures } = portLetterStore.fields;
-    const { seller } = contract.record.row;
+    const { isPictures, podpisant } = fescoLetterStore.fields;
+    const { seller } = doc.record;
 
     await utils.initTmp({
-        cells: getPortLetterCells(contract),
-        initRows: () => initPortLetterRows(contract, utils),
+        cells: getFescoLetterCells(doc),
+        initRows: () => initFescoRows(doc, utils),
         mergeCells: [
             {
                 row: {
-                    from: { name: 'Образцы_выдача' },
+                    from: { name: 'Письмо_электропитание' },
                     to: { name: 'Merge_end' },
                 },
                 cols: [{ start: 'Banner_start', end: 'Pg_end' }],

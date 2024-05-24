@@ -3,13 +3,13 @@ import portLetterStore from '../../../../stores/docsStores/portLetterStore';
 import { CellUtilsT } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { InnerGroupT } from '../groupInnerContracts';
 
-export const initPortLetterRows = (contract: InnerGroupT, utils: CellUtilsT<''>) => {
+export const initPortLetterRows = (doc: InnerGroupT, utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Письмо_массив' });
-    const { noGroup, portLetter } = contract.groupedBy;
+    const { noGroup, portLetter } = doc.groupedBy;
     const { isGroupingKns } = portLetterStore.fields;
 
     let records = isGroupingKns ? portLetter : noGroup;
-    if (contract.record.type === 'samplesInnerT') records = noGroup;
+    if (doc.record.type === 'samplesInnerT') records = noGroup;
 
     insertRows({
         records,

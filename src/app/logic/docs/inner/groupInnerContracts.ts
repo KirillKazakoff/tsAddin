@@ -44,7 +44,7 @@ export const groupInnerContracts = () => {
         rows,
         input: ({ row, mateRow }) => ({
             init: () => !!row.id,
-            code: row.type === 'innerT' ? `${row.id}${row.buyer.code}` : row.id,
+            code: row.type === 'innerT' ? `${row.id}${row.buyer.code}` : `${row.id}`,
             groupedBy: {
                 noGroup: {
                     code: nanoid(),
@@ -59,15 +59,13 @@ export const groupInnerContracts = () => {
                     },
                 },
                 sortPack: {
-                    code: row.product.code + row.vessel.code + row.sort + row.pack,
+                    code: `${row.product.code + row.vessel.code + row.sort + row.pack}`,
                 },
                 request: {
-                    code:
-                        row.product.code + row.vessel.code + row.sort + row.pack,
+                    code: `${row.product.code + row.vessel.code + row.sort + row.pack}`,
                 },
                 portLetter: {
-                    code:
-                        row.product.code + row.vessel.code + row.sort + row.pack + row.knsNo,
+                    code: `${row.product.code + row.vessel.code + row.sort + row.pack + row.knsNo}`,
                 },
             },
             additional: { portLetterNo: '' },

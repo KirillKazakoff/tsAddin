@@ -5,6 +5,7 @@ import { PortLetterSection } from './PortLetterSection';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { InnerContractSection } from './InnerContractSection';
 import { RequestSection } from './RequestSection';
+import { FescoLetterSection } from './FescoLetterSection';
 
 export const InnerRoute = observer(() => {
     if (excelSyncStore.isLoading) return null;
@@ -20,8 +21,14 @@ export const InnerRoute = observer(() => {
     return (
         <div className='doc-links'>
             <InnerContractSection />
-            <RequestSection />
-            <PortLetterSection />
+            {tablesStore.fescoContainers.length === 0 ? (
+                <>
+                    <RequestSection />
+                    <PortLetterSection />
+                </>
+            ) : (
+                <FescoLetterSection />
+            )}
         </div>
     );
 });

@@ -53,12 +53,12 @@ export const useInitPortLetter = () => {
         docs: groupInnerContracts(),
         getSettings: () => ({
             formik,
-            createDoc: (contract) => {
-                const { row } = contract.record;
+            createDoc: (doc) => {
+                const { row } = doc.record;
 
                 return {
                     tmpPath: 'portLetter',
-                    initTmpsCb: async (book) => initPortLetterTmp(book, contract),
+                    initTmpsCb: async (book) => initPortLetterTmp(book, doc),
                     fileName: `Письмо №${row.id} ${
                         row.type === 'innerT'
                             ? row.buyer.code

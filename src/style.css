@@ -386,3 +386,7 @@ b {
 .svg-bell--error {
     filter: var(--red-filter);
 }
+
+.fesco-letter-form {
+    margin-top: 20px;
+}

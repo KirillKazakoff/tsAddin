@@ -11,6 +11,8 @@ const getHtml = (c: React.ReactElement) => {
         const res = renderToString(c);
         return res;
     } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e);
         popupStore.pushStatus({ title: 'Программная ошибка', desc: e.message });
         return '';
     }

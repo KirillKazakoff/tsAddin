@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import pageStatusStore from '../../../stores/pageStatusStore.ts/pageStatusStore';
 import { TableKeyT } from '../../../stores/tablesStore/tablesStore';
 import {
     AmountObjT,
