@@ -13,6 +13,12 @@ export const initFescoTmp = async (book: Workbook, doc: FescoGroupT) => {
     const { isPictures, podpisant } = fescoLetterStore.fields;
     const { seller } = doc.record;
 
+    await initPictureGit({
+        url: seller.code === 'ТРК' ? pathObj.bg.trk : pathObj.bg.msi,
+        ws,
+        rangeObj: { start: 'Banner_start', end: 'Banner_end' },
+    });
+
     await utils.initTmp({
         cells: getFescoLetterCells(doc),
         initRows: () => initFescoRows(doc, utils),
@@ -44,11 +50,5 @@ export const initFescoTmp = async (book: Workbook, doc: FescoGroupT) => {
                 },
             ],
         },
-    });
-
-    await initPictureGit({
-        url: seller.code === 'ТРК' ? pathObj.bg.trk : pathObj.bg.msi,
-        ws,
-        rangeObj: { start: 'Banner_start', end: 'Banner_end' },
     });
 };

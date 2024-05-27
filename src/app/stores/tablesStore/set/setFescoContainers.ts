@@ -13,9 +13,9 @@ export const setFescos = (table: any[][]) => {
             product: 'Продукция',
             sort: 'Сорт',
             transport: 'Транспорт',
-            containerNo: '№ контейнера',
-            places: 'Места',
-            placesAmount: 'Количество, кг',
+            containerNo: '№ Контейнера',
+            places: 'Места, шт',
+            placesAmount: 'Кол-во, кг',
             etaDate: 'ETA',
         },
         row: (r) => ({

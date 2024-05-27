@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 type Props = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -6,11 +6,6 @@ type Props = {
 
 const FileInput = ({ onChange, ...rest }: Props) => {
     const ref = useRef<HTMLInputElement>();
-    const [file, setFile] = useState<File[]>();
-
-    useEffect(() => {
-        console.log(ref.current.value);
-    }, []);
 
     return (
         <div>
@@ -21,7 +16,7 @@ const FileInput = ({ onChange, ...rest }: Props) => {
                     ref={ref}
                     {...rest}
                     style={{ display: 'none' }}
-                    type='file'
+                    type=''
                     onChange={onChange}
                 />
             </label>

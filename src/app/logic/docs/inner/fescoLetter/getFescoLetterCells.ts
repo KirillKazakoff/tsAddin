@@ -32,7 +32,7 @@ export const getFescoLetterCells = (doc: FescoGroupT) => {
                     richText: [
                         richText({ text: `             Просим Вас следующие контейнеры, отгруженные на транспорт ${r.transport.ru.name} ` }),
                         richText({ text: `рейс № ${fields.reiceNo} `, isBold: true }),
-                        richText({ text: `(ETA ВВО ${date.delivery})\n` }),
+                        richText({ text: `(ETA ВВО ${date.delivery}) ` }),
                         richText({ text: `в адрес ${orgName.seller} ` }),
                         richText({ text: `выдать ${orgName.buyer}, ИНН ${r.buyer.inn} ${r.buyer.phone ? `(контактный телефон ${r.buyer.phone})` : ''} ` }),
                     ],

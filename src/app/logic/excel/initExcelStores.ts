@@ -35,7 +35,7 @@ const getExistedStores = async (context: Excel.RequestContext) => {
             (item) => item.name === store.table,
         );
 
-        if (!storeWS && key !== 'FESCO') {
+        if (!storeWS) {
             popupStore.pushStatus({
                 title: 'Отсутствует справочник',
                 desc: `В excel-книге нет Листа с названием ${key}`,

@@ -166,8 +166,8 @@ export const excelStoresDictionary = {
         table: 'DT',
         setter: setDT,
     },
-    'FESCO': {
-        table: 'FESCO',
+    'Контейнеры': {
+        table: 'Контейнеры',
         setter: setFescos,
     },
 } satisfies Record<string, ExcelStoreT>;
@@ -205,7 +205,7 @@ export const movementDictionary = {
     'Пошлина': D['Пошлина'],
     'Экспорт': D['Экспорт'],
     'Образцы': D['Образцы'],
-    'FESCO': D['FESCO'],
+    'Контейнеры': D['Контейнеры'],
 } satisfies ExcelStoresDictionaryT;
 
 export const salesDictionary = {
