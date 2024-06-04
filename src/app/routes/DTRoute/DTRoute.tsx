@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import FileInput from '../../components/FileInput';
 import { addRowsDT } from './addRowDT';
+import FileDropzone from '../../components/FileDropzone';
 
 export const DTRoute = observer(() => {
-    const url = {
-        init: './assets/DT_XML.xml',
-        vtd: './assets/ВТД.xml',
-        pvd: './assets/ПВД.xml',
-        ek10: './assets/ЭК10.xml',
-    };
-
+    // debug
     useEffect(() => {
+        const url = {
+            init: './assets/DT_XML.xml',
+            vtd: './assets/ВТД.xml',
+            pvd: './assets/ПВД.xml',
+            ek10: './assets/ЭК10.xml',
+        };
+
         const reader = new FileReader();
 
         reader.onload = async function callback() {
@@ -25,27 +26,22 @@ export const DTRoute = observer(() => {
         });
     }, []);
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { files } = e.target;
-        if (!files[0]) return;
+    const loadFile = (file: File) => {
+        if (!file.name.toLowerCase().includes('xml')) return;
 
-        Array.from(files).forEach((item) => {
-            if (!item.name.toLowerCase().includes('xml')) return;
+        const reader = new FileReader();
 
-            const reader = new FileReader();
+        reader.onload = async function callback() {
+            addRowsDT({ id: '100', xml: reader.result });
+        };
 
-            reader.onload = async function callback() {
-                addRowsDT({ id: '100', xml: reader.result });
-            };
-
-            reader.readAsText(item);
-        });
+        reader.readAsText(file);
     };
 
     return (
         <div>
             <h1>DT Route</h1>
-            <FileInput onChange={onChange} />
+            <FileDropzone onChange={loadFile} />
         </div>
     );
 });

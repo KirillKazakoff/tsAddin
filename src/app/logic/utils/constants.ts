@@ -23,11 +23,12 @@ export const pathObj = {
     invoiceKTIStorage: `${baseUrl}templates/Invoice_KTI_Storage.xlsx`,
     salesContract: `${baseUrl}templates/Sales_Purchase_Contract.xlsx`,
     salesContractLive: `${baseUrl}templates/Sales_Purchase_Contract_Live.xlsx`,
-    bg: {
+    pictures: {
         trk: `${baseUrl}assets/TRK.png`,
         msi: `${baseUrl}assets/MSI.png`,
+        kti: `${baseUrl}assets/KTI_LOGO.png`,
+        bell: `${baseUrl}assets/bell.svg`,
     },
-    bell: `${baseUrl}assets/bell.svg`,
 };
 
 export type PathKeyT = keyof typeof pathObj;

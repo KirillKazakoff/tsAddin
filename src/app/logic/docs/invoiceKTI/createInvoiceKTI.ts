@@ -1,26 +1,26 @@
 import { createDoc } from '../../excel/utils/excelUtilsObj/createDoc';
-import { PathKeyT } from '../../utils/constants';
+import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { InvoiceKTIGroupT } from './groupInvoiceKTIByNo';
 import { initInvoiceKTItmp } from './initInvoiceKTItmp';
-import { mergeInvoiceKTICells } from './mergeInvoiceKTICells';
 
-export const createInvoiceKTI = (invoice: InvoiceKTIGroupT) => {
-    let tmpPath: PathKeyT;
+export const createInvoiceKTI = async (invoice: InvoiceKTIGroupT) => {
     let fileName = '';
 
     if (invoice.record.type === 'dischargeInvoicesT') {
-        tmpPath = 'invoiceKTIDischarge';
         fileName = `KTI Discharge invoice - ${invoice.record.row.invoiceNo}`;
     } else {
-        tmpPath = 'invoiceKTIStorage';
         fileName = `KTI Storage invoice - ${invoice.record.row.invoiceNo}`;
     }
 
-    createDoc({
-        tmpPath,
+    await createDoc({
+        tmpPath: 'invoiceKTIDischarge',
         initTmpsCb: async (book) => {
-            initInvoiceKTItmp(book, invoice);
-            await mergeInvoiceKTICells(book);
+            const ws = book.getWorksheet('Invoice_KTI');
+            const utils = initExcelUtils(ws, '');
+
+            await initInvoiceKTItmp(book, invoice);
+
+            utils.getRow('Инвойс_п_граница').addPageBreak();
         },
         fileName,
     });

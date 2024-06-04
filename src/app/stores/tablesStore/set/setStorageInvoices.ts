@@ -1,4 +1,5 @@
 import { selectSp } from '../../spsStore/select';
+import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setStorageInvoices = (table: any[][]) => {
@@ -19,8 +20,6 @@ export const setStorageInvoices = (table: any[][]) => {
             dateInvoice: 'Дата инвойса',
             price: 'Ставка за сут*тн',
             priceTotal: 'Стоимость',
-            operation: 'Тип операции',
-            operationResult: 'Приход/расход',
             dateAccountSent: 'Дата отправки в бухгалтерию',
         },
         row: (r) => ({
@@ -35,13 +34,11 @@ export const setStorageInvoices = (table: any[][]) => {
             dateAccountSent: r.dateAccountSent,
             dateInvoice: r.dateInvoice,
             amount: {
-                placesTotal: r.placesTotal,
-                price: r.price,
-                priceTotal: r.priceTotal,
+                placesTotal: initAmount(r.placesTotal, 3, 4),
+                price: initAmount(r.price, 2, 2),
+                priceTotal: initAmount(r.priceTotal, 2, 2),
             },
             days: r.days,
-            operationResult: r.operationResult,
-            operation: r.operation,
         }),
     });
 };

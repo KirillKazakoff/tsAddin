@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/indent */
 import { selectSp } from '../../spsStore/select';
+import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
 export const setDischargeInvoices = (table: any[][]) => {
@@ -29,9 +30,9 @@ export const setDischargeInvoices = (table: any[][]) => {
             dateDischarge: r.dateDischarge,
             dateInvoice: r.dateInvoice,
             amount: {
-                price: r.price,
-                placesTotal: r.placesTotal,
-                priceTotal: r.priceTotal,
+                price: initAmount(r.price, 2, 2),
+                placesTotal: initAmount(r.placesTotal, 4, 4),
+                priceTotal: initAmount(r.priceTotal, 4, 4),
             },
         }),
     });
@@ -39,10 +40,10 @@ export const setDischargeInvoices = (table: any[][]) => {
 
 export type InvoiceKTIRowT = ReturnType<typeof setDischargeInvoices>[number] &
     Partial<{
-        dateAccountSent: string;
+        dateAccountSent: number;
         operation: string;
         days: number;
         operationResult: number;
-        dateStorageStart: string;
-        dateStorageEnd: string;
+        dateStorageStart: number;
+        dateStorageEnd: number;
     }>;

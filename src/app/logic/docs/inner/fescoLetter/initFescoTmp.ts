@@ -14,7 +14,7 @@ export const initFescoTmp = async (book: Workbook, doc: FescoGroupT) => {
     const { seller } = doc.record;
 
     await initPictureGit({
-        url: seller.code === 'ТРК' ? pathObj.bg.trk : pathObj.bg.msi,
+        url: seller.code === 'ТРК' ? pathObj.pictures.trk : pathObj.pictures.msi,
         ws,
         rangeObj: { start: 'Banner_start', end: 'Banner_end' },
     });

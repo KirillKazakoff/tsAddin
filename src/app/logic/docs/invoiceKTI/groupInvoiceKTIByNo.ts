@@ -9,9 +9,14 @@ export const groupInvoiceKTIByNo = () => {
     const rows = [...dischargeInvoicesT, ...storageInvoicesT].map((row) => {
         const exportRow = blGrouped.find((group) => group.code === row.blNo)?.record;
 
+        const dischargeDate = row.type === 'storageInvoicesT'
+            ? dischargeInvoicesT.find((r) => r.blNo === row.blNo).dateDischarge
+            : row.dateDischarge;
+
         return {
             row,
             exportRow,
+            dischargeDate,
             type: row.type,
             amount: row.amount,
         };

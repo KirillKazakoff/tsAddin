@@ -1,4 +1,3 @@
-import tablesStore from '../../stores/tablesStore/tablesStore';
 import { xmlParse } from './xmlParse';
 
 type SettignsT = {
@@ -11,7 +10,7 @@ export const addRowsDT = async ({ id, xml }: SettignsT) => {
 
     const rows = parsedXML.map((r) => {
         const { documents, product } = r.productDT;
-        const { currency, incoterms, port } = r.terms;
+        const { currency, incoterms } = r.terms;
 
         return [
             id,

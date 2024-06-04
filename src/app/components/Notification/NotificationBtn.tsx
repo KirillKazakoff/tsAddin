@@ -20,7 +20,7 @@ export const NotificationBtn = observer(() => {
         >
             <img
                 className={`svg svg-bell svg--scale ${cls}`}
-                src={pathObj.bell}
+                src={pathObj.pictures.bell}
                 alt='cant load bell img'
             />
         </button>

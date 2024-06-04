@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable dot-notation */
-/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable quote-props */
 import { setAgents } from '../../stores/spsStore/set/setAgents';
 import { setBanksProdavec } from '../../stores/spsStore/set/setBanksProdavec';
@@ -41,14 +40,6 @@ export type ExcelStoreT = {
 };
 
 export const excelStoresDictionary = {
-    // 'Инвойсы хранение': {
-    //     table: 'Инвойсы_хранение',
-    //     setter: setStorageInvoices,
-    // },
-    // 'Инвойсы выгрузка': {
-    //     table: 'Инвойсы_выгрузка',
-    //     setter: setDischargeInvoices,
-    // },
     'SPOrg': {
         table: 'SPOrg',
         setter: setOrgForm,
@@ -170,14 +161,20 @@ export const excelStoresDictionary = {
         table: 'Контейнеры',
         setter: setFescos,
     },
+    'Инвойсы хранение': {
+        table: 'Инвойсы_хранение',
+        setter: setStorageInvoices,
+    },
+    'Инвойсы выгрузка': {
+        table: 'Инвойсы_выгрузка',
+        setter: setDischargeInvoices,
+    },
 } satisfies Record<string, ExcelStoreT>;
 
 const D = excelStoresDictionary;
 export type ExcelStoresDictionaryT = Partial<typeof excelStoresDictionary>;
 
 export const movementDictionary = {
-    // 'Инвойсы хранение': D['Инвойсы хранение'],
-    // 'Инвойсы выгрузка': D['Инвойсы выгрузка'],
     'SPOrg': D['SPOrg'],
     'Транспорта': D['Транспорта'],
     'Суда': D['Суда'],
@@ -206,6 +203,8 @@ export const movementDictionary = {
     'Экспорт': D['Экспорт'],
     'Образцы': D['Образцы'],
     'Контейнеры': D['Контейнеры'],
+    'Инвойсы хранение': D['Инвойсы хранение'],
+    'Инвойсы выгрузка': D['Инвойсы выгрузка'],
 } satisfies ExcelStoresDictionaryT;
 
 export const salesDictionary = {

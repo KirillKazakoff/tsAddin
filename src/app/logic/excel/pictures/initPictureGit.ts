@@ -2,6 +2,7 @@ import { Worksheet } from 'exceljs';
 import { getPictureRange } from './getPictureRange';
 import { loadPicture } from './loadPicture';
 import { PictureSettingsT } from './initPictureExcel';
+import { getCellSingle } from '../utils/excelUtilsObj/getCell';
 
 export type PictureGitSettingsT = {
     url: string;
@@ -16,4 +17,6 @@ export const initPictureGit = async (settings: PictureGitSettingsT) => {
     const range = getPictureRange(rangeObj, ws);
 
     await loadPicture({ blob, ws, range });
+
+    getCellSingle(ws)(rangeObj.start).value = '';
 };

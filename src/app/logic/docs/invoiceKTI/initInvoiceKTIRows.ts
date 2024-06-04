@@ -1,20 +1,87 @@
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
-import { formatCount } from '../../utils/formatCount';
+import { getExcelDateNumeric, getExcelDateShort } from '../../excel/utils/getExcelDate';
 import type { InvoiceKTIGroupT } from './groupInvoiceKTIByNo';
 
 export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<''>) => {
     ['eng', 'ru'].forEach((language) => {
         const cellName = language === 'eng' ? 'Инвойс_массив' : 'Инвойс_массив_п';
-        const { insertRows } = utils.initRowMaker({ cellName });
+        const { insertRows, insertRow } = utils.initRowMaker({ cellName });
+        const { type } = invoice.record;
+
+        if (type === 'storageInvoicesT') {
+            // change header titles on storageInvoice invoice type
+            let headersCellName = '';
+
+            const fieldsHeaders = {
+                empty1: '',
+                desc: 'Description',
+                m1: '',
+                m2: '',
+                m3: '',
+                days: 'Days',
+                price: 'Cold Storage Charge',
+                priceTotal: 'Amount',
+            };
+
+            if (language === 'eng') {
+                headersCellName = 'Инвойс_таблица_заголовок';
+            } else {
+                headersCellName = 'Инвойс_таблица_заголовок_п';
+
+                fieldsHeaders.desc = 'Описание';
+                fieldsHeaders.days = 'Кол-во дней';
+                fieldsHeaders.price = 'Стоимость хранения';
+                fieldsHeaders.priceTotal = 'Сумма';
+            }
+
+            utils.initRowMaker({ cellName: headersCellName }).insertRow({
+                fields: fieldsHeaders,
+                style: {
+                    common: {
+                        alignment: 'center',
+                        font: { bold: true },
+                        border: {
+                            top: { style: 'thick' },
+                            bottom: { style: 'thin' },
+                        },
+                    },
+                    special: {
+                        days: {
+                            style: {
+                                border: {
+                                    left: { style: 'thin' },
+                                    right: { style: 'thin' },
+                                },
+                            },
+                        },
+                        price: {
+                            style: {
+                                border: {
+                                    right: { style: 'thin' },
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+
+            utils.deleteRow(headersCellName);
+        }
 
         insertRows({
             records: invoice.rows,
             deleteStartAmount: 1,
-            rowSettings: (r, index) => {
-                const placesTotal = formatCount(r.row.amount.placesTotal.count, 3, 4);
+            rowSettings: (r) => {
+                const storagePeriod = type === 'storageInvoicesT'
+                    ? ` (${getExcelDateShort(
+                        r.row.dateStorageStart,
+                        'ru',
+                    )}-${getExcelDateShort(r.row.dateStorageEnd, 'ru')})`
+                    : '';
+
                 const fields = {
                     empty1: '',
-                    description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${placesTotal} mt`,
+                    description: `${r.exportRow.vessel.eng.name} (${r.exportRow.blNo})\n${r.exportRow.product.eng.name}\n${r.row.amount.placesTotal.str} mt ${storagePeriod}`,
                     m1: '',
                     m2: '',
                     m3: '',
@@ -25,45 +92,14 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
                 };
 
                 if (language === 'ru') {
-                    fields.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${placesTotal} тн`;
-                }
-                if (invoice.record.type === 'dischargeInvoicesT') {
-                    delete fields.days;
+                    fields.description = `${r.exportRow.vessel.ru.name} (${r.exportRow.blNo})\n${r.exportRow.product.ru.name}\n${r.row.amount.placesTotal.str} тн ${storagePeriod}`;
                 }
 
-                const row = utils.ws.getRow(index);
-                const fieldsTitles = {
-                    desc: utils.getCell('Инвойс_таблица_заголовок').col,
-                    days: utils.getCell('Инвойсы_таблица_дни')?.col,
-                    price: utils.getCell('Инвойсы_таблица_стоимость').col,
-                    priceTotal: utils.getCell('Инвойсы_таблица_сумма').col,
-                };
-                const rowObj = {
-                    desc: row.getCell(2),
-                    days:
-                        invoice.record.type === 'storageInvoicesT'
-                            ? row.getCell(+fieldsTitles.days)
-                            : null,
-                    price: row.getCell(+fieldsTitles.price),
-                    priceTotal: row.getCell(+fieldsTitles.priceTotal),
-                };
-                rowObj.desc.style.alignment = { vertical: 'middle', wrapText: true };
-                rowObj.price.style = {
-                    border: { right: { style: 'thin' }, left: { style: 'thin' } },
-                    alignment: { horizontal: 'right', vertical: 'middle' },
-                };
-                rowObj.priceTotal.alignment = {
-                    horizontal: 'right',
-                    vertical: 'middle',
-                };
-                if (invoice.record.type === 'storageInvoicesT') {
-                    rowObj.days.style = {
-                        border: {
-                            left: { style: 'thin' },
-                            right: { style: 'thin' },
-                        },
-                        alignment: { horizontal: 'center', vertical: 'middle' },
-                    };
+                if (type === 'dischargeInvoicesT') {
+                    delete fields.days;
+                }
+                if (type === 'storageInvoicesT') {
+                    delete fields.m4;
                 }
 
                 // prettier-ignore
@@ -72,13 +108,54 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
                     docType: 'invoiceKTI',
                     style: {
                         common: {
-                            height: invoice.record.type === 'dischargeInvoicesT' ? 45 : 60,
-                            alignment: {
-                                wrapText: true,
+                            height: type === 'dischargeInvoicesT' ? 45 : 60,
+                            alignment: { wrapText: true, vertical: 'middle' },
+                        },
+                        special: {
+                            days: {
+                                style: {
+                                    alignment: { horizontal: 'center' },
+                                    border: { left: { style: 'thin' } },
+                                },
+                            },
+                            price: {
+                                style: {
+                                    alignment: { horizontal: 'center' },
+                                    border: { left: { style: 'thin' }, right: { style: 'thin' } },
+                                },
+                            },
+                            priceTotal: {
+                                style: { alignment: { horizontal: 'center' } },
                             },
                         },
                     },
                 };
+            },
+        });
+
+        insertRow({
+            fields: {
+                empty1: '',
+                empty2: '',
+                empty3: '',
+                empty4: '',
+                empty5: '',
+                empty6: '',
+                title: language === 'eng' ? 'TOTAL' : 'ИТОГО',
+                priceTotal: invoice.total.priceTotal.count,
+            },
+            docType: 'invoiceKTI',
+            style: {
+                common: {
+                    font: { bold: true },
+                    height: 45,
+                    border: { bottom: { style: 'thick' }, top: { style: 'thin' } },
+                    alignment: 'center',
+                },
+                special: {
+                    title: { style: { border: { left: { style: 'thin' } } } },
+                    priceTotal: { style: { border: { left: { style: 'thin' } } } },
+                },
             },
         });
     });

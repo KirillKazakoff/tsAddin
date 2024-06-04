@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { StatusT } from './Doc';
 import popupStore from '../../stores/popupStore.ts/popupStore';
 
