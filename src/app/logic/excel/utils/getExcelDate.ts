@@ -12,7 +12,6 @@ const getExcelDate = (month: Intl.DateTimeFormatOptions['month']) => (excelSeria
     });
 };
 export const getExcelDateStr = getExcelDate('long');
-export const getExcelDateNumeric = getExcelDate('2-digit');
 export const getExcelDateShort = getExcelDate('2-digit');
 
 export const getDeliveryDate = (

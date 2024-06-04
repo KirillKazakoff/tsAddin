@@ -3,14 +3,14 @@ import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getPortLetterNo } from './getPortLetterNo';
 import spsStore from '../../../../stores/spsStore/spsStore';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';
-import { getExcelDateNumeric } from '../../../excel/utils/getExcelDate';
+import { getExcelDateShort } from '../../../excel/utils/getExcelDate';
 import { InnerGroupT } from '../groupInnerContracts';
 
 export const getPortLetterCells = (doc: InnerGroupT) => {
     const {
         record: { row: r },
     } = doc;
-    const date = { delivery: getExcelDateNumeric(r.deliveryDate, 'ru') };
+    const date = { delivery: getExcelDateShort(r.deliveryDate, 'ru') };
 
     const { confidentialPhones: phones } = spsStore;
     const { fields } = portLetterStore;

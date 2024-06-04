@@ -1,5 +1,5 @@
 import { CellUtilsT } from '../../excel/utils/excelUtilsObj/initExcelUtils';
-import { getExcelDateNumeric, getExcelDateShort } from '../../excel/utils/getExcelDate';
+import { getExcelDateShort } from '../../excel/utils/getExcelDate';
 import type { InvoiceKTIGroupT } from './groupInvoiceKTIByNo';
 
 export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<''>) => {
@@ -41,8 +41,8 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
                         alignment: 'center',
                         font: { bold: true },
                         border: {
-                            top: { style: 'thick' },
-                            bottom: { style: 'thin' },
+                            top: { style: 'medium' },
+                            bottom: { style: 'medium' },
                         },
                     },
                     special: {
@@ -149,7 +149,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
                 common: {
                     font: { bold: true },
                     height: 45,
-                    border: { bottom: { style: 'thick' }, top: { style: 'thin' } },
+                    border: { bottom: { style: 'medium' }, top: { style: 'thin' } },
                     alignment: 'center',
                 },
                 special: {

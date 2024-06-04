@@ -24,9 +24,11 @@ export const initAmount = (
     fractionMin: number,
     fractionMax: number,
 ): AmountT => {
+    const fixedCount = fractionMin === fractionMax ? +(+count).toFixed(2) : +count;
+
     const amount = {
         str: formatCount(+count, fractionMin, fractionMax),
-        count: +count,
+        count: fixedCount,
         fraction: {
             min: fractionMin,
             max: fractionMax,

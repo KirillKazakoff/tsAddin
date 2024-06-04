@@ -22,23 +22,28 @@ export const setStorageInvoices = (table: any[][]) => {
             priceTotal: 'Стоимость',
             dateAccountSent: 'Дата отправки в бухгалтерию',
         },
-        row: (r) => ({
-            blNo: r.blNo,
-            agreementNo: r.agreementNo,
-            invoiceNo: r.invoiceNo,
-            seller: selectSp.seller(r.seller),
-            vessel: selectSp.vessel(r.vessel),
-            product: selectSp.product(r.product),
-            dateStorageStart: r.dateStorageStart,
-            dateStorageEnd: r.dateStorageEnd,
-            dateAccountSent: r.dateAccountSent,
-            dateInvoice: r.dateInvoice,
-            amount: {
-                placesTotal: initAmount(r.placesTotal, 3, 4),
-                price: initAmount(r.price, 2, 2),
-                priceTotal: initAmount(r.priceTotal, 2, 2),
-            },
-            days: r.days,
-        }),
+        row: (r) => {
+            const res = {
+                blNo: r.blNo,
+                agreementNo: r.agreementNo,
+                invoiceNo: r.invoiceNo,
+                seller: selectSp.seller(r.seller),
+                vessel: selectSp.vessel(r.vessel),
+                product: selectSp.product(r.product),
+                dateStorageStart: r.dateStorageStart,
+                dateStorageEnd: r.dateStorageEnd,
+                dateAccountSent: r.dateAccountSent,
+                dateInvoice: r.dateInvoice,
+                amount: {
+                    placesTotal: initAmount(r.placesTotal, 3, 4),
+                    price: initAmount(r.price, 2, 2),
+                    priceTotal: initAmount(r.priceTotal, 2, 2),
+                },
+                days: r.days,
+            };
+
+            console.log(res.amount);
+            return res;
+        },
     });
 };
