@@ -15,6 +15,60 @@ export const initExportDefaultContractRowsFCA = (
         return total;
     }, []);
 
+    // headers remove
+    const headersCellName = 'Контракт_предмет_заголовки';
+
+    utils.initRowMaker({ cellName: headersCellName }).insertRow({
+        fields: {
+            empty1: '',
+            desc: 'Продукция\nGoods description',
+            m1: '',
+            m2: '',
+            m3: '',
+            vessel: 'Изготовитель\nFishing Vessel',
+            m4: '',
+            price: 'Цена, $/тн\nPrice,$/тн',
+            placesTotal: 'Кол-во, тн\nQuantity, tn',
+        },
+        style: {
+            common: {
+                alignment: 'center',
+                // border: 'all',
+                fill: {
+                    pattern: 'solid',
+                    fgColor: { argb: 'FFDCDCDC' },
+                    bgColor: { argb: 'FFDCDCDC' },
+                    type: 'pattern',
+                },
+            },
+            special: {
+                // empty1: {
+                //     style: {
+                //         fill: {
+                //             pattern: 'solid',
+                //             fgColor: { argb: 'FFFFFFFF' },
+                //             bgColor: { argb: 'FFFFFFFF' },
+                //             type: 'pattern',
+                //         },
+                //     },
+                // },
+                desc: {
+                    style: {
+                        border: { top: { style: 'thin' }, left: { style: 'thin' } },
+                    },
+                },
+                vessel: {
+                    style: {
+                        border: { left: { style: 'thin' } },
+                    },
+                },
+            },
+        },
+    });
+
+    utils.deleteRow(headersCellName);
+
+    // insert table rows
     insertRows({
         records: groups,
         deleteStartAmount: 1,

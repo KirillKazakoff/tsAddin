@@ -86,7 +86,7 @@ export const initExportInvoiceRows = (
             },
             special: {
                 totalHeader: { style: { alignment: { horizontal: 'right' } } },
-                places: { style: { alignment: { horizontal: 'right' } } },
+                places: { style: { alignment: { horizontal: 'right' }, border: { left: { style: 'thin' } } } },
                 placesTotal: { style: { alignment: { horizontal: 'left' } } },
                 empty1: { style: { border: { right: { style: 'thin' }, top: {} } } },
                 priceTotal: { style: { border: { right: { style: 'thin' } } } },

@@ -68,6 +68,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
             utils.deleteRow(headersCellName);
         }
 
+        // insert table rows
         insertRows({
             records: invoice.rows,
             deleteStartAmount: 1,

@@ -37,11 +37,9 @@ export const useInitContractSection = () => {
                     const { operation } = exportContractStore;
                     const { agreementNo, id } = current.record;
 
-                    let tmpPath: PathKeyT = operation === 'export'
+                    const tmpPath: PathKeyT = operation === 'export'
                         ? 'exportContract'
                         : 'exportStorageContract';
-
-                    if (current.record.terms === 'FCA') tmpPath = 'exportContractFCA';
 
                     return {
                         fileName: `Доп №${agreementNo} (${id})`,

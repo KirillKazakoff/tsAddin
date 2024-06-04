@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import {
-    Alignment, Borders, Cell, Font, Row,
+    Alignment, Borders, Cell, Fill, Font, Row, Style,
 } from 'exceljs';
 import { mergeStyles } from './mergeStyles';
 import { createFormula } from './createFormula';
@@ -11,6 +11,7 @@ export type RowStyleSettingsT = {
     border?: Partial<Borders> | 'all' | 'outside' | 'edges';
     alignment?: Partial<Alignment> | 'center';
     font?: Partial<Font>;
+    fill?: Fill;
 };
 
 export const borderAll: Partial<Borders> = {
@@ -29,6 +30,9 @@ export const styleCell = (cell: Cell, settings: Cell['style']) => {
     cell.border = settings.border;
     cell.alignment = settings.alignment;
     cell.font = settings.font;
+    if (settings.fill?.type) {
+        cell.fill = settings.fill;
+    }
 };
 
 export const styleRowCommon = (
@@ -40,6 +44,7 @@ export const styleRowCommon = (
         border: {},
         alignment: {},
         font: settings.font,
+        fill: settings.fill,
     };
     if (settings.border === 'edges') {
         cellSettings.border = {};
@@ -92,7 +97,11 @@ export const styleRow = <FieldsT>(
     firstCellCount: number,
 ) => {
     if (settings.style) {
-        const commonStyle = styleRowCommon(row, settings.style.common, firstCellCount);
+        // prettier-ignore
+        let commonStyle: Partial<Style>;
+        if (settings.style.common) {
+            commonStyle = styleRowCommon(row, settings.style.common, firstCellCount);
+        }
 
         if (settings.style.special) {
             Object.keys(settings.fields).forEach((fieldKey, cellIndex) => {
@@ -102,6 +111,7 @@ export const styleRow = <FieldsT>(
                 const cellObj = row.getCell(1 + cellIndex);
 
                 const mergedStyle = mergeStyles(commonStyle, cell.style);
+
                 if (cell.formulaCb) {
                     cellObj.value = createFormula({
                         cell: cellObj,
