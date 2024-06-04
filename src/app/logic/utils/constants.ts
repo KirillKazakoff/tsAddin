@@ -8,7 +8,6 @@ const mode = process.env.NODE_ENV;
 const baseUrl = mode === 'production' ? 'https://kirillkazakoff.github.io/tsAddin/' : './';
 
 export const pathObj = {
-    bl: `${baseUrl}templates/BL.xlsx`,
     fesco: `${baseUrl}templates/Fesco_Letter.xlsx`,
     newBl: `${baseUrl}templates/BL_New.xlsx`,
     exportContract: `${baseUrl}templates/Export_Agreement.xlsx`,
@@ -18,9 +17,7 @@ export const pathObj = {
     requestContractRu: `${baseUrl}templates/Request_Contract_Ru.xlsx`,
     requestContractNordmileRu: `${baseUrl}templates/Request_Contract_Ru_Nordmile.xlsx`,
     portLetter: `${baseUrl}templates/Port_Letter.xlsx`,
-    portLetterFCA: `${baseUrl}templates/Port_Letter_FCA.xlsx`,
     invoiceKTIDischarge: `${baseUrl}templates/Invoice_KTI_Discharge.xlsx`,
-    invoiceKTIStorage: `${baseUrl}templates/Invoice_KTI_Storage.xlsx`,
     salesContract: `${baseUrl}templates/Sales_Purchase_Contract.xlsx`,
     salesContractLive: `${baseUrl}templates/Sales_Purchase_Contract_Live.xlsx`,
     pictures: {
