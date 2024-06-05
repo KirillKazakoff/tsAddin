@@ -1,6 +1,8 @@
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import {
     CellObjDoubleT as CellDoubleT,
+    CellFullT,
+    CellSettingsT,
     CellObjT as CellSingleT,
 } from '../../../../types/typesExcelUtils';
 import { CellDeclarationT } from '../../../../types/typesUtils';
@@ -76,7 +78,6 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_транспорт',
                 eng: `${transport.eng.name}`,
                 ru: `${transport.ru.name}`,
-                isEmptyTitle: invoice.record.terms === 'FCA' || invoice.record.terms === 'EXW',
             },
             {
                 name: 'Инвойс_куда',
@@ -106,29 +107,39 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `${terms}, ${portTo.ru.name}`,
             },
         ],
-        exportDefault: [
-            {
-                name: 'Инвойс',
-                eng: `Commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
-                ru: `Коммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
-            },
-            {
-                name: 'Инвойс_соглашение',
-                eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
-                ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
-            },
-            {
-                name: 'Инвойс_контракт',
-                eng: `to the Contract of sale № ${contract.contractNo}`,
-                ru: `к контракту купли-продажи № ${contract.contractNo}`,
-            },
-            {
+        exportDefault: {
+            common: [
+                {
+                    name: 'Инвойс',
+                    eng: `Commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                    ru: `Коммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+                },
+                {
+                    name: 'Инвойс_соглашение',
+                    eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
+                    ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
+                },
+                {
+                    name: 'Инвойс_контракт',
+                    eng: `to the Contract of sale № ${contract.contractNo}`,
+                    ru: `к контракту купли-продажи № ${contract.contractNo}`,
+                },
+                {
+                    name: 'Инвойс_декларация',
+                    eng: declarationNo,
+                    ru: declarationNo,
+                    isEmptyTitle: invoice.record.terms === 'CFR',
+                },
+            ],
+            exw: [{
+                name: 'Инвойс_транспорт',
+                deleteRows: { start: -1, end: -1 },
+            }],
+            cfr: [{
                 name: 'Инвойс_декларация',
-                eng: declarationNo,
-                ru: declarationNo,
-                isEmptyTitle: invoice.record.terms === 'CFR',
-            },
-        ],
+                isEmptyTitle: true,
+            }],
+        },
         exportStorage: [
             {
                 name: 'Инвойс',
@@ -161,8 +172,6 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 },
                 {
                     name: 'Инвойс_декларация',
-                    eng: '',
-                    ru: '',
                     deleteRows: { start: -1, end: 1 },
                 },
             ],
@@ -201,11 +210,18 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
     } satisfies CellDeclarationT<CellSingleT>;
 
     const singleCells = [...singleObj.common];
-    const doubleCells = [...doubleObj.common];
+    const doubleCells = [...doubleObj.common] as CellSettingsT[];
 
     if (type === 'exportT') {
         singleCells.push(...singleObj.exportDefault);
-        doubleCells.push(...doubleObj.exportDefault);
+        doubleCells.push(...doubleObj.exportDefault.common);
+
+        if (terms === 'EXW') {
+            doubleCells.push(...doubleObj.exportDefault.exw);
+        }
+        if (terms === 'CFR') {
+            doubleCells.push(...doubleObj.exportDefault.cfr);
+        }
     }
 
     if (type === 'exportStorageT') {

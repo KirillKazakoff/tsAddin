@@ -180,24 +180,20 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     eng: `Продавец/Seller ______________________________${podpisant.eng.name}`,
                     ru: `Покупатель/Buyer ______________________________${agent.eng.signatory}`,
                 },
-                {
-                    height: terms === 'EXW' ? 1 : 27,
-                    isEmptyCell: terms === 'EXW',
-                    name: 'Сертификаты_обязательства',
-                    eng: 'Seller is obligated to issue set of sertificates for consignees, mentioned in clause 1.',
-                    ru: 'Покупатель обязуется выпустить комплект сертификатов на получателей, перечисленных в пункте 1.',
-                },
             ],
             exw: [
                 {
                     name: 'Доставка_условия',
                     eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
                     ru: `3.1 Поставка осуществляется на условиях ${terms} ${portTo.ru.name}`,
+                    height: 25,
                 },
                 {
+
                     name: 'Доставка_порт',
                     eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} at ${date.delivery('eng', 'day')}`,
                     ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country}, ${date.delivery('ru', 'day')}`,
+                    height: 35,
                 },
             ],
             cfr: [
@@ -205,11 +201,19 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                     name: 'Доставка_условия',
                     eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
                     ru: `3.1 Поставка осуществляется на условиях ${terms} ${portTo.ru.name}`,
+                    height: 25,
                 },
                 {
                     name: 'Доставка_порт',
                     eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} no later than ${date.delivery('eng', 'month')}`,
                     ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country} не позднее чем ${date.delivery('ru', 'month')}`,
+                    height: 35,
+                },
+                {
+                    name: 'Сертификаты_обязательства',
+                    eng: 'Seller is obligated to issue set of sertificates for consignees, mentioned in clause 1.',
+                    ru: 'Покупатель обязуется выпустить комплект сертификатов на получателей, перечисленных в пункте 1.',
+                    height: 30,
                 },
             ],
             fca: {
@@ -219,22 +223,25 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                         name: 'Цена_неком',
                         eng: `2.1 The final price agreed upon by the parties after the cargo discharging at the ${portTo.eng.name} port of destination is detailed in the table in Item 1 of this Agreement.`,
                         ru: `2.1 Окончательная цена, установленная сторонами по результатам выгрузки в порту назначения ${portTo.ru.name}, указана в таблице в п. 1 настоящего Дополнения.`,
+                        height: 35,
                     },
                     {
                         name: 'Доставка_условия',
                         eng: `3.1 The delivery was carried out under conditions of the FCA ${portTo.eng.name} in accordance with Agreement ${storageAgreementRow?.agreementNo} dated ${date.storageAgreementDate('eng')} to the Contract of Sales No.${storageAgreementRow?.contract?.contractNo} dated ${date.contract('eng')}. Acceptance and transfer of Goods in terms of quantity and quality was carried out on the territory of ${portTo.eng.countryFull} in the settlement of ${portTo.eng.name}.`,
                         ru: `3.1 Поставка осуществлялась на условиях FCA ${portTo.ru.name} в рамках Дополнения № ${storageAgreementRow?.agreementNo} от ${date.storageAgreementDate('ru')} к контракту ${storageAgreementRow?.contract?.contractNo} от ${date.contract('ru')} Приемка-передача Товара по количеству и качеству производилась на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}.`,
-                        height: terms === 'FCA' ? 60 : 45,
+                        height: 65,
                     },
                     {
                         name: 'Доставка_приемка',
                         eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of ${portTo.eng.name} on behalf of the Buyer was carried out by: ${consignee.fullName} ${consignee.addres}`,
                         ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. ${portTo.ru.name} от имени покупателя осуществляла компания: ${consignee.fullName} ${consignee.addres}`,
+                        height: 50,
                     },
                     {
                         name: 'Доставка_дата',
                         eng: `Delivery date: ${deliveryDate}`,
                         ru: `Дата поставки: ${deliveryDate}`,
+                        height: 20,
                     },
                 ],
                 nonCom: [
@@ -258,25 +265,27 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                         name: 'Цена_неком',
                         eng: '2.1 The price is approximate. The final price will be set by the parties after',
                         ru: '2.1  Цена является ориентировочной. Окончательная цена будет установлена.',
-                        height: 20,
+                        height: 35,
                     },
                     {
                         name: 'Доставка_условия',
                         eng: `3.1 Supply of products is carried out on FCA Terms.\nAcceptance- transfer of Goods by quantity and quality is made on the territory of: ${portTo.eng.countryFull} in ${portTo.eng.name}.`,
                         ru: `3.1 Поставка осуществляется на условиях FCA.\nПриемка-передача Товара по количеству и качеству производится на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}`,
+                        height: 30,
                     },
                     {
                         name: 'Доставка_приемка',
                         eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of ${portTo.eng.name} on behalf of the Buyer will be carried out by: ${consignee.fullName} ${consignee.addres}`,
                         ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. ${portTo.ru.name} от имени покупателя будет осуществлять: ${consignee.fullName} ${consignee.addres}`,
+                        height: 30,
                     },
                     {
                         name: 'Доставка_дата',
                         eng: `Expected delivery date: ${deliveryDate}`,
                         ru: `Дата поставки ориентировочно: ${deliveryDate}`,
+                        height: 20,
                     },
                 ],
-
             },
         },
         exportStorage: {

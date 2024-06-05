@@ -33,7 +33,7 @@ export const initExportDefaultContractRowsFCA = (
         style: {
             common: {
                 alignment: 'center',
-                // border: 'all',
+                border: 'outside',
                 fill: {
                     pattern: 'solid',
                     fgColor: { argb: 'FFDCDCDC' },
@@ -42,19 +42,14 @@ export const initExportDefaultContractRowsFCA = (
                 },
             },
             special: {
-                // empty1: {
-                //     style: {
-                //         fill: {
-                //             pattern: 'solid',
-                //             fgColor: { argb: 'FFFFFFFF' },
-                //             bgColor: { argb: 'FFFFFFFF' },
-                //             type: 'pattern',
-                //         },
-                //     },
-                // },
-                desc: {
+                empty1: {
                     style: {
-                        border: { top: { style: 'thin' }, left: { style: 'thin' } },
+                        fill: {
+                            pattern: 'solid',
+                            fgColor: { argb: 'FFFFFFFF' },
+                            bgColor: { argb: 'FFFFFFFF' },
+                            type: 'pattern',
+                        },
                     },
                 },
                 vessel: {

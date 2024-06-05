@@ -1,7 +1,6 @@
 import { Cell, CellValue } from 'exceljs';
 
-type CellSettingsT = {
-    name: string;
+type PartialSettingsT = Partial<{
     offsetRow?: number;
     numFmt?: string;
     isEmptyTitle?: boolean;
@@ -12,11 +11,15 @@ type CellSettingsT = {
         start?: number;
         end?: number;
     };
-};
+}>;
+
+export type CellSettingsT = {
+    name: string;
+} & PartialSettingsT;
 
 export type CellObjDoubleT = CellSettingsT & {
-    eng: CellValue;
-    ru: CellValue;
+    eng?: CellValue;
+    ru?: CellValue;
 };
 
 export type CellObjT = CellSettingsT & {
