@@ -61,7 +61,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             },
             {
                 name: 'Продавец_представитель',
-                eng: `${podpisant.eng.comment}\n${podpisant.eng.name}`,
+                eng: `${podpisant.eng.comment} ${podpisant.eng.name}`,
                 ru: `${podpisant.req.face}`,
             },
             {
@@ -267,21 +267,21 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             },
             {
                 name: 'Цена_неком',
-                eng: '2.1 The price is approximate. The final price will be set by the parties after',
-                ru: '2.1  Цена является ориентировочной. Окончательная цена будет установлена.',
-                height: 35,
+                eng: '2.1 The price is approximate. The final price will be set by the parties after unloading at the final destination.',
+                ru: '2.1  Цена является ориентировочной. Окончательная цена будет установлена после выгрузки в порту назначения.',
+                height: 30,
             },
             {
                 name: 'Доставка_условия',
                 eng: `3.1 Supply of products is carried out on FCA Terms.\nAcceptance- transfer of Goods by quantity and quality is made on the territory of: ${portTo.eng.countryFull} in ${portTo.eng.name}.`,
                 ru: `3.1 Поставка осуществляется на условиях FCA.\nПриемка-передача Товара по количеству и качеству производится на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}`,
-                height: 30,
+                height: 45,
             },
             {
                 name: 'Доставка_приемка',
                 eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of ${portTo.eng.name} on behalf of the Buyer will be carried out by: ${consignee.fullName} ${consignee.addres}`,
                 ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. ${portTo.ru.name} от имени покупателя будет осуществлять: ${consignee.fullName} ${consignee.addres}`,
-                height: 30,
+                height: 70,
             },
             {
                 name: 'Доставка_дата',

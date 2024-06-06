@@ -50,6 +50,7 @@ export const setCells = (cells: CellFullT[]) => {
     } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);
+        // eslint-disable-next-line no-console
         console.error(`Ошибка при установке значения ${cells[0].settings.name}`);
         return null;
     }

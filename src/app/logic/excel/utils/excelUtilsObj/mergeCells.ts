@@ -103,14 +103,9 @@ export const mergeRowCells = (ws: Worksheet, fields: FieldsGenT, row: number) =>
         }
     });
 
-    merge.forEach(({ start, end }, i, { length }) => {
+    merge.forEach(({ start, end }) => {
         const { style: styleStart } = _.cloneDeep(ws.getCell(row, start));
         const styleEnd = _.cloneDeep(ws.getCell(row, end));
-
-        // merge take first cell styles so set last cell border if last cell merge
-        // if (length - 1 === i) {
-        //     ws.getCell(row, start).style.border = ws.getCell(row, end).style.border;
-        // }
 
         mergeCells(ws)({
             startCol: start,

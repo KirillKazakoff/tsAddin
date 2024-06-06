@@ -159,6 +159,11 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `к контракту купли-продажи № ${contract.contractNo}`,
             },
             {
+                name: 'Инвойс_соглашение',
+                eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
+                ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
+            },
+            {
                 name: 'Инвойс_транспорт',
                 eng: `${portTo.eng.name}, ${portTo.eng.country}`,
                 ru: `${portTo.ru.name}, ${portTo.ru.country}`,
