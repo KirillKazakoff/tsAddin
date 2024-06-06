@@ -33,16 +33,6 @@ export const initExportInvoicesTmps = async (
         cells.double.forEach((cell) => utilsDouble.setCell(cell));
         cells.single.forEach((cell) => utilsSingle.setCell(cell));
 
-        // ?? in cells (splice if terms)
-        if (invoice.record.type === 'exportT' && invoice.record.terms === 'EXW') {
-            const cell = utilsSingle.getCell('Инвойс_транспорт');
-
-            if (cell) {
-                const row = utilsSingle.getRow('Инвойс_транспорт', -1);
-                wsOriginal.spliceRows(row.number, 2);
-            }
-        }
-
         // finish initInvoice
         await utilsDouble.initPictures(
             [

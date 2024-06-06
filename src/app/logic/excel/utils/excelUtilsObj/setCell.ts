@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import { Worksheet } from 'exceljs';
 import { CellFullT, CellObjDoubleT, CellObjT } from '../../../../types/typesExcelUtils';
@@ -6,22 +5,15 @@ import { getCellSingle, getCellDouble } from './getCell';
 import { getRow } from './getRow';
 import { deleteRow } from './deleteRow';
 
-// eslint-disable-next-line max-len
 export const setCells = (cells: CellFullT[]) => {
     const {
-        height,
-        name,
-        isEmptyCell,
-        isEmptyTitle,
-        numFmt,
-        deleteRows: deleteSettings,
+        name, height, numFmt, deleteRows: deleteSettings,
     } = cells[0].settings;
+
     try {
         cells.forEach((c) => {
-            const { value } = c.settings;
             const ws = c.cell.worksheet;
-            const mainCell = ws.getCell(+c.cell.row, +c.cell.col);
-            const titleCell = ws.getCell(+c.cell.row - 1, +c.cell.col);
+            const defineCell = c.settings?.defineCell;
 
             if (deleteSettings) {
                 if (deleteSettings.onlyParent) {
@@ -35,12 +27,17 @@ export const setCells = (cells: CellFullT[]) => {
                 return;
             }
 
-            if (value) c.cell.value = value;
+            if (defineCell) {
+                const cell = ws.getCell(
+                    +c.cell.row + defineCell.offset.y,
+                    +c.cell.col + defineCell.offset.x,
+                );
 
-            if (isEmptyCell) {
-                c.cell.value = '';
-                return;
+                setCells([{ cell, settings: defineCell.cell }]);
             }
+
+            // if (typeof value === 'string' || typeof value === 'number') c.cell.value = value;
+            c.cell.value = c.settings.value;
 
             if (numFmt) c.cell.numFmt = numFmt;
 
@@ -48,17 +45,12 @@ export const setCells = (cells: CellFullT[]) => {
                 const row = getRow(ws)(name);
                 row.height = height;
             }
-            if (isEmptyTitle) {
-                mainCell.value = '';
-                titleCell.value = '';
-            }
         });
         return cells;
     } catch (e) {
-        if (isEmptyTitle) return null;
-        // console.log(e);
         // eslint-disable-next-line no-console
-        console.error(`Ошибка при установке значения ${name}`);
+        console.log(e);
+        console.error(`Ошибка при установке значения ${cells[0].settings.name}`);
         return null;
     }
 };
@@ -77,7 +69,7 @@ export const setCellSingle = (ws: Worksheet) => (settings: CellObjT) => {
 
 export const setCellDouble = (ws: Worksheet, offsetCell: string) => (settings: CellObjDoubleT) => {
     const {
-        name, offsetRow, eng, ru,
+        name, offsetRow, eng, ru, defineCell,
     } = settings;
 
     const { cellEng, cellRus } = getCellDouble(ws, offsetCell)(name, offsetRow);
@@ -85,7 +77,21 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (settings: C
 
     const cellObj = setCells([
         { cell: cellEng, settings: { ...(settings as any), value: eng } },
-        { cell: cellRus, settings: { ...(settings as any), value: ru } },
+        {
+            cell: cellRus,
+            settings: {
+                ...(settings as any),
+                value: ru,
+                defineCell: defineCell
+                    ? {
+                        cell: defineCell?.cellRu
+                            ? defineCell.cellRu
+                            : defineCell?.cell,
+                        offset: defineCell.offset,
+                    }
+                    : null,
+            },
+        },
     ]);
 
     return { cellEng: cellObj[0].cell, cellRus: cellObj[0].cell };

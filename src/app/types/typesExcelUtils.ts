@@ -1,9 +1,9 @@
+/* eslint-disable no-use-before-define */
 import { Cell, CellValue } from 'exceljs';
 
 type PartialSettingsT = Partial<{
     offsetRow?: number;
     numFmt?: string;
-    isEmptyTitle?: boolean;
     isEmptyCell?: boolean;
     height?: number;
     deleteRows?: {
@@ -13,20 +13,28 @@ type PartialSettingsT = Partial<{
     };
 }>;
 
-export type CellSettingsT = {
-    name: string;
+export type CellSettingsCommonT = {
+    name?: string;
+    defineCell?: {
+        cell: CellObjT;
+        cellRu?: CellObjT;
+        offset: {
+            x: number;
+            y: number;
+        };
+    };
 } & PartialSettingsT;
 
-export type CellObjDoubleT = CellSettingsT & {
+export type CellObjDoubleT = CellSettingsCommonT & {
     eng?: CellValue;
     ru?: CellValue;
 };
 
-export type CellObjT = CellSettingsT & {
+export type CellObjT = CellSettingsCommonT & {
     value: CellValue;
 };
 
 export type CellFullT = {
-    settings: CellSettingsT & { value: CellValue };
+    settings: CellSettingsCommonT & { value: CellValue };
     cell: Cell;
 };

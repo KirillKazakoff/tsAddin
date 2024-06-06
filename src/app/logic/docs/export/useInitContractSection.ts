@@ -35,9 +35,9 @@ export const useInitContractSection = () => {
                 createDoc: () => {
                     const { invoices } = current.groupedBy;
                     const { operation } = exportContractStore;
-                    const { agreementNo, id } = current.record;
+                    const { agreementNo, id, terms } = current.record;
 
-                    const tmpPath: PathKeyT = operation === 'export'
+                    const tmpPath: PathKeyT = operation === 'export' || terms === 'FCA'
                         ? 'exportContract'
                         : 'exportStorageContract';
 

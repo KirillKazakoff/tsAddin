@@ -1,8 +1,8 @@
+/* eslint-disable max-len */
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import {
     CellObjDoubleT as CellDoubleT,
-    CellFullT,
-    CellSettingsT,
+    CellSettingsCommonT,
     CellObjT as CellSingleT,
 } from '../../../../types/typesExcelUtils';
 import { CellDeclarationT } from '../../../../types/typesUtils';
@@ -34,10 +34,40 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
         invoice: (language: string) => getExcelDateStr(docDate, language),
         contract: (language: string) => getExcelDateStr(contract.date, language),
     };
-    const { podpisant, isNonComFCA } = exportContractStore.fields;
+    const { podpisant } = exportContractStore.fields;
 
-    // prettier-ignore
-    const doubleObj = {
+    const singleObj = {
+        common: [
+            {
+                name: 'Инвойс_подписант',
+                value: `Signed by ${podpisant.eng.name} / ${podpisant.ru.name}`,
+            },
+        ],
+        exportDefault: [
+            {
+                name: 'Инвойс_банк_получателя',
+                value: `Beneficiary Bank: ${bankSeller.eng.name}`,
+            },
+            {
+                name: 'Инвойс_банк_получателя_адрес',
+                value: `Bank address: ${bankSeller.address}`,
+            },
+            {
+                name: 'Инвойс_банк_получателя_свифт',
+                value: `SWIFT: ${bankSeller.swift}`,
+            },
+            {
+                name: 'Инвойс_получатель_в_пользу',
+                value: `in forward to ${seller.eng.name}`,
+            },
+            {
+                name: 'Инвойс_получатель_счет',
+                value: `A/C: ${bankSeller.accountNo}`,
+            },
+        ],
+    } satisfies CellDeclarationT<CellSingleT>;
+
+    const commonObj = {
         common: [
             {
                 name: 'Инвойс_дата',
@@ -83,13 +113,11 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_куда',
                 eng: `${portTo.eng.name}, ${portTo.eng.country}`,
                 ru: `${portTo.ru.name}, ${portTo.ru.country}`,
-                isEmptyTitle: invoice.record.terms === 'EXW' && !isNonComFCA,
             },
             {
                 name: 'Инвойс_откуда',
                 eng: `${portFrom?.eng?.name}`,
                 ru: `${portFrom?.ru?.name}`,
-                isEmptyTitle: invoice.record.terms === 'FCA' || invoice.record.terms === 'EXW',
             },
             {
                 name: 'Инвойс_изготовитель',
@@ -107,40 +135,115 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `${terms}, ${portTo.ru.name}`,
             },
         ],
-        exportDefault: {
-            common: [
-                {
-                    name: 'Инвойс',
-                    eng: `Commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
-                    ru: `Коммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
-                },
-                {
-                    name: 'Инвойс_соглашение',
-                    eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
-                    ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
-                },
-                {
-                    name: 'Инвойс_контракт',
-                    eng: `to the Contract of sale № ${contract.contractNo}`,
-                    ru: `к контракту купли-продажи № ${contract.contractNo}`,
-                },
-                {
-                    name: 'Инвойс_декларация',
-                    eng: declarationNo,
-                    ru: declarationNo,
-                    isEmptyTitle: invoice.record.terms === 'CFR',
-                },
-            ],
-            exw: [{
+        EXWCFR: [
+            {
+                name: 'Инвойс',
+                eng: `Commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                ru: `Коммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+            },
+            {
+                name: 'Инвойс_соглашение',
+                eng: `to the Agreement No. ${agreementNo} from ${date.agreement('eng')}`,
+                ru: `к Дополнению No. ${agreementNo} от ${date.agreement('ru')}`,
+            },
+            {
+                name: 'Инвойс_контракт',
+                eng: `to the Contract of sale № ${contract.contractNo}`,
+                ru: `к контракту купли-продажи № ${contract.contractNo}`,
+            },
+        ],
+        FCA: [
+            {
+                name: 'Инвойс_контракт',
+                eng: `to the Contract of sale № ${contract.contractNo}`,
+                ru: `к контракту купли-продажи № ${contract.contractNo}`,
+            },
+            {
                 name: 'Инвойс_транспорт',
-                deleteRows: { start: -1, end: -1 },
-            }],
-            cfr: [{
+                eng: `${portTo.eng.name}, ${portTo.eng.country}`,
+                ru: `${portTo.ru.name}, ${portTo.ru.country}`,
+                defineCell: {
+                    offset: { x: 0, y: -1 },
+                    cell: { value: 'To' },
+                    cellRu: { value: 'Порт назначения' },
+                },
+            },
+            {
+                name: 'Инвойс_куда',
+                eng: `${terms}, ${portTo.eng.name}`,
+                ru: `${terms}, ${portTo.ru.name}`,
+                defineCell: {
+                    offset: { x: 0, y: -1 },
+                    cell: { value: 'Terms of delivery and payment' },
+                    cellRu: { value: 'Условия доставки и оплаты' },
+                },
+            },
+            {
+                name: 'Инвойс_откуда',
+                eng: null,
+                ru: null,
+                defineCell: { offset: { x: 0, y: -1 }, cell: { value: null } },
+            },
+            {
                 name: 'Инвойс_декларация',
-                isEmptyTitle: true,
-            }],
-        },
-        exportStorage: [
+                eng: null,
+                ru: null,
+                defineCell: { offset: { x: 0, y: -1 }, cell: { value: null } },
+            },
+        ],
+    } satisfies CellDeclarationT<CellDoubleT>;
+
+    // prettier-ignore
+    const doubleObj = {
+        common: commonObj.common,
+        cfr: [
+            {
+                name: 'Инвойс_декларация',
+                eng: '',
+                ru: '',
+                defineCell: { offset: { x: 0, y: -1 }, cell: { value: '' } },
+            },
+            ...commonObj.EXWCFR,
+        ],
+        exw: [
+            {
+                name: 'Инвойс_декларация',
+                eng: declarationNo,
+                ru: declarationNo,
+            },
+            {
+                name: 'Инвойс_транспорт',
+                deleteRows: { start: -1, end: 1 },
+            },
+            ...commonObj.EXWCFR,
+        ],
+        fcaNonCom: [
+            {
+                name: 'Инвойс',
+                eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+            },
+            {
+                name: 'Инвойс_декларация',
+                deleteRows: { start: -1, end: 1 },
+            },
+            ...commonObj.FCA,
+        ],
+        fcaCom: [
+            {
+                name: 'Инвойс',
+                eng: `Commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                ru: `Коммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+            },
+            {
+                name: 'Инвойс_условия',
+                eng: declarationNo,
+                ru: declarationNo,
+                defineCell: { offset: { x: 0, y: -1 }, cell: { value: 'Temporary Customs Declaration' }, cellRu: { value: '№ временной декларации на товары' } },
+            },
+            ...commonObj.FCA,
+        ],
+        storage: [
             {
                 name: 'Инвойс',
                 eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
@@ -157,78 +260,32 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
             },
         ],
-        fca: {
-            common: [],
-            nonCom: [
-                {
-                    name: 'Инвойс',
-                    eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
-                    ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
-                },
-                {
-                    name: 'Инвойс_контракт',
-                    eng: `to the Contract of sale № ${contract.contractNo}`,
-                    ru: `к контракту купли-продажи № ${contract.contractNo}`,
-                },
-                {
-                    name: 'Инвойс_декларация',
-                    deleteRows: { start: -1, end: 1 },
-                },
-            ],
-        },
+
     } satisfies CellDeclarationT<CellDoubleT>;
 
-    const singleObj = {
-        common: [
-            {
-                name: 'Инвойс_подписант',
-                value: `Signed by ${podpisant.eng.name} / ${podpisant.ru.name}`,
-            },
-        ],
-        exportDefault: [
-            {
-                name: 'Инвойс_банк_получателя',
-                value: `Beneficiary Bank: ${bankSeller.eng.name}`,
-            },
-            {
-                name: 'Инвойс_банк_получателя_адрес',
-                value: `Bank address: ${bankSeller.address}`,
-            },
-            {
-                name: 'Инвойс_банк_получателя_свифт',
-                value: `SWIFT: ${bankSeller.swift}`,
-            },
-            {
-                name: 'Инвойс_получатель_в_пользу',
-                value: `in forward to ${seller.eng.name}`,
-            },
-            {
-                name: 'Инвойс_получатель_счет',
-                value: `A/C: ${bankSeller.accountNo}`,
-            },
-        ],
-    } satisfies CellDeclarationT<CellSingleT>;
-
     const singleCells = [...singleObj.common];
-    const doubleCells = [...doubleObj.common] as CellSettingsT[];
+    const doubleCells = [...doubleObj.common] as CellSettingsCommonT[];
 
     if (type === 'exportT') {
         singleCells.push(...singleObj.exportDefault);
-        doubleCells.push(...doubleObj.exportDefault.common);
 
         if (terms === 'EXW') {
-            doubleCells.push(...doubleObj.exportDefault.exw);
+            doubleCells.push(...doubleObj.exw);
         }
         if (terms === 'CFR') {
-            doubleCells.push(...doubleObj.exportDefault.cfr);
+            doubleCells.push(...doubleObj.cfr);
+        }
+        if (terms === 'FCA') {
+            doubleCells.push(...doubleObj.fcaCom);
         }
     }
 
     if (type === 'exportStorageT') {
-        doubleCells.push(...doubleObj.exportStorage);
-
+        if (terms === 'EXW') {
+            doubleCells.push(...doubleObj.storage);
+        }
         if (terms === 'FCA') {
-            doubleCells.push(...doubleObj.fca.nonCom);
+            doubleCells.push(...doubleObj.fcaNonCom);
         }
     }
 

@@ -42,7 +42,6 @@ export const setStorageInvoices = (table: any[][]) => {
                 days: r.days,
             };
 
-            console.log(res.amount);
             return res;
         },
     });

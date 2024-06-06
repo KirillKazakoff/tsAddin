@@ -1,6 +1,6 @@
 import { CellUtilsT } from '../../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { ExportGroupT } from '../../groupAgByNo';
-import { initExportDefaultContractRowsFCA } from './initExportDefaultContractFCARows';
+import { initExportDefaultContractRowsFCA } from './initExportDefaultContractRowsFCA';
 import { initExportDefaultContractRows } from './initExportDefaultContractRows';
 
 export const initExportDefaultContractTmp = async (
