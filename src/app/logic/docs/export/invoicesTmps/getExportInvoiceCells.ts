@@ -204,9 +204,9 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
         cfr: [
             {
                 name: 'Инвойс_декларация',
-                eng: '',
-                ru: '',
-                defineCell: { offset: { x: 0, y: -1 }, cell: { value: '' } },
+                eng: null,
+                ru: null,
+                defineCell: { offset: { x: 0, y: -1 }, cell: { value: null } },
             },
             ...commonObj.EXWCFR,
         ],
