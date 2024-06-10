@@ -1,5 +1,4 @@
-import { CellObjT } from '../../../../types/typesExcelUtils';
-import { CellDeclarationT } from '../../../../types/typesUtils';
+import { CellDeclarationT, CellObjT } from '../../../../types/typesExcelUtils';
 import { getPortLetterNo } from './getPortLetterNo';
 import spsStore from '../../../../stores/spsStore/spsStore';
 import portLetterStore from '../../../../stores/docsStores/portLetterStore';

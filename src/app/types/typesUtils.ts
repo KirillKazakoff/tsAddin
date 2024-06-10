@@ -33,8 +33,3 @@ export type Paths<T> = T extends Array<infer U>
                 : never;
         }[keyof T & (string | number)]
         : never;
-
-export type CellDeclarationT<CellT> = {
-    common: CellT[];
-    [key: string]: CellT[] | CellDeclarationT<CellT>;
-};

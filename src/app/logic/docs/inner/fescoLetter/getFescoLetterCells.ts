@@ -1,6 +1,5 @@
 import fescoLetterStore from '../../../../stores/docsStores/fescoLetterStore';
-import { CellObjT } from '../../../../types/typesExcelUtils';
-import { CellDeclarationT } from '../../../../types/typesUtils';
+import { CellDeclarationT, CellObjT } from '../../../../types/typesExcelUtils';
 import { getExcelDateStr, getNowDate } from '../../../excel/utils/getExcelDate';
 import { FescoGroupT } from './groupFesco';
 

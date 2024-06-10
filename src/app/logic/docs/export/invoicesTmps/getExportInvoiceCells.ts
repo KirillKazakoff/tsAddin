@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import {
+    CellDeclarationT,
     CellObjDoubleT as CellDoubleT,
     CellSettingsCommonT,
     CellObjT as CellSingleT,
 } from '../../../../types/typesExcelUtils';
-import { CellDeclarationT } from '../../../../types/typesUtils';
 import { getExcelDateStr } from '../../../excel/utils/getExcelDate';
 import { ExportGroupT } from '../groupAgByNo';
 
@@ -167,7 +167,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_транспорт',
                 eng: `${portTo.eng.name}, ${portTo.eng.country}`,
                 ru: `${portTo.ru.name}, ${portTo.ru.country}`,
-                defineCell: {
+                redefineCell: {
                     offset: { x: 0, y: -1 },
                     cell: { value: 'To' },
                     cellRu: { value: 'Порт назначения' },
@@ -177,7 +177,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_куда',
                 eng: `${terms}, ${portTo.eng.name}`,
                 ru: `${terms}, ${portTo.ru.name}`,
-                defineCell: {
+                redefineCell: {
                     offset: { x: 0, y: -1 },
                     cell: { value: 'Terms of delivery and payment' },
                     cellRu: { value: 'Условия доставки и оплаты' },
@@ -187,13 +187,13 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_откуда',
                 eng: null,
                 ru: null,
-                defineCell: { offset: { x: 0, y: -1 }, cell: { value: null } },
+                redefineCell: { offset: { x: 0, y: -1 }, cell: { value: null } },
             },
             {
                 name: 'Инвойс_декларация',
                 eng: null,
                 ru: null,
-                defineCell: { offset: { x: 0, y: -1 }, cell: { value: null } },
+                redefineCell: { offset: { x: 0, y: -1 }, cell: { value: null } },
             },
         ],
     } satisfies CellDeclarationT<CellDoubleT>;
@@ -206,7 +206,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_декларация',
                 eng: null,
                 ru: null,
-                defineCell: { offset: { x: 0, y: -1 }, cell: { value: null } },
+                redefineCell: { offset: { x: 0, y: -1 }, cell: { value: null } },
             },
             ...commonObj.EXWCFR,
         ],
@@ -244,7 +244,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_условия',
                 eng: declarationNo,
                 ru: declarationNo,
-                defineCell: { offset: { x: 0, y: -1 }, cell: { value: 'Temporary Customs Declaration' }, cellRu: { value: '№ временной декларации на товары' } },
+                redefineCell: { offset: { x: 0, y: -1 }, cell: { value: 'Temporary Customs Declaration' }, cellRu: { value: '№ временной декларации на товары' } },
             },
             ...commonObj.FCA,
         ],
@@ -268,18 +268,14 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 name: 'Инвойс_декларация',
                 eng: null,
                 ru: null,
-                defineCell: {
+                redefineCell: {
                     offset: { x: 0, y: -1 },
-                    cell: {
-                        value: '* This price given exclusively for customs clearance',
-                        alignment: { vertical: 'middle', wrapText: true } as any,
-                        font: { bold: false } as any,
+                    commonStyles: {
+                        alignment: { vertical: 'middle', wrapText: true },
+                        font: { bold: false },
                     },
-                    cellRu: {
-                        value: '* Данная цена указана исключительно для таможенного оформления',
-                        alignment: { vertical: 'middle', wrapText: true } as any,
-                        font: { bold: false } as any,
-                    },
+                    cell: { value: '* This price given exclusively for customs clearance' },
+                    cellRu: { value: '* Данная цена указана исключительно для таможенного оформления' },
                 },
             },
         ],

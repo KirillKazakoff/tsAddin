@@ -14,12 +14,13 @@ export const setCells = (cells: CellFullT[]) => {
         fill,
         alignment,
         font,
+        isEmptyCell,
     } = cells[0].settings;
 
     try {
         cells.forEach((c) => {
             const ws = c.cell.worksheet;
-            const defineCell = c.settings?.defineCell;
+            const redefineCell = c.settings?.redefineCell;
 
             if (deleteSettings) {
                 if (deleteSettings.onlyParent) {
@@ -33,26 +34,31 @@ export const setCells = (cells: CellFullT[]) => {
                 return;
             }
 
-            if (defineCell) {
+            if (redefineCell) {
+                const { commonStyles } = redefineCell;
                 const cell = ws.getCell(
-                    +c.cell.row + defineCell.offset.y,
-                    +c.cell.col + defineCell.offset.x,
+                    +c.cell.row + redefineCell.offset.y,
+                    +c.cell.col + redefineCell.offset.x,
                 );
 
-                setCells([{ cell, settings: defineCell.cell }]);
+                setCells([{ cell, settings: { ...redefineCell.cell, ...commonStyles } }]);
             }
 
             if (typeof c.settings.value !== 'undefined') {
                 c.cell.value = c.settings.value;
             }
 
-            if (numFmt) c.cell.numFmt = numFmt;
-
+            if (isEmptyCell) {
+                c.cell.value = null;
+            }
             if (height) {
                 const row = getRow(ws)(name);
                 row.height = height;
             }
 
+            if (numFmt) {
+                c.cell.numFmt = numFmt;
+            }
             if (fill) {
                 c.cell.fill = fill;
             }
@@ -87,7 +93,7 @@ export const setCellSingle = (ws: Worksheet) => (settings: CellObjT) => {
 
 export const setCellDouble = (ws: Worksheet, offsetCell: string) => (settings: CellObjDoubleT) => {
     const {
-        name, offsetRow, eng, ru, defineCell,
+        name, offsetRow, eng, ru, redefineCell,
     } = settings;
 
     const { cellEng, cellRus } = getCellDouble(ws, offsetCell)(name, offsetRow);
@@ -100,12 +106,12 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (settings: C
             settings: {
                 ...(settings as any),
                 value: ru,
-                defineCell: defineCell
+                redefineCell: redefineCell
                     ? {
-                        cell: defineCell?.cellRu
-                            ? defineCell.cellRu
-                            : defineCell?.cell,
-                        offset: defineCell.offset,
+                        ...redefineCell,
+                        cell: redefineCell?.cellRu
+                            ? redefineCell.cellRu
+                            : redefineCell?.cell,
                     }
                     : null,
             },

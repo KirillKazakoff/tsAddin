@@ -1,5 +1,4 @@
-import { CellObjT } from '../../../types/typesExcelUtils';
-import { CellDeclarationT } from '../../../types/typesUtils';
+import { CellDeclarationT, CellObjT } from '../../../types/typesExcelUtils';
 import { getExcelDateStr } from '../../excel/utils/getExcelDate';
 import { SalesGroupT } from './groupSalesContract';
 
