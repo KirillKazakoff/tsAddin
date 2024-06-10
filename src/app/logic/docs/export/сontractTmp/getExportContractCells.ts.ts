@@ -47,6 +47,23 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
     const currency = getCostGoodsStr(agreement);
 
     const commonObj = {
+        hidden: [
+            { name: 'Доставка_транспорт', height: 1 },
+            { name: 'Остальное_контракт', height: 1 },
+            { name: 'Соглашение_вступление', height: 1 },
+            { name: 'Юридикция', height: 1 },
+            { name: 'Цена_заголовок', height: 1 },
+            { name: 'Цена_неком', height: 1 },
+            { name: 'Цена_всего', height: 1 },
+            { name: 'Доставка_заголовок', height: 1 },
+            { name: 'Доставка_условия', height: 1 },
+            { name: 'Доставка_приемка', height: 1 },
+            { name: 'Доставка_дата', height: 1 },
+            { name: 'Доставка_порт', height: 1 },
+            { name: 'Сертификаты_обязательства', height: 1 },
+            { name: 'Прочие_условия_заголовок', height: 1 },
+            { name: 'Прочие_условия_описание', height: 1 },
+        ],
         common: [
             // Header
             {
@@ -58,6 +75,11 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 name: 'Продавец',
                 eng: `${seller.eng.name}`,
                 ru: `${seller.ru.fullNameOrg}`,
+            },
+            {
+                name: 'Продавец_адрес',
+                eng: seller.eng.address,
+                ru: seller.ru.address,
             },
             {
                 name: 'Продавец_представитель',
@@ -174,16 +196,54 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 height: 40,
             },
             {
+                name: 'Прочие_условия_описание',
+                eng: 'Copies of present agreement corresponded by fax are also valid.',
+                ru: 'Копии настоящего дополнения, подписанные по факсу, также имеют юридическую силу.',
+                height: 30,
+            },
+            {
                 name: 'Адреса_подпись',
                 eng: `Продавец/Seller ______________________________${podpisant.eng.name}`,
                 ru: `Покупатель/Buyer ______________________________${agent.eng.signatory}`,
+            },
+        ],
+        titles: [
+            {
+                name: 'Предмет_дополнения_заголовок',
+                eng: '1. Subject of Agreement',
+                ru: '1. Предмет дополнения',
+                height: 20,
+            },
+            {
+                name: 'Цена_заголовок',
+                eng: '2. Cost of goods',
+                ru: '2. Цена товара',
+                height: 20,
+            },
+            {
+                name: 'Доставка_заголовок',
+                eng: '3. Delivery',
+                ru: 'Доставка',
+                height: 20,
+            },
+            {
+                name: 'Прочие_условия_заголовок',
+                eng: '4. Other terms',
+                ru: '4. Прочие условия',
+                height: 20,
+            },
+            {
+                name: 'Адреса_сторон_заголовок',
+                eng: '5. Addresses of the Parties',
+                ru: '5. Адреса Сторон',
+                height: 20,
             },
         ],
     } satisfies CellDeclarationT<CellObjT>;
 
     // prettier-ignore
     const cells = {
-        common: commonObj.common,
+        common: [...commonObj.common, ...commonObj.hidden],
         exw: [
             {
                 name: 'Доставка_условия',
@@ -198,7 +258,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country}, ${date.delivery('ru', 'day')}`,
                 height: 35,
             },
-            ...commonObj.export,
+            ...commonObj.export, ...commonObj.titles,
         ],
         cfr: [
             {
@@ -219,7 +279,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 ru: 'Покупатель обязуется выпустить комплект сертификатов на получателей, перечисленных в пункте 1.',
                 height: 30,
             },
-            ...commonObj.export,
+            ...commonObj.export, ...commonObj.titles,
         ],
         fcaCom: [
             {
@@ -246,7 +306,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 ru: `Дата поставки: ${deliveryDate}`,
                 height: 20,
             },
-            ...commonObj.export,
+            ...commonObj.export, ...commonObj.titles,
         ],
         fcaNonCom: [
             {
@@ -289,7 +349,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 ru: `Дата поставки ориентировочно: ${deliveryDate}`,
                 height: 20,
             },
-            ...commonObj.export,
+            ...commonObj.export, ...commonObj.titles,
         ],
         exportStorage: [
             {
@@ -303,9 +363,10 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
             },
             {
-                name: 'Обязательство_хранение',
+                name: 'Предмет_дополнения',
                 eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country}, the batch of:`,
                 ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country}, переданную Заказчиком партию:`,
+                height: 30,
             },
             {
                 name: 'Доставка_транспорт',
@@ -317,16 +378,32 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 name: 'Остальное_контракт',
                 eng: `3. In all other matters not covered by this Agreement, the parties shall be governed by the terms and conditions of Storage Services Contract No. ${contract.contractNo}, dated ${date.contract('eng')}`,
                 ru: `3. Во всем остальном, что не предусмотрено настоящим дополнением, стороны руководствуются условиями контракта оказания услуг хранения ${contract.contractNo} от ${date.contract('ru')}`,
+                height: 40,
             },
             {
                 name: 'Соглашение_вступление',
                 eng: `4. The present Agreement shall come into force from the moment of its signing and is an integral part of the Storage Services Contract No. ${contract.contractNo} dated ${date.contract('eng')}`,
                 ru: `4. Настоящее дополнение вступает в силу с момента его подписания и является неотъемлемой частью контракта оказания услуг хранения № ${contract.contractNo} от ${date.contract('ru')}`,
+                height: 40,
             },
             {
                 name: 'Юридикция',
                 eng: '5. This Agreement has been drawn up and signed in two original duplicates of equal legal force.',
                 ru: '5. Настоящее дополнение составлено и подписано в двух подлинных экземплярах, имеющих одинаковую юридическую силу.',
+                height: 30,
+            },
+            {
+                name: 'Адреса_сторон_заголовок',
+                eng: 'Addresses and bank details of the parties',
+                ru: 'Адреса и банковские реквизиты сторон',
+                height: 25,
+                alignment: { horizontal: 'center', vertical: 'middle' } as any,
+                fill: {
+                    pattern: 'solid',
+                    fgColor: { argb: 'FFDCDCDC' },
+                    bgColor: { argb: 'FFDCDCDC' },
+                    type: 'pattern',
+                },
             },
             {
                 name: 'Адреса_подпись',
@@ -336,7 +413,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         ],
         certificates: [
             {
-                name: 'Обязательство_хранение',
+                name: 'Предмет_дополнения',
                 eng: `1. The Contractor shall undertake to accept for storage on the refrigerator, located in ${portTo.eng.name}, ${portTo.eng.country} the batch of the following quantity:`,
                 ru: `1. Исполнитель обязуется принять на хранение на холодильник расположенный в г. ${portTo.ru.name}, ${portTo.ru.country} переданную Заказчиком партию:`,
             },

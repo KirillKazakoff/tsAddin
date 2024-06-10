@@ -264,6 +264,24 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 eng: `to the Storage Services Contract No. ${contract.contractNo}`,
                 ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
             },
+            {
+                name: 'Инвойс_декларация',
+                eng: null,
+                ru: null,
+                defineCell: {
+                    offset: { x: 0, y: -1 },
+                    cell: {
+                        value: '* This price given exclusively for customs clearance',
+                        alignment: { vertical: 'middle', wrapText: true } as any,
+                        font: { bold: false } as any,
+                    },
+                    cellRu: {
+                        value: '* Данная цена указана исключительно для таможенного оформления',
+                        alignment: { vertical: 'middle', wrapText: true } as any,
+                        font: { bold: false } as any,
+                    },
+                },
+            },
         ],
 
     } satisfies CellDeclarationT<CellDoubleT>;

@@ -7,7 +7,13 @@ import { deleteRow } from './deleteRow';
 
 export const setCells = (cells: CellFullT[]) => {
     const {
-        name, height, numFmt, deleteRows: deleteSettings,
+        name,
+        height,
+        numFmt,
+        deleteRows: deleteSettings,
+        fill,
+        alignment,
+        font,
     } = cells[0].settings;
 
     try {
@@ -36,14 +42,25 @@ export const setCells = (cells: CellFullT[]) => {
                 setCells([{ cell, settings: defineCell.cell }]);
             }
 
-            // if (typeof value === 'string' || typeof value === 'number') c.cell.value = value;
-            c.cell.value = c.settings.value;
+            if (typeof c.settings.value !== 'undefined') {
+                c.cell.value = c.settings.value;
+            }
 
             if (numFmt) c.cell.numFmt = numFmt;
 
             if (height) {
                 const row = getRow(ws)(name);
                 row.height = height;
+            }
+
+            if (fill) {
+                c.cell.fill = fill;
+            }
+            if (alignment) {
+                c.cell.style.alignment = alignment;
+            }
+            if (font) {
+                c.cell.style.font = font;
             }
         });
         return cells;

@@ -15,7 +15,7 @@ export const initExportDefaultContractRowsFCA = (
         return total;
     }, []);
 
-    // headers remove
+    // table header replace
     const headersCellName = 'Контракт_предмет_заголовки';
 
     utils.initRowMaker({ cellName: headersCellName }).insertRow({

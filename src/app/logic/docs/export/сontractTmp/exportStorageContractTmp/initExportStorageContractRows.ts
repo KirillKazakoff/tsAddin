@@ -6,7 +6,7 @@ export const initExportStorageContractRows = (
     invoices: ExportGroupT[],
     utils: CellUtilsT<string>,
 ) => {
-    const { insertRows } = utils.initRowMaker({ cellName: 'Сертификаты_массив' });
+    const { insertRows } = utils.initRowMaker({ cellName: 'Предмет_массив' });
 
     // Get product groups
     const groups = invoices.reduce<ExportGroupT[]>((total, invoice) => {
@@ -15,19 +15,67 @@ export const initExportStorageContractRows = (
         return total;
     }, []);
 
+    // table header replace
+    const headersCellName = 'Контракт_предмет_заголовки';
+
+    utils.initRowMaker({ cellName: headersCellName }).insertRow({
+        fields: {
+            empty1: '',
+            desc: 'Продукция / Goods description',
+            m1: '',
+            vessel: 'Изготовитель\nFishing Vessel',
+            m2: '',
+            consignee: 'Получатель сертификатов / Certificates Consignee',
+            m3: '',
+            m4: '',
+            placesTotal: 'Кол-во, тн\nQuantity, tn',
+        },
+        style: {
+            common: {
+                alignment: 'center',
+                border: 'all',
+                fill: {
+                    pattern: 'solid',
+                    fgColor: { argb: 'FFDCDCDC' },
+                    bgColor: { argb: 'FFDCDCDC' },
+                    type: 'pattern',
+                },
+            },
+            special: {
+                empty1: {
+                    style: {
+                        border: {
+                            left: null,
+                            top: null,
+                            bottom: null,
+                        },
+                        fill: {
+                            pattern: 'solid',
+                            fgColor: { argb: 'FFFFFFFF' },
+                            bgColor: { argb: 'FFFFFFFF' },
+                            type: 'pattern',
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    utils.deleteRow(headersCellName);
+
     insertRows({
         records: groups,
         deleteStartAmount: 1,
         rowSettings: ({ record: r, total }) => {
-            // empty spaces since additional columns for pictures
             const fields = {
                 empty1: '',
-                product: `${r.product.ru.name}\n${r.product.eng.name}`,
+                desc: `${r.product.ru.name}\n${r.product.eng.name}`,
                 m1: '',
                 vessel: `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
-                consignee: `${r.consignee.fullName}\n${r.consignee.addres}`,
                 m2: '',
+                consignee: `${r.consignee.fullName}\n${r.consignee.addres}`,
                 m3: '',
+                m4: '',
                 placesTotal: total.placesTotal.count,
             };
 
@@ -37,10 +85,9 @@ export const initExportStorageContractRows = (
                 docType: 'exportContract',
                 style: {
                     common: {
-                        height: 45,
+                        height: 55,
                         border: 'all',
                         alignment: 'center',
-                        font: { size: 9 },
                     },
                 },
             };

@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
-import { Cell, CellValue } from 'exceljs';
+import {
+    Alignment, Cell, CellValue, Fill, Font,
+} from 'exceljs';
 
 type PartialSettingsT = Partial<{
     offsetRow?: number;
@@ -11,6 +13,9 @@ type PartialSettingsT = Partial<{
         start?: number;
         end?: number;
     };
+    fill?: Fill;
+    alignment?: Alignment;
+    font?: Font;
 }>;
 
 export type CellSettingsCommonT = {

@@ -2,7 +2,6 @@
 import { useInitSection } from '../../../components/Form/useInitSection';
 import { useMyFormik } from '../../../components/Form/useMyFormik';
 import exportContractStore from '../../../stores/docsStores/exportContractStore';
-import { PathKeyT } from '../../utils/constants';
 import { groupAgByNo } from './groupAgByNo';
 import { initExportInvoicesTmps } from './invoicesTmps/initExportInvoicesTmps';
 import { initExportContractTmp } from './сontractTmp/initExportContractTmp';
@@ -34,12 +33,7 @@ export const useInitContractSection = () => {
                 formik,
                 createDoc: () => {
                     const { invoices } = current.groupedBy;
-                    const { operation } = exportContractStore;
-                    const { agreementNo, id, terms } = current.record;
-
-                    const tmpPath: PathKeyT = operation === 'export' || terms === 'FCA'
-                        ? 'exportContract'
-                        : 'exportStorageContract';
+                    const { agreementNo, id } = current.record;
 
                     return {
                         fileName: `Доп №${agreementNo} (${id})`,
@@ -51,7 +45,7 @@ export const useInitContractSection = () => {
                                 formik.formRef.current.setFieldValue('declaration', '');
                             }
                         },
-                        tmpPath,
+                        tmpPath: 'exportContract',
                     };
                 },
                 title: `Контракт №${current?.record?.id}`,

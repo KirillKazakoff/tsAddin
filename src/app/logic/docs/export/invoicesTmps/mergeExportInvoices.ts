@@ -10,7 +10,11 @@ export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) 
     await book.xlsx.load(xls64);
     const ws = book.getWorksheet(`invoice ${invoice.record.invoice}`);
 
-    const initMerge = () => ({ col: { start: 0, end: 0 }, row: { start: 0, end: 0 } });
+    const initMerge = () => ({
+        col: { start: 0, end: 0 },
+        row: { start: 0, end: 0 },
+        name: '',
+    });
     const distance = 5;
     const arrayCl = { row: 0, col: 0 };
 
@@ -40,7 +44,7 @@ export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) 
         setBlNo: ['bl no'],
     };
 
-    const mergeArray = [];
+    const mergeArray: ReturnType<typeof initMerge>[] = [];
 
     const getFunctions = (cell: Cell) => {
         const merge = initMerge();
@@ -59,6 +63,7 @@ export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) 
                 merge.row.end = +cell.row + 1;
                 merge.col.start = +cell.col;
                 merge.col.end = +cell.col + 3;
+                merge.name = 'price';
 
                 mergeArray.push(merge);
             },
@@ -67,14 +72,13 @@ export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) 
                 merge.col.end = +cell.col + 1;
                 merge.row.start = +cell.row + 1;
                 merge.row.end = +cell.row + 1;
+                mergeArray.push(merge);
 
                 // const mergeTitle = initMerge();
                 // mergeTitle.col = merge.col;
                 // mergeTitle.row.start = +cell.row;
                 // mergeTitle.row.end = +cell.row;
                 // mergeArray.push(mergeTitle);
-
-                mergeArray.push(merge);
             },
 
             setBlNo: () => {
@@ -93,7 +97,7 @@ export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) 
 
             Object.entries(caseCellName).forEach(([key, array]) => {
                 array.forEach((caseValue) => {
-                    if (valueStr.includes(caseValue)) {
+                    if (valueStr.toLowerCase().includes(caseValue.toLowerCase())) {
                         functions[key]();
                     }
                 });
