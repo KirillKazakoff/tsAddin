@@ -6,6 +6,7 @@ import {
     CellObjDoubleT as CellObjT,
 } from '../../../../types/typesExcelUtils';
 import { getDeliveryDate, getExcelDateStr } from '../../../excel/utils/getExcelDate';
+import { myStyles } from '../../../excel/utils/styleRowCells';
 import { ExportGroupT } from '../groupAgByNo';
 import { matchCOHCLanguage } from '../setCOHCStatus';
 import { getCostGoodsStr } from './getCostGoodsStr';
@@ -251,7 +252,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 name: 'Доставка_условия',
                 eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
                 ru: `3.1 Поставка осуществляется на условиях ${terms} ${portTo.ru.name}`,
-                height: 25,
+                height: 20,
             },
             {
 
@@ -380,13 +381,13 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 name: 'Остальное_контракт',
                 eng: `3. In all other matters not covered by this Agreement, the parties shall be governed by the terms and conditions of Storage Services Contract No. ${contract.contractNo}, dated ${date.contract('eng')}`,
                 ru: `3. Во всем остальном, что не предусмотрено настоящим дополнением, стороны руководствуются условиями контракта оказания услуг хранения ${contract.contractNo} от ${date.contract('ru')}`,
-                height: 40,
+                height: 45,
             },
             {
                 name: 'Соглашение_вступление',
                 eng: `4. The present Agreement shall come into force from the moment of its signing and is an integral part of the Storage Services Contract No. ${contract.contractNo} dated ${date.contract('eng')}`,
                 ru: `4. Настоящее дополнение вступает в силу с момента его подписания и является неотъемлемой частью контракта оказания услуг хранения № ${contract.contractNo} от ${date.contract('ru')}`,
-                height: 40,
+                height: 45,
             },
             {
                 name: 'Юридикция',
@@ -400,12 +401,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 ru: 'Адреса и банковские реквизиты сторон',
                 height: 25,
                 alignment: { horizontal: 'center', vertical: 'middle' },
-                fill: {
-                    pattern: 'solid',
-                    fgColor: { argb: 'FFDCDCDC' },
-                    bgColor: { argb: 'FFDCDCDC' },
-                    type: 'pattern',
-                },
+                fill: myStyles.fill.fillGray,
             },
             {
                 name: 'Продавец_шапка_заголовок',
@@ -431,6 +427,12 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 name: 'Адреса_подпись',
                 eng: `Заказчик/Customer ______________________________${podpisant.eng.name}`,
                 ru: `Исполнитель/Contractor ______________________________${agent.eng.signatory}`,
+            },
+            {
+                name: 'Цена_заголовок',
+                eng: null,
+                ru: null,
+                fill: myStyles.fill.noFill,
             },
         ],
         certificates: [

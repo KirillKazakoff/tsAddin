@@ -1,27 +1,55 @@
 import { Workbook } from 'exceljs';
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
-import { initExportDefaultContractTmp } from './exportDefaultContractTmp/initExportDefaultContractTmp';
-import { initExportStorageContractTmp } from './exportStorageContractTmp/initExportStorageContractTmp';
 import { getExportContractCells } from './getExportContractCells.ts';
 import { initExcelUtils } from '../../../excel/utils/excelUtilsObj/initExcelUtils';
 import { ExportGroupT } from '../groupAgByNo';
+import { initExportStorageContractRows } from './initExportStorageContractRows';
+import { initExportStorageContractRowsR } from './initExportStorageContractRowsR';
+import { initExportDefaultContractRows } from './initExportDefaultContractRows';
+import { initExportDefaultContractRowsFCA } from './initExportDefaultContractRowsFCA';
 
 export const initExportContractTmp = async (book: Workbook, agreement: ExportGroupT) => {
     const ws = book.getWorksheet('Export_Contract');
-    const { operation, fields, currentTerms } = exportContractStore;
+    const { operation, fields } = exportContractStore;
+    const { terms } = agreement.record;
+    const { invoices, bl } = agreement.groupedBy;
     const utils = initExcelUtils(ws, 'MID_Contract');
 
     await utils.initTmp({
         cells: getExportContractCells(agreement),
-        initTmpCb: async () => {
+        initRows: () => {
             const isStorageTmp = operation === 'export_storage' || operation === 'certificates';
 
-            if (isStorageTmp && currentTerms !== 'FCA') {
-                await initExportStorageContractTmp(utils, agreement);
+            if (isStorageTmp && terms !== 'FCA') {
+                if (exportContractStore.operation === 'export_storage') {
+                    initExportStorageContractRows(invoices, utils);
+                }
+                if (exportContractStore.operation === 'certificates') {
+                    initExportStorageContractRowsR(bl, utils);
+                }
+            } else if (terms === 'FCA') {
+                initExportDefaultContractRowsFCA(invoices, utils);
             } else {
-                initExportDefaultContractTmp(utils, agreement);
+                initExportDefaultContractRows(invoices, utils);
             }
         },
+        // prettier-ignore
+        mergeCells: [
+            {
+                row: {
+                    from: { name: 'Доставка_транспорт' },
+                    to: { name: 'Адреса_покупатель_адрес' },
+                },
+                cols: [[2, 5], [6, 9]],
+            },
+            {
+                row: {
+                    from: { name: 'Адреса_покупатель_банк_адрес' },
+                    to: { name: 'Адреса_покупатель_банк_адрес' },
+                },
+                cols: [[2, 5], [6, 9]],
+            },
+        ],
         pictureSettings: {
             isActive: fields.isPictures,
             settings: [

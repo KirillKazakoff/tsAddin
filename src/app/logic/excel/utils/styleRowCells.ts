@@ -11,19 +11,39 @@ export type RowStyleSettingsT = {
     border?: Partial<Borders> | 'all' | 'outside' | 'edges';
     alignment?: Partial<Alignment> | 'center';
     font?: Partial<Font>;
-    fill?: Fill;
+    fill?: Partial<Fill>;
 };
 
-export const borderAll: Partial<Borders> = {
-    top: { style: 'thin' },
-    bottom: { style: 'thin' },
-    left: { style: 'thin' },
-    right: { style: 'thin' },
-};
-export const alignmentCenter: Partial<Alignment> = {
-    horizontal: 'center',
-    wrapText: true,
-    vertical: 'middle',
+export const myStyles = {
+    fill: {
+        noFill: <Fill>{
+            pattern: 'solid',
+            fgColor: { argb: 'FFFFFFFF' },
+            bgColor: { argb: 'FFFFFFFF' },
+            type: 'pattern',
+        },
+        fillGray: <Fill>{
+            pattern: 'solid',
+            fgColor: { argb: 'FFDCDCDC' },
+            bgColor: { argb: 'FFDCDCDC' },
+            type: 'pattern',
+        },
+    },
+    border: {
+        all: <Partial<Borders>>{
+            top: { style: 'thin' },
+            bottom: { style: 'thin' },
+            left: { style: 'thin' },
+            right: { style: 'thin' },
+        },
+    },
+    alignment: {
+        center: <Partial<Alignment>>{
+            horizontal: 'center',
+            wrapText: true,
+            vertical: 'middle',
+        },
+    },
 };
 
 export const styleCell = (cell: Cell, settings: Cell['style']) => {
@@ -43,21 +63,22 @@ export const styleRowCommon = (
     const cellSettings: Cell['style'] = {
         border: {},
         alignment: {},
+        fill: settings.fill as any,
         font: settings.font,
-        fill: settings.fill,
     };
+    // border style
     if (settings.border === 'edges') {
         cellSettings.border = {};
     } else if (settings.border === 'outside') {
         cellSettings.border = { bottom: { style: 'thin' } };
     } else if (settings.border === 'all') {
-        cellSettings.border = borderAll;
+        cellSettings.border = myStyles.border.all;
     } else {
         cellSettings.border = settings.border;
     }
 
     if (settings.alignment === 'center') {
-        cellSettings.alignment = alignmentCenter;
+        cellSettings.alignment = myStyles.alignment.center;
     } else {
         cellSettings.alignment = settings.alignment;
     }
@@ -84,11 +105,6 @@ export const styleRowCommon = (
     }
 
     return cellSettings;
-};
-
-export const fontDefault: Partial<Font> = {
-    size: 10,
-    bold: false,
 };
 
 export const styleRow = <FieldsT>(

@@ -14,10 +14,10 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
     const { confidentialPhones: phones } = spsStore;
     const { fields } = portLetterStore;
 
+    // prettier-ignore
     const orgName = {
         seller: `ООО "${r.seller.ru.name}"`,
-        buyer:
-            r.type === 'innerT' ? `${r.buyer.req.org.form.code} "${r.buyer.name}"` : '',
+        buyer: r.type === 'innerT' ? `${r.buyer.req.org.form.code} "${r.buyer.name}"` : '',
     };
 
     const common = [

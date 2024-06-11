@@ -303,14 +303,3 @@ export type SigningDetails = {
 export type CommunicationDetails = {
     Phone: string;
 };
-
-// Converts JSON strings to/from your types
-export class Convert {
-    public static toDTRecord(json: string): DTReportT {
-        return JSON.parse(json);
-    }
-
-    public static dTRecordToJson(value: DTReportT): string {
-        return JSON.stringify(value);
-    }
-}

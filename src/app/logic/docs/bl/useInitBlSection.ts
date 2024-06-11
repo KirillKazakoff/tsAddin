@@ -11,7 +11,7 @@ export const useInitBlSection = () => {
 
     const onLoad = async (group: BlGroupT<ExportRowT>) => {
         await createDoc({
-            tmpPath: 'newBl',
+            tmpPath: 'bl',
             initTmpsCb: (book) => initBlTmp(book, group),
             fileName: group.record.blNo,
         });

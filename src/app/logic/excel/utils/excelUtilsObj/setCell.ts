@@ -19,6 +19,8 @@ export const setCells = (cells: CellFullT[]) => {
 
     try {
         cells.forEach((c) => {
+            if (!c) return;
+
             const ws = c.cell.worksheet;
             const redefineCell = c.settings?.redefineCell;
 
@@ -99,9 +101,8 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (settings: C
     const { cellEng, cellRus } = getCellDouble(ws, offsetCell)(name, offsetRow);
     if (!cellEng) return null;
 
-    const cellObj = setCells([
-        { cell: cellEng, settings: { ...(settings as any), value: eng } },
-        {
+    const cellRu: CellFullT = typeof ru !== 'undefined'
+        ? {
             cell: cellRus,
             settings: {
                 ...(settings as any),
@@ -115,7 +116,12 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (settings: C
                     }
                     : null,
             },
-        },
+        }
+        : null;
+
+    const cellObj = setCells([
+        { cell: cellEng, settings: { ...(settings as any), value: eng } },
+        cellRu,
     ]);
 
     return { cellEng: cellObj[0].cell, cellRus: cellObj[0].cell };

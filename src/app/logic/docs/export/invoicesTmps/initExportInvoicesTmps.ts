@@ -23,15 +23,13 @@ export const initExportInvoicesTmps = async (
     }
 
     const utilsDouble = initExcelUtils(wsOriginal, 'MID_Invoice');
-    const utilsSingle = initExcelUtils(wsOriginal, '');
 
     for await (const invoice of invoices) {
         // initInvoice
         const key = invoice.code;
         const cells = getExportInvoiceCells(invoice);
 
-        cells.double.forEach((cell) => utilsDouble.setCell(cell));
-        cells.single.forEach((cell) => utilsSingle.setCell(cell));
+        cells.forEach((cell) => utilsDouble.setCell(cell));
 
         // finish initInvoice
         await utilsDouble.initPictures(
