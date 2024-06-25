@@ -30,7 +30,7 @@ export const DocList = observer(<T,>({ docs, docSettings }: Props<T>) => {
         return (
             <Doc
                 onClick={onClick} title={title}
-                cls={cls}
+                cls={cls} key={key}
             />
         );
     });

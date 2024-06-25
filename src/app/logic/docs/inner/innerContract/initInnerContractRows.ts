@@ -15,6 +15,11 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
     };
 
     insertSubject({
+        headers: ({ record: r }) => ({
+            pack: r.row.product.code.toLowerCase().includes('живой')
+                ? 'Категория'
+                : 'Упаковка',
+        }),
         records: contract.groupedBy.sortPack,
         deleteStartAmount: 2,
         rowSettings: ({ record: { row: r }, total }) => {
@@ -35,7 +40,9 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
                 docType: 'inner',
                 style: {
                     common,
-                    special: { m3: { style: { border: { right: { style: 'thin' } } } } },
+                    special: {
+                        placesTotal: { style: { border: { right: { style: 'thin' } } } },
+                    },
                 },
             };
         },
@@ -47,6 +54,11 @@ export const initInnerContractRows = (contract: InnerGroupT, utils: CellUtilsT<'
 
     insertCost({
         mergeHeader: true,
+        headers: ({ record: r }) => ({
+            pack: r.row.product.code.toLowerCase().includes('живой')
+                ? 'Категория'
+                : 'Упаковка',
+        }),
         records: contract.groupedBy.sortPack,
         deleteStartAmount: 2,
         rowSettings: ({ record: { row: r } }) => {

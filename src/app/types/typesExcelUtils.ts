@@ -37,11 +37,11 @@ export type CellObjDoubleT = CellSettingsCommonT & {
 };
 
 export type CellObjT = CellSettingsCommonT & {
-    value: CellValue;
+    value?: CellValue;
 };
 
 export type CellFullT = {
-    settings: CellSettingsCommonT & { value: CellValue };
+    settings: CellObjT;
     cell: Cell;
 };
 

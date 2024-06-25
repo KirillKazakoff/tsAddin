@@ -23,6 +23,25 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
 
     // prettier-ignore
     const commonObj = {
+        hidden: [
+            { name: 'Договор_передача_EXW', height: 1 },
+            { name: 'Договор_приемка_EXW', height: 1 },
+            { name: 'Договор_момент_приемки_EXW', height: 1 },
+            { name: 'Договор_Меркурий_EXW', height: 1 },
+            { name: 'Договор_подход_дата', height: 1 },
+            { name: 'Договор_доставка', height: 1 },
+            { name: 'Договор_приемка_товара', height: 1 },
+            { name: 'Договор_приемка_товара_количество', height: 1 },
+            { name: 'Договор_приемка_товара_качество', height: 1 },
+            { name: 'Договор_момент_приемки', height: 1 },
+            { name: 'Договор_приемка_товара_ВСД', height: 1 },
+            { name: 'Договор_Меркурий', height: 1 },
+            { name: 'Договор_доставка_FCA', height: 1 },
+            { name: 'Договор_приемка_товара_FCA', height: 1 },
+            { name: 'Договор_момент_приемки_FCA', height: 1 },
+            { name: 'Договор_Меркурий_FCA', height: 1 },
+            { name: 'Договор_право_собственности_FCA', height: 1 },
+        ],
         common: [
             { name: 'Договор_номер', value: `ДОГОВОР ПОСТАВКИ №${r.id}` },
             { name: 'Договор_дата', value: date.contract },
@@ -59,6 +78,10 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
                     ],
                 },
                 height: 42,
+            },
+            {
+                name: 'Нарушение_договор',
+                value: `6.5. Нарушение договора Покупателем предполагается существенным в случаях:\n- невнесения ${isPaymentMore ? 'оплаты' : 'предоплаты'} в срок, установленный п. 4.1 договора;\n- внесения ${isPaymentMore ? 'оплаты' : 'предоплаты'} в неполном размере.`,
             },
         ],
         addresses: [
@@ -185,6 +208,7 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
         ],
     } satisfies CellDeclarationT<CellObjT>;
 
+    // prettier-ignore
     const cells = {
         cfrDefault: [
             {
@@ -276,9 +300,43 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
                 height: 30,
             },
         ],
+        fca: [
+            {
+                name: 'Договор_доставка_FCA',
+                value: `4.2. Товар передается Покупателю в порту ${
+                    r.port.code
+                } ориентировочно ${date.delivery}. Грузовые работы в порту ${
+                    r.port.code
+                } – за счет ${r.cargo === 'Покупатель' ? 'Покупателя' : 'Поставщика'}`,
+                height: 25,
+            },
+            {
+                name: 'Договор_приемка_товара_FCA',
+                value: '4.3. Приемка товара по качеству и количеству осуществляется Покупателем или его уполномоченным представителем в порту в момент получения товара.',
+                height: 30,
+            },
+            {
+                name: 'Договор_момент_приемки_FCA',
+                value: '4.4. С момента приемки товара по количеству и качеству, согласно п. 4.3 настоящего договора, в дальнейшем никакие претензии по количеству и качеству товара от Покупателя Поставщиком не принимаются.',
+                height: 40,
+            },
+            {
+                name: 'Договор_Меркурий_FCA',
+                value: '4.5. Покупатель обязан подтвердить регистрацию в ГИС «Меркурий».',
+                height: 20,
+            },
+            {
+                name: 'Договор_право_собственности_FCA',
+                value: '4.6. Право собственности на товар переходит к Покупателю с момента оформления Поставщиком ВСЭ.',
+                height: 20,
+            },
+            { name: 'Поставщик_обязуется', height: 1 },
+            { name: 'Транспортная_тара', height: 1 },
+            { name: 'Дата_выпуска', height: 1 },
+        ],
     } satisfies CellDeclarationT<CellObjT>;
 
-    const resArr = [...commonObj.common, ...commonObj.addresses];
+    const resArr = [...commonObj.hidden, ...commonObj.common, ...commonObj.addresses];
 
     if (r.terms === 'CFR') {
         resArr.push(...cells.cfrDefault);
@@ -288,6 +346,9 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
     }
     if (r.terms === 'EXW') {
         resArr.push(...cells.exw);
+    }
+    if (r.terms === 'FCA') {
+        resArr.push(...cells.fca);
     }
 
     return resArr;
