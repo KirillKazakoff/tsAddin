@@ -6,7 +6,7 @@ export type DTReportT = {
 
 export type EDContainer = {
     DocumentID: string;
-    ContainerDoc: ContainerDoc;
+    ContainerDoc: ContainerDoc[];
 };
 
 export type ContainerDoc = {
@@ -14,7 +14,9 @@ export type ContainerDoc = {
 };
 
 export type DocBody = {
-    ESADout_CU: ESADoutCU;
+    Signature: {
+        Object: { ESADout_CU: ESADoutCU };
+    };
 };
 
 export type ESADoutCU = {
@@ -302,4 +304,15 @@ export type SigningDetails = {
 
 export type CommunicationDetails = {
     Phone: string;
+};
+
+// GTD
+export type GTD = {
+    DTSout: {
+        GTDNumber: {
+            CustomsCode: string;
+            GTDNumber: string;
+            RegistrationDate: string;
+        };
+    };
 };

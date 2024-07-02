@@ -1,11 +1,10 @@
 import { xmlParse } from './xmlParse';
 
 type SettignsT = {
-    id: string;
     xml: any;
 };
 
-export const addRowsDT = async ({ id, xml }: SettignsT) => {
+export const addRowsDT = async ({ xml }: SettignsT) => {
     const parsedXML = await xmlParse(xml);
 
     const rows = parsedXML.map((r) => {
@@ -13,22 +12,26 @@ export const addRowsDT = async ({ id, xml }: SettignsT) => {
         const { currency, incoterms } = r.terms;
 
         return [
-            id,
+            r.id,
             r.dtKind,
             r.preceedingDT,
             documents.passport,
             r.declarant,
             r.consignee,
             documents.blNo,
+            documents.contractNo,
             documents.agreementNo,
             documents.invoiceNo,
-            product.code,
+            product.description,
             product.productNo,
             product.places,
             product.placesAmount.net,
             currency.rate,
-            product.customsCost,
             currency.priceTotal,
+            product.customs.customsCost,
+            product.customs.customsSbor,
+            product.customs.rate,
+            product.customs.payment,
             product.vessel,
             incoterms,
         ];

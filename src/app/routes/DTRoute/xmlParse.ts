@@ -1,14 +1,26 @@
 /* eslint-disable no-param-reassign */
 import xml2jsBrowser from 'browser-xml2js';
 import _xml2js from 'xml2js';
-import { DTReportT, EADocumentT, ESADoutCUGoodsT } from '../../types/DTtype';
+import {
+    DTReportT, EADocumentT, ESADoutCUGoodsT, GTD,
+} from '../../types/DTtype';
 
 const xml2js = xml2jsBrowser as typeof _xml2js;
+
+const parseDateToDt = (date: string) => {
+    const splitDate = date.split('-');
+    return splitDate[0].substring(2, 10) + splitDate[1] + splitDate[2];
+};
 
 export const xmlParse = async (xml: any) => {
     const parseCallback = (err: Error, json: DTReportT) => {
         console.log(json);
-        const report = json.ED_Container.ContainerDoc.DocBody.ESADout_CU;
+        const report = json.ED_Container.ContainerDoc[0].DocBody.Signature.Object.ESADout_CU;
+
+        const gtdContainer = json.ED_Container.ContainerDoc[1].DocBody.Signature
+            .Object as any as GTD;
+        const { CustomsCode, GTDNumber, RegistrationDate } = gtdContainer.DTSout.GTDNumber;
+        const gtdStr = `${CustomsCode}/${parseDateToDt(RegistrationDate)}/${GTDNumber}`;
 
         const {
             ESADout_CUConsignee: consignee,
@@ -30,6 +42,8 @@ export const xmlParse = async (xml: any) => {
             date: '',
             passport: '-',
         });
+
+        console.log(products);
 
         const parsedRes = products.map((product) => {
             const documents = product.ESADout_CUPresentedDocument.reduce<
@@ -56,7 +70,8 @@ export const xmlParse = async (xml: any) => {
                     total.date = docDate.toString();
                 }
                 // prettier-ignore
-                if (docName.includes('ДОКУМЕНТЫ, ВНОСЯЩИЕ ИЗМЕНЕНИЯ И (ИЛИ) ДОПОЛНЕНИЯ К ДОКУМЕНТУ, СВЕДЕНИЯ О КОТОРОМ УКАЗАНЫ ПОД КОДОМ 03011')) {
+                const docNameStr = 'ДОКУМЕНТЫ, ВНОСЯЩИЕ ИЗМЕНЕНИЯ И (ИЛИ) ДОПОЛНЕНИЯ К ДОКУМЕНТУ, СВЕДЕНИЯ О КОТОРОМ УКАЗАНЫ ПОД КОДОМ 03011';
+                if (docName.includes(docNameStr)) {
                     total.contractDocs.push(val);
                 }
 
@@ -65,7 +80,7 @@ export const xmlParse = async (xml: any) => {
 
             const agreementNo = documents.contractDocs.find(
                 (doc) => doc.PrDocumentDate.toString() === documents.date.toString(),
-            ).PrDocumentNumber;
+            )?.PrDocumentNumber;
 
             let preceedingDT = '-';
             if (report.DeclarationKind === 'ПВД') {
@@ -75,15 +90,17 @@ export const xmlParse = async (xml: any) => {
                     PrecedingDocumentGoodsNumeric: pGoodsNumeric,
                     PrecedingDocumentNumber: pNumber,
                 } = product.ESADout_CUPrecedingDocument;
+                const parsedDate = parseDateToDt(pDate);
 
-                const splitDate = pDate.split('-');
-                const combinedDateNo = splitDate[0].substring(2, 10) + splitDate[1] + splitDate[2];
-
-                preceedingDT = `${pCode}/${combinedDateNo}/${pNumber}/${pGoodsNumeric}`;
+                preceedingDT = `${pCode}/${parsedDate}/${pNumber}/${pGoodsNumeric}`;
             }
 
+            // prettier-ignore
+            const vesselName = product.GoodsGroupDescription.GoodsGroupInformation.Manufacturer.split('"', 2).join(' ');
+            const [customsSbor, customsPayment] = product.ESADout_CUCustomsPaymentCalculation;
+
             const parsedProd = {
-                id: '',
+                id: gtdStr,
                 consignee: consignee.OrganizationName,
                 declarant: declarant.OrganizationName,
                 transport:
@@ -105,8 +122,7 @@ export const xmlParse = async (xml: any) => {
                 productDT: {
                     product: {
                         productNo: product.GoodsNumeric,
-                        vessel: product.GoodsGroupDescription.GoodsGroupInformation
-                            .Manufacturer,
+                        vessel: vesselName,
                         places: product.ESADGoodsPackaging.PakageQuantity,
                         description: product.GoodsDescription,
                         code: product.GoodsTNVEDCode,
@@ -114,7 +130,12 @@ export const xmlParse = async (xml: any) => {
                             net: product.NetWeightQuantity,
                             gross: product.GrossWeightQuantity,
                         },
-                        customsCost: product.CustomsCost,
+                        customs: {
+                            customsCost: product.CustomsCost,
+                            customsSbor: customsSbor.PaymentAmount,
+                            payment: customsPayment.PaymentAmount,
+                            rate: +customsPayment.Rate / 100,
+                        },
                     },
                     priceCustoms: product.CustomsCost,
                     documents: { ...documents, agreementNo },

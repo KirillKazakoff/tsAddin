@@ -12,7 +12,9 @@ export const initInvoiceKTItmp = async (
 ) => {
     const ws = book.getWorksheet('Invoice_KTI');
     const utils = initExcelUtils(ws, '');
-    const { row, exportRow, dischargeDate } = invoice.record;
+    const {
+        row, exportRow, dischargeDate, type,
+    } = invoice.record;
 
     const date = {
         invoice: (locale: string) => getExcelDateStr(row.dateInvoice, locale),
@@ -29,6 +31,7 @@ export const initInvoiceKTItmp = async (
         })),
     );
 
+    // prettier-ignore
     await utils.initTmp({
         cells: [
             { name: 'Инвойс_номер', value: `KTICOLTD - ${row.invoiceNo}` },
@@ -48,6 +51,10 @@ export const initInvoiceKTItmp = async (
                     exportRow.agreementNo
                 } dated ${date.agreement('eng')}`,
             },
+            {
+                name: 'Инвойс_объект',
+                value: `Request for payment for ${type === 'dischargeInvoicesT' ? 'discharging operation' : 'cold storage'}`,
+            },
             { name: 'Инвойс_номер_п', value: `KTICOLTD - ${row.invoiceNo}` },
             { name: 'Инвойс_компания_п', value: exportRow.seller.ru.name },
             { name: 'Инвойс_дата_п', value: date.invoice('ru') },
@@ -64,6 +71,10 @@ export const initInvoiceKTItmp = async (
                 value: `Дополнительное соглашение №${
                     exportRow.agreementNo
                 } от ${date.agreement('ru')}`,
+            },
+            {
+                name: 'Инвойс_объект_п',
+                value: `Запрос на оплату ${type === 'dischargeInvoicesT' ? 'разгрузочных работ' : 'складского хранения в холодильнике'}`,
             },
         ],
         initRows: () => initInvoiceKTIRows(invoice, utils),

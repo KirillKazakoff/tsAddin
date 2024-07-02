@@ -11,15 +11,16 @@ export const DTRoute = observer(() => {
             vtd: './assets/ВТД.xml',
             pvd: './assets/ПВД.xml',
             ek10: './assets/ЭК10.xml',
+            ed: './assets/ED.xml',
         };
 
         const reader = new FileReader();
 
         reader.onload = async function callback() {
-            addRowsDT({ id: '100', xml: reader.result });
+            addRowsDT({ xml: reader.result });
         };
 
-        fetch(url.pvd).then((res) => {
+        fetch(url.ed).then((res) => {
             res.blob().then((blob) => {
                 reader.readAsText(blob);
             });
@@ -32,7 +33,7 @@ export const DTRoute = observer(() => {
         const reader = new FileReader();
 
         reader.onload = async function callback() {
-            addRowsDT({ id: '100', xml: reader.result });
+            addRowsDT({ xml: reader.result });
         };
 
         reader.readAsText(file);

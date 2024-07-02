@@ -295,13 +295,13 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 name: 'Доставка_условия',
                 eng: `3.1 The delivery was carried out under conditions of the FCA ${portTo.eng.name} in accordance with Agreement ${storageAgreementRow?.agreementNo} dated ${date.storageAgreementDate('eng')} to the Contract of Sales No.${storageAgreementRow?.contract?.contractNo} dated ${date.contract('eng')}. Acceptance and transfer of Goods in terms of quantity and quality was carried out on the territory of ${portTo.eng.countryFull} in the settlement of ${portTo.eng.name}.`,
                 ru: `3.1 Поставка осуществлялась на условиях FCA ${portTo.ru.name} в рамках Дополнения № ${storageAgreementRow?.agreementNo} от ${date.storageAgreementDate('ru')} к контракту ${storageAgreementRow?.contract?.contractNo} от ${date.contract('ru')} Приемка-передача Товара по количеству и качеству производилась на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}.`,
-                height: 65,
+                height: 70,
             },
             {
                 name: 'Доставка_приемка',
                 eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of ${portTo.eng.name} on behalf of the Buyer was carried out by: ${consignee.fullName} ${consignee.addres}`,
                 ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. ${portTo.ru.name} от имени покупателя осуществляла компания: ${consignee.fullName} ${consignee.addres}`,
-                height: 50,
+                height: 60,
             },
             {
                 name: 'Доставка_дата',
