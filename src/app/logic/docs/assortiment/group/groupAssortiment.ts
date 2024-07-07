@@ -32,21 +32,5 @@ export type AssortimentGroupT = ReturnType<typeof groupFn>[number];
 export const groupAssortiment = (rows: ExportRowT[]) => {
     const assortimentTables = groupFn(rows);
 
-    assortimentTables.forEach((table) => {
-        table.rows = table.rows.sort((a, b) => {
-            const prev = a.sort.length;
-            const next = b.sort.length;
-
-            if (prev < next) return 1;
-            if (prev > next) return -1;
-            if (prev === next) {
-                if (a.sort === 'M' && b.sort === 'L') return 1;
-                if (a.sort < b.sort) return 1;
-            }
-
-            return -1;
-        });
-    });
-
     return initAssortimentObj(assortimentTables, false);
 };

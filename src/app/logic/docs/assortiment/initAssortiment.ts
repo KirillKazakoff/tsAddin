@@ -39,12 +39,30 @@ export const initAssortiment = async (assortiment: AssortimentObjT, ws: Workshee
     });
     rowMaker.insertRows({ records: [rows.eta, rows.empty] });
 
-    // sort by seller and add tables
+    // sort by seller
     const tables = assortiment.tables.sort((a, b) => {
         if (a.record.vessel.eng.name < b.record.vessel.eng.name) return -1;
         return 1;
     });
 
+    // sort each row by sort
+    tables.forEach((t) => {
+        t.groupedBy.sort = t.groupedBy.sort.sort(({ record: a }, { record: b }) => {
+            const prev = a.sort.length;
+            const next = b.sort.length;
+
+            if (prev < next) return 1;
+            if (prev > next) return -1;
+            if (prev === next) {
+                if (a.sort === 'M' && b.sort === 'L') return 1;
+                if (a.sort < b.sort) return 1;
+            }
+
+            return -1;
+        });
+    });
+
+    // add tables
     tables.forEach((table, i) => {
         addAssortimentTable(table, rowMaker, i, assortiment.isSample);
     });
