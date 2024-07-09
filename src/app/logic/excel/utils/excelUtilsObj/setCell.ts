@@ -74,6 +74,7 @@ export const setCells = (cells: CellFullT[]) => {
         return cells;
     } catch (e) {
         // eslint-disable-next-line no-console
+        if (isEmptyCell) return null;
         console.log(e);
         // eslint-disable-next-line no-console
         console.error(`Ошибка при установке значения ${cells[0].settings.name}`);
@@ -90,6 +91,7 @@ export const setCellSingle = (ws: Worksheet) => (settings: CellObjT) => {
             settings,
         },
     ]);
+    if (!cellObj) return null;
     return cellObj[0].cell;
 };
 

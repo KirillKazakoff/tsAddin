@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import tablesStore from '../../../../stores/tablesStore/tablesStore';
 import {

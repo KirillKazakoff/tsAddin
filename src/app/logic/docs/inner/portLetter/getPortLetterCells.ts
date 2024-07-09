@@ -20,31 +20,41 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
         buyer: r.type === 'innerT' ? `${r.buyer.req.org.form.code} "${r.buyer.name}"` : '',
     };
 
-    const common = [
-        { name: 'Номер_письма', value: getPortLetterNo(doc) },
-        { name: 'Порт', value: `${fields.portRu.name}` },
-        { name: 'Порт_директор', value: `${fields.portRu.director}` },
-        { name: 'Порт_почта', value: `${fields.portRu.mail}` },
-        { name: 'Подписант_комментарий', value: fields.podpisant.ru.position },
-        { name: 'Подписант', value: fields.podpisant.ru.name },
-        {
-            name: 'Контрольный_звонок',
-            isEmptyCell: !fields.isControlPhone,
-            value: `Передача продукции по контрольному звонку: т. ${phones?.['МСФ']?.phone}`,
-        },
-        {
-            name: 'Имя_представитель',
-            value: phones?.['ДМА']?.fullName,
-        },
-        {
-            name: 'Телефон_представитель',
-            value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
-        },
-    ];
+    const commonObj = {
+        common: [
+            { name: 'Номер_письма', value: getPortLetterNo(doc) },
+            { name: 'Порт', value: `${fields.portRu.name}` },
+            { name: 'Порт_директор', value: `${fields.portRu.director}` },
+            { name: 'Порт_почта', value: `${fields.portRu.mail}` },
+            { name: 'Подписант_комментарий', value: fields.podpisant.ru.position },
+            { name: 'Подписант', value: fields.podpisant.ru.name },
+            {
+                name: 'Контрольный_звонок',
+                isEmptyCell: !fields.isControlPhone,
+                value: `Передача продукции по контрольному звонку: т. ${phones?.['МСФ']?.phone}`,
+            },
+            {
+                name: 'Имя_представитель',
+                value: phones?.['ДМА']?.fullName,
+            },
+            {
+                name: 'Телефон_представитель',
+                value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
+            },
+        ],
+        hidden: [
+            { name: 'Хранение', height: 1 },
+            { name: 'Письмо_описание_шапка', height: 1 },
+            { name: 'Образцы_выдача', height: 1 },
+            { name: 'Образцы_подвал', height: 1 },
+            { name: 'Расходы_компания', height: 1 },
+            { name: 'Выгрузка_ответственный', height: 1 },
+        ],
+    } satisfies CellDeclarationT<CellObjT>;
 
     // prettier-ignore
     const cells = r.type === 'innerT' ? {
-        common,
+        common: commonObj.common,
         default: [
             {
                 name: 'Письмо_описание_шапка',
@@ -53,6 +63,7 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
                         ? `которая прибудет в п. Владивосток на ${r.transport.ru.name} в адрес ООО "${r.seller.ru.name}" по следующим коносаментам:`
                         : `находящуюся на хранении ${orgName.seller}`
                 }`,
+                height: 30,
             },
             {
                 name: 'Письмо_описание_подвал',
@@ -95,17 +106,20 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
             },
             {
                 name: 'Имя_представитель',
-                value: phones?.['ДМА']?.fullName,
+                value: `Дополнительно сообщаем контактные данные нашего представителя во Владивостоке:\n${phones?.['ДМА']?.fullName}`,
+                height: 30,
             },
             {
                 name: 'Телефон_представитель',
                 value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
+                height: 20,
             },
         ],
         fca: [
             {
                 name: 'Письмо_описание_шапка',
                 value: `Просим Вас рыбопродукцию, которая прибудет на ${r.vessel.code} ${date.delivery} (ориентировочно в 08:00 с уточнением) в адрес ${orgName.seller}`,
+                height: 40,
             },
             {
                 name: 'Письмо_описание_подвал',
@@ -124,11 +138,12 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
             },
         ],
     } satisfies CellDeclarationT<CellObjT> : {
-        common,
+        common: commonObj.common,
         samples: [
             {
                 name: 'Письмо_описание_шапка',
                 value: `Просим Вас рыбопродукцию, находящуюся на хранении ${orgName.seller} по следующим коносаментам:`,
+                height: 25,
             },
             {
                 name: 'Образцы_выдача',
@@ -143,7 +158,7 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
         ],
     } satisfies CellDeclarationT<CellObjT>;
 
-    const resArr = [...cells.common];
+    const resArr = [...commonObj.hidden, ...cells.common];
 
     if (r.type === 'innerT') {
         if (r.terms === 'FCA') {

@@ -50,7 +50,7 @@ export const initExcelUtils = <T extends string>(ws: Worksheet, offsetCell: T) =
     const utilsMain = _initExcelUtils(ws, offsetCell);
     return {
         ...utilsMain,
-        initTmp: initTmp(utilsMain),
+        initTmp: initTmp(utilsMain as any),
     };
 };
 

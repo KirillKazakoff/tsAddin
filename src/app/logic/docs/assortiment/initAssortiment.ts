@@ -39,7 +39,7 @@ export const initAssortiment = async (assortiment: AssortimentObjT, ws: Workshee
     });
     rowMaker.insertRows({ records: [rows.eta, rows.empty] });
 
-    // sort by seller
+    // sort tables by seller
     const tables = assortiment.tables.sort((a, b) => {
         if (a.record.vessel.eng.name < b.record.vessel.eng.name) return -1;
         return 1;
