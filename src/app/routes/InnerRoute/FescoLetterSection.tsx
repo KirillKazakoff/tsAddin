@@ -37,8 +37,8 @@ const SectionComponent = observer(() => {
                     docSettings={(doc) => {
                         return {
                             onClick: () => initObj.onLoad(doc),
-                            title: `${doc.record.buyer.code}`,
-                            key: `${doc.record.buyer.code}`,
+                            title: `${doc.record.row.buyer.code}`,
+                            key: `${doc.record.row.buyer.code}`,
                         };
                     }}
                 />

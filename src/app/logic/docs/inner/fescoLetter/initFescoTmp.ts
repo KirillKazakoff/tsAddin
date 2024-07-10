@@ -11,7 +11,7 @@ export const initFescoTmp = async (book: Workbook, doc: FescoGroupT) => {
     const ws = book.getWorksheet('Fesco_Letter');
     const utils = initExcelUtils(ws, '');
     const { isPictures, podpisant } = fescoLetterStore.fields;
-    const { seller } = doc.record;
+    const { seller } = doc.record.row;
 
     await initPictureGit({
         url: seller.code === 'ТРК' ? pathObj.pictures.trk : pathObj.pictures.msi,

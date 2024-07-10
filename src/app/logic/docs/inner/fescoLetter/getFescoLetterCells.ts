@@ -1,10 +1,11 @@
 import fescoLetterStore from '../../../../stores/docsStores/fescoLetterStore';
 import { CellDeclarationT, CellObjT } from '../../../../types/typesExcelUtils';
 import { getExcelDateStr, getNowDate } from '../../../excel/utils/getExcelDate';
+import { getPortLetterNo } from '../portLetter/getPortLetterNo';
 import { FescoGroupT } from './groupFesco';
 
 export const getFescoLetterCells = (doc: FescoGroupT) => {
-    const { record: r } = doc;
+    const { row: r } = doc.record;
     const { fields } = fescoLetterStore;
 
     const orgName = {
@@ -22,7 +23,7 @@ export const getFescoLetterCells = (doc: FescoGroupT) => {
     // prettier-ignore
     const cells = {
         common: [
-            { name: 'Номер_письма', value: getNowDate() },
+            { name: 'Номер_письма', value: getPortLetterNo(doc) },
             { name: 'Подписант_комментарий', value: fields.podpisant.ru.position },
             { name: 'Подписант', value: fields.podpisant.ru.name },
             {

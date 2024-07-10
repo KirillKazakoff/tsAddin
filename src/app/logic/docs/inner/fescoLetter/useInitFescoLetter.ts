@@ -25,8 +25,7 @@ export const useInitFescoLetter = () => {
         getSettings: () => ({
             formik,
             createDoc: (doc) => {
-                const { buyer } = doc.record;
-                console.log(doc);
+                const { buyer } = doc.record.row;
                 const { placesTotal } = doc.total;
 
                 return {

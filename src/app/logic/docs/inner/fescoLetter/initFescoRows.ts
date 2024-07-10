@@ -12,7 +12,7 @@ export const initFescoRows = (doc: FescoGroupT, utils: CellUtilsT<''>) => {
     doc.groupedBy.container.forEach((group) => {
         insertRows({
             records: group.groupedBy.productSort,
-            rowSettings: ({ record: r, total }, insertIndex) => {
+            rowSettings: ({ record: { row: r }, total }, insertIndex) => {
                 lastMergeIndex = insertIndex - 1;
 
                 const fields = {
