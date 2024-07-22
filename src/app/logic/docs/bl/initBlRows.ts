@@ -37,15 +37,15 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
                 m3: '',
                 m4: '',
                 pack: r.pack,
-                placesTotal: total.placesTotal.count,
-                placesGross: total.placesGross.count,
+                placesTotal: total.placesTotal.count * 1000,
+                placesGross: total.placesGross.count * 1000,
             };
 
             const totalPlacesAmounted = remainderToZero(
-                initAmount(total.placesTotal.count, 5, 7).str,
+                initAmount(total.placesTotal.count * 1000, 2, 3).str,
             );
             const totalGrossAmounted = remainderToZero(
-                initAmount(total.placesGross.count, 5, 7).str,
+                initAmount(total.placesGross.count * 1000, 2, 3).str,
             );
 
             return {
@@ -53,8 +53,8 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
                 dynamicFormats: {
                     places: `# ### "${r.packSp?.type}S"`,
                     pack: `#,##0.00_) "KG/${r.packSp?.type}"`,
-                    placesTotal: `#,##0.${totalPlacesAmounted}_) "MTS"`,
-                    placesGross: `#,##0.${totalGrossAmounted}_) "MTS"`,
+                    placesTotal: `#,##0.${totalPlacesAmounted}_) "KG"`,
+                    placesGross: `#,##0.${totalGrossAmounted}_) "KG"`,
                 },
                 style: {
                     common,
@@ -69,10 +69,10 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
     insertRows({ records: [[''], [''], ['']] });
 
     const totalPlacesAmounted = remainderToZero(
-        initAmount(blGroup.total.placesTotal.count, 5, 7).str,
+        initAmount(blGroup.total.placesTotal.count * 1000, 2, 3).str,
     );
     const totalGrossAmounted = remainderToZero(
-        initAmount(blGroup.total.placesGross.count, 5, 7).str,
+        initAmount(blGroup.total.placesGross.count * 1000, 2, 3).str,
     );
 
     const totalFields = {
@@ -83,15 +83,15 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
         e4: '',
         e5: '',
         places: blGroup.total.places.count,
-        placesTotal: blGroup.total.placesTotal.count,
-        placesGross: blGroup.total.placesGross.count,
+        placesTotal: blGroup.total.placesTotal.count * 1000,
+        placesGross: blGroup.total.placesGross.count * 1000,
     };
     insertRow({
         fields: totalFields,
         dynamicFormats: {
             places: `# ### "${blGroup.record.packSp?.type}S"`,
-            placesTotal: `#,##0.${totalPlacesAmounted}_) "MTS"`,
-            placesGross: `#,##0.${totalGrossAmounted}_) "MTS"`,
+            placesTotal: `#,##0.${totalPlacesAmounted}_) "KG"`,
+            placesGross: `#,##0.${totalGrossAmounted}_) "KG"`,
         },
         style: {
             common,

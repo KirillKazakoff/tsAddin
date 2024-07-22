@@ -73,8 +73,8 @@ export const setCells = (cells: CellFullT[]) => {
         });
         return cells;
     } catch (e) {
-        // eslint-disable-next-line no-console
         if (isEmptyCell) return null;
+        // eslint-disable-next-line no-console
         console.log(e);
         // eslint-disable-next-line no-console
         console.error(`Ошибка при установке значения ${cells[0].settings.name}`);
