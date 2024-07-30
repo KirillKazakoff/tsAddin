@@ -43,6 +43,7 @@ type RowMakerSettingsT = {
 };
 
 export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
+    let itteration = 0;
     let insertIndex = setup?.rowIndex || 1;
     let firstCellCount = setup?.firstCol || 1;
 
@@ -56,6 +57,7 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
         const rowArr = Object.values(settings.fields);
         const row = ws.insertRow(insertIndex, rowArr);
         insertIndex += 1;
+        itteration += 1;
 
         styleRow(settings, row, firstCellCount);
         setFormats(row, settings.fields as FieldsObjT, settings.docType);
@@ -66,7 +68,7 @@ export const initRowMaker = (ws: Worksheet) => (setup?: RowMakerSettingsT) => {
     const insertRows = <RecordT, FieldsT extends FieldsGenT>(
         settingsTmp: SettingsRowsT<RecordT, FieldsT>,
     ) => {
-        if (settingsTmp.headers) {
+        if (settingsTmp.headers && itteration === 0) {
             const firstRec = settingsTmp.records[0];
             const { fields } = settingsTmp.rowSettings(firstRec, insertIndex, 0, null);
 

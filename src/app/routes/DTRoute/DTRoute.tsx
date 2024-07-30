@@ -12,6 +12,7 @@ export const DTRoute = observer(() => {
             pvd: './assets/ПВД.xml',
             ek10: './assets/ЭК10.xml',
             ed: './assets/ED.xml',
+            86: './assets/86.xml',
         };
 
         const reader = new FileReader();
