@@ -300,6 +300,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 name: 'Доставка_приемка',
                 eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of ${portTo.eng.name} on behalf of the Buyer was carried out by: ${consignee.fullName} ${consignee.addres}`,
                 ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. ${portTo.ru.name} от имени покупателя осуществляла компания: ${consignee.fullName} ${consignee.addres}`,
+                isEmptyCell: consignee.code === agent.code,
                 height: 60,
             },
             {
@@ -343,6 +344,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 name: 'Доставка_приемка',
                 eng: `3.4 The Parties have agreed that the acceptance and transfer of the batch of Goods in the settlement of ${portTo.eng.name} on behalf of the Buyer will be carried out by: ${consignee.fullName} ${consignee.addres}`,
                 ru: `3.4 Стороны пришли к соглашению, что приемку-передачу партии Товара в п. ${portTo.ru.name} от имени покупателя будет осуществлять: ${consignee.fullName} ${consignee.addres}`,
+                isEmptyCell: consignee.code === agent.code,
                 height: 70,
             },
             {

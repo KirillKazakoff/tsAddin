@@ -126,5 +126,7 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (settings: C
         cellRu,
     ]);
 
+    if (!cellObj) return null;
+
     return { cellEng: cellObj[0].cell, cellRus: cellObj[0].cell };
 };

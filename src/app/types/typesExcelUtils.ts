@@ -22,6 +22,7 @@ export type CellSettingsCommonT = {
         };
     };
     deleteRows?: {
+        // condition?
         onlyParent?: boolean;
         start?: number;
         end?: number;
