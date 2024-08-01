@@ -33,3 +33,39 @@ export default function InputText(props: Props) {
 InputText.defaultProps = {
     wrapperCls: '',
 };
+
+type PropsNoFormik = {
+    input: Partial<HTMLInputElement>;
+    value: string;
+    setter: (value: string) => any;
+    wrapperCls?: string;
+};
+
+export function InputTextNoFormik(props: PropsNoFormik) {
+    const {
+        input, value, setter, wrapperCls,
+    } = props;
+
+    const onChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+        setter(e.currentTarget.value);
+    };
+
+    return (
+        <div className={`form__control input-wrapper ${wrapperCls}`}>
+            <span className='input-title'>{input.title}</span>
+            <input
+                autoComplete='off'
+                name={input.name}
+                className='input-text'
+                type={input.type || 'text'}
+                placeholder={input.placeholder}
+                value={value}
+                onChange={onChange}
+            />
+        </div>
+    );
+}
+
+InputTextNoFormik.defaultProps = {
+    wrapperCls: '',
+};

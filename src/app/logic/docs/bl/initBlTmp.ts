@@ -3,6 +3,7 @@ import { ExportRowT } from '../../../stores/tablesStore/set/setExport';
 import { BlGroupT } from './groupByBl';
 import { initExcelUtils } from '../../excel/utils/excelUtilsObj/initExcelUtils';
 import { initBlRows } from './initBlRows';
+import blStore from '../../../stores/docsStores/blStore';
 
 export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>) => {
     const ws = book.getWorksheet('BL');
@@ -21,7 +22,7 @@ export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>)
             { name: 'Получатель_уведомление_адрес', value: r.consignee?.addres || r.agent.address },
             { name: 'Судно', value: r.transport.eng.name.toUpperCase() },
             { name: 'Куда', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
-            { name: 'Зона_вылова', value: 'OKHOTSK SEA' },
+            { name: 'Зона_вылова', value: blStore.catchZone },
             { name: 'Место_дата', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
         ],
         initRows: () => initBlRows(blGroup, utils),

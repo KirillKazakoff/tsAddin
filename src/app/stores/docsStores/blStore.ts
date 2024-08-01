@@ -3,6 +3,7 @@ import { makeAutoObservable } from 'mobx';
 class BlStore {
     name = 'blStore';
     isSortable = false;
+    catchZone = 'OKHOTSK SEA';
 
     constructor() {
         makeAutoObservable(this);
@@ -10,6 +11,12 @@ class BlStore {
 
     setSortable(value: boolean) {
         this.isSortable = value;
+    }
+
+    setCatchZone() {
+        return (value: string) => {
+            this.catchZone = value.toUpperCase();
+        };
     }
 }
 

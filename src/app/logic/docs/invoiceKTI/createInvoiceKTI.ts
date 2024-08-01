@@ -5,11 +5,12 @@ import { initInvoiceKTItmp } from './initInvoiceKTItmp';
 
 export const createInvoiceKTI = async (invoice: InvoiceKTIGroupT) => {
     let fileName = '';
+    const { row } = invoice.record;
 
     if (invoice.record.type === 'dischargeInvoicesT') {
-        fileName = `KTI Discharge invoice - ${invoice.record.row.invoiceNo}`;
+        fileName = `KTI Discharge invoice - ${row.invoiceNo} ${row.seller.code}`;
     } else {
-        fileName = `KTI Storage invoice - ${invoice.record.row.invoiceNo}`;
+        fileName = `KTI Storage invoice - ${row.invoiceNo} ${row.seller.code}`;
     }
 
     await createDoc({

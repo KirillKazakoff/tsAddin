@@ -419,3 +419,8 @@ b {
 .dropzone-reject {
     border-color: #ff1744;
 }
+
+.checkbox-bl {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}

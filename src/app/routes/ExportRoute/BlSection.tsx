@@ -5,6 +5,7 @@ import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
 import { CheckBoxComponent } from '../../components/CheckBox/CheckBoxComponent';
 import blStore from '../../stores/docsStores/blStore';
+import { InputTextNoFormik } from '../../components/Form/InputText';
 
 export const BlSection = observer(() => {
     const initObj = useInitBlSection();
@@ -26,16 +27,27 @@ export const BlSection = observer(() => {
         <form className='docs__form bl-form'>
             <h2 className='title bl-title'>BL</h2>
             <ul className='docs'>{blDocs}</ul>
-            <DocsDownloadBtn
-                onClick={onLoadAll}
-                title='Загрузить все BL'
-                isPreventDefault
+
+            <InputTextNoFormik
+                input={{
+                    name: 'sea',
+                    title: 'Море Район:',
+                    placeholder: 'Охотское по умолчанию',
+                }}
+                value={blStore.catchZone}
+                setter={blStore.setCatchZone()}
             />
             <CheckBoxComponent
+                cls='checkbox-bl'
                 state={blStore.isSortable}
                 name='isSortable'
                 title='Разделять по сортам'
                 setState={() => blStore.setSortable(!blStore.isSortable)}
+            />
+            <DocsDownloadBtn
+                onClick={onLoadAll}
+                title='Загрузить все BL'
+                isPreventDefault
             />
         </form>
     );
