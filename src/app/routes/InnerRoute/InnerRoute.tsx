@@ -27,7 +27,10 @@ export const InnerRoute = observer(() => {
                     <PortLetterSection />
                 </>
             ) : (
-                <FescoLetterSection />
+                <>
+                    <RequestSection />
+                    <FescoLetterSection />
+                </>
             )}
         </div>
     );
