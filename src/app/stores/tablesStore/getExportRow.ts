@@ -46,6 +46,7 @@ export const getExportRow = (row: ExportInitRowT) => {
         msc: row.msc,
         id: row.id,
         idProduct: row.idProduct,
+        idContract: `${row.contract}-${row.agreementNo}`,
         currency: currenciesSp[row.currency] as CurrencyT,
     };
 };

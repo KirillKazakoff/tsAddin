@@ -1,14 +1,14 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 
-type DocT = { record: { id: string } } & unknown;
+type DocT = { record: { id: string; idContract: string } } & unknown;
 type StoreT = { currentId: string; setCurrentId: (id: string) => void } & unknown;
 
 type Props = { docs: DocT[]; store: StoreT };
 
 export const DocListActive = observer(({ docs, store }: Props) => {
     const docList = docs.map((doc) => {
-        const { id } = doc.record;
+        const { id, idContract } = doc.record;
         const onClick = async () => {
             store.setCurrentId(id);
         };
@@ -22,7 +22,7 @@ export const DocListActive = observer(({ docs, store }: Props) => {
                 type='button' onClick={onClick}
                 key={id} className={className}
             >
-                {`№ ${id}`}
+                {`№ ${idContract}`}
             </button>
         );
     });

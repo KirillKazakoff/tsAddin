@@ -28,6 +28,7 @@ export const setSales = (table: any[][]) => {
         },
         row: (r) => ({
             id: r.id,
+            idContract: r.id,
             contractDate: r.contractDate,
             seller: selectSp.agent(r.seller),
             buyer: selectSp.consignee(r.buyer),
