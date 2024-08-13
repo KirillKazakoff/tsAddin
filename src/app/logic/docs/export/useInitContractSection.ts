@@ -97,10 +97,10 @@ export const useInitContractSection = () => {
                 formik,
                 createDoc: () => {
                     const { invoices } = current.groupedBy;
-                    const { agreementNo, id } = current.record;
+                    const { agreementNo, idContract } = current.record;
 
                     return {
-                        fileName: `Доп №${agreementNo} (${id})`,
+                        fileName: `Доп №${agreementNo} (${idContract})`,
                         initTmpsCb: async (book) => {
                             await initExportInvoicesTmps(book, invoices);
                             await initExportContractTmp(book, current);
