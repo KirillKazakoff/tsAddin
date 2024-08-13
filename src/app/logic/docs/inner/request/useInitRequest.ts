@@ -16,7 +16,7 @@ const createRequest = async (invoice: InnerGroupT) => {
             columns[0].width = 20;
             columns[1].width = 30;
             columns[2].width = 15;
-            columns[3].width = 25;
+            columns[3].width = 45;
             columns[4].width = 20;
             columns[5].width = 15;
             columns[6].width = 20;
