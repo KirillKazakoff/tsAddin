@@ -16,7 +16,7 @@ export const groupAgByNo = () => {
                 if (row.msc) setMSC(row);
                 return true;
             },
-            code: row.id,
+            code: row.idContract,
             groupedBy: {
                 invoices: {
                     code: row.invoice,
