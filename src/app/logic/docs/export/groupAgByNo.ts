@@ -1,4 +1,3 @@
-// groupAgByNo.ts
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
 import _ from 'lodash';

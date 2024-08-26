@@ -8,6 +8,7 @@ import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import { DocList } from '../../components/Doc/DocList';
 import CheckBox from '../../components/CheckBox/CheckBox';
+import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
 
 const SectionComponent = observer(() => {
     const { initObj, formik, contracts } = useInitInnerContract();
@@ -39,6 +40,11 @@ const SectionComponent = observer(() => {
                             isNull: row.type !== 'innerT',
                         };
                     }}
+                />
+
+                <DocsDownloadBtn
+                    title='Загрузить все договора'
+                    onClick={initObj.onLoadAll}
                 />
             </Form>
         </Formik>

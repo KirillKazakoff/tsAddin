@@ -28,7 +28,7 @@ export const useInitInnerContract = () => {
                 const { buyer, id } = contract.record.row;
 
                 return {
-                    fileName: `Договор ${buyer.code} №${id}`,
+                    fileName: `Договор №${id} ${buyer.code}`,
                     initTmpsCb: async (book) => initInnerContractTmp(book, contract),
                     tmpPath: 'innerContract',
                 };
