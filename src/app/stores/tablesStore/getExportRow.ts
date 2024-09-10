@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import _ from 'lodash';
 import { CurrencyT, currenciesSp } from '../../logic/utils/currencyBuilder';
 import { ExportInitRowT } from '../../types/typesTables';
 import { selectSp } from '../spsStore/select';
@@ -27,7 +29,7 @@ export const getExportRow = (row: ExportInitRowT) => {
         portFrom: selectSp.portTamozhnya(row.portFrom),
         portTo: selectSp.portZarubezh(row.portTo),
         consignee: consigneeSp,
-        product: selectSp.product(row.product),
+        product: _.cloneDeep(selectSp.product(row.product)),
         packSp,
         sortSp: selectSp.sortAssortiment(`${row.sort}${row.product}`),
         amount: {
