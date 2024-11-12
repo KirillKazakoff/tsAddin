@@ -271,8 +271,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             },
             {
                 name: 'Доставка_порт',
-                eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1.1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} no later than ${date.delivery('eng', 'month')}`,
-                ru: `3.5 Передача Покупателю Товара, оговоренного в п.1.1. настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country} не позднее чем ${date.delivery('ru', 'month')}`,
+                eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} no later than ${date.delivery('eng', 'month')}`,
+                ru: `3.5 Передача Покупателю Товара, оговоренного в п.1 настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country} не позднее чем ${date.delivery('ru', 'month')}`,
                 height: 40,
             },
             {
