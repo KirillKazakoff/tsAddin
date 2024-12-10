@@ -13,7 +13,7 @@ export const useInitAssortimentSection = () => {
     const rows = [...exportT, ...exportStorageT];
 
     const assortiment = groupAssortiment(_.cloneDeep(rows));
-    const samples = groupSamples(_.cloneDeep(rows));
+    const samples = groupSamples(_.cloneDeep(exportStorageT));
 
     const onLoad = {
         assortiment: async () => {

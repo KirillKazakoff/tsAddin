@@ -25,10 +25,6 @@ export const groupSamples = (rows: ExportRowT[]) => {
                     },
                 },
             },
-            groupModify: (group) => {
-                const isStorageRowInExport = group.record.type === 'exportT' && row.type === 'exportStorageT';
-                return !isStorageRowInExport;
-            },
         }),
     });
 
