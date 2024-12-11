@@ -11,7 +11,7 @@ import { groupify } from './groupify';
 
 type RowExtT = { amount?: AmountObjT; type: TableKeyT };
 type AdditionalT = Partial<{
-    samples: { rows: number[]; total: number };
+    samples: number;
     cohc: COHCT;
     portLetterNo: string;
     konosamentGroup: { value: string; index: number };

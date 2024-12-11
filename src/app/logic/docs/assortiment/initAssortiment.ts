@@ -45,6 +45,11 @@ export const initAssortiment = async (assortiment: AssortimentObjT, ws: Workshee
         return 1;
     });
 
+    // add tables
+    tables.forEach((table, i) => {
+        addAssortimentTable(table, rowMaker, i, assortiment.isSample);
+    });
+
     // sort each row by sort
     tables.forEach((t) => {
         t.groupedBy.sort = t.groupedBy.sort.sort(({ record: a }, { record: b }) => {
@@ -60,10 +65,5 @@ export const initAssortiment = async (assortiment: AssortimentObjT, ws: Workshee
 
             return -1;
         });
-    });
-
-    // add tables
-    tables.forEach((table, i) => {
-        addAssortimentTable(table, rowMaker, i, assortiment.isSample);
     });
 };

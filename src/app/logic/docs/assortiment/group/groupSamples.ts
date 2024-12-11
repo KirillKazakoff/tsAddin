@@ -18,10 +18,7 @@ export const groupSamples = (rows: ExportRowT[]) => {
                         sort: { code: row.sort },
                     },
                     additional: {
-                        samples: {
-                            rows: <number[]>[],
-                            total: 0,
-                        },
+                        samples: 0,
                     },
                 },
             },
@@ -35,8 +32,7 @@ export const groupSamples = (rows: ExportRowT[]) => {
                     row.total.placesTotal.count * 1000,
                     row.record.pack,
                 );
-                table.additional.samples.rows.push(samplesCount);
-                table.additional.samples.total += samplesCount;
+                table.additional.samples += samplesCount;
             });
         });
     });

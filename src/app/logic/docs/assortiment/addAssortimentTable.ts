@@ -2,6 +2,7 @@ import { calcFreezing } from './calcFreezing';
 import { AddressT, getAddress } from '../../excel/utils/createFormula';
 import { RowMakerT } from '../../excel/utils/excelUtilsObj/initRows';
 import { AssortimentObjT } from './initAssortimentObj';
+import { calcSamples } from './calcSamples';
 
 /* eslint-disable no-param-reassign */
 export const addAssortimentTable = (
@@ -70,7 +71,7 @@ export const addAssortimentTable = (
                 weight: r?.record?.sortSp?.weight,
                 places: r?.total?.places.count,
                 placesTotal: r.total.placesTotal.count * 1000,
-                samples: table.additional.samples.rows[cycleIndex],
+                samples: calcSamples(r.total.placesTotal.count * 1000, r.record.pack),
                 percentage: (r.total.placesTotal.count * 1000) / placesTotal.count,
             };
 
@@ -114,7 +115,7 @@ export const addAssortimentTable = (
         title: 'Total:',
         places: places.count,
         placesTotal: placesTotal.count,
-        samples: table.additional.samples.total,
+        samples: table.additional.samples,
     };
     if (!isSample) delete totalFields.samples;
 
