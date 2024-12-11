@@ -20,7 +20,7 @@ export const useInitAssortimentSection = () => {
             await createDoc({
                 fileName: `Assortment ${assortiment.record.transport.eng.name}`,
                 initTmpsCb: (book) => {
-                    const ws = book.addWorksheet('assortiment');
+                    const ws = book.addWorksheet('assortment');
                     initAssortiment(assortiment, ws);
                 },
             });
