@@ -5,10 +5,10 @@ import { InnerGroupT } from '../groupInnerContracts';
 
 export const initPortLetterRows = (doc: InnerGroupT, utils: CellUtilsT<''>) => {
     const { insertRows } = utils.initRowMaker({ cellName: 'Письмо_массив' });
-    const { noGroup, portLetter } = doc.groupedBy;
+    const { noGroup, vesselProduct } = doc.groupedBy;
     const { isGroupingKns } = portLetterStore.fields;
 
-    let records = isGroupingKns ? portLetter : noGroup;
+    let records = isGroupingKns ? vesselProduct : noGroup;
     if (doc.record.type === 'samplesInnerT') records = noGroup;
 
     insertRows({

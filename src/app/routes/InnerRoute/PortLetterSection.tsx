@@ -32,16 +32,6 @@ const SectionComponent = observer(() => {
                     <SelectPodpisant />
                     <SelectTerms name='termsPort' />
                     <DischargeTerms />
-                    {/* <InputText
-                        name='dateLetter'
-                        title='Дата письма:'
-                        placeholder='Дата письма'
-                    />
-                    <InputText
-                        name='correctedNo'
-                        title='Коррект номер:'
-                        placeholder='Введите номер'
-                    /> */}
                     <CheckBox title={'Включить картинки:'} name='isPictures' />
                     <CheckBox title={'Контрольный звонок'} name='isControlPhone' />
                     <CheckBox title={'Группировка коносаменты'} name='isGroupingKns' />

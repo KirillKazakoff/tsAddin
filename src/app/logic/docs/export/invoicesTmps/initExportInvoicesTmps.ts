@@ -22,17 +22,17 @@ export const initExportInvoicesTmps = async (
         return;
     }
 
-    const utilsDouble = initExcelUtils(wsOriginal, 'MID_Invoice');
+    const utils = initExcelUtils(wsOriginal, 'MID_Invoice');
 
     for await (const invoice of invoices) {
         // initInvoice
         const key = invoice.code;
         const cells = getExportInvoiceCells(invoice);
 
-        cells.forEach((cell) => utilsDouble.setCell(cell));
+        cells.forEach((cell) => utils.setCell(cell));
 
         // finish initInvoice
-        await utilsDouble.initPictures(
+        await utils.initPictures(
             [
                 {
                     key: exportContractStore.fields.podpisant.code,

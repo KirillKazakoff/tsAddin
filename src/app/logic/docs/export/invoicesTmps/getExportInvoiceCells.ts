@@ -257,10 +257,18 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 eng: `to the Storage Services Contract No. ${contract.contractNo}`,
                 ru: `к контракту оказания услуг хранения № ${contract.contractNo}`,
             },
+            // something wrong with redefineCell fn prop (there is no need to use it here but
+            // styles broke without it) Styles changes depending on cell place in array
+            {
+                name: 'Инвойс_покупатель_заголовок',
+                eng: 'Contractor:',
+                ru: 'Исполнитель:',
+            },
             {
                 name: 'Инвойс_декларация',
                 eng: null,
                 ru: null,
+                font: { bold: false },
                 redefineCell: {
                     offset: { x: 0, y: -1 },
                     commonStyles: {
@@ -268,9 +276,17 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                         font: { bold: false },
                     },
                     cell: { value: '* This price given exclusively for customs clearance' },
-                    cellRu: { value: '* Данная цена указана исключительно для таможенного оформления' },
+                    cellRu: { value: '* Данная цена указана исключительно для таможенного оформления', alignment: { wrapText: true }, font: { bold: false } },
                 },
             },
+            {
+                name: 'Инвойс_получатель_заголовок',
+                eng: 'Customer:',
+                ru: 'Заказчик:',
+                font: { bold: true },
+            },
+
+            // end error block
             {
                 name: 'Инвойс_банк_получателя',
                 eng: null,

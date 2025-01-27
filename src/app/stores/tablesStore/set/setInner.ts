@@ -18,6 +18,7 @@ export const setInner = (table: any[][]) => {
             vessel: 'Изготовитель',
             product: 'Продукция',
             sort: 'Сорт',
+            // konosament
             pack: 'Упаковка',
             konosament: 'Коносамент',
             placesTotal: 'Объем, кг',

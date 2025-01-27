@@ -26,6 +26,8 @@ export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) 
             'получатель:',
             'buyer:',
             'покупатель:',
+            'customer',
+            'заказчик',
         ],
         setMergeColumns: [
             'fishing vessel:',

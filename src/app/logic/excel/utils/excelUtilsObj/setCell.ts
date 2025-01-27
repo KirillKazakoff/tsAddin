@@ -24,6 +24,7 @@ export const setCells = (cells: CellFullT[]) => {
             const ws = c.cell.worksheet;
             const redefineCell = c.settings?.redefineCell;
 
+            // delete row based on this cell
             if (deleteSettings) {
                 if (deleteSettings.onlyParent) {
                     deleteRow(ws)(name, 0);
@@ -36,6 +37,7 @@ export const setCells = (cells: CellFullT[]) => {
                 return;
             }
 
+            // fully rerecord cell
             if (redefineCell) {
                 const { commonStyles } = redefineCell;
                 const cell = ws.getCell(
@@ -46,10 +48,10 @@ export const setCells = (cells: CellFullT[]) => {
                 setCells([{ cell, settings: { ...redefineCell.cell, ...commonStyles } }]);
             }
 
+            // define props
             if (typeof c.settings.value !== 'undefined') {
                 c.cell.value = c.settings.value;
             }
-
             if (isEmptyCell) {
                 c.cell.value = null;
             }
@@ -57,7 +59,6 @@ export const setCells = (cells: CellFullT[]) => {
                 const row = getRow(ws)(name);
                 row.height = height;
             }
-
             if (numFmt) {
                 c.cell.numFmt = numFmt;
             }
@@ -128,5 +129,6 @@ export const setCellDouble = (ws: Worksheet, offsetCell: string) => (settings: C
 
     if (!cellObj) return null;
 
+    // return nothing for ts
     return { cellEng: cellObj[0].cell, cellRus: cellObj[0].cell };
 };

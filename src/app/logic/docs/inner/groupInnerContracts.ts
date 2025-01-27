@@ -67,6 +67,10 @@ export const groupInnerContracts = () => {
                 portLetter: {
                     code: `${row.product.code + row.vessel.code + row.sort + row.pack + row.knsNo}`,
                 },
+                vesselProduct: {
+                    code: `${row.product.code + row.vessel.code + row.sort + row.pack}`,
+                    additional: { konosamentGroup: { value: '', index: 0 } },
+                },
             },
             additional: { portLetterNo: '' },
             groupModify: (group) => {
