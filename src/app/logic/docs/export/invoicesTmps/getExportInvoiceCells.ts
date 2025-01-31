@@ -218,8 +218,8 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
         fcaNonCom: [
             {
                 name: 'Инвойс',
-                eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
-                ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+                eng: `Proforma invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                ru: `Проформа-инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
             },
             {
                 name: 'Инвойс_декларация',
