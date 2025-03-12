@@ -65,4 +65,5 @@ export const setTable = <
     }
 
     return { transformedTable, afterStoresInit };
+    console.log('hello');
 };
