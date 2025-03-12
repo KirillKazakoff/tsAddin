@@ -4,7 +4,7 @@ import { groupByBl, BlGroupT } from './groupByBl';
 import { createDoc } from '../../excel/utils/excelUtilsObj/createDoc';
 import { initBlTmp } from './initBlTmp';
 
-export const useInitBlSection = () => {
+export const initBlSection = () => {
     const table = exportContractStore.currentTable;
 
     const blGroupsArr = Object.values(groupByBl(table));

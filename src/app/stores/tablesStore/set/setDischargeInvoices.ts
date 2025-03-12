@@ -38,7 +38,9 @@ export const setDischargeInvoices = (table: any[][]) => {
     });
 };
 
-export type InvoiceKTIRowT = ReturnType<typeof setDischargeInvoices>[number] &
+export type InvoiceKTIRowT = ReturnType<
+    typeof setDischargeInvoices
+>['transformedTable'][number] &
     Partial<{
         dateAccountSent: number;
         operation: string;

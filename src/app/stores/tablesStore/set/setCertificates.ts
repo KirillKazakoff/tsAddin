@@ -55,4 +55,6 @@ export const setCertificates = (table: any[][]) => {
     });
 };
 
-export type CertificateRowT = ReturnType<typeof setCertificates>[number];
+export type CertificateRowT = ReturnType<
+    typeof setCertificates
+>['transformedTable'][number];

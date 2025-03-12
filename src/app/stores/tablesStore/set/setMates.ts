@@ -23,7 +23,7 @@ export const setMates = (table: any[][]) => {
             operation: 'Вид операции',
         },
         row: (r) => ({
-            transport: r.transport,
+            transport: selectSp.transport(r.transport),
             vessel: selectSp.vessel(r.vessel),
             product: selectSp.product(r.product.toLowerCase()),
             reice: isNumber(+r.reice) ? r.reice : '',
@@ -45,4 +45,4 @@ export const setMates = (table: any[][]) => {
     return transformed;
 };
 
-export type MateRowT = ReturnType<typeof setMates>[number];
+export type MateRowT = ReturnType<typeof setMates>['transformedTable'][number];

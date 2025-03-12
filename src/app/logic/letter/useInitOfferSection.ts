@@ -3,9 +3,9 @@ import { useInitSection } from '../../components/Form/useInitSection';
 import { useMyFormik } from '../../components/Form/useMyFormik';
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import letterStore from '../../stores/letterStore/letterStore';
-import { getHref } from './getHref';
+import { createOffer } from './createOffer';
 
-export const useInitLetterSection = () => {
+export const useInitOfferSection = () => {
     const formik = useMyFormik({
         store: letterStore,
         initialFields: {
@@ -40,7 +40,7 @@ export const useInitLetterSection = () => {
             createDoc: () => {
                 return {
                     initTmpsCb: () => {
-                        const href = getHref();
+                        const href = createOffer();
                         document.location.href = href;
                         // refresh stores
                         excelSyncStore.setSync(false);

@@ -32,4 +32,4 @@ export const setDT = (table: any[][]) => {
     });
 };
 
-export type DTRowT = ReturnType<typeof setDT>[number];
+export type DTRowT = ReturnType<typeof setDT>['transformedTable'][number];

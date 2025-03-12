@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Formik } from 'formik';
-import { useInitLetterSection } from '../../logic/letter/useInitLetterSection';
-import { LetterExportFields } from './LetterExportFields';
-import { LetterMainFields } from './LetterMainFields';
+import { useInitOfferSection } from '../../logic/letter/useInitOfferSection';
+import { LetterExportFields } from './OfferExportFields';
+import { LetterMainFields } from './OfferMainFields';
 import { Form } from '../../components/Form/Form';
 
 export const LetterRoute = observer(() => {
-    const { initObj, formik } = useInitLetterSection();
+    const { initObj, formik } = useInitOfferSection();
 
     return (
         <Formik

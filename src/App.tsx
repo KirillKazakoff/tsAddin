@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { LetterRoute } from './app/routes/LetterRoute/LetterRoute';
+import { LetterRoute } from './app/routes/OfferRoute/OfferRoute';
 import { LinkRoute } from './app/routes/LinkRoute';
 import NavigatorRoute from './app/routes/NavigatorRoute';
 import { PageStatusRoute } from './app/routes/ErrorRoute/PageStatusRoute';
@@ -8,6 +8,7 @@ import { ExportRoute } from './app/routes/ExportRoute/ExportRoute';
 import { InnerRoute } from './app/routes/InnerRoute/InnerRoute';
 import { SalesRoute } from './app/routes/SalesRoute';
 import { DTRoute } from './app/routes/DTRoute/DTRoute';
+import { BhgDTRoute } from './app/routes/BuhDTRoute/BhgDTRoute';
 
 export default function App() {
     return (
@@ -21,6 +22,7 @@ export default function App() {
                     <Route path='/pageStatus' element={<PageStatusRoute />} />
                     <Route path='/sales' element={<SalesRoute />} />
                     <Route path='/dt' element={<DTRoute />} />
+                    <Route path='/dtLetter' element={<BhgDTRoute />} />
                 </Route>
             </Routes>
         </Router>

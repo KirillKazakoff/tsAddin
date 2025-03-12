@@ -39,4 +39,4 @@ export const setNordmile = (table: any[][]) => {
     });
 };
 
-export type NordmileRowT = ReturnType<typeof setNordmile>[number];
+export type NordmileRowT = ReturnType<typeof setNordmile>['transformedTable'][number];

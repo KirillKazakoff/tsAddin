@@ -67,4 +67,4 @@ export const setInner = (table: any[][]) => {
     return res;
 };
 
-export type InnerRowT = ReturnType<typeof setInner>[number];
+export type InnerRowT = ReturnType<typeof setInner>['transformedTable'][number];

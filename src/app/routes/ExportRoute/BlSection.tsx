@@ -2,13 +2,13 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Doc } from '../../components/Doc/Doc';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
-import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
+import { initBlSection } from '../../logic/docs/bl/initBlSection';
 import { CheckBoxComponent } from '../../components/CheckBox/CheckBoxComponent';
 import blStore from '../../stores/docsStores/blStore';
 import { InputTextNoFormik } from '../../components/Form/InputText';
 
 export const BlSection = observer(() => {
-    const initObj = useInitBlSection();
+    const initObj = initBlSection();
     const { blGroupsArr, onLoad, onLoadAll } = initObj;
 
     const blDocs = blGroupsArr.map((group) => {

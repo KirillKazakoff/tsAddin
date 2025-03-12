@@ -35,4 +35,4 @@ export const setFescos = (table: any[][]) => {
     });
 };
 
-export type FescoRowT = ReturnType<typeof setFescos>[number];
+export type FescoRowT = ReturnType<typeof setFescos>['transformedTable'][number];

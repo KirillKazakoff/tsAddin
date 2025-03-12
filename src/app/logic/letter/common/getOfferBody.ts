@@ -13,7 +13,7 @@ const getBodyRow = (group: MateRowT[]) => {
     return bodyRow;
 };
 
-export const getBody = (table: MateRowT[], vessels: VesselT[]) => {
+export const getOfferBody = (table: MateRowT[], vessels: VesselT[]) => {
     const groupsVessel = groupByVessel(vessels, table);
 
     const bodyObj = groupsVessel.reduce<BodyRowT[]>((total, group) => {

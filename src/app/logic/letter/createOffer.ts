@@ -1,13 +1,13 @@
 import letterStore from '../../stores/letterStore/letterStore';
-import { letter } from './letter';
+import { offerDictionary } from './offerDictionary';
 
-export const getHref = () => {
+export const createOffer = () => {
     const { isExport } = letterStore.fields;
 
     const key = isExport ? 'eng' : 'ru';
     const {
         getSubject, getHeader, getBody, getFooter, mailTo,
-    } = letter[key];
+    } = offerDictionary[key];
 
     const subject = getSubject();
     const body = getBody();

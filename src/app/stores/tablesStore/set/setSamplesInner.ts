@@ -43,4 +43,6 @@ export const setSamplesInner = (table: any[][]) => {
     return transformed;
 };
 
-export type InnerSampleRowT = ReturnType<typeof setSamplesInner>[number];
+export type InnerSampleRowT = ReturnType<
+    typeof setSamplesInner
+>['transformedTable'][number];

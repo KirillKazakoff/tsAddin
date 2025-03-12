@@ -53,4 +53,4 @@ export const setSales = (table: any[][]) => {
     });
 };
 
-export type SalesRowT = ReturnType<typeof setSales>[number];
+export type SalesRowT = ReturnType<typeof setSales>['transformedTable'][number];

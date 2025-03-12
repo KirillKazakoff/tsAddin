@@ -87,9 +87,16 @@ const initStores = async (context: Excel.RequestContext) => {
 
     await context.sync();
 
+    const afterStoresInitList = [];
     storeObjects.forEach((obj) => {
         if (!obj.range) return;
-        obj.setter(obj.range.values);
+        const { afterStoresInit } = obj.setter(obj.range.values);
+
+        afterStoresInitList.push(afterStoresInit);
+    });
+
+    afterStoresInitList.forEach((afterStoresInit) => {
+        if (afterStoresInit) afterStoresInit();
     });
 };
 

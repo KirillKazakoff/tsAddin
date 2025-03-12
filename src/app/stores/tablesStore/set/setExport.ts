@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/indent */
 import { getExportRow } from '../getExportRow';
 import tablesStore from '../tablesStore';
@@ -37,24 +38,27 @@ export const setExport = (table: any[][]) => {
 
         row: (r) => {
             const res = getExportRow(r);
+            return { ...res, declarationNo: '' };
+        },
+
+        afterStoresInit: (transformedRow) => {
             let declarationNo = '';
 
-            if (!tablesStore.customsT[0].blNo) return { ...res, declarationNo };
+            if (!tablesStore.customsT[0]?.blNo) return;
 
             declarationNo = tablesStore.customsT.find(
-                (cR) => cR.blNo.trim() === r.blNo.trim(),
+                (cR) => cR.blNo.trim() === transformedRow.blNo.trim(),
             )?.declarationNo;
 
             if (!declarationNo) declarationNo = '';
-
-            return { ...res, declarationNo };
+            transformedRow.declarationNo = declarationNo;
         },
     });
 
     return transformed;
 };
 
-export type ExportRowT = ReturnType<typeof setExport>[number] &
+export type ExportRowT = ReturnType<typeof setExport>['transformedTable'][number] &
     Partial<{
         date: any;
         hcNo: any;

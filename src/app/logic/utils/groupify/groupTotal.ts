@@ -19,7 +19,7 @@ type AdditionalT = Partial<{
 
 type P<T> = Paths<T>;
 
-export type OutputObjGroupT<R, K> = {
+type OutputObjGroupT<R, K> = {
     code: string;
     rows: R[];
     record: R;
@@ -29,7 +29,7 @@ export type OutputObjGroupT<R, K> = {
     index: number;
 };
 
-export type OutputGroupT<R, K> = {
+type OutputGroupT<R, K> = {
     code: string;
     rows: R[];
     record: R;
@@ -41,12 +41,13 @@ export type OutputGroupT<R, K> = {
 
 type AssociativeT<R, K> = Record<string, OutputObjGroupT<R, K>>;
 
-export type InputGroupT<R> = {
+type InputGroupT<R> = {
     code: string;
     groupedBy?: Record<string, InputGroupT<R>>;
     groupModify?: (group: OutputObjGroupT<R, unknown>) => boolean;
     init?: () => boolean;
     additional?: AdditionalT;
+    isNoAmount?: boolean;
 };
 
 type IExtT<R> = (row: R) => InputGroupT<R>;
@@ -66,7 +67,7 @@ const arrayifyRecursive = <R, K>(group: OutputObjGroupT<R, K>) => {
     });
 };
 
-export const arrayify = <R, K>(total: AssociativeT<R, K>): OutputGroupT<R, K>[] => {
+const arrayify = <R, K>(total: AssociativeT<R, K>): OutputGroupT<R, K>[] => {
     const groupArray = Object.values(total).map((group) => {
         arrayifyRecursive(group);
         return group;
@@ -76,24 +77,26 @@ export const arrayify = <R, K>(total: AssociativeT<R, K>): OutputGroupT<R, K>[] 
 };
 
 const groupifyOutput = <R extends RowExtT, K>(
-    code: string,
+    input: InputGroupT<R>,
     associative: AssociativeT<R, K>,
     row: R,
-    additional: AdditionalT,
 ) => {
     const init = {
-        code,
+        code: input.code,
         rows: [],
         record: row,
         groupedBy: {} as Record<P<K>, Record<string, OutputObjGroupT<R, K>>>,
         total: initAmountObj(row.type),
-        additional,
+        additional: input.additional,
         index: 0,
     };
 
-    const group = groupify(associative, init, code);
+    const group = groupify(associative, init, input.code);
 
-    addToAmountObj(group.total, row.amount);
+    if (!input.isNoAmount) {
+        addToAmountObj(group.total, row.amount);
+    }
+
     group.rows.push(row);
 
     return group;
@@ -108,7 +111,7 @@ const groupRecursive = <R extends RowExtT, K>(
         if (!input.init()) return;
     }
 
-    const group = groupifyOutput(input.code, output, row, input.additional);
+    const group = groupifyOutput(input, output, row);
 
     if (input?.groupModify) {
         const goNext = input?.groupModify(group);

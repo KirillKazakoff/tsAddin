@@ -19,13 +19,4 @@ const eng = {
     getFooter: () => footerToStrEng(),
 };
 
-type LetterPartsT = typeof eng;
-
-type LetterLangT = {
-    [key: string]: LetterPartsT;
-};
-
-export const letter: LetterLangT = {
-    ru,
-    eng,
-};
+export const offerDictionary = { ru, eng };

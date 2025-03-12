@@ -1,6 +1,6 @@
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 import { ProductionToStr } from '../../../types/typesLetter';
-import { getBody } from '../common/getBody';
+import { getOfferBody } from '../common/getOfferBody';
 import { getFilteredVessels } from '../common/getFilteredVessels';
 import { productToStringEng, productToStringRu } from './productToStr';
 
@@ -21,7 +21,7 @@ export const bodyToStrRu = () => {
     const { matesT: mates } = tablesStore;
     const vessels = getFilteredVessels();
 
-    const bodyObj = getBody(mates, vessels);
+    const bodyObj = getOfferBody(mates, vessels);
 
     const body = bodyObj.reduce((bodyStr, bodyRow) => {
         const { vessel } = bodyRow;
@@ -38,7 +38,7 @@ export const bodyToStrRu = () => {
 export const bodyToStrEng = () => {
     const { matesT: mates } = tablesStore;
     const vessels = getFilteredVessels();
-    const bodyObj = getBody(mates, vessels);
+    const bodyObj = getOfferBody(mates, vessels);
 
     const body = bodyObj.reduce((bodyStr, bodyRow) => {
         const { vessel } = bodyRow;

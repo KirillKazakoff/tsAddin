@@ -16,6 +16,7 @@ export const setTable = <
     type: K;
     row: (row: Record<keyof T, any>) => R;
     init?: (row: Record<keyof T, any>) => boolean;
+    afterStoresInit?: (row: R & CommonRowT) => void;
 }) => {
     const { table, row: getRow, type } = settings;
 
@@ -50,5 +51,18 @@ export const setTable = <
     }, [] as any);
 
     tablesStore.setTable(transformedTable, type);
-    return transformedTable;
+
+    let afterStoresInit = () => {};
+    if (settings.afterStoresInit) {
+        afterStoresInit = () => {
+            transformedTable.forEach((row) => {
+                settings.afterStoresInit(row);
+            });
+
+            // reset table if changes in afterInitCb
+            tablesStore.setTable(transformedTable, type);
+        };
+    }
+
+    return { transformedTable, afterStoresInit };
 };
