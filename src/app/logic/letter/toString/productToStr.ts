@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import letterStore from '../../../stores/letterStore/letterStore';
+import offerStore from '../../../stores/mailStores/offerStore';
 import { DetailsT, ProductT } from '../../../types/typesLetter';
 import { isStOff } from '../common/isStOff';
 import { p } from '../../utils/constants';
@@ -38,10 +38,10 @@ export const productToStringRu = (product: ProductT) => {
 };
 
 export const productToStringEng = (product: ProductT) => {
-    const { ground } = letterStore.fields;
+    const { ground } = offerStore.fields;
     const { details, info } = product;
     const { desc } = info;
-    const port = letterStore.fields.port as PortZarubezhT;
+    const port = offerStore.fields.port as PortZarubezhT;
 
     const detailsStr = getDetailsStr(details, desc.eng.name, 'kg');
 

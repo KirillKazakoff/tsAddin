@@ -2,12 +2,12 @@
 import { useInitSection } from '../../components/Form/useInitSection';
 import { useMyFormik } from '../../components/Form/useMyFormik';
 import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
-import letterStore from '../../stores/letterStore/letterStore';
+import offerStore from '../../stores/mailStores/offerStore';
 import { createOffer } from './createOffer';
 
 export const useInitOfferSection = () => {
     const formik = useMyFormik({
-        store: letterStore,
+        store: offerStore,
         initialFields: {
             port: '',
             arrivalVld: '',
@@ -34,7 +34,7 @@ export const useInitOfferSection = () => {
     });
 
     return useInitSection({
-        store: letterStore as any,
+        store: offerStore as any,
         getSettings: () => ({
             formik,
             createDoc: () => {

@@ -7,7 +7,7 @@ import { SelectPortZarubezh } from '../../components/Select/SelectPortZarubezh';
 import InputText from '../../components/Form/InputText';
 import CheckBox from '../../components/CheckBox/CheckBox';
 
-export const LetterMainFields = observer(() => {
+export const OfferMainFields = observer(() => {
     const context = useFormikContext<{
         port: string;
         isExport: boolean;

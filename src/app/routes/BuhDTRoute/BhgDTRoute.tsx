@@ -1,18 +1,31 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { createBhgMail } from './createBhgMail';
-import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
+import { Formik } from 'formik';
+import { Form } from '../../components/Form/Form';
+import { useInitBhgDTSection } from './useInitBhgDTSection';
+import Select from '../../components/Select/Select';
 
 export const BhgDTRoute = observer(() => {
-    const onClick = () => {
-        document.location.href = createBhgMail();
-        // refresh stores
-        excelSyncStore.setSync(false);
-    };
+    const { formik, initObj } = useInitBhgDTSection();
 
     return (
-        <button type='button' onClick={onClick}>
-            Отправить письмо в бухгалтерию
-        </button>
+        <Formik
+            initialValues={formik.initialFields}
+            validate={formik.validate}
+            onSubmit={initObj.onLoad as any}
+            innerRef={formik.formRef}
+            validateOnMount
+        >
+            <Form className='form buh__form'>
+                <h2>Отправить письмо ДТ в бухгалтерию</h2>
+                <Select
+                    name='dt' options={['ВТД', 'ПВД', '']}
+                    title='Тип ДТ'
+                />
+                <button type='submit' className='btn letter__btn'>
+                    Создать письмо
+                </button>
+            </Form>
+        </Formik>
     );
 });

@@ -48,7 +48,7 @@ export const setExport = (table: any[][]) => {
 
             declarationNo = tablesStore.customsT.find(
                 (cR) => cR.blNo.trim() === transformedRow.blNo.trim(),
-            )?.declarationNo;
+            )?.declaration.vtd;
 
             if (!declarationNo) declarationNo = '';
             transformedRow.declarationNo = declarationNo;

@@ -1,5 +1,5 @@
 import { isNumber } from '../../../logic/utils/isNumber';
-import letterStore from '../../letterStore/letterStore';
+import offerStore from '../../mailStores/offerStore';
 import { selectSp } from '../../spsStore/select';
 import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
@@ -40,7 +40,7 @@ export const setMates = (table: any[][]) => {
         }),
     });
 
-    letterStore.setTransport(transformed[0]?.transport);
+    offerStore.setTransport(transformed[0]?.transport);
 
     return transformed;
 };

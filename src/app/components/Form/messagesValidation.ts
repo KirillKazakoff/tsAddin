@@ -11,6 +11,9 @@ export const messages: MessagesT = {
     podpisant: {
         valueMissing: 'Выберите подписанта',
     },
+    dt: {
+        valueMissing: 'Выберите тип ДТ',
+    },
     terms: {
         valueMissing: 'Выберите условия доставки',
     },
@@ -52,10 +55,6 @@ export const messages: MessagesT = {
     },
     personDischarge: {
         valueMissing: 'Выберите ответственного за диспетчеризацию',
-    },
-    declaration: {
-        valueMissing: 'Введите номер ВТД декларации',
-        formatMismatch: 'Неправильный формат (8 цифр/6 цифр/7 цифр)',
     },
     departureDate: {
         valueMissing: 'Введите дату отбытия Владивосток',

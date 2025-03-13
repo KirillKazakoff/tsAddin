@@ -43,5 +43,5 @@ class LetterStore {
     }
 }
 
-const letterStore = new LetterStore();
-export default letterStore;
+const offerStore = new LetterStore();
+export default offerStore;

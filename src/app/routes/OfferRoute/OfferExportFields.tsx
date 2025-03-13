@@ -4,7 +4,7 @@ import { useFormikContext } from 'formik';
 import { SelectTerms } from '../../components/Select/SelectTerms';
 import InputText from '../../components/Form/InputText';
 
-export const LetterExportFields = observer(() => {
+export const OfferExportFields = observer(() => {
     const context = useFormikContext<{
         port: string;
         isExport: boolean;
@@ -23,8 +23,7 @@ export const LetterExportFields = observer(() => {
             ) : null}
             <SelectTerms />
             <InputText
-                title='Фишинг земля'
-                placeholder='Fishing ground'
+                title='Фишинг земля' placeholder='Fishing ground'
                 name='ground'
             />
         </div>

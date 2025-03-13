@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { LetterRoute } from './app/routes/OfferRoute/OfferRoute';
+import { OfferRoute } from './app/routes/OfferRoute/OfferRoute';
 import { LinkRoute } from './app/routes/LinkRoute';
 import NavigatorRoute from './app/routes/NavigatorRoute';
 import { PageStatusRoute } from './app/routes/ErrorRoute/PageStatusRoute';
@@ -18,7 +18,7 @@ export default function App() {
                 <Route path='/' element={<LinkRoute />}>
                     <Route path='/export' element={<ExportRoute />} />
                     <Route path='/inner' element={<InnerRoute />} />
-                    <Route path='/letter' element={<LetterRoute />} />
+                    <Route path='/letter' element={<OfferRoute />} />
                     <Route path='/pageStatus' element={<PageStatusRoute />} />
                     <Route path='/sales' element={<SalesRoute />} />
                     <Route path='/dt' element={<DTRoute />} />

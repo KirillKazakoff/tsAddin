@@ -1,8 +1,8 @@
-import letterStore from '../../stores/letterStore/letterStore';
+import offerStore from '../../stores/mailStores/offerStore';
 import { offerDictionary } from './offerDictionary';
 
 export const createOffer = () => {
-    const { isExport } = letterStore.fields;
+    const { isExport } = offerStore.fields;
 
     const key = isExport ? 'eng' : 'ru';
     const {

@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 /* eslint-disable no-useless-escape */
-import letterStore from '../../../stores/letterStore/letterStore';
+import offerStore from '../../../stores/mailStores/offerStore';
 import { PortZarubezhT } from '../../../stores/spsStore/set/setPortsZarubezh';
 import tablesStore from '../../../stores/tablesStore/tablesStore';
 
 export const footerToStrRu = () => {
-    const { arrivalVld, payment, port } = letterStore.fields;
+    const { arrivalVld, payment, port } = offerStore.fields;
 
     const arrivalStr = `Прибытие в п. ${port.code} ${arrivalVld}`;
     const paymentStr = payment ? `Оплата до ${payment}` : '';
@@ -17,9 +17,9 @@ export const footerToStrRu = () => {
 export const footerToStrEng = () => {
     const {
         terms, arrivalForeign, arrivalVld, payment,
-    } = letterStore.fields;
-    const port = letterStore.fields.port as PortZarubezhT;
-    const transport = letterStore.transport.eng.name;
+    } = offerStore.fields;
+    const port = offerStore.fields.port as PortZarubezhT;
+    const transport = offerStore.transport.eng.name;
 
     let weightInformStr = 'Send you weight reports in attached files.';
     if (terms === 'EXW') {

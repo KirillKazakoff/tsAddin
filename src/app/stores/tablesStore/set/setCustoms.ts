@@ -3,13 +3,23 @@ import tablesStore from '../tablesStore';
 import { ExportRowT } from './setExport';
 import { setTable } from './setTable';
 
+const getDate = (date: string) => {
+    const dateArr = date.split('/')[1].split('');
+    dateArr.splice(2, 0, '.');
+    dateArr.splice(5, 0, '.');
+
+    const transformed = dateArr.join('');
+    return transformed;
+};
+
 export const setCustoms = (table: any[][]) => {
     return setTable({
         table,
         type: 'customsT',
         headers: {
             id: 'ID',
-            declarationNo: 'ДТ',
+            declarationNoVTD: 'ДТ',
+            declarationNoPVD: 'ПВД',
             blNo: 'BL',
             date: 'Дата декларирования',
         },
@@ -17,8 +27,12 @@ export const setCustoms = (table: any[][]) => {
             return {
                 id: r.id,
                 blNo: r.blNo,
-                declarationNo: r.declarationNo,
-                date: r.date,
+                declaration: {
+                    vtd: r.declarationNoVTD,
+                    pvd: r.declarationNoPVD,
+                },
+                dateVTD: getDate(r.declarationNoVTD),
+                datePVD: getDate(r.declarationNoPVD),
                 agreement: <ExportRowT>{},
             };
         },

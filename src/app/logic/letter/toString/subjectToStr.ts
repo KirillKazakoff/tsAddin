@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
-import letterStore from '../../../stores/letterStore/letterStore';
+import offerStore from '../../../stores/mailStores/offerStore';
 import { selectSp } from '../../../stores/spsStore/select';
 import { getSubject } from '../common/getSubject';
 
 export const subjectToStrRu = () => {
-    const transport = letterStore.transport.ru.name;
+    const transport = offerStore.transport.ru.name;
     const subjectObj = getSubject();
 
     const subjectStr = Object.entries(subjectObj).reduce((total, [productKey, sorts]) => {
@@ -20,7 +20,7 @@ export const subjectToStrRu = () => {
 };
 
 export const subjectToStrEng = () => {
-    const transport = letterStore.transport.eng.name;
+    const transport = offerStore.transport.eng.name;
     const subjectObj = getSubject();
 
     const subjectStr = Object.entries(subjectObj).reduce((total, [productKey, sorts]) => {
