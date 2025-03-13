@@ -9,7 +9,7 @@ import type { MateRowT } from './set/setMates';
 import type { NordmileRowT } from './set/setNordmile';
 import type { SalesRowT } from './set/setSales';
 import type { CustomsRowT } from './set/setCustoms';
-import type { InnerSampleRowT } from './set/setSamplesInner';
+import type { InnerStorageRowT } from './set/setInnerStorage';
 import type { DTRowT } from './set/setDT';
 import type { FescoRowT } from './set/setFescoContainers';
 
@@ -26,7 +26,7 @@ class TablesStore {
     dtT: DTRowT[] = [];
     fescoContainers: FescoRowT[] = [];
     customsT: CustomsRowT[] = [];
-    samplesInnerT: InnerSampleRowT[] = [];
+    innerStorageT: InnerStorageRowT[] = [];
 
     status = {
         export: initTableStatus(),

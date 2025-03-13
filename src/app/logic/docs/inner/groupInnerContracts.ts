@@ -7,12 +7,12 @@ import { indexToStr } from '../../utils/indexToStr';
 import portLetterStore from '../../../stores/docsStores/portLetterStore';
 import { groupMates } from './groupMates';
 import { InnerRowT } from '../../../stores/tablesStore/set/setInner';
-import { InnerSampleRowT } from '../../../stores/tablesStore/set/setSamplesInner';
+import { InnerStorageRowT } from '../../../stores/tablesStore/set/setInnerStorage';
 
 export const groupInnerContracts = () => {
     const matesGrouped = groupMates();
 
-    const rows = [...tablesStore.innerT, ...tablesStore.samplesInnerT].map((row) => {
+    const rows = [...tablesStore.innerT, ...tablesStore.innerStorageT].map((row) => {
         const mateRow = tablesStore.matesT.find((r) => r.konosament === row.knsNo);
 
         const konosamentGroup = matesGrouped
@@ -30,7 +30,7 @@ export const groupInnerContracts = () => {
         );
 
         return {
-            row: row as InnerRowT & InnerSampleRowT,
+            row: row as InnerRowT & InnerStorageRowT,
             mateRow,
             konosamentGroup,
             type: row.type,

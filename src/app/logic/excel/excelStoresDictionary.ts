@@ -30,7 +30,7 @@ import { setInner } from '../../stores/tablesStore/set/setInner';
 import { setMates } from '../../stores/tablesStore/set/setMates';
 import { setNordmile } from '../../stores/tablesStore/set/setNordmile';
 import { setSales } from '../../stores/tablesStore/set/setSales';
-import { setSamplesInner } from '../../stores/tablesStore/set/setSamplesInner';
+import { setInnerStorage } from '../../stores/tablesStore/set/setInnerStorage';
 import { setStorageInvoices } from '../../stores/tablesStore/set/setStorageInvoices';
 
 export type ExcelStoreT = {
@@ -130,16 +130,14 @@ export const excelStoresDictionary = {
         table: 'Сертификаты',
         setter: setCertificates,
     },
-    // save initialize order (Пошлина after Экспорт_хранение);
     'Пошлина': {
         table: 'Customs',
         setter: setCustoms,
         isJustRange: true,
     },
-    'Образцы': {
-        table: 'Samples',
-        setter: setSamplesInner,
-        isJustRange: true,
+    'Хранение РФ': {
+        table: 'Хранение_ВР',
+        setter: setInnerStorage,
     },
     'Экспорт': {
         table: 'Экспорт',
@@ -200,7 +198,7 @@ export const movementDictionary = {
     'Экспорт': D['Экспорт'],
     'Пошлина': D['Пошлина'],
     'Сертификаты': D['Сертификаты'],
-    'Образцы': D['Образцы'],
+    'Хранение РФ': D['Хранение РФ'],
     'Контейнеры': D['Контейнеры'],
     'Инвойсы хранение': D['Инвойсы хранение'],
     'Инвойсы выгрузка': D['Инвойсы выгрузка'],

@@ -35,7 +35,8 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
             },
             {
                 name: 'Имя_представитель',
-                value: phones?.['ДМА']?.fullName,
+                value: `Дополнительно сообщаем контактные данные нашего представителя во Владивостоке:\n${phones?.['ДМА']?.fullName}`,
+                height: 30,
             },
             {
                 name: 'Телефон_представитель',
@@ -49,6 +50,11 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
             { name: 'Образцы_подвал', height: 1 },
             { name: 'Расходы_компания', height: 1 },
             { name: 'Выгрузка_ответственный', height: 1 },
+            { name: 'Письмо_описание_подвал', height: 1 },
+            { name: 'Покупатель_телефон', height: 1 },
+            { name: 'Грузовые_борт_склад', height: 1 },
+            { name: 'Грузовые_склад_авто', height: 1 },
+            { name: 'Исполнитель_информация', height: 1 },
         ],
     } satisfies CellDeclarationT<CellObjT>;
 
@@ -105,11 +111,6 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
                 height: 25,
             },
             {
-                name: 'Имя_представитель',
-                value: `Дополнительно сообщаем контактные данные нашего представителя во Владивостоке:\n${phones?.['ДМА']?.fullName}`,
-                height: 30,
-            },
-            {
                 name: 'Телефон_представитель',
                 value: `( контактный телефон: ${phones?.['ДМА']?.phone} )`,
                 height: 20,
@@ -139,7 +140,7 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
         ],
     } satisfies CellDeclarationT<CellObjT> : {
         common: commonObj.common,
-        samples: [
+        storage: [
             {
                 name: 'Письмо_описание_шапка',
                 value: `Просим Вас рыбопродукцию, находящуюся на хранении ${orgName.seller} по следующим коносаментам:`,
@@ -167,7 +168,7 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
             resArr.push(...cells.default);
         }
     } else {
-        resArr.push(...cells.samples);
+        resArr.push(...cells.storage);
     }
 
     return resArr;

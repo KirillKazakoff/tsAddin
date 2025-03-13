@@ -9,7 +9,7 @@ export const initPortLetterRows = (doc: InnerGroupT, utils: CellUtilsT<''>) => {
     const { isGroupingKns } = portLetterStore.fields;
 
     let records = isGroupingKns ? vesselProduct : noGroup;
-    if (doc.record.type === 'samplesInnerT') records = noGroup;
+    if (doc.record.type === 'innerStorageT') records = noGroup;
 
     insertRows({
         records,

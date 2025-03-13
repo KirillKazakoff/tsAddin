@@ -1,14 +1,15 @@
+/* eslint-disable no-param-reassign */
 import { selectSp } from '../../spsStore/select';
+import tablesStore from '../tablesStore';
 import { initAmount } from '../utils/initAmount';
 import { setTable } from './setTable';
 
-export const setSamplesInner = (table: any[][]) => {
+export const setInnerStorage = (table: any[][]) => {
     const transformed = setTable({
         table,
-        type: 'samplesInnerT',
+        type: 'innerStorageT',
         headers: {
-            id: '№ письма',
-            reiceNo: 'Номер рейса',
+            id: 'номер письма',
             knsNo: 'Коносамент',
             dateDischarge: 'Дата перегруза',
             vessel: 'Судно',
@@ -17,14 +18,14 @@ export const setSamplesInner = (table: any[][]) => {
             product: 'Продукция',
             sort: 'Сорт',
             pack: 'Упаковка',
-            places: 'Кол-во мест',
-            placesTotal: 'Объем, кг',
-            operation: 'Вид операции',
+            places: 'Отгружено мест',
+            placesTotal: 'Отгужено Объем',
+            operation: 'Грузовые операции',
         },
         init: (r) => !!r.id,
         row: (r) => ({
             id: `${r.id.toString()}-О`,
-            reiceNo: r.reiceNo,
+            reiceNo: '',
             knsNo: r.knsNo,
             dateDischarge: r.dateDischarge,
             vessel: selectSp.vessel(r.vessel),
@@ -38,11 +39,15 @@ export const setSamplesInner = (table: any[][]) => {
                 placesTotal: initAmount(r.placesTotal, 0, 2),
             },
         }),
+        afterStoresInit: (r) => {
+            r.reiceNo = tablesStore.matesT.find((mR) => mR.konosament === r.knsNo).reice;
+        },
     });
 
+    console.log(transformed.transformedTable);
     return transformed;
 };
 
-export type InnerSampleRowT = ReturnType<
-    typeof setSamplesInner
+export type InnerStorageRowT = ReturnType<
+    typeof setInnerStorage
 >['transformedTable'][number];

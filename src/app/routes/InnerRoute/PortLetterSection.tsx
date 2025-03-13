@@ -66,7 +66,7 @@ const SectionComponent = observer(() => {
                             onClick: () => initObj.onLoad(doc as any),
                             title: `${id}-${product.code}`,
                             key: id,
-                            isNull: doc.record.type !== 'samplesInnerT',
+                            isNull: doc.record.type !== 'innerStorageT',
                         };
                     }}
                 />
