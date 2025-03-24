@@ -9,9 +9,11 @@ export const useInitBhgDTSection = () => {
         store: buhDTStore,
         initialFields: {
             dt: '',
+            company: '',
         },
         validateCb(errors, values) {
             if (!values.dt) errors.dt = 'valueMissing';
+            if (!values.company) errors.company = 'valueMissing';
         },
     });
 

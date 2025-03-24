@@ -40,7 +40,7 @@ export const setMates = (table: any[][]) => {
         }),
     });
 
-    offerStore.setTransport(transformed[0]?.transport);
+    offerStore.setTransport(transformed.transformedTable[0].transport.code);
 
     return transformed;
 };

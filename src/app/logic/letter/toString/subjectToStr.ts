@@ -20,6 +20,7 @@ export const subjectToStrRu = () => {
 };
 
 export const subjectToStrEng = () => {
+    console.log(offerStore.transport);
     const transport = offerStore.transport.eng.name;
     const subjectObj = getSubject();
 

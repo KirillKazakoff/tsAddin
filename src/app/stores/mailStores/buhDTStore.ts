@@ -3,6 +3,7 @@ import { FormValuesT } from '../../types/typesUtils';
 
 const initFields = () => ({
     dt: '',
+    company: '',
 });
 type FormFieldsT = FormValuesT<ReturnType<typeof initFields>>;
 
@@ -16,6 +17,7 @@ class BuhDTStore {
 
     setFields(values: FormFieldsT) {
         this.fields.dt = values.dt;
+        this.fields.company = values.company;
     }
 }
 

@@ -22,6 +22,10 @@ export const BhgDTRoute = observer(() => {
                     name='dt' options={['ВТД', 'ПВД', '']}
                     title='Тип ДТ'
                 />
+                <Select
+                    name='company' options={['ТРК', 'МСИ']}
+                    title='Компания'
+                />
                 <button type='submit' className='btn letter__btn'>
                     Создать письмо
                 </button>

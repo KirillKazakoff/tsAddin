@@ -4,6 +4,8 @@ import { ExportRowT } from './setExport';
 import { setTable } from './setTable';
 
 const getDate = (date: string) => {
+    if (!date) return '';
+
     const dateArr = date.split('/')[1].split('');
     dateArr.splice(2, 0, '.');
     dateArr.splice(5, 0, '.');
