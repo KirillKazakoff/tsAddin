@@ -44,7 +44,6 @@ export const setInnerStorage = (table: any[][]) => {
         },
     });
 
-    console.log(transformed.transformedTable);
     return transformed;
 };
 

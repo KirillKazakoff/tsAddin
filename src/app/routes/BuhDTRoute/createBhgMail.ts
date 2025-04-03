@@ -11,31 +11,43 @@ export const createBhgMail = () => {
 
     const data = groupBhgData();
     const transport = tablesStore.matesT[0].transport.ru.name;
-    const customsDate = isVTD ? data[0].record.dateVTD : data[0].record.datePVD;
+    const agreements = data.filter((a) => (isVTD ? a.record.dateVTD : a.record.datePVD));
+
+    const customsDate = isVTD
+        ? agreements[0].record.dateVTD
+        : agreements[0].record.datePVD;
 
     const mailTo = choosenCompany === 'ТРК' ? 'buh_trk@sea-wolf.ru' : 'buh_msi6@sea-wolf.ru';
     const cc = 'oved@sea-wolf.ru';
     const subject = `Документы по экспортной продукции, отгруженной через ${transport} ${customsDate}`;
     const header = `Вложением направляю документы по экспортной продукции, отгруженной через ${transport}\n\nТаможенное оформление во Владивостоке: ${customsDate}\n\nПеречень документов:\n\n`;
 
+    let i = 0;
     const body = encodeURIComponent(
-        data.reduce<string>((total, group, i) => {
-            const { agreement } = group.record;
-            if (agreement.seller.code !== choosenCompany) return total;
+        data.reduce<string>((total, group) => {
+            const agreementRecord = isVTD
+                ? group.record.agreement
+                : group.record.agreementPVD;
 
-            const agreementDate = getExcelDateShort(agreement.date, 'ru');
+            const isCompany = agreementRecord.seller.code === choosenCompany;
+            const isPVD = !isVTD && group.record.datePVD;
+            if (!isCompany || (!isPVD && !isVTD)) return total;
+
+            const agreementDate = getExcelDateShort(agreementRecord.date, 'ru');
             // prettier-ignore
-            const agreementStr = `${i + 1}) Дополнение №${agreement.agreementNo} от ${agreementDate} к контракту ${agreement.type === 'exportT' ? 'купли-продажи' : 'оказания услуг хранения'} №${agreement.contract.contractNo}`;
+            const agreementStr = `${i + 1}) Дополнение №${agreementRecord.agreementNo} от ${agreementDate} к контракту ${agreementRecord.type === 'exportT' ? 'купли-продажи' : 'оказания услуг хранения'} №${agreementRecord.contract.contractNo}`;
 
             const agreementGroup = group.rows.reduce<string>((agTotal, row) => {
                 const declarationNo = isVTD ? row.declaration.vtd : row.declaration.pvd;
+                const agreementRow = isVTD ? row.agreement : row.agreementPVD;
 
-                agTotal += `\n     -Инвойс №${row.agreement.invoice} от ${agreementDate}`;
+                agTotal += `\n     -Инвойс №${agreementRow.invoice} от ${agreementDate}`;
                 agTotal += `\n     -ДТ ${declarationNo}\n`;
                 return agTotal;
             }, '');
 
             total += `${agreementStr} ${agreementGroup}\n\n`;
+            i += 1;
 
             return total;
         }, ''),

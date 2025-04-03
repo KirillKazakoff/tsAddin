@@ -3,14 +3,15 @@ import tablesStore from '../tablesStore';
 import { ExportRowT } from './setExport';
 import { setTable } from './setTable';
 
-const getDate = (date: string) => {
-    if (!date) return '';
+const getDate = (dt: string) => {
+    if (!dt) return '';
 
-    const dateArr = date.split('/')[1].split('');
+    const dateArr = dt.split('/')[1].split('');
     dateArr.splice(2, 0, '.');
     dateArr.splice(5, 0, '.');
 
     const transformed = dateArr.join('');
+    console.log(transformed);
     return transformed;
 };
 
@@ -36,12 +37,14 @@ export const setCustoms = (table: any[][]) => {
                 dateVTD: getDate(r.declarationNoVTD),
                 datePVD: getDate(r.declarationNoPVD),
                 agreement: <ExportRowT>{},
+                agreementPVD: <ExportRowT>{},
             };
         },
         afterStoresInit: (r) => {
             r.agreement = [...tablesStore.exportStorageT, ...tablesStore.exportT].find(
                 (exRow) => r.blNo === exRow.blNo,
             );
+            r.agreementPVD = tablesStore.exportT.find((exRow) => r.blNo === exRow.blNo);
         },
     });
 };
