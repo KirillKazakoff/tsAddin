@@ -6,10 +6,9 @@ export const setProductionSales = (spRange: any[][]) => {
         type: 'productionSales',
         headers: {
             name: 'Product name',
-            code: 'ShortName',
-            expirationDate: 'Срок годности',
+            code: 'Short name',
         },
-        row: (r) => ({ code: r.code, expirationDate: r.expirationDate, name: r.name }),
+        row: (r) => ({ code: r.code, name: r.name }),
     });
 };
 

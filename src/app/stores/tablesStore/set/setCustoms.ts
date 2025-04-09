@@ -11,7 +11,6 @@ const getDate = (dt: string) => {
     dateArr.splice(5, 0, '.');
 
     const transformed = dateArr.join('');
-    console.log(transformed);
     return transformed;
 };
 

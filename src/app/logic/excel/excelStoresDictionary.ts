@@ -210,7 +210,6 @@ export const salesDictionary = {
     SPAgent: D['SPAgent'],
 
     Продажи: D['Продажи'],
-    Суда: D['Суда'],
 } satisfies ExcelStoresDictionaryT;
 
 export const dtDictionary = {

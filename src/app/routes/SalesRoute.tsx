@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik } from 'formik';
-import { Form } from 'react-router-dom';
+import { Form } from '../components/Form/Form';
 import { SectionErrorHOC } from '../components/SectionErrorHOC';
 import tablesStore from '../stores/tablesStore/tablesStore';
 import excelSyncStore from '../stores/excelSyncStore.ts/excelSyncStore';

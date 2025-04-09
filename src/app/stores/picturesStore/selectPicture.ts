@@ -19,9 +19,9 @@ const switchPictureGet = (codeName: string): PictureKey => {
             return 'Sign_KRUZINAMN';
         case 'SE JI YOUNG':
             return 'Sign_SOJI';
-        case 'OCEANIC':
+        case 'OST':
             return 'Sign_OCEANIC';
-        case 'CHANGRUN':
+        case 'HCIF':
             return 'Sign_CHANGRUN';
 
         default:
