@@ -349,8 +349,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             },
             {
                 name: 'Доставка_дата',
-                eng: `Expected delivery date: ${deliveryDate}`,
-                ru: `Дата поставки ориентировочно: ${deliveryDate}`,
+                eng: `Expected discharge date: ${deliveryDate}`,
+                ru: `Дата отгрузки ориентировочно: ${deliveryDate}`,
                 height: 20,
             },
             ...commonObj.export, ...commonObj.titles,
