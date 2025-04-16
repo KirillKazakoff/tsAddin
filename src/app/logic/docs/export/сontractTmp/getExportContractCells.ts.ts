@@ -305,7 +305,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             },
             {
                 name: 'Доставка_дата',
-                eng: `Delivery date: ${deliveryDate}`,
+                eng: `Discharge date: ${deliveryDate}`,
                 ru: `Дата отгрузки: ${deliveryDate}`,
                 height: 20,
             },
