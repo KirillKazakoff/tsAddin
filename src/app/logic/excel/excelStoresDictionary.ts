@@ -32,6 +32,7 @@ import { setNordmile } from '../../stores/tablesStore/set/setNordmile';
 import { setSales } from '../../stores/tablesStore/set/setSales';
 import { setInnerStorage } from '../../stores/tablesStore/set/setInnerStorage';
 import { setStorageInvoices } from '../../stores/tablesStore/set/setStorageInvoices';
+import { setTranslator } from '../../stores/tablesStore/set/setTranslator';
 
 export type ExcelStoreT = {
     table: string;
@@ -130,6 +131,10 @@ export const excelStoresDictionary = {
         table: 'Сертификаты',
         setter: setCertificates,
     },
+    'Инвойсы': {
+        table: 'Инвойсы',
+        setter: setTranslator,
+    },
     'Пошлина': {
         table: 'Customs',
         setter: setCustoms,
@@ -214,4 +219,8 @@ export const salesDictionary = {
 
 export const dtDictionary = {
     DT: D['DT'],
+} satisfies ExcelStoresDictionaryT;
+
+export const translatorDictionary = {
+    Инвойсы: D['Инвойсы'],
 } satisfies ExcelStoresDictionaryT;

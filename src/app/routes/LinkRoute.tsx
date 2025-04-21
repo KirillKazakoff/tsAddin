@@ -47,6 +47,13 @@ export const LinkRoute = observer(() => {
                 </NavLink>
             );
         }
+        if (appStatus === 'Translator') {
+            return (
+                <NavLink className={'nav-link'} to={'/translator'}>
+                    Инвойсы
+                </NavLink>
+            );
+        }
 
         if (appStatus === 'Docs') {
             return (

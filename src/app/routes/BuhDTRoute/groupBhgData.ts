@@ -6,7 +6,7 @@ export const groupBhgData = () => {
         rows: tablesStore.customsT,
         input: (r) => {
             return {
-                code: r.agreement.agreementNo,
+                code: r.agreement.idContract,
                 isNoAmount: true,
             };
         },

@@ -12,6 +12,7 @@ import type { CustomsRowT } from './set/setCustoms';
 import type { InnerStorageRowT } from './set/setInnerStorage';
 import type { DTRowT } from './set/setDT';
 import type { FescoRowT } from './set/setFescoContainers';
+import type { TranslatorRowT } from './set/setTranslator';
 
 class TablesStore {
     matesT: MateRowT[] = [];
@@ -27,6 +28,7 @@ class TablesStore {
     fescoContainers: FescoRowT[] = [];
     customsT: CustomsRowT[] = [];
     innerStorageT: InnerStorageRowT[] = [];
+    translatorT: TranslatorRowT[] = [];
 
     status = {
         export: initTableStatus(),
@@ -42,6 +44,7 @@ class TablesStore {
         samplesInnerT: initTableStatus(),
         dt: initTableStatus(),
         fescos: initTableStatus(),
+        translatorT: initTableStatus(),
     };
 
     constructor() {

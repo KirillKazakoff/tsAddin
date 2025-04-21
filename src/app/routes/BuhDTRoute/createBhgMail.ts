@@ -10,8 +10,14 @@ export const createBhgMail = () => {
     const choosenCompany = buhDTStore.fields.company;
 
     const data = groupBhgData();
-    const transport = tablesStore.matesT[0].transport.ru.name;
     const agreements = data.filter((a) => (isVTD ? a.record.dateVTD : a.record.datePVD));
+    let transport = tablesStore.matesT[0].transport.ru.name;
+
+    const isLiveCrab = agreements[0].record.agreement.product.code.includes('живой');
+
+    if (isLiveCrab) {
+        transport = agreements[0].record.agreement.vessel.ru.name;
+    }
 
     const customsDate = isVTD
         ? agreements[0].record.dateVTD
@@ -35,7 +41,7 @@ export const createBhgMail = () => {
 
             const agreementDate = getExcelDateShort(agreementRecord.date, 'ru');
             // prettier-ignore
-            const agreementStr = `${i + 1}) Дополнение №${agreementRecord.agreementNo} от ${agreementDate} к контракту ${agreementRecord.type === 'exportT' ? 'купли-продажи' : 'оказания услуг хранения'} №${agreementRecord.contract.contractNo}`;
+            const agreementStr = `${i + 1}) Дополнение №${agreementRecord.agreementNo} от ${agreementDate} к контракту ${agreementRecord.type === 'exportT' || isLiveCrab ? 'купли-продажи' : 'оказания услуг хранения'} №${agreementRecord.contract.contractNo}`;
 
             const agreementGroup = group.rows.reduce<string>((agTotal, row) => {
                 const declarationNo = isVTD ? row.declaration.vtd : row.declaration.pvd;

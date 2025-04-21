@@ -9,6 +9,7 @@ import {
     excelStoresDictionary,
     salesDictionary,
     dtDictionary,
+    translatorDictionary,
 } from './excelStoresDictionary';
 import { initExcelImages } from './initExcelImages';
 import { initRange } from './utils/initRange';
@@ -25,6 +26,9 @@ const getExistedStores = async (context: Excel.RequestContext) => {
     }
     if (excelSyncStore.appStatus === 'DT') {
         stores = dtDictionary;
+    }
+    if (excelSyncStore.appStatus === 'Translator') {
+        stores = translatorDictionary;
     }
 
     for await (const [key, store] of Object.entries(stores)) {
@@ -114,6 +118,8 @@ export const initStoresOnFileName = async (context: Excel.RequestContext) => {
             excelSyncStore.setAppStatus('DT');
         } else if (fileName.includes('продажи')) {
             excelSyncStore.setAppStatus('Sales');
+        } else if (fileName.includes('инвойсы')) {
+            excelSyncStore.setAppStatus('Translator');
         } else {
             pageStatusStore.setPageStatus('noRouteMatchFileName', fileName);
         }

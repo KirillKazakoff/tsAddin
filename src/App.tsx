@@ -9,6 +9,7 @@ import { InnerRoute } from './app/routes/InnerRoute/InnerRoute';
 import { SalesRoute } from './app/routes/SalesRoute';
 import { DTRoute } from './app/routes/DTRoute/DTRoute';
 import { BhgDTRoute } from './app/routes/BuhDTRoute/BhgDTRoute';
+import { TranslatorRoute } from './app/routes/TranslatorRoute/TranslatorRoute';
 
 export default function App() {
     return (
@@ -23,6 +24,7 @@ export default function App() {
                     <Route path='/sales' element={<SalesRoute />} />
                     <Route path='/dt' element={<DTRoute />} />
                     <Route path='/dtLetter' element={<BhgDTRoute />} />
+                    <Route path='/translator' element={<TranslatorRoute />} />
                 </Route>
             </Routes>
         </Router>
