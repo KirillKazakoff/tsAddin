@@ -15,14 +15,10 @@ export const setTranslator = (table: any[][]) => {
             priceTotal: 'Стоимость',
         },
         row: (r) => {
-            const regexp = /([а-я А-Я A-Z a-z]+)(([-\/\s,(;]+)?([\d]+)?(.+)?)/;
-            let splitted = r.nameInput.toString().match(regexp);
-            if (!splitted) splitted = ['', r.nameInput.toString(), r.suffix.toString()];
-
             const row = {
-                nameInput: r.nameInput as string,
-                name: splitted[1].trim() as string,
-                suffix: splitted[2].trim(),
+                nameInput: r.nameInput.toString() as string,
+                name: r.name as string,
+                suffix: r.suffix,
                 places: r.places,
                 pack: r.pack,
                 price: r.price,

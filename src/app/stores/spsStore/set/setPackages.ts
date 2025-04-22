@@ -3,7 +3,7 @@ import { setSp } from './setSp';
 export const setPackages = (spRange: any[][]) => {
     const getType = (fullName: string) => {
         if (!fullName) return '';
-        const res = fullName.toLowerCase().includes('мешок') ? 'BAG' : 'CARTOON';
+        const res = fullName.toLowerCase().includes('мешок') ? 'BAG' : 'CARTON';
         return res;
     };
 

@@ -1,10 +1,13 @@
 /* eslint-disable no-useless-escape */
-import tablesStore from '../../stores/tablesStore/tablesStore';
 
 export const transformInput = (input: string) => {
-    const regexp = /([а-я А-Я A-Z a-z]+)(([-\/\s]+)?([\d]+)?(.+)?)/;
-    const splitted = input.match(regexp);
-    const [, name, suffix] = splitted;
+    const emptyInput = { name: '', suffix: '' };
+    if (!input) return emptyInput;
 
-    console.log(name, ' suffix: ', suffix);
+    const regexp = /([а-я А-Я A-Z a-z]+)(([-\/\s]+)?([\d]+)?(.+)?)/;
+    const splitted = input.toString().match(regexp);
+    if (!splitted?.length) return emptyInput;
+
+    const [, name, suffix] = splitted;
+    return { name, suffix };
 };

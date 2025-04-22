@@ -9,6 +9,7 @@ export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>)
     const ws = book.getWorksheet('BL');
     const utils = initExcelUtils(ws, '');
     const { record: r } = blGroup;
+    const isAgent = r.consignee.code === 'KTI';
 
     utils.initTmp({
         // prettier-ignore
@@ -16,10 +17,10 @@ export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>)
             { name: 'BL_No', value: `B/L No. ${r.blNo}` },
             { name: 'Продавец', value: r.seller.eng.name },
             { name: 'Продавец_адрес', value: r.seller.eng.address },
-            { name: 'Получатель', value: r.consignee?.fullName || r.agent.name },
-            { name: 'Получатель_адрес', value: r.consignee?.addres || r.agent.address },
-            { name: 'Получатель_уведомление', value: r.consignee?.fullName || r.agent.name },
-            { name: 'Получатель_уведомление_адрес', value: r.consignee?.addres || r.agent.address },
+            { name: 'Получатель', value: isAgent ? 'TO ORDER OF SHIPPER' : r.consignee?.fullName },
+            { name: 'Получатель_адрес', value: isAgent ? '' : r.consignee?.addres },
+            { name: 'Получатель_уведомление', value: r.consignee?.fullName },
+            { name: 'Получатель_уведомление_адрес', value: r.consignee?.addres },
             { name: 'Судно', value: r.transport.eng.name.toUpperCase() },
             { name: 'Куда', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
             { name: 'Зона_вылова', value: blStore.catchZone },

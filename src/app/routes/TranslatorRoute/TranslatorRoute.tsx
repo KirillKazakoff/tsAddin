@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import tablesStore from '../../stores/tablesStore/tablesStore';
+import { transformInput } from './transformInput';
 
 export const TranslatorRoute = observer(() => {
     const onClick = async () => {
@@ -10,16 +12,36 @@ export const TranslatorRoute = observer(() => {
             table.load('rows');
             await context.sync();
 
-            table.rows.items[0].set({
-                values: [['11', 'a22', 'a33', 'a44', 'a55', 'a66', 'a77']],
+            const translators = [];
+            tablesStore.translatorT.forEach((r, i) => {
+                const transformed = transformInput(r.nameInput);
+                const values = [
+                    [
+                        r.nameInput,
+                        transformed.name,
+                        transformed.suffix,
+                        r.places,
+                        r.pack,
+                        r.price,
+                        '=[@[Цена/ед]]*[@Количество]',
+                    ],
+                ];
+
+                table.rows.items[i].set({ values });
+
+                const valuesCopy = [...values];
+                valuesCopy.pop();
+                valuesCopy.push(r.priceTotal);
+
+                translators.push(valuesCopy);
             });
+
+            tablesStore.setTable(translators, 'translatorT');
 
             await context.sync();
         });
     };
-    useEffect(() => {
-        onClick();
-    });
+
     return (
         <button type='button' onClick={onClick}>
             hello
