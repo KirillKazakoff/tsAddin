@@ -8,6 +8,7 @@ export const setTranslator = (table: any[][]) => {
         headers: {
             nameInput: 'Товар',
             name: 'Наименование',
+            rus: 'Перевод',
             suffix: 'Приставка',
             places: 'Количество',
             pack: 'Упаковка',
@@ -19,6 +20,7 @@ export const setTranslator = (table: any[][]) => {
                 nameInput: r.nameInput.toString() as string,
                 name: r.name as string,
                 suffix: r.suffix,
+                rus: r.rus,
                 places: r.places,
                 pack: r.pack,
                 price: r.price,

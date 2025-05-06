@@ -24,7 +24,7 @@ export const initInvoiceKTItmp = async (
     };
 
     await Promise.all(
-        ['KTI_LOGO', 'KTI_LOGO_п'].map(async (start) => initPictureGit({
+        ['KTI_LOGO'].map(async (start) => initPictureGit({
             url: pathObj.pictures.kti,
             ws,
             rangeObj: { start, ext: { width: 65, height: 45 } },
@@ -56,7 +56,7 @@ export const initInvoiceKTItmp = async (
                 value: `Request for payment for ${type === 'dischargeInvoicesT' ? 'discharging operation' : 'cold storage'}`,
             },
             { name: 'Инвойс_номер_п', value: `KTICOLTD - ${row.invoiceNo}` },
-            { name: 'Инвойс_компания_п', value: exportRow.seller.ru.name },
+            { name: 'Инвойс_компания_п', value: `ООО "${exportRow.seller.ru.shortName}"` },
             { name: 'Инвойс_дата_п', value: date.invoice('ru') },
             {
                 name: 'Инвойс_контракт_п',
@@ -79,5 +79,14 @@ export const initInvoiceKTItmp = async (
         ],
         initRows: () => initInvoiceKTIRows(invoice, utils),
         printSettings: { endCell: 'Инвойс_печать', column: 'I' },
+        mergeCells: [
+            {
+                row: {
+                    from: { name: 'Инвойс_перевод_старт_п' },
+                    to: { name: 'Инвойс_перевод_конец_п' },
+                },
+                cols: [[2, 8]],
+            },
+        ],
     });
 };

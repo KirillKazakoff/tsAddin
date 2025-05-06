@@ -20,6 +20,8 @@ export const TranslatorRoute = observer(() => {
                         r.nameInput,
                         transformed.name,
                         transformed.suffix,
+                        // eslint-disable-next-line @typescript-eslint/quotes, quotes
+                        '=XLOOKUP(TRIM(LOWER([@Наименование])), TRIM(LOWER(SPProduct[Код])), SPProduct[Наименование рус/полное], "-")',
                         r.places,
                         r.pack,
                         r.price,
@@ -29,11 +31,16 @@ export const TranslatorRoute = observer(() => {
 
                 table.rows.items[i].set({ values });
 
-                const valuesCopy = [...values];
-                valuesCopy.pop();
-                valuesCopy.push(r.priceTotal);
-
-                translators.push(valuesCopy);
+                translators.push([
+                    r.nameInput,
+                    transformed.name,
+                    transformed.suffix,
+                    r.rus,
+                    r.places,
+                    r.pack,
+                    r.price,
+                    r.priceTotal,
+                ]);
             });
 
             tablesStore.setTable(translators, 'translatorT');
