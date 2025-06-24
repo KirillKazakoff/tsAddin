@@ -19,7 +19,7 @@ export const setCustoms = (table: any[][]) => {
         table,
         type: 'customsT',
         headers: {
-            id: 'ID',
+            id: 'ID_5',
             declarationNoVTD: 'ДТ',
             declarationNoPVD: 'ПВД',
             blNo: 'BL',
@@ -40,6 +40,8 @@ export const setCustoms = (table: any[][]) => {
             };
         },
         afterStoresInit: (r) => {
+            if (!r.blNo) return;
+
             r.agreement = [...tablesStore.exportStorageT, ...tablesStore.exportT].find(
                 (exRow) => r.blNo === exRow.blNo,
             );

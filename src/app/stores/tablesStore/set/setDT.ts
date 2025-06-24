@@ -5,7 +5,7 @@ export const setDT = (table: any[][]) => {
         table,
         type: 'dtT',
         headers: {
-            id: 'Номер ДТ',
+            id: 'ID_5',
             type: 'Вид ДТ',
             prevDt: 'Предшествующее ДТ',
             passport: 'Паспорт сделки',

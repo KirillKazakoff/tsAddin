@@ -20,11 +20,3 @@ export const selectSp = {
     productSales: (codeName: string) => spsStore.productionSales[codeName],
     confidential: (codeName: string) => spsStore.confidentialPhones[codeName],
 };
-
-// const selectSpObj = () => {
-//     try {
-//         const functions = Object.values(selectSp);
-//     } catch (e) {
-//         console.log(e);
-//     }
-// };
