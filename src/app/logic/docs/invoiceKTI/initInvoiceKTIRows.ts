@@ -109,7 +109,7 @@ export const initInvoiceKTIRows = (invoice: InvoiceKTIGroupT, utils: CellUtilsT<
                     docType: 'invoiceKTI',
                     style: {
                         common: {
-                            height: type === 'dischargeInvoicesT' ? 45 : 60,
+                            height: type === 'dischargeInvoicesT' ? 55 : 65,
                             alignment: { wrapText: true, vertical: 'middle' },
                         },
                         special: {

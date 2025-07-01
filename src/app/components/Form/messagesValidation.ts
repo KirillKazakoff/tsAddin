@@ -60,4 +60,7 @@ export const messages: MessagesT = {
         valueMissing: 'Введите дату отбытия Владивосток',
         formatMismatch: 'Неправильный формат даты (2 цифры. 2 цифры. 4 цифры)',
     },
+    translator: {
+        valueMissing: 'Выберите инициалы переводчика-исполнителя',
+    },
 };

@@ -22,7 +22,7 @@ export const setDischargeInvoices = (table: any[][]) => {
         },
         row: (r) => ({
             agreementNo: r.agreementNo,
-            invoiceNo: r.invoiceNo,
+            id: r.invoiceNo as string,
             blNo: r.blNo,
             seller: selectSp.seller(r.seller),
             vessel: selectSp.vessel(r.vessel),

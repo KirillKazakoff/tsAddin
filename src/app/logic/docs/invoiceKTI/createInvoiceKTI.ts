@@ -8,9 +8,9 @@ export const createInvoiceKTI = async (invoice: InvoiceKTIGroupT) => {
     const { row } = invoice.record;
 
     if (invoice.record.type === 'dischargeInvoicesT') {
-        fileName = `KTI Discharge invoice - ${row.invoiceNo} ${row.seller.code}`;
+        fileName = `KTI Discharge invoice - ${row.id} ${row.seller.code}`;
     } else {
-        fileName = `KTI Storage invoice - ${row.invoiceNo} ${row.seller.code}`;
+        fileName = `KTI Storage invoice - ${row.id} ${row.seller.code}`;
     }
 
     await createDoc({

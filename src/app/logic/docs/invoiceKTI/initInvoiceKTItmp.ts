@@ -5,6 +5,7 @@ import { initInvoiceKTIRows } from './initInvoiceKTIRows';
 import { InvoiceKTIGroupT } from './groupInvoiceKTIByNo';
 import { initPictureGit } from '../../excel/pictures/initPictureGit';
 import { pathObj } from '../../utils/constants';
+import invoicesKTIStore from '../../../stores/docsStores/invoicesKTIStore';
 
 export const initInvoiceKTItmp = async (
     book: ExcelJS.Workbook,
@@ -15,6 +16,7 @@ export const initInvoiceKTItmp = async (
     const {
         row, exportRow, dischargeDate, type,
     } = invoice.record;
+    const { translator } = invoicesKTIStore.fields;
 
     const date = {
         invoice: (locale: string) => getExcelDateStr(row.dateInvoice, locale),
@@ -34,7 +36,9 @@ export const initInvoiceKTItmp = async (
     // prettier-ignore
     await utils.initTmp({
         cells: [
-            { name: 'Инвойс_номер', value: `KTICOLTD - ${row.invoiceNo}` },
+            { name: 'Инвойс_исполнитель_ТНИ', height: translator === 'ТНИ' ? 76 : 1 },
+            { name: 'Инвойс_исполнитель_КИА', height: translator === 'КИА' ? 76 : 1 },
+            { name: 'Инвойс_номер', value: `KTICOLTD - ${row.id}` },
             { name: 'Инвойс_компания', value: exportRow.seller.eng.name },
             { name: 'Инвойс_дата', value: date.invoice('eng') },
             {
@@ -55,7 +59,7 @@ export const initInvoiceKTItmp = async (
                 name: 'Инвойс_объект',
                 value: `Request for payment for ${type === 'dischargeInvoicesT' ? 'discharging operation' : 'cold storage'}`,
             },
-            { name: 'Инвойс_номер_п', value: `KTICOLTD - ${row.invoiceNo}` },
+            { name: 'Инвойс_номер_п', value: `KTICOLTD - ${row.id}` },
             { name: 'Инвойс_компания_п', value: `ООО "${exportRow.seller.ru.shortName}"` },
             { name: 'Инвойс_дата_п', value: date.invoice('ru') },
             {

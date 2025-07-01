@@ -26,7 +26,7 @@ export const setStorageInvoices = (table: any[][]) => {
             const res = {
                 blNo: r.blNo,
                 agreementNo: r.agreementNo,
-                invoiceNo: r.invoiceNo,
+                id: r.invoiceNo as string,
                 seller: selectSp.seller(r.seller),
                 vessel: selectSp.vessel(r.vessel),
                 product: selectSp.product(r.product),

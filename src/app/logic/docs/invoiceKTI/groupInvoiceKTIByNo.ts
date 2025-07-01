@@ -14,6 +14,7 @@ export const groupInvoiceKTIByNo = () => {
             : row.dateDischarge;
 
         return {
+            id: row.id,
             row,
             exportRow,
             dischargeDate,
@@ -25,8 +26,8 @@ export const groupInvoiceKTIByNo = () => {
     return groupTotal({
         rows,
         input: (row) => ({
-            init: () => !!row.row.invoiceNo,
-            code: row.row.invoiceNo,
+            init: () => !!row.row.id,
+            code: row.row.id,
         }),
     });
 };

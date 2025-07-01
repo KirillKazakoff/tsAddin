@@ -5,9 +5,9 @@ import excelSyncStore from '../../stores/excelSyncStore.ts/excelSyncStore';
 import { ExportContractSection } from './ExportContractSection';
 import { ExportRadio } from './ExportRadio';
 import { AssortimentSection } from './AssortimentSection';
-import { InvoiceKTISection } from './InvoiceKTISection';
 import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import { BlSection } from './BlSection';
+import { InvoiceKTISection } from './InvoiceKTISection';
 
 export const ExportRoute = observer(() => {
     if (excelSyncStore.isLoading) return null;

@@ -1,38 +1,42 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Doc } from '../../components/Doc/Doc';
-import {
-    InvoiceKTIGroupT,
-    groupInvoiceKTIByNo,
-} from '../../logic/docs/invoiceKTI/groupInvoiceKTIByNo';
-import { createInvoiceKTI } from '../../logic/docs/invoiceKTI/createInvoiceKTI';
-import { SectionErrorHOC } from '../../components/SectionErrorHOC';
+import { Formik } from 'formik';
+import { useInitInvoiceKTI } from '../../logic/docs/invoiceKTI/useInitInvoiceKTI';
+import { Form } from '../../components/Form/Form';
+import { DocList } from '../../components/Doc/DocList';
 import tablesStore from '../../stores/tablesStore/tablesStore';
+import { SectionErrorHOC } from '../../components/SectionErrorHOC';
+import Select from '../../components/Select/Select';
 
-export const SectionComponent = observer(() => {
-    const invoicesGrouped = groupInvoiceKTIByNo();
-    const onLoad = async (invoice: InvoiceKTIGroupT) => {
-        await createInvoiceKTI(invoice);
-    };
-
-    const invoices = invoicesGrouped.map((invoice) => {
-        const onClick = async () => onLoad(invoice);
-        return (
-            <Doc
-                key={invoice.record.row.invoiceNo}
-                onClick={onClick}
-                title={`${invoice.record.exportRow.seller.code} ${invoice.record.row.invoiceNo}`}
-                isPreventDefault
-            />
-        );
-    });
-
-    if (invoicesGrouped.length === 0) return null;
+const SectionComponent = observer(() => {
+    const { formik, initObj } = useInitInvoiceKTI();
 
     return (
-        <form className='docs__form kti-invoices-form'>
-            <ul className='docs'>{invoices}</ul>
-        </form>
+        <Formik
+            initialValues={formik.initialFields}
+            validate={formik.validate}
+            onSubmit={formik.onSubmit}
+            innerRef={formik.formRef}
+            validateOnMount
+        >
+            <Form className='docs__form kti-invoices-form'>
+                <Select
+                    name='translator'
+                    title='Переводчик-исполнитель'
+                    options={['КИА', 'ТНИ']}
+                />
+                <DocList
+                    docs={initObj.docs}
+                    docSettings={(invoice) => {
+                        return {
+                            key: invoice.code,
+                            onClick: () => initObj.onLoad(invoice),
+                            title: `${invoice.record.exportRow.seller.code} ${invoice.record.row.id}`,
+                        };
+                    }}
+                />
+            </Form>
+        </Formik>
     );
 });
 

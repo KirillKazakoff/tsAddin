@@ -65,7 +65,7 @@ const createRequest = async (invoice: InnerGroupT) => {
                         vessel: rec.row.vessel.ru.name,
                         product: rec.row.product.ru.name,
                         sort: rec.row.sort,
-                        pack: rec.row.product.ru.pack,
+                        pack: rec.row.packSp.fullName,
                         placesTotal: total.placesTotal.count,
                         price: rec.row.amount.price.count,
                         priceTotal: total.priceTotal.count,

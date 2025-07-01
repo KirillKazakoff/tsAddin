@@ -23,7 +23,7 @@ export const createBhgMail = () => {
         ? agreements[0].record.dateVTD
         : agreements[0].record.datePVD;
 
-    const mailTo = choosenCompany === 'ТРК' ? 'buh_trk@sea-wolf.ru' : 'buh_msi6@sea-wolf.ru';
+    const mailTo = choosenCompany === 'ТРК' ? 'buh_trk@sea-wolf.ru' : 'buh10trk@sea-wolf.ru';
     const cc = 'oved@sea-wolf.ru';
     const subject = `Документы по экспортной продукции, отгруженной через ${transport} ${customsDate}`;
     const header = `Вложением направляю документы по экспортной продукции, отгруженной через ${transport}\n\nТаможенное оформление во Владивостоке: ${customsDate}\n\nПеречень документов:\n\n`;
