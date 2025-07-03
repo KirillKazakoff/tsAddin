@@ -38,6 +38,7 @@ export const initInvoiceKTItmp = async (
         cells: [
             { name: 'Инвойс_исполнитель_ТНИ', height: translator === 'ТНИ' ? 76 : 1 },
             { name: 'Инвойс_исполнитель_КИА', height: translator === 'КИА' ? 76 : 1 },
+            { name: 'Инвойс_печать', height: 1 },
             { name: 'Инвойс_номер', value: `KTICOLTD - ${row.id}` },
             { name: 'Инвойс_компания', value: exportRow.seller.eng.name },
             { name: 'Инвойс_дата', value: date.invoice('eng') },

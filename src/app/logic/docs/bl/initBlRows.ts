@@ -14,7 +14,11 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
     });
 
     const common: RowStyleSettingsT = {
-        alignment: 'center',
+        alignment: {
+            horizontal: 'center',
+            vertical: 'middle',
+            wrapText: false,
+        },
         font: { size: 8, name: 'Arial' },
     };
 
@@ -40,6 +44,14 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
                 placesTotal: total.placesTotal.count * 1000,
                 placesGross: total.placesGross.count * 1000,
             };
+
+            // if live crab make empty cells
+            if (r.terms === 'FCA') {
+                fields.places = null;
+                fields.placesGross = null;
+                fields.pack = null;
+                fields.placesTotal = `${blStore.vatsAmount} VATS WITH WATER ${fields.placesTotal} KG` as unknown as number;
+            }
 
             const totalPlacesAmounted = remainderToZero(
                 initAmount(total.placesTotal.count * 1000, 2, 3).str,
@@ -86,6 +98,13 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
         placesTotal: blGroup.total.placesTotal.count * 1000,
         placesGross: blGroup.total.placesGross.count * 1000,
     };
+
+    if (blGroup.record.terms === 'FCA') {
+        totalFields.places = null;
+        totalFields.placesGross = null;
+        totalFields.placesTotal = `${blStore.vatsAmount} VATS WITH WATER ${totalFields.placesTotal} KG` as unknown as number;
+    }
+
     insertRow({
         fields: totalFields,
         dynamicFormats: {

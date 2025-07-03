@@ -27,8 +27,14 @@ export const ExportRoute = observer(() => {
             </div>
         );
     }
+    // if live crab section
     if (exportContractStore.firstRowTerms === 'FCA') {
-        ExportSection = ExportContractSection;
+        ExportSection = () => (
+            <>
+                <BlSection />
+                <ExportContractSection />
+            </>
+        );
     }
 
     return (

@@ -4,6 +4,7 @@ class BlStore {
     name = 'blStore';
     isSortable = false;
     catchZone = 'OKHOTSK SEA';
+    vatsAmount = '';
 
     constructor() {
         makeAutoObservable(this);
@@ -16,6 +17,12 @@ class BlStore {
     setCatchZone() {
         return (value: string) => {
             this.catchZone = value.toUpperCase();
+        };
+    }
+
+    setVatsAmount() {
+        return (value: string) => {
+            this.vatsAmount = value;
         };
     }
 }

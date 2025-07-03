@@ -30,6 +30,15 @@ export const BlSection = observer(() => {
 
             <InputTextNoFormik
                 input={{
+                    name: 'vats',
+                    title: 'Кол-во чанов:',
+                    placeholder: 'Введите кол-во чанов',
+                }}
+                value={blStore.vatsAmount}
+                setter={blStore.setVatsAmount()}
+            />
+            <InputTextNoFormik
+                input={{
                     name: 'sea',
                     title: 'Море Район:',
                     placeholder: 'Охотское по умолчанию',
