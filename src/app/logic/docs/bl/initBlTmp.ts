@@ -24,7 +24,7 @@ export const initBlTmp = (book: ExcelJS.Workbook, blGroup: BlGroupT<ExportRowT>)
             { name: 'Получатель_уведомление_адрес', value: r.consignee?.addres },
             { name: 'Судно', value: transport.eng.name.toUpperCase() },
             { name: 'Куда', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
-            { name: 'Зона_вылова', value: blStore.catchZone },
+            { name: 'Зона_вылова', value: blStore.fields.catchZone },
             { name: 'Место_дата', value: `${r.portTo.eng.name}, ${r.portTo.eng.country}`.toUpperCase() },
         ],
         initRows: () => initBlRows(blGroup, utils),

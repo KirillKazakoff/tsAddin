@@ -63,4 +63,7 @@ export const messages: MessagesT = {
     translator: {
         valueMissing: 'Выберите инициалы переводчика-исполнителя',
     },
+    catchZone: {
+        valueMissing: 'Выберите подзону вылова',
+    },
 };

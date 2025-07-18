@@ -22,7 +22,7 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
         font: { size: 8, name: 'Arial' },
     };
 
-    const records = blStore.isSortable
+    const records = blStore.fields.isSortable
         ? blGroup.groupedBy.product
         : blGroup.groupedBy.productSort;
 
@@ -31,7 +31,7 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
         deleteStartAmount: 1,
         rowSettings: ({ record: r, total }) => {
             const isRoe = r.product.code.toLowerCase().includes('икра');
-            const sort = isRoe || !blStore.isSortable ? '' : r.sort;
+            const sort = isRoe || !blStore.fields.isSortable ? '' : r.sort;
 
             const fields = {
                 places: total.places.count,
@@ -50,7 +50,7 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
                 fields.places = null;
                 fields.placesGross = null;
                 fields.pack = null;
-                fields.placesTotal = `${blStore.vatsAmount} VATS WITH WATER ${fields.placesTotal} KG` as unknown as number;
+                fields.placesTotal = `${blStore.fields.vatsAmount} VATS WITH WATER ${fields.placesTotal} KG` as unknown as number;
             }
 
             const totalPlacesAmounted = remainderToZero(
@@ -102,7 +102,7 @@ export const initBlRows = (blGroup: BlGroupT<ExportRowT>, utils: CellUtilsT<''>)
     if (blGroup.record.terms === 'FCA') {
         totalFields.places = null;
         totalFields.placesGross = null;
-        totalFields.placesTotal = `${blStore.vatsAmount} VATS WITH WATER ${totalFields.placesTotal} KG` as unknown as number;
+        totalFields.placesTotal = `${blStore.fields.vatsAmount} VATS WITH WATER ${totalFields.placesTotal} KG` as unknown as number;
     }
 
     insertRow({

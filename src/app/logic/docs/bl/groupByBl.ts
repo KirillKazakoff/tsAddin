@@ -40,7 +40,6 @@ export const groupByBl = <RowT extends RowBlExtendT>(rows: RowT[]) => {
         },
     });
 
-    console.log(bl);
     return bl;
 };
 

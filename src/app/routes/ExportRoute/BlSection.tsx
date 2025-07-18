@@ -1,63 +1,72 @@
-import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { Doc } from '../../components/Doc/Doc';
+import { observer } from 'mobx-react-lite';
+import { Formik } from 'formik';
+import { useInitBlSection } from '../../logic/docs/bl/useInitBlSection';
+import { Form } from '../../components/Form/Form';
+import InputText from '../../components/Form/InputText';
+import CheckBox from '../../components/CheckBox/CheckBox';
 import DocsDownloadBtn from '../../components/Doc/DocsDownloadBtn';
-import { initBlSection } from '../../logic/docs/bl/initBlSection';
-import { CheckBoxComponent } from '../../components/CheckBox/CheckBoxComponent';
-import blStore from '../../stores/docsStores/blStore';
-import { InputTextNoFormik } from '../../components/Form/InputText';
+import { SectionErrorHOC } from '../../components/SectionErrorHOC';
+import tablesStore from '../../stores/tablesStore/tablesStore';
+import exportContractStore from '../../stores/docsStores/exportContractStore';
+import { DocList } from '../../components/Doc/DocList';
 
-export const BlSection = observer(() => {
-    const initObj = initBlSection();
-    const { blGroupsArr, onLoad, onLoadAll } = initObj;
-
-    const blDocs = blGroupsArr.map((group) => {
-        const onClick = async () => onLoad(group);
-        return (
-            <Doc
-                onClick={onClick}
-                title={group.record.blNo}
-                key={group.record.blNo}
-                isPreventDefault
-            />
-        );
-    });
+const SectionComponent = observer(() => {
+    const { formik, initObj } = useInitBlSection();
 
     return (
-        <form className='docs__form bl-form'>
-            <h2 className='title bl-title'>BL</h2>
-            <ul className='docs'>{blDocs}</ul>
+        <Formik
+            initialValues={formik.initialFields}
+            validate={formik.validate}
+            onSubmit={formik.onSubmit}
+            innerRef={formik.formRef}
+            validateOnMount
+        >
+            <Form className='docs__form'>
+                <div className='fields-wrapper mt10'>
+                    <CheckBox title='Разделять по сортам:' name='isSortable' />
 
-            <InputTextNoFormik
-                input={{
-                    name: 'vats',
-                    title: 'Кол-во чанов:',
-                    placeholder: 'Введите кол-во чанов',
-                }}
-                value={blStore.vatsAmount}
-                setter={blStore.setVatsAmount()}
-            />
-            <InputTextNoFormik
-                input={{
-                    name: 'sea',
-                    title: 'Море Район:',
-                    placeholder: 'Охотское по умолчанию',
-                }}
-                value={blStore.catchZone}
-                setter={blStore.setCatchZone()}
-            />
-            <CheckBoxComponent
-                cls='checkbox-bl'
-                state={blStore.isSortable}
-                name='isSortable'
-                title='Разделять по сортам'
-                setState={() => blStore.setSortable(!blStore.isSortable)}
-            />
-            <DocsDownloadBtn
-                onClick={onLoadAll}
-                title='Загрузить все BL'
-                isPreventDefault
-            />
-        </form>
+                    {/* add vats input if live crab */}
+                    {initObj.docs[0].record.terms === 'FCA' ? (
+                        <InputText
+                            name='vatsAmount'
+                            title='Кол-во чанов:'
+                            placeholder='Введите кол-во чанов'
+                        />
+                    ) : null}
+
+                    <InputText
+                        name='catchZone'
+                        title='Район промысла:'
+                        placeholder='Район промысла'
+                    />
+                </div>
+
+                <h3 className='title bl-title'>Загрузить BL:</h3>
+                <DocList
+                    docs={initObj.docs}
+                    docSettings={(doc) => {
+                        return {
+                            onClick: () => initObj.onLoad(doc),
+                            title: doc.code,
+                            key: doc.code,
+                        };
+                    }}
+                />
+                <DocsDownloadBtn onClick={initObj.onLoadAll} title='Загрузить все BL' />
+            </Form>
+        </Formik>
     );
 });
+
+export const BlSection = () => {
+    const status = exportContractStore.operation === 'export'
+        ? tablesStore.status.export
+        : tablesStore.status.exportStorage;
+
+    return (
+        <SectionErrorHOC status={status} title='Заявки BL:'>
+            <SectionComponent />
+        </SectionErrorHOC>
+    );
+};

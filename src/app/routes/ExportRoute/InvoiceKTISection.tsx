@@ -22,7 +22,7 @@ const SectionComponent = observer(() => {
             <Form className='docs__form kti-invoices-form'>
                 <Select
                     name='translator'
-                    title='Переводчик-исполнитель'
+                    title='Переводчик-исполнитель:'
                     options={['КИА', 'ТНИ']}
                 />
                 <DocList
@@ -54,7 +54,7 @@ export const InvoiceKTISection = () => {
     }
 
     return (
-        <SectionErrorHOC status={status} title='KTI Инвойсы'>
+        <SectionErrorHOC status={status} title='KTI Инвойсы:'>
             <SectionComponent />
         </SectionErrorHOC>
     );
