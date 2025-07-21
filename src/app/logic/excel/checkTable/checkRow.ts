@@ -22,8 +22,8 @@ export const checkRow = (row: CommonRowT, tableName: TableKeyT, i: number) => {
 
         popupStore.pushStatus({
             title: `Ошибка в таблице ${tableName}`,
-            desc: `Не заполнена строка ${i}, столбец "${errorProp.toUpperCase()}"`,
+            desc: `Не заполнена строка ${i + 1}, столбец "${errorProp.toUpperCase()}"`,
         });
-        throw new Error(`error table prop ${errorProp} in ${tableName}, row ${i}`);
+        throw new Error(`error table prop ${errorProp} in ${tableName}, row ${i + 1}`);
     }
 };
