@@ -66,4 +66,7 @@ export const messages: MessagesT = {
     catchZone: {
         valueMissing: 'Выберите подзону вылова',
     },
+    vatsAmount: {
+        valueMissing: 'Введите кол-во чанов',
+    },
 };

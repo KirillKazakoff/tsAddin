@@ -15,8 +15,13 @@ export const useInitBlSection = () => {
             isSortable: false,
         },
         validateCb: (errors, values) => {
+            const isFCA = exportContractStore.currentTable[0].terms === 'FCA';
+
             if (!values.catchZone) {
                 errors.catchZone = 'valueMissing';
+            }
+            if (isFCA && !values.vatsAmount) {
+                errors.vatsAmount = 'valueMissing';
             }
         },
     });

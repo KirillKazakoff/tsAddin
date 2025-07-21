@@ -10,6 +10,7 @@ import { SectionErrorHOC } from '../../components/SectionErrorHOC';
 import tablesStore from '../../stores/tablesStore/tablesStore';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 import { DocList } from '../../components/Doc/DocList';
+import Select from '../../components/Select/Select';
 
 const SectionComponent = observer(() => {
     const { formik, initObj } = useInitBlSection();
@@ -35,10 +36,11 @@ const SectionComponent = observer(() => {
                         />
                     ) : null}
 
-                    <InputText
+                    <Select
                         name='catchZone'
                         title='Район промысла:'
                         placeholder='Район промысла'
+                        options={['OKHOTSK SEA', 'BERING SEA']}
                     />
                 </div>
 
