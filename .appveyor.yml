@@ -1,14 +1,14 @@
 image: Ubuntu2004 # образ для сборки
-stack: node 20 # окружение
+stack: node 18 # окружение
 branches:
     only:
         - master # ветка git
 cache: node_modules # кеширование
 install:
-    - yarn # команда установки зависимостей
+    - npm # команда установки зависимостей
 build: off
 build_script:
-    - yarn run build # команда сборки
+    - npm run build # команда сборки
 test_script:
 
 deploy_script: # скрипт развёртывания
@@ -16,4 +16,4 @@ deploy_script: # скрипт развёртывания
     - git config --global user.name AppVeyor
     - git config --global user.email ci@appveyor.com
     - echo "https://$GITHUB_TOKEN:x-oauth-basic@github.com" > "$HOME/.git-credentials"
-    - yarn run push-dir --dir=dist --branch=gh-pages --force --verbose
+    - npm run push-dir --dir=dist --branch=gh-pages --force --verbose
