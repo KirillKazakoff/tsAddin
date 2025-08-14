@@ -14,7 +14,7 @@ export const getPortLetterNo = (doc: InnerGroupT | FescoGroupT) => {
     if (doc.record.type === 'fescoContainers') {
         const docF = doc as FescoGroupT;
         const { reiceNo } = docF.record;
-        return `Исх. № ${reiceNo}-${doc.index} от ${getNowDate()}`;
+        return `Исх. № ${reiceNo}-${docF.index} от ${getNowDate()}`;
     }
 
     const portLetterNo = `Исх. № ${`${record.mateRow.reice}-` || ''}${letterIndex}`;
