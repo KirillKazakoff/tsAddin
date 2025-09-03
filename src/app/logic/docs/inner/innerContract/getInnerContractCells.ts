@@ -137,7 +137,7 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
 
             {
                 name: 'Договор_адреса_покупатель',
-                value: `Покупатель: ${r.buyer.req.org.form.code} «${r.buyer.name}»`,
+                value: `Покупатель: ${r.buyer.req.org.form.code} ${isIP ? '' : '«'}${r.buyer.name}${isIP ? '' : '»'}`,
             },
             {
                 name: 'Договор_адреса_покупатель_адрес',
