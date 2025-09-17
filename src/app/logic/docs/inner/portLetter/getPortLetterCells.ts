@@ -17,7 +17,7 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
     // prettier-ignore
     const orgName = {
         seller: `ООО "${r.seller.ru.name}"`,
-        buyer: r.type === 'innerT' ? `${r.buyer.req.org.form.code} "${r.buyer.name}"` : '',
+        buyer: r.type === 'innerT' ? r.buyer.orgNameShort : '',
     };
 
     const commonObj = {
@@ -75,7 +75,7 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
                 name: 'Письмо_описание_подвал',
                 value: `передать с ${
                     fields.termsPort.includes('CFR') ? 'борта судна' : 'нашего хранения'
-                } компании ${orgName.buyer}; ИНН ${r.buyer.inn}`,
+                } на ${orgName.buyer}; ИНН ${r.buyer.inn}`,
                 height: 30,
             },
             {
@@ -129,7 +129,7 @@ export const getPortLetterCells = (doc: InnerGroupT) => {
             },
             {
                 name: 'Расходы_компания',
-                value: `Расходы по судозаходу и ПРР просьба выставлять на компанию ${orgName.seller}`,
+                value: `Расходы по судозаходу и ПРР просьба выставлять на ${orgName.seller}`,
                 height: 30,
             },
             {

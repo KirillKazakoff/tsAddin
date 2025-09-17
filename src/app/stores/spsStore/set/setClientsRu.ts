@@ -30,40 +30,51 @@ export const setClientsRu = (spRange: any[][]) => {
             positionReq: 'Реквизиты.должность',
             podpisantShortNameReq: 'Реквизиты.ФИО короткое',
         },
-        row: (r) => ({
-            code: r.code,
-            mail: r.mailMain,
-            name: r.fullNameCompany,
-            orgName: `${r.form} "${r.fullNameCompany}"`,
-            phone: r.phone,
-            inn: r.inn,
-            req: {
-                bank: {
-                    bik: r.bikReq,
-                    ks: r.ksReq,
-                    name: r.bankNameReq,
-                    rs: r.rsReq,
+        row: (r) => {
+            const isIP = r.form === 'ИП';
+            const form = selectSp.orgForm(r.form);
+
+            return {
+                code: r.code,
+                mail: r.mailMain,
+                name: r.fullNameCompany,
+                orgNameFull: `${form?.name} ${isIP ? '' : '"'}${r.fullNameCompany}${
+                    isIP ? '' : '"'
+                }`,
+                orgNameShort: `${r.form} ${isIP ? '' : '"'}${r.fullNameCompany}${
+                    isIP ? '' : '"'
+                }`,
+                phone: r.phone,
+                inn: r.inn,
+                isIP,
+                req: {
+                    bank: {
+                        bik: r.bikReq,
+                        ks: r.ksReq,
+                        name: r.bankNameReq,
+                        rs: r.rsReq,
+                    },
+                    org: {
+                        address: r.addressReq,
+                        form: selectSp.orgForm(r.form),
+                        kpp: r.kppReq,
+                        mail: r.mailReq,
+                        mailAddress: r.mailReqAddress,
+                        ogrn: r.ogrnReq,
+                        okpo: r.okpoReq,
+                        phoneFax: r.phoneFaxReq,
+                        shortName: r.shortNameCompany,
+                    },
+                    podpisant: {
+                        base: r.basisReq,
+                        face: r.faceReq,
+                        position: r.positionReq,
+                        sex: r.sexReq,
+                        shortName: r.podpisantShortNameReq,
+                    },
                 },
-                org: {
-                    address: r.addressReq,
-                    form: selectSp.orgForm(r.form),
-                    kpp: r.kppReq,
-                    mail: r.mailReq,
-                    mailAddress: r.mailReqAddress,
-                    ogrn: r.ogrnReq,
-                    okpo: r.okpoReq,
-                    phoneFax: r.phoneFaxReq,
-                    shortName: r.shortNameCompany,
-                },
-                podpisant: {
-                    base: r.basisReq,
-                    face: r.faceReq,
-                    position: r.positionReq,
-                    sex: r.sexReq,
-                    shortName: r.podpisantShortNameReq,
-                },
-            },
-        }),
+            };
+        },
     });
 
     return res;

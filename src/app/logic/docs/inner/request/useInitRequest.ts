@@ -33,7 +33,7 @@ const createRequest = async (invoice: InnerGroupT) => {
                 records: [
                     [`Прошу выставить счет от ${date}`],
                     [''],
-                    [`между ${r.seller.orgName} (ПОСТАВЩИК) на ${r.buyer.orgName}`],
+                    [`между ${r.seller.orgName} (ПОСТАВЩИК) на ${r.buyer.orgNameFull}`],
                     [''],
                 ],
             });

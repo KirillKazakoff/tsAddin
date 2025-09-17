@@ -52,7 +52,7 @@ export const getInnerContractCells = (contract: InnerGroupT) => {
                     richText: [
                         richText({ text: `Общество с ограниченной ответственностью «${r.seller.ru.name}» (ООО «${r.seller.ru.shortName}»), `, isBold: true }),
                         richText({ text: `именуемое в дальнейшем «Поставщик», ${podpisant.req.face}, действующ${podpisant.req.sex} ${podpisant.req.base[r.seller.code]}, с одной стороны, и ` }),
-                        richText({ text: `${r.buyer.req.org.form?.name} ${isIP ? '' : '«'}${r.buyer.name}${isIP ? '' : '»'} (${r.buyer.req.org.form?.code} ${isIP ? '' : '«'}${r.buyer.req.org.shortName}${isIP ? '' : '»'}), `, isBold: true }),
+                        richText({ text: `${r.buyer.orgNameFull} (${r.buyer.orgNameShort}), `, isBold: true }),
                         richText({ text: `${isIP ? 'именуемый/ая' : 'именуемое'}  в дальнейшем «Покупатель», ${r.buyer.req.podpisant.face}, действущ${r.buyer.req.podpisant.sex} ${r.buyer.req.podpisant.base} с другой стороны, ` }),
                         richText({ text: 'заключили настоящий договор о нижеследующем:' }),
                     ],
