@@ -18,7 +18,7 @@ export const groupFesco = () => {
     const groups = groupTotal({
         rows,
         input: ({ row }) => ({
-            code: `${row.buyer.code}${row.konosament}`,
+            code: `${row.buyer.code}`,
             groupedBy: {
                 container: {
                     code: `${row.id}`,
