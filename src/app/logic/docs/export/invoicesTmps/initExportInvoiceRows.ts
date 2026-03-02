@@ -15,7 +15,7 @@ export const initExportInvoiceRows = (
         deleteStartAmount: 2,
         records: invoice.groupedBy.productPack,
         headers: ({ record: r }) => ({
-            price: `Price, ${r.currency.symbol}/tn\nЦена, ${r.currency.symbol}/тн`,
+            price: `Price, ${r.currency.symbol}/kg\nЦена, ${r.currency.symbol}/кг`,
             priceTotal: `Amount, ${r.currency.symbol}\nСумма, ${r.currency.symbol}`,
         }),
         rowSettings: ({ record: r, total }) => {

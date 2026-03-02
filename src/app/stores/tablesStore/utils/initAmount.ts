@@ -39,8 +39,10 @@ export const initAmount = (
 };
 
 export const initAmountObj = (rowType: TableKeyT) => {
-    const min = rowType === 'salesT' ? 2 : 3;
-    const max = rowType === 'salesT' ? 2 : 4;
+    // const min = rowType === 'salesT' ? 2 : 3;
+    // const max = rowType === 'salesT' ? 2 : 4;
+    const min = 2;
+    const max = 2;
 
     return {
         places: initAmount(0, 0, 0),

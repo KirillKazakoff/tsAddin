@@ -12,7 +12,7 @@ export const initExportDefaultContractRows = (
             records: invoice.groupedBy.product,
             deleteStartAmount: 1,
             headers: ({ record: r }) => ({
-                price: `Цена, ${r.currency.symbol}/тн\nPrice, ${r.currency.symbol}/тн`,
+                price: `Цена, ${r.currency.symbol}/кг\nPrice, ${r.currency.symbol}/kg`,
             }),
             rowSettings: ({ record: r, total }) => {
                 const fields = {

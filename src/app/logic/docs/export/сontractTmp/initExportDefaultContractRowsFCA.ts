@@ -18,8 +18,8 @@ export const initExportDefaultContractRowsFCA = (
             m3: '',
             vessel: 'Изготовитель\nFishing Vessel',
             m4: '',
-            price: 'Цена, $/тн\nPrice,$/тн',
-            placesTotal: 'Кол-во, тн\nQuantity, tn',
+            price: 'Цена, $/кг\nPrice,$/kg',
+            placesTotal: 'Кол-во, кг\nQuantity, kg',
         },
         style: {
             common: {

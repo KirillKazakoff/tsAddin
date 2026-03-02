@@ -51,7 +51,7 @@ export const TranslatorRoute = observer(() => {
 
     return (
         <button type='button' onClick={onClick}>
-            hello
+            Отделить суффикс от ключа
         </button>
     );
 });

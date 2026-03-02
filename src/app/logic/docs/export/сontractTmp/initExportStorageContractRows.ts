@@ -20,7 +20,7 @@ export const initExportStorageContractRows = (
             consignee: 'Получатель сертификатов / Certificates Consignee',
             m3: '',
             m4: '',
-            placesTotal: 'Кол-во, тн\nQuantity, tn',
+            placesTotal: 'Кол-во, кг\nQuantity, kg',
         },
         style: {
             common: {

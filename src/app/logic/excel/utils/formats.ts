@@ -8,6 +8,7 @@ export const formats = () => {
         },
         common: {
             basePlacesTotalTn: '#,##0.000#_)',
+            basePlacesTotalKg: '#,##0.00_)',
             basePlaces: '# ###',
             price: {
                 rub: '#,##0.00_)"руб."',
@@ -46,25 +47,25 @@ const formatsDocs = () => {
 
     return {
         exportInvoice: {
-            placesTotal: f.common.basePlacesTotalTn,
+            placesTotal: f.common.basePlacesTotalKg,
             priceTotal: f.common.price.dollar,
             price: f.common.price.dollar,
             places: f.unique.placesSlash,
         },
         exportContract: {
             price: f.common.price.dollar,
-            placesTotal: f.common.basePlacesTotalTn,
+            placesTotal: f.common.basePlacesTotalKg,
         },
         exportEng: {
-            placesTotal: f.eng.placesTotalTn,
-            placesGross: f.eng.placesTotalTn,
+            placesTotal: f.eng.placesTotalKg,
+            placesGross: f.eng.placesTotalKg,
             places: f.eng.places,
             price: f.common.price.dollar,
             priceTotal: f.common.price.dollar,
         },
         exportRu: {
             places: f.ru.places,
-            placesTotal: f.ru.placesTotalTn,
+            placesTotal: f.ru.placesTotalKg,
             price: f.common.price.dollar,
             priceTotal: f.common.price.dollar,
         },
