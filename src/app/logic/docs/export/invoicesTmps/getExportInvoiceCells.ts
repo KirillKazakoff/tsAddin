@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import exportContractStore from '../../../../stores/docsStores/exportContractStore';
 import {
     CellDeclarationT,
@@ -234,10 +235,11 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
                 ru: `Коммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
             },
             {
-                name: 'Инвойс_условия',
-                eng: declarationNo,
-                ru: declarationNo,
-                redefineCell: { offset: { x: 0, y: -1 }, cell: { value: 'Temporary Customs Declaration' }, cellRu: { value: '№ временной декларации на товары' } },
+                name: 'Инвойс_декларация',
+                deleteRows: { start: -1, end: 1 },
+                // eng: declarationNo,
+                // ru: declarationNo,
+                // redefineCell: { offset: { x: 0, y: -1 }, cell: { value: 'Temporary Customs Declaration' }, cellRu: { value: '№ временной декларации на товары' } },
             },
             ...commonObj.FCA, ...commonObj.export,
         ],
