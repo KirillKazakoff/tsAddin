@@ -36,6 +36,19 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         return storageID === currentID;
     });
 
+    const fcaCom = {
+        zarubino: {
+            eng: `2.1 The final price agreed upon by the parties after the cargo discharging at the ${portTo.eng.name} port of destination is detailed in the table in Item 1 of this Agreement.`,
+            ru: `2.1 Окончательная цена, установленная сторонами по результатам выгрузки в порту назначения ${portTo.ru.name}, указана в таблице в п. 1 настоящего Дополнения.`,
+            height: 35,
+        },
+        foreign: {
+            eng: '2.1 The price agreed upon by the parties is detailed in the table in Item 1 of this Agreement.',
+            ru: '2.1 Цена, установленная сторонами, указана в таблице в п. 1 настоящего Дополнения.',
+            height: 35,
+        },
+    };
+
     const date = {
         agreement: (locale: string) => getExcelDateStr(dateAgreement, locale),
         contract: (locale: string) => getExcelDateStr(contract.date, locale),
@@ -255,7 +268,6 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
                 height: 20,
             },
             {
-
                 name: 'Доставка_порт',
                 eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} at ${date.delivery('eng', 'day')}`,
                 ru: `3.5 Передача Покупателю Товара, оговоренного в п.1 настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country}, ${date.delivery('ru', 'day')}`,
@@ -287,8 +299,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         fcaCom: [
             {
                 name: 'Цена_неком',
-                eng: `2.1 The final price agreed upon by the parties after the cargo discharging at the ${portTo.eng.name} port of destination is detailed in the table in Item 1 of this Agreement.`,
-                ru: `2.1 Окончательная цена, установленная сторонами по результатам выгрузки в порту назначения ${portTo.ru.name}, указана в таблице в п. 1 настоящего Дополнения.`,
+                eng: `${portTo.ru.country === 'Россия' ? fcaCom.zarubino.eng : fcaCom.foreign.eng}`,
+                ru: `${portTo.ru.country === 'Россия' ? fcaCom.zarubino.ru : fcaCom.foreign.ru}`,
                 height: 35,
             },
             {
