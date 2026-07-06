@@ -349,8 +349,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             },
             {
                 name: 'Цена_неком',
-                eng: '2.1 The price is approximate. The final price will be set by the parties after unloading at the final destination.',
-                ru: '2.1  Цена является ориентировочной. Окончательная цена будет установлена после выгрузки в порту назначения.',
+                eng: '2.1 The price is approximate. The final price will be set by the parties after unloading and inspection at the final destination.',
+                ru: '2.1  Цена является ориентировочной. Окончательная цена будет установлена после выгрузки и инспекции в порту назначения.',
                 height: 30,
             },
             {

@@ -219,14 +219,35 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
         fcaNonCom: [
             {
                 name: 'Инвойс',
-                eng: `Proforma invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
-                ru: `Проформа-инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
+                eng: `Non-commercial invoice № ${invoiceNo} dated ${date.invoice('eng')}`,
+                ru: `Некоммерческий инвойс № ${invoiceNo} от ${date.invoice('ru')}`,
             },
             {
                 name: 'Инвойс_декларация',
-                deleteRows: { start: -1, end: 1 },
+                eng: null,
+                ru: null,
+                font: { bold: false },
+                redefineCell: {
+                    offset: { x: 0, y: -1 },
+                    commonStyles: {
+                        alignment: { vertical: 'middle', wrapText: true },
+                        font: { bold: false },
+                    },
+                    cell: { value: '* This invoice has no commercial value and is for customs clearance purposes only' },
+                    cellRu: { value: '* Данный инвойс не имеет коммерческой силы, только для таможенного оформления', alignment: { wrapText: true }, font: { bold: false } },
+                },
             },
             ...commonObj.FCA, ...commonObj.export,
+            {
+                name: 'Инвойс_куда',
+                eng: '',
+                ru: '',
+                redefineCell: {
+                    offset: { x: 0, y: -1 },
+                    cell: { value: '' },
+                    cellRu: { value: '' },
+                },
+            },
         ],
         fcaCom: [
             {

@@ -42,7 +42,7 @@ export const mergeExportInvoice = async (book: Workbook, invoice: ExportGroupT) 
             'порт отправления:',
             'условия доставки и оплаты:',
         ],
-        setNonComPrice: ['данная цена указана', 'this price given'],
+        setNonComPrice: ['данный инвойс не', 'this invoice has no'],
         setBlNo: ['bl no'],
     };
 
