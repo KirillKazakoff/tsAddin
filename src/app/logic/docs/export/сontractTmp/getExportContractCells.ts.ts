@@ -355,8 +355,8 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
             },
             {
                 name: 'Доставка_условия',
-                eng: `3.1 Supply of products is carried out on FCA Terms.\nAcceptance- transfer of Goods by quantity and quality is made on the territory of: ${portTo.eng.countryFull} in ${portTo.eng.name}.`,
-                ru: `3.1 Поставка осуществляется на условиях FCA.\nПриемка-передача Товара по количеству и качеству производится на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}`,
+                eng: `3.1 Supply of products is carried out on FCA Terms.\nAcceptance- transfer of Goods by quantity and quality will be made on the territory of: ${portTo.eng.countryFull} in ${portTo.eng.name}.`,
+                ru: `3.1 Поставка осуществляется на условиях FCA.\nПриемка-передача Товара по количеству и качеству будет производиться на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}`,
                 height: 45,
             },
             {
