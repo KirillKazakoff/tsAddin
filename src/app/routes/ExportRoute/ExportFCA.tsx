@@ -3,12 +3,13 @@ import { observer } from 'mobx-react-lite';
 import InputText from '../../components/Form/InputText';
 import exportContractStore from '../../stores/docsStores/exportContractStore';
 
-export const ExportFCA = observer(() => {
+export const ExportFCAEXW = observer(() => {
     const { currentTerms: terms } = exportContractStore;
     const title = 'ETD порт:';
 
     const isFCA = terms && terms.includes('FCA');
-    if (!isFCA) return null;
+    // adding EXW from 22.07.26
+    if (!isFCA && terms !== 'EXW') return null;
 
     return (
         <InputText

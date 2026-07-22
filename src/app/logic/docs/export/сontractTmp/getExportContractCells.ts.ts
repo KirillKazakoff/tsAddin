@@ -262,16 +262,22 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         common: [...commonObj.common, ...commonObj.hidden],
         exw: [
             {
-                name: 'Доставка_условия',
-                eng: `3.1 The commodity should be delivered under terms of ${terms} ${portTo.eng.name}`,
-                ru: `3.1 Поставка осуществляется на условиях ${terms} ${portTo.ru.name}`,
-                height: 20,
+                name: 'Цена_неком',
+                eng: '2.1 The price is approximate. The final price will be set by the parties after unloading and inspection at the final destination.',
+                ru: '2.1  Цена является ориентировочной. Окончательная цена будет установлена после выгрузки и инспекции в порту назначения.',
+                height: 30,
             },
             {
-                name: 'Доставка_порт',
-                eng: `3.5 The delivery of goods to Buyer, mentioned in clause 1 of this Agreement should be carried in port of destination ${portTo.eng.name}, ${portTo.eng.country} at ${date.delivery('eng', 'day')}`,
-                ru: `3.5 Передача Покупателю Товара, оговоренного в п.1 настоящего Дополнения будет производиться в порту назначения ${portTo.ru.name}, ${portTo.ru.country}, ${date.delivery('ru', 'day')}`,
-                height: 35,
+                name: 'Доставка_условия',
+                eng: `3.1 Supply of products is carried out on FCA Terms.\nAcceptance- transfer of Goods by quantity and quality is made on the territory of: ${portTo.eng.countryFull} in ${portTo.eng.name}.`,
+                ru: `3.1 Поставка осуществляется на условиях FCA.\nПриемка-передача Товара по количеству и качеству производится на территории: ${portTo.ru.countryFull} в п. ${portTo.ru.name}`,
+                height: 45,
+            },
+            {
+                name: 'Доставка_дата',
+                eng: `Expected discharge date: ${deliveryDate}`,
+                ru: `Дата отгрузки ориентировочно: ${deliveryDate}`,
+                height: 20,
             },
             ...commonObj.export, ...commonObj.titles,
         ],
@@ -472,7 +478,7 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
 
     const resArr = [...cells.common];
 
-    if (type === 'exportT') {
+    if (type === 'exportT' || type === 'exportStorageT') {
         if (terms === 'EXW') {
             resArr.push(...cells.exw);
         }
@@ -484,14 +490,14 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         }
     }
 
-    if (type === 'exportStorageT') {
-        if (terms === 'EXW') {
-            resArr.push(...cells.exportStorage);
-        }
-        if (terms === 'FCA') {
-            resArr.push(...cells.fcaNonCom);
-        }
-    }
+    // if (type === 'exportStorageT') {
+    //     if (terms === 'EXW') {
+    //         resArr.push(...cells.exportStorage);
+    //     }
+    //     if (terms === 'FCA') {
+    //         resArr.push(...cells.fcaNonCom);
+    //     }
+    // }
 
     if (type === 'certificatesT') {
         resArr.push(...cells.exportStorage);
