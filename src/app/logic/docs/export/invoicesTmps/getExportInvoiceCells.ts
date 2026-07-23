@@ -284,8 +284,9 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
             // styles broke without it) Styles changes depending on cell place in array
             {
                 name: 'Инвойс_покупатель_заголовок',
-                eng: 'Contractor:',
-                ru: 'Исполнитель:',
+                eng: 'Buyer:',
+                ru: 'Покупатель:',
+                font: { bold: true },
             },
             {
                 name: 'Инвойс_декларация',
@@ -304,8 +305,8 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
             },
             {
                 name: 'Инвойс_получатель_заголовок',
-                eng: 'Customer:',
-                ru: 'Заказчик:',
+                eng: 'Consignee:',
+                ru: 'Получатель:',
                 font: { bold: true },
             },
 
@@ -348,6 +349,7 @@ export const getExportInvoiceCells = (invoice: ExportGroupT) => {
         }
     }
 
+    // since 22.07.2026
     if (type === 'exportStorageT') {
         if (terms === 'EXW') {
             cells.push(...cellsObj.storage);

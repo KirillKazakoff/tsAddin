@@ -17,10 +17,10 @@ export const initExportStorageContractRows = (
             m1: '',
             vessel: 'Изготовитель\nFishing Vessel',
             m2: '',
-            consignee: 'Получатель сертификатов / Certificates Consignee',
+            price: 'Цена, $/кг\nPrice,$/kg',
             m3: '',
-            m4: '',
             placesTotal: 'Кол-во, кг\nQuantity, kg',
+            m4: '',
         },
         style: {
             common: {
@@ -55,10 +55,10 @@ export const initExportStorageContractRows = (
                     m1: '',
                     vessel: `${r.vessel.ru.name}\n${r.vessel.eng.name}`,
                     m2: '',
-                    consignee: `${r.consignee.fullName}\n${r.consignee.addres}`,
+                    price: r.amount.price.count,
                     m3: '',
-                    m4: '',
                     placesTotal: total.placesTotal.count,
+                    m4: '',
                 };
 
                 // prettier-ignore
