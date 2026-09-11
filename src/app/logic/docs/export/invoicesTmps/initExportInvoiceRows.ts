@@ -40,8 +40,8 @@ export const initExportInvoiceRows = (
                 fields,
                 docType: 'exportInvoice',
                 dynamicFormats: {
-                    price: `#,##0.00_) \n${r.currency.symbol}`,
-                    priceTotal: `#,##0.00_) \n${r.currency.symbol}`,
+                    price: `#,##0.000_) \n${r.currency.symbol}`,
+                    priceTotal: `#,##0.000_) \n${r.currency.symbol}`,
                 },
                 style: {
                     common: {
@@ -93,7 +93,7 @@ export const initExportInvoiceRows = (
             },
         },
         dynamicFormats: {
-            priceTotal: `#,##0.00_) \n${invoice.record.currency.symbol}`,
+            priceTotal: `#,##0.000_) \n${invoice.record.currency.symbol}`,
         },
     });
 };

@@ -48,8 +48,8 @@ export const initAmountObj = (rowType: TableKeyT) => {
         places: initAmount(0, 0, 0),
         placesTotal: initAmount(0, min, max),
         placesGross: initAmount(0, min, max),
-        priceTotal: initAmount(0, 2, 2),
-        price: initAmount(0, 2, 2),
+        priceTotal: initAmount(0, 3, 3),
+        price: initAmount(0, 3, 3),
     };
 };
 

@@ -12,7 +12,7 @@ export const formats = () => {
             basePlaces: '# ###',
             price: {
                 rub: '#,##0.00_)"руб."',
-                dollar: '#,##0.00_) "USD"',
+                dollar: '#,##0.000_) "USD"',
                 uan: '#,##0.00_) "CNY"',
             },
             percentage: '0.00%',
