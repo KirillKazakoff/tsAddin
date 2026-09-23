@@ -490,14 +490,14 @@ export const getExportContractCells = (agreement: ExportGroupT) => {
         }
     }
 
-    // if (type === 'exportStorageT') {
-    //     if (terms === 'EXW') {
-    //         resArr.push(...cells.exportStorage);
-    //     }
-    //     if (terms === 'FCA') {
-    //         resArr.push(...cells.fcaNonCom);
-    //     }
-    // }
+    if (type === 'exportStorageT') {
+        if (terms === 'EXW') {
+            resArr.push(...cells.exportStorage);
+        }
+        if (terms === 'FCA') {
+            resArr.push(...cells.fcaNonCom);
+        }
+    }
 
     if (type === 'certificatesT') {
         resArr.push(...cells.exportStorage);
