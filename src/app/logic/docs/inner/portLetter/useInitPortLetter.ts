@@ -59,7 +59,7 @@ export const useInitPortLetter = () => {
                 return {
                     tmpPath: 'portLetter',
                     initTmpsCb: async (book) => initPortLetterTmp(book, doc),
-                    fileName: `Письмо №${row.id} ${
+                    fileName: `Письмо №${doc.record.mateRow.reice}-${row.id} ${
                         row.type === 'innerT'
                             ? row.buyer.code
                             : `${row.seller.code} Образец`

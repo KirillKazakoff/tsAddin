@@ -36,10 +36,14 @@ export const setInner = (table: any[][]) => {
                 `${r.vessel}${r.product}${r.pack.toString().replace('.', ',')}`,
             );
 
+            // change id if it's invoice
+            const isInvoice = r.id.toLowerCase().includes('счет');
+            const id = isInvoice ? r.id.replace('счет', '') : r.id;
+
             return {
                 buyer: selectSp.clientRu(r.buyer),
                 seller: selectSp.seller(r.seller),
-                id: r.id,
+                id,
                 contractDate: r.contractDate,
                 vessel: selectSp.vessel(r.vessel),
                 product: selectSp.product(r.product),
