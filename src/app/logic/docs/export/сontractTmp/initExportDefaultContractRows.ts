@@ -43,7 +43,7 @@ export const initExportDefaultContractRows = (
                         },
                     },
                     dynamicFormats: {
-                        price: `#,##0.00_) \n${r.currency.symbol}`,
+                        price: `#,##0.000_) \n${r.currency.symbol}`,
                     },
                 };
             },

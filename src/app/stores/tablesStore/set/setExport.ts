@@ -55,6 +55,7 @@ export const setExport = (table: any[][]) => {
         },
     });
 
+    console.log(transformed);
     return transformed;
 };
 

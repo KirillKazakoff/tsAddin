@@ -35,8 +35,8 @@ export const getExportRow = (row: ExportInitRowT) => {
         amount: {
             places: initAmount(row.places, 0, 0),
             placesTotal: initAmount(row.placesTotal * 1000, 2, 2),
-            price: initAmount(row.price / 1000, 2, 2),
-            priceTotal: initAmount(row.priceTotal, 2, 2),
+            price: initAmount(row.price / 1000, 3, 3),
+            priceTotal: initAmount(row.priceTotal, 3, 3),
             placesGross: initAmount(placesGross * 1000, 2, 2),
         },
         agreementNo: row.agreementNo,

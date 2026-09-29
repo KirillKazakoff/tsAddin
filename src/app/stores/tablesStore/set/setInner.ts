@@ -55,8 +55,8 @@ export const setInner = (table: any[][]) => {
                 amount: {
                     places: initAmount(+r.placesTotal / +r.pack, 0, 0),
                     placesTotal: initAmount(r.placesTotal, 1, 3),
-                    price: initAmount(r.price, 2, 2),
-                    priceTotal: initAmount(r.priceTotal, 2, 2),
+                    price: initAmount(r.price, 3, 3),
+                    priceTotal: initAmount(r.priceTotal, 3, 3),
                 },
                 bankSeller: selectSp.bankProdavec(r.bank),
                 deliveryDate: r.deliveryDate,
